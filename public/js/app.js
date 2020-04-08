@@ -1935,6 +1935,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37325,13 +37332,13 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
             _vm._v(
-              "\n                        Example Component\n                        "
+              "\r\n                        Example Component\r\n                    "
             )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "title m-b-md" }, [
             _vm._v(
-              "\n                        I'm an example component.\n                    "
+              "\r\n                        I'm an example component.\r\n                    "
             )
           ])
         ]),
@@ -37339,13 +37346,27 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
             _vm._v(
-              "\n                        Example Component\n                        "
+              "\r\n                        Example Component\r\n                    "
             )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "content m-b-md" }, [
             _vm._v(
-              "\n                        I'm an example component.\n                    "
+              "\r\n                        I'm an example component.\r\n                    "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v(
+              "\r\n                        Example Component\r\n                    "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "content m-b-md" }, [
+            _vm._v(
+              "\r\n                        I'm an example component.\r\n                    "
             )
           ])
         ])
@@ -37387,7 +37408,7 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "container" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-            _vm._v("Hello")
+            _vm._v("Hello World")
           ])
         ])
       ]
