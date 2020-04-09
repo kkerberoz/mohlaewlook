@@ -12,6 +12,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/info">info</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contract">ติดต่อ</a>
+                </li>
             </ul>
         </div>
     </nav>

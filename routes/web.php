@@ -17,3 +17,4 @@ Route::get('/', 'PagesController@index');
 Route::get('/boss', 'PagesController@boss');
 Route::get('/about', 'PagesController@about');
 Route::get('/info', 'PagesController@info');
+Route::get('/contract', 'PagesController@contract');
