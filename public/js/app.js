@@ -37536,20 +37536,20 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    Mhee ka jok\n                ")
+            _vm._v("\n                    Rat ZAZA\n                ")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
+          _c("div", { staticClass: "title m-b-md flex-center" }, [
             _vm._v("\n                    ka\n                ")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    Boss\n                ")
+            _vm._v("\n                    Rat\n                ")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
+          _c("div", { staticClass: "title m-b-md flex-center" }, [
             _vm._v("\n                    ka\n                ")
           ])
         ]),
@@ -37559,7 +37559,7 @@ var staticRenderFns = [
             _vm._v("\n                    Come\n                ")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
+          _c("div", { staticClass: "title m-b-md flex-center" }, [
             _vm._v("\n                   with\n                ")
           ])
         ]),
@@ -37569,7 +37569,7 @@ var staticRenderFns = [
             _vm._v("\n                    Rat\n                ")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
+          _c("div", { staticClass: "title m-b-md flex-center" }, [
             _vm._v("\n                   hahahaha\n                ")
           ])
         ])

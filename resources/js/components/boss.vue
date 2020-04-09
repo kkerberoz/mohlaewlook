@@ -3,19 +3,19 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Mhee ka jok
+                        Rat ZAZA
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md flex-center">
                         ka
                     </div>
             </div>
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Boss
+                        Rat
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md flex-center">
                         ka
                     </div>
             </div>
@@ -24,7 +24,7 @@
                         Come
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md flex-center">
                        with
                     </div>
             </div>
@@ -33,7 +33,7 @@
                         Rat
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md flex-center">
                        hahahaha
                     </div>
             </div>
