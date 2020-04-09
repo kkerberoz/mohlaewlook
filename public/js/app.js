@@ -37554,7 +37554,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("ZAZARAT")
+            _vm._v("GGEZ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "title m-b-md flex-center" }, [
@@ -50298,13 +50298,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
 __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> fcd37fe57b6cb155563143ebb0113c5b47564484
 
 
 /***/ })
