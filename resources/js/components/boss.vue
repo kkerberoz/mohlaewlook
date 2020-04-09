@@ -3,38 +3,38 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Example Component1
+                        Boss
                     </div>
 
                     <div class="content m-b-md">
-                        I'm an example component.
+                        ka
                     </div>
             </div>
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Example Component2
+                        Boss
                     </div>
 
                     <div class="content m-b-md">
-                        I'm an example component.
+                        ka
                     </div>
             </div>
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Example Component3
+                        Come
                     </div>
 
                     <div class="content m-b-md">
-                        I'm an example component.
+                       with
                     </div>
             </div>
              <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Example Component4
+                        Rat
                     </div>
 
                     <div class="content m-b-md">
-                        I'm an example component.
+                       hahahaha
                     </div>
             </div>
         </div>

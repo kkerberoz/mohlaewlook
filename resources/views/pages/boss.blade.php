@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Boss</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="/css/app.css">
@@ -18,7 +18,7 @@
          <navbar></navbar>
          <div class="container">
              <div class="row">
-                <example-component></example-component>
+                <boss></boss>
              </div>
          </div>
      </div>
