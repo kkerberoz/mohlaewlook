@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('navbar', require('./components/navbar.vue').default);
+Vue.component('boss', require('./components/boss.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
