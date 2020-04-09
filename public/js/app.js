@@ -37540,8 +37540,24 @@ var staticRenderFns = [
       { staticClass: "navbar navbar-expand-sm navbar-dark bg-info mb-2" },
       [
         _c("div", { staticClass: "container" }, [
-          _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-            _vm._v("Hello World")
+          _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
+            _vm._v("Home")
+          ]),
+          _vm._v(" "),
+          _c("ul", { staticClass: "navbar-nav" }, [
+            _c("li", { staticClass: "nav-item active" }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "/boss" } }, [
+                _vm._v("Boss")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link disabled", attrs: { href: "#" } },
+                [_vm._v("Link")]
+              )
+            ])
           ])
         ])
       ]
