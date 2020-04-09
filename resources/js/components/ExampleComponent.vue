@@ -6,7 +6,7 @@
                     Example Component.
                 </div>
 
-                <div class="title m-b-md">
+                <div class="title flex-center full-height">
                     Example Component.
                 </div>
             </div>
