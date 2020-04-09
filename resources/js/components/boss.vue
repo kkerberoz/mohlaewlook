@@ -3,29 +3,38 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Example Component
+                        Rat
                     </div>
 
-                    <div class="title m-b-md">
-                        I'm an example component.
+                    <div class="title m-b-md flex-center">
+                        ka
                     </div>
             </div>
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Example Component
+                        Rat
                     </div>
 
-                    <div class="content m-b-md">
-                        I'm an example component.
+                    <div class="title m-b-md flex-center">
+                        ka
                     </div>
             </div>
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Example Component
+                        Come
                     </div>
 
-                    <div class="content m-b-md">
-                        I'm an example component.
+                    <div class="title m-b-md flex-center">
+                       with
+                    </div>
+            </div>
+             <div class="col-md-12">
+                    <div class="title flex-center full-height">
+                        Rat
+                    </div>
+
+                    <div class="title m-b-md flex-center">
+                       hahahaha
                     </div>
             </div>
         </div>

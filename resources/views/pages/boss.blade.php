@@ -4,8 +4,9 @@
             <navbar></navbar>
             <div class="container">
                 <div class="row">
-                <example-component></example-component>
+                <boss></boss>
                 </div>
             </div>
         </div>
     @endsection
+
