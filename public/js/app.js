@@ -37536,7 +37536,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    Boss\n                ")
+            _vm._v("\n                    Mhee ka jok\n                ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "content m-b-md" }, [
@@ -37616,15 +37616,13 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("ul", { staticClass: "navbar-nav" }, [
             _c("li", { staticClass: "nav-item active" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link", attrs: { href: "/supervalentine" } },
-                [_vm._v("Boss")]
-              )
+              _c("a", { staticClass: "nav-link", attrs: { href: "/boss" } }, [
+                _vm._v("supervarentine")
+              ])
             ]),
             _vm._v(" "),
             _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link ", attrs: { href: "/about" } }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "/about" } }, [
                 _vm._v("about")
               ])
             ])
@@ -50161,8 +50159,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

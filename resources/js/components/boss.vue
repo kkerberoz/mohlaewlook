@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Boss
+                        Mhee ka jok
                     </div>
 
                     <div class="content m-b-md">
