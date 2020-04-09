@@ -1975,6 +1975,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted. // Hello');
@@ -37494,6 +37512,26 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
             _vm._v("\n                    ABOUT\n                ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "content m-b-md" }, [
+            _vm._v("\n                    ka\n                ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v("\n                    DIVE\n                ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "content m-b-md" }, [
+            _vm._v("\n                    ka\n                ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v("\n                    DIVE\n                ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "content m-b-md" }, [

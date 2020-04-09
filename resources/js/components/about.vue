@@ -10,6 +10,24 @@
                         ka
                     </div>
             </div>
+            <div class="col-md-12">
+                    <div class="title flex-center full-height">
+                        DIVE
+                    </div>
+
+                    <div class="content m-b-md">
+                        ka
+                    </div>
+            </div>
+            <div class="col-md-12">
+                    <div class="title flex-center full-height">
+                        DIVE
+                    </div>
+
+                    <div class="content m-b-md">
+                        ka
+                    </div>
+            </div>
         </div>
     </div>
 </template>
