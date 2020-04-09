@@ -6,7 +6,7 @@
                         ABOUT
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class=" title content m-b-md">
                         ka
                     </div>
             </div>
@@ -15,7 +15,7 @@
                         DIVE
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title content m-b-md">
                         ka
                     </div>
             </div>
@@ -24,7 +24,7 @@
                         DIVE
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title content m-b-md">
                         ka
                     </div>
             </div>
