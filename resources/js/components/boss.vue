@@ -19,7 +19,7 @@
       <div class="col-md-12">
         <div class="title flex-center full-height">DIVE</div>
 
-        <div class="title m-b-md flex-center">hahahaha</div>
+        <div class="title m-b-md flex-center">KA</div>
       </div>
     </div>
   </div>
