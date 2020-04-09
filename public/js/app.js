@@ -37558,14 +37558,12 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-<<<<<<< HEAD
-            _vm._v("\n                    BOSS RAT DIVe MHEE\n                ")
-=======
-            _vm._v("Rat ZAZA")
->>>>>>> cab6b001418722ed356c17df1c8c39338812001b
+            _vm._v("ZAZARAT")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "title m-b-md flex-center" }, [_vm._v("ka")])
+          _c("div", { staticClass: "title m-b-md flex-center" }, [
+            _vm._v("RAT")
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
@@ -37573,7 +37571,9 @@ var staticRenderFns = [
             _vm._v("Rat ZAZA")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "title m-b-md flex-center" }, [_vm._v("ka")])
+          _c("div", { staticClass: "title m-b-md flex-center" }, [
+            _vm._v("RAT")
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
@@ -50179,8 +50179,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
