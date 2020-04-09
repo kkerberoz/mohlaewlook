@@ -37495,7 +37495,9 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    ABOUT\n                ")
+            _vm._v(
+              "\n                    AI puak hua kuy cambodia\n                "
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: " title content m-b-md" }, [
@@ -50179,8 +50181,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

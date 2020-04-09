@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        ABOUT
+                        AI puak hua kuy cambodia
                     </div>
 
                     <div class=" title content m-b-md">
