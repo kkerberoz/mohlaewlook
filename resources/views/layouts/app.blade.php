@@ -15,10 +15,8 @@
     </head>
     <body>
         <div id="app">
-            <navbar></navbar>
-
+            <navbar :links="navbarlinks"></navbar>
                     @yield('content')
-
         </div>
     </body>
     <script src="{{ asset('js/app.js') }}"></script>

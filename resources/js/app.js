@@ -35,5 +35,15 @@ Vue.component("info", require("./components/info.vue").default);
  */
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
+    data() {
+        return {
+            navbarlinks: [
+                // { link: "/", label: "Home" },
+                { link: "/login", label: "login" },
+                { link: "/register", label: "register" },
+                { link: "/info", label: "info" }
+            ]
+        };
+    }
 });
