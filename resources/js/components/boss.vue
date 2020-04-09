@@ -6,7 +6,7 @@
                         Boss
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md">
                         ka
                     </div>
             </div>
@@ -15,7 +15,7 @@
                         Boss
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md">
                         ka
                     </div>
             </div>
@@ -24,7 +24,7 @@
                         Come
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md">
                        with
                     </div>
             </div>
@@ -33,7 +33,7 @@
                         Rat
                     </div>
 
-                    <div class="content m-b-md">
+                    <div class="title m-b-md">
                        hahahaha
                     </div>
             </div>
