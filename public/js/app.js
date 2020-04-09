@@ -2037,25 +2037,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Component mounted.");
   }
 });
 
@@ -37574,41 +37558,37 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    Rat ZAZA\n                ")
+            _vm._v("Rat ZAZA")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "title m-b-md flex-center" }, [_vm._v("ka")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v("Rat ZAZA")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "title m-b-md flex-center" }, [_vm._v("ka")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v("Come")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "title m-b-md flex-center" }, [
-            _vm._v("\n                    ka\n                ")
+            _vm._v("with")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    Rat\n                ")
+            _vm._v("DIVE")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "title m-b-md flex-center" }, [
-            _vm._v("\n                    ka\n                ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    Come\n                ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "title m-b-md flex-center" }, [
-            _vm._v("\n                   with\n                ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                    Rat\n                ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "title m-b-md flex-center" }, [
-            _vm._v("\n                   hahahaha\n                ")
+            _vm._v("hahahaha")
           ])
         ])
       ])
