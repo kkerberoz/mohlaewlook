@@ -4,6 +4,7 @@
             <navbar></navbar>
             <div class="container">
                 <div class="row">
+                    <boss></boss>
                     <info></info>
                 </div>
             </div>
