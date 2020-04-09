@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                     <div class="title flex-center full-height">
-                        Rat ZAZA
+                        BOSS RAT DIVe MHEE
                     </div>
 
                     <div class="title m-b-md flex-center">
