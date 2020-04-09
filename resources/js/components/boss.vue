@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="title flex-center full-height">ZAZARAT</div>
+                <div class="title flex-center full-height">GGEZ</div>
 
                 <div class="title m-b-md flex-center">BOSS</div>
             </div>

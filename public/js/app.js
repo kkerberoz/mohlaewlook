@@ -37554,7 +37554,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("ZAZARAT")
+            _vm._v("GGEZ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "title m-b-md flex-center" }, [
@@ -37625,31 +37625,61 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                info\n            ")
+            _vm._v("info")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "title m-b-md" }, [
-            _vm._v("\n                info\n            ")
+          _c("div", { staticClass: "flex-center title m-b-md" }, [
+            _vm._v("info")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component\n            ")
+            _vm._v("Example Component")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("\n                I'm an example component.\n            ")
+            _vm._v("I'm an example component.")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component\n            ")
+            _vm._v("Example Component")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("\n                I'm an example component.\n            ")
+            _vm._v("I'm an example component.")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v("info")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex-center title m-b-md" }, [
+            _vm._v("info")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v("Example Component")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "content m-b-md" }, [
+            _vm._v("I'm an example component.")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "title flex-center full-height" }, [
+            _vm._v("Example Component")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "content m-b-md" }, [
+            _vm._v("I'm an example component.")
           ])
         ])
       ])
