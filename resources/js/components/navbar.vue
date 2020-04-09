@@ -7,7 +7,7 @@
                     <a class="nav-link" href="/boss">Boss</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Link</a>
+                    <a class="nav-link " href="/about">about</a>
                 </li>
             </ul>
         </div>
