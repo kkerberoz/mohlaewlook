@@ -4,7 +4,7 @@
             <a href="/" class="navbar-brand">Home</a>
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/boss">Boss</a>
+                    <a class="nav-link" href="/supervalentine">Boss</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="/about">about</a>
