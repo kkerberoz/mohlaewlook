@@ -15,13 +15,8 @@
     </head>
     <body>
         <div id="app">
-<<<<<<< Updated upstream
-            <navbar :links="navbarlinks"></navbar>
+            <navbar :links="navbarlinks" is-logged-in="true"></navbar>
                     @yield('content')
-=======
-            <navbar></navbar>
-            @yield('content')
->>>>>>> Stashed changes
         </div>
     </body>
     <script src="{{ asset('js/app.js') }}"></script>
