@@ -15,7 +15,7 @@
     </head>
     <body>
         <div id="app">
-            <navbar :links="navbarlinks" is-logged-in="true"></navbar>
+            <navbar :links="navbarlinks"></navbar>
                     @yield('content')
         </div>
     </body>

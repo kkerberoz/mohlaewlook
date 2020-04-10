@@ -1982,6 +1982,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     links: Array,
@@ -37604,27 +37614,64 @@ var render = function() {
     { staticClass: "navbar navbar-expand-sm navbar-dark bg-info mb-2" },
     [
       _c("div", { staticClass: "container" }, [
-        _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
-          _vm._v("Mohlaewlook")
-        ]),
+        _c(
+          "a",
+          {
+            staticClass: "navbar-brand",
+            staticStyle: { "font-weight": "bold" },
+            attrs: { href: "/" }
+          },
+          [_vm._v("Mohlaewlook")]
+        ),
+        _vm._v(" "),
+        _vm._m(0),
         _vm._v(" "),
         _c(
-          "ul",
-          { staticClass: "navbar-nav" },
-          _vm._l(_vm.links_filtered, function(link, i) {
-            return _c("li", { key: i, staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: link.link } }, [
-                _vm._v(_vm._s(link.label))
-              ])
-            ])
-          }),
-          0
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "collapsibleNavbar" }
+          },
+          [
+            _c(
+              "ul",
+              { staticClass: "navbar-nav ml-auto" },
+              _vm._l(_vm.links_filtered, function(link, i) {
+                return _c("li", { key: i, staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    { staticClass: "nav-link", attrs: { href: link.link } },
+                    [_vm._v(_vm._s(link.label))]
+                  )
+                ])
+              }),
+              0
+            )
+          ]
         )
       ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#collapsibleNavbar"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -50323,8 +50370,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
