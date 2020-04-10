@@ -15,8 +15,13 @@
     </head>
     <body>
         <div id="app">
+<<<<<<< Updated upstream
             <navbar :links="navbarlinks"></navbar>
                     @yield('content')
+=======
+            <navbar></navbar>
+            @yield('content')
+>>>>>>> Stashed changes
         </div>
     </body>
     <script src="{{ asset('js/app.js') }}"></script>
