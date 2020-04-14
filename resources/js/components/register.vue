@@ -7,112 +7,129 @@
                         Register
                     </div>
                     <form v-on:submit="formSubmit">
-                    <!-- <form method="post" action="/regis"> -->
-                    <input type="hidden" name="_token" v-bind:value="csrf">
+                        <!-- <form method="post" action="/regis"> -->
+                        <input
+                            type="hidden"
+                            name="_token"
+                            v-bind:value="csrf"
+                        />
                         <div class="card-body">
-                            <div class="form-group" >
+                            <div class="form-group">
                                 <label>Username:</label>
-                                <input v-bind:class="{ 'is-invalid': error_username }"
+                                <input
+                                    v-bind:class="{
+                                        'is-invalid': error_username
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="username"
                                     name="username"
                                 />
                                 <div class="invalid-feedback">
-                                     {{ error_username }}
+                                    {{ error_username }}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Password:</label>
-                                <input v-bind:class="{ 'is-invalid': error_password }"
+                                <input
+                                    v-bind:class="{
+                                        'is-invalid': error_password
+                                    }"
                                     type="password"
                                     class="form-control"
                                     v-model="password"
                                     name="password"
                                 />
                                 <div class="invalid-feedback">
-                                     {{ error_password }}
+                                    {{ error_password }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Title</label>
-                                <select v-bind:class="{ 'is-invalid': error_title }" class="form-control" name="title" v-model="title">
-                                    <option value="" selected disabled>Please select</option>
+                                <select
+                                    v-bind:class="{ 'is-invalid': error_title }"
+                                    class="form-control"
+                                    name="title"
+                                    v-model="title"
+                                >
+                                    <option value="" selected disabled
+                                        >Please select</option
+                                    >
                                     <option>Mrs.</option>
                                     <option>Ms.</option>
                                     <option>Mr.</option>
                                     <option>Miss</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                     {{ error_title }}
+                                    {{ error_title }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Name:</label>
                                 <input
                                     v-bind:class="{ 'is-invalid': error_name }"
-                                    id = "04"
+                                    id="04"
                                     type="text"
                                     class="form-control"
                                     name="name"
                                     v-model="name"
                                 />
                                 <div class="invalid-feedback">
-                                     {{ error_name }}
+                                    {{ error_name }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Surname:</label>
                                 <input
-                                    v-bind:class="{ 'is-invalid': error_surname }"
-                                    id = "05"
+                                    v-bind:class="{
+                                        'is-invalid': error_surname
+                                    }"
+                                    id="05"
                                     type="text"
                                     class="form-control"
                                     name="surname"
                                     v-model="surname"
                                 />
                                 <div class="invalid-feedback">
-                                     {{ error_surname }}
+                                    {{ error_surname }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>DOB:</label>
                                 <input
                                     v-bind:class="{ 'is-invalid': error_DOB }"
-                                    id = "06"
+                                    id="06"
                                     type="date"
                                     class="form-control"
                                     name="DOB"
                                     v-model="DOB"
                                 />
                                 <div class="invalid-feedback">
-                                     {{ error_DOB }}
+                                    {{ error_DOB }}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Email:</label>
                                 <input
                                     v-bind:class="{ 'is-invalid': error_email }"
-                                    id = "07"
+                                    id="07"
                                     type="email"
                                     class="form-control"
                                     name="email"
                                     v-model="email"
                                 />
                                 <div class="invalid-feedback">
-                                     {{ error_email }}
+                                    {{ error_email }}
                                 </div>
                             </div>
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-block" >
+                            <button type="submit" class="btn btn-block">
                                 Sign up
                             </button>
                         </div>
-
-
                     </form>
                 </div>
             </div>
@@ -142,77 +159,58 @@ export default {
     },
     methods: {
         formSubmit(e) {
-
             e.preventDefault();
             let currentObj = this;
-            if(!isNaN(this.username))
-            {
+            if (!isNaN(this.username)) {
                 this.error_username = "Please fill your username.";
                 this.errors.push(this.error_username);
-            }
-            else{
+            } else {
                 this.error_username = null;
             }
 
-            if(!isNaN(this.password))
-            {
-                this.error_password = 'Please fill your password.';
+            if (!isNaN(this.password)) {
+                this.error_password = "Please fill your password.";
                 this.errors.push(this.error_password);
-            }
-            else if (this.password.length < 6)
-            {
-                this.error_password = 'Password has to be at least 6 characters long.';
+            } else if (this.password.length < 6) {
+                this.error_password =
+                    "Password has to be at least 6 characters long.";
                 this.errors.push(this.error_password);
-            }
-            else{
+            } else {
                 this.error_password = null;
             }
 
-            if(!isNaN(this.title)){
+            if (!isNaN(this.title)) {
                 this.error_title = "Please select your title.";
                 this.errors.push(this.error_title);
-            }
-            else{
+            } else {
                 this.error_title = null;
             }
-            if(!isNaN(this.name))
-            {
+            if (!isNaN(this.name)) {
                 this.error_name = "Please fill your name.";
                 this.errors.push(this.error_name);
-            }
-            else{
+            } else {
                 this.error_name = null;
             }
-            if(!isNaN(this.surname))
-            {
+            if (!isNaN(this.surname)) {
                 this.error_surname = "Please fill your surname.";
                 this.errors.push(this.error_surname);
-            }
-            else{
+            } else {
                 this.error_surname = null;
             }
 
-            if(!isNaN(this.DOB))
-            {
+            if (!isNaN(this.DOB)) {
                 this.error_DOB = "Please select your Date of Birth.";
                 this.errors.push(this.error_DOB);
+            } else {
+                this.error_DOB = null;
             }
-            else{
-                this.error_DOB= null;
-            }
-            if(!isNaN(this.email))
-            {
+            if (!isNaN(this.email)) {
                 this.error_email = "Please fill your E-mail.";
                 this.errors.push(this.error_email);
+            } else {
+                this.error_email = null;
             }
-            else{
-                this.error_email= null;
-            }
-
-
-            if(!this.errors)
-            {
-
+            if (!this.errors) {
                 let data = {
                     username: this.username,
                     password: this.password,
@@ -222,15 +220,15 @@ export default {
                     DOB: this.DOB,
                     email: this.email
                 };
-                axios.post("/regis", data)
-                .then(function (response) {
+                axios.post("/regis", data).then(response => {
                     currentObj.output = response.data;
                     swal.fire(
                         "Register Success!",
                         "Cilck the button to continue!",
                         "success"
-                    ).then(function(){ window.location = "/"});
-
+                    ).then(() => {
+                        this.$router.push({ name: "Home" });
+                    });
                 });
                 // .catch(function (error) {
                 //     currentObj.output = error;
@@ -251,7 +249,6 @@ export default {
                 //     )
                 // });
             }
-
         }
     }
 };

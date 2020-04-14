@@ -2246,6 +2246,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf", "oldName"],
   data: function data() {
@@ -2268,6 +2285,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     formSubmit: function formSubmit(e) {
+      var _this = this;
+
       e.preventDefault();
       var currentObj = this;
 
@@ -2279,10 +2298,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!isNaN(this.password)) {
-        this.error_password = 'Please fill your password.';
+        this.error_password = "Please fill your password.";
         this.errors.push(this.error_password);
       } else if (this.password.length < 6) {
-        this.error_password = 'Password has to be at least 6 characters long.';
+        this.error_password = "Password has to be at least 6 characters long.";
         this.errors.push(this.error_password);
       } else {
         this.error_password = null;
@@ -2336,7 +2355,9 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/regis", data).then(function (response) {
           currentObj.output = response.data;
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-            window.location = "/";
+            _this.$router.push({
+              name: "Home"
+            });
           });
         }); // .catch(function (error) {
         //     currentObj.output = error;
@@ -41228,7 +41249,9 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  class: { "is-invalid": _vm.error_username },
+                  class: {
+                    "is-invalid": _vm.error_username
+                  },
                   attrs: { type: "text", name: "username" },
                   domProps: { value: _vm.username },
                   on: {
@@ -41243,7 +41266,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\n                                 " +
+                    "\n                                " +
                       _vm._s(_vm.error_username) +
                       "\n                            "
                   )
@@ -41263,7 +41286,9 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  class: { "is-invalid": _vm.error_password },
+                  class: {
+                    "is-invalid": _vm.error_password
+                  },
                   attrs: { type: "password", name: "password" },
                   domProps: { value: _vm.password },
                   on: {
@@ -41278,7 +41303,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\n                                 " +
+                    "\n                                " +
                       _vm._s(_vm.error_password) +
                       "\n                            "
                   )
@@ -41337,7 +41362,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\n                                 " +
+                    "\n                                " +
                       _vm._s(_vm.error_title) +
                       "\n                            "
                   )
@@ -41372,7 +41397,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\n                                 " +
+                    "\n                                " +
                       _vm._s(_vm.error_name) +
                       "\n                            "
                   )
@@ -41392,7 +41417,9 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  class: { "is-invalid": _vm.error_surname },
+                  class: {
+                    "is-invalid": _vm.error_surname
+                  },
                   attrs: { id: "05", type: "text", name: "surname" },
                   domProps: { value: _vm.surname },
                   on: {
@@ -41407,7 +41434,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\n                                 " +
+                    "\n                                " +
                       _vm._s(_vm.error_surname) +
                       "\n                            "
                   )
@@ -41442,7 +41469,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\n                                 " +
+                    "\n                                " +
                       _vm._s(_vm.error_DOB) +
                       "\n                            "
                   )
@@ -41477,7 +41504,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\n                                 " +
+                    "\n                                " +
                       _vm._s(_vm.error_email) +
                       "\n                            "
                   )
@@ -57079,8 +57106,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
