@@ -2230,39 +2230,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf", "oldName"],
   data: function data() {
@@ -41226,7 +41193,7 @@ var render = function() {
       _c("div", { staticClass: "col-md-6" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header bg-info" }, [
-            _vm._v("\n                    Register\n                ")
+            _vm._v("Register")
           ]),
           _vm._v(" "),
           _c("form", { on: { submit: _vm.formSubmit } }, [
@@ -41249,9 +41216,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.error_username
-                  },
+                  class: { "is-invalid": _vm.error_username },
                   attrs: { type: "text", name: "username" },
                   domProps: { value: _vm.username },
                   on: {
@@ -41265,11 +41230,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_username) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_username))
                 ])
               ]),
               _vm._v(" "),
@@ -41286,9 +41247,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.error_password
-                  },
+                  class: { "is-invalid": _vm.error_password },
                   attrs: { type: "password", name: "password" },
                   domProps: { value: _vm.password },
                   on: {
@@ -41302,11 +41261,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_password) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_password))
                 ])
               ]),
               _vm._v(" "),
@@ -41361,11 +41316,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_title) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_title))
                 ])
               ]),
               _vm._v(" "),
@@ -41383,7 +41334,7 @@ var render = function() {
                   ],
                   staticClass: "form-control",
                   class: { "is-invalid": _vm.error_name },
-                  attrs: { id: "04", type: "text", name: "name" },
+                  attrs: { type: "text", name: "name" },
                   domProps: { value: _vm.name },
                   on: {
                     input: function($event) {
@@ -41396,11 +41347,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_name) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_name))
                 ])
               ]),
               _vm._v(" "),
@@ -41417,10 +41364,8 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.error_surname
-                  },
-                  attrs: { id: "05", type: "text", name: "surname" },
+                  class: { "is-invalid": _vm.error_surname },
+                  attrs: { type: "text", name: "surname" },
                   domProps: { value: _vm.surname },
                   on: {
                     input: function($event) {
@@ -41433,11 +41378,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_surname) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_surname))
                 ])
               ]),
               _vm._v(" "),
@@ -41455,7 +41396,7 @@ var render = function() {
                   ],
                   staticClass: "form-control",
                   class: { "is-invalid": _vm.error_DOB },
-                  attrs: { id: "06", type: "date", name: "DOB" },
+                  attrs: { type: "date", name: "DOB" },
                   domProps: { value: _vm.DOB },
                   on: {
                     input: function($event) {
@@ -41468,11 +41409,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_DOB) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_DOB))
                 ])
               ]),
               _vm._v(" "),
@@ -41490,7 +41427,7 @@ var render = function() {
                   ],
                   staticClass: "form-control",
                   class: { "is-invalid": _vm.error_email },
-                  attrs: { id: "07", type: "email", name: "email" },
+                  attrs: { type: "email", name: "email" },
                   domProps: { value: _vm.email },
                   on: {
                     input: function($event) {
@@ -41503,40 +41440,28 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_email) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_email))
                 ])
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0)
+            _c("div", { staticClass: "card-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-block",
+                  attrs: { disabled: _vm.loading, type: "submit" }
+                },
+                [_vm._v("Sign up")]
+              )
+            ])
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-block", attrs: { type: "submit" } },
-        [
-          _vm._v(
-            "\n                            Sign up\n                        "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -57106,8 +57031,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
