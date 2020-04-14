@@ -6,8 +6,8 @@
                     <div class="card-header bg-info">
                         Register
                     </div>
-                    <!-- <form v-on:submit="formSubmit"> -->
-                    <form method="post" action="/regis">
+                    <form v-on:submit.prevent="formSubmit">
+                    <!-- <form method="post" action="/regis"> -->
                     <input type="hidden" name="_token" v-bind:value="csrf">
                         <div class="card-body">
                             <div class="form-group" >
@@ -90,40 +90,45 @@
 </template>
 <script>
 export default {
-    props: ['csrf', 'oldName']
-    // data()
-    // {
-    //     return {
-    //         username: "",
-    //         password: "",
-    //         title: "",
-    //         name: "",
-    //         surname: "",
-    //         DOB: "",
-    //         email: ""
-    //     };
-    // },
-    // methods: {
-    //         formSubmit(e) {
-    //             e.preventDefault();
-    //             let currentObj = this;
-    //             axios.post('/regis', {
-    //                 username: this.username,
-    //                 password: this.password,
-    //                 title: this.title,
-    //                 name: this.name,
-    //                 surname: this.surname,
-    //                 DOB: this.DOB,
-    //                 email: this.email
-    //             })
-    //             .then(function (response) {
-    //                 currentObj.output = response.data;
-    //             })
-    //             .catch(function (error) {
-    //                 currentObj.output = error;
-    //             });
-    //         }
-    //     }
+    props: ['csrf', 'oldName'],
+    data()
+    {
+        return {
+            username: "",
+            password: "",
+            title: "",
+            name: "",
+            surname: "",
+            DOB: "",
+            email: ""
+        };
+    },
+    methods:
+    {
+        formSubmit(e) {
+            e.preventDefault();
+            let currentObj = this;
+            axios.post('/regis', {
+                username: this.username,
+                password: this.password,
+                title: this.title,
+                name: this.name,
+                surname: this.surname,
+                DOB: this.DOB,
+                email: this.email
+            })
+            .then(function (response) {
+                currentObj.output = response.data;
+                alert("Register Success!");
+                location.replace('/')
+            })
+            .catch(function (error) {
+                currentObj.output = error;
+
+            });
+        }
+
+    }
 
    }
 
