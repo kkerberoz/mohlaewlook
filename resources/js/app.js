@@ -24,10 +24,10 @@ Vue.component(
     require("./components/ExampleComponent.vue").default
 );
 Vue.component("navbar", require("./components/navbar.vue").default);
-Vue.component("boss", require("./components/boss.vue").default);
-Vue.component("about", require("./components/about.vue").default);
+Vue.component("login", require("./components/login.vue").default);
+Vue.component("register", require("./components/register.vue").default);
 Vue.component("info", require("./components/info.vue").default);
-Vue.component("contract", require("./components/contract.vue").default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -35,5 +35,15 @@ Vue.component("contract", require("./components/contract.vue").default);
  */
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
+    data() {
+        return {
+            navbarlinks: [
+                // { link: "/", label: "Home" },
+                { link: "/login", label: "login" },
+                { link: "/register", label: "register" },
+                { link: "/info", label: "info" }
+            ]
+        };
+    }
 });

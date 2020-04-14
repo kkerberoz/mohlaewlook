@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<title>register</title>
     @section('content')
-         <example-component></example-component>
+        <register></register>
     @endsection
