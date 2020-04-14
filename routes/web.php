@@ -14,7 +14,3 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PagesController@index');
-Route::get('/info', 'PagesController@info');
-
-Route::get('/login', 'UserController@login');
-Route::get('/register', 'UserController@register');
