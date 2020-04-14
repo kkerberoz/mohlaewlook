@@ -2242,7 +2242,7 @@ __webpack_require__.r(__webpack_exports__);
         email: this.email
       }).then(function (response) {
         currentObj.output = response.data;
-        swal.fire("Good job!", "You clicked the button!", "success").then(function () {
+        swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
           window.location = "/";
         });
       })["catch"](function (error) {

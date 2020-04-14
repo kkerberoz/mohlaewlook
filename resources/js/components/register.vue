@@ -119,7 +119,7 @@ export default {
             })
             .then(function (response) {
                 currentObj.output = response.data;
-                swal.fire("Good job!", "You clicked the button!", "success").then(function() {window.location = "/";});
+                swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function() {window.location = "/";});
             })
             .catch(function (error) {
                 currentObj.output = error;
