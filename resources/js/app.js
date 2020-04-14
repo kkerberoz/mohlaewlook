@@ -14,6 +14,7 @@ Vue.use(VueRouter);
 let routes = [
     {
         path: "/",
+        name: "Home",
         component: require("./components/ExampleComponent.vue").default
     },
     { path: "/login", component: require("./components/login.vue").default },
@@ -25,7 +26,7 @@ let routes = [
 ];
 
 const router = new VueRouter({
-    mode: "history",
+    // mode: "history",
     routes // short for `routes: routes`
 });
 /**
