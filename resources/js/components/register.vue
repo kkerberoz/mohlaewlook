@@ -7,10 +7,14 @@
                         Register
                     </div>
                     <form v-on:submit.prevent="formSubmit">
-                    <!-- <form method="post" action="/regis"> -->
-                    <input type="hidden" name="_token" v-bind:value="csrf">
+                        <!-- <form method="post" action="/regis"> -->
+                        <input
+                            type="hidden"
+                            name="_token"
+                            v-bind:value="csrf"
+                        />
                         <div class="card-body">
-                            <div class="form-group" >
+                            <div class="form-group">
                                 <label>Username:</label>
                                 <input
                                     type="text"
@@ -30,7 +34,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Title</label>
-                                <select class="form-control" name="title" v-model="title">
+                                <select
+                                    class="form-control"
+                                    name="title"
+                                    v-model="title"
+                                >
                                     <option>Mrs.</option>
                                     <option>Ms.</option>
                                     <option>Mr.</option>
@@ -76,12 +84,10 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-block" >
+                            <button type="submit" class="btn btn-block">
                                 Sign up
                             </button>
                         </div>
-
-
                     </form>
                 </div>
             </div>
@@ -90,9 +96,8 @@
 </template>
 <script>
 export default {
-    props: ['csrf', 'oldName'],
-    data()
-    {
+    props: ["csrf", "oldName"],
+    data() {
         return {
             username: "",
             password: "",
@@ -103,35 +108,34 @@ export default {
             email: ""
         };
     },
-    methods:
-    {
+    methods: {
         formSubmit(e) {
             e.preventDefault();
             let currentObj = this;
-            axios.post('/regis', {
-                username: this.username,
-                password: this.password,
-                title: this.title,
-                name: this.name,
-                surname: this.surname,
-                DOB: this.DOB,
-                email: this.email
-            })
-            .then(function (response) {
-                currentObj.output = response.data;
-                swal.fire("Good job!", "You clicked the button!", "success").then(function() {window.location = "/";});
-            })
-            .catch(function (error) {
-                currentObj.output = error;
-
-            });
+            axios
+                .post("/regis", {
+                    username: this.username,
+                    password: this.password,
+                    title: this.title,
+                    name: this.name,
+                    surname: this.surname,
+                    DOB: this.DOB,
+                    email: this.email
+                })
+                .then(function(response) {
+                    currentObj.output = response.data;
+                    swal.fire(
+                        "Register Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    ).then(function() {
+                        window.location = "/";
+                    });
+                })
+                .catch(function(error) {
+                    currentObj.output = error;
+                });
         }
-
     }
-
-   }
-
+};
 </script>
-
-
-

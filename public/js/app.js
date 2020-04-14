@@ -2215,8 +2215,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['csrf', 'oldName'],
+  props: ["csrf", "oldName"],
   data: function data() {
     return {
       username: "",
@@ -2232,7 +2238,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       e.preventDefault();
       var currentObj = this;
-      axios.post('/regis', {
+      axios.post("/regis", {
         username: this.username,
         password: this.password,
         title: this.title,
@@ -2242,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
         email: this.email
       }).then(function (response) {
         currentObj.output = response.data;
-        swal.fire("Good job!", "You clicked the button!", "success").then(function () {
+        swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
           window.location = "/";
         });
       })["catch"](function (error) {
@@ -56914,8 +56920,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
