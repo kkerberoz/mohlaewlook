@@ -119,8 +119,7 @@ export default {
             })
             .then(function (response) {
                 currentObj.output = response.data;
-                alert("Register Success!");
-                location.replace('/')
+                swal.fire("Good job!", "You clicked the button!", "success").then(function() {window.location = "/";});
             })
             .catch(function (error) {
                 currentObj.output = error;
