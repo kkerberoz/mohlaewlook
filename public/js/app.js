@@ -2215,8 +2215,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['csrf', 'oldName'],
+  props: ["csrf", "oldName"],
   data: function data() {
     return {
       username: "",
@@ -2225,29 +2256,105 @@ __webpack_require__.r(__webpack_exports__);
       name: "",
       surname: "",
       DOB: "",
-      email: ""
+      email: "",
+      error_username: "",
+      error_password: "",
+      error_title: "",
+      error_name: "",
+      error_surname: "",
+      error_DOB: "",
+      error_email: ""
     };
   },
   methods: {
     formSubmit: function formSubmit(e) {
       e.preventDefault();
       var currentObj = this;
-      axios.post('/regis', {
-        username: this.username,
-        password: this.password,
-        title: this.title,
-        name: this.name,
-        surname: this.surname,
-        DOB: this.DOB,
-        email: this.email
-      }).then(function (response) {
-        currentObj.output = response.data;
-        swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-          window.location = "/";
-        });
-      })["catch"](function (error) {
-        currentObj.output = error;
-      });
+
+      if (!isNaN(this.username)) {
+        this.error_username = "Please fill your username.";
+        this.errors.push(this.error_username);
+      } else {
+        this.error_username = null;
+      }
+
+      if (!isNaN(this.password)) {
+        this.error_password = 'Please fill your password.';
+        this.errors.push(this.error_password);
+      } else if (this.password.length < 6) {
+        this.error_password = 'Password has to be at least 6 characters long.';
+        this.errors.push(this.error_password);
+      } else {
+        this.error_password = null;
+      }
+
+      if (!isNaN(this.title)) {
+        this.error_title = "Please select your title.";
+        this.errors.push(this.error_title);
+      } else {
+        this.error_title = null;
+      }
+
+      if (!isNaN(this.name)) {
+        this.error_name = "Please fill your name.";
+        this.errors.push(this.error_name);
+      } else {
+        this.error_name = null;
+      }
+
+      if (!isNaN(this.surname)) {
+        this.error_surname = "Please fill your surname.";
+        this.errors.push(this.error_surname);
+      } else {
+        this.error_surname = null;
+      }
+
+      if (!isNaN(this.DOB)) {
+        this.error_DOB = "Please select your Date of Birth.";
+        this.errors.push(this.error_DOB);
+      } else {
+        this.error_DOB = null;
+      }
+
+      if (!isNaN(this.email)) {
+        this.error_email = "Please fill your E-mail.";
+        this.errors.push(this.error_email);
+      } else {
+        this.error_email = null;
+      }
+
+      if (!this.errors) {
+        var data = {
+          username: this.username,
+          password: this.password,
+          title: this.title,
+          name: this.name,
+          surname: this.surname,
+          DOB: this.DOB,
+          email: this.email
+        };
+        axios.post("/regis", data).then(function (response) {
+          currentObj.output = response.data;
+          swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+            window.location = "/";
+          });
+        }); // .catch(function (error) {
+        //     currentObj.output = error;
+        //     var val = [];
+        //     var err = ["Username", "Password", "Title", "Name",
+        //                 "Surname", "Date of Birth", "E-mail"];
+        //     var show_error = "";
+        //     for(var i=1; i<=7; ++i){
+        //         val[i] = document.getElementById("0" + i).value;
+        //         if(!isNaN(val[i])) show_error +=  err[i - 1]  + "<br>" ;
+        //     }
+        //     swal.fire(
+        //         "Please fill",
+        //          show_error,
+        //         "error"
+        //     )
+        // });
+      }
     }
   }
 });
@@ -41101,227 +41208,285 @@ var render = function() {
             _vm._v("\n                    Register\n                ")
           ]),
           _vm._v(" "),
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.formSubmit($event)
-                }
-              }
-            },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Username:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.username,
-                        expression: "username"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", name: "username" },
-                    domProps: { value: _vm.username },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.username = $event.target.value
-                      }
-                    }
-                  })
-                ]),
+          _c("form", { on: { submit: _vm.formSubmit } }, [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Username:")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Password:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.password,
-                        expression: "password"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "password", name: "password" },
-                    domProps: { value: _vm.password },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.password = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Title")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
+                _c("input", {
+                  directives: [
                     {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.title,
-                          expression: "title"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { name: "title" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.title = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.username,
+                      expression: "username"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_username },
+                  attrs: { type: "text", name: "username" },
+                  domProps: { value: _vm.username },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    },
-                    [
-                      _c("option", [_vm._v("Mrs.")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Ms.")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Mr.")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Miss")])
-                    ]
+                      _vm.username = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                 " +
+                      _vm._s(_vm.error_username) +
+                      "\n                            "
                   )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.name,
-                        expression: "name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", name: "name" },
-                    domProps: { value: _vm.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.name = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Surname:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.surname,
-                        expression: "surname"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", name: "surname" },
-                    domProps: { value: _vm.surname },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.surname = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("DOB:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.DOB,
-                        expression: "DOB"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "date", name: "DOB" },
-                    domProps: { value: _vm.DOB },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.DOB = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Email:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.email,
-                        expression: "email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "email", name: "email" },
-                    domProps: { value: _vm.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.email = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0)
-            ]
-          )
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Password:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_password },
+                  attrs: { type: "password", name: "password" },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                 " +
+                      _vm._s(_vm.error_password) +
+                      "\n                            "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Title")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.title,
+                        expression: "title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.error_title },
+                    attrs: { name: "title" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.title = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { value: "", selected: "", disabled: "" } },
+                      [_vm._v("Please select")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Mrs.")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Ms.")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Mr.")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Miss")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                 " +
+                      _vm._s(_vm.error_title) +
+                      "\n                            "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Name:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_name },
+                  attrs: { id: "04", type: "text", name: "name" },
+                  domProps: { value: _vm.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                 " +
+                      _vm._s(_vm.error_name) +
+                      "\n                            "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Surname:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.surname,
+                      expression: "surname"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_surname },
+                  attrs: { id: "05", type: "text", name: "surname" },
+                  domProps: { value: _vm.surname },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.surname = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                 " +
+                      _vm._s(_vm.error_surname) +
+                      "\n                            "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("DOB:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.DOB,
+                      expression: "DOB"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_DOB },
+                  attrs: { id: "06", type: "date", name: "DOB" },
+                  domProps: { value: _vm.DOB },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.DOB = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                 " +
+                      _vm._s(_vm.error_DOB) +
+                      "\n                            "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Email:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.email,
+                      expression: "email"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_email },
+                  attrs: { id: "07", type: "email", name: "email" },
+                  domProps: { value: _vm.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.email = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                 " +
+                      _vm._s(_vm.error_email) +
+                      "\n                            "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
         ])
       ])
     ])

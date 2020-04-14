@@ -8,6 +8,11 @@ use App\Customer;
 
 class UserController extends Controller
 {
+    public function index(){
+
+        return view('welcome');
+    }
+
     public function register(Request $request){
         $register = new Customer;
         $register->username = $request->username;
