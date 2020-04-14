@@ -17,12 +17,16 @@ let routes = [
         name: "Home",
         component: require("./components/ExampleComponent.vue").default
     },
-    { path: "/login", component: require("./components/login.vue").default },
+    {
+        path: "/login", component: require("./components/login.vue").default
+    },
     {
         path: "/register",
         component: require("./components/register.vue").default
     },
-    { path: "/info", component: require("./components/info.vue").default }
+    {
+        path: "/info", component: require("./components/info.vue").default
+    }
 ];
 
 const router = new VueRouter({

@@ -6,14 +6,17 @@
                     <div class="card-header bg-info">
                         Register
                     </div>
-                    <form v-on:submit.prevent="onSubmit">
+                    <!-- <form v-on:submit="formSubmit"> -->
+                    <form method="post" action="/regis">
+                    <input type="hidden" name="_token" v-bind:value="csrf">
                         <div class="card-body">
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label>Username:</label>
                                 <input
                                     type="text"
                                     class="form-control"
                                     v-model="username"
+                                    name="username"
                                 />
                             </div>
                             <div class="form-group">
@@ -22,11 +25,12 @@
                                     type="password"
                                     class="form-control"
                                     v-model="password"
+                                    name="password"
                                 />
                             </div>
                             <div class="form-group">
                                 <label>Title</label>
-                                <select class="form-control" v-model="title">
+                                <select class="form-control" name="title" v-model="title">
                                     <option>Mrs.</option>
                                     <option>Ms.</option>
                                     <option>Mr.</option>
@@ -38,6 +42,7 @@
                                 <input
                                     type="text"
                                     class="form-control"
+                                    name="name"
                                     v-model="name"
                                 />
                             </div>
@@ -46,6 +51,7 @@
                                 <input
                                     type="text"
                                     class="form-control"
+                                    name="surname"
                                     v-model="surname"
                                 />
                             </div>
@@ -54,6 +60,7 @@
                                 <input
                                     type="date"
                                     class="form-control"
+                                    name="DOB"
                                     v-model="DOB"
                                 />
                             </div>
@@ -62,15 +69,19 @@
                                 <input
                                     type="email"
                                     class="form-control"
+                                    name="email"
                                     v-model="email"
                                 />
                             </div>
                         </div>
+
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-block">
+                            <button type="submit" class="btn btn-block" >
                                 Sign up
                             </button>
                         </div>
+
+
                     </form>
                 </div>
             </div>
@@ -79,39 +90,44 @@
 </template>
 <script>
 export default {
-    name: "register",
-    data() {
-        return {
-            username: "",
-            password: "",
-            title: "",
-            name: "",
-            surname: "",
-            DOB: "",
-            email: ""
-        };
-    }
+    props: ['csrf', 'oldName']
+    // data()
+    // {
+    //     return {
+    //         username: "",
+    //         password: "",
+    //         title: "",
+    //         name: "",
+    //         surname: "",
+    //         DOB: "",
+    //         email: ""
+    //     };
+    // },
     // methods: {
-    //     onSubmit() {
-    //         let data = {
-    //             username: this.username,
-    //             password: this.password,
-    //             title: this.title,
-    //             name: this.name,
-    //             surname: this.surname,
-    //             DOB: this.DOB,
-    //             email: this.email
-    //         };
-    //         this.app.req.post("register", data).then(response => {
-    //             if (response.data.id) {
-    //                 this.app.user = response.data;
-    //                 this.app.$router.push({ name: "home" });
-    //             } else if (response.data.error === "email_taken") {
-    //                 this.errorEmail = "This email is taken";
-    //                 this.email = "";
-    //             }
-    //         });
+    //         formSubmit(e) {
+    //             e.preventDefault();
+    //             let currentObj = this;
+    //             axios.post('/regis', {
+    //                 username: this.username,
+    //                 password: this.password,
+    //                 title: this.title,
+    //                 name: this.name,
+    //                 surname: this.surname,
+    //                 DOB: this.DOB,
+    //                 email: this.email
+    //             })
+    //             .then(function (response) {
+    //                 currentObj.output = response.data;
+    //             })
+    //             .catch(function (error) {
+    //                 currentObj.output = error;
+    //             });
+    //         }
     //     }
-    // }
-};
+
+   }
+
 </script>
+
+
+
