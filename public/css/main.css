@@ -51,7 +51,7 @@ body {
 }
 
 .btn {
-    background-color: #fff;
+    background-color: #6cb2eb;
     border-radius: 5px;
     border-color: #636b6f;
     font-size: 16px;
@@ -60,7 +60,7 @@ body {
     transition: 0.3s;
     border-radius: 5px;
     font-size: 20px;
-    background-color: lightskyblue;
+    background-color: #339bf0;
 }
 .card-header {
     font-size: 30px;

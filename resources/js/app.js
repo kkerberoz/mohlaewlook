@@ -8,6 +8,28 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
+
+Vue.component("navbar", require("./components/navbar.vue").default);
+
+let routes = [
+    {
+        path: "/",
+        component: require("./components/ExampleComponent.vue").default
+    },
+    { path: "/login", component: require("./components/login.vue").default },
+    {
+        path: "/register",
+        component: require("./components/register.vue").default
+    },
+    { path: "/info", component: require("./components/info.vue").default }
+];
+
+const router = new VueRouter({
+    mode: "history",
+    routes // short for `routes: routes`
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,15 +41,6 @@ window.Vue = require("vue");
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component(
-    "example-component",
-    require("./components/ExampleComponent.vue").default
-);
-Vue.component("navbar", require("./components/navbar.vue").default);
-Vue.component("login", require("./components/login.vue").default);
-Vue.component("register", require("./components/register.vue").default);
-Vue.component("info", require("./components/info.vue").default);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -35,7 +48,7 @@ Vue.component("info", require("./components/info.vue").default);
  */
 
 const app = new Vue({
-    el: "#app",
+    router,
     data() {
         return {
             navbarlinks: [
@@ -46,4 +59,4 @@ const app = new Vue({
             ]
         };
     }
-});
+}).$mount("#app");

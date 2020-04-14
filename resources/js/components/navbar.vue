@@ -3,8 +3,8 @@
         <div class="container">
             <!-- {{ isLogIn }} -->
 
-            <a href="/" class="navbar-brand" style="font-weight: bold;"
-                >Mohlaewlook</a
+            <router-link to="/" class="navbar-brand" style="font-weight: bold;"
+                >Mohlaewlook</router-link
             >
             <button
                 class="navbar-toggler"
@@ -21,9 +21,9 @@
                         :key="i"
                         class="nav-item"
                     >
-                        <a :href="link.link" class="nav-link">{{
+                        <router-link :to="link.link" class="nav-link">{{
                             link.label
-                        }}</a>
+                        }}</router-link>
                     </li>
                 </ul>
             </div>
@@ -35,19 +35,18 @@
 export default {
     props: {
         links: Array,
-        isLoggedIn: { type: Boolean, default: false },
+        isLoggedIn: { type: Boolean, default: false }
     },
     computed: {
-        links_filtered: function () {
+        links_filtered: function() {
             if (this.isLoggedIn) {
                 return this.links.filter(
-                    (link) =>
-                        link.link !== "/login" && link.link !== "/register"
+                    link => link.link !== "/login" && link.link !== "/register"
                 );
             } else {
                 return this.links;
             }
-        },
-    },
+        }
+    }
 };
 </script>

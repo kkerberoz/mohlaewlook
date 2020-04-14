@@ -10,8 +10,4 @@ class PagesController extends Controller
     {
         return view('welcome');
     }
-    public function info()
-    {
-        return view('pages.info');
-    }
 }
