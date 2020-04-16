@@ -217,6 +217,7 @@ export default {
                 this.error_email = null;
             }
             if (!this.errors.length) {
+
                 let data = {
                     username: this.username,
                     password: this.password,
@@ -227,17 +228,19 @@ export default {
                     email: this.email
                 };
                 axios.post("/api/regis", data).then(response => {
-                    if(response.data.error === 'This E-mail is already exist.'){
-                        this.email = '';
-                        this.error_email = response.data.error;
-                        this.errors.push(this.error_email);
-                    }
-                    else if (response.data.error === 'This username is already exist.'){
+                    if (response.data.errorU == 1){
                         this.username= '';
-                        this.error_username = response.data.error;
+                        this.error_username = 'This Username is already exist';
                         this.errors.push(this.error_username);
+                        this.errors = [];
                     }
-                    else{
+                    else if(response.data.errorE == 1){
+                        this.email = '';
+                        this.error_email = 'This E-mail is already exist';
+                        this.errors.push(this.error_email);
+                        this.errors = [];
+                    }
+                    else if(response.data.errorU==0 && response.data.errorE ==0){
                         currentObj.output = response.data;
                         swal.fire(
                         "Register Success!",

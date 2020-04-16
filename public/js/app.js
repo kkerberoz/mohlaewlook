@@ -2649,17 +2649,21 @@ __webpack_require__.r(__webpack_exports__);
           email: this.email
         };
         axios.post("/api/regis", data).then(function (response) {
-          if (response.data.error === 'This E-mail is already exist.') {
-            _this.email = '';
-            _this.error_email = response.data.error;
-
-            _this.errors.push(_this.error_email);
-          } else if (response.data.error === 'This username is already exist.') {
+          if (response.data.errorU == 1) {
             _this.username = '';
-            _this.error_username = response.data.error;
+            _this.error_username = 'This Username is already exist';
 
             _this.errors.push(_this.error_username);
-          } else {
+
+            _this.errors = [];
+          } else if (response.data.errorE == 1) {
+            _this.email = '';
+            _this.error_email = 'This E-mail is already exist';
+
+            _this.errors.push(_this.error_email);
+
+            _this.errors = [];
+          } else if (response.data.errorU == 0 && response.data.errorE == 0) {
             currentObj.output = response.data;
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
               _this.$router.push({
