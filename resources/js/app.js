@@ -15,39 +15,7 @@ const toast = swal.mixin({
 
 window.toast = toast;
 
-let routes = [
-    {
-        path: "/",
-        name: "Home",
-        component: require("./pages/ExampleComponent.vue").default
-    },
-    {
-        path: "/login",
-        component: require("./pages/login.vue").default
-    },
-    {
-        path: "/register",
-        component: require("./pages/register.vue").default
-    },
-    {
-        path: "/info",
-        component: require("./pages/info.vue").default
-    },
-    {
-        path: "/employee",
-        name: "employee",
-        component: require("./pages/employee/employee.vue").default,
-        children: [
-            {
-                path: "/registersss",
-                name: "resgiteremp",
-                component: require("./pages/employee/register_emp.vue").default
-            }
-            // other nested routes
-        ]
-    }
-];
-
+import routes from "./routes";
 const router = new VueRouter({
     // mode: "history",
     routes // short for `routes: routes`
