@@ -128,6 +128,7 @@ export default {
     formSubmit(e) {
       e.preventDefault();
       let currentObj = this;
+      alert("Sfdsdfsfsfdfdsf")
       if (!isNaN(this.username)) {
         this.error_username = "Please fill your username.";
         this.errors.push(this.error_username);
