@@ -41203,7 +41203,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "footers" } }, [
     _c("footer", { staticClass: " pt-xl-5 text-center" }, [
-      _c("p", { staticClass: "mb-1" }, [_vm._v("© 2017-2018 Company Name")]),
+      _c("p", { staticClass: "mb-1" }, [_vm._v("© 2020 Mohlaewlook")]),
       _vm._v(" "),
       _c(
         "ul",
@@ -58180,8 +58180,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

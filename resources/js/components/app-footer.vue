@@ -1,7 +1,7 @@
 <template>
     <div id="footers">
         <footer class=" pt-xl-5 text-center">
-            <p class="mb-1">&copy; 2017-2018 Company Name</p>
+            <p class="mb-1">&copy; 2020 Mohlaewlook</p>
             <ul class="list-inline">
                 <li
                     v-for="(link, i) in links_filtered"
