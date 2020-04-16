@@ -1,18 +1,17 @@
 require("./bootstrap");
-import swal from 'sweetalert2'
+import swal from "sweetalert2";
 window.swal = swal;
 
 window.Vue = require("vue");
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
-
 const toast = swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: "top-end",
     showConfirmButton: false,
     timer: 3000
-  });
+});
 
 window.toast = toast;
 
@@ -20,17 +19,19 @@ let routes = [
     {
         path: "/",
         name: "Home",
-        component: require("./components/ExampleComponent.vue").default
+        component: require("./pages/ExampleComponent.vue").default
     },
     {
-        path: "/login", component: require("./components/login.vue").default
+        path: "/login",
+        component: require("./pages/login.vue").default
     },
     {
         path: "/register",
-        component: require("./components/register.vue").default
+        component: require("./pages/register.vue").default
     },
     {
-        path: "/info", component: require("./components/info.vue").default
+        path: "/info",
+        component: require("./pages/info.vue").default
     }
 ];
 
