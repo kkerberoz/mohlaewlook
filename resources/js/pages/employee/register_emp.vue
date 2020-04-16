@@ -1,233 +1,221 @@
 <template>
-    <div class="container">
-        <div class="row flex-center full-height">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-info">Register new employee</div>
-                    <form v-on:submit="formSubmit">
-                        <!-- <form method="post" action="/regis"> -->
-                        <input
-                            type="hidden"
-                            name="_token"
-                            v-bind:value="csrf"
-                        />
-                        <div class="card-body">
-                            <span class="form-group">
-                                <label>Username:</label>
+    <div class="container" id="content">
+        <div class="row flex-center">
+            <div
+                class="col-md-8 order-md-1 justify-content-between align-items-center "
+            >
+                <h3 class="mb-3" style="display:flex;">Employee Register</h3>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label>Username:</label>
+                            <div class="input-group">
                                 <input
-                                    v-bind:class="{
-                                        'is-invalid': error_username
-                                    }"
                                     type="text"
                                     class="form-control"
-                                    v-model="username"
-                                    name="username"
+                                    required
                                 />
-                                <span class="invalid-feedback">
-                                    {{ error_username }}
-                                </span>
-                            </span>
-
-                            <span class="form-group">
-                                <label>Password:</label>
-                                <input
-                                    v-bind:class="{
-                                        'is-invalid': error_password
-                                    }"
-                                    type="password"
-                                    class="form-control"
-                                    v-model="password"
-                                    name="password"
-                                />
-                                <span class="invalid-feedback">
-                                    {{ error_password }}
-                                </span>
-                            </span>
-
-                            <span class="form-group">
-                                <label>Title</label>
-                                <select
-                                    v-bind:class="{ 'is-invalid': error_title }"
-                                    class="form-control"
-                                    name="title"
-                                    v-model="title"
+                                <div
+                                    class="invalid-feedback"
+                                    style="width: 100%;"
                                 >
-                                    <option value selected disabled
-                                        >Please select</option
-                                    >
-                                    <option>Mrs.</option>
-                                    <option>Ms.</option>
-                                    <option>Mr.</option>
-                                    <option>Miss</option>
-                                </select>
-                                <span class="invalid-feedback">
-                                    {{ error_title }}
-                                </span>
-                            </span>
-                            <span class="form-group">
-                                <label>Name:</label>
+                                    Your username is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Password:</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                required
+                            />
+                            <div class="invalid-feedback">
+                                Please enter
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 mb-2">
+                            <label for="state">Title:</label>
+                            <select
+                                class="custom-select d-block w-100"
+                                required
+                            >
+                                <option value="">Choose</option>
+                                <option>Mrs.</option>
+                                <option>Ms.</option>
+                                <option>Mr.</option>
+                                <option>Miss</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose
+                            </div>
+                        </div>
+                        <div class="col-md-5 mb-2">
+                            <label>First name:</label>
+                            <input type="text" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-5 mb-2">
+                            <label>Last name:</label>
+                            <input type="text" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <span class="col-md-6 mb-2">
+                            <label>ID-Card:</label>
+                            <div class="input-group">
                                 <input
-                                    v-bind:class="{ 'is-invalid': error_name }"
                                     type="text"
                                     class="form-control"
-                                    name="name"
-                                    v-model="name"
+                                    required
                                 />
                                 <div class="invalid-feedback">
-                                    {{ error_name }}
+                                    Your id-card is required.
                                 </div>
-                            </span>
-                            <span class="form-group">
-                                <label>Surname:</label>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="col-md-4 mb-2">
+                            <label>DOB:</label>
+                            <input type="date" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Please enter date
+                            </div>
+                        </span>
+                        <span class="col-md-4 mb-2">
+                            <label>Height:</label>
+                            <div class="input-group">
                                 <input
-                                    v-bind:class="{
-                                        'is-invalid': error_surname
-                                    }"
                                     type="text"
                                     class="form-control"
-                                    name="surname"
-                                    v-model="surname"
+                                    required
                                 />
                                 <div class="invalid-feedback">
-                                    {{ error_surname }}
+                                    plz enter height
                                 </div>
-                            </span>
-                            <span class="form-group">
-                                <label>DOB:</label>
+                            </div>
+                        </span>
+                        <span class="col-md-4 mb-2">
+                            <label>Weight:</label>
+                            <div class="input-group">
                                 <input
-                                    v-bind:class="{ 'is-invalid': error_DOB }"
-                                    type="date"
+                                    type="text"
                                     class="form-control"
-                                    name="DOB"
-                                    v-model="DOB"
+                                    required
                                 />
                                 <div class="invalid-feedback">
-                                    {{ error_DOB }}
+                                    plz enter weight
                                 </div>
-                            </span>
-                            <span class="form-group">
-                                <label>Email:</label>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <span class="col-md-6 mb-2">
+                            <label>Email:</label>
+                            <div class="input-group">
                                 <input
-                                    v-bind:class="{ 'is-invalid': error_email }"
                                     type="email"
                                     class="form-control"
-                                    name="email"
-                                    v-model="email"
+                                    required
                                 />
                                 <div class="invalid-feedback">
-                                    {{ error_email }}
+                                    Your email is required.
                                 </div>
-                            </span>
-                        </div>
+                            </div>
+                        </span>
+                        <span class="col-md-6 mb-2">
+                            <label>Phone Number:</label>
+                            <input type="text" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Please enter Phone
+                            </div>
+                        </span>
+                    </div>
 
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-block">
-                                Register
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <hr class="mb-4" />
+                    <h5 class="mb-3">Work Details</h5>
+
+                    <div class="row">
+                        <span class="col-md-6 mb-2">
+                            <label>Start Date:</label>
+                            <div class="input-group">
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    required
+                                />
+                                <div class="invalid-feedback">
+                                    startdate required.
+                                </div>
+                            </div>
+                        </span>
+                        <span class="col-md-6 mb-2">
+                            <label>Salary:</label>
+                            <input type="text" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Please enter salary
+                            </div>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="col-md-6 mb-2">
+                            <label>Airport:</label>
+                            <select
+                                class="custom-select d-block w-100"
+                                required
+                            >
+                                <option value="">Choose</option>
+                                <option>Germany.</option>
+                                <option>Germany.</option>
+                                <option>Germany.</option>
+                                <option>Germany</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose
+                            </div>
+                        </span>
+                        <span class="col-md-6 mb-2">
+                            <label>Work Status:</label>
+                            <select
+                                class="custom-select d-block w-100"
+                                required
+                            >
+                                <option value="">Choose</option>
+                                <option>Active.</option>
+                                <option>Left.</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose
+                            </div>
+                        </span>
+                    </div>
+
+                    <hr class="mb-4" />
+                    <button
+                        class="btn btn-primary btn-lg btn-block"
+                        type="submit"
+                    >
+                        Continue to checkout
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
-    props: ["csrf", "oldName"],
-    data() {
-        return {
-            username: "",
-            password: "",
-            title: "",
-            name: "",
-            surname: "",
-            DOB: "",
-            email: "",
-            error_username: "",
-            error_password: "",
-            error_title: "",
-            error_name: "",
-            error_surname: "",
-            error_DOB: "",
-            error_email: ""
-        };
-    },
-    methods: {
-        formSubmit(e) {
-            e.preventDefault();
-            let currentObj = this;
-            if (!isNaN(this.username)) {
-                this.error_username = "Please fill your username.";
-                this.errors.push(this.error_username);
-            } else {
-                this.error_username = null;
-            }
-
-            if (!isNaN(this.password)) {
-                this.error_password = "Please fill your password.";
-                this.errors.push(this.error_password);
-            } else if (this.password.length < 6) {
-                this.error_password =
-                    "Password has to be at least 6 characters long.";
-                this.errors.push(this.error_password);
-            } else {
-                this.error_password = null;
-            }
-
-            if (!isNaN(this.title)) {
-                this.error_title = "Please select your title.";
-                this.errors.push(this.error_title);
-            } else {
-                this.error_title = null;
-            }
-            if (!isNaN(this.name)) {
-                this.error_name = "Please fill your name.";
-                this.errors.push(this.error_name);
-            } else {
-                this.error_name = null;
-            }
-            if (!isNaN(this.surname)) {
-                this.error_surname = "Please fill your surname.";
-                this.errors.push(this.error_surname);
-            } else {
-                this.error_surname = null;
-            }
-
-            if (!isNaN(this.DOB)) {
-                this.error_DOB = "Please select your Date of Birth.";
-                this.errors.push(this.error_DOB);
-            } else {
-                this.error_DOB = null;
-            }
-            if (!isNaN(this.email)) {
-                this.error_email = "Please fill your E-mail.";
-                this.errors.push(this.error_email);
-            } else {
-                this.error_email = null;
-            }
-            if (!this.errors) {
-                let data = {
-                    username: this.username,
-                    password: this.password,
-                    title: this.title,
-                    name: this.name,
-                    surname: this.surname,
-                    DOB: this.DOB,
-                    email: this.email
-                };
-                axios.post("/api/regis", data).then(response => {
-                    currentObj.output = response.data;
-                    swal.fire(
-                        "Register Success!",
-                        "Cilck the button to continue!",
-                        "success"
-                    ).then(() => {
-                        this.$router.push({ name: "Home" });
-                    });
-                });
-            }
-        }
-    }
-};
+export default {};
 </script>
+
+<style></style>

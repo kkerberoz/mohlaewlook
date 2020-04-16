@@ -22,7 +22,7 @@ let routes = [
     {
         path: "/employee",
         name: "employee",
-        component: require("./pages/employee/register_emp.vue").default
+        component: require("./pages/employee/employee.vue").default
     },
     {
         path: "/employee/register",

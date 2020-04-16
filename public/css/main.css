@@ -78,3 +78,16 @@ body {
     border: none;
     background-color: #fff;
 }
+
+#content {
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+#footers {
+    background-color: #6cb2eb;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}

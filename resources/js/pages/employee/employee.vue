@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-12">
                 <div class="title flex-center full-height">
-                    Example Component
+                    Employee
                 </div>
 
                 <div class="content m-b-md">
@@ -33,9 +33,5 @@
 </template>
 
 <script>
-export default {
-    mounted() {
-        console.log("Component mounted.");
-    }
-};
+export default {};
 </script>

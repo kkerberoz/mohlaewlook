@@ -16,7 +16,9 @@
     <body>
         <div id="app">
             <navbar :links="navbarlinks"></navbar>
+
             <router-view csrf="{{csrf_token()}}"></router-view>
+            <app-footer :links ="footerlinks"></app-footer>
         </div>
     </body>
     <script src="{{ asset('js/app.js') }}"></script>

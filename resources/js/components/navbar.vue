@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-2 fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-2  fixed-top">
         <div class="container">
             <!-- {{ isLogIn }} -->
 
