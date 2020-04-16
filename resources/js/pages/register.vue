@@ -152,19 +152,18 @@ export default {
             error_surname: "",
             error_DOB: "",
             error_email: "",
-            errors : []
+            errors: []
         };
     },
     methods: {
-
         formSubmit(e) {
-            this.error_name =null
-            this.error_surname=null
-            this.error_DOB=null
-            this.error_email=null
-            this.error_username=null
-            this.error_password=null
-            this.error_title=null
+            this.error_name = null;
+            this.error_surname = null;
+            this.error_DOB = null;
+            this.error_email = null;
+            this.error_username = null;
+            this.error_password = null;
+            this.error_title = null;
             e.preventDefault();
             let currentObj = this;
             if (!this.username.trim()) {
@@ -174,7 +173,8 @@ export default {
                 this.error_username = null;
             }
 
-            if (!this.password) { //Check password constrain 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+            if (!this.password) {
+                //Check password constrain 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                 this.error_password = "Please fill your password.";
                 this.errors.push(this.error_password);
             } else if (this.password.length < 6) {
@@ -243,9 +243,12 @@ export default {
                     else if(response.data.errorU==0 && response.data.errorE ==0){
                         currentObj.output = response.data;
                         swal.fire(
-                        "Register Success!",
-                        "Cilck the button to continue!",
-                        "success").then(() => {this.$router.push({ name: "Home" });});
+                            "Register Success!",
+                            "Cilck the button to continue!",
+                            "success"
+                        ).then(() => {
+                            this.$router.push({ name: "Home" });
+                        });
                     }
                 });
             }
