@@ -7,19 +7,25 @@ use Illuminate\Support\Facades\DB;
 use App\Customer;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
-    public function index(){
-        return view('welcome');
-    }
+    // public function queryusername(Request $request)
+    // {
+
+    // }
+
     public function register(Request $request)
     {
-        $username = $request->username;
-        #$checkUsername = DB::select("SELECT username FROM customers WHERE username == $username");
-        if(true){
-            return response()->json([$username]);
+        $usernameCheck = DB::table('customers')->select('username')->where('username', $request->username)->first();
+        $emailCheck = DB::table('customers')->select('email')->where('email', $request->email)->first();
+        if(isset($usernameCheck)){
+            return response()->json(['error'=>'This username is already exist.']);
         }
-        else {
+        else if(isset($emailCheck)){
+            return response()->json(['error'=>'This E-mail is already exist.']);
+        }
+        else{
             $register = new Customer;
             $register->username = $request->username;
             $register->password = HASH::make($request->password);

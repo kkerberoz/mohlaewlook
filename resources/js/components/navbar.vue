@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-2">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-2 fixed-top">
         <div class="container">
             <!-- {{ isLogIn }} -->
 
@@ -22,7 +22,7 @@
                         class="nav-item"
                     >
                         <router-link :to="link.link" class="nav-link">
-                            {{link.label}}
+                            {{ link.label }}
                         </router-link>
                     </li>
                 </ul>

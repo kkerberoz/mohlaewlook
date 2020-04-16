@@ -32,6 +32,19 @@ let routes = [
     {
         path: "/info",
         component: require("./pages/info.vue").default
+    },
+    {
+        path: "/employee",
+        name: "employee",
+        component: require("./pages/employee/employee.vue").default,
+        children: [
+            {
+                path: "/registersss",
+                name: "resgiteremp",
+                component: require("./pages/employee/register_emp.vue").default
+            }
+            // other nested routes
+        ]
     }
 ];
 
