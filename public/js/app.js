@@ -2258,6 +2258,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf", "oldName"],
   data: function data() {
@@ -2275,24 +2277,33 @@ __webpack_require__.r(__webpack_exports__);
       error_name: "",
       error_surname: "",
       error_DOB: "",
-      error_email: ""
+      error_email: "",
+      errors: []
     };
   },
   methods: {
     formSubmit: function formSubmit(e) {
       var _this = this;
 
+      this.error_name = null;
+      this.error_surname = null;
+      this.error_DOB = null;
+      this.error_email = null;
+      this.error_username = null;
+      this.error_password = null;
+      this.error_title = null;
       e.preventDefault();
       var currentObj = this;
 
-      if (!isNaN(this.username)) {
+      if (!this.username.trim()) {
         this.error_username = "Please fill your username.";
         this.errors.push(this.error_username);
       } else {
         this.error_username = null;
       }
 
-      if (!isNaN(this.password)) {
+      if (!this.password) {
+        //Check password constrain 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         this.error_password = "Please fill your password.";
         this.errors.push(this.error_password);
       } else if (this.password.length < 6) {
@@ -2302,42 +2313,42 @@ __webpack_require__.r(__webpack_exports__);
         this.error_password = null;
       }
 
-      if (!isNaN(this.title)) {
+      if (!this.title) {
         this.error_title = "Please select your title.";
         this.errors.push(this.error_title);
       } else {
         this.error_title = null;
       }
 
-      if (!isNaN(this.name)) {
+      if (!this.name.trim()) {
         this.error_name = "Please fill your name.";
         this.errors.push(this.error_name);
       } else {
         this.error_name = null;
       }
 
-      if (!isNaN(this.surname)) {
+      if (!this.surname.trim()) {
         this.error_surname = "Please fill your surname.";
         this.errors.push(this.error_surname);
       } else {
         this.error_surname = null;
       }
 
-      if (!isNaN(this.DOB)) {
+      if (!this.DOB) {
         this.error_DOB = "Please select your Date of Birth.";
         this.errors.push(this.error_DOB);
       } else {
         this.error_DOB = null;
       }
 
-      if (!isNaN(this.email)) {
+      if (!this.email.trim()) {
         this.error_email = "Please fill your E-mail.";
         this.errors.push(this.error_email);
       } else {
         this.error_email = null;
       }
 
-      if (!this.errors) {
+      if (!this.errors.length) {
         var data = {
           username: this.username,
           password: this.password,
@@ -2348,12 +2359,24 @@ __webpack_require__.r(__webpack_exports__);
           email: this.email
         };
         axios.post("/api/regis", data).then(function (response) {
-          currentObj.output = response.data;
-          swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-            _this.$router.push({
-              name: "Home"
+          if (response.data.error === 'This E-mail is already exist.') {
+            _this.email = '';
+            _this.error_email = response.data.error;
+
+            _this.errors.push(_this.error_email);
+          } else if (response.data.error === 'This username is already exist.') {
+            _this.username = '';
+            _this.error_username = response.data.error;
+
+            _this.errors.push(_this.error_username);
+          } else {
+            currentObj.output = response.data;
+            swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+              _this.$router.push({
+                name: "Home"
+              });
             });
-          });
+          }
         }); // .catch(function (error) {
         //     currentObj.output = error;
         //     var val = [];
@@ -41284,7 +41307,13 @@ var render = function() {
                   class: {
                     "is-invalid": _vm.error_password
                   },
-                  attrs: { type: "password", name: "password" },
+                  attrs: {
+                    type: "password",
+                    name: "password",
+                    pattern: "(?=.[a-z])(?=.*[A-Z]).{6,}",
+                    title:
+                      "Must contain at least one uppercase and lowercase letter, and at least 6 or more characters "
+                  },
                   domProps: { value: _vm.password },
                   on: {
                     input: function($event) {
