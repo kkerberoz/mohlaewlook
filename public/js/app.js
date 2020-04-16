@@ -2347,7 +2347,7 @@ __webpack_require__.r(__webpack_exports__);
           DOB: this.DOB,
           email: this.email
         };
-        axios.post("/regis", data).then(function (response) {
+        axios.post("/api/regis", data).then(function (response) {
           currentObj.output = response.data;
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
             _this.$router.push({

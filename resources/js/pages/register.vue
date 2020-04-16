@@ -215,7 +215,7 @@ export default {
                     DOB: this.DOB,
                     email: this.email
                 };
-                axios.post("/regis", data).then(response => {
+                axios.post("/api/regis", data).then(response => {
                     currentObj.output = response.data;
                     swal.fire(
                         "Register Success!",
