@@ -21,9 +21,9 @@
                         :key="i"
                         class="nav-item"
                     >
-                        <router-link :to="link.link" class="nav-link">{{
-                            link.label
-                        }}</router-link>
+                        <router-link :to="link.link" class="nav-link">
+                            {{link.label}}
+                        </router-link>
                     </li>
                 </ul>
             </div>

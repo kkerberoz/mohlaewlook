@@ -13,8 +13,8 @@ class CreateCustomerInfo extends Migration
      */
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
-            $table->increments('user_id');
+        Schema::create('customers', function (Blueprint $table) {
+            $table->increments('user_id')->start_from(00000000)->unique();
             $table->string('username', 32)->unique();
             $table->string('password', 32);
             $table->string('title', 10);
@@ -32,6 +32,6 @@ class CreateCustomerInfo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('customers');
     }
 }

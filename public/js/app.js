@@ -2204,8 +2204,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "register",
+  props: ['csrf', 'oldName'],
   data: function data() {
     return {
       username: "",
@@ -2218,10 +2235,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    onSubmit: function onSubmit() {
-      var _this = this;
-
-      var data = {
+    formSubmit: function formSubmit(e) {
+      e.preventDefault();
+      var currentObj = this;
+      axios.post('/regis', {
         username: this.username,
         password: this.password,
         title: this.title,
@@ -2229,18 +2246,21 @@ __webpack_require__.r(__webpack_exports__);
         surname: this.surname,
         DOB: this.DOB,
         email: this.email
-      };
-      this.app.req.post("register", data).then(function (response) {
-        if (response.data.id) {
-          _this.app.user = response.data;
+      }).then(function (response) {
+        currentObj.output = response.data;
+      })["catch"](function (error) {
+        currentObj.output = error;
+        var val = [];
+        var err = ["Plese fill Username", "Plese fill Password", "Plese fill Title", "Plese fill Name", "Plese fill Surname", "Please fill Date of Birth", "Plese fill email"];
+        var show_error = "";
 
-          _this.app.$router.push({
-            name: "home"
-          });
-        } else if (response.data.error === "email_taken") {
-          _this.errorEmail = "This email is taken";
-          _this.email = "";
+        for (var i = 1; i <= 7; ++i) {
+          val[i] = document.getElementById("0" + i).value;
+          if (!isNaN(val[i])) show_error += err[i - 1] + "\n";
         }
+
+        console.log(val[1].textLength);
+        alert(show_error);
       });
     }
   }
@@ -37915,7 +37935,13 @@ var render = function() {
                       _c(
                         "router-link",
                         { staticClass: "nav-link", attrs: { to: link.link } },
-                        [_vm._v(_vm._s(link.label))]
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(link.label) +
+                              "\n                    "
+                          )
+                        ]
                       )
                     ],
                     1
@@ -37979,7 +38005,12 @@ var render = function() {
             _vm._v("\n                    Register\n                ")
           ]),
           _vm._v(" "),
-          _c("form", { on: { submit: _vm.onSubmit } }, [
+          _c("form", { on: { submit: _vm.formSubmit } }, [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            }),
+            _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "form-group" }, [
                 _c("label", [_vm._v("Username:")]),
@@ -37994,7 +38025,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { id: "01", type: "text", name: "username" },
                   domProps: { value: _vm.username },
                   on: {
                     input: function($event) {
@@ -38020,7 +38051,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "password" },
+                  attrs: { id: "02", type: "password", name: "password" },
                   domProps: { value: _vm.password },
                   on: {
                     input: function($event) {
@@ -38048,6 +38079,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    attrs: { id: "03", name: "title" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -38089,7 +38121,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { id: "04", type: "text", name: "name" },
                   domProps: { value: _vm.name },
                   on: {
                     input: function($event) {
@@ -38115,7 +38147,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { id: "05", type: "text", name: "surname" },
                   domProps: { value: _vm.surname },
                   on: {
                     input: function($event) {
@@ -38141,7 +38173,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "date" },
+                  attrs: { id: "06", type: "date", name: "DOB" },
                   domProps: { value: _vm.DOB },
                   on: {
                     input: function($event) {
@@ -38167,7 +38199,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "email" },
+                  attrs: { id: "07", type: "email", name: "email" },
                   domProps: { value: _vm.email },
                   on: {
                     input: function($event) {
