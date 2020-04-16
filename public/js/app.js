@@ -1924,14 +1924,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     links: Array,
@@ -1991,12 +1983,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     links: Array,
@@ -2029,18 +2015,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2266,83 +2240,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2356,18 +2253,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2457,28 +2342,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2692,15 +2555,15 @@ __webpack_require__.r(__webpack_exports__);
         };
         axios.post("/api/regis", data).then(function (response) {
           if (response.data.errorU == 1) {
-            _this.username = '';
-            _this.error_username = 'This Username is already exist';
+            _this.username = "";
+            _this.error_username = "This Username is already exist";
 
             _this.errors.push(_this.error_username);
 
             _this.errors = [];
           } else if (response.data.errorE == 1) {
-            _this.email = '';
-            _this.error_email = 'This E-mail is already exist';
+            _this.email = "";
+            _this.error_email = "This E-mail is already exist";
 
             _this.errors.push(_this.error_email);
 
@@ -41202,12 +41065,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "footers" } }, [
-    _c("footer", { staticClass: " pt-xl-5 text-center" }, [
+    _c("footer", { staticClass: "pt-xl-5 text-center" }, [
       _c("p", { staticClass: "mb-1" }, [_vm._v("© 2020 Mohlaewlook")]),
       _vm._v(" "),
       _c(
         "ul",
-        { staticClass: "list-inline" },
+        { staticClass: "list-inline", staticStyle: {} },
         _vm._l(_vm.links_filtered, function(link, i) {
           return _c(
             "li",
@@ -41252,67 +41115,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    {
-      staticClass: "navbar navbar-expand-sm navbar-dark bg-info mb-2  fixed-top"
-    },
-    [
-      _c(
-        "div",
-        { staticClass: "container" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "navbar-brand",
-              staticStyle: { "font-weight": "bold" },
-              attrs: { to: "/" }
-            },
-            [_vm._v("Mohlaewlook")]
-          ),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse navbar-collapse",
-              attrs: { id: "collapsibleNavbar" }
-            },
-            [
-              _c(
-                "ul",
-                { staticClass: "navbar-nav ml-auto" },
-                _vm._l(_vm.links_filtered, function(link, i) {
-                  return _c(
-                    "li",
-                    { key: i, staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        { staticClass: "nav-link", attrs: { to: link.link } },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(link.label) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                }),
-                0
-              )
-            ]
-          )
-        ],
-        1
-      )
-    ]
-  )
+  return _c("div", [
+    _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-sm navbar-dark bg-info sticky-top" },
+      [
+        _c(
+          "div",
+          { staticClass: "container" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "navbar-brand",
+                staticStyle: { "font-weight": "bold" },
+                attrs: { to: "/" }
+              },
+              [_vm._v("Mohlaewlook")]
+            ),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse navbar-collapse",
+                attrs: { id: "collapsibleNavbar" }
+              },
+              [
+                _c(
+                  "ul",
+                  { staticClass: "navbar-nav ml-auto" },
+                  _vm._l(_vm.links_filtered, function(link, i) {
+                    return _c(
+                      "li",
+                      { key: i, staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: link.link } },
+                          [_vm._v(_vm._s(link.label))]
+                        )
+                      ],
+                      1
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -41361,35 +41218,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
+    return _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component.\n            ")
+            _vm._v("Example Component.")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component.\n            ")
+            _vm._v("Example Component.")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component\n            ")
+            _vm._v("Example Component")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("\n                I'm an example component.\n            ")
+            _vm._v("I'm an example component.")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component\n            ")
+            _vm._v("Example Component")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("\n                I'm an example component.\n            ")
+            _vm._v("I'm an example component.")
           ])
         ])
       ])
@@ -41487,18 +41344,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container", attrs: { id: "content" } }, [
-      _c("div", { staticClass: "row flex-center" }, [
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row flex-center full-height" }, [
         _c(
           "div",
           {
             staticClass:
-              "col-md-8 order-md-1 justify-content-between align-items-center "
+              "col-md-8 order-md-1 justify-content-between align-items-center"
           },
           [
             _c(
-              "h3",
-              { staticClass: "mb-3", staticStyle: { display: "flex" } },
+              "h2",
+              { staticClass: "mb-3", staticStyle: { display: "block" } },
               [_vm._v("Employee Register")]
             ),
             _vm._v(" "),
@@ -41519,11 +41376,7 @@ var staticRenderFns = [
                         staticClass: "invalid-feedback",
                         staticStyle: { width: "100%" }
                       },
-                      [
-                        _vm._v(
-                          "\n                                Your username is required.\n                            "
-                        )
-                      ]
+                      [_vm._v("Your username is required.")]
                     )
                   ])
                 ]),
@@ -41537,9 +41390,7 @@ var staticRenderFns = [
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Please enter\n                        "
-                    )
+                    _vm._v("Please enter")
                   ])
                 ])
               ]),
@@ -41570,9 +41421,7 @@ var staticRenderFns = [
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Please choose\n                        "
-                    )
+                    _vm._v("Please choose")
                   ])
                 ]),
                 _vm._v(" "),
@@ -41585,9 +41434,7 @@ var staticRenderFns = [
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Valid first name is required.\n                        "
-                    )
+                    _vm._v("Valid first name is required.")
                   ])
                 ]),
                 _vm._v(" "),
@@ -41600,9 +41447,7 @@ var staticRenderFns = [
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Valid last name is required.\n                        "
-                    )
+                    _vm._v("Valid last name is required.")
                   ])
                 ])
               ]),
@@ -41618,9 +41463,7 @@ var staticRenderFns = [
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                Your id-card is required.\n                            "
-                      )
+                      _vm._v("Your id-card is required.")
                     ])
                   ])
                 ])
@@ -41636,9 +41479,7 @@ var staticRenderFns = [
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Please enter date\n                        "
-                    )
+                    _vm._v("Please enter date")
                   ])
                 ]),
                 _vm._v(" "),
@@ -41652,9 +41493,7 @@ var staticRenderFns = [
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                plz enter height\n                            "
-                      )
+                      _vm._v("plz enter height")
                     ])
                   ])
                 ]),
@@ -41669,9 +41508,7 @@ var staticRenderFns = [
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                plz enter weight\n                            "
-                      )
+                      _vm._v("plz enter weight")
                     ])
                   ])
                 ])
@@ -41688,9 +41525,7 @@ var staticRenderFns = [
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                Your email is required.\n                            "
-                      )
+                      _vm._v("Your email is required.")
                     ])
                   ])
                 ]),
@@ -41704,9 +41539,7 @@ var staticRenderFns = [
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Please enter Phone\n                        "
-                    )
+                    _vm._v("Please enter Phone")
                   ])
                 ])
               ]),
@@ -41726,9 +41559,7 @@ var staticRenderFns = [
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                startdate required.\n                            "
-                      )
+                      _vm._v("startdate required.")
                     ])
                   ])
                 ]),
@@ -41742,9 +41573,7 @@ var staticRenderFns = [
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Please enter salary\n                        "
-                    )
+                    _vm._v("Please enter salary")
                   ])
                 ])
               ]),
@@ -41775,9 +41604,7 @@ var staticRenderFns = [
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Please choose\n                        "
-                    )
+                    _vm._v("Please choose")
                   ])
                 ]),
                 _vm._v(" "),
@@ -41802,9 +41629,7 @@ var staticRenderFns = [
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                            Please choose\n                        "
-                    )
+                    _vm._v("Please choose")
                   ])
                 ])
               ]),
@@ -41817,11 +41642,7 @@ var staticRenderFns = [
                   staticClass: "btn btn-primary btn-lg btn-block",
                   attrs: { type: "submit" }
                 },
-                [
-                  _vm._v(
-                    "\n                    Continue to checkout\n                "
-                  )
-                ]
+                [_vm._v("Register")]
               )
             ])
           ]
@@ -41944,15 +41765,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row flex-center full-height" }, [
-      _c("div", { staticClass: "col-md-5" }, [
+      _c("div", { staticClass: "col-md-3" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header bg-info" }, [
-            _vm._v("\n                    Login\n                ")
-          ]),
+          _c("div", { staticClass: "card-header bg-info" }, [_vm._v("Login")]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body " }, [
+          _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", { attrs: { for: "usr" } }, [_vm._v("Username:")]),
               _vm._v(" "),
@@ -42021,7 +41840,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-block", attrs: { type: "button" } },
-        [_vm._v("\n                        Sign in\n                    ")]
+        [_vm._v("Sign in")]
       )
     ])
   }
@@ -42047,9 +41866,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row flex-center full-height" }, [
-      _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header bg-info" }, [
             _vm._v("Register")
@@ -42091,11 +41910,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_username) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_username))
                 ])
               ]),
               _vm._v(" "),
@@ -42134,11 +41949,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_password) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_password))
                 ])
               ]),
               _vm._v(" "),
@@ -42193,11 +42004,7 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("span", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_title) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_title))
                 ])
               ]),
               _vm._v(" "),
@@ -42228,11 +42035,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_name) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_name))
                 ])
               ]),
               _vm._v(" "),
@@ -42265,11 +42068,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_surname) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_surname))
                 ])
               ]),
               _vm._v(" "),
@@ -42300,11 +42099,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_DOB) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_DOB))
                 ])
               ]),
               _vm._v(" "),
@@ -42335,11 +42130,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_email) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_email))
                 ])
               ])
             ]),
@@ -42360,11 +42151,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-block", attrs: { type: "submit" } },
-        [
-          _vm._v(
-            "\n                            Sign up\n                        "
-          )
-        ]
+        [_vm._v("Sign up")]
       )
     ])
   }
@@ -58180,8 +57967,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

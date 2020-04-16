@@ -10,6 +10,7 @@ body {
 
 .full-height {
     height: 100vh;
+    display: inline-block;
 }
 
 .flex-center {
@@ -90,4 +91,15 @@ body {
     display: flex;
     justify-content: center;
     color: #fff;
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+    display: block;
+    justify-content: center;
+}
+
+.card {
+    display: block;
 }
