@@ -18,3 +18,4 @@ Route::get('/', 'PagesController@index');
 
 Route::get('/', 'UserController@index');
 Route::post('/regis', 'UserController@register');
+

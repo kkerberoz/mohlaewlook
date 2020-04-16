@@ -156,14 +156,22 @@ export default {
         formSubmit(e) {
             e.preventDefault();
             let currentObj = this;
-            if (!isNaN(this.username)) {
+            let data = {
+                username : this.username
+            }
+            axios.post("/api/regis", data).then(response => {
+                 currentObj.output = response.data
+            })
+            axios.get("/api/regis").then(response => {
+                 console.log(response.data);
+            })
+            if (!this.username.trim()) {
                 this.error_username = "Please fill your username.";
                 this.errors.push(this.error_username);
             } else {
                 this.error_username = null;
             }
-
-            if (!isNaN(this.password)) {
+            if (!this.password) {
                 this.error_password = "Please fill your password.";
                 this.errors.push(this.error_password);
             } else if (this.password.length < 6) {
@@ -174,32 +182,32 @@ export default {
                 this.error_password = null;
             }
 
-            if (!isNaN(this.title)) {
+            if (!this.title) {
                 this.error_title = "Please select your title.";
                 this.errors.push(this.error_title);
             } else {
                 this.error_title = null;
             }
-            if (!isNaN(this.name)) {
+            if (!this.name) {
                 this.error_name = "Please fill your name.";
                 this.errors.push(this.error_name);
             } else {
                 this.error_name = null;
             }
-            if (!isNaN(this.surname)) {
+            if (!this.surname) {
                 this.error_surname = "Please fill your surname.";
                 this.errors.push(this.error_surname);
             } else {
                 this.error_surname = null;
             }
 
-            if (!isNaN(this.DOB)) {
+            if (!this.DOB) {
                 this.error_DOB = "Please select your Date of Birth.";
                 this.errors.push(this.error_DOB);
             } else {
                 this.error_DOB = null;
             }
-            if (!isNaN(this.email)) {
+            if (!this.email) {
                 this.error_email = "Please fill your E-mail.";
                 this.errors.push(this.error_email);
             } else {

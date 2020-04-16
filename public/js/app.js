@@ -2284,15 +2284,24 @@ __webpack_require__.r(__webpack_exports__);
 
       e.preventDefault();
       var currentObj = this;
+      var data = {
+        username: this.username
+      };
+      axios.post("/api/regis", data).then(function (response) {
+        currentObj.output = response.data;
+      });
+      axios.get("/api/regis").then(function (response) {
+        console.log(response.data);
+      });
 
-      if (!isNaN(this.username)) {
+      if (!this.username.trim()) {
         this.error_username = "Please fill your username.";
         this.errors.push(this.error_username);
       } else {
         this.error_username = null;
       }
 
-      if (!isNaN(this.password)) {
+      if (!this.password) {
         this.error_password = "Please fill your password.";
         this.errors.push(this.error_password);
       } else if (this.password.length < 6) {
@@ -2302,35 +2311,35 @@ __webpack_require__.r(__webpack_exports__);
         this.error_password = null;
       }
 
-      if (!isNaN(this.title)) {
+      if (!this.title) {
         this.error_title = "Please select your title.";
         this.errors.push(this.error_title);
       } else {
         this.error_title = null;
       }
 
-      if (!isNaN(this.name)) {
+      if (!this.name) {
         this.error_name = "Please fill your name.";
         this.errors.push(this.error_name);
       } else {
         this.error_name = null;
       }
 
-      if (!isNaN(this.surname)) {
+      if (!this.surname) {
         this.error_surname = "Please fill your surname.";
         this.errors.push(this.error_surname);
       } else {
         this.error_surname = null;
       }
 
-      if (!isNaN(this.DOB)) {
+      if (!this.DOB) {
         this.error_DOB = "Please select your Date of Birth.";
         this.errors.push(this.error_DOB);
       } else {
         this.error_DOB = null;
       }
 
-      if (!isNaN(this.email)) {
+      if (!this.email) {
         this.error_email = "Please fill your E-mail.";
         this.errors.push(this.error_email);
       } else {
@@ -2338,7 +2347,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!this.errors) {
-        var data = {
+        var _data = {
           username: this.username,
           password: this.password,
           title: this.title,
@@ -2347,7 +2356,7 @@ __webpack_require__.r(__webpack_exports__);
           DOB: this.DOB,
           email: this.email
         };
-        axios.post("/api/regis", data).then(function (response) {
+        axios.post("/api/regis", _data).then(function (response) {
           currentObj.output = response.data;
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
             _this.$router.push({
@@ -57101,8 +57110,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\Desktop\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\Desktop\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
