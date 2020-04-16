@@ -176,6 +176,7 @@ export default {
       } else {
         this.error_email = null;
       }
+
       if (!this.errors) {
         let data = {
           username: this.username,
@@ -198,24 +199,7 @@ export default {
               this.$router.push({ name: "Home" });
             });
         });
-        // .catch(function (error) {
-        //     currentObj.output = error;
-        //     var val = [];
-        //     var err = ["Username", "Password", "Title", "Name",
-        //                 "Surname", "Date of Birth", "E-mail"];
 
-        //     var show_error = "";
-        //     for(var i=1; i<=7; ++i){
-        //         val[i] = document.getElementById("0" + i).value;
-        //         if(!isNaN(val[i])) show_error +=  err[i - 1]  + "<br>" ;
-        //     }
-
-        //     swal.fire(
-        //         "Please fill",
-        //          show_error,
-        //         "error"
-        //     )
-        // });
       }
     }
   }

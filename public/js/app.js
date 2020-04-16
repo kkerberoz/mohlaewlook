@@ -2326,22 +2326,7 @@ __webpack_require__.r(__webpack_exports__);
               name: "Home"
             });
           });
-        }); // .catch(function (error) {
-        //     currentObj.output = error;
-        //     var val = [];
-        //     var err = ["Username", "Password", "Title", "Name",
-        //                 "Surname", "Date of Birth", "E-mail"];
-        //     var show_error = "";
-        //     for(var i=1; i<=7; ++i){
-        //         val[i] = document.getElementById("0" + i).value;
-        //         if(!isNaN(val[i])) show_error +=  err[i - 1]  + "<br>" ;
-        //     }
-        //     swal.fire(
-        //         "Please fill",
-        //          show_error,
-        //         "error"
-        //     )
-        // });
+        });
       }
     }
   }
@@ -57031,8 +57016,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
