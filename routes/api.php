@@ -19,4 +19,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/regis', 'UserController@register');
-Route::get('/regis', 'UserController@queryusername');

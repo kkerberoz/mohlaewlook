@@ -48,10 +48,7 @@ const app = new Vue({
                 { link: "/register", label: "register" },
                 { link: "/info", label: "info" }
             ],
-            footerlinks: [
-                { name: "employee", label: "backend" },
-                { name: "employeeRegister", label: "employee register" }
-            ]
+            footerlinks: [{ link: "/admin", label: "backend" }]
         };
     }
 }).$mount("#app");

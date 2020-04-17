@@ -51,14 +51,14 @@ body {
     margin-bottom: 30px;
 }
 
-.btn {
+.btn-login {
     color: #fff;
     background-color: #6cb2eb;
     border-radius: 5px;
     border-color: #636b6f;
     font-size: 16px;
 }
-.btn:hover {
+.btn-login:hover {
     color: #fff;
     transition: 0.3s;
     border-radius: 5px;
@@ -81,7 +81,7 @@ body {
 }
 
 #content {
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 5%;
 }
 
