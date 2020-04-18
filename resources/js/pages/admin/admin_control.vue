@@ -11,9 +11,8 @@
                 <div class="sidebar-content hide-scroll">
                     <!-- sidebar-brand  -->
                     <div class="sidebar-item sidebar-brand">
-                        <router-link :to="{ name: 'Home' }"
-                            >Admin Control</router-link
-                        >
+                        <a>Admin Control</a>
+
                         <div id="close-sidebar" @click="closeMenu">
                             <i class="fas fa-times"></i>
                         </div>
@@ -46,21 +45,40 @@
                             </li>
 
                             <li>
-                                <router-link to="/admin/newemployee">
+                                <a
+                                    :href="
+                                        $router.resolve({ name: 'registeremp' })
+                                            .href
+                                    "
+                                >
                                     <i class="far fa-address-card"></i>
                                     <span>New Employee</span>
-                                </router-link>
+                                </a>
                             </li>
                             <li>
-                                <router-link to="/info">
+                                <a
+                                    :href="
+                                        $router.resolve({ name: 'info' }).href
+                                    "
+                                >
                                     <i class="fa fa-chart-line"></i>
                                     <span>info</span>
-                                </router-link>
+                                </a>
                             </li>
                             <li>
-                                <router-link to="/admin/newemployee">
+                                <a
+                                    :href="
+                                        $router.resolve({ name: 'info' }).href
+                                    "
+                                >
                                     <i class="fa fa-chart-line"></i>
-                                    <span>Overview</span>
+                                    <span>~~~~</span>
+                                </a>
+                            </li>
+                            <li>
+                                <router-link to="/">
+                                    <i class="fas fa-home"></i>
+                                    <span>Homepage</span>
                                 </router-link>
                             </li>
                         </ul>
@@ -70,7 +88,7 @@
             </nav>
             <!-- sidebar-content  -->
             <main class="page-content">
-                <router-view> </router-view>
+                <router-view></router-view>
                 <hr />
                 <footer class="pt-xl-5 text-center">
                     <p class="mb-1">&copy; 2020 Mohlaewlook</p>

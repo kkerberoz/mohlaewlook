@@ -17,7 +17,7 @@ window.toast = toast;
 
 import routes from "./routes";
 const router = new VueRouter({
-    // mode: "history",
+    mode: "history",
     routes // short for `routes: routes`
 });
 /**

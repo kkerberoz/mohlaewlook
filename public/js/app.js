@@ -2116,6 +2116,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "admin",
   methods: {
@@ -2433,57 +2451,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "login",
   data: function data() {
     return {
       username: "",
       password: "",
+      error_username: "",
+      error_password: "",
       errors: []
     };
-  } // mounted() {
-  //     if (this.app.user) {
-  //         this.$router.push({ name: "home" });
-  //     }
-  // },
-  // methods: {
-  //     onSubmit() {
-  //         this.errors = [];
-  //         if (!this.email && this.email.length < 6) {
-  //             this.errorEmail = "Email has to be at least 6 characters long.";
-  //             this.errors.push(this.errorEmail);
-  //         } else {
-  //             this.errorEmail = null;
-  //         }
-  //         if (!this.password && this.password.length < 6) {
-  //             this.errorPassword =
-  //                 "Password has to be at least 6 characters long.";
-  //             this.errors.push(this.errorPassword);
-  //         } else {
-  //             this.errorPassword = null;
-  //         }
-  //         if (!this.errors.length) {
-  //             this.loading = true;
-  //             let data = {
-  //                 email: this.email,
-  //                 password: this.password
-  //             };
-  //             this.app.req.post("login", data).then(response => {
-  //                 this.loading = false;
-  //                 if (response.data.id) {
-  //                     this.app.user = response.data;
-  //                     this.$router.push({
-  //                         name: "home"
-  //                     });
-  //                 } else if (response.data.error === 401) {
-  //                     this.errorPassword = "Could not log you in.";
-  //                     this.password = "";
-  //                 }
-  //             });
-  //         }
-  //     }
-  // }
+  },
+  methods: {
+    formSubmit: function formSubmit(e) {
+      this.error_username = null;
+      this.error_password = null;
+      e.preventDefault();
+      var currentObj = this;
 
+      if (!this.username.trim()) {
+        this.error_username = "Please fill your username.";
+        this.errors.push(this.error_username);
+      } else {
+        this.error_username = null;
+      }
+
+      if (!this.password) {
+        this.error_password = "Please fill your password.";
+        this.errors.push(this.error_password);
+      } else if (this.password.length < 6) {
+        this.error_password = "Password has to be at least 6 characters long.";
+        this.errors.push(this.error_password);
+      } else {
+        this.error_password = null;
+      } // if (!this.errors.length) {
+      //     let data = {
+      //         username: this.username,
+      //         password: this.password
+      //     };
+      //     axios.post("/api/login", data).then(response => {
+      //         if (response.data.id) {
+      //             currentObj.output = response.data;
+      //             swal.fire(
+      //                 "Login Success!",
+      //                 "Cilck the button to continue!",
+      //                 "success"
+      //             ).then(() => {
+      //                 this.$router.push({ name: "Home" });
+      //             });
+      //         } else if (response.data.error === 401) {
+      //             swal.fire(
+      //                 "Could not log you in.",
+      //                 "Cilck the button to continue!",
+      //                 "error"
+      //             ).then(() => {
+      //                 this.errors = [];
+      //                 this.password = "";
+      //             });
+      //         }
+      //     });
+      // }
+
+    }
+  }
 });
 
 /***/ }),
@@ -7307,7 +7350,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -41897,18 +41940,11 @@ var render = function() {
         "ul",
         { staticClass: "list-inline", staticStyle: {} },
         _vm._l(_vm.links_filtered, function(link, i) {
-          return _c(
-            "li",
-            { key: i, staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                { staticStyle: { color: "#fff" }, attrs: { to: link.link } },
-                [_vm._v(_vm._s(link.label))]
-              )
-            ],
-            1
-          )
+          return _c("li", { key: i, staticClass: "nav-item" }, [
+            _c("a", { attrs: { href: _vm.$router.resolve(link.link).href } }, [
+              _vm._v(_vm._s(link.label))
+            ])
+          ])
         }),
         0
       )
@@ -42051,25 +42087,18 @@ var render = function() {
           { staticClass: "sidebar-wrapper", attrs: { id: "sidebar" } },
           [
             _c("div", { staticClass: "sidebar-content hide-scroll" }, [
-              _c(
-                "div",
-                { staticClass: "sidebar-item sidebar-brand" },
-                [
-                  _c("router-link", { attrs: { to: { name: "Home" } } }, [
-                    _vm._v("Admin Control")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      attrs: { id: "close-sidebar" },
-                      on: { click: _vm.closeMenu }
-                    },
-                    [_c("i", { staticClass: "fas fa-times" })]
-                  )
-                ],
-                1
-              ),
+              _c("div", { staticClass: "sidebar-item sidebar-brand" }, [
+                _c("a", [_vm._v("Admin Control")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    attrs: { id: "close-sidebar" },
+                    on: { click: _vm.closeMenu }
+                  },
+                  [_c("i", { staticClass: "fas fa-times" })]
+                )
+              ]),
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),
@@ -42077,46 +42106,63 @@ var render = function() {
                 _c("ul", [
                   _vm._m(1),
                   _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        { attrs: { to: "/admin/newemployee" } },
-                        [
-                          _c("i", { staticClass: "far fa-address-card" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("New Employee")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: _vm.$router.resolve({ name: "registeremp" })
+                            .href
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "far fa-address-card" }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("New Employee")])
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c("router-link", { attrs: { to: "/info" } }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: _vm.$router.resolve({ name: "info" }).href
+                        }
+                      },
+                      [
                         _c("i", { staticClass: "fa fa-chart-line" }),
                         _vm._v(" "),
                         _c("span", [_vm._v("info")])
-                      ])
-                    ],
-                    1
-                  ),
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: _vm.$router.resolve({ name: "info" }).href
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-chart-line" }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("~~~~")])
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c(
                     "li",
                     [
-                      _c(
-                        "router-link",
-                        { attrs: { to: "/admin/newemployee" } },
-                        [
-                          _c("i", { staticClass: "fa fa-chart-line" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Overview")])
-                        ]
-                      )
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _c("i", { staticClass: "fas fa-home" }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Homepage")])
+                      ])
                     ],
                     1
                   )
@@ -42520,7 +42566,7 @@ var staticRenderFns = [
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary btn-lg btn-block",
+                  staticClass: "btn btn-primary btn-lg btn-block btn-login",
                   attrs: { type: "submit" }
                 },
                 [_vm._v("\n                    Register\n                ")]
@@ -42712,64 +42758,86 @@ var render = function() {
   return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row flex-center full-height" }, [
       _c("div", { staticClass: "col-md-3" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header bg-info" }, [_vm._v("Login")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "usr" } }, [_vm._v("Username:")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.username,
-                    expression: "username"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.username },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.username = $event.target.value
-                  }
-                }
-              })
+        _c("form", { on: { submit: _vm.formSubmit } }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header bg-info" }, [
+              _vm._v("Login")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password:")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.password,
-                    expression: "password"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "password" },
-                domProps: { value: _vm.password },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Username:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.username,
+                      expression: "username"
                     }
-                    _vm.password = $event.target.value
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_username },
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.username },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.username = $event.target.value
+                    }
                   }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(0)
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                " +
+                      _vm._s(_vm.error_username) +
+                      "\n                            "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Password:")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.error_password },
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n                                " +
+                      _vm._s(_vm.error_password) +
+                      "\n                            "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
         ])
       ])
     ])
@@ -42783,8 +42851,12 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-footer" }, [
       _c(
         "button",
-        { staticClass: "btn btn-block btn-login", attrs: { type: "button" } },
-        [_vm._v("\n                        Sign in\n                    ")]
+        { staticClass: "btn btn-block btn-login", attrs: { type: "submiit" } },
+        [
+          _vm._v(
+            "\n                            Sign in\n                        "
+          )
+        ]
       )
     ])
   }
@@ -58247,7 +58319,7 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 window.toast = toast;
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  // mode: "history",
+  mode: "history",
   routes: _routes__WEBPACK_IMPORTED_MODULE_2__["default"] // short for `routes: routes`
 
 });
@@ -58920,7 +58992,6 @@ var routes = [{
   component: __webpack_require__(/*! ./pages/info.vue */ "./resources/js/pages/info.vue")["default"]
 }, {
   path: "/admin",
-  name: "Admin",
   component: __webpack_require__(/*! ./pages/admin/admin_control.vue */ "./resources/js/pages/admin/admin_control.vue")["default"],
   children: [{
     path: "",
@@ -58954,8 +59025,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

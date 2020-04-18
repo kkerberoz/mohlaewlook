@@ -21,7 +21,6 @@ let routes = [
     },
     {
         path: "/admin",
-        name: "Admin",
         component: require("./pages/admin/admin_control.vue").default,
         children: [
             {
