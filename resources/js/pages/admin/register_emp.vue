@@ -197,7 +197,7 @@
 
                     <hr class="mb-4" />
                     <button
-                        class="btn btn-primary btn-lg btn-block"
+                        class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
                     >
                         Register

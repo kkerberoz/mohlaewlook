@@ -8,12 +8,12 @@
                     :key="i"
                     class="nav-item"
                 >
-                    <!-- <router-link :to="link.link" class="nav-link">
-                        {{ link.label }}
-          </router-link>-->
-                    <router-link :to="link.link" style="color:#fff;">{{
+                    <!-- <router-link :to="link.link" style="color:#fff;">{{
                         link.label
-                    }}</router-link>
+                    }}</router-link> -->
+                    <a :href="$router.resolve(link.link).href">{{
+                        link.label
+                    }}</a>
                 </li>
             </ul>
         </footer>
