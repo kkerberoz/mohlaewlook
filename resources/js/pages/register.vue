@@ -167,6 +167,7 @@ export default {
             this.error_username = null;
             this.error_password = null;
             this.error_title = null;
+
             e.preventDefault();
             let currentObj = this;
             if (!this.username.trim()) {

@@ -10,10 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // public function queryusername(Request $request)
-    // {
 
-    // }
 
     public function register(Request $request)
     {
@@ -28,7 +25,26 @@ class UserController extends Controller
         }
 
         else{
+            $count = Customer::count();
+            if($count<10)
+                $value = '0000000'.(string)$count;
+            else if($count >= 10 && $count<100)
+                $value = '000000'.(string)$count;
+            else if($count>=100 && $count<1000)
+                $value = '00000'.(string)$count;
+            else if($count >=1000&&$count<10000)
+                $value = '0000'.(string)$count;
+            else if($count >=10000 && $count<100000)
+                $value = '000'.(string)$count;
+            else if($count>=100000 && $count<1000000)
+                $value = '00'.(string)$count;
+            else if($count>=1000000 && $count < 10000000)
+                $value = '0'.(string)$count;
+            else if($count>=10000000 && $count < 100000000)
+                $value = (string)$count;
+
             $register = new Customer;
+            $register->user_id = 'CST'.$value;
             $register->username = $request->username;
             $register->password = HASH::make($request->password);
             $register->title = $request->title;
