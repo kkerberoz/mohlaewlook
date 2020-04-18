@@ -208,8 +208,12 @@
     </div>
 </template>
 
+
 <script>
-export default {};
+export default {
+    props: ["csrf", "oldName"]
+
+};
 </script>
 
 <style></style>
