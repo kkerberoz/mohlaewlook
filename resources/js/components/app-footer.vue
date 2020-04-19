@@ -11,9 +11,11 @@
                     <!-- <router-link :to="link.link" style="color:#fff;">{{
                         link.label
                     }}</router-link> -->
-                    <a :href="$router.resolve(link.link).href">{{
-                        link.label
-                    }}</a>
+                    <a
+                        :href="$router.resolve(link.link).href"
+                        style="color:#fff"
+                        >{{ link.label }}</a
+                    >
                 </li>
             </ul>
         </footer>

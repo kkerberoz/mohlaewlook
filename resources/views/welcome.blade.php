@@ -17,13 +17,13 @@
     </head>
     <body>
         <div id="app">
-            <header v-show="$route.path==='/admin' || $route.path==='/admin/newemployee' ? false : true">
+            <header v-show="$route.path==='/admin' || $route.path==='/admin/newemployee'||$route.path==='/admin/addflight' ? false : true">
                 <navbar :links="navbarlinks"></navbar>
             </header>
 
 
             <router-view csrf="{{csrf_token()}}"></router-view>
-            <footer v-show="$route.path==='/admin' || $route.path==='/admin/newemployee' ? false : true">
+            <footer v-show="$route.path==='/admin' || $route.path==='/admin/newemployee' ||$route.path==='/admin/addflight' ? false : true">
                 <app-footer :links ="footerlinks"></app-footer>
             </footer>
 
