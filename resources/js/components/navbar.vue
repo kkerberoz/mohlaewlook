@@ -1,34 +1,39 @@
 <template>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-2 fixed-top">
-        <div class="container">
-            <!-- {{ isLogIn }} -->
+    <div>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-info fixed-top">
+            <div class="container">
+                <!-- {{ isLogIn }} -->
 
-            <router-link to="/" class="navbar-brand" style="font-weight: bold;"
-                >Mohlaewlook</router-link
-            >
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapsibleNavbar"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav ml-auto">
-                    <li
-                        v-for="(link, i) in links_filtered"
-                        :key="i"
-                        class="nav-item"
-                    >
-                        <router-link :to="link.link" class="nav-link">
-                            {{ link.label }}
-                        </router-link>
-                    </li>
-                </ul>
+                <router-link
+                    to="/"
+                    class="navbar-brand"
+                    style="font-weight: bold;"
+                    >Mohlaewlook</router-link
+                >
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapsibleNavbar"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav ml-auto">
+                        <li
+                            v-for="(link, i) in links_filtered"
+                            :key="i"
+                            class="nav-item"
+                        >
+                            <router-link :to="link.link" class="nav-link">{{
+                                link.label
+                            }}</router-link>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 </template>
 
 <script>

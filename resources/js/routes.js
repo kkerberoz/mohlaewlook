@@ -2,7 +2,7 @@ let routes = [
     {
         path: "/",
         name: "Home",
-        component: require("./pages/ExampleComponent.vue").default
+        component: require("./pages/home.vue").default
     },
     {
         path: "/login",
@@ -20,14 +20,20 @@ let routes = [
         component: require("./pages/info.vue").default
     },
     {
-        path: "/employee",
-        name: "employee",
-        component: require("./pages/employee/register_emp.vue").default
-    },
-    {
-        path: "/employee/register",
-        name: "employeeRegister",
-        component: require("./pages/employee/register_emp.vue").default
+        path: "/admin",
+        component: require("./pages/admin/admin_control.vue").default,
+        children: [
+            {
+                path: "",
+                name: "adminHome",
+                component: require("./pages/info.vue").default
+            },
+            {
+                path: "newemployee",
+                name: "registeremp",
+                component: require("./pages/admin/register_emp.vue").default
+            }
+        ]
     }
 ];
 

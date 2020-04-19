@@ -14,7 +14,7 @@ class CreateCustomerInfo extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->increments('user_id')->start_from(00000000)->unique();
+            $table->string('user_id',11)->unique();//PK
             $table->string('username', 32)->unique();
             $table->string('password', 128);
             $table->string('title', 10);
@@ -22,6 +22,8 @@ class CreateCustomerInfo extends Migration
             $table->string('surname', 64);
             $table->date('DOB');
             $table->string('email', 60);
+
+            $table->primary('user_id');
         });
     }
 

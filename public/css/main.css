@@ -10,6 +10,7 @@ body {
 
 .full-height {
     height: 100vh;
+    display: inline-block;
 }
 
 .flex-center {
@@ -50,14 +51,14 @@ body {
     margin-bottom: 30px;
 }
 
-.btn {
+.btn-login {
     color: #fff;
     background-color: #6cb2eb;
     border-radius: 5px;
     border-color: #636b6f;
     font-size: 16px;
 }
-.btn:hover {
+.btn-login:hover {
     color: #fff;
     transition: 0.3s;
     border-radius: 5px;
@@ -77,4 +78,28 @@ body {
 .card-footer {
     border: none;
     background-color: #fff;
+}
+
+#content {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#footers {
+    background-color: #6cb2eb;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+    display: block;
+    justify-content: center;
+}
+
+.card {
+    display: block;
 }

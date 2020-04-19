@@ -17,7 +17,7 @@ window.toast = toast;
 
 import routes from "./routes";
 const router = new VueRouter({
-    // mode: "history",
+    mode: "history",
     routes // short for `routes: routes`
 });
 /**
@@ -28,6 +28,7 @@ const router = new VueRouter({
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 Vue.component("navbar", require("./components/navbar.vue").default);
+Vue.component("app-footer", require("./components/app-footer.vue").default);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
@@ -46,7 +47,8 @@ const app = new Vue({
                 { link: "/login", label: "login" },
                 { link: "/register", label: "register" },
                 { link: "/info", label: "info" }
-            ]
+            ],
+            footerlinks: [{ link: "/admin", label: "backend" }]
         };
     }
 }).$mount("#app");

@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div class="container-fluid" id="content">
         <div class="row flex-center full-height">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header bg-info">Register</div>
                     <form v-on:submit="formSubmit">
@@ -23,9 +23,9 @@
                                     v-model="username"
                                     name="username"
                                 />
-                                <span class="invalid-feedback">
-                                    {{ error_username }}
-                                </span>
+                                <span class="invalid-feedback">{{
+                                    error_username
+                                }}</span>
                             </span>
 
                             <span class="form-group">
@@ -41,9 +41,9 @@
                                     pattern="(?=.[a-z])(?=.*[A-Z]).{6,}"
                                     title="Must contain at least one uppercase and lowercase letter, and at least 6 or more characters "
                                 />
-                                <span class="invalid-feedback">
-                                    {{ error_password }}
-                                </span>
+                                <span class="invalid-feedback">{{
+                                    error_password
+                                }}</span>
                             </span>
 
                             <span class="form-group">
@@ -62,9 +62,9 @@
                                     <option>Mr.</option>
                                     <option>Miss</option>
                                 </select>
-                                <span class="invalid-feedback">
-                                    {{ error_title }}
-                                </span>
+                                <span class="invalid-feedback">{{
+                                    error_title
+                                }}</span>
                             </span>
                             <span class="form-group">
                                 <label>Name:</label>
@@ -123,7 +123,10 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-block">
+                            <button
+                                type="submit"
+                                class="btn btn-block btn-login"
+                            >
                                 Sign up
                             </button>
                         </div>
@@ -164,6 +167,7 @@ export default {
             this.error_username = null;
             this.error_password = null;
             this.error_title = null;
+
             e.preventDefault();
             let currentObj = this;
             if (!this.username.trim()) {
@@ -217,7 +221,6 @@ export default {
                 this.error_email = null;
             }
             if (!this.errors.length) {
-
                 let data = {
                     username: this.username,
                     password: this.password,
@@ -228,19 +231,20 @@ export default {
                     email: this.email
                 };
                 axios.post("/api/regis", data).then(response => {
-                    if (response.data.errorU == 1){
-                        this.username= '';
-                        this.error_username = 'This Username is already exist';
+                    if (response.data.errorU == 1) {
+                        this.username = "";
+                        this.error_username = "This Username is already exist";
                         this.errors.push(this.error_username);
                         this.errors = [];
-                    }
-                    else if(response.data.errorE == 1){
-                        this.email = '';
-                        this.error_email = 'This E-mail is already exist';
+                    } else if (response.data.errorE == 1) {
+                        this.email = "";
+                        this.error_email = "This E-mail is already exist";
                         this.errors.push(this.error_email);
                         this.errors = [];
-                    }
-                    else if(response.data.errorU==0 && response.data.errorE ==0){
+                    } else if (
+                        response.data.errorU == 0 &&
+                        response.data.errorE == 0
+                    ) {
                         currentObj.output = response.data;
                         swal.fire(
                             "Register Success!",
