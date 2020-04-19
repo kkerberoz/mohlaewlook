@@ -31,7 +31,7 @@ let routes = [
             {
                 path: "newemployee",
                 name: "newemployee",
-                component: require("./pages/admin/register_emp.vue").default
+                component: require("./pages/admin/registerEmployee.vue").default
             },
             {
                 path: "addflight",
