@@ -164,11 +164,16 @@
               </div>
             </div>
           </form>
-
-          <hr class="mb-4" />
-          <h5 class="mb-3">Educations History:</h5>
           <form>
+            <hr class="mb-4" />
+            <h5 class="mb-3">Educations History</h5>
             <div class="form-group" v-for="(edu, counter) in edus" :key="counter">
+              <hr class="mb-4" v-show="counter || (!counter && edus.length > 1)" />
+              <h5
+                class="mb-3"
+                v-show="counter || (!counter && edus.length > 1)"
+              >Educations {{Number(counter)+1}} :</h5>
+
               <div class="row">
                 <div class="col-md-12 mb-2">
                   <label>Degree:</label>
@@ -206,11 +211,13 @@
               <span>
                 <i
                   class="fas fa-plus-circle"
+                  style="color:#4BB543;"
                   @click="addedu(counter)"
                   v-show="counter == edus.length - 1"
                 ></i>
                 <i
                   class="fas fa-minus-circle"
+                  style="color:#ED4337;"
                   @click="removeedu(counter)"
                   v-show="
                                         counter || (!counter && edus.length > 1)
@@ -221,32 +228,41 @@
           </form>
 
           <hr class="mb-4" />
-          <h5 class="mb-3">Disease info</h5>
+          <h5 class="mb-3">Diseases</h5>
           <form class="form-group" v-for="(disease, k) in diseases" :key="k">
-            <div>
-              <div class="row">
-                <span class="col-md-6 mb-2">
-                  <label>Disease:</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" v-model="disease.info" />
-                    <div class="invalid-feedback">startdate required.</div>
-                  </div>
-                </span>
-                <span class="col-md-6 mb-2">
-                  <label>Note:</label>
-                  <input type="text" class="form-control" v-model="disease.note" />
-                  <div class="invalid-feedback">Please enter salary</div>
-                </span>
-              </div>
-              <span>
-                <i class="fas fa-plus-circle" @click="add(k)" v-show="k == diseases.length - 1"></i>
-                <i
-                  class="fas fa-minus-circle"
-                  @click="remove(k)"
-                  v-show="k || (!k && diseases.length > 1)"
-                ></i>
+            <hr class="mb-4" v-show="k || (!k && diseases.length > 1)" />
+            <h5
+              class="mb-3"
+              v-show="k || (!k && diseases.length > 1)"
+            >Disease info {{Number(k)+1}} :</h5>
+            <div class="row">
+              <span class="col-md-6 mb-2">
+                <label>Disease:</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" v-model="disease.info" />
+                  <div class="invalid-feedback">startdate required.</div>
+                </div>
+              </span>
+              <span class="col-md-6 mb-2">
+                <label>Note:</label>
+                <input type="text" class="form-control" v-model="disease.note" />
+                <div class="invalid-feedback">Please enter salary</div>
               </span>
             </div>
+            <span>
+              <i
+                class="fas fa-plus-circle"
+                style="color:#4BB543;"
+                @click="add(k)"
+                v-show="k == diseases.length - 1"
+              ></i>
+              <i
+                class="fas fa-minus-circle"
+                style="color:#ED4337;"
+                @click="remove(k)"
+                v-show="k || (!k && diseases.length > 1)"
+              ></i>
+            </span>
           </form>
 
           <hr class="mb-4" />
