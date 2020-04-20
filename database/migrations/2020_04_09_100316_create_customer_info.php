@@ -14,7 +14,7 @@ class CreateCustomerInfo extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->string('user_id',11)->unique();//PK
+            $table->string('user_id', 11)->unique(); //PK
             $table->string('username', 32)->unique();
             $table->string('password', 128);
             $table->string('title', 10);

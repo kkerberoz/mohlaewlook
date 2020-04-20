@@ -1995,13 +1995,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     links: Array,
@@ -2019,6 +2012,19 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return this.links;
       }
+    }
+  },
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      axios.post("/api/logout").then(function () {
+        _this.user = null;
+
+        _this.$router.push({
+          name: "Home"
+        });
+      });
     }
   }
 });
@@ -3280,15 +3286,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "login",
   data: function data() {
@@ -3332,17 +3329,20 @@ __webpack_require__.r(__webpack_exports__);
           password: this.password
         };
         axios.post("/api/login", data).then(function (response) {
-          if (response.data.id) {
+          if (response.data.username) {
             _this.customer = response.data;
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
               _this.$router.push({
                 name: "Home"
               });
+
+              isLoggedIn = true;
             });
-          } else if (response.data.error === 401) {
+          } else if (response.data.error == 401) {
             swal.fire("Could not log you in.", "Cilck the button to continue!", "error").then(function () {
               _this.errors = [];
               _this.password = "";
+              _this.username = "";
             });
           }
         });
@@ -42839,7 +42839,13 @@ var render = function() {
                         _c(
                           "router-link",
                           { staticClass: "nav-link", attrs: { to: link.link } },
-                          [_vm._v(_vm._s(link.label))]
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(link.label) +
+                                "\n            "
+                            )
+                          ]
                         )
                       ],
                       1
@@ -45629,11 +45635,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_username) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_username))
                 ])
               ]),
               _vm._v(" "),
@@ -45664,11 +45666,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                                " +
-                      _vm._s(_vm.error_password) +
-                      "\n                            "
-                  )
+                  _vm._v(_vm._s(_vm.error_password))
                 ])
               ])
             ]),
@@ -45689,11 +45687,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-block btn-login", attrs: { type: "submiit" } },
-        [
-          _vm._v(
-            "\n                            Sign in\n                        "
-          )
-        ]
+        [_vm._v("Sign in")]
       )
     ])
   }
@@ -62023,8 +62017,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
