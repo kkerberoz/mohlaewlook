@@ -29,14 +29,19 @@ let routes = [
                 component: require("./pages/info.vue").default
             },
             {
-                path: "newemployee",
-                name: "newemployee",
+                path: "newEmployee",
+                name: "newEmployee",
                 component: require("./pages/admin/registerEmployee.vue").default
             },
             {
-                path: "addflight",
-                name: "addflight",
-                component: require("./pages/admin/add_flight.vue").default
+                path: "addFlight",
+                name: "addFlight",
+                component: require("./pages/admin/addFlight.vue").default
+            },
+            {
+                path: "addAircraft",
+                name: "addAircraft",
+                component: require("./pages/admin/addAircraft.vue").default
             }
         ]
     }

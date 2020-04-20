@@ -47,7 +47,7 @@
                             <li>
                                 <a
                                     :href="
-                                        $router.resolve({ name: 'newemployee' })
+                                        $router.resolve({ name: 'newEmployee' })
                                             .href
                                     "
                                 >
@@ -60,14 +60,27 @@
                                 <a
                                     :href="
                                         $router.resolve({
-                                            name: 'addflight'
+                                            name: 'addFlight'
                                         }).href
                                     "
                                 >
-                                    <i class="fas fa-plane"></i>
+                                    <i class="fas fa-plane-departure"></i>
+
                                     <span>Add Flight</span>
                                 </a>
                             </li>
+                            <li>
+                                <a
+                                    :href="
+                                        $router.resolve({ name: 'addAircraft' })
+                                            .href
+                                    "
+                                >
+                                    <i class="fas fa-plane"></i>
+                                    <span>Add Aircraft</span>
+                                </a>
+                            </li>
+
                             <li>
                                 <router-link to="/">
                                     <i class="fas fa-home"></i>

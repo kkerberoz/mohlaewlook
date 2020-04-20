@@ -49,13 +49,5 @@ const app = new Vue({
             ],
             footerlinks: [{ link: "/admin", label: "backend" }]
         };
-    },
-    methods: {
-        add(index) {
-            this.disease.push({ name: "" });
-        },
-        remove(index) {
-            this.disease.splice(index, 1);
-        }
     }
 }).$mount("#app");

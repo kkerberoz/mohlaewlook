@@ -12,10 +12,26 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    public function init()
+    {
+        $customer = Auth::user();
+
+        return response()->json([
+            'customer' => $customer
+        ], 200);
+    }
     public function login(Request $request)
     {
-        //
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $customer = Auth::user();
+
+            return response()->json($customer, 200);
+        } else {
+            return response()->json(['error' => 'Could not log you in.']);
+        }
     }
+
 
 
     public function register(Request $request)
