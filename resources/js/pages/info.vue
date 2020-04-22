@@ -2,7 +2,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="title flex-center full-height">info</div>
+                <div class="title flex-center full-height">
+                    Logged in as: {{ user.username }}
+                </div>
 
                 <div class="flex-center title m-b-md">info</div>
             </div>
@@ -41,5 +43,16 @@
     </div>
 </template>
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            user: ""
+        };
+    },
+    mounted() {
+        axios.get("/api/user").then(response => {
+            this.user = response.data;
+        });
+    }
+};
 </script>

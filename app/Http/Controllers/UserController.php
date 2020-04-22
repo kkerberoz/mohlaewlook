@@ -77,7 +77,7 @@ class UserController extends Controller
             $customer->email = $request->email;
             // $customer->timestamps = false;
             $customer->save();
-            Auth::login($customer, true);
+            // Auth::login($customer, true);
 
             return response()->json(['errorE' => 0, 'errorU' => 0]);
         }

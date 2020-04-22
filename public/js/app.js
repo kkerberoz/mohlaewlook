@@ -1995,13 +1995,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isLoggedIn: false
+    };
+  },
   props: {
-    links: Array,
-    isLoggedIn: {
-      type: Boolean,
-      "default": false
-    }
+    links: Array // isLoggedIn: { type: Boolean, default: false }
+
+  },
+  mounted: function mounted() {
+    this.isLoggedIn = localStorage.getItem("isLoggedIn");
   },
   computed: {
     links_filtered: function links_filtered() {
@@ -2018,11 +2033,13 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this = this;
 
-      axios.post("/api/logout").then(function () {
-        _this.user = null;
+      axios.get("/sanctum/csrf-cookie").then(function (response) {
+        axios.post("/api/logout").then(function () {
+          localStorage.removeItem("isLoggedIn");
 
-        _this.$router.push({
-          name: "Home"
+          _this.$router.go({
+            name: "userLogin"
+          });
         });
       });
     }
@@ -3234,7 +3251,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      user: ""
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get("/api/user").then(function (response) {
+      _this.user = response.data;
+    });
+  }
+});
 
 /***/ }),
 
@@ -3247,6 +3279,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3328,23 +3369,25 @@ __webpack_require__.r(__webpack_exports__);
           username: this.username,
           password: this.password
         };
-        axios.post("/api/login", data).then(function (response) {
-          if (response.data.username) {
-            _this.customer = response.data;
-            swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
-              _this.$router.push({
-                name: "Home"
-              });
+        axios.get("/sanctum/csrf-cookie").then(function (response) {
+          axios.post("/api/login", data).then(function (response) {
+            if (response.data.id) {
+              _this.customer = response.data;
+              swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
+                localStorage.setItem("isLoggedIn", "true");
 
-              isLoggedIn = true;
-            });
-          } else if (response.data.error == 401) {
-            swal.fire("Could not log you in.", "Cilck the button to continue!", "error").then(function () {
-              _this.errors = [];
-              _this.password = "";
-              _this.username = "";
-            });
-          }
+                _this.$router.go({
+                  name: "info"
+                });
+              });
+            } else if (response.data.error == 401) {
+              swal.fire("Could not log you in.", "Cilck the button to continue!", "error").then(function () {
+                _this.errors = [];
+                _this.password = "";
+                _this.username = "";
+              });
+            }
+          });
         });
       }
     }
@@ -3598,29 +3641,31 @@ __webpack_require__.r(__webpack_exports__);
           DOB: this.DOB,
           email: this.email
         };
-        axios.post("/api/regis", data).then(function (response) {
-          if (response.data.errorU == 1) {
-            _this.username = "";
-            _this.error_username = "This Username is already exist";
+        axios.get("/sanctum/csrf-cookie").then(function (response) {
+          axios.post("/api/regis", data).then(function (response) {
+            if (response.data.errorU == 1) {
+              _this.username = "";
+              _this.error_username = "This Username is already exist";
 
-            _this.errors.push(_this.error_username);
+              _this.errors.push(_this.error_username);
 
-            _this.errors = [];
-          } else if (response.data.errorE == 1) {
-            _this.email = "";
-            _this.error_email = "This E-mail is already exist";
+              _this.errors = [];
+            } else if (response.data.errorE == 1) {
+              _this.email = "";
+              _this.error_email = "This E-mail is already exist";
 
-            _this.errors.push(_this.error_email);
+              _this.errors.push(_this.error_email);
 
-            _this.errors = [];
-          } else if (response.data.errorU == 0 && response.data.errorE == 0) {
-            currentObj.output = response.data;
-            swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this.$router.push({
-                name: "Home"
+              _this.errors = [];
+            } else if (response.data.errorU == 0 && response.data.errorE == 0) {
+              currentObj.output = response.data;
+              swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+                _this.$router.push({
+                  name: "userLogin"
+                });
               });
-            });
-          }
+            }
+          });
         });
       }
     }
@@ -42831,27 +42876,40 @@ var render = function() {
                 _c(
                   "ul",
                   { staticClass: "navbar-nav ml-auto" },
-                  _vm._l(_vm.links_filtered, function(link, i) {
-                    return _c(
-                      "li",
-                      { key: i, staticClass: "nav-item" },
-                      [
-                        _c(
-                          "router-link",
-                          { staticClass: "nav-link", attrs: { to: link.link } },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(link.label) +
-                                "\n            "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  }),
-                  0
+                  [
+                    _vm._l(_vm.links_filtered, function(link, i) {
+                      return _c(
+                        "li",
+                        { key: i, staticClass: "nav-item" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { to: link.link }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(link.label) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        { staticClass: "nav-link", on: { click: _vm.logout } },
+                        [_vm._v("Logout")]
+                      )
+                    ])
+                  ],
+                  2
                 )
               ]
             )
@@ -45505,74 +45563,98 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "title flex-center full-height" }, [
+          _vm._v(
+            "\n                Logged in as: " +
+              _vm._s(_vm.user.username) +
+              "\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex-center title m-b-md" }, [_vm._v("info")])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _vm._m(4)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("info")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex-center title m-b-md" }, [
-            _vm._v("info")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("Created by")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("mohlaewlook group")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component\n            ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("I'm an example component.")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("info")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex-center title m-b-md" }, [
-            _vm._v("info")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component\n            ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("I'm an example component.")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v("\n                Example Component\n            ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "content m-b-md" }, [
-            _vm._v("I'm an example component.")
-          ])
-        ])
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "title flex-center full-height" }, [
+        _vm._v("Created by")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content m-b-md" }, [
+        _vm._v("mohlaewlook group")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "title flex-center full-height" }, [
+        _vm._v("\n                Example Component\n            ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content m-b-md" }, [
+        _vm._v("I'm an example component.")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "title flex-center full-height" }, [
+        _vm._v("info")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex-center title m-b-md" }, [_vm._v("info")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "title flex-center full-height" }, [
+        _vm._v("\n                Example Component\n            ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content m-b-md" }, [
+        _vm._v("I'm an example component.")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "title flex-center full-height" }, [
+        _vm._v("\n                Example Component\n            ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content m-b-md" }, [
+        _vm._v("I'm an example component.")
       ])
     ])
   }
@@ -45635,7 +45717,11 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.error_username))
+                  _vm._v(
+                    "\n                                " +
+                      _vm._s(_vm.error_username) +
+                      "\n                            "
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -45666,7 +45752,11 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.error_password))
+                  _vm._v(
+                    "\n                                " +
+                      _vm._s(_vm.error_password) +
+                      "\n                            "
+                  )
                 ])
               ])
             ]),
@@ -45687,7 +45777,11 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-block btn-login", attrs: { type: "submiit" } },
-        [_vm._v("Sign in")]
+        [
+          _vm._v(
+            "\n                            Sign in\n                        "
+          )
+        ]
       )
     ])
   }
@@ -61166,6 +61260,39 @@ Vue.component("navbar", __webpack_require__(/*! ./components/navbar.vue */ "./re
 Vue.component("app-footer", __webpack_require__(/*! ./components/app-footer.vue */ "./resources/js/components/app-footer.vue")["default"]); // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+function isLoggedIn() {
+  return localStorage.getItem("isLoggedIn");
+}
+
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.requiresAuth;
+  })) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!isLoggedIn()) {
+      next({
+        name: "userLogin"
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(function (record) {
+    return record.meta.requiresVisitor;
+  })) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (isLoggedIn()) {
+      next({
+        name: "info"
+      });
+    } else {
+      next();
+    }
+  } else {
+    next(); // make sure to always call next()!
+  }
+});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -61224,7 +61351,8 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.withCredentials = true;
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -61965,18 +62093,30 @@ var routes = [{
 }, {
   path: "/login",
   name: "userLogin",
-  component: __webpack_require__(/*! ./pages/login.vue */ "./resources/js/pages/login.vue")["default"]
+  component: __webpack_require__(/*! ./pages/login.vue */ "./resources/js/pages/login.vue")["default"],
+  meta: {
+    requiresVisitor: true
+  }
 }, {
   path: "/register",
   name: "userRegister",
-  component: __webpack_require__(/*! ./pages/register.vue */ "./resources/js/pages/register.vue")["default"]
+  component: __webpack_require__(/*! ./pages/register.vue */ "./resources/js/pages/register.vue")["default"],
+  meta: {
+    requiresVisitor: true
+  }
 }, {
   path: "/info",
   name: "info",
-  component: __webpack_require__(/*! ./pages/info.vue */ "./resources/js/pages/info.vue")["default"]
+  component: __webpack_require__(/*! ./pages/info.vue */ "./resources/js/pages/info.vue")["default"],
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: "/admin",
   component: __webpack_require__(/*! ./pages/admin/admin_control.vue */ "./resources/js/pages/admin/admin_control.vue")["default"],
+  meta: {
+    requiresAuth: true
+  },
   children: [{
     path: "",
     name: "adminHome",
@@ -62017,8 +62157,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

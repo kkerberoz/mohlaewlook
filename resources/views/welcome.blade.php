@@ -18,7 +18,7 @@
     <body>
         <div id="app">
             <header v-show="$route.path==='/admin' || $route.path==='/admin/newEmployee'||$route.path==='/admin/addFlight'||$route.path==='/admin/addAircraft' ? false : true">
-                <navbar :links="navbarlinks"></navbar>
+                <navbar :links="navbarlinks" ></navbar>
             </header>
 
 
@@ -29,5 +29,6 @@
 
         </div>
     </body>
+
     <script src="{{ asset('js/app.js') }}"></script>
 </html>

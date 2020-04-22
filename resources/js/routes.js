@@ -7,21 +7,25 @@ let routes = [
     {
         path: "/login",
         name: "userLogin",
-        component: require("./pages/login.vue").default
+        component: require("./pages/login.vue").default,
+        meta: { requiresVisitor: true }
     },
     {
         path: "/register",
         name: "userRegister",
-        component: require("./pages/register.vue").default
+        component: require("./pages/register.vue").default,
+        meta: { requiresVisitor: true }
     },
     {
         path: "/info",
         name: "info",
-        component: require("./pages/info.vue").default
+        component: require("./pages/info.vue").default,
+        meta: { requiresAuth: true }
     },
     {
         path: "/admin",
         component: require("./pages/admin/admin_control.vue").default,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: "",
