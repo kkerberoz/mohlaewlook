@@ -61,4 +61,8 @@ class UserController extends Controller
             return response()->json(['errorE' => 0, 'errorU' => 0]);
         }
     }
+
+    public function registerEmployee(Request $request){
+
+    }
 }
