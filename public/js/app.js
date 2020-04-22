@@ -61426,6 +61426,9 @@ var app = new Vue({
   data: function data() {
     return {
       navbarlinks: [{
+        link: "/reservation",
+        label: "reservation"
+      }, {
         link: "/login",
         label: "login"
       }, {

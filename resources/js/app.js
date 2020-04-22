@@ -74,6 +74,7 @@ const app = new Vue({
     data() {
         return {
             navbarlinks: [
+                { link: "/reservation", label: "reservation" },
                 { link: "/login", label: "login" },
                 { link: "/register", label: "register" },
                 { link: "/info", label: "info" }
