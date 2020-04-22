@@ -43,12 +43,19 @@ const app = new Vue({
     data() {
         return {
             navbarlinks: [
-                // { link: "/", label: "Home" },
                 { link: "/login", label: "login" },
                 { link: "/register", label: "register" },
                 { link: "/info", label: "info" }
             ],
             footerlinks: [{ link: "/admin", label: "backend" }]
         };
+    },
+    methods: {
+        add(index) {
+            this.disease.push({ name: "" });
+        },
+        remove(index) {
+            this.disease.splice(index, 1);
+        }
     }
 }).$mount("#app");

@@ -47,32 +47,25 @@
                             <li>
                                 <a
                                     :href="
-                                        $router.resolve({ name: 'registeremp' })
+                                        $router.resolve({ name: 'newemployee' })
                                             .href
                                     "
                                 >
                                     <i class="far fa-address-card"></i>
-                                    <span>New Employee</span>
+                                    <span>Add Employee</span>
                                 </a>
                             </li>
+
                             <li>
                                 <a
                                     :href="
-                                        $router.resolve({ name: 'info' }).href
+                                        $router.resolve({
+                                            name: 'addflight'
+                                        }).href
                                     "
                                 >
-                                    <i class="fa fa-chart-line"></i>
-                                    <span>info</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    :href="
-                                        $router.resolve({ name: 'info' }).href
-                                    "
-                                >
-                                    <i class="fa fa-chart-line"></i>
-                                    <span>~~~~</span>
+                                    <i class="fas fa-plane"></i>
+                                    <span>Add Flight</span>
                                 </a>
                             </li>
                             <li>
@@ -102,8 +95,6 @@
 
 <script>
 export default {
-    name: "admin",
-
     methods: {
         closeMenu() {
             $(".page-wrapper").toggleClass("toggled");
