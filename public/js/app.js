@@ -2005,6 +2005,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -42901,18 +42908,28 @@ var render = function() {
                       )
                     }),
                     _vm._v(" "),
-                    _vm.isLoggedIn
-                      ? _c("li", { staticClass: "nav-item" }, [
-                          _c(
+                    _c("li", { staticClass: "nav-item" }, [
+                      _vm.isLoggedIn
+                        ? _c(
                             "a",
                             {
-                              staticClass: "nav-link",
-                              on: { click: _vm.logout }
+                              staticClass: " nav-link",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.logout($event)
+                                }
+                              }
                             },
-                            [_vm._v("Logout")]
+                            [
+                              _vm._v(
+                                "\n                            Logout\n                        "
+                              )
+                            ]
                           )
-                        ])
-                      : _vm._e()
+                        : _vm._e()
+                    ])
                   ],
                   2
                 )
