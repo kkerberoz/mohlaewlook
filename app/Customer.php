@@ -9,6 +9,7 @@ class Customer extends Authenticatable
 {
     use Notifiable;
     // protected $primaryKey = 'user_id';
+    protected $guard = "customer";
     protected $table = 'customers';
     public $timestamps = false;
     protected $rememberTokenName = false;

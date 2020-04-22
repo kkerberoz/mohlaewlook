@@ -27,9 +27,13 @@
                             />
                         </div> -->
                         <div class="user-info">
-                            <span class="user-name"
-                                >Boss
-                                <strong>Germany</strong>
+                            <span class="user-welcome">
+                                UserID: {{ user.user_id }}
+                            </span>
+                            <span class="user-name">
+                                <strong>
+                                    {{ user.name + " " + user.surname }}</strong
+                                >
                             </span>
                             <span class="user-status">
                                 <i class="fa fa-circle"></i>
@@ -108,6 +112,16 @@
 
 <script>
 export default {
+    data() {
+        return {
+            user: ""
+        };
+    },
+    mounted() {
+        axios.get("/api/user").then(response => {
+            this.user = response.data;
+        });
+    },
     methods: {
         closeMenu() {
             $(".page-wrapper").toggleClass("toggled");

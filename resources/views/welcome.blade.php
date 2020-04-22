@@ -22,7 +22,7 @@
             </header>
 
 
-            <router-view csrf="{{csrf_token()}}"></router-view>
+            <router-view csrf="{{csrf_token()}}" ></router-view>
             <footer v-show="$route.path==='/admin' || $route.path==='/admin/newEmployee' ||$route.path==='/admin/addFlight'||$route.path==='/admin/addAircraft' ? false : true">
                 <app-footer :links ="footerlinks"></app-footer>
             </footer>

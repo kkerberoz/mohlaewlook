@@ -23,6 +23,12 @@ let routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: "/reservation",
+        name: "reservation",
+        component: require("./pages/reservation.vue").default,
+        meta: { requiresAuth: true }
+    },
+    {
         path: "/admin",
         component: require("./pages/admin/admin_control.vue").default,
         meta: { requiresAuth: true },
