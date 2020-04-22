@@ -1,6 +1,6 @@
 <template>
     <div class="container-fulid">
-        <div class="row flex-center">
+        <div class="row flex-center" style="margin-bottom:3%">
             <div
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
@@ -48,7 +48,9 @@
                                         v-model="input.airport"
                                         required
                                     >
-                                        <option value>Choose</option>
+                                        <option value selected disabledd
+                                            >Choose</option
+                                        >
                                         <option>Germany.</option>
                                         <option>Germany.</option>
                                         <option>Germany.</option>
@@ -65,7 +67,9 @@
                                         v-model="input.status"
                                         required
                                     >
-                                        <option value>Choose</option>
+                                        <option value selected disabledd
+                                            >Choose</option
+                                        >
                                         <option>Active.</option>
                                         <option>Left.</option>
                                     </select>
@@ -123,14 +127,13 @@
                                         </div>
                                     </div>
                                 </span>
-                                <span class="col-md-4 ">
+                                <span class="col-md-4">
                                     <label>Gender:</label>
                                     <br />
                                     <div class="form-check form-check-inline">
                                         <input
                                             class="form-check-input"
                                             type="radio"
-                                            name="inlineRadioOptions"
                                             value="male"
                                             v-model="input.gender"
                                         />
@@ -144,7 +147,6 @@
                                         <input
                                             class="form-check-input"
                                             type="radio"
-                                            name="inlineRadioOptions"
                                             value="female"
                                             v-model="input.gender"
                                         />
@@ -158,7 +160,6 @@
                                         <input
                                             class="form-check-input"
                                             type="radio"
-                                            name="inlineRadioOptions"
                                             value="other"
                                             v-model="input.gender"
                                         />
@@ -179,7 +180,9 @@
                                         v-model="input.title"
                                         required
                                     >
-                                        <option value>Choose</option>
+                                        <option value selected disabled
+                                            >Choose</option
+                                        >
                                         <option>Mrs.</option>
                                         <option>Ms.</option>
                                         <option>Mr.</option>
@@ -288,24 +291,40 @@
                             </div>
                         </div>
                     </form>
-
-                    <hr class="mb-4" />
-                    <h5 class="mb-3">Educations History</h5>
-
                     <form>
+                        <hr class="mb-4" />
+                        <h5 class="mb-3">Educations History</h5>
+
                         <div
                             class="form-group"
                             v-for="(edu, counter) in edus"
                             :key="counter"
                         >
+                            <hr
+                                class="mb-4"
+                                v-show="
+                                    counter || (!counter && edus.length > 1)
+                                "
+                            />
+                            <h5
+                                class="mb-3"
+                                v-show="
+                                    counter || (!counter && edus.length > 1)
+                                "
+                            >
+                                Educations {{ Number(counter) + 1 }} :
+                            </h5>
+
                             <div class="row">
-                                <di class="col-md-12 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label>Degree:</label>
                                     <select
                                         class="custom-select d-block w-100"
                                         v-model="edu.degree"
                                     >
-                                        <option value>Choose</option>
+                                        <option value selected disabled
+                                            >Choose</option
+                                        >
                                         <option>Bachelor's degree</option>
                                         <option>Master's degree</option>
                                         <option>Doctoral degree</option>
@@ -313,7 +332,7 @@
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
-                                </di>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
@@ -361,74 +380,82 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="btn">
+                            <span>
+                                <i
+                                    class="fas fa-plus-circle"
+                                    style="color:#4BB543;"
+                                    @click="addedu(counter)"
+                                    v-show="counter == edus.length - 1"
+                                ></i>
                                 <i
                                     class="fas fa-minus-circle"
+                                    style="color:#ED4337;"
                                     @click="removeedu(counter)"
                                     v-show="
                                         counter || (!counter && edus.length > 1)
                                     "
-                                    >DELETE</i
-                                >
-                                <i
-                                    class="fas fa-plus-circle"
-                                    @click="addedu(counter)"
-                                    v-show="counter == edus.length - 1"
-                                    >ADD</i
-                                >
-                            </div>
+                                ></i>
+                            </span>
                         </div>
                     </form>
 
                     <hr class="mb-4" />
-                    <h5 class="mb-3">Disease info</h5>
+                    <h5 class="mb-3">Diseases</h5>
                     <form
                         class="form-group"
                         v-for="(disease, k) in diseases"
                         :key="k"
                     >
-                        <div>
-                            <div class="row">
-                                <span class="col-md-6 mb-2">
-                                    <label>Disease:</label>
-                                    <div class="input-group">
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            v-model="disease.info"
-                                        />
-                                        <div class="invalid-feedback">
-                                            startdate required.
-                                        </div>
-                                    </div>
-                                </span>
-                                <span class="col-md-6 mb-2">
-                                    <label>Note:</label>
+                        <hr
+                            class="mb-4"
+                            v-show="k || (!k && diseases.length > 1)"
+                        />
+                        <h5
+                            class="mb-3"
+                            v-show="k || (!k && diseases.length > 1)"
+                        >
+                            Disease info {{ Number(k) + 1 }} :
+                        </h5>
+                        <div class="row">
+                            <span class="col-md-6 mb-2">
+                                <label>Disease:</label>
+                                <div class="input-group">
                                     <input
                                         type="text"
                                         class="form-control"
-                                        v-model="disease.note"
+                                        v-model="disease.info"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter salary
+                                        startdate required.
                                     </div>
-                                </span>
-                            </div>
-                            <div class="btn">
-                                <i
-                                    class="fas fa-minus-circle"
-                                    @click="remove(k)"
-                                    v-show="k || (!k && diseases.length > 1)"
-                                    >DELETE</i
-                                >
-                                <i
-                                    class="fas fa-plus-circle"
-                                    @click="add(k)"
-                                    v-show="k == diseases.length - 1"
-                                    >ADD</i
-                                >
-                            </div>
+                                </div>
+                            </span>
+                            <span class="col-md-6 mb-2">
+                                <label>Note:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="disease.note"
+                                />
+                                <div class="invalid-feedback">
+                                    Please enter salary
+                                </div>
+                            </span>
                         </div>
+                        <span>
+                            <i
+                                class="fas fa-plus-circle"
+                                style="color:#4BB543;"
+                                @click="add(k)"
+                                v-show="k == diseases.length - 1"
+                            ></i>
+                            <i
+                                class="fas fa-minus-circle"
+                                style="color:#ED4337;"
+                                @click="remove(k)"
+                                v-show="k || (!k && diseases.length > 1)"
+                            ></i>
+                        </span>
                     </form>
 
                     <hr class="mb-4" />
@@ -446,7 +473,7 @@
 
 <script>
 export default {
-    name: "register_emp",
+    name: "registerEmployee",
     data() {
         return {
             input: {
@@ -485,16 +512,24 @@ export default {
     },
     methods: {
         addedu(index) {
-            this.edu.push([]);
+            this.edus.push({
+                degree: "",
+                university: "",
+                faculty: "",
+                department: ""
+            });
         },
         removeedu(index) {
-            this.edu.splice(index, 1);
+            this.edus.splice(index, 1);
         },
         add(index) {
-            this.disease.push([]);
+            this.diseases.push({
+                info: "",
+                note: ""
+            });
         },
         remove(index) {
-            this.disease.splice(index, 1);
+            this.diseases.splice(index, 1);
         }
     }
 };

@@ -12,10 +12,20 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
     public function login(Request $request)
     {
-        //
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $customer = Auth::user();
+            // $customer = Auth::guard('customers')->user();
+            return response()->json($customer, 200);
+        } else {
+            return response()->json([
+                'error' => "Cloud not log you in"
+            ], 401);
+        }
     }
+
 
 
     public function register(Request $request)
@@ -56,9 +66,17 @@ class UserController extends Controller
             $customer->surname = $request->surname;
             $customer->DOB = $request->DOB;
             $customer->email = $request->email;
-            $customer->timestamps = false;
+            // $customer->timestamps = false;
             $customer->save();
+            // Auth::login($customer, true);
+
             return response()->json(['errorE' => 0, 'errorU' => 0]);
         }
+    }
+    public function logout()
+    {
+        Auth::logout();
+
+        return response()->json(true, 200);
     }
 }

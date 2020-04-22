@@ -230,30 +230,33 @@ export default {
                     DOB: this.DOB,
                     email: this.email
                 };
-                axios.post("/api/regis", data).then(response => {
-                    if (response.data.errorU == 1) {
-                        this.username = "";
-                        this.error_username = "This Username is already exist";
-                        this.errors.push(this.error_username);
-                        this.errors = [];
-                    } else if (response.data.errorE == 1) {
-                        this.email = "";
-                        this.error_email = "This E-mail is already exist";
-                        this.errors.push(this.error_email);
-                        this.errors = [];
-                    } else if (
-                        response.data.errorU == 0 &&
-                        response.data.errorE == 0
-                    ) {
-                        currentObj.output = response.data;
-                        swal.fire(
-                            "Register Success!",
-                            "Cilck the button to continue!",
-                            "success"
-                        ).then(() => {
-                            this.$router.push({ name: "Home" });
-                        });
-                    }
+                axios.get("/sanctum/csrf-cookie").then(response => {
+                    axios.post("/api/regis", data).then(response => {
+                        if (response.data.errorU == 1) {
+                            this.username = "";
+                            this.error_username =
+                                "This Username is already exist";
+                            this.errors.push(this.error_username);
+                            this.errors = [];
+                        } else if (response.data.errorE == 1) {
+                            this.email = "";
+                            this.error_email = "This E-mail is already exist";
+                            this.errors.push(this.error_email);
+                            this.errors = [];
+                        } else if (
+                            response.data.errorU == 0 &&
+                            response.data.errorE == 0
+                        ) {
+                            currentObj.output = response.data;
+                            swal.fire(
+                                "Register Success!",
+                                "Cilck the button to continue!",
+                                "success"
+                            ).then(() => {
+                                this.$router.push({ name: "userLogin" });
+                            });
+                        }
+                    });
                 });
             }
         }
