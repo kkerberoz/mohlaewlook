@@ -42901,13 +42901,18 @@ var render = function() {
                       )
                     }),
                     _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        { staticClass: "nav-link", on: { click: _vm.logout } },
-                        [_vm._v("Logout")]
-                      )
-                    ])
+                    _vm.isLoggedIn
+                      ? _c("li", { staticClass: "nav-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              on: { click: _vm.logout }
+                            },
+                            [_vm._v("Logout")]
+                          )
+                        ])
+                      : _vm._e()
                   ],
                   2
                 )

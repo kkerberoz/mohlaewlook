@@ -29,7 +29,7 @@
                                 {{ link.label }}
                             </router-link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="isLoggedIn">
                             <a @click="logout" class="nav-link">Logout</a>
                         </li>
                     </ul>
