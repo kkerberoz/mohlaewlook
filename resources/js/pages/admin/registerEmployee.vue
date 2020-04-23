@@ -65,10 +65,12 @@
                                     <select
                                         class="custom-select d-block w-100"
                                         v-model="input.airport"
-                                        required
-                                        id="airport"
+
+
                                     >
                                         <option value selected disabledd>Choose</option>
+                                        <option v-for="(Airport, i) in Airports"
+                                        :key="i" >{{Airport.airport_id}}</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Please choose
@@ -538,7 +540,8 @@ export default {
                     info: "",
                     note: ""
                 }
-            ]
+            ],
+            Airports:[]
         };
     },
     methods: {
@@ -580,14 +583,8 @@ export default {
     },
     mounted() {
         axios.get("/api/getAirports").then(response => { // show all airports onto option
-            var AirportID = response.data[0];
-            var select = document.getElementById("airport");
-            for(var i=0; i<AirportID.length; ++i){
-                var option = document.createElement("option");
-                option.text = AirportID[i]['airport_id'] + ": " + AirportID[i]['airport_name'];
-                option.value = AirportID[i]['airport_id'];
-                select.add(option);
-            }
+            this.Airports = response.data[0];
+            console.log(this.Airports);
         }
     );
     }
