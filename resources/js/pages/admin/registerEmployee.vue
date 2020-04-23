@@ -65,8 +65,6 @@
                                     <select
                                         class="custom-select d-block w-100"
                                         v-model="input.airport"
-
-
                                     >
                                         <option value selected disabledd>Choose</option>
                                         <option v-for="(Airport, i) in Airports"
