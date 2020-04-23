@@ -3378,6 +3378,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     remove: function remove(index) {
       this.diseases.splice(index, 1);
+    },
+    formSubmit: function formSubmit(e) {
+      console.log(this.input.username + " " + this.input.password);
+      console.log(this.diseases.values);
     }
   }
 });
@@ -44714,6 +44718,7 @@ var render = function() {
           [
             _c(
               "form",
+              { on: { submit: _vm.formSubmit } },
               [
                 _c(
                   "h1",
@@ -61783,7 +61788,7 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 window.toast = toast;
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  mode: "history",
+  // mode: "history",
   routes: _routes__WEBPACK_IMPORTED_MODULE_2__["default"] // short for `routes: routes`
 
 });

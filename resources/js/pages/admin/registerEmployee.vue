@@ -4,7 +4,7 @@
             <div
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
-                <form>
+                <form v-on:submit="formSubmit">
                     <h1 class="mb-3" style="display:block ">
                         Employee's Register
                     </h1>
@@ -530,6 +530,13 @@ export default {
         },
         remove(index) {
             this.diseases.splice(index, 1);
+        },
+        formSubmit(e){
+            console.log(this.input.username + " " + this.input.password);
+            console.log(this.diseases.values);
+
+
+
         }
     }
 };
