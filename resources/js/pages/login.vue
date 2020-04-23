@@ -60,6 +60,7 @@ export default {
     },
     methods: {
         formSubmit(e) {
+            this.errors = [];
             this.error_username = null;
             this.error_password = null;
 

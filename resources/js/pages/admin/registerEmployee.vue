@@ -309,6 +309,21 @@
                                     </div>
                                 </span>
                             </div>
+                            <div class="row">
+                                <span class="col-md-12 mb-2">
+                                    <label>Address:</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            v-model="input.address"
+                                        />
+                                        <div class="invalid-feedback">
+                                            Your address is required.
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
                         </div>
                     </form>
                     <form>
@@ -514,6 +529,7 @@ export default {
                 height: "",
                 weight: "",
                 email: "",
+                address: "",
                 phone: ""
             },
             edus: [
