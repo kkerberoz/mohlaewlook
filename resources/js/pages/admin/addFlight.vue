@@ -159,23 +159,59 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div
+                                    class="col-md-6 mb-2"
+                                    style="margin-top:50px"
+                                >
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2"
                                             >Avaliable flight adtendant</label
                                         >
-                                        <select
+                                        <!-- <select
                                             multiple
                                             class="form-control"
                                             id="exampleFormControlSelect2"
                                             v-model="input.crew"
                                         >
-                                            <option>1</option>
-                                            <option>2</option>
+                                            <option
+                                                ></option
+                                            >
                                             <option>3</option>
                                             <option>4</option>
                                             <option>5</option>
-                                        </select>
+                                        </select> -->
+                                        <multiselect
+                                            v-model="input.crew"
+                                            :options="options"
+                                            :searchable="true"
+                                            :multiple="true"
+                                            :close-on-select="false"
+                                            :clear-on-select="false"
+                                            :preserve-search="true"
+                                            placeholder="Choose"
+                                            label="name"
+                                            :custom-label="nameWithId"
+                                            track-by="name"
+                                            :preselect-first="false"
+                                        >
+                                            <template
+                                                slot="selection"
+                                                slot-scope="{
+                                                    values,
+                                                    search,
+                                                    isOpen
+                                                }"
+                                                ><span
+                                                    class="multiselect__single"
+                                                    v-if="values.length &amp;&amp; !isOpen"
+                                                    >{{ values.length }} crew
+                                                    selected</span
+                                                ></template
+                                            >
+                                        </multiselect>
+                                        <div class="invalid-feedback">
+                                            Please choose
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +231,9 @@
 </template>
 
 <script>
+import Multiselect from "vue-multiselect";
 export default {
+    components: { Multiselect },
     data() {
         return {
             input: {
@@ -210,8 +248,26 @@ export default {
                 captain: "",
                 coPilot: "",
                 crew: []
-            }
+            },
+            options: [
+                { id: "1", name: "Boss" },
+                { id: "2", name: "Rat" },
+                { id: "3", name: "Dive" },
+                { id: "4", name: "Jane" },
+                { id: "5", name: "O" },
+                { id: "6", name: "Pan" },
+                { id: "7", name: "Cake" },
+                { id: "8", name: "Min" },
+                { id: "9", name: "Cream" },
+                { id: "10", name: "Jo" },
+                { id: "11", name: "Oh" }
+            ]
         };
+    },
+    methods: {
+        nameWithId({ name, id }) {
+            return `[${id}] - ${name}  `;
+        }
     }
 };
 </script>
