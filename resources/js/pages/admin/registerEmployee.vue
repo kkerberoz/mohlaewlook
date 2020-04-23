@@ -460,6 +460,7 @@
 
                     <hr class="mb-4" />
                     <button
+                        @click="formSubmit"
                         class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
                     >
@@ -530,6 +531,9 @@ export default {
         },
         remove(index) {
             this.diseases.splice(index, 1);
+        },
+        formSubmit() {
+            console.log("Hello");
         }
     }
 };

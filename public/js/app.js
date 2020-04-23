@@ -3324,6 +3324,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3378,6 +3379,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     remove: function remove(index) {
       this.diseases.splice(index, 1);
+    },
+    formSubmit: function formSubmit() {
+      console.log("Hello");
     }
   }
 });
@@ -45950,7 +45954,8 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { type: "submit" }
+                    attrs: { type: "submit" },
+                    on: { click: _vm.formSubmit }
                   },
                   [_vm._v("\n                    Register\n                ")]
                 )
@@ -61783,7 +61788,7 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 window.toast = toast;
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  mode: "history",
+  // mode: "history",
   routes: _routes__WEBPACK_IMPORTED_MODULE_2__["default"] // short for `routes: routes`
 
 });
