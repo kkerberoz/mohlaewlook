@@ -3339,6 +3339,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3360,6 +3375,7 @@ __webpack_require__.r(__webpack_exports__);
         height: "",
         weight: "",
         email: "",
+        address: "",
         phone: ""
       },
       edus: [{
@@ -3414,7 +3430,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    axios.get("/api/getAirport").then(function (response) {
+    axios.get("/api/getAirports").then(function (response) {
       // show all airports onto option
       var AirportID = response.data[0];
       var select = document.getElementById("airport");
@@ -3616,6 +3632,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this = this;
 
+      this.errors = [];
       this.error_username = null;
       this.error_password = null;
       e.preventDefault();
@@ -3842,6 +3859,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this = this;
 
+      this.errors = [];
       this.error_name = null;
       this.error_surname = null;
       this.error_DOB = null;
@@ -45608,6 +45626,46 @@ var render = function() {
                           _vm._v(
                             "\n                                    Please enter Phone\n                                "
                           )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("span", { staticClass: "col-md-12 mb-2" }, [
+                        _c("label", [_vm._v("Address:")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.address,
+                                expression: "input.address"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "email" },
+                            domProps: { value: _vm.input.address },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "address",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        Your address is required.\n                                    "
+                            )
+                          ])
                         ])
                       ])
                     ])

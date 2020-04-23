@@ -160,6 +160,7 @@ export default {
     },
     methods: {
         formSubmit(e) {
+            this.errors = [];
             this.error_name = null;
             this.error_surname = null;
             this.error_DOB = null;
@@ -220,6 +221,7 @@ export default {
             } else {
                 this.error_email = null;
             }
+
             if (!this.errors.length) {
                 let data = {
                     username: this.username,
