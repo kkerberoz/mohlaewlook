@@ -13,7 +13,7 @@
                     <form>
                         <div class="form-group">
                             <div class="row">
-                                <span class="col-md-6 mb-2">
+                                <span class="col-md-4 mb-2">
                                     <label>Start Date:</label>
                                     <div class="input-group">
                                         <input
@@ -27,7 +27,7 @@
                                         </div>
                                     </div>
                                 </span>
-                                <span class="col-md-6 mb-2">
+                                <span class="col-md-4 mb-2">
                                     <label>Salary:</label>
                                     <input
                                         type="text"
@@ -39,6 +39,25 @@
                                         Please enter salary
                                     </div>
                                 </span>
+                                <span class="col-md-4 mb-2">
+                                    <label>Role:</label>
+                                    <select
+                                        class="custom-select d-block w-100"
+                                        v-model="input.role"
+                                        required
+                                    >
+                                        <option value selected disabledd
+                                            >Choose</option
+                                        >
+                                        <option value = "staff">Staff</option>
+                                        <option value = "pilot">Pilot</option>
+                                        <option value = "flight_attendant">Flight Attendant</option>
+                                    </select>
+
+                                    <div class="invalid-feedback">
+                                        Please enter role
+                                    </div>
+                                </span>
                             </div>
                             <div class="row">
                                 <span class="col-md-6 mb-2">
@@ -47,14 +66,9 @@
                                         class="custom-select d-block w-100"
                                         v-model="input.airport"
                                         required
+                                        id="airport"
                                     >
-                                        <option value selected disabledd
-                                            >Choose</option
-                                        >
-                                        <option>Germany.</option>
-                                        <option>Germany.</option>
-                                        <option>Germany.</option>
-                                        <option>Germany</option>
+                                        <option value selected disabledd>Choose</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Please choose
@@ -70,8 +84,8 @@
                                         <option value selected disabledd
                                             >Choose</option
                                         >
-                                        <option>Active.</option>
-                                        <option>Left.</option>
+                                        <option value = 1>Active</option>
+                                        <option value = 0>Left</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Please choose
@@ -481,6 +495,7 @@ export default {
                 start_date: "",
                 salary: "",
                 airport: "",
+                role: "",
                 status: "",
                 username: "",
                 password: "",
@@ -534,13 +549,32 @@ export default {
         },
         formSubmit(e){
             e.preventDefault();
-            var details = this.input;
-            var edus = this.edus;
-            var diseases = this.diseases;
+            var details = this.input; // data in detail
+            var educations = this.edus; // data in education
+            var diseases = this.diseases; // data in diseases
+            let data = {
+                details: details,
+                educations: educations,
+                diseases: diseases
+            }
+            axios.post("/api/addEmployee", data).then(response=>{
+                console.log(response.data);
 
-
-
+            });
         }
+    },
+    mounted() {
+        axios.get("/api/getAirport").then(response => { // show all airports onto option
+            var AirportID = response.data[0];
+            var select = document.getElementById("airport");
+            for(var i=0; i<AirportID.length; ++i){
+                var option = document.createElement("option");
+                option.text = AirportID[i]['airport_id'] + ": " + AirportID[i]['airport_name'];
+                option.value = AirportID[i]['airport_id'];
+                select.add(option);
+            }
+        }
+    );
     }
 };
 </script>

@@ -3325,6 +3325,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3333,6 +3347,7 @@ __webpack_require__.r(__webpack_exports__);
         start_date: "",
         salary: "",
         airport: "",
+        role: "",
         status: "",
         username: "",
         password: "",
@@ -3382,10 +3397,35 @@ __webpack_require__.r(__webpack_exports__);
     },
     formSubmit: function formSubmit(e) {
       e.preventDefault();
-      var details = this.input;
-      var edus = this.edus;
-      var diseases = this.diseases;
+      var details = this.input; // data in detail
+
+      var educations = this.edus; // data in education
+
+      var diseases = this.diseases; // data in diseases
+
+      var data = {
+        details: details,
+        educations: educations,
+        diseases: diseases
+      };
+      axios.post("/api/addEmployee", data).then(function (response) {
+        console.log(response.data);
+      });
     }
+  },
+  mounted: function mounted() {
+    axios.get("/api/getAirport").then(function (response) {
+      // show all airports onto option
+      var AirportID = response.data[0];
+      var select = document.getElementById("airport");
+
+      for (var i = 0; i < AirportID.length; ++i) {
+        var option = document.createElement("option");
+        option.text = AirportID[i]['airport_id'] + ": " + AirportID[i]['airport_name'];
+        option.value = AirportID[i]['airport_id'];
+        select.add(option);
+      }
+    });
   }
 });
 
@@ -44740,7 +44780,7 @@ var render = function() {
                 _c("form", [
                   _c("div", { staticClass: "form-group" }, [
                     _c("div", { staticClass: "row" }, [
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
+                      _c("span", { staticClass: "col-md-4 mb-2" }, [
                         _c("label", [_vm._v("Start Date:")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group" }, [
@@ -44778,7 +44818,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
+                      _c("span", { staticClass: "col-md-4 mb-2" }, [
                         _c("label", [_vm._v("Salary:")]),
                         _vm._v(" "),
                         _c("input", {
@@ -44808,6 +44848,78 @@ var render = function() {
                             "\n                                    Please enter salary\n                                "
                           )
                         ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "col-md-4 mb-2" }, [
+                        _c("label", [_vm._v("Role:")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.role,
+                                expression: "input.role"
+                              }
+                            ],
+                            staticClass: "custom-select d-block w-100",
+                            attrs: { required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.input,
+                                  "role",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: {
+                                  value: "",
+                                  selected: "",
+                                  disabledd: ""
+                                }
+                              },
+                              [_vm._v("Choose")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "staff" } }, [
+                              _vm._v("Staff")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "pilot" } }, [
+                              _vm._v("Pilot")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              { attrs: { value: "flight_attendant" } },
+                              [_vm._v("Flight Attendant")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please enter role\n                                "
+                          )
+                        ])
                       ])
                     ]),
                     _vm._v(" "),
@@ -44827,7 +44939,7 @@ var render = function() {
                               }
                             ],
                             staticClass: "custom-select d-block w-100",
-                            attrs: { required: "" },
+                            attrs: { required: "", id: "airport" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -44859,15 +44971,7 @@ var render = function() {
                                 }
                               },
                               [_vm._v("Choose")]
-                            ),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany")])
+                            )
                           ]
                         ),
                         _vm._v(" "),
@@ -44927,9 +45031,13 @@ var render = function() {
                               [_vm._v("Choose")]
                             ),
                             _vm._v(" "),
-                            _c("option", [_vm._v("Active.")]),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("Active")
+                            ]),
                             _vm._v(" "),
-                            _c("option", [_vm._v("Left.")])
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("Left")
+                            ])
                           ]
                         ),
                         _vm._v(" "),
