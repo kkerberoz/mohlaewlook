@@ -27,9 +27,13 @@
                             />
                         </div> -->
                         <div class="user-info">
-                            <span class="user-name"
-                                >Boss
-                                <strong>Germany</strong>
+                            <span class="user-welcome">
+                                UserID: {{ user.user_id }}
+                            </span>
+                            <span class="user-name">
+                                <strong>
+                                    {{ user.name + " " + user.surname }}</strong
+                                >
                             </span>
                             <span class="user-status">
                                 <i class="fa fa-circle"></i>
@@ -47,7 +51,7 @@
                             <li>
                                 <a
                                     :href="
-                                        $router.resolve({ name: 'newemployee' })
+                                        $router.resolve({ name: 'newEmployee' })
                                             .href
                                     "
                                 >
@@ -60,14 +64,27 @@
                                 <a
                                     :href="
                                         $router.resolve({
-                                            name: 'addflight'
+                                            name: 'addFlight'
                                         }).href
                                     "
                                 >
-                                    <i class="fas fa-plane"></i>
+                                    <i class="fas fa-plane-departure"></i>
+
                                     <span>Add Flight</span>
                                 </a>
                             </li>
+                            <li>
+                                <a
+                                    :href="
+                                        $router.resolve({ name: 'addAircraft' })
+                                            .href
+                                    "
+                                >
+                                    <i class="fas fa-plane"></i>
+                                    <span>Add Aircraft</span>
+                                </a>
+                            </li>
+
                             <li>
                                 <router-link to="/">
                                     <i class="fas fa-home"></i>
@@ -95,6 +112,16 @@
 
 <script>
 export default {
+    data() {
+        return {
+            user: ""
+        };
+    },
+    mounted() {
+        axios.get("/api/user").then(response => {
+            this.user = response.data;
+        });
+    },
     methods: {
         closeMenu() {
             $(".page-wrapper").toggleClass("toggled");

@@ -83,33 +83,37 @@ export default {
                 this.error_password = null;
             }
 
-            // if (!this.errors.length) {
-            //     let data = {
-            //         username: this.username,
-            //         password: this.password
-            //     };
-            //     axios.post("/api/login", data).then(response => {
-            //         if (response.data.id) {
-            //             currentObj.output = response.data;
-            //             swal.fire(
-            //                 "Login Success!",
-            //                 "Cilck the button to continue!",
-            //                 "success"
-            //             ).then(() => {
-            //                 this.$router.push({ name: "Home" });
-            //             });
-            //         } else if (response.data.error === 401) {
-            //             swal.fire(
-            //                 "Could not log you in.",
-            //                 "Cilck the button to continue!",
-            //                 "error"
-            //             ).then(() => {
-            //                 this.errors = [];
-            //                 this.password = "";
-            //             });
-            //         }
-            //     });
-            // }
+            if (!this.errors.length) {
+                let data = {
+                    username: this.username,
+                    password: this.password
+                };
+                axios.get("/sanctum/csrf-cookie").then(response => {
+                    axios.post("/api/login", data).then(response => {
+                        if (response.data.id) {
+                            this.customer = response.data;
+                            swal.fire(
+                                "Login Success!",
+                                "Cilck the button to continue!",
+                                "success"
+                            ).then(() => {
+                                localStorage.setItem("isLoggedIn", "true");
+                                this.$router.go({ name: "info" });
+                            });
+                        } else if (response.data.error == 401) {
+                            swal.fire(
+                                "Could not log you in.",
+                                "Cilck the button to continue!",
+                                "error"
+                            ).then(() => {
+                                this.errors = [];
+                                this.password = "";
+                                this.username = "";
+                            });
+                        }
+                    });
+                });
+            }
         }
     }
 };

@@ -1,6 +1,6 @@
 <template>
     <div class="container-fulid">
-        <div class="row flex-center" style="margin-bottom:5%;margin-top:2%;">
+        <div class="row flex-center" style="margin-bottom:3%">
             <div
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
@@ -186,7 +186,7 @@
                         class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
                     >
-                        Register
+                        Add Flight
                     </button>
                 </form>
             </div>

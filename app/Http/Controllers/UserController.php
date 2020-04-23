@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,10 +13,29 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    // public function init()
+    // {
+    //     // $customer = Auth::guard('customers')->user();
+    //     $customer = Auth::user();
+
+    //     return response()->json([
+    //         'customer' => $customer
+    //     ], 200);
+    // }
     public function login(Request $request)
     {
-        //
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $customer = Auth::user();
+            // $customer = Auth::guard('customers')->user();
+            return response()->json($customer, 200);
+        } else {
+            return response()->json([
+                'error' => 401
+            ]);
+        }
     }
+
 
 
     public function register(Request $request)
@@ -56,13 +76,25 @@ class UserController extends Controller
             $customer->surname = $request->surname;
             $customer->DOB = $request->DOB;
             $customer->email = $request->email;
-            $customer->timestamps = false;
+            // $customer->timestamps = false;
             $customer->save();
+            // Auth::login($customer, true);
+
             return response()->json(['errorE' => 0, 'errorU' => 0]);
         }
     }
 
-    public function registerEmployee(Request $request){
+    public function registerEmployee(Request $request)
+    {
+        $employee = new Employee;
 
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return response()->json(true, 200);
     }
 }
