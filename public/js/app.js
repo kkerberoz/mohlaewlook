@@ -3386,7 +3386,8 @@ __webpack_require__.r(__webpack_exports__);
       diseases: [{
         info: "",
         note: ""
-      }]
+      }],
+      Airports: []
     };
   },
   methods: {
@@ -3429,17 +3430,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this = this;
+
     axios.get("/api/getAirports").then(function (response) {
       // show all airports onto option
-      var AirportID = response.data[0];
-      var select = document.getElementById("airport");
-
-      for (var i = 0; i < AirportID.length; ++i) {
-        var option = document.createElement("option");
-        option.text = AirportID[i]['airport_id'] + ": " + AirportID[i]['airport_name'];
-        option.value = AirportID[i]['airport_id'];
-        select.add(option);
-      }
+      _this.Airports = response.data[0];
+      console.log(_this.Airports);
     });
   }
 });
@@ -44971,7 +44967,6 @@ var render = function() {
                               }
                             ],
                             staticClass: "custom-select d-block w-100",
-                            attrs: { required: "", id: "airport" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -45003,8 +44998,15 @@ var render = function() {
                                 }
                               },
                               [_vm._v("Choose")]
-                            )
-                          ]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.Airports, function(Airport, i) {
+                              return _c("option", { key: i }, [
+                                _vm._v(_vm._s(Airport.airport_id))
+                              ])
+                            })
+                          ],
+                          2
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [

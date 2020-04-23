@@ -47,7 +47,7 @@ class BackenController extends Controller
         // return response() -> JSON([$diseases]);
     }
     public function getAirports(){
-        $AirportID = Airport::select('airport_id', 'airport_name')->get();
+        $AirportID = Airport::all();
         return response() -> JSON([$AirportID]);
     }
 }

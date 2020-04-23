@@ -33,7 +33,6 @@
                                         type="text"
                                         class="form-control"
                                         v-model="input.salary"
-                                        required
                                     />
                                     <div class="invalid-feedback">
                                         Please enter salary
