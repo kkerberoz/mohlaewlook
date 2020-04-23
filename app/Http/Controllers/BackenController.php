@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Hash;
 class BackenController extends Controller
 {
     public function addEmployee(Request $request){
-        $test = Employee::all();
 
         $diseases = new Disease;
         $diseases->user_id = "S01";
