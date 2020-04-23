@@ -67,7 +67,10 @@ export default {
                     link => link.link !== "/login" && link.link !== "/register"
                 );
             } else {
-                return this.links;
+                return this.links.filter(
+                    link =>
+                        link.link !== "/info" && link.link !== "/reservation"
+                );
             }
         }
     },

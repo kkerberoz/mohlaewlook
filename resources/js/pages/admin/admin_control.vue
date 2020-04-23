@@ -27,9 +27,6 @@
                             />
                         </div> -->
                         <div class="user-info">
-                            <span class="user-welcome">
-                                UserID: {{ user.user_id }}
-                            </span>
                             <span class="user-name">
                                 <strong>
                                     {{ user.name + " " + user.surname }}</strong
@@ -49,7 +46,7 @@
                             </li>
 
                             <li>
-                                <a
+                                <!-- <a
                                     :href="
                                         $router.resolve({ name: 'newEmployee' })
                                             .href
@@ -57,32 +54,24 @@
                                 >
                                     <i class="far fa-address-card"></i>
                                     <span>Add Employee</span>
-                                </a>
+                                </a> -->
+                                <router-link :to="{ name: 'newEmployee' }">
+                                    <i class="far fa-address-card"></i>
+                                    <span>Add Employee</span>
+                                </router-link>
                             </li>
 
                             <li>
-                                <a
-                                    :href="
-                                        $router.resolve({
-                                            name: 'addFlight'
-                                        }).href
-                                    "
-                                >
+                                <router-link :to="{ name: 'addFlight' }">
                                     <i class="fas fa-plane-departure"></i>
-
                                     <span>Add Flight</span>
-                                </a>
+                                </router-link>
                             </li>
                             <li>
-                                <a
-                                    :href="
-                                        $router.resolve({ name: 'addAircraft' })
-                                            .href
-                                    "
-                                >
+                                <router-link :to="{ name: 'addAircraft' }">
                                     <i class="fas fa-plane"></i>
                                     <span>Add Aircraft</span>
-                                </a>
+                                </router-link>
                             </li>
 
                             <li>
