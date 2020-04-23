@@ -3325,6 +3325,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3333,6 +3353,7 @@ __webpack_require__.r(__webpack_exports__);
         start_date: "",
         salary: "",
         airport: "",
+        role: "",
         status: "",
         username: "",
         password: "",
@@ -44736,7 +44757,7 @@ var render = function() {
                 _c("form", [
                   _c("div", { staticClass: "form-group" }, [
                     _c("div", { staticClass: "row" }, [
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
+                      _c("span", { staticClass: "col-md-4 mb-2" }, [
                         _c("label", [_vm._v("Start Date:")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group" }, [
@@ -44774,7 +44795,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
+                      _c("span", { staticClass: "col-md-4 mb-2" }, [
                         _c("label", [_vm._v("Salary:")]),
                         _vm._v(" "),
                         _c("input", {
@@ -44802,6 +44823,72 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                    Please enter salary\n                                "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "col-md-4 mb-2" }, [
+                        _c("label", [_vm._v("Role:")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.role,
+                                expression: "input.role"
+                              }
+                            ],
+                            staticClass: "custom-select d-block w-100",
+                            attrs: { required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.input,
+                                  "role",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: {
+                                  value: "",
+                                  selected: "",
+                                  disabledd: ""
+                                }
+                              },
+                              [_vm._v("Choose")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("staff.")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Germany.")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Germany.")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Germany")])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please enter role\n                                "
                           )
                         ])
                       ])

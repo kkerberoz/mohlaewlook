@@ -13,7 +13,7 @@
                     <form>
                         <div class="form-group">
                             <div class="row">
-                                <span class="col-md-6 mb-2">
+                                <span class="col-md-4 mb-2">
                                     <label>Start Date:</label>
                                     <div class="input-group">
                                         <input
@@ -27,7 +27,7 @@
                                         </div>
                                     </div>
                                 </span>
-                                <span class="col-md-6 mb-2">
+                                <span class="col-md-4 mb-2">
                                     <label>Salary:</label>
                                     <input
                                         type="text"
@@ -37,6 +37,26 @@
                                     />
                                     <div class="invalid-feedback">
                                         Please enter salary
+                                    </div>
+                                </span>
+                                <span class="col-md-4 mb-2">
+                                    <label>Role:</label>
+                                    <select
+                                        class="custom-select d-block w-100"
+                                        v-model="input.role"
+                                        required
+                                    >
+                                        <option value selected disabledd
+                                            >Choose</option
+                                        >
+                                        <option>staff.</option>
+                                        <option>Germany.</option>
+                                        <option>Germany.</option>
+                                        <option>Germany</option>
+                                    </select>
+
+                                    <div class="invalid-feedback">
+                                        Please enter role
                                     </div>
                                 </span>
                             </div>
@@ -481,6 +501,7 @@ export default {
                 start_date: "",
                 salary: "",
                 airport: "",
+                role: "",
                 status: "",
                 username: "",
                 password: "",
