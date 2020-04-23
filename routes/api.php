@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', 'UserController@login');
 Route::post('regis', 'UserController@register');
 Route::post('logout', 'UserController@logout');
+
+
+Route::get('backend/init', 'AdminController@init');
+Route::post('backend/login', 'AdminController@login');
+Route::post('backend/logout', 'AdminController@logout');
+
+Route::get('getAirports', 'BackenController@getAirports');
+Route::post('/addEmployee', 'BackenController@addEmployee');

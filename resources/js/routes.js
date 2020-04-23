@@ -29,9 +29,15 @@ let routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: "/adminLogin",
+        name: "adminLogin",
+        component: require("./pages/admin/adminLogin.vue").default
+    },
+    {
         path: "/admin",
         component: require("./pages/admin/admin_control.vue").default,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, hideNavigation: true },
+
         children: [
             {
                 path: "",

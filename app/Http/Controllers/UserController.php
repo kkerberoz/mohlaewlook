@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Customer;
 use App\Employee;
 use Illuminate\Support\Facades\Auth;
@@ -14,15 +14,6 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    // public function init()
-    // {
-    //     // $customer = Auth::guard('customers')->user();
-    //     $customer = Auth::user();
-
-    //     return response()->json([
-    //         'customer' => $customer
-    //     ], 200);
-    // }
     public function login(Request $request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
@@ -31,8 +22,8 @@ class UserController extends Controller
             return response()->json($customer, 200);
         } else {
             return response()->json([
-                'error' => 401
-            ]);
+                'error' => "Cloud not log you in"
+            ], 401);
         }
     }
 

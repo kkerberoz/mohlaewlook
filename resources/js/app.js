@@ -18,7 +18,7 @@ window.toast = toast;
 import routes from "./routes";
 
 const router = new VueRouter({
-    mode: "history",
+    // mode: "history",
     routes // short for `routes: routes`
 });
 /**
@@ -30,6 +30,7 @@ const router = new VueRouter({
  */
 Vue.component("navbar", require("./components/navbar.vue").default);
 Vue.component("app-footer", require("./components/app-footer.vue").default);
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 

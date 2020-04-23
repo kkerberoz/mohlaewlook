@@ -1,10 +1,12 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid" id="adminLogin">
         <div class="row flex-center full-height">
             <div class="col-md-3">
                 <form v-on:submit="formSubmit">
-                    <div class="card">
-                        <div class="card-header bg-info">Login</div>
+                    <div class="card" id="cardLogin">
+                        <div class="card-header bg-dark" id="cardLogin">
+                            Admin Login
+                        </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Username:</label>
@@ -31,8 +33,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer" id="cardLogin">
                             <button
+                                id="btnLogin"
                                 type="submiit"
                                 class="btn btn-block btn-login"
                             >
@@ -48,7 +51,7 @@
 
 <script>
 export default {
-    name: "login",
+    name: "adminLogin",
     data() {
         return {
             username: "",
@@ -58,9 +61,9 @@ export default {
             errors: []
         };
     },
+
     methods: {
         formSubmit(e) {
-            this.errors = [];
             this.error_username = null;
             this.error_password = null;
 
@@ -91,16 +94,16 @@ export default {
                 };
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
-                        .post("/api/login", data)
+                        .post("/api/backend/login", data)
                         .then(response => {
-                            this.customer = response.data;
+                            this.admin = response.data;
                             swal.fire(
                                 "Login Success!",
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
                                 localStorage.setItem("isLoggedIn", "true");
-                                this.$router.go({ name: "info" });
+                                this.$router.go({ name: "admin" });
                             });
                         })
                         .catch(error => {
@@ -122,3 +125,18 @@ export default {
     }
 };
 </script>
+<style>
+#adminLogin {
+    background: #c0c0aa;
+    background: -webkit-linear-gradient(to right, #1cefff, #c0c0aa);
+    background: linear-gradient(to right, #1cefff, #c0c0aa);
+}
+#cardLogin {
+    border: none;
+    border-radius: 0px;
+}
+#btnLogin {
+    border: none;
+    border-radius: 0px;
+}
+</style>

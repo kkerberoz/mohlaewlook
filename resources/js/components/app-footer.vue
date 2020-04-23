@@ -14,7 +14,8 @@
                     <a
                         :href="$router.resolve(link.link).href"
                         style="color:#fff"
-                        >{{ link.label }}</a
+                    >
+                        {{ link.label }}</a
                     >
                 </li>
             </ul>
