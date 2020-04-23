@@ -460,6 +460,7 @@
 
                     <hr class="mb-4" />
                     <button
+                        @click="formSubmit"
                         class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
                     >
@@ -532,8 +533,10 @@ export default {
             this.diseases.splice(index, 1);
         },
         formSubmit(e){
-            console.log(this.input.username + " " + this.input.password);
-            console.log(this.diseases.values);
+            e.preventDefault();
+            var details = this.input;
+            var edus = this.edus;
+            var diseases = this.diseases;
 
 
 

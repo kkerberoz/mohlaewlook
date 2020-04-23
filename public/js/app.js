@@ -3324,6 +3324,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3380,8 +3381,10 @@ __webpack_require__.r(__webpack_exports__);
       this.diseases.splice(index, 1);
     },
     formSubmit: function formSubmit(e) {
-      console.log(this.input.username + " " + this.input.password);
-      console.log(this.diseases.values);
+      e.preventDefault();
+      var details = this.input;
+      var edus = this.edus;
+      var diseases = this.diseases;
     }
   }
 });
@@ -45955,7 +45958,8 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { type: "submit" }
+                    attrs: { type: "submit" },
+                    on: { click: _vm.formSubmit }
                   },
                   [_vm._v("\n                    Register\n                ")]
                 )
