@@ -84,10 +84,19 @@
                                         :clear-on-select="false"
                                         :preserve-search="true"
                                         placeholder="Choose"
-                                        track-by="name"
                                         :preselect-first="false"
                                     >
                                     </multiselect>
+                                    <!-- <multiselect
+                                        v-model="input.airport"
+                                        :custom-label="airportName"
+                                        :options="airports"
+                                        :searchable="true"
+                                        :preserve-search="true"
+                                        :close-on-select="false"
+                                        :show-labels="false"
+                                        placeholder="Pick a value"
+                                    ></multiselect> -->
 
                                     <div class="invalid-feedback">
                                         Please choose

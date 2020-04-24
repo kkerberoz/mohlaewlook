@@ -3394,6 +3394,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -44969,7 +44978,6 @@ var render = function() {
                             "clear-on-select": false,
                             "preserve-search": true,
                             placeholder: "Choose",
-                            "track-by": "name",
                             "preselect-first": false
                           },
                           model: {
