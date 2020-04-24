@@ -3353,6 +3353,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3387,7 +3388,7 @@ __webpack_require__.r(__webpack_exports__);
         info: "",
         note: ""
       }],
-      Airports: []
+      airports: []
     };
   },
   methods: {
@@ -3425,7 +3426,7 @@ __webpack_require__.r(__webpack_exports__);
         diseases: diseases
       };
       axios.post("/api/addEmployee", data).then(function (response) {
-        console.log(response.data.test);
+        console.log(response.data[0]);
       });
     }
   },
@@ -3434,8 +3435,8 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/api/getAirports").then(function (response) {
       // show all airports onto option
-      _this.Airports = response.data[0];
-      console.log(_this.Airports);
+      var AirportID = response.data[0];
+      _this.airports = AirportID;
     });
   }
 });
@@ -44859,7 +44860,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "text", required: "" },
+                          attrs: { type: "text" },
                           domProps: { value: _vm.input.salary },
                           on: {
                             input: function($event) {
@@ -44967,6 +44968,7 @@ var render = function() {
                               }
                             ],
                             staticClass: "custom-select d-block w-100",
+                            attrs: { required: "", id: "airport" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -45000,10 +45002,24 @@ var render = function() {
                               [_vm._v("Choose")]
                             ),
                             _vm._v(" "),
-                            _vm._l(_vm.Airports, function(Airport, i) {
-                              return _c("option", { key: i }, [
-                                _vm._v(_vm._s(Airport.airport_id))
-                              ])
+                            _vm._l(_vm.airports, function(airport, i) {
+                              return _c(
+                                "option",
+                                {
+                                  key: i,
+                                  domProps: { value: airport.airport_id }
+                                },
+                                [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        airport.airport_id +
+                                          ": " +
+                                          airport.airport_name
+                                      )
+                                  )
+                                ]
+                              )
                             })
                           ],
                           2

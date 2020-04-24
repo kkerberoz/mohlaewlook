@@ -68,6 +68,8 @@
                                         id="airport"
                                     >
                                         <option value selected disabledd>Choose</option>
+                                        <option v-for="(airport, i) in airports"
+                                                :key="i" v-bind:value="airport.airport_id"> {{airport.airport_id + ": " + airport.airport_name}}</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Please choose
@@ -537,7 +539,8 @@ export default {
                     info: "",
                     note: ""
                 }
-            ]
+            ],
+            airports: []
         };
     },
     methods: {
@@ -572,7 +575,7 @@ export default {
                 diseases: diseases
             }
             axios.post("/api/addEmployee", data).then(response=>{
-                console.log(response.data.test);
+                console.log(response.data[0]);
 
             });
         }
@@ -580,13 +583,7 @@ export default {
     mounted() {
         axios.get("/api/getAirports").then(response => { // show all airports onto option
             var AirportID = response.data[0];
-            var select = document.getElementById("airport");
-            for(var i=0; i<AirportID.length; ++i){
-                var option = document.createElement("option");
-                option.text = AirportID[i]['airport_id'] + ": " + AirportID[i]['airport_name'];
-                option.value = AirportID[i]['airport_id'];
-                select.add(option);
-            }
+            this.airports = AirportID;
         }
     );
     }

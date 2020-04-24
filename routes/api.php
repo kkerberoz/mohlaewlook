@@ -28,5 +28,5 @@ Route::get('backend/init', 'AdminController@init');
 Route::post('backend/login', 'AdminController@login');
 Route::post('backend/logout', 'AdminController@logout');
 
-Route::get('getAirports', 'BackenController@getAirports');
-Route::post('/addEmployee', 'BackenController@addEmployee');
+Route::get('getAirports', 'BackendController@getAirports');
+Route::post('addEmployee', 'BackendController@addEmployee');

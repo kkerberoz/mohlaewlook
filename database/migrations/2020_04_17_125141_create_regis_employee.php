@@ -17,7 +17,7 @@ class CreateRegisEmployee extends Migration
             $table->bigIncrements('id');
             $table->string('user_id', 11)->unique(); //PK
             $table->string('username', 32)->unique();
-            $table->string('password', 32);
+            $table->string('password', 128);
             $table->string('title', 10);
             $table->string('name', 64);
             $table->string('surname', 64);
