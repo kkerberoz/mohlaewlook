@@ -63,7 +63,7 @@
                             <div class="row">
                                 <span class="col-md-6 mb-2">
                                     <label>Airport:</label>
-                                    <select
+                                    <!-- <select
                                         class="custom-select d-block w-100"
                                         v-model="input.airport"
                                         required
@@ -72,7 +72,23 @@
                                         <option value selected disabledd>Choose</option>
                                         <option v-for="(airport, i) in airports"
                                                 :key="i" v-bind:value="airport.airport_id"> {{airport.airport_id + ": " + airport.airport_name}}</option>
-                                    </select>
+                                    </select> -->
+
+                                    <multiselect
+                                        :custom-label="airportName"
+                                        v-model="input.airport"
+                                        :options="airports"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        :preserve-search="true"
+                                        placeholder="Choose"
+                                        track-by="name"
+                                        :preselect-first="false"
+                                    >
+                                    </multiselect>
+
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -450,7 +466,10 @@
                         >
                             Disease info {{ Number(k) + 1 }} :
                         </h5>
-                        <div class="row">
+                        <div
+                            class="row"
+                            v-show="k || (!k && diseases.length > 1)"
+                        >
                             <span class="col-md-6 mb-2">
                                 <label>Disease:</label>
                                 <div class="input-group">
@@ -506,8 +525,10 @@
 </template>
 
 <script>
+import Multiselect from "vue-multiselect";
 export default {
     name: "registerEmployee",
+    components: { Multiselect },
     data() {
         return {
             input: {
@@ -549,6 +570,9 @@ export default {
         };
     },
     methods: {
+        airportName({ airport_id, airport_name }) {
+            return `[${airport_id}] - ${airport_name}  `;
+        },
         addedu(index) {
             this.edus.push({
                 degree: "",
@@ -579,10 +603,9 @@ export default {
                 details: details,
                 educations: educations,
                 diseases: diseases
-            }
-            axios.post("/api/addEmployee", data).then(response=>{
+            };
+            axios.post("/api/addEmployee", data).then(response => {
                 console.log(response.data);
-
             });
         }
     },
@@ -591,8 +614,7 @@ export default {
             // show all airports onto option
             var AirportID = response.data; // get all aiport
             this.airports = AirportID;
-        }
-    );
+        });
     }
 };
 </script>

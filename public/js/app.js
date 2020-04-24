@@ -2853,6 +2853,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3360,8 +3362,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   data: function data() {
     return {
       input: {
@@ -3399,6 +3424,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    airportName: function airportName(_ref) {
+      var airport_id = _ref.airport_id,
+          airport_name = _ref.airport_name;
+      return "[".concat(airport_id, "] - ").concat(airport_name, "  ");
+    },
     addedu: function addedu(index) {
       this.edus.push({
         degree: "",
@@ -8577,7 +8607,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -44916,84 +44946,42 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
-                        _c("label", [_vm._v("Airport:")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.input.airport,
-                                expression: "input.airport"
-                              }
-                            ],
-                            staticClass: "custom-select d-block w-100",
-                            attrs: { required: "", id: "airport" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.input,
-                                  "airport",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: {
-                                  value: "",
-                                  selected: "",
-                                  disabledd: ""
-                                }
+                      _c(
+                        "span",
+                        { staticClass: "col-md-6 mb-2" },
+                        [
+                          _c("label", [_vm._v("Airport:")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            attrs: {
+                              "custom-label": _vm.airportName,
+                              options: _vm.airports,
+                              searchable: true,
+                              multiple: false,
+                              "close-on-select": false,
+                              "clear-on-select": false,
+                              "preserve-search": true,
+                              placeholder: "Choose",
+                              "track-by": "name",
+                              "preselect-first": false
+                            },
+                            model: {
+                              value: _vm.input.airport,
+                              callback: function($$v) {
+                                _vm.$set(_vm.input, "airport", $$v)
                               },
-                              [_vm._v("Choose")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.airports, function(airport, i) {
-                              return _c(
-                                "option",
-                                {
-                                  key: i,
-                                  domProps: { value: airport.airport_id }
-                                },
-                                [
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(
-                                        airport.airport_id +
-                                          ": " +
-                                          airport.airport_name
-                                      )
-                                  )
-                                ]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                    Please choose\n                                "
-                          )
-                        ])
-                      ]),
+                              expression: "input.airport"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    Please choose\n                                "
+                            )
+                          ])
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c("span", { staticClass: "col-md-6 mb-2" }, [
                         _c("label", [_vm._v("Work Status:")]),
@@ -46019,73 +46007,87 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "row" }, [
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
-                        _c("label", [_vm._v("Disease:")]),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: k || (!k && _vm.diseases.length > 1),
+                            expression: "k || (!k && diseases.length > 1)"
+                          }
+                        ],
+                        staticClass: "row"
+                      },
+                      [
+                        _c("span", { staticClass: "col-md-6 mb-2" }, [
+                          _c("label", [_vm._v("Disease:")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: disease.info,
+                                  expression: "disease.info"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: disease.info },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(disease, "info", $event.target.value)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(
+                                "\n                                    startdate required.\n                                "
+                              )
+                            ])
+                          ])
+                        ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "col-md-6 mb-2" }, [
+                          _c("label", [_vm._v("Note:")]),
+                          _vm._v(" "),
                           _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: disease.info,
-                                expression: "disease.info"
+                                value: disease.note,
+                                expression: "disease.note"
                               }
                             ],
                             staticClass: "form-control",
                             attrs: { type: "text" },
-                            domProps: { value: disease.info },
+                            domProps: { value: disease.note },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.$set(disease, "info", $event.target.value)
+                                _vm.$set(disease, "note", $event.target.value)
                               }
                             }
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                    startdate required.\n                                "
+                              "\n                                Please enter salary\n                            "
                             )
                           ])
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
-                        _c("label", [_vm._v("Note:")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: disease.note,
-                              expression: "disease.note"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: disease.note },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(disease, "note", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                Please enter salary\n                            "
-                          )
-                        ])
-                      ])
-                    ]),
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("span", [
                       _c("i", {
@@ -63044,8 +63046,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
