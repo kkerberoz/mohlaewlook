@@ -451,65 +451,78 @@
 
                     <hr class="mb-4" />
                     <h5 class="mb-3">Diseases</h5>
-                    <form
-                        class="form-group"
-                        v-for="(disease, k) in diseases"
-                        :key="k"
-                    >
-                        <hr
-                            class="mb-4"
-                            v-show="k || (!k && diseases.length > 1)"
-                        />
-                        <h5
-                            class="mb-3"
-                            v-show="k || (!k && diseases.length > 1)"
+                    <div id="app" @click="seen = !seen" class="control">
+                        <i
+                            v-show="seen"
+                            class="fas fa-plus-circle"
+                            style="color:#4BB543;"
+                            >ADD</i
                         >
-                            Disease info {{ Number(k) + 1 }} :
-                        </h5>
-                        <div
-                            class="row"
-                            v-show="k || (!k && diseases.length > 1)"
+                        <i
+                            class="fas fa-minus-circle"
+                            style="color:#ED4337;"
+                            v-show="!seen"
+                            >REMOVE</i
                         >
-                            <span class="col-md-6 mb-2">
-                                <label>Disease:</label>
-                                <div class="input-group">
+                    </div>
+                    <div v-if="!seen" id="hide">
+                        <form
+                            class="form-group"
+                            v-for="(disease, k) in diseases"
+                            :key="k"
+                        >
+                            <hr
+                                class="mb-4"
+                                v-show="k || (!k && diseases.length > 1)"
+                            />
+                            <h5
+                                class="mb-3"
+                                v-show="k || (!k && diseases.length > 1)"
+                            >
+                                Disease info {{ Number(k) + 1 }} :
+                            </h5>
+                            <div class="row">
+                                <span class="col-md-6 mb-2">
+                                    <label>Disease:</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="disease.info"
+                                        />
+                                        <div class="invalid-feedback">
+                                            Please enter
+                                        </div>
+                                    </div>
+                                </span>
+                                <span class="col-md-6 mb-2">
+                                    <label>Note:</label>
                                     <input
                                         type="text"
                                         class="form-control"
-                                        v-model="disease.info"
+                                        v-model="disease.note"
                                     />
                                     <div class="invalid-feedback">
-                                        startdate required.
+                                        Please enter
                                     </div>
-                                </div>
+                                </span>
+                            </div>
+                            <span>
+                                <i
+                                    class="fas fa-plus-circle"
+                                    style="color:#4BB543;"
+                                    @click="add(k)"
+                                    v-show="k == diseases.length - 1"
+                                ></i>
+                                <i
+                                    class="fas fa-minus-circle"
+                                    style="color:#ED4337;"
+                                    @click="remove(k)"
+                                    v-show="k || (!k && diseases.length > 1)"
+                                ></i>
                             </span>
-                            <span class="col-md-6 mb-2">
-                                <label>Note:</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    v-model="disease.note"
-                                />
-                                <div class="invalid-feedback">
-                                    Please enter salary
-                                </div>
-                            </span>
-                        </div>
-                        <span>
-                            <i
-                                class="fas fa-plus-circle"
-                                style="color:#4BB543;"
-                                @click="add(k)"
-                                v-show="k == diseases.length - 1"
-                            ></i>
-                            <i
-                                class="fas fa-minus-circle"
-                                style="color:#ED4337;"
-                                @click="remove(k)"
-                                v-show="k || (!k && diseases.length > 1)"
-                            ></i>
-                        </span>
-                    </form>
+                        </form>
+                    </div>
 
                     <hr class="mb-4" />
                     <button
@@ -566,7 +579,8 @@ export default {
                     note: ""
                 }
             ],
-            airports: []
+            airports: [],
+            seen: true
         };
     },
     methods: {
