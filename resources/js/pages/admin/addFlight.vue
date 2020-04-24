@@ -5,9 +5,7 @@
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
                 <form>
-                    <h1 class="mb-3" style="display:block ">
-                        Add flight
-                    </h1>
+                    <h1 class="mb-3" style="display:block ">Add flight</h1>
                     <hr class="mb-4" />
                     <h5 class="mb-3">Flight Details</h5>
                     <form>
@@ -140,8 +138,7 @@
                                             :custom-label="nameWithId"
                                             track-by="name"
                                             :preselect-first="false"
-                                        >
-                                        </multiselect>
+                                        ></multiselect>
                                         <div class="invalid-feedback">
                                             Please choose
                                         </div>
@@ -161,8 +158,7 @@
                                         label="name"
                                         :custom-label="nameWithId"
                                         :preselect-first="false"
-                                    >
-                                    </multiselect>
+                                    ></multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -172,8 +168,8 @@
                                 <div class="col-md-12 mb-2">
                                     <div class="form-group">
                                         <label
-                                            >Avaliable flight adtendant
-                                        </label>
+                                            >Avaliable flight adtendant</label
+                                        >
                                         <multiselect
                                             v-model="input.crew"
                                             :options="options"
@@ -196,13 +192,15 @@
                                                     search,
                                                     isOpen
                                                 }"
-                                                ><span
+                                            >
+                                                <span
                                                     class="multiselect__single"
                                                     v-if="values.length &amp;&amp; !isOpen"
-                                                    >{{ values.length }} crew
-                                                    selected</span
-                                                ></template
-                                            >
+                                                >
+                                                    {{ values.length }} crew
+                                                    selected
+                                                </span>
+                                            </template>
                                         </multiselect>
 
                                         <div class="invalid-feedback">

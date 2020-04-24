@@ -1,6 +1,6 @@
 <template>
-    <div class="admin ">
-        <div class="page-wrapper default-theme sidebar-bg bg1 toggled ">
+    <div class="admin">
+        <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
             <div class="btn btn-lg btn-dark btn-admin">
                 <a id="show-sidebar" @click="closeMenu">
                     <i class="fas fa-compress-alt fa-2x"></i>
@@ -25,12 +25,12 @@
 
                                 alt="User picture"
                             />
-                        </div> -->
+            </div>-->
                         <div class="user-info">
                             <span class="user-name">
-                                <strong>
-                                    {{ user.name + " " + user.surname }}</strong
-                                >
+                                <strong>{{
+                                    user.name + " " + user.surname
+                                }}</strong>
                             </span>
                             <span class="user-status">
                                 <i class="fa fa-circle"></i>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <!-- sidebar-menu  -->
-                    <div class=" sidebar-item sidebar-menu">
+                    <div class="sidebar-item sidebar-menu">
                         <ul>
                             <li class="header-menu">
                                 <span>Menu</span>
@@ -54,7 +54,7 @@
                                 >
                                     <i class="far fa-address-card"></i>
                                     <span>Add Employee</span>
-                                </a> -->
+                </a>-->
                                 <router-link :to="{ name: 'newEmployee' }">
                                     <i class="far fa-address-card"></i>
                                     <span>Add Employee</span>
