@@ -357,17 +357,18 @@
                             <div class="row">
                                 <div class="col-md-12 mb-2">
                                     <label>Degree:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+                                    <multiselect
                                         v-model="edu.degree"
+                                        :options="degrees"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :show-labels="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value selected disabled
-                                            >Choose</option
-                                        >
-                                        <option>Bachelor's degree</option>
-                                        <option>Master's degree</option>
-                                        <option>Doctoral degree</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -586,6 +587,11 @@ export default {
                 { title: "Mrs." },
                 { title: "Mr." },
                 { title: "Mr." }
+            ],
+            degrees: [
+                "Bachelor's degree",
+                "Master's degree",
+                "Doctoral degree"
             ],
             seen: true
         };

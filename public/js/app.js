@@ -3386,6 +3386,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -3449,6 +3450,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         title: "Mr."
       }],
+      degrees: ["Bachelor's degree", "Master's degree", "Doctoral degree"],
       seen: true
     };
   },
@@ -45640,69 +45642,40 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-md-12 mb-2" }, [
-                            _c("label", [_vm._v("Degree:")]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: edu.degree,
-                                    expression: "edu.degree"
-                                  }
-                                ],
-                                staticClass: "custom-select d-block w-100",
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      edu,
-                                      "degree",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "option",
-                                  {
-                                    attrs: {
-                                      value: "",
-                                      selected: "",
-                                      disabled: ""
-                                    }
+                          _c(
+                            "div",
+                            { staticClass: "col-md-12 mb-2" },
+                            [
+                              _c("label", [_vm._v("Degree:")]),
+                              _vm._v(" "),
+                              _c("multiselect", {
+                                attrs: {
+                                  options: _vm.degrees,
+                                  searchable: true,
+                                  multiple: false,
+                                  "show-labels": false,
+                                  "close-on-select": false,
+                                  "clear-on-select": false,
+                                  placeholder: "Choose",
+                                  "preselect-first": false
+                                },
+                                model: {
+                                  value: edu.degree,
+                                  callback: function($$v) {
+                                    _vm.$set(edu, "degree", $$v)
                                   },
-                                  [_vm._v("Choose")]
-                                ),
-                                _vm._v(" "),
-                                _c("option", [_vm._v("Bachelor's degree")]),
-                                _vm._v(" "),
-                                _c("option", [_vm._v("Master's degree")]),
-                                _vm._v(" "),
-                                _c("option", [_vm._v("Doctoral degree")])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                    Please choose\n                                "
-                              )
-                            ])
-                          ])
+                                  expression: "edu.degree"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v(
+                                  "\n                                    Please choose\n                                "
+                                )
+                              ])
+                            ],
+                            1
+                          )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
