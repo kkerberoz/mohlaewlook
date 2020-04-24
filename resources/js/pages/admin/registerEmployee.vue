@@ -40,20 +40,20 @@
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Role:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+
+                                    <multiselect
+                                        label="name"
                                         v-model="input.role"
-                                        required
+                                        :options="roles"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        :preserve-search="true"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value selected disabledd
-                                            >Choose</option
-                                        >
-                                        <option value="staff">Staff</option>
-                                        <option value="pilot">Pilot</option>
-                                        <option value="flight_attendant"
-                                            >Flight Attendant</option
-                                        >
-                                    </select>
+                                    </multiselect>
 
                                     <div class="invalid-feedback">
                                         Please enter role
@@ -63,16 +63,6 @@
                             <div class="row">
                                 <span class="col-md-6 mb-2">
                                     <label>Airport:</label>
-                                    <!-- <select
-                                        class="custom-select d-block w-100"
-                                        v-model="input.airport"
-                                        required
-                                        id="airport"
-                                    >
-                                        <option value selected disabledd>Choose</option>
-                                        <option v-for="(airport, i) in airports"
-                                                :key="i" v-bind:value="airport.airport_id"> {{airport.airport_id + ": " + airport.airport_name}}</option>
-                                    </select> -->
 
                                     <multiselect
                                         :custom-label="airportName"
@@ -87,34 +77,24 @@
                                         :preselect-first="false"
                                     >
                                     </multiselect>
-                                    <!-- <multiselect
-                                        v-model="input.airport"
-                                        :custom-label="airportName"
-                                        :options="airports"
-                                        :searchable="true"
-                                        :preserve-search="true"
-                                        :close-on-select="false"
-                                        :show-labels="false"
-                                        placeholder="Pick a value"
-                                    ></multiselect> -->
-
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
                                 </span>
                                 <span class="col-md-6 mb-2">
                                     <label>Work Status:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+                                    <multiselect
+                                        label="name"
                                         v-model="input.status"
-                                        required
+                                        :options="status"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value selected disabledd
-                                            >Choose</option
-                                        >
-                                        <option value="1">Active</option>
-                                        <option value="0">Left</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -460,8 +440,8 @@
 
                     <hr class="mb-4" />
                     <h5 class="mb-3">Diseases</h5>
-                    <div id="app" @click="seen = !seen" class="control">
-                        <i
+                    <span id="app" @click="seen = !seen"
+                        ><i
                             v-show="seen"
                             class="fas fa-plus-circle"
                             style="color:#4BB543;"
@@ -472,8 +452,9 @@
                             style="color:#ED4337;"
                             v-show="!seen"
                             >REMOVE</i
-                        >
-                    </div>
+                        ></span
+                    >
+
                     <div v-if="!seen" id="hide">
                         <form
                             class="form-group"
@@ -589,9 +570,16 @@ export default {
                 }
             ],
             airports: [],
+            roles: [
+                { name: "Staff" },
+                { name: " Pilot" },
+                { name: "Flight Attendant" }
+            ],
+            status: [{ name: "Active" }, { name: "Left" }],
             seen: true
         };
     },
+
     methods: {
         airportName({ airport_id, airport_name }) {
             return `[${airport_id}] - ${airport_name}  `;

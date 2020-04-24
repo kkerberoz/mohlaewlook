@@ -3384,25 +3384,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -3443,6 +3424,18 @@ __webpack_require__.r(__webpack_exports__);
         note: ""
       }],
       airports: [],
+      roles: [{
+        name: "Staff"
+      }, {
+        name: " Pilot"
+      }, {
+        name: "Flight Attendant"
+      }],
+      status: [{
+        name: "Active"
+      }, {
+        name: "Left"
+      }],
       seen: true
     };
   },
@@ -44336,7 +44329,6 @@ var render = function() {
                             placeholder: "Choose",
                             label: "name",
                             "custom-label": _vm.nameWithId,
-                            "track-by": "name",
                             "preselect-first": false
                           },
                           model: {
@@ -44364,7 +44356,11 @@ var render = function() {
                         "div",
                         { staticClass: "form-group" },
                         [
-                          _c("label", [_vm._v("Avaliable flight adtendant")]),
+                          _c("label", [
+                            _vm._v(
+                              "Avaliable flight adtendant\n                                    "
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
@@ -44892,73 +44888,41 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "col-md-4 mb-2" }, [
-                      _c("label", [_vm._v("Role:")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input.role,
-                              expression: "input.role"
-                            }
-                          ],
-                          staticClass: "custom-select d-block w-100",
-                          attrs: { required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.input,
-                                "role",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", selected: "", disabledd: "" }
+                    _c(
+                      "span",
+                      { staticClass: "col-md-4 mb-2" },
+                      [
+                        _c("label", [_vm._v("Role:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            label: "name",
+                            options: _vm.roles,
+                            searchable: true,
+                            multiple: false,
+                            "close-on-select": false,
+                            "clear-on-select": false,
+                            "preserve-search": true,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.role,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "role", $$v)
                             },
-                            [_vm._v("Choose")]
-                          ),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "staff" } }, [
-                            _vm._v("Staff")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "pilot" } }, [
-                            _vm._v("Pilot")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "option",
-                            { attrs: { value: "flight_attendant" } },
-                            [_vm._v("Flight Attendant")]
+                            expression: "input.role"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please enter role\n                                "
                           )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please enter role\n                                "
-                        )
-                      ])
-                    ])
+                        ])
+                      ],
+                      1
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
@@ -44998,67 +44962,40 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("span", { staticClass: "col-md-6 mb-2" }, [
-                      _c("label", [_vm._v("Work Status:")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input.status,
-                              expression: "input.status"
-                            }
-                          ],
-                          staticClass: "custom-select d-block w-100",
-                          attrs: { required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.input,
-                                "status",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", selected: "", disabledd: "" }
+                    _c(
+                      "span",
+                      { staticClass: "col-md-6 mb-2" },
+                      [
+                        _c("label", [_vm._v("Work Status:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            label: "name",
+                            options: _vm.status,
+                            searchable: true,
+                            multiple: false,
+                            "close-on-select": false,
+                            "clear-on-select": false,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.status,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "status", $$v)
                             },
-                            [_vm._v("Choose")]
-                          ),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Active")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "0" } }, [
-                            _vm._v("Left")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please choose\n                                "
-                        )
-                      ])
-                    ])
+                            expression: "input.status"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please choose\n                                "
+                          )
+                        ])
+                      ],
+                      1
+                    )
                   ]),
                   _vm._v(" "),
                   _c("hr", { staticClass: "mb-4" }),
@@ -45951,9 +45888,8 @@ var render = function() {
               _c("h5", { staticClass: "mb-3" }, [_vm._v("Diseases")]),
               _vm._v(" "),
               _c(
-                "div",
+                "span",
                 {
-                  staticClass: "control",
                   attrs: { id: "app" },
                   on: {
                     click: function($event) {

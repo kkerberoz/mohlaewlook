@@ -160,7 +160,6 @@
                                         placeholder="Choose"
                                         label="name"
                                         :custom-label="nameWithId"
-                                        track-by="name"
                                         :preselect-first="false"
                                     >
                                     </multiselect>
@@ -173,8 +172,8 @@
                                 <div class="col-md-12 mb-2">
                                     <div class="form-group">
                                         <label
-                                            >Avaliable flight adtendant</label
-                                        >
+                                            >Avaliable flight adtendant
+                                        </label>
                                         <multiselect
                                             v-model="input.crew"
                                             :options="options"
@@ -205,6 +204,7 @@
                                                 ></template
                                             >
                                         </multiselect>
+
                                         <div class="invalid-feedback">
                                             Please choose
                                         </div>
