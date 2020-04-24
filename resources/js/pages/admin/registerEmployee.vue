@@ -4,23 +4,24 @@
             <div
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
-                <form v-on:submit="formSubmit">
+                <form >
                     <h1 class="mb-3" style="display:block ">
                         Employee's Register
                     </h1>
                     <hr class="mb-4" />
                     <h5 class="mb-3">Work Details</h5>
-                    <form>
+
                         <div class="form-group">
                             <div class="row">
                                 <span class="col-md-4 mb-2">
                                     <label>Start Date:</label>
                                     <div class="input-group">
                                         <input
+                                        required
                                             type="date"
                                             class="form-control"
                                             v-model="input.start_date"
-                                            required
+
                                         />
                                         <div class="invalid-feedback">
                                             start date required.
@@ -329,8 +330,7 @@
                                 </span>
                             </div>
                         </div>
-                    </form>
-                    <form>
+
                         <hr class="mb-4" />
                         <h5 class="mb-3">Educations History</h5>
 
@@ -439,7 +439,7 @@
                                 ></i>
                             </span>
                         </div>
-                    </form>
+
 
                     <hr class="mb-4" />
                     <h5 class="mb-3">Diseases</h5>
@@ -519,6 +519,7 @@
 
                     <hr class="mb-4" />
                     <button
+                    @click="formSubmit"
                         class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
                     >
