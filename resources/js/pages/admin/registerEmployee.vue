@@ -47,7 +47,7 @@
                                     :options="roles"
                                     :searchable="true"
                                     :multiple="false"
-                                    :close-on-select="false"
+                                    :close-on-select="true"
                                     :clear-on-select="false"
                                     :preserve-search="true"
                                     :show-labels="false"
@@ -71,7 +71,7 @@
                                     :options="airports"
                                     :searchable="true"
                                     :multiple="false"
-                                    :close-on-select="false"
+                                    :close-on-select="true"
                                     :clear-on-select="false"
                                     :preserve-search="true"
                                     placeholder="Choose"
@@ -91,7 +91,7 @@
                                     :searchable="true"
                                     :multiple="false"
                                     :show-labels="false"
-                                    :close-on-select="false"
+                                    :close-on-select="true"
                                     :clear-on-select="false"
                                     placeholder="Choose"
                                     :preselect-first="false"
@@ -206,7 +206,7 @@
                                     :searchable="true"
                                     :show-labels="false"
                                     :multiple="false"
-                                    :close-on-select="false"
+                                    :close-on-select="true"
                                     :clear-on-select="false"
                                     placeholder="Choose"
                                     :preselect-first="false"
@@ -358,7 +358,7 @@
                                     :searchable="true"
                                     :multiple="false"
                                     :show-labels="false"
-                                    :close-on-select="false"
+                                    :close-on-select="true"
                                     :clear-on-select="false"
                                     placeholder="Choose"
                                     :preselect-first="false"
@@ -570,8 +570,8 @@ export default {
             airports: [],
             roles: [
                 { name: "Staff" },
-                { name: " Pilot" },
-                { name: "Flight_Attendant" }
+                { name: "Pilot" },
+                { name: "Flight Attendant" }
             ],
             status: [
                 { value: 1, name: "Active" },

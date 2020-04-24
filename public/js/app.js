@@ -2499,6 +2499,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2552,7 +2558,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         id: "11",
         name: "Oh"
-      }]
+      }],
+      aircrafts: ["GGF1151", " GGF1152", "GGF1153", "GGF1154"],
+      locations: ["Swiss", " Germany", "Thailand", "Kanchanaburi"]
     };
   },
   methods: {
@@ -3414,9 +3422,9 @@ __webpack_require__.r(__webpack_exports__);
       roles: [{
         name: "Staff"
       }, {
-        name: " Pilot"
+        name: "Pilot"
       }, {
-        name: "Flight_Attendant"
+        name: "Flight Attendant"
       }],
       status: [{
         value: 1,
@@ -8622,7 +8630,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\r\n    background: #4ecdc4;\r\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n#adminLogin {\n    background: #4ecdc4;\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -8641,7 +8649,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -43933,62 +43941,40 @@ var render = function() {
               _c("form", [
                 _c("div", { staticClass: "form-group" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("span", { staticClass: "col-md-6 mb-2" }, [
-                      _c("label", [_vm._v("Aircraft ID:")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input.aircraftID,
-                              expression: "input.aircraftID"
-                            }
-                          ],
-                          staticClass: "custom-select d-block w-100",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.input,
-                                "aircraftID",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                    _c(
+                      "span",
+                      { staticClass: "col-md-6 mb-2" },
+                      [
+                        _c("label", [_vm._v("Aircraft ID:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            options: _vm.aircrafts,
+                            searchable: true,
+                            multiple: false,
+                            "show-labels": false,
+                            "close-on-select": true,
+                            "clear-on-select": false,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.aircraftID,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "aircraftID", $$v)
+                            },
+                            expression: "input.aircraftID"
                           }
-                        },
-                        [
-                          _c("option", { attrs: { value: "" } }, [
-                            _vm._v("Choose")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("GGF1151")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("GGF1152")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("GGF1153")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("GGF1154")])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please choose\n                                "
-                        )
-                      ])
-                    ]),
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please choose\n                                "
+                          )
+                        ])
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("span", { staticClass: "col-md-6 mb-2" }, [
                       _c("label", [_vm._v("Flight Number:")]),
@@ -44024,62 +44010,40 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("span", { staticClass: "col-md-4 mb-2" }, [
-                      _c("label", [_vm._v("Depart Location:")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input.departLocation,
-                              expression: "input.departLocation"
-                            }
-                          ],
-                          staticClass: "custom-select d-block w-100",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.input,
-                                "departLocation",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                    _c(
+                      "span",
+                      { staticClass: "col-md-4 mb-2" },
+                      [
+                        _c("label", [_vm._v("Depart Location:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            options: _vm.locations,
+                            searchable: true,
+                            multiple: false,
+                            "show-labels": false,
+                            "close-on-select": true,
+                            "clear-on-select": false,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.departLocation,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "departLocation", $$v)
+                            },
+                            expression: "input.departLocation"
                           }
-                        },
-                        [
-                          _c("option", { attrs: { value: "" } }, [
-                            _vm._v("Choose")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany")])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please choose\n                                "
-                        )
-                      ])
-                    ]),
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please choose\n                                "
+                          )
+                        ])
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("span", { staticClass: "col-md-4 mb-2" }, [
                       _c("label", [_vm._v("Depart Date:")]),
@@ -44155,62 +44119,40 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("span", { staticClass: "col-md-4 mb-2" }, [
-                      _c("label", [_vm._v("Arrive Location:")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input.arriveLocation,
-                              expression: "input.arriveLocation"
-                            }
-                          ],
-                          staticClass: "custom-select d-block w-100",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.input,
-                                "arriveLocation",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                    _c(
+                      "span",
+                      { staticClass: "col-md-4 mb-2" },
+                      [
+                        _c("label", [_vm._v("Arrive Location:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            options: _vm.locations,
+                            searchable: true,
+                            multiple: false,
+                            "show-labels": false,
+                            "close-on-select": true,
+                            "clear-on-select": false,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.arriveLocation,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "arriveLocation", $$v)
+                            },
+                            expression: "input.arriveLocation"
                           }
-                        },
-                        [
-                          _c("option", { attrs: { value: "" } }, [
-                            _vm._v("Choose")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Germany")])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please choose\n                                "
-                        )
-                      ])
-                    ]),
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please choose\n                                "
+                          )
+                        ])
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("span", { staticClass: "col-md-4 mb-2" }, [
                       _c("label", [_vm._v("Arrive Date:")]),
@@ -44302,7 +44244,7 @@ var render = function() {
                               options: _vm.options,
                               searchable: true,
                               multiple: false,
-                              "close-on-select": false,
+                              "close-on-select": true,
                               "clear-on-select": false,
                               "preserve-search": true,
                               placeholder: "Choose",
@@ -44341,7 +44283,7 @@ var render = function() {
                             options: _vm.options,
                             searchable: true,
                             multiple: false,
-                            "close-on-select": false,
+                            "close-on-select": true,
                             "clear-on-select": false,
                             "preserve-search": true,
                             placeholder: "Choose",
@@ -44913,7 +44855,7 @@ var render = function() {
                             options: _vm.roles,
                             searchable: true,
                             multiple: false,
-                            "close-on-select": false,
+                            "close-on-select": true,
                             "clear-on-select": false,
                             "preserve-search": true,
                             "show-labels": false,
@@ -44952,7 +44894,7 @@ var render = function() {
                             options: _vm.airports,
                             searchable: true,
                             multiple: false,
-                            "close-on-select": false,
+                            "close-on-select": true,
                             "clear-on-select": false,
                             "preserve-search": true,
                             placeholder: "Choose",
@@ -44989,7 +44931,7 @@ var render = function() {
                             searchable: true,
                             multiple: false,
                             "show-labels": false,
-                            "close-on-select": false,
+                            "close-on-select": true,
                             "clear-on-select": false,
                             placeholder: "Choose",
                             "preselect-first": false
@@ -45264,7 +45206,7 @@ var render = function() {
                             searchable: true,
                             "show-labels": false,
                             multiple: false,
-                            "close-on-select": false,
+                            "close-on-select": true,
                             "clear-on-select": false,
                             placeholder: "Choose",
                             "preselect-first": false
@@ -45628,7 +45570,7 @@ var render = function() {
                                 searchable: true,
                                 multiple: false,
                                 "show-labels": false,
-                                "close-on-select": false,
+                                "close-on-select": true,
                                 "clear-on-select": false,
                                 placeholder: "Choose",
                                 "preselect-first": false
@@ -62463,14 +62405,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue ***!
   \*******************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _registerEmployee_vue_vue_type_template_id_0228415a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=template&id=0228415a& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=template&id=0228415a&");
 /* harmony import */ var _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -62500,7 +62443,7 @@ component.options.__file = "resources/js/pages/admin/registerEmployee.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62965,8 +62908,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

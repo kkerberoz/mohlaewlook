@@ -13,16 +13,18 @@
                             <div class="row">
                                 <span class="col-md-6 mb-2">
                                     <label>Aircraft ID:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+                                    <multiselect
                                         v-model="input.aircraftID"
+                                        :options="aircrafts"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :show-labels="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value>Choose</option>
-                                        <option>GGF1151</option>
-                                        <option>GGF1152</option>
-                                        <option>GGF1153</option>
-                                        <option>GGF1154</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -42,16 +44,18 @@
                             <div class="row">
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Location:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+                                    <multiselect
                                         v-model="input.departLocation"
+                                        :options="locations"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :show-labels="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value>Choose</option>
-                                        <option>Germany.</option>
-                                        <option>Germany.</option>
-                                        <option>Germany.</option>
-                                        <option>Germany</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -82,16 +86,18 @@
                             <div class="row">
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Location:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+                                    <multiselect
                                         v-model="input.arriveLocation"
+                                        :options="locations"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :show-labels="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value>Choose</option>
-                                        <option>Germany.</option>
-                                        <option>Germany.</option>
-                                        <option>Germany.</option>
-                                        <option>Germany</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -130,7 +136,7 @@
                                             :options="options"
                                             :searchable="true"
                                             :multiple="false"
-                                            :close-on-select="false"
+                                            :close-on-select="true"
                                             :clear-on-select="false"
                                             :preserve-search="true"
                                             placeholder="Choose"
@@ -151,7 +157,7 @@
                                         :options="options"
                                         :searchable="true"
                                         :multiple="false"
-                                        :close-on-select="false"
+                                        :close-on-select="true"
                                         :clear-on-select="false"
                                         :preserve-search="true"
                                         placeholder="Choose"
@@ -255,7 +261,9 @@ export default {
                 { id: "9", name: "Cream" },
                 { id: "10", name: "Jo" },
                 { id: "11", name: "Oh" }
-            ]
+            ],
+            aircrafts: ["GGF1151", " GGF1152", "GGF1153", "GGF1154"],
+            locations: ["Swiss", " Germany", "Thailand", "Kanchanaburi"]
         };
     },
     methods: {
