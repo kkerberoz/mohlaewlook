@@ -2634,6 +2634,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "adminLogin",
   data: function data() {
@@ -2646,7 +2649,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    axios.get("/api/backend/init").then(function (response) {
+    axios.get("/api/admin/init").then(function (response) {
       console.log(response.data);
     });
   },
@@ -2683,13 +2686,14 @@ __webpack_require__.r(__webpack_exports__);
           password: this.password
         };
         axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/backend/login", data).then(function (response) {
+          axios.post("/api/admin/login", data).then(function (response) {
+            console.log(response.data);
             _this.admin = response.data;
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
-              localStorage.setItem("isLoggedIn", "true");
+              localStorage.setItem("isAdmin", "true");
 
-              _this.$router.go({
-                name: "admin"
+              _this.$router.push({
+                name: "newEmployee"
               });
             });
           })["catch"](function (error) {
@@ -2703,6 +2707,19 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
       }
+    },
+    logout: function logout() {
+      var _this2 = this;
+
+      axios.get("/sanctum/csrf-cookie").then(function (response) {
+        axios.post("/api/admin/logout").then(function () {
+          localStorage.removeItem("isAdmin");
+
+          _this2.$router.push({
+            path: "/admin"
+          });
+        });
+      });
     }
   }
 });
@@ -2718,6 +2735,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2835,6 +2862,19 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     closeMenu: function closeMenu() {
       $(".page-wrapper").toggleClass("toggled");
+    },
+    logout: function logout() {
+      var _this2 = this;
+
+      axios.get("/sanctum/csrf-cookie").then(function (response) {
+        axios.post("/api/admin/logout").then(function () {
+          localStorage.removeItem("isAdmin");
+
+          _this2.$router.push({
+            path: "/admin"
+          });
+        });
+      });
     }
   }
 });
@@ -3446,6 +3486,16 @@ __webpack_require__.r(__webpack_exports__);
       seen: true
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get("/api/backend/getAirports").then(function (response) {
+      // show all airports onto option
+      var AirportID = response.data; // get all aiport
+
+      _this.airports = AirportID;
+    });
+  },
   methods: {
     airportName: function airportName(_ref) {
       var airport_id = _ref.airport_id,
@@ -3474,6 +3524,8 @@ __webpack_require__.r(__webpack_exports__);
       this.diseases.splice(index, 1);
     },
     formSubmit: function formSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
       var details = {
         start_date: this.input.start_date,
@@ -3505,20 +3557,16 @@ __webpack_require__.r(__webpack_exports__);
         educations: educations,
         diseases: diseases
       };
-      axios.post("/api/addEmployee", data).then(function (response) {
-        console.log(response.data);
+      axios.get("/sanctum/csrf-cookie").then(function (response) {
+        axios.post("/api/admin/addEmployee", data).then(function (response) {
+          swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+            _this2.$router.push({
+              name: "/adminHome"
+            });
+          });
+        });
       });
     }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get("/api/getAirports").then(function (response) {
-      // show all airports onto option
-      var AirportID = response.data; // get all aiport
-
-      _this.airports = AirportID;
-    });
   }
 });
 
@@ -44518,7 +44566,17 @@ var render = function() {
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "btn btn-block btn-login",
+          attrs: { id: "btnLogin" },
+          on: { click: _vm.logout }
+        },
+        [_vm._v("\n        logout\n    ")]
+      )
     ]
   )
 }
@@ -44673,7 +44731,23 @@ var render = function() {
                       ])
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn btn-block btn-login",
+                        attrs: { id: "btnLogin" },
+                        on: { click: _vm.logout }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-home" }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Logout")])
+                      ]
+                    )
+                  ])
                 ])
               ])
             ])
@@ -61843,6 +61917,10 @@ function isLoggedIn() {
   return localStorage.getItem("isLoggedIn");
 }
 
+function isAdmin() {
+  return localStorage.getItem("isAdmin");
+}
+
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth;
@@ -61864,6 +61942,18 @@ router.beforeEach(function (to, from, next) {
     if (isLoggedIn()) {
       next({
         name: "info"
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(function (record) {
+    return record.meta.requiresAdmin;
+  })) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!isAdmin()) {
+      next({
+        name: "adminLogin"
       });
     } else {
       next();
@@ -62860,14 +62950,17 @@ var routes = [{
 }, {
   path: "/adminLogin",
   name: "adminLogin",
-  component: __webpack_require__(/*! ./pages/admin/adminLogin.vue */ "./resources/js/pages/admin/adminLogin.vue")["default"]
+  component: __webpack_require__(/*! ./pages/admin/adminLogin.vue */ "./resources/js/pages/admin/adminLogin.vue")["default"],
+  meta: {
+    requiresVisitor: true
+  }
 }, {
   path: "/admin",
   component: __webpack_require__(/*! ./pages/admin/admin_control.vue */ "./resources/js/pages/admin/admin_control.vue")["default"],
   meta: {
-    requiresAuth: true,
     hideNavigation: true
   },
+  // requiresAdmin: true
   children: [{
     path: "",
     name: "adminHome",

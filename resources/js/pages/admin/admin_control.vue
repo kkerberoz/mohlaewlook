@@ -80,6 +80,16 @@
                                     <span>Homepage</span>
                                 </router-link>
                             </li>
+                            <li>
+                                <div
+                                    id="btnLogin"
+                                    @click="logout"
+                                    class="btn btn-block btn-login"
+                                >
+                                    <i class="fas fa-home"></i>
+                                    <span>Logout</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <!-- sidebar-menu  -->
@@ -114,6 +124,14 @@ export default {
     methods: {
         closeMenu() {
             $(".page-wrapper").toggleClass("toggled");
+        },
+        logout() {
+            axios.get("/sanctum/csrf-cookie").then(response => {
+                axios.post("/api/admin/logout").then(() => {
+                    localStorage.removeItem("isAdmin");
+                    this.$router.push({ path: "/admin" });
+                });
+            });
         }
     }
 };

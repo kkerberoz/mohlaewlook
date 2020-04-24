@@ -37,6 +37,9 @@ Vue.component("app-footer", require("./components/app-footer.vue").default);
 function isLoggedIn() {
     return localStorage.getItem("isLoggedIn");
 }
+function isAdmin() {
+    return localStorage.getItem("isAdmin");
+}
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -55,6 +58,16 @@ router.beforeEach((to, from, next) => {
         if (isLoggedIn()) {
             next({
                 name: "info"
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresAdmin)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!isAdmin()) {
+            next({
+                name: "adminLogin"
             });
         } else {
             next();

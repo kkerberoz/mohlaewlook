@@ -46,6 +46,9 @@
                 </form>
             </div>
         </div>
+        <div id="btnLogin" @click="logout" class="btn btn-block btn-login">
+            logout
+        </div>
     </div>
 </template>
 
@@ -62,7 +65,7 @@ export default {
         };
     },
     mounted() {
-        axios.get("/api/backend/init").then(response => {
+        axios.get("/api/admin/init").then(response => {
             console.log(response.data);
         });
     },
@@ -99,16 +102,17 @@ export default {
                 };
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
-                        .post("/api/backend/login", data)
+                        .post("/api/admin/login", data)
                         .then(response => {
+                            console.log(response.data);
                             this.admin = response.data;
                             swal.fire(
                                 "Login Success!",
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                localStorage.setItem("isLoggedIn", "true");
-                                this.$router.go({ name: "admin" });
+                                localStorage.setItem("isAdmin", "true");
+                                this.$router.push({ name: "newEmployee" });
                             });
                         })
                         .catch(error => {
@@ -126,6 +130,14 @@ export default {
                         });
                 });
             }
+        },
+        logout() {
+            axios.get("/sanctum/csrf-cookie").then(response => {
+                axios.post("/api/admin/logout").then(() => {
+                    localStorage.removeItem("isAdmin");
+                    this.$router.push({ path: "/admin" });
+                });
+            });
         }
     }
 };

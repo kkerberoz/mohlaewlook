@@ -31,13 +31,14 @@ let routes = [
     {
         path: "/adminLogin",
         name: "adminLogin",
-        component: require("./pages/admin/adminLogin.vue").default
+        component: require("./pages/admin/adminLogin.vue").default,
+        meta: { requiresVisitor: true }
     },
     {
         path: "/admin",
         component: require("./pages/admin/admin_control.vue").default,
-        meta: { requiresAuth: true, hideNavigation: true },
-
+        meta: { hideNavigation: true },
+        // requiresAdmin: true
         children: [
             {
                 path: "",

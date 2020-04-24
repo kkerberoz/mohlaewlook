@@ -591,6 +591,13 @@ export default {
             seen: true
         };
     },
+    mounted() {
+        axios.get("/api/backend/getAirports").then(response => {
+            // show all airports onto option
+            var AirportID = response.data; // get all aiport
+            this.airports = AirportID;
+        });
+    },
 
     methods: {
         airportName({ airport_id, airport_name }) {
@@ -647,17 +654,18 @@ export default {
                 diseases: diseases
             };
 
-            axios.post("/api/addEmployee", data).then(response => {
-                console.log(response.data);
+            axios.get("/sanctum/csrf-cookie").then(response => {
+                axios.post("/api/admin/addEmployee", data).then(response => {
+                    swal.fire(
+                        "Register Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    ).then(() => {
+                        this.$router.push({ name: "/adminHome" });
+                    });
+                });
             });
         }
-    },
-    mounted() {
-        axios.get("/api/getAirports").then(response => {
-            // show all airports onto option
-            var AirportID = response.data; // get all aiport
-            this.airports = AirportID;
-        });
     }
 };
 </script>
