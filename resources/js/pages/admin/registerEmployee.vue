@@ -50,6 +50,7 @@
                                         :close-on-select="false"
                                         :clear-on-select="false"
                                         :preserve-search="true"
+                                        :show-labels="false"
                                         placeholder="Choose"
                                         :preselect-first="false"
                                     >
@@ -89,6 +90,7 @@
                                         :options="status"
                                         :searchable="true"
                                         :multiple="false"
+                                        :show-labels="false"
                                         :close-on-select="false"
                                         :clear-on-select="false"
                                         placeholder="Choose"
@@ -197,19 +199,19 @@
                             <div class="row">
                                 <div class="col-md-2 mb-2">
                                     <label for="state">Title:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+                                    <multiselect
+                                        label="title"
                                         v-model="input.title"
-                                        required
+                                        :options="titles"
+                                        :searchable="true"
+                                        :show-labels="false"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value selected disabled
-                                            >Choose</option
-                                        >
-                                        <option>Mrs.</option>
-                                        <option>Ms.</option>
-                                        <option>Mr.</option>
-                                        <option>Miss</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -575,7 +577,16 @@ export default {
                 { name: " Pilot" },
                 { name: "Flight Attendant" }
             ],
-            status: [{ name: "Active" }, { name: "Left" }],
+            status: [
+                { value: 1, name: "Active" },
+                { value: 0, name: "Left" }
+            ],
+            titles: [
+                { title: "Mr." },
+                { title: "Mrs." },
+                { title: "Mr." },
+                { title: "Mr." }
+            ],
             seen: true
         };
     },
@@ -607,7 +618,26 @@ export default {
         },
         formSubmit(e) {
             e.preventDefault();
-            var details = this.input; // data in detail
+            let details = {
+                start_date: this.input.start_date,
+                salary: this.input.salary,
+                airport: this.input.airport.airport_id,
+                role: this.input.role.name,
+                status: this.input.status.value,
+                username: this.input.username,
+                password: this.input.password,
+                idcard: this.input.idcard,
+                gender: this.input.gender,
+                title: this.input.title.title,
+                firstname: this.input.firstname,
+                lastname: this.input.lastname,
+                DOB: this.input.DOB,
+                height: this.input.height,
+                weight: this.input.weight,
+                email: this.input.email,
+                address: this.input.address,
+                phone: this.input.phone
+            }; // data in detail
             var educations = this.edus; // data in education
             var diseases = this.diseases; // data in diseases
             let data = {
@@ -615,6 +645,7 @@ export default {
                 educations: educations,
                 diseases: diseases
             };
+
             axios.post("/api/addEmployee", data).then(response => {
                 console.log(response.data);
             });

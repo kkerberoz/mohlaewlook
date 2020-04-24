@@ -3384,6 +3384,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -3432,9 +3434,20 @@ __webpack_require__.r(__webpack_exports__);
         name: "Flight Attendant"
       }],
       status: [{
+        value: 1,
         name: "Active"
       }, {
+        value: 0,
         name: "Left"
+      }],
+      titles: [{
+        title: "Mr."
+      }, {
+        title: "Mrs."
+      }, {
+        title: "Mr."
+      }, {
+        title: "Mr."
       }],
       seen: true
     };
@@ -3468,7 +3481,26 @@ __webpack_require__.r(__webpack_exports__);
     },
     formSubmit: function formSubmit(e) {
       e.preventDefault();
-      var details = this.input; // data in detail
+      var details = {
+        start_date: this.input.start_date,
+        salary: this.input.salary,
+        airport: this.input.airport.airport_id,
+        role: this.input.role.name,
+        status: this.input.status.value,
+        username: this.input.username,
+        password: this.input.password,
+        idcard: this.input.idcard,
+        gender: this.input.gender,
+        title: this.input.title.title,
+        firstname: this.input.firstname,
+        lastname: this.input.lastname,
+        DOB: this.input.DOB,
+        height: this.input.height,
+        weight: this.input.weight,
+        email: this.input.email,
+        address: this.input.address,
+        phone: this.input.phone
+      }; // data in detail
 
       var educations = this.edus; // data in education
 
@@ -44903,6 +44935,7 @@ var render = function() {
                             "close-on-select": false,
                             "clear-on-select": false,
                             "preserve-search": true,
+                            "show-labels": false,
                             placeholder: "Choose",
                             "preselect-first": false
                           },
@@ -44974,6 +45007,7 @@ var render = function() {
                             options: _vm.status,
                             searchable: true,
                             multiple: false,
+                            "show-labels": false,
                             "close-on-select": false,
                             "clear-on-select": false,
                             placeholder: "Choose",
@@ -45234,69 +45268,43 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-2 mb-2" }, [
-                      _c("label", { attrs: { for: "state" } }, [
-                        _vm._v("Title:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input.title,
-                              expression: "input.title"
-                            }
-                          ],
-                          staticClass: "custom-select d-block w-100",
-                          attrs: { required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.input,
-                                "title",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", selected: "", disabled: "" }
+                    _c(
+                      "div",
+                      { staticClass: "col-md-2 mb-2" },
+                      [
+                        _c("label", { attrs: { for: "state" } }, [
+                          _vm._v("Title:")
+                        ]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            label: "title",
+                            options: _vm.titles,
+                            searchable: true,
+                            "show-labels": false,
+                            multiple: false,
+                            "close-on-select": false,
+                            "clear-on-select": false,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.title,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "title", $$v)
                             },
-                            [_vm._v("Choose")]
-                          ),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Mrs.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Ms.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Mr.")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Miss")])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please choose\n                                "
-                        )
-                      ])
-                    ]),
+                            expression: "input.title"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please choose\n                                "
+                          )
+                        ])
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-5 mb-2" }, [
                       _c("label", [_vm._v("First name:")]),
