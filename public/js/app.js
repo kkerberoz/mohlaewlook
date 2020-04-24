@@ -2652,10 +2652,16 @@ __webpack_require__.r(__webpack_exports__);
       errors: []
     };
   },
+  mounted: function mounted() {
+    axios.get("/api/backend/init").then(function (response) {
+      console.log(response.data);
+    });
+  },
   methods: {
     formSubmit: function formSubmit(e) {
       var _this = this;
 
+      this.errors = [];
       this.error_username = null;
       this.error_password = null;
       e.preventDefault();
@@ -3354,6 +3360,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3382,7 +3392,8 @@ __webpack_require__.r(__webpack_exports__);
         degree: "",
         university: "",
         faculty: "",
-        department: ""
+        department: "",
+        gpa: ""
       }],
       diseases: [{
         info: "",
@@ -3397,7 +3408,8 @@ __webpack_require__.r(__webpack_exports__);
         degree: "",
         university: "",
         faculty: "",
-        department: ""
+        department: "",
+        gpa: ""
       });
     },
     removeedu: function removeedu(index) {
@@ -3426,7 +3438,7 @@ __webpack_require__.r(__webpack_exports__);
         diseases: diseases
       };
       axios.post("/api/addEmployee", data).then(function (response) {
-        console.log(response.data[0]);
+        console.log(response.data);
       });
     }
   },
@@ -3435,7 +3447,8 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/api/getAirports").then(function (response) {
       // show all airports onto option
-      var AirportID = response.data[0];
+      var AirportID = response.data; // get all aiport
+
       _this.airports = AirportID;
     });
   }
@@ -8549,7 +8562,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\r\n    background: #c0c0aa;\r\n    background: linear-gradient(to right, #1cefff, #c0c0aa);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n#adminLogin {\r\n    background: #4ecdc4;\r\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -45859,18 +45872,12 @@ var render = function() {
                                 _vm._v(
                                   "\n                                    university is required.\n                                "
                                 )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v(
-                                  "\n                                    Please enter\n                                "
-                                )
                               ])
                             ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-6 mb-2" }, [
+                            _c("div", { staticClass: "col-md-4 mb-2" }, [
                               _c("label", [_vm._v("Faculty:")]),
                               _vm._v(" "),
                               _c("input", {
@@ -45903,16 +45910,10 @@ var render = function() {
                                 _vm._v(
                                   "\n                                    Faculty is required.\n                                "
                                 )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v(
-                                  "\n                                    Please enter\n                                "
-                                )
                               ])
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6 mb-2" }, [
+                            _c("div", { staticClass: "col-md-4 mb-2" }, [
                               _c("label", [_vm._v("Department:")]),
                               _vm._v(" "),
                               _c("input", {
@@ -45945,11 +45946,37 @@ var render = function() {
                                 _vm._v(
                                   "\n                                    Department is required.\n                                "
                                 )
-                              ]),
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-4 mb-2" }, [
+                              _c("label", [_vm._v("GPA:")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: edu.gpa,
+                                    expression: "edu.gpa"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: edu.gpa },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(edu, "gpa", $event.target.value)
+                                  }
+                                }
+                              }),
                               _vm._v(" "),
                               _c("div", { staticClass: "invalid-feedback" }, [
                                 _vm._v(
-                                  "\n                                    Please enter\n                                "
+                                  "\n                                    DPA is required.\n                                "
                                 )
                               ])
                             ])

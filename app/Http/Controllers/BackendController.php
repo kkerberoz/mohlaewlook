@@ -47,8 +47,9 @@ class BackendController extends Controller
         //     $education->user_id = $user_id;
         //     $education->degree = $education_data[$i]['degree'];
         //     $education->school_university_name = $education_data[$i]['university'];
-        //     $education->department = $education_data[$i]['faculty'];
-        //     $education->GPA = $education_data[$i]['department'];
+        //     $education->department = $education_data[$i]['department'];
+        //     $education->faculty = $education_data[$i]['faculty'];
+        //     $education->GPA = $education_data[$i]['GPA'];
         //     $education->save();
         // }
         // // add into diseases table
@@ -59,10 +60,10 @@ class BackendController extends Controller
         //     $diseases->note = $diseases_data[$i]['note'];
         //     $diseases->save();
         // }
-        return response() -> JSON([$user_id_search]);
+        return response() -> JSON(sizeof($user_id_search));
     }
     public function getAirports(){
         $AirportID = Airport::all();
-        return response() -> JSON([$AirportID]);
+        return response() -> JSON($AirportID);
     }
 }

@@ -14,13 +14,13 @@ class AdminController extends Controller
 
     public function init()
     {
-        $employee = Employee::count();
+        $employee = Employee::all();
         return response()->json($employee, 200);
     }
 
     public function login(Request $request)
     {
-        if (Auth::guard('employee')->attempt(['username' => $request->username, 'password' => $request->password])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $employee = Auth::guard('employee')->user();
             // $customer = Auth::guard('customers')->user();
             return response()->json($employee, 200);
