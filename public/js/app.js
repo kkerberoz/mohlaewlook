@@ -2652,10 +2652,16 @@ __webpack_require__.r(__webpack_exports__);
       errors: []
     };
   },
+  mounted: function mounted() {
+    axios.get("/api/backend/init").then(function (response) {
+      console.log(response.data);
+    });
+  },
   methods: {
     formSubmit: function formSubmit(e) {
       var _this = this;
 
+      this.errors = [];
       this.error_username = null;
       this.error_password = null;
       e.preventDefault();
@@ -3353,6 +3359,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   data: function data() {
@@ -3381,13 +3392,13 @@ __webpack_require__.r(__webpack_exports__);
         degree: "",
         university: "",
         faculty: "",
-        department: ""
+        department: "",
+        gpa: ""
       }],
       diseases: [{
         info: "",
         note: ""
-      }],
-      Airports: []
+      }]
     };
   },
   methods: {
@@ -3396,7 +3407,8 @@ __webpack_require__.r(__webpack_exports__);
         degree: "",
         university: "",
         faculty: "",
-        department: ""
+        department: "",
+        gpa: ""
       });
     },
     removeedu: function removeedu(index) {
@@ -3430,12 +3442,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this = this;
-
     axios.get("/api/getAirports").then(function (response) {
       // show all airports onto option
-      _this.Airports = response.data[0];
-      console.log(_this.Airports);
+      var AirportID = response.data[0];
+      var select = document.getElementById("airport");
+
+      for (var i = 0; i < AirportID.length; ++i) {
+        var option = document.createElement("option");
+        option.text = AirportID[i]["airport_id"] + ": " + AirportID[i]["airport_name"];
+        option.value = AirportID[i]["airport_id"];
+        select.add(option);
+      }
     });
   }
 });
@@ -8548,7 +8565,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\r\n    background: #c0c0aa;\r\n    background: linear-gradient(to right, #1cefff, #c0c0aa);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n#adminLogin {\n    background: #4ecdc4;\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -8567,7 +8584,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -44859,7 +44876,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "text", required: "" },
+                          attrs: { type: "text" },
                           domProps: { value: _vm.input.salary },
                           on: {
                             input: function($event) {
@@ -44967,6 +44984,7 @@ var render = function() {
                               }
                             ],
                             staticClass: "custom-select d-block w-100",
+                            attrs: { required: "", id: "airport" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -44998,15 +45016,8 @@ var render = function() {
                                 }
                               },
                               [_vm._v("Choose")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.Airports, function(Airport, i) {
-                              return _c("option", { key: i }, [
-                                _vm._v(_vm._s(Airport.airport_id))
-                              ])
-                            })
-                          ],
-                          2
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
@@ -45843,18 +45854,12 @@ var render = function() {
                                 _vm._v(
                                   "\n                                    university is required.\n                                "
                                 )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v(
-                                  "\n                                    Please enter\n                                "
-                                )
                               ])
                             ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-6 mb-2" }, [
+                            _c("div", { staticClass: "col-md-4 mb-2" }, [
                               _c("label", [_vm._v("Faculty:")]),
                               _vm._v(" "),
                               _c("input", {
@@ -45887,16 +45892,10 @@ var render = function() {
                                 _vm._v(
                                   "\n                                    Faculty is required.\n                                "
                                 )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v(
-                                  "\n                                    Please enter\n                                "
-                                )
                               ])
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6 mb-2" }, [
+                            _c("div", { staticClass: "col-md-4 mb-2" }, [
                               _c("label", [_vm._v("Department:")]),
                               _vm._v(" "),
                               _c("input", {
@@ -45929,11 +45928,37 @@ var render = function() {
                                 _vm._v(
                                   "\n                                    Department is required.\n                                "
                                 )
-                              ]),
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-4 mb-2" }, [
+                              _c("label", [_vm._v("GPA:")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: edu.gpa,
+                                    expression: "edu.gpa"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: edu.gpa },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(edu, "gpa", $event.target.value)
+                                  }
+                                }
+                              }),
                               _vm._v(" "),
                               _c("div", { staticClass: "invalid-feedback" }, [
                                 _vm._v(
-                                  "\n                                    Please enter\n                                "
+                                  "\n                                    DPA is required.\n                                "
                                 )
                               ])
                             ])
@@ -63051,8 +63076,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

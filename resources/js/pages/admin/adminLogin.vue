@@ -61,9 +61,14 @@ export default {
             errors: []
         };
     },
-
+    mounted() {
+        axios.get("/api/backend/init").then(response => {
+            console.log(response.data);
+        });
+    },
     methods: {
         formSubmit(e) {
+            this.errors = [];
             this.error_username = null;
             this.error_password = null;
 
@@ -127,9 +132,9 @@ export default {
 </script>
 <style>
 #adminLogin {
-    background: #c0c0aa;
-    background: -webkit-linear-gradient(to right, #1cefff, #c0c0aa);
-    background: linear-gradient(to right, #1cefff, #c0c0aa);
+    background: #4ecdc4;
+    background: -webkit-linear-gradient(to right, #556270, #4ecdc4);
+    background: linear-gradient(to right, #556270, #4ecdc4);
 }
 #cardLogin {
     border: none;
@@ -137,6 +142,18 @@ export default {
 }
 #btnLogin {
     border: none;
+    background: #56ab2f;
+    background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);
+    background: linear-gradient(to right, #a8e063, #56ab2f);
+
+    border-radius: 0px;
+}
+#btnLogin:hover {
+    border: none;
+    transition: 0.7s;
+    background: #56ab2f;
+    background: -webkit-linear-gradient(to left, #a8e063, #56ab2f);
+    background: linear-gradient(to left, #a8e063, #56ab2f);
     border-radius: 0px;
 }
 </style>

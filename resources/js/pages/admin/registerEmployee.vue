@@ -48,9 +48,11 @@
                                         <option value selected disabledd
                                             >Choose</option
                                         >
-                                        <option value = "staff">Staff</option>
-                                        <option value = "pilot">Pilot</option>
-                                        <option value = "flight_attendant">Flight Attendant</option>
+                                        <option value="staff">Staff</option>
+                                        <option value="pilot">Pilot</option>
+                                        <option value="flight_attendant"
+                                            >Flight Attendant</option
+                                        >
                                     </select>
 
                                     <div class="invalid-feedback">
@@ -67,7 +69,9 @@
                                         required
                                         id="airport"
                                     >
-                                        <option value selected disabledd>Choose</option>
+                                        <option value selected disabledd
+                                            >Choose</option
+                                        >
                                     </select>
                                     <div class="invalid-feedback">
                                         Please choose
@@ -83,8 +87,8 @@
                                         <option value selected disabledd
                                             >Choose</option
                                         >
-                                        <option value = 1>Active</option>
-                                        <option value = 0>Left</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Left</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Please choose
@@ -373,13 +377,10 @@
                                     <div class="invalid-feedback">
                                         university is required.
                                     </div>
-                                    <div class="invalid-feedback">
-                                        Please enter
-                                    </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label>Faculty:</label>
                                     <input
                                         type="text"
@@ -389,11 +390,8 @@
                                     <div class="invalid-feedback">
                                         Faculty is required.
                                     </div>
-                                    <div class="invalid-feedback">
-                                        Please enter
-                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label>Department:</label>
                                     <input
                                         type="text"
@@ -403,8 +401,16 @@
                                     <div class="invalid-feedback">
                                         Department is required.
                                     </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label>GPA:</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="edu.gpa"
+                                    />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        DPA is required.
                                     </div>
                                 </div>
                             </div>
@@ -529,7 +535,8 @@ export default {
                     degree: "",
                     university: "",
                     faculty: "",
-                    department: ""
+                    department: "",
+                    gpa: ""
                 }
             ],
             diseases: [
@@ -546,7 +553,8 @@ export default {
                 degree: "",
                 university: "",
                 faculty: "",
-                department: ""
+                department: "",
+                gpa: ""
             });
         },
         removeedu(index) {
@@ -561,7 +569,7 @@ export default {
         remove(index) {
             this.diseases.splice(index, 1);
         },
-        formSubmit(e){
+        formSubmit(e) {
             e.preventDefault();
             var details = this.input; // data in detail
             var educations = this.edus; // data in education
@@ -570,25 +578,27 @@ export default {
                 details: details,
                 educations: educations,
                 diseases: diseases
-            }
-            axios.post("/api/addEmployee", data).then(response=>{
+            };
+            axios.post("/api/addEmployee", data).then(response => {
                 console.log(response.data.test);
-
             });
         }
     },
     mounted() {
-        axios.get("/api/getAirports").then(response => { // show all airports onto option
+        axios.get("/api/getAirports").then(response => {
+            // show all airports onto option
             var AirportID = response.data[0];
             var select = document.getElementById("airport");
-            for(var i=0; i<AirportID.length; ++i){
+            for (var i = 0; i < AirportID.length; ++i) {
                 var option = document.createElement("option");
-                option.text = AirportID[i]['airport_id'] + ": " + AirportID[i]['airport_name'];
-                option.value = AirportID[i]['airport_id'];
+                option.text =
+                    AirportID[i]["airport_id"] +
+                    ": " +
+                    AirportID[i]["airport_name"];
+                option.value = AirportID[i]["airport_id"];
                 select.add(option);
             }
-        }
-    );
+        });
     }
 };
 </script>
