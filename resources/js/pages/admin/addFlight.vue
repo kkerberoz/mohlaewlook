@@ -127,59 +127,53 @@
                                 <div class="col-md-6 mb-2">
                                     <div class="form-group">
                                         <label>Captain:</label>
-                                        <select
-                                            class="custom-select d-block w-100"
+                                        <multiselect
                                             v-model="input.captain"
+                                            :options="options"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="false"
+                                            :clear-on-select="false"
+                                            :preserve-search="true"
+                                            placeholder="Choose"
+                                            label="name"
+                                            :custom-label="nameWithId"
+                                            track-by="name"
+                                            :preselect-first="false"
                                         >
-                                            <option value>Choose</option>
-                                            <option>Germany.</option>
-                                            <option>Germany.</option>
-                                            <option>Germany.</option>
-                                            <option>Germany</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please choose
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Co-pilot:</label>
-                                        <select
-                                            class="custom-select d-block w-100"
-                                            v-model="input.coPilot"
-                                        >
-                                            <option value>Choose</option>
-                                            <option>Germany.</option>
-                                            <option>Germany.</option>
-                                            <option>Germany.</option>
-                                            <option>Germany</option>
-                                        </select>
+                                        </multiselect>
                                         <div class="invalid-feedback">
                                             Please choose
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="col-md-6 mb-2"
-                                    style="margin-top:50px"
-                                >
+                                <div class="col-md-6 mb-2">
+                                    <label>Co-pilot:</label>
+                                    <multiselect
+                                        v-model="input.coPilot"
+                                        :options="options"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        :preserve-search="true"
+                                        placeholder="Choose"
+                                        label="name"
+                                        :custom-label="nameWithId"
+                                        :preselect-first="false"
+                                    >
+                                    </multiselect>
+                                    <div class="invalid-feedback">
+                                        Please choose
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect2"
-                                            >Avaliable flight adtendant</label
-                                        >
-                                        <!-- <select
-                                            multiple
-                                            class="form-control"
-                                            id="exampleFormControlSelect2"
-                                            v-model="input.crew"
-                                        >
-                                            <option
-                                                ></option
-                                            >
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select> -->
+                                        <label
+                                            >Avaliable flight adtendant
+                                        </label>
                                         <multiselect
                                             v-model="input.crew"
                                             :options="options"
@@ -193,6 +187,7 @@
                                             :custom-label="nameWithId"
                                             track-by="name"
                                             :preselect-first="false"
+                                            :max="6"
                                         >
                                             <template
                                                 slot="selection"
@@ -209,6 +204,7 @@
                                                 ></template
                                             >
                                         </multiselect>
+
                                         <div class="invalid-feedback">
                                             Please choose
                                         </div>

@@ -40,20 +40,20 @@
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Role:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+
+                                    <multiselect
+                                        label="name"
                                         v-model="input.role"
-                                        required
+                                        :options="roles"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        :preserve-search="true"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value selected disabledd
-                                            >Choose</option
-                                        >
-                                        <option value="staff">Staff</option>
-                                        <option value="pilot">Pilot</option>
-                                        <option value="flight_attendant"
-                                            >Flight Attendant</option
-                                        >
-                                    </select>
+                                    </multiselect>
 
                                     <div class="invalid-feedback">
                                         Please enter role
@@ -63,33 +63,38 @@
                             <div class="row">
                                 <span class="col-md-6 mb-2">
                                     <label>Airport:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+
+                                    <multiselect
+                                        :custom-label="airportName"
                                         v-model="input.airport"
-                                        required
-                                        id="airport"
+                                        :options="airports"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        :preserve-search="true"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value selected disabledd>Choose</option>
-                                        <option v-for="(airport, i) in airports"
-                                                :key="i" v-bind:value="airport.airport_id"> {{airport.airport_id + ": " + airport.airport_name}}</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
                                 </span>
                                 <span class="col-md-6 mb-2">
                                     <label>Work Status:</label>
-                                    <select
-                                        class="custom-select d-block w-100"
+                                    <multiselect
+                                        label="name"
                                         v-model="input.status"
-                                        required
+                                        :options="status"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
                                     >
-                                        <option value selected disabledd
-                                            >Choose</option
-                                        >
-                                        <option value="1">Active</option>
-                                        <option value="0">Left</option>
-                                    </select>
+                                    </multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -435,62 +440,79 @@
 
                     <hr class="mb-4" />
                     <h5 class="mb-3">Diseases</h5>
-                    <form
-                        class="form-group"
-                        v-for="(disease, k) in diseases"
-                        :key="k"
-                    >
-                        <hr
-                            class="mb-4"
-                            v-show="k || (!k && diseases.length > 1)"
-                        />
-                        <h5
-                            class="mb-3"
-                            v-show="k || (!k && diseases.length > 1)"
+                    <span id="app" @click="seen = !seen"
+                        ><i
+                            v-show="seen"
+                            class="fas fa-plus-circle"
+                            style="color:#4BB543;"
+                            >ADD</i
                         >
-                            Disease info {{ Number(k) + 1 }} :
-                        </h5>
-                        <div class="row">
-                            <span class="col-md-6 mb-2">
-                                <label>Disease:</label>
-                                <div class="input-group">
+                        <i
+                            class="fas fa-minus-circle"
+                            style="color:#ED4337;"
+                            v-show="!seen"
+                            >REMOVE</i
+                        ></span
+                    >
+
+                    <div v-if="!seen" id="hide">
+                        <form
+                            class="form-group"
+                            v-for="(disease, k) in diseases"
+                            :key="k"
+                        >
+                            <hr
+                                class="mb-4"
+                                v-show="k || (!k && diseases.length > 1)"
+                            />
+                            <h5
+                                class="mb-3"
+                                v-show="k || (!k && diseases.length > 1)"
+                            >
+                                Disease info {{ Number(k) + 1 }} :
+                            </h5>
+                            <div class="row">
+                                <span class="col-md-6 mb-2">
+                                    <label>Disease:</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="disease.info"
+                                        />
+                                        <div class="invalid-feedback">
+                                            Please enter
+                                        </div>
+                                    </div>
+                                </span>
+                                <span class="col-md-6 mb-2">
+                                    <label>Note:</label>
                                     <input
                                         type="text"
                                         class="form-control"
-                                        v-model="disease.info"
+                                        v-model="disease.note"
                                     />
                                     <div class="invalid-feedback">
-                                        startdate required.
+                                        Please enter
                                     </div>
-                                </div>
+                                </span>
+                            </div>
+                            <span>
+                                <i
+                                    class="fas fa-plus-circle"
+                                    style="color:#4BB543;"
+                                    @click="add(k)"
+                                    v-show="k == diseases.length - 1"
+                                ></i>
+                                <i
+                                    class="fas fa-minus-circle"
+                                    style="color:#ED4337;"
+                                    @click="remove(k)"
+                                    v-show="k || (!k && diseases.length > 1)"
+                                ></i>
                             </span>
-                            <span class="col-md-6 mb-2">
-                                <label>Note:</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    v-model="disease.note"
-                                />
-                                <div class="invalid-feedback">
-                                    Please enter salary
-                                </div>
-                            </span>
-                        </div>
-                        <span>
-                            <i
-                                class="fas fa-plus-circle"
-                                style="color:#4BB543;"
-                                @click="add(k)"
-                                v-show="k == diseases.length - 1"
-                            ></i>
-                            <i
-                                class="fas fa-minus-circle"
-                                style="color:#ED4337;"
-                                @click="remove(k)"
-                                v-show="k || (!k && diseases.length > 1)"
-                            ></i>
-                        </span>
-                    </form>
+                        </form>
+                    </div>
 
                     <hr class="mb-4" />
                     <button
@@ -506,8 +528,10 @@
 </template>
 
 <script>
+import Multiselect from "vue-multiselect";
 export default {
     name: "registerEmployee",
+    components: { Multiselect },
     data() {
         return {
             input: {
@@ -545,10 +569,21 @@ export default {
                     note: ""
                 }
             ],
-            airports: []
+            airports: [],
+            roles: [
+                { name: "Staff" },
+                { name: " Pilot" },
+                { name: "Flight Attendant" }
+            ],
+            status: [{ name: "Active" }, { name: "Left" }],
+            seen: true
         };
     },
+
     methods: {
+        airportName({ airport_id, airport_name }) {
+            return `[${airport_id}] - ${airport_name}  `;
+        },
         addedu(index) {
             this.edus.push({
                 degree: "",
@@ -579,10 +614,9 @@ export default {
                 details: details,
                 educations: educations,
                 diseases: diseases
-            }
-            axios.post("/api/addEmployee", data).then(response=>{
+            };
+            axios.post("/api/addEmployee", data).then(response => {
                 console.log(response.data);
-
             });
         }
     },
@@ -591,8 +625,7 @@ export default {
             // show all airports onto option
             var AirportID = response.data; // get all aiport
             this.airports = AirportID;
-        }
-    );
+        });
     }
 };
 </script>
