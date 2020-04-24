@@ -2510,10 +2510,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -44231,197 +44227,151 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-6 mb-2" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Captain:")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.input.captain,
-                                expression: "input.captain"
-                              }
-                            ],
-                            staticClass: "custom-select d-block w-100",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.input,
-                                  "captain",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("Captain:")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            attrs: {
+                              options: _vm.options,
+                              searchable: true,
+                              multiple: false,
+                              "close-on-select": false,
+                              "clear-on-select": false,
+                              "preserve-search": true,
+                              placeholder: "Choose",
+                              label: "name",
+                              "custom-label": _vm.nameWithId,
+                              "track-by": "name",
+                              "preselect-first": false
+                            },
+                            model: {
+                              value: _vm.input.captain,
+                              callback: function($$v) {
+                                _vm.$set(_vm.input, "captain", $$v)
+                              },
+                              expression: "input.captain"
                             }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Choose")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany")])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                        Please choose\n                                    "
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Co-pilot:")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.input.coPilot,
-                                expression: "input.coPilot"
-                              }
-                            ],
-                            staticClass: "custom-select d-block w-100",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.input,
-                                  "coPilot",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Choose")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany.")]),
-                            _vm._v(" "),
-                            _c("option", [_vm._v("Germany")])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                        Please choose\n                                    "
-                          )
-                        ])
-                      ])
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        Please choose\n                                    "
+                            )
+                          ])
+                        ],
+                        1
+                      )
                     ]),
                     _vm._v(" "),
                     _c(
                       "div",
-                      {
-                        staticClass: "col-md-6 mb-2",
-                        staticStyle: { "margin-top": "50px" }
-                      },
+                      { staticClass: "col-md-6 mb-2" },
                       [
-                        _c(
-                          "div",
-                          { staticClass: "form-group" },
-                          [
-                            _c(
-                              "label",
-                              { attrs: { for: "exampleFormControlSelect2" } },
-                              [_vm._v("Avaliable flight adtendant")]
-                            ),
-                            _vm._v(" "),
-                            _c("multiselect", {
-                              attrs: {
-                                options: _vm.options,
-                                searchable: true,
-                                multiple: true,
-                                "close-on-select": false,
-                                "clear-on-select": false,
-                                "preserve-search": true,
-                                placeholder: "Choose",
-                                label: "name",
-                                "custom-label": _vm.nameWithId,
-                                "track-by": "name",
-                                "preselect-first": false
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "selection",
-                                  fn: function(ref) {
-                                    var values = ref.values
-                                    var search = ref.search
-                                    var isOpen = ref.isOpen
-                                    return [
-                                      values.length && !isOpen
-                                        ? _c(
-                                            "span",
-                                            {
-                                              staticClass: "multiselect__single"
-                                            },
-                                            [
-                                              _vm._v(
-                                                _vm._s(values.length) +
-                                                  " crew\n                                                selected"
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  }
-                                }
-                              ]),
-                              model: {
-                                value: _vm.input.crew,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.input, "crew", $$v)
-                                },
-                                expression: "input.crew"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                        Please choose\n                                    "
-                              )
-                            ])
-                          ],
-                          1
-                        )
-                      ]
+                        _c("label", [_vm._v("Co-pilot:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            options: _vm.options,
+                            searchable: true,
+                            multiple: false,
+                            "close-on-select": false,
+                            "clear-on-select": false,
+                            "preserve-search": true,
+                            placeholder: "Choose",
+                            label: "name",
+                            "custom-label": _vm.nameWithId,
+                            "track-by": "name",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.coPilot,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "coPilot", $$v)
+                            },
+                            expression: "input.coPilot"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please choose\n                                "
+                          )
+                        ])
+                      ],
+                      1
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12 mb-2" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("Avaliable flight adtendant")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            attrs: {
+                              options: _vm.options,
+                              searchable: true,
+                              multiple: true,
+                              "close-on-select": false,
+                              "clear-on-select": false,
+                              "preserve-search": true,
+                              placeholder: "Choose",
+                              label: "name",
+                              "custom-label": _vm.nameWithId,
+                              "track-by": "name",
+                              "preselect-first": false,
+                              max: 6
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "selection",
+                                fn: function(ref) {
+                                  var values = ref.values
+                                  var search = ref.search
+                                  var isOpen = ref.isOpen
+                                  return [
+                                    values.length && !isOpen
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass: "multiselect__single"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(values.length) +
+                                                " crew\n                                                selected"
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                }
+                              }
+                            ]),
+                            model: {
+                              value: _vm.input.crew,
+                              callback: function($$v) {
+                                _vm.$set(_vm.input, "crew", $$v)
+                              },
+                              expression: "input.crew"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        Please choose\n                                    "
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ])
                   ])
                 ])
               ]),
