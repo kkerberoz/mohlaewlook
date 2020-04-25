@@ -2768,6 +2768,8 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
+      } else {
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     },
     home: function home() {
@@ -3938,7 +3940,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
       } else {
-        swal.fire("Plese Success your form!", "Cilck the button to continue!", "error");
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
   }
@@ -4179,6 +4181,8 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
+      } else {
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
   }
@@ -4473,6 +4477,8 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
+      } else {
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
   }
@@ -45215,21 +45221,25 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("li", { staticStyle: { "margin-top": "50px" } }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "btn btn-block",
-                        attrs: { id: "btnLogin" },
-                        on: { click: _vm.logout }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-power-off" }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Logout")])
-                      ]
-                    )
-                  ])
+                  _c(
+                    "li",
+                    { staticStyle: { "margin-top": "50px", padding: "10px" } },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-block",
+                          attrs: { id: "btnLogin" },
+                          on: { click: _vm.logout }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-power-off" }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Logout")])
+                        ]
+                      )
+                    ]
+                  )
                 ])
               ])
             ])

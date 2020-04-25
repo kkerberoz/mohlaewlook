@@ -128,6 +128,12 @@ export default {
                             }
                         });
                 });
+            } else {
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
             }
         },
         home() {
