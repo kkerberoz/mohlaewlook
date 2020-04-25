@@ -5,11 +5,6 @@
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
                 <form>
-                    <input
-                            type="hidden"
-                            name="_token"
-                            v-bind:value="csrf"
-                    />
                     <h1 class="mb-3" style="display:block ">
                         Employee's Register
                     </h1>
@@ -46,7 +41,7 @@
                                     v-model="input.salary"
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_salary}}
+                                    {{ error.error_salary }}
                                 </div>
                             </span>
                             <span class="col-md-4 mb-2">
@@ -71,16 +66,14 @@
                                 </multiselect>
 
                                 <div class="invalid-feedback">
-                                    {{error.error_role}}
+                                    {{ error.error_role }}
                                 </div>
                             </span>
                         </div>
                         <div class="row">
                             <span class="col-md-6 mb-2">
                                 <label>Airport:</label>
-
                                 <multiselect
-
                                     :custom-label="airportName"
                                     v-model="input.airport"
                                     :options="airports"
@@ -93,7 +86,6 @@
                                     :preselect-first="false"
                                 >
                                 </multiselect>
-
                             </span>
                             <span class="col-md-6 mb-2">
                                 <label>Work Status:</label>
@@ -114,7 +106,7 @@
                                 >
                                 </multiselect>
                                 <div class="invalid-feedback">
-                                    {{error.error_status}}
+                                    {{ error.error_status }}
                                 </div>
                             </span>
                         </div>
@@ -138,7 +130,7 @@
                                         class="invalid-feedback"
                                         style="width: 100%;"
                                     >
-                                        {{error.error_username}}
+                                        {{ error.error_username }}
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +146,7 @@
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_password}}
+                                    {{ error.error_password }}
                                 </div>
                             </div>
                         </div>
@@ -172,7 +164,7 @@
                                         required
                                     />
                                     <div class="invalid-feedback">
-                                        {{error.error_idcard}}
+                                        {{ error.error_idcard }}
                                     </div>
                                 </div>
                             </span>
@@ -223,15 +215,15 @@
                                 </div>
                             </span>
                             <div class="invalid-feedback">
-                                    {{ error.error_gender }}
-                                </div>
+                                {{ error.error_gender }}
+                            </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-2 mb-2">
                                 <label for="state">Title:</label>
                                 <multiselect
-                                     v-bind:class="{
+                                    v-bind:class="{
                                         'is-invalid': error.error_title
                                     }"
                                     label="title"
@@ -247,7 +239,7 @@
                                 >
                                 </multiselect>
                                 <div class="invalid-feedback">
-                                    {{error.error_title}}
+                                    {{ error.error_title }}
                                 </div>
                             </div>
                             <div class="col-md-5 mb-2">
@@ -262,7 +254,7 @@
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_firstname}}
+                                    {{ error.error_firstname }}
                                 </div>
                             </div>
                             <div class="col-md-5 mb-2">
@@ -277,7 +269,7 @@
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_lastname}}
+                                    {{ error.error_lastname }}
                                 </div>
                             </div>
                         </div>
@@ -295,7 +287,7 @@
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_DOB}}
+                                    {{ error.error_DOB }}
                                 </div>
                             </span>
                             <span class="col-md-4 mb-2">
@@ -311,7 +303,7 @@
                                         required
                                     />
                                     <div class="invalid-feedback">
-                                        {{error.error_height}}
+                                        {{ error.error_height }}
                                     </div>
                                 </div>
                             </span>
@@ -328,7 +320,7 @@
                                         required
                                     />
                                     <div class="invalid-feedback">
-                                        {{error.error_weight}}
+                                        {{ error.error_weight }}
                                     </div>
                                 </div>
                             </span>
@@ -339,7 +331,6 @@
                                 <label>Email:</label>
                                 <div class="input-group">
                                     <input
-
                                         type="email"
                                         class="form-control"
                                         v-model="input.email"
@@ -358,7 +349,7 @@
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_phone}}
+                                    {{ error.error_phone }}
                                 </div>
                             </span>
                         </div>
@@ -375,7 +366,7 @@
                                         v-model="input.address"
                                     />
                                     <div class="invalid-feedback">
-                                        {{error.error_address}}
+                                        {{ error.error_address }}
                                     </div>
                                 </div>
                             </span>
@@ -420,7 +411,7 @@
                                 >
                                 </multiselect>
                                 <div class="invalid-feedback">
-                                    {{error.error_edus}}
+                                    {{ error.error_edus }}
                                 </div>
                             </div>
                         </div>
@@ -436,7 +427,7 @@
                                     v-model="edu.university"
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_edus}}
+                                    {{ error.error_edus }}
                                 </div>
                             </div>
                         </div>
@@ -452,7 +443,7 @@
                                     v-model="edu.faculty"
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_edus}}
+                                    {{ error.error_edus }}
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
@@ -466,7 +457,7 @@
                                     v-model="edu.department"
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_edus}}
+                                    {{ error.error_edus }}
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
@@ -480,7 +471,7 @@
                                     v-model="edu.gpa"
                                 />
                                 <div class="invalid-feedback">
-                                    {{error.error_edus}}
+                                    {{ error.error_edus }}
                                 </div>
                             </div>
                         </div>
@@ -597,7 +588,7 @@ import Multiselect from "vue-multiselect";
 export default {
     name: "registerEmployee",
     components: { Multiselect },
-    props: ["csrf", "oldName"],
+
     data() {
         return {
             input: {
@@ -639,7 +630,9 @@ export default {
             roles: [
                 { name: "Staff" },
                 { name: "Pilot" },
-                { name: "Flight Attendant" }
+                { name: "Flight Attendant" },
+                { name: "Human Resource" },
+                { name: "Flight Manager" }
             ],
             status: [
                 { value: 1, name: "Active" },
@@ -648,8 +641,8 @@ export default {
             titles: [
                 { title: "Mr." },
                 { title: "Mrs." },
-                { title: "Mr." },
-                { title: "Mr." }
+                { title: "Ms." },
+                { title: "Miss" }
             ],
             degrees: [
                 "Bachelor's degree",
@@ -657,7 +650,7 @@ export default {
                 "Doctoral degree"
             ],
 
-            error : [
+            error: [
                 {
                     error_start_date: "",
                     error_salary: "",
@@ -687,8 +680,7 @@ export default {
                     errors: []
                 }
             ],
-            seen: true,
-
+            seen: true
         };
     },
     mounted() {
@@ -725,27 +717,27 @@ export default {
             this.diseases.splice(index, 1);
         },
         formSubmit(e) {
-            this.error.error_start_date=null;//
-            this.error.error_salary=null;//
-            this.error.error_airport=null;//////
-            this.error.error_role=null;//
-            this.error.error_status=null;//
-            this.error.error_username=null;//
-            this.error.error_password=null;//
-            this.error.error_idcard=null;//
-            this.error.error_gender=null;//
-            this.error.error_title=null;//
-            this.error.error_firstname=null;//
-            this.error.error_lastname=null;//
-            this.error.error_DOB=null;//
-            this.error. error_height=null;//
-            this.error.error_weight=null;//
-            this.error.error_email=null;///////
-            this.error.error_address=null;//
-            this.error.error_phone=null;//
-            this.error.error_edus=null;//
-            this.error.errors = [];
             e.preventDefault();
+            this.error.errors = [];
+            this.error.error_start_date = null; //
+            this.error.error_salary = null; //
+            this.error.error_airport = null; //////
+            this.error.error_role = null; //
+            this.error.error_status = null; //
+            this.error.error_username = null; //
+            this.error.error_password = null; //
+            this.error.error_idcard = null; //
+            this.error.error_gender = null; //
+            this.error.error_title = null; //
+            this.error.error_firstname = null; //
+            this.error.error_lastname = null; //
+            this.error.error_DOB = null; //
+            this.error.error_height = null; //
+            this.error.error_weight = null; //
+            this.error.error_email = null; ///////
+            this.error.error_address = null; //
+            this.error.error_phone = null; //
+            this.error.error_edus = null; //
             let details = {
                 start_date: this.input.start_date,
                 salary: this.input.salary,
@@ -781,13 +773,13 @@ export default {
                 this.error.error_start_date = null;
             }
 
-            if(!this.input.salary){
+            if (!this.input.salary) {
                 this.error.error_salary = "Please fill the salary.";
                 this.error.errors.push(this.error.error_salary);
-            }else if(isNaN(this.input.salary)){
+            } else if (isNaN(this.input.salary)) {
                 this.error.error_salary = "Please fill only number.";
                 this.error.errors.push(this.error.error_salary);
-            }else{
+            } else {
                 this.error.error_salary = null;
             }
 
@@ -805,20 +797,19 @@ export default {
                 this.error.error_status = null;
             }
 
-
             if (!this.input.username.trim()) {
                 this.error_username = "Please fill your username.";
                 this.errors.push(this.error.error_username);
-            }else {
+            } else {
                 this.error.error_username = null;
             }
-
 
             if (!this.input.password) {
                 this.error.error_password = "Please fill your password.";
                 this.error.errors.push(this.error.error_password);
             } else if (this.input.password.length < 6) {
-                this.error.error_password ="Password has to be at least 6 characters long.";
+                this.error.error_password =
+                    "Password has to be at least 6 characters long.";
                 this.error.errors.push(this.error.error_password);
             } else {
                 this.error.error_password = null;
@@ -828,20 +819,18 @@ export default {
                 this.error.error_idcard = "Please fill your id card.";
                 this.error.errors.push(this.error.error_idcard);
             } else if (this.input.idcard.length != 13) {
-                this.error.error_idcard ="Password must be 13 characters.";
+                this.error.error_idcard = "Password must be 13 characters.";
                 this.error.errors.push(this.error.error_idcard);
             } else {
                 this.error.error_idcard = null;
             }
 
-            if(!this.input.gender){
+            if (!this.input.gender) {
                 this.error.error_gender = "Please select the gender.";
                 this.error.errors.push(this.error.error_gender);
-            }else{
+            } else {
                 this.input.error_gender = null;
             }
-
-
 
             if (!this.input.title.title) {
                 this.error.error_title = "Please select your title.";
@@ -850,14 +839,12 @@ export default {
                 this.error.error_title = null;
             }
 
-
             if (!this.input.firstname.trim()) {
                 this.error.error_name = "Please fill your first name.";
                 this.error.errors.push(this.error.error_name);
             } else {
                 this.error.error_name = null;
             }
-
 
             if (!this.input.lastname.trim()) {
                 this.error.error_surname = "Please fill your last name.";
@@ -880,35 +867,32 @@ export default {
                 this.error.error_address = null;
             }
 
-
-            if(!this.input.phone.trim()){
+            if (!this.input.phone.trim()) {
                 this.error.error_phone = "Please fill your phone number.";
                 this.error.errors.push(this.error.error_phone);
-            }else{
+            } else {
                 this.error.errors.push(this.error.error_phone);
             }
 
-
-            if(!this.input.height){
+            if (!this.input.height) {
                 this.error.error_height = "Please fill you height.";
                 this.error.errors.push(this.error.error_height);
-            }else if(isNaN(this.input.height)){
+            } else if (isNaN(this.input.height)) {
                 this.error.error_height = "Please fill only number.";
                 this.error.errors.push(this.error.error_height);
-            }else{
+            } else {
                 this.error.error_height = null;
             }
 
-            if(!this.input.weight){
+            if (!this.input.weight) {
                 this.error.error_weight = "Please fill you weight.";
                 this.error.errors.push(this.error.error_weight);
-            }else if(isNaN(this.input.weight)){
+            } else if (isNaN(this.input.weight)) {
                 this.error.error_weight = "Please fill only number.";
                 this.error.errors.push(this.error.error_weight);
-            }else{
+            } else {
                 this.error.error_weight = null;
             }
-
 
             if (!this.edus) {
                 this.error.error_edus = "Please fill the detail.";
@@ -917,24 +901,21 @@ export default {
                 this.error.error_edus = null;
             }
 
-            console.log(errors);
-
-
-            if(!this.error.errors.lenght)
-            {
+            if (!this.error.errors.lenght) {
                 axios.get("/sanctum/csrf-cookie").then(response => {
-                    axios.post("/api/admin/addEmployee", data).then(response => {
-                        swal.fire(
-                            "Register Success!",
-                            "Cilck the button to continue!",
-                            "success"
-                        ).then(() => {
-                            this.$router.push({ name: "/adminHome" });
+                    axios
+                        .post("/api/admin/addEmployee", data)
+                        .then(response => {
+                            swal.fire(
+                                "Register Success!",
+                                "Cilck the button to continue!",
+                                "success"
+                            ).then(() => {
+                                this.$router.push("/adminHome");
+                            });
                         });
-                    });
                 });
             }
-
         }
     }
 };

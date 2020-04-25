@@ -3538,22 +3538,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
-  props: ["csrf", "oldName"],
   data: function data() {
     return {
       input: {
@@ -3594,6 +3584,10 @@ __webpack_require__.r(__webpack_exports__);
         name: "Pilot"
       }, {
         name: "Flight Attendant"
+      }, {
+        name: "Human Resource"
+      }, {
+        name: "Flight Manager"
       }],
       status: [{
         value: 1,
@@ -3607,9 +3601,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         title: "Mrs."
       }, {
-        title: "Mr."
+        title: "Ms."
       }, {
-        title: "Mr."
+        title: "Miss"
       }],
       degrees: ["Bachelor's degree", "Master's degree", "Doctoral degree"],
       error: [{
@@ -3683,6 +3677,8 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this2 = this;
 
+      e.preventDefault();
+      this.error.errors = [];
       this.error.error_start_date = null; //
 
       this.error.error_salary = null; //
@@ -3721,8 +3717,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.error.error_edus = null; //
 
-      this.error.errors = [];
-      e.preventDefault();
       var details = {
         start_date: this.input.start_date,
         salary: this.input.salary,
@@ -3888,15 +3882,11 @@ __webpack_require__.r(__webpack_exports__);
         this.error.error_edus = null;
       }
 
-      console.log(errors);
-
       if (!this.error.errors.lenght) {
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.push({
-                name: "/adminHome"
-              });
+              _this2.$router.push("/adminHome");
             });
           });
         });
@@ -45274,11 +45264,6 @@ var render = function() {
             _c(
               "form",
               [
-                _c("input", {
-                  attrs: { type: "hidden", name: "_token" },
-                  domProps: { value: _vm.csrf }
-                }),
-                _vm._v(" "),
                 _c(
                   "h1",
                   { staticClass: "mb-3", staticStyle: { display: "block" } },
@@ -45741,9 +45726,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
                       _vm._v(
-                        "\n                                " +
+                        "\n                            " +
                           _vm._s(_vm.error.error_gender) +
-                          "\n                            "
+                          "\n                        "
                       )
                     ])
                   ]),
@@ -63561,10 +63546,7 @@ var routes = [{
 }, {
   path: "/adminLogin",
   name: "adminLogin",
-  component: __webpack_require__(/*! ./pages/admin/adminLogin.vue */ "./resources/js/pages/admin/adminLogin.vue")["default"],
-  meta: {
-    requiresVisitor: true
-  }
+  component: __webpack_require__(/*! ./pages/admin/adminLogin.vue */ "./resources/js/pages/admin/adminLogin.vue")["default"]
 }, {
   path: "/admin",
   component: __webpack_require__(/*! ./pages/admin/admin_control.vue */ "./resources/js/pages/admin/admin_control.vue")["default"],

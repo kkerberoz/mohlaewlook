@@ -31,8 +31,7 @@ let routes = [
     {
         path: "/adminLogin",
         name: "adminLogin",
-        component: require("./pages/admin/adminLogin.vue").default,
-        meta: { requiresVisitor: true }
+        component: require("./pages/admin/adminLogin.vue").default
     },
     {
         path: "/admin",

@@ -60,7 +60,9 @@ class AdminController extends Controller
         $employee_role = array(
             array("role_name" => "staff", "initial" => "STA"),
             array("role_name" => "pilot", "initial" => "PLT"),
-            array("role_name" => "flight_attendant", "initial" => "FAD")
+            array("role_name" => "flight attendant", "initial" => "FAD"),
+            array("role_name" => "human resource", "initial" => "HR"),
+            array("role_name" => "flight manager", "initial" => "FM")
         );
         foreach ($employee_role as $role) {
             if (!strcmp(strtolower($detail_data['role']), $role["role_name"])) {
@@ -71,6 +73,7 @@ class AdminController extends Controller
                         $id[$i] = str_replace($role["initial"], "", $user_id_search[$i]['user_id']);
                     $user_id = $role["initial"] . sprintf("%08d", max($id) + 1);
                 }
+                $detail_data['role'] = str_replace(" ", "_", $detail_data['role'] );
             }
         }
         // add into employees table
