@@ -80,13 +80,14 @@
                                     <span>Homepage</span>
                                 </router-link>
                             </li>
-                            <li>
+
+                            <li style="margin-top:50px">
                                 <div
                                     id="btnLogin"
                                     @click="logout"
-                                    class="btn btn-block btn-login"
+                                    class="btn btn-block"
                                 >
-                                    <i class="fas fa-home"></i>
+                                    <i class="fas fa-power-off"></i>
                                     <span>Logout</span>
                                 </div>
                             </li>
@@ -117,9 +118,22 @@ export default {
         };
     },
     mounted() {
-        axios.get("/api/user").then(response => {
-            this.user = response.data;
-        });
+        axios
+            .get("/api/admin/init")
+            .then(response => {
+                this.user = response.data;
+            })
+            .catch(error => {
+                if (error.response.status === 401) {
+                    swal.fire(
+                        "Please log in.",
+                        "Cilck the button to continue!",
+                        "error"
+                    ).then(() => {
+                        this.$router.push({ name: "adminLogin" });
+                    });
+                }
+            });
     },
     methods: {
         closeMenu() {
@@ -129,7 +143,7 @@ export default {
             axios.get("/sanctum/csrf-cookie").then(response => {
                 axios.post("/api/admin/logout").then(() => {
                     localStorage.removeItem("isAdmin");
-                    this.$router.push({ path: "/admin" });
+                    this.$router.push({ name: "adminLogin" });
                 });
             });
         }

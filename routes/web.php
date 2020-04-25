@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/{any}', 'PagesController@index')->where('any', '^(?!api\/)[\/\w\.-]*');
-Route::get('/', 'PagesController@index');
+Route::get('/{any}', 'PagesController@index')->where('any', '^(?!api\/)[\/\w\.-]*');
+// Route::get('/', 'PagesController@index');

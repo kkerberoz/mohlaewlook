@@ -41,13 +41,17 @@
                             >
                                 Sign in
                             </button>
+                            <button
+                                @click="home"
+                                id="btnLogin2"
+                                class="btn btn-block btn-login"
+                            >
+                                HOME
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
-        </div>
-        <div id="btnLogin" @click="logout" class="btn btn-block btn-login">
-            logout
         </div>
     </div>
 </template>
@@ -63,11 +67,6 @@ export default {
             error_password: "",
             errors: []
         };
-    },
-    mounted() {
-        axios.get("/api/admin/init").then(response => {
-            console.log(response.data);
-        });
     },
     methods: {
         formSubmit(e) {
@@ -112,7 +111,7 @@ export default {
                                 "success"
                             ).then(() => {
                                 localStorage.setItem("isAdmin", "true");
-                                this.$router.push({ name: "newEmployee" });
+                                this.$router.push("/admin");
                             });
                         })
                         .catch(error => {
@@ -131,13 +130,8 @@ export default {
                 });
             }
         },
-        logout() {
-            axios.get("/sanctum/csrf-cookie").then(response => {
-                axios.post("/api/admin/logout").then(() => {
-                    localStorage.removeItem("isAdmin");
-                    this.$router.push("/admin");
-                });
-            });
+        home() {
+            this.$router.push("/");
         }
     }
 };
@@ -166,6 +160,15 @@ export default {
     background: #56ab2f;
     background: -webkit-linear-gradient(to left, #a8e063, #56ab2f);
     background: linear-gradient(to left, #a8e063, #56ab2f);
+    border-radius: 0px;
+}
+#btnLogin2 {
+    border: none;
+    border-radius: 0px;
+}
+#btnLogin2:hover {
+    border: none;
+    transition: 0.7s;
     border-radius: 0px;
 }
 </style>

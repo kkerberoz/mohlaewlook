@@ -28,8 +28,14 @@ class AdminController extends Controller
 
     public function init()
     {
-        $employee = Employee::all();
-        return response()->json($employee, 200);
+        if (Auth::guard('employee')->check()) {
+            $employee = Auth::guard('employee')->user();
+            return response()->json($employee, 200);
+        } else {
+            return response()->json([
+                'error' => "Please Login !!!"
+            ], 401);
+        }
     }
 
     public function login(Request $request)
