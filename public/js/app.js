@@ -8630,7 +8630,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\n    background: #4ecdc4;\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n#adminLogin {\r\n    background: #4ecdc4;\r\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -8649,7 +8649,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
 
 // exports
 
@@ -62405,15 +62405,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue ***!
   \*******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _registerEmployee_vue_vue_type_template_id_0228415a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=template&id=0228415a& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=template&id=0228415a&");
 /* harmony import */ var _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -62443,7 +62442,7 @@ component.options.__file = "resources/js/pages/admin/registerEmployee.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62908,8 +62907,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
