@@ -2718,6 +2718,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    home: function home() {
+      this.$router.push("/");
+    },
     formSubmit: function formSubmit(e) {
       var _this = this;
 
@@ -2768,12 +2771,7 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
-      } else {
-        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
-    },
-    home: function home() {
-      this.$router.push("/");
     }
   }
 });
