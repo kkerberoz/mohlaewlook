@@ -18,7 +18,7 @@ window.toast = toast;
 import routes from "./routes";
 
 const router = new VueRouter({
-    // mode: "history",
+    mode: "history",
     routes // short for `routes: routes`
 });
 /**
@@ -36,6 +36,9 @@ Vue.component("app-footer", require("./components/app-footer.vue").default);
 
 function isLoggedIn() {
     return localStorage.getItem("isLoggedIn");
+}
+function isAdmin() {
+    return localStorage.getItem("isAdmin");
 }
 
 router.beforeEach((to, from, next) => {
@@ -55,6 +58,16 @@ router.beforeEach((to, from, next) => {
         if (isLoggedIn()) {
             next({
                 name: "info"
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresAdmin)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!isAdmin()) {
+            next({
+                name: "adminLogin"
             });
         } else {
             next();

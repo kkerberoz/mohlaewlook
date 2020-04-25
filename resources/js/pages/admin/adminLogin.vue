@@ -41,6 +41,13 @@
                             >
                                 Sign in
                             </button>
+                            <button
+                                @click="home"
+                                id="btnLogin2"
+                                class="btn btn-block btn-login"
+                            >
+                                HOME
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -60,11 +67,6 @@ export default {
             error_password: "",
             errors: []
         };
-    },
-    mounted() {
-        axios.get("/api/backend/init").then(response => {
-            console.log(response.data);
-        });
     },
     methods: {
         formSubmit(e) {
@@ -99,16 +101,17 @@ export default {
                 };
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
-                        .post("/api/backend/login", data)
+                        .post("/api/admin/login", data)
                         .then(response => {
+                            console.log(response.data);
                             this.admin = response.data;
                             swal.fire(
                                 "Login Success!",
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                localStorage.setItem("isLoggedIn", "true");
-                                this.$router.go({ name: "admin" });
+                                localStorage.setItem("isAdmin", "true");
+                                this.$router.push("/admin");
                             });
                         })
                         .catch(error => {
@@ -126,6 +129,9 @@ export default {
                         });
                 });
             }
+        },
+        home() {
+            this.$router.push("/");
         }
     }
 };
@@ -154,6 +160,15 @@ export default {
     background: #56ab2f;
     background: -webkit-linear-gradient(to left, #a8e063, #56ab2f);
     background: linear-gradient(to left, #a8e063, #56ab2f);
+    border-radius: 0px;
+}
+#btnLogin2 {
+    border: none;
+    border-radius: 0px;
+}
+#btnLogin2:hover {
+    border: none;
+    transition: 0.7s;
     border-radius: 0px;
 }
 </style>
