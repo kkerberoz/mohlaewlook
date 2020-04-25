@@ -239,7 +239,7 @@
                                                 checked
                                                 value="Male"
                                             />
-                                            Male &nbsp
+                                            Male
                                         </label>
                                         <label
                                             class="radio-inline"
@@ -423,7 +423,7 @@
                                                 checked
                                                 value="Male"
                                             />
-                                            Male &nbsp
+                                            Male 
                                         </label>
                                         <label
                                             class="radio-inline"
