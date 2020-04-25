@@ -120,8 +120,8 @@ class AdminController extends Controller
 
     public function logout()
     {
-        Auth::guard('employee')->logout();
-
+        // Auth::guard('employee')->logout();
+        Auth::logout();
         return response()->json(true, 200);
     }
 }

@@ -5,6 +5,11 @@
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
                 <form>
+                    <input
+                            type="hidden"
+                            name="_token"
+                            v-bind:value="csrf"
+                    />
                     <h1 class="mb-3" style="display:block ">
                         Employee's Register
                     </h1>
@@ -17,25 +22,31 @@
                                 <label>Start Date:</label>
                                 <div class="input-group">
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error.error_start_date
+                                        }"
                                         required
                                         type="date"
                                         class="form-control"
                                         v-model="input.start_date"
                                     />
-                                    <div class="invalid-feedback">
-                                        start date required.
-                                    </div>
+                                    <span class="invalid-feedback">{{
+                                        error.error_start_date
+                                    }}</span>
                                 </div>
                             </span>
                             <span class="col-md-4 mb-2">
                                 <label>Salary:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_salary
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="input.salary"
                                 />
                                 <div class="invalid-feedback">
-                                    Please enter salary
+                                    {{error.error_salary}}
                                 </div>
                             </span>
                             <span class="col-md-4 mb-2">
@@ -43,6 +54,9 @@
 
                                 <multiselect
                                     label="name"
+                                    v-bind:class="{
+                                        'is-invalid': error.error_role
+                                    }"
                                     v-model="input.role"
                                     :options="roles"
                                     :searchable="true"
@@ -57,7 +71,7 @@
                                 </multiselect>
 
                                 <div class="invalid-feedback">
-                                    Please enter role
+                                    {{error.error_role}}
                                 </div>
                             </span>
                         </div>
@@ -66,6 +80,7 @@
                                 <label>Airport:</label>
 
                                 <multiselect
+
                                     :custom-label="airportName"
                                     v-model="input.airport"
                                     :options="airports"
@@ -78,14 +93,15 @@
                                     :preselect-first="false"
                                 >
                                 </multiselect>
-                                <div class="invalid-feedback">
-                                    Please choose
-                                </div>
+
                             </span>
                             <span class="col-md-6 mb-2">
                                 <label>Work Status:</label>
                                 <multiselect
                                     label="name"
+                                    v-bind:class="{
+                                        'is-invalid': error.error_status
+                                    }"
                                     v-model="input.status"
                                     :options="status"
                                     :searchable="true"
@@ -98,7 +114,7 @@
                                 >
                                 </multiselect>
                                 <div class="invalid-feedback">
-                                    Please choose
+                                    {{error.error_status}}
                                 </div>
                             </span>
                         </div>
@@ -110,6 +126,9 @@
                                 <label>Username:</label>
                                 <div class="input-group">
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error.error_username
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.username"
@@ -119,20 +138,23 @@
                                         class="invalid-feedback"
                                         style="width: 100%;"
                                     >
-                                        Your username is required.
+                                        {{error.error_username}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label>Password:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_password
+                                    }"
                                     type="password"
                                     class="form-control"
                                     v-model="input.password"
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    Please enter
+                                    {{error.error_password}}
                                 </div>
                             </div>
                         </div>
@@ -141,13 +163,16 @@
                                 <label>ID-Card:</label>
                                 <div class="input-group">
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error.error_idcard
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.idcard"
                                         required
                                     />
                                     <div class="invalid-feedback">
-                                        Your id-card is required.
+                                        {{error.error_idcard}}
                                     </div>
                                 </div>
                             </span>
@@ -156,6 +181,9 @@
                                 <br />
                                 <div class="form-check form-check-inline">
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error.error_gender
+                                        }"
                                         class="form-check-input"
                                         type="radio"
                                         value="male"
@@ -194,12 +222,18 @@
                                     >
                                 </div>
                             </span>
+                            <div class="invalid-feedback">
+                                    {{ error.error_gender }}
+                                </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-2 mb-2">
                                 <label for="state">Title:</label>
                                 <multiselect
+                                     v-bind:class="{
+                                        'is-invalid': error.error_title
+                                    }"
                                     label="title"
                                     v-model="input.title"
                                     :options="titles"
@@ -213,31 +247,37 @@
                                 >
                                 </multiselect>
                                 <div class="invalid-feedback">
-                                    Please choose
+                                    {{error.error_title}}
                                 </div>
                             </div>
                             <div class="col-md-5 mb-2">
                                 <label>First name:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_firstname
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="input.firstname"
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    Valid first name is required.
+                                    {{error.error_firstname}}
                                 </div>
                             </div>
                             <div class="col-md-5 mb-2">
                                 <label>Last name:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_lastname
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="input.lastname"
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    Valid last name is required.
+                                    {{error.error_lastname}}
                                 </div>
                             </div>
                         </div>
@@ -246,26 +286,32 @@
                             <span class="col-md-4 mb-2">
                                 <label>Date of Birth:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_DOB
+                                    }"
                                     type="date"
                                     class="form-control"
                                     v-model="input.DOB"
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    Please enter date
+                                    {{error.error_DOB}}
                                 </div>
                             </span>
                             <span class="col-md-4 mb-2">
                                 <label>Height:</label>
                                 <div class="input-group">
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error.error_height
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.height"
                                         required
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter height
+                                        {{error.error_height}}
                                     </div>
                                 </div>
                             </span>
@@ -273,13 +319,16 @@
                                 <label>Weight:</label>
                                 <div class="input-group">
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error.error_weight
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.weight"
                                         required
                                     />
                                     <div class="invalid-feedback">
-                                        plz enter weight
+                                        {{error.error_weight}}
                                     </div>
                                 </div>
                             </span>
@@ -290,26 +339,26 @@
                                 <label>Email:</label>
                                 <div class="input-group">
                                     <input
+
                                         type="email"
                                         class="form-control"
                                         v-model="input.email"
-                                        required
                                     />
-                                    <div class="invalid-feedback">
-                                        Your email is required.
-                                    </div>
                                 </div>
                             </span>
                             <span class="col-md-6 mb-2">
                                 <label>Phone Number:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_phone
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="input.phone"
                                     required
                                 />
                                 <div class="invalid-feedback">
-                                    Please enter Phone
+                                    {{error.error_phone}}
                                 </div>
                             </span>
                         </div>
@@ -318,12 +367,15 @@
                                 <label>Address:</label>
                                 <div class="input-group">
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error.error_address
+                                        }"
                                         type="email"
                                         class="form-control"
                                         v-model="input.address"
                                     />
                                     <div class="invalid-feedback">
-                                        Your address is required.
+                                        {{error.error_address}}
                                     </div>
                                 </div>
                             </span>
@@ -353,6 +405,9 @@
                             <div class="col-md-12 mb-2">
                                 <label>Degree:</label>
                                 <multiselect
+                                    v-bind:class="{
+                                        'is-invalid': error.error_edus
+                                    }"
                                     v-model="edu.degree"
                                     :options="degrees"
                                     :searchable="true"
@@ -365,7 +420,7 @@
                                 >
                                 </multiselect>
                                 <div class="invalid-feedback">
-                                    Please choose
+                                    {{error.error_edus}}
                                 </div>
                             </div>
                         </div>
@@ -373,12 +428,15 @@
                             <div class="col-md-12 mb-2">
                                 <label>University:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_edus
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="edu.university"
                                 />
                                 <div class="invalid-feedback">
-                                    university is required.
+                                    {{error.error_edus}}
                                 </div>
                             </div>
                         </div>
@@ -386,34 +444,43 @@
                             <div class="col-md-4 mb-2">
                                 <label>Faculty:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_edus
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="edu.faculty"
                                 />
                                 <div class="invalid-feedback">
-                                    Faculty is required.
+                                    {{error.error_edus}}
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label>Department:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_edus
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="edu.department"
                                 />
                                 <div class="invalid-feedback">
-                                    Department is required.
+                                    {{error.error_edus}}
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label>GPA:</label>
                                 <input
+                                    v-bind:class="{
+                                        'is-invalid': error.error_edus
+                                    }"
                                     type="text"
                                     class="form-control"
                                     v-model="edu.gpa"
                                 />
                                 <div class="invalid-feedback">
-                                    DPA is required.
+                                    {{error.error_edus}}
                                 </div>
                             </div>
                         </div>
@@ -530,6 +597,7 @@ import Multiselect from "vue-multiselect";
 export default {
     name: "registerEmployee",
     components: { Multiselect },
+    props: ["csrf", "oldName"],
     data() {
         return {
             input: {
@@ -588,7 +656,39 @@ export default {
                 "Master's degree",
                 "Doctoral degree"
             ],
-            seen: true
+
+            error : [
+                {
+                    error_start_date: "",
+                    error_salary: "",
+                    error_airport: "",
+                    error_role: "",
+                    error_status: "",
+                    error_username: "",
+                    error_password: "",
+                    error_idcard: "",
+                    error_gender: "",
+                    error_title: "",
+                    error_firstname: "",
+                    error_lastname: "",
+                    error_DOB: "",
+                    error_height: "",
+                    error_weight: "",
+                    error_email: "",
+                    error_address: "",
+                    error_phone: "",
+                    error_degree: "",
+                    error_university: "",
+                    error_faculty: "",
+                    error_department: "",
+                    error_gpa: "",
+                    error_info: "",
+                    error_note: "",
+                    errors: []
+                }
+            ],
+            seen: true,
+
         };
     },
     mounted() {
@@ -625,6 +725,26 @@ export default {
             this.diseases.splice(index, 1);
         },
         formSubmit(e) {
+            this.error.error_start_date=null;//
+            this.error.error_salary=null;//
+            this.error.error_airport=null;//////
+            this.error.error_role=null;//
+            this.error.error_status=null;//
+            this.error.error_username=null;//
+            this.error.error_password=null;//
+            this.error.error_idcard=null;//
+            this.error.error_gender=null;//
+            this.error.error_title=null;//
+            this.error.error_firstname=null;//
+            this.error.error_lastname=null;//
+            this.error.error_DOB=null;//
+            this.error. error_height=null;//
+            this.error.error_weight=null;//
+            this.error.error_email=null;///////
+            this.error.error_address=null;//
+            this.error.error_phone=null;//
+            this.error.error_edus=null;//
+            this.error.errors = [];
             e.preventDefault();
             let details = {
                 start_date: this.input.start_date,
@@ -654,17 +774,167 @@ export default {
                 diseases: diseases
             };
 
-            axios.get("/sanctum/csrf-cookie").then(response => {
-                axios.post("/api/admin/addEmployee", data).then(response => {
-                    swal.fire(
-                        "Register Success!",
-                        "Cilck the button to continue!",
-                        "success"
-                    ).then(() => {
-                        this.$router.push("/admin");
+            if (!this.input.start_date) {
+                this.error.error_start_date = "Please select your start date.";
+                this.error.errors.push(this.error.error_start_date);
+            } else {
+                this.error.error_start_date = null;
+            }
+
+            if(!this.input.salary){
+                this.error.error_salary = "Please fill the salary.";
+                this.error.errors.push(this.error.error_salary);
+            }else if(isNaN(this.input.salary)){
+                this.error.error_salary = "Please fill only number.";
+                this.error.errors.push(this.error.error_salary);
+            }else{
+                this.error.error_salary = null;
+            }
+
+            if (!this.input.role) {
+                this.error.error_role = "Please select your role.";
+                this.error.errors.push(this.error.error_role);
+            } else {
+                this.error.error_role = null;
+            }
+
+            if (!this.input.status) {
+                this.error.error_status = "Please select your work status.";
+                this.error.errors.push(this.error.error_status);
+            } else {
+                this.error.error_status = null;
+            }
+
+
+            if (!this.input.username.trim()) {
+                this.error_username = "Please fill your username.";
+                this.errors.push(this.error.error_username);
+            }else {
+                this.error.error_username = null;
+            }
+
+
+            if (!this.input.password) {
+                this.error.error_password = "Please fill your password.";
+                this.error.errors.push(this.error.error_password);
+            } else if (this.input.password.length < 6) {
+                this.error.error_password ="Password has to be at least 6 characters long.";
+                this.error.errors.push(this.error.error_password);
+            } else {
+                this.error.error_password = null;
+            }
+
+            if (!this.input.idcard) {
+                this.error.error_idcard = "Please fill your id card.";
+                this.error.errors.push(this.error.error_idcard);
+            } else if (this.input.idcard.length != 13) {
+                this.error.error_idcard ="Password must be 13 characters.";
+                this.error.errors.push(this.error.error_idcard);
+            } else {
+                this.error.error_idcard = null;
+            }
+
+            if(!this.input.gender){
+                this.error.error_gender = "Please select the gender.";
+                this.error.errors.push(this.error.error_gender);
+            }else{
+                this.input.error_gender = null;
+            }
+
+
+
+            if (!this.input.title.title) {
+                this.error.error_title = "Please select your title.";
+                this.error.errors.push(this.error.error_title);
+            } else {
+                this.error.error_title = null;
+            }
+
+
+            if (!this.input.firstname.trim()) {
+                this.error.error_name = "Please fill your first name.";
+                this.error.errors.push(this.error.error_name);
+            } else {
+                this.error.error_name = null;
+            }
+
+
+            if (!this.input.lastname.trim()) {
+                this.error.error_surname = "Please fill your last name.";
+                this.error.errors.push(this.error.error_surname);
+            } else {
+                this.error.error_surname = null;
+            }
+
+            if (!this.input.DOB) {
+                this.error.error_DOB = "Please select your Date of Birth.";
+                this.error.errors.push(this.error.error_DOB);
+            } else {
+                this.error.error_DOB = null;
+            }
+
+            if (!this.input.address.trim()) {
+                this.error.error_address = "Please fill your address.";
+                this.error.errors.push(this.error.error_address);
+            } else {
+                this.error.error_address = null;
+            }
+
+
+            if(!this.input.phone.trim()){
+                this.error.error_phone = "Please fill your phone number.";
+                this.error.errors.push(this.error.error_phone);
+            }else{
+                this.error.errors.push(this.error.error_phone);
+            }
+
+
+            if(!this.input.height){
+                this.error.error_height = "Please fill you height.";
+                this.error.errors.push(this.error.error_height);
+            }else if(isNaN(this.input.height)){
+                this.error.error_height = "Please fill only number.";
+                this.error.errors.push(this.error.error_height);
+            }else{
+                this.error.error_height = null;
+            }
+
+            if(!this.input.weight){
+                this.error.error_weight = "Please fill you weight.";
+                this.error.errors.push(this.error.error_weight);
+            }else if(isNaN(this.input.weight)){
+                this.error.error_weight = "Please fill only number.";
+                this.error.errors.push(this.error.error_weight);
+            }else{
+                this.error.error_weight = null;
+            }
+
+
+            if (!this.edus) {
+                this.error.error_edus = "Please fill the detail.";
+                this.error.errors.push(this.error.error_edus);
+            } else {
+                this.error.error_edus = null;
+            }
+
+            console.log(errors);
+
+
+            if(!this.error.errors.lenght)
+            {
+                axios.get("/sanctum/csrf-cookie").then(response => {
+                    axios.post("/api/admin/addEmployee", data).then(response => {
+                        swal.fire(
+                            "Register Success!",
+                            "Cilck the button to continue!",
+                            "success"
+                        ).then(() => {
+                            this.$router.push({ name: "/adminHome" });
+                        });
                     });
                 });
-            });
+            }
+
         }
     }
 };
