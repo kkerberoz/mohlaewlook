@@ -2715,9 +2715,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/admin/logout").then(function () {
           localStorage.removeItem("isAdmin");
 
-          _this2.$router.push({
-            path: "/admin"
-          });
+          _this2.$router.push("/admin");
         });
       });
     }
@@ -3500,7 +3498,7 @@ __webpack_require__.r(__webpack_exports__);
     airportName: function airportName(_ref) {
       var airport_id = _ref.airport_id,
           airport_name = _ref.airport_name;
-      return "[".concat(airport_id, "] - ").concat(airport_name, "  ");
+      return "[".concat(airport_id, "] - ").concat(airport_name);
     },
     addedu: function addedu(index) {
       this.edus.push({
@@ -3561,7 +3559,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/admin/addEmployee", data).then(function (response) {
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
             _this2.$router.push({
-              name: "/adminHome"
+              name: "adminHome"
             });
           });
         });
@@ -8697,7 +8695,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
 
 // exports
 
@@ -62495,15 +62493,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue ***!
   \*******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _registerEmployee_vue_vue_type_template_id_0228415a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=template&id=0228415a& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=template&id=0228415a&");
 /* harmony import */ var _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -62533,7 +62530,7 @@ component.options.__file = "resources/js/pages/admin/registerEmployee.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63001,8 +62998,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

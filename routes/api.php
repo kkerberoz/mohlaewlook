@@ -25,10 +25,12 @@ Route::post('login', 'UserController@login');
 Route::post('regis', 'UserController@register');
 Route::post('logout', 'UserController@logout');
 
+Route::prefix("admin")->group(function () {
+    Route::post('/login', 'AdminController@login');
+    Route::post('/logout', 'AdminController@logout');
+    Route::post('/addEmployee', 'AdminController@addEmployee');
+    Route::get('/init', 'AdminController@init');
+});
 
-Route::get('admin/init', 'AdminController@init');
-Route::post('admin/login', 'AdminController@login');
-Route::post('admin/logout', 'AdminController@logout');
-Route::post('admin/addEmployee', 'AdminController@addEmployee');
 
 Route::get('backend/getAirports', 'BackendController@getAirports');

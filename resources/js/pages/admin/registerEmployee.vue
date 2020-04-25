@@ -601,7 +601,7 @@ export default {
 
     methods: {
         airportName({ airport_id, airport_name }) {
-            return `[${airport_id}] - ${airport_name}  `;
+            return `[${airport_id}] - ${airport_name}`;
         },
         addedu(index) {
             this.edus.push({
@@ -661,7 +661,7 @@ export default {
                         "Cilck the button to continue!",
                         "success"
                     ).then(() => {
-                        this.$router.push({ name: "/adminHome" });
+                        this.$router.push({ name: "adminHome" });
                     });
                 });
             });

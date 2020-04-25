@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    protected function guard()
+    {
+        // specify the guard that should be used for login attempts
+        return Auth::guard('employee');
+    }
+
+    // public function __construct()
+    // {
+    //     Auth::shouldUse("employee");
+    //     // $this->middleware('auth:sanctum', ['except' => ['login', 'logout', 'addEmployee', 'init']]);
+    // }
 
     public function init()
     {
@@ -23,7 +34,7 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        if (Auth::guard('employee')->attempt(['username' => $request->username, 'password' => $request->password])) {
             $employee = Auth::guard('employee')->user();
             return response()->json($employee, 200);
         } else {
