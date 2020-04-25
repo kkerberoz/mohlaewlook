@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Aircraft_model extends Model
+class Aircraft extends Model
 {
 
     public $timestamps = false;

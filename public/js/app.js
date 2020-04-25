@@ -2058,8 +2058,34 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2238,10 +2264,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      input: _defineProperty({
+      model_query: [],
+      brand_query: [],
+      input: {
         date: "",
         brand: "",
         model: "",
+        country: "",
         fuelCap: "",
         numberEng: "",
         typeEng: "",
@@ -2249,13 +2278,92 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         busCap: "",
         firstCap: "",
         ecoPat: "",
-        busPat: ""
-      }, "firstCap", "")
+        busPat: "",
+        firstPat: "",
+        Dup_date: "",
+        Dup_brand: "",
+        Dup_model: "",
+        Dup_country: "",
+        Dup_fuelCap: "",
+        Dup_numberEng: "",
+        Dup_typeEng: "",
+        Dup_ecoCap: "",
+        Dup_busCap: "",
+        Dup_firstCap: "",
+        Dup_ecoPat: "",
+        Dup_busPat: "",
+        Dup_firstPat: ""
+      },
+      seenModel: true,
+      seenBrand: true
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get("/api/getModelBrand").then(function (response) {
+      _this.model_query = response.data[0];
+      _this.brand_query = response.data[1];
+    });
   },
   methods: {
     handleFormCilcked: function handleFormCilcked() {
-      console.log("Hello World");
+      // e.preventDefault();
+      var data = {
+        input: this.input
+      };
+      axios.post("/api/backend/addAircraft", data).then(function (response) {
+        console.log(response.data);
+        swal.fire("Register Success!", "Cilck the button to continue!", "success");
+      });
+    },
+    checkModel: function checkModel() {
+      var _this2 = this;
+
+      console.log(this.model_query);
+      console.log(this.brand_query);
+      this.model_query.forEach(function (each_model) {
+        if (_this2.input.model === each_model['model_name']) {
+          _this2.seenModel = false;
+          console.log("find");
+          _this2.input.Dup_fuelCap = each_model['fuel_capacity'];
+          _this2.input.Dup_numberEng = each_model['number_of_engine'];
+          _this2.input.Dup_typeEng = each_model['engine_type'];
+          _this2.input.Dup_ecoCap = each_model['eco_cap'];
+          _this2.input.Dup_busCap = each_model['bus_cap'];
+          _this2.input.Dup_firstCap = each_model['first_cap'];
+          _this2.input.Dup_ecoPat = each_model['eco_pattern'];
+          _this2.input.Dup_busPat = each_model['bus_pattern'];
+          _this2.input.Dup_firstPat = each_model['first_pattern'];
+        }
+      });
+    },
+    checkBrand: function checkBrand() {
+      var _this3 = this;
+
+      this.brand_query.forEach(function (each_brand) {
+        if (_this3.input.brand === each_brand['brand_name']) {
+          _this3.seenBrand = false;
+          console.log("find");
+          _this3.input.Dup_country = each_brand['country'];
+        }
+      });
+    },
+    matchModel: function matchModel() {
+      this.input.fuelCap = this.input.Dup_fuelCap;
+      this.input.numberEng = this.input.Dup_numberEng;
+      this.input.typeEng = this.input.Dup_typeEng;
+      this.input.ecoCap = this.input.Dup_ecoCap;
+      this.input.busCap = this.input.Dup_busCap;
+      this.input.firstCap = this.input.Dup_firstCap;
+      this.input.ecoPat = this.input.Dup_ecoPat;
+      this.input.busPat = this.input.Dup_busPat;
+      this.input.firstPat = this.input.Dup_firstPat;
+      this.seenModel = true;
+    },
+    matchBrand: function matchBrand() {
+      this.input.country = this.input.Dup_country;
+      this.seenBrand = true;
     }
   }
 });
@@ -9077,7 +9185,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
 
 // exports
 
@@ -43928,7 +44036,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("span", { staticClass: "col-md-6 mb-2" }, [
+                    _c("span", { staticClass: "col-md-4 mb-2" }, [
                       _c("label", [_vm._v("Brand:")]),
                       _vm._v(" "),
                       _c("input", {
@@ -43944,11 +44052,74 @@ var render = function() {
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.brand },
                         on: {
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.input, "brand", $event.target.value)
+                            },
+                            _vm.checkBrand
+                          ]
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.seenBrand,
+                              expression: "!seenBrand"
+                            }
+                          ]
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-lg btn-block btn-login",
+                              on: { click: _vm.matchBrand }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        Match brand\n                                    "
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                    Please enter\n                                "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "col-md-4 mb-2" }, [
+                      _c("label", [_vm._v("Country:")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.input.country,
+                            expression: "input.country"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.input.country },
+                        on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.input, "brand", $event.target.value)
+                            _vm.$set(_vm.input, "country", $event.target.value)
                           }
                         }
                       }),
@@ -43960,37 +44131,79 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "col-md-6 mb-2" }, [
-                      _c("label", [_vm._v("Model:")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.model,
-                            expression: "input.model"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.input.model },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                    _c(
+                      "span",
+                      {
+                        staticClass: "col-md-4 mb-2",
+                        attrs: { id: "watch-example" }
+                      },
+                      [
+                        _c("label", [_vm._v("Model:")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.input.model,
+                              expression: "input.model"
                             }
-                            _vm.$set(_vm.input, "model", $event.target.value)
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.input.model },
+                          on: {
+                            input: [
+                              function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "model",
+                                  $event.target.value
+                                )
+                              },
+                              _vm.checkModel
+                            ]
                           }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please enter\n                                "
-                        )
-                      ])
-                    ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.seenModel,
+                                expression: "!seenModel"
+                              }
+                            ]
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-lg btn-block btn-login",
+                                on: { click: _vm.matchModel }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        Match model\n                                    "
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please enter\n                                "
+                          )
+                        ])
+                      ]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
@@ -62495,7 +62708,7 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 window.toast = toast;
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  mode: "history",
+  //mode: "history",
   routes: _routes__WEBPACK_IMPORTED_MODULE_2__["default"] // short for `routes: routes`
 
 });
