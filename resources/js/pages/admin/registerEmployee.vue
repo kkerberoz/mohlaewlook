@@ -933,7 +933,9 @@ export default {
             if (!this.edus.gpa) {
                 this.error_gpa = "Please enter your gpa.";
                 this.errors.push(this.error_gpa);
-            } else {
+            }else if(isNaN(this.edus.gpa)){
+                this.error_gpa = "Please fill with number."
+            }else {
                 this.error_gpa = null;
             }
 
