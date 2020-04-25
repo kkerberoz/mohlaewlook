@@ -701,7 +701,7 @@ export default {
 
     methods: {
         airportName({ airport_id, airport_name }) {
-            return `[${airport_id}] - ${airport_name}  `;
+            return `[${airport_id}] - ${airport_name}`;
         },
         addedu(index) {
             this.edus.push({

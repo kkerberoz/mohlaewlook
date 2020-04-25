@@ -37,13 +37,13 @@ let routes = [
     {
         path: "/admin",
         component: require("./pages/admin/admin_control.vue").default,
-        meta: { hideNavigation: true },
-        // requiresAdmin: true
+        meta: { requiresAdmin: true },
+
         children: [
             {
                 path: "",
                 name: "adminHome",
-                component: require("./pages/info.vue").default
+                component: require("./pages/admin/adminHome.vue").default
             },
             {
                 path: "newEmployee",
