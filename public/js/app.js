@@ -3538,9 +3538,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
+  props: ["csrf", "oldName"],
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
@@ -3606,34 +3615,33 @@ __webpack_require__.r(__webpack_exports__);
         title: "Miss"
       }],
       degrees: ["Bachelor's degree", "Master's degree", "Doctoral degree"],
-      error: [{
-        error_start_date: "",
-        error_salary: "",
-        error_airport: "",
-        error_role: "",
-        error_status: "",
-        error_username: "",
-        error_password: "",
-        error_idcard: "",
-        error_gender: "",
-        error_title: "",
-        error_firstname: "",
-        error_lastname: "",
-        error_DOB: "",
-        error_height: "",
-        error_weight: "",
-        error_email: "",
-        error_address: "",
-        error_phone: "",
-        error_degree: "",
-        error_university: "",
-        error_faculty: "",
-        error_department: "",
-        error_gpa: "",
-        error_info: "",
-        error_note: "",
-        errors: []
-      }],
+      error_start_date: "",
+      error_salary: "",
+      error_airport: "",
+      error_role: "",
+      error_status: "",
+      error_username: "",
+      error_password: "",
+      error_idcard: "",
+      error_gender: "",
+      error_title: "",
+      error_firstname: "",
+      error_lastname: "",
+      error_DOB: "",
+      error_height: "",
+      error_weight: "",
+      error_email: "",
+      error_address: "",
+      error_phone: "",
+      error_degree: "",
+      error_university: "",
+      error_faculty: "",
+      error_department: "",
+      error_gpa: "",
+      error_info: "",
+      error_note: "",
+      error_edus: "",
+      errors: [],
       seen: true
     };
   },
@@ -3678,44 +3686,49 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       e.preventDefault();
-      this.error.errors = [];
-      this.error.error_start_date = null; //
+      this.errors = [];
+      this.error_start_date = null; //
 
-      this.error.error_salary = null; //
+      this.error_salary = null; //
 
-      this.error.error_airport = null; //////
+      this.error_airport = null; //////
 
-      this.error.error_role = null; //
+      this.error_role = null; //
 
-      this.error.error_status = null; //
+      this.error_status = null; //
 
-      this.error.error_username = null; //
+      this.error_username = null; //
 
-      this.error.error_password = null; //
+      this.error_password = null; //
 
-      this.error.error_idcard = null; //
+      this.error_idcard = null; //
 
-      this.error.error_gender = null; //
+      this.error_gender = null; //
 
-      this.error.error_title = null; //
+      this.error_title = null; //
 
-      this.error.error_firstname = null; //
+      this.error_firstname = null; //
 
-      this.error.error_lastname = null; //
+      this.error_lastname = null; //
 
-      this.error.error_DOB = null; //
+      this.error_DOB = null; //
 
-      this.error.error_height = null; //
+      this.error_height = null; //
 
-      this.error.error_weight = null; //
+      this.error_weight = null; //
 
-      this.error.error_email = null; ///////
+      this.error_email = null; ///////
 
-      this.error.error_address = null; //
+      this.error_address = null; //
 
-      this.error.error_phone = null; //
+      this.error_phone = null; //
 
-      this.error.error_edus = null; //
+      this.error_edus = null;
+      this.error_degree = null;
+      this.error_university = null;
+      this.error_faculty = null;
+      this.error_department = null;
+      this.error_gpa = null; //
 
       var details = {
         start_date: this.input.start_date,
@@ -3749,140 +3762,174 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       if (!this.input.start_date) {
-        this.error.error_start_date = "Please select your start date.";
-        this.error.errors.push(this.error.error_start_date);
+        this.error_start_date = "Please select your start date.";
+        this.errors.push(this.error_start_date);
       } else {
-        this.error.error_start_date = null;
+        this.error_start_date = null;
       }
 
       if (!this.input.salary) {
-        this.error.error_salary = "Please fill the salary.";
-        this.error.errors.push(this.error.error_salary);
+        this.error_salary = "Please fill the salary.";
+        this.errors.push(this.error_salary);
       } else if (isNaN(this.input.salary)) {
-        this.error.error_salary = "Please fill only number.";
-        this.error.errors.push(this.error.error_salary);
+        this.error_salary = "Please fill only number.";
+        this.errors.push(this.error_salary);
       } else {
-        this.error.error_salary = null;
+        this.error_salary = null;
       }
 
       if (!this.input.role) {
-        this.error.error_role = "Please select your role.";
-        this.error.errors.push(this.error.error_role);
+        this.error_role = "Please select your role.";
+        this.errors.push(this.error_role);
       } else {
-        this.error.error_role = null;
+        this.error_role = null;
       }
 
       if (!this.input.status) {
-        this.error.error_status = "Please select your work status.";
-        this.error.errors.push(this.error.error_status);
+        this.error_status = "Please select your work status.";
+        this.errors.push(this.error_status);
       } else {
-        this.error.error_status = null;
+        this.error_status = null;
       }
 
       if (!this.input.username.trim()) {
         this.error_username = "Please fill your username.";
-        this.errors.push(this.error.error_username);
+        this.errors.push(this.error_username);
       } else {
-        this.error.error_username = null;
+        this.error_username = null;
       }
 
       if (!this.input.password) {
-        this.error.error_password = "Please fill your password.";
-        this.error.errors.push(this.error.error_password);
+        this.error_password = "Please fill your password.";
+        this.errors.push(this.error_password);
       } else if (this.input.password.length < 6) {
-        this.error.error_password = "Password has to be at least 6 characters long.";
-        this.error.errors.push(this.error.error_password);
+        this.error_password = "Password has to be at least 6 characters long.";
+        this.errors.push(this.error_password);
       } else {
-        this.error.error_password = null;
+        this.error_password = null;
       }
 
       if (!this.input.idcard) {
-        this.error.error_idcard = "Please fill your id card.";
-        this.error.errors.push(this.error.error_idcard);
+        this.error_idcard = "Please fill your id card.";
+        this.errors.push(this.error_idcard);
       } else if (this.input.idcard.length != 13) {
-        this.error.error_idcard = "Password must be 13 characters.";
-        this.error.errors.push(this.error.error_idcard);
+        this.error_idcard = "Password must be 13 characters.";
+        this.errors.push(this.error_idcard);
       } else {
-        this.error.error_idcard = null;
+        this.error_idcard = null;
       }
 
       if (!this.input.gender) {
-        this.error.error_gender = "Please select the gender.";
-        this.error.errors.push(this.error.error_gender);
+        this.error_gender = "Please select the gender.";
+        this.errors.push(this.error_gender);
       } else {
         this.input.error_gender = null;
       }
 
       if (!this.input.title.title) {
-        this.error.error_title = "Please select your title.";
-        this.error.errors.push(this.error.error_title);
+        this.error_title = "Please select your title.";
+        this.errors.push(this.error_title);
       } else {
-        this.error.error_title = null;
+        this.error_title = null;
       }
 
       if (!this.input.firstname.trim()) {
-        this.error.error_name = "Please fill your first name.";
-        this.error.errors.push(this.error.error_name);
+        this.error_firstname = "Please fill your first name.";
+        this.errors.push(this.error_firstname);
       } else {
-        this.error.error_name = null;
+        this.error_firstname = null;
       }
 
       if (!this.input.lastname.trim()) {
-        this.error.error_surname = "Please fill your last name.";
-        this.error.errors.push(this.error.error_surname);
+        this.error_lastname = "Please fill your last name.";
+        this.errors.push(this.error_lastname);
       } else {
-        this.error.error_surname = null;
+        this.error_lastname = null;
       }
 
       if (!this.input.DOB) {
-        this.error.error_DOB = "Please select your Date of Birth.";
-        this.error.errors.push(this.error.error_DOB);
+        this.error_DOB = "Please select your Date of Birth.";
+        this.errors.push(this.error_DOB);
       } else {
-        this.error.error_DOB = null;
+        this.error_DOB = null;
       }
 
       if (!this.input.address.trim()) {
-        this.error.error_address = "Please fill your address.";
-        this.error.errors.push(this.error.error_address);
+        this.error_address = "Please fill your address.";
+        this.errors.push(this.error_address);
       } else {
-        this.error.error_address = null;
+        this.error_address = null;
       }
 
       if (!this.input.phone.trim()) {
-        this.error.error_phone = "Please fill your phone number.";
-        this.error.errors.push(this.error.error_phone);
+        this.error_phone = "Please fill your phone number.";
+        this.errors.push(this.error_phone);
       } else {
-        this.error.errors.push(this.error.error_phone);
+        this.errors.push(this.error_phone);
       }
 
       if (!this.input.height) {
-        this.error.error_height = "Please fill you height.";
-        this.error.errors.push(this.error.error_height);
+        this.error_height = "Please fill you height.";
+        this.errors.push(this.error_height);
       } else if (isNaN(this.input.height)) {
-        this.error.error_height = "Please fill only number.";
-        this.error.errors.push(this.error.error_height);
+        this.error_height = "Please fill only number.";
+        this.errors.push(this.error_height);
       } else {
-        this.error.error_height = null;
+        this.error_height = null;
       }
 
       if (!this.input.weight) {
-        this.error.error_weight = "Please fill you weight.";
-        this.error.errors.push(this.error.error_weight);
+        this.error_weight = "Please fill you weight.";
+        this.errors.push(this.error_weight);
       } else if (isNaN(this.input.weight)) {
-        this.error.error_weight = "Please fill only number.";
-        this.error.errors.push(this.error.error_weight);
+        this.error_weight = "Please fill only number.";
+        this.errors.push(this.error_weight);
       } else {
-        this.error.error_weight = null;
+        this.error_weight = null;
       }
 
-      if (!this.edus) {
-        this.error.error_edus = "Please fill the detail.";
-        this.error.errors.push(this.error.error_edus);
+      if (!this.edus.degree) {
+        this.error_degree = "Please select your degree.";
+        this.errors.push(this.error_degree);
       } else {
-        this.error.error_edus = null;
+        this.error_degree = null;
       }
 
-      if (!this.error.errors.lenght) {
+      if (!this.edus.university) {
+        this.error_university = "Please enter your university.";
+        this.errors.push(this.error_university);
+      } else {
+        this.error_university = null;
+      }
+
+      if (!this.edus.faculty) {
+        this.error_faculty = "Please enter your faculty.";
+        this.errors.push(this.error_faculty);
+      } else {
+        this.error_faculty = null;
+      }
+
+      if (!this.edus.department) {
+        this.error_department = "Please enter your department.";
+        this.errors.push(this.error_department);
+      } else {
+        this.error_department = null;
+      }
+
+      if (!this.edus.gpa) {
+        this.error_gpa = "Please enter your gpa.";
+        this.errors.push(this.error_gpa);
+      } else {
+        this.error_gpa = null;
+      } // if (!this.edus) {
+      //     this.error_edus = "Please fill the detail.";
+      //     this.errors.push(this.error_edus);
+      // } else {
+      //     this.error_edus = null;
+      // }
+
+
+      if (!this.errors.length) {
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
@@ -3890,6 +3937,8 @@ __webpack_require__.r(__webpack_exports__);
             });
           });
         });
+      } else {
+        swal.fire("Plese Success your form!", "Cilck the button to continue!", "error");
       }
     }
   }
@@ -9003,7 +9052,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\r\n    background: #4ecdc4;\r\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n#adminLogin {\n    background: #4ecdc4;\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -9022,7 +9071,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -45261,6 +45310,11 @@ var render = function() {
               "col-md-7 order-md-1 justify-content-between align-items-center"
           },
           [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            }),
+            _vm._v(" "),
             _c(
               "form",
               [
@@ -45295,7 +45349,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.error.error_start_date
+                            "is-invalid": _vm.error_start_date
                           },
                           attrs: { required: "", type: "date" },
                           domProps: { value: _vm.input.start_date },
@@ -45314,7 +45368,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.error.error_start_date))
+                          _vm._v(_vm._s(_vm.error_start_date))
                         ])
                       ])
                     ]),
@@ -45333,7 +45387,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         class: {
-                          "is-invalid": _vm.error.error_salary
+                          "is-invalid": _vm.error_salary
                         },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.salary },
@@ -45350,7 +45404,7 @@ var render = function() {
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(_vm.error.error_salary) +
+                            _vm._s(_vm.error_salary) +
                             "\n                            "
                         )
                       ])
@@ -45364,7 +45418,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           class: {
-                            "is-invalid": _vm.error.error_role
+                            "is-invalid": _vm.error_role
                           },
                           attrs: {
                             label: "name",
@@ -45390,7 +45444,7 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                " +
-                              _vm._s(_vm.error.error_role) +
+                              _vm._s(_vm.error_role) +
                               "\n                            "
                           )
                         ])
@@ -45438,7 +45492,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           class: {
-                            "is-invalid": _vm.error.error_status
+                            "is-invalid": _vm.error_status
                           },
                           attrs: {
                             label: "name",
@@ -45463,7 +45517,7 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                " +
-                              _vm._s(_vm.error.error_status) +
+                              _vm._s(_vm.error_status) +
                               "\n                            "
                           )
                         ])
@@ -45494,7 +45548,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.error.error_username
+                            "is-invalid": _vm.error_username
                           },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.username },
@@ -45521,7 +45575,7 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                                    " +
-                                _vm._s(_vm.error.error_username) +
+                                _vm._s(_vm.error_username) +
                                 "\n                                "
                             )
                           ]
@@ -45543,7 +45597,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         class: {
-                          "is-invalid": _vm.error.error_password
+                          "is-invalid": _vm.error_password
                         },
                         attrs: { type: "password", required: "" },
                         domProps: { value: _vm.input.password },
@@ -45560,7 +45614,7 @@ var render = function() {
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(_vm.error.error_password) +
+                            _vm._s(_vm.error_password) +
                             "\n                            "
                         )
                       ])
@@ -45583,7 +45637,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.error.error_idcard
+                            "is-invalid": _vm.error_idcard
                           },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.idcard },
@@ -45600,7 +45654,7 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                    " +
-                              _vm._s(_vm.error.error_idcard) +
+                              _vm._s(_vm.error_idcard) +
                               "\n                                "
                           )
                         ])
@@ -45627,7 +45681,7 @@ var render = function() {
                             ],
                             staticClass: "form-check-input",
                             class: {
-                              "is-invalid": _vm.error.error_gender
+                              "is-invalid": _vm.error_gender
                             },
                             attrs: { type: "radio", value: "male" },
                             domProps: {
@@ -45665,6 +45719,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-check-input",
+                            class: {
+                              "is-invalid": _vm.error_gender
+                            },
                             attrs: { type: "radio", value: "female" },
                             domProps: {
                               checked: _vm._q(_vm.input.gender, "female")
@@ -45701,6 +45758,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-check-input",
+                            class: {
+                              "is-invalid": _vm.error_gender
+                            },
                             attrs: { type: "radio", value: "other" },
                             domProps: {
                               checked: _vm._q(_vm.input.gender, "other")
@@ -45721,15 +45781,15 @@ var render = function() {
                             [_vm._v("other")]
                           )
                         ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.error.error_gender) +
-                          "\n                        "
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.error_gender) +
+                            "\n                            "
+                        )
+                      ])
                     ])
                   ]),
                   _vm._v(" "),
@@ -45744,7 +45804,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           class: {
-                            "is-invalid": _vm.error.error_title
+                            "is-invalid": _vm.error_title
                           },
                           attrs: {
                             label: "title",
@@ -45769,7 +45829,7 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                " +
-                              _vm._s(_vm.error.error_title) +
+                              _vm._s(_vm.error_title) +
                               "\n                            "
                           )
                         ])
@@ -45791,7 +45851,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         class: {
-                          "is-invalid": _vm.error.error_firstname
+                          "is-invalid": _vm.error_firstname
                         },
                         attrs: { type: "text", required: "" },
                         domProps: { value: _vm.input.firstname },
@@ -45809,10 +45869,10 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
+                      _c("span", { staticClass: "invalid-feedback" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(_vm.error.error_firstname) +
+                            _vm._s(_vm.error_firstname) +
                             "\n                            "
                         )
                       ])
@@ -45832,7 +45892,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         class: {
-                          "is-invalid": _vm.error.error_lastname
+                          "is-invalid": _vm.error_lastname
                         },
                         attrs: { type: "text", required: "" },
                         domProps: { value: _vm.input.lastname },
@@ -45846,10 +45906,10 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
+                      _c("span", { staticClass: "invalid-feedback" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(_vm.error.error_lastname) +
+                            _vm._s(_vm.error_lastname) +
                             "\n                            "
                         )
                       ])
@@ -45871,7 +45931,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         class: {
-                          "is-invalid": _vm.error.error_DOB
+                          "is-invalid": _vm.error_DOB
                         },
                         attrs: { type: "date", required: "" },
                         domProps: { value: _vm.input.DOB },
@@ -45888,7 +45948,7 @@ var render = function() {
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(_vm.error.error_DOB) +
+                            _vm._s(_vm.error_DOB) +
                             "\n                            "
                         )
                       ])
@@ -45909,7 +45969,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.error.error_height
+                            "is-invalid": _vm.error_height
                           },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.height },
@@ -45926,7 +45986,7 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                    " +
-                              _vm._s(_vm.error.error_height) +
+                              _vm._s(_vm.error_height) +
                               "\n                                "
                           )
                         ])
@@ -45948,7 +46008,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.error.error_weight
+                            "is-invalid": _vm.error_weight
                           },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.weight },
@@ -45965,7 +46025,7 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                    " +
-                              _vm._s(_vm.error.error_weight) +
+                              _vm._s(_vm.error_weight) +
                               "\n                                "
                           )
                         ])
@@ -46016,7 +46076,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         class: {
-                          "is-invalid": _vm.error.error_phone
+                          "is-invalid": _vm.error_phone
                         },
                         attrs: { type: "text", required: "" },
                         domProps: { value: _vm.input.phone },
@@ -46033,7 +46093,7 @@ var render = function() {
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(_vm.error.error_phone) +
+                            _vm._s(_vm.error_phone) +
                             "\n                            "
                         )
                       ])
@@ -46056,7 +46116,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.error.error_address
+                            "is-invalid": _vm.error_address
                           },
                           attrs: { type: "email" },
                           domProps: { value: _vm.input.address },
@@ -46077,7 +46137,7 @@ var render = function() {
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
                             "\n                                    " +
-                              _vm._s(_vm.error.error_address) +
+                              _vm._s(_vm.error_address) +
                               "\n                                "
                           )
                         ])
@@ -46143,7 +46203,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("multiselect", {
                               class: {
-                                "is-invalid": _vm.error.error_edus
+                                "is-invalid": _vm.error_degree
                               },
                               attrs: {
                                 options: _vm.degrees,
@@ -46167,7 +46227,7 @@ var render = function() {
                             _c("div", { staticClass: "invalid-feedback" }, [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(_vm.error.error_edus) +
+                                  _vm._s(_vm.error_degree) +
                                   "\n                            "
                               )
                             ])
@@ -46191,7 +46251,7 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.error.error_edus
+                              "is-invalid": _vm.error_university
                             },
                             attrs: { type: "text" },
                             domProps: { value: edu.university },
@@ -46208,7 +46268,7 @@ var render = function() {
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
                               "\n                                " +
-                                _vm._s(_vm.error.error_edus) +
+                                _vm._s(_vm.error_university) +
                                 "\n                            "
                             )
                           ])
@@ -46230,7 +46290,7 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.error.error_edus
+                              "is-invalid": _vm.error_faculty
                             },
                             attrs: { type: "text" },
                             domProps: { value: edu.faculty },
@@ -46247,7 +46307,7 @@ var render = function() {
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
                               "\n                                " +
-                                _vm._s(_vm.error.error_edus) +
+                                _vm._s(_vm.error_faculty) +
                                 "\n                            "
                             )
                           ])
@@ -46267,7 +46327,7 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.error.error_edus
+                              "is-invalid": _vm.error_department
                             },
                             attrs: { type: "text" },
                             domProps: { value: edu.department },
@@ -46284,7 +46344,7 @@ var render = function() {
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
                               "\n                                " +
-                                _vm._s(_vm.error.error_edus) +
+                                _vm._s(_vm.error_department) +
                                 "\n                            "
                             )
                           ])
@@ -46304,7 +46364,7 @@ var render = function() {
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.error.error_edus
+                              "is-invalid": _vm.error_gpa
                             },
                             attrs: { type: "text" },
                             domProps: { value: edu.gpa },
@@ -46321,7 +46381,7 @@ var render = function() {
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
                               "\n                                " +
-                                _vm._s(_vm.error.error_edus) +
+                                _vm._s(_vm.error_gpa) +
                                 "\n                            "
                             )
                           ])
@@ -63593,8 +63653,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
