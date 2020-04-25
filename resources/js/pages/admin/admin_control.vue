@@ -1,6 +1,6 @@
 <template>
-    <div class="admin ">
-        <div class="page-wrapper default-theme sidebar-bg bg1 toggled ">
+    <div class="admin">
+        <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
             <div class="btn btn-lg btn-dark btn-admin">
                 <a id="show-sidebar" @click="closeMenu">
                     <i class="fas fa-compress-alt fa-2x"></i>
@@ -25,11 +25,12 @@
 
                                 alt="User picture"
                             />
-                        </div> -->
+            </div>-->
                         <div class="user-info">
-                            <span class="user-name"
-                                >Boss
-                                <strong>Germany</strong>
+                            <span class="user-name">
+                                <strong>{{
+                                    user.name + " " + user.surname
+                                }}</strong>
                             </span>
                             <span class="user-status">
                                 <i class="fa fa-circle"></i>
@@ -38,41 +39,57 @@
                         </div>
                     </div>
                     <!-- sidebar-menu  -->
-                    <div class=" sidebar-item sidebar-menu">
+                    <div class="sidebar-item sidebar-menu">
                         <ul>
                             <li class="header-menu">
                                 <span>Menu</span>
                             </li>
 
                             <li>
-                                <a
+                                <!-- <a
                                     :href="
-                                        $router.resolve({ name: 'newemployee' })
+                                        $router.resolve({ name: 'newEmployee' })
                                             .href
                                     "
                                 >
                                     <i class="far fa-address-card"></i>
                                     <span>Add Employee</span>
-                                </a>
+                </a>-->
+                                <router-link :to="{ name: 'newEmployee' }">
+                                    <i class="far fa-address-card"></i>
+                                    <span>Add Employee</span>
+                                </router-link>
                             </li>
 
                             <li>
-                                <a
-                                    :href="
-                                        $router.resolve({
-                                            name: 'addflight'
-                                        }).href
-                                    "
-                                >
-                                    <i class="fas fa-plane"></i>
+                                <router-link :to="{ name: 'addFlight' }">
+                                    <i class="fas fa-plane-departure"></i>
                                     <span>Add Flight</span>
-                                </a>
+                                </router-link>
                             </li>
+                            <li>
+                                <router-link :to="{ name: 'addAircraft' }">
+                                    <i class="fas fa-plane"></i>
+                                    <span>Add Aircraft</span>
+                                </router-link>
+                            </li>
+
                             <li>
                                 <router-link to="/">
                                     <i class="fas fa-home"></i>
                                     <span>Homepage</span>
                                 </router-link>
+                            </li>
+
+                            <li style="margin-top:50px; padding:10px">
+                                <div
+                                    id="btnLogin"
+                                    @click="logout"
+                                    class="btn btn-block"
+                                >
+                                    <i class="fas fa-power-off"></i>
+                                    <span>Logout</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -95,9 +112,40 @@
 
 <script>
 export default {
+    data() {
+        return {
+            user: ""
+        };
+    },
+    mounted() {
+        axios
+            .get("/api/admin/init")
+            .then(response => {
+                this.user = response.data;
+            })
+            .catch(error => {
+                if (error.response.status === 401) {
+                    swal.fire(
+                        "Please log in.",
+                        "Cilck the button to continue!",
+                        "error"
+                    ).then(() => {
+                        this.$router.push({ name: "adminLogin" });
+                    });
+                }
+            });
+    },
     methods: {
         closeMenu() {
             $(".page-wrapper").toggleClass("toggled");
+        },
+        logout() {
+            axios.get("/sanctum/csrf-cookie").then(response => {
+                axios.post("/api/admin/logout").then(() => {
+                    localStorage.removeItem("isAdmin");
+                    this.$router.push({ name: "adminLogin" });
+                });
+            });
         }
     }
 };

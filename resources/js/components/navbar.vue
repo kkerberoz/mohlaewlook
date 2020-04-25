@@ -25,9 +25,19 @@
                             :key="i"
                             class="nav-item"
                         >
-                            <router-link :to="link.link" class="nav-link">{{
-                                link.label
-                            }}</router-link>
+                            <router-link :to="link.link" class="nav-link">
+                                {{ link.label }}
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="#"
+                                @click.prevent="logout"
+                                class=" nav-link"
+                                v-if="isLoggedIn"
+                            >
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -38,9 +48,17 @@
 
 <script>
 export default {
+    data() {
+        return {
+            isLoggedIn: false
+        };
+    },
     props: {
-        links: Array,
-        isLoggedIn: { type: Boolean, default: false }
+        links: Array
+        // isLoggedIn: { type: Boolean, default: false }
+    },
+    mounted() {
+        this.isLoggedIn = localStorage.getItem("isLoggedIn");
     },
     computed: {
         links_filtered: function() {
@@ -49,8 +67,21 @@ export default {
                     link => link.link !== "/login" && link.link !== "/register"
                 );
             } else {
-                return this.links;
+                return this.links.filter(
+                    link =>
+                        link.link !== "/info" && link.link !== "/reservation"
+                );
             }
+        }
+    },
+    methods: {
+        logout() {
+            axios.get("/sanctum/csrf-cookie").then(response => {
+                axios.post("/api/logout").then(() => {
+                    localStorage.removeItem("isLoggedIn");
+                    this.$router.go({ name: "userLogin" });
+                });
+            });
         }
     }
 };

@@ -38,13 +38,28 @@
                                     class="form-control"
                                     v-model="password"
                                     name="password"
+                                />
+                                <span class="invalid-feedback">{{
+                                    error_password
+                                }}</span>
+                            </span>
+                            <!-- <span class="form-group">
+                                <label>Password:</label>
+                                <input
+                                    v-bind:class="{
+                                        'is-invalid': error_password
+                                    }"
+                                    type="password"
+                                    class="form-control"
+                                    v-model="password"
+                                    name="password"
                                     pattern="(?=.[a-z])(?=.*[A-Z]).{6,}"
                                     title="Must contain at least one uppercase and lowercase letter, and at least 6 or more characters "
                                 />
                                 <span class="invalid-feedback">{{
                                     error_password
                                 }}</span>
-                            </span>
+                            </span> -->
 
                             <span class="form-group">
                                 <label>Title</label>
@@ -160,6 +175,7 @@ export default {
     },
     methods: {
         formSubmit(e) {
+            this.errors = [];
             this.error_name = null;
             this.error_surname = null;
             this.error_DOB = null;
@@ -220,6 +236,7 @@ export default {
             } else {
                 this.error_email = null;
             }
+
             if (!this.errors.length) {
                 let data = {
                     username: this.username,
@@ -230,31 +247,40 @@ export default {
                     DOB: this.DOB,
                     email: this.email
                 };
-                axios.post("/api/regis", data).then(response => {
-                    if (response.data.errorU == 1) {
-                        this.username = "";
-                        this.error_username = "This Username is already exist";
-                        this.errors.push(this.error_username);
-                        this.errors = [];
-                    } else if (response.data.errorE == 1) {
-                        this.email = "";
-                        this.error_email = "This E-mail is already exist";
-                        this.errors.push(this.error_email);
-                        this.errors = [];
-                    } else if (
-                        response.data.errorU == 0 &&
-                        response.data.errorE == 0
-                    ) {
-                        currentObj.output = response.data;
-                        swal.fire(
-                            "Register Success!",
-                            "Cilck the button to continue!",
-                            "success"
-                        ).then(() => {
-                            this.$router.push({ name: "Home" });
-                        });
-                    }
+                axios.get("/sanctum/csrf-cookie").then(response => {
+                    axios.post("/api/regis", data).then(response => {
+                        if (response.data.errorU == 1) {
+                            this.username = "";
+                            this.error_username =
+                                "This Username is already exist";
+                            this.errors.push(this.error_username);
+                            this.errors = [];
+                        } else if (response.data.errorE == 1) {
+                            this.email = "";
+                            this.error_email = "This E-mail is already exist";
+                            this.errors.push(this.error_email);
+                            this.errors = [];
+                        } else if (
+                            response.data.errorU == 0 &&
+                            response.data.errorE == 0
+                        ) {
+                            currentObj.output = response.data;
+                            swal.fire(
+                                "Register Success!",
+                                "Cilck the button to continue!",
+                                "success"
+                            ).then(() => {
+                                this.$router.push({ name: "userLogin" });
+                            });
+                        }
+                    });
                 });
+            } else {
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
             }
         }
     }

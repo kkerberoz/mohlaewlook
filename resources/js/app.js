@@ -16,6 +16,7 @@ const toast = swal.mixin({
 window.toast = toast;
 
 import routes from "./routes";
+
 const router = new VueRouter({
     mode: "history",
     routes // short for `routes: routes`
@@ -29,8 +30,52 @@ const router = new VueRouter({
  */
 Vue.component("navbar", require("./components/navbar.vue").default);
 Vue.component("app-footer", require("./components/app-footer.vue").default);
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+function isLoggedIn() {
+    return localStorage.getItem("isLoggedIn");
+}
+function isAdmin() {
+    return localStorage.getItem("isAdmin");
+}
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!isLoggedIn()) {
+            next({
+                name: "userLogin"
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (isLoggedIn()) {
+            next({
+                name: "info"
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresAdmin)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!isAdmin()) {
+            next({
+                name: "adminLogin"
+            });
+        } else {
+            next();
+        }
+    } else {
+        next(); // make sure to always call next()!
+    }
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -43,19 +88,12 @@ const app = new Vue({
     data() {
         return {
             navbarlinks: [
+                { link: "/reservation", label: "reservation" },
                 { link: "/login", label: "login" },
                 { link: "/register", label: "register" },
                 { link: "/info", label: "info" }
             ],
             footerlinks: [{ link: "/admin", label: "backend" }]
         };
-    },
-    methods: {
-        add(index) {
-            this.disease.push({ name: "" });
-        },
-        remove(index) {
-            this.disease.splice(index, 1);
-        }
     }
 }).$mount("#app");

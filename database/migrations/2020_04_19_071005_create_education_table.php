@@ -18,11 +18,10 @@ class CreateEducationTable extends Migration
             $table->string('user_id',11);
             $table->foreign('user_id')->references('user_id')->on('employees')->onUpdate('cascade');
             $table->string('degree',128);
-            $table->string('school_university_name',128);
+            $table->string('university',128);
+            $table->string('faculty',128);
             $table->string('department',128);
             $table->double('GPA');
-
-
         });
     }
 

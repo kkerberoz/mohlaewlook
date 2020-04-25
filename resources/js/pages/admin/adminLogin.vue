@@ -1,10 +1,12 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid" id="adminLogin">
         <div class="row flex-center full-height">
             <div class="col-md-3">
                 <form v-on:submit="formSubmit">
-                    <div class="card">
-                        <div class="card-header bg-info">Login</div>
+                    <div class="card" id="cardLogin">
+                        <div class="card-header bg-dark" id="cardLogin">
+                            Admin Login
+                        </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Username:</label>
@@ -31,12 +33,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer" id="cardLogin">
                             <button
+                                id="btnLogin"
                                 type="submiit"
                                 class="btn btn-block btn-login"
                             >
                                 Sign in
+                            </button>
+                            <button
+                                @click="home"
+                                id="btnLogin2"
+                                class="btn btn-block btn-login"
+                            >
+                                HOME
                             </button>
                         </div>
                     </div>
@@ -48,7 +58,7 @@
 
 <script>
 export default {
-    name: "login",
+    name: "adminLogin",
     data() {
         return {
             username: "",
@@ -59,6 +69,9 @@ export default {
         };
     },
     methods: {
+        home() {
+            this.$router.push("/");
+        },
         formSubmit(e) {
             this.errors = [];
             this.error_username = null;
@@ -91,16 +104,17 @@ export default {
                 };
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
-                        .post("/api/login", data)
+                        .post("/api/admin/login", data)
                         .then(response => {
-                            this.customer = response.data;
+                            console.log(response.data);
+                            this.admin = response.data;
                             swal.fire(
                                 "Login Success!",
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                localStorage.setItem("isLoggedIn", "true");
-                                this.$router.go({ name: "info" });
+                                localStorage.setItem("isAdmin", "true");
+                                this.$router.push("/admin");
                             });
                         })
                         .catch(error => {
@@ -122,3 +136,39 @@ export default {
     }
 };
 </script>
+<style>
+#adminLogin {
+    background: #4ecdc4;
+    background: -webkit-linear-gradient(to right, #556270, #4ecdc4);
+    background: linear-gradient(to right, #556270, #4ecdc4);
+}
+#cardLogin {
+    border: none;
+    border-radius: 0px;
+}
+#btnLogin {
+    border: none;
+    background: #56ab2f;
+    background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);
+    background: linear-gradient(to right, #a8e063, #56ab2f);
+
+    border-radius: 0px;
+}
+#btnLogin:hover {
+    border: none;
+    transition: 0.7s;
+    background: #56ab2f;
+    background: -webkit-linear-gradient(to left, #a8e063, #56ab2f);
+    background: linear-gradient(to left, #a8e063, #56ab2f);
+    border-radius: 0px;
+}
+#btnLogin2 {
+    border: none;
+    border-radius: 0px;
+}
+#btnLogin2:hover {
+    border: none;
+    transition: 0.7s;
+    border-radius: 0px;
+}
+</style>
