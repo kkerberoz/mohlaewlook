@@ -75,12 +75,6 @@ class UserController extends Controller
         }
     }
 
-    public function registerEmployee(Request $request)
-    {
-        $employee = new Employee;
-
-    }
-
 
     public function logout()
     {

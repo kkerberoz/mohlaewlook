@@ -113,8 +113,53 @@ export default {
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                localStorage.setItem("isAdmin", "true");
-                                this.$router.push("/admin");
+                                if (response.data.employee_role === "staff") {
+                                    localStorage.setItem("isAdmin", "true");
+                                    localStorage.setItem("isRole", "staff");
+                                    this.$router.push("/admin");
+                                } else if (
+                                    response.data.employee_role ===
+                                    "flight_attendant"
+                                ) {
+                                    localStorage.setItem("isAdmin", "true");
+                                    localStorage.setItem(
+                                        "isRole",
+                                        "flight_attendant"
+                                    );
+                                    this.$router.push("/admin");
+                                } else if (
+                                    response.data.employee_role ===
+                                    "human_resource"
+                                ) {
+                                    localStorage.setItem("isAdmin", "true");
+                                    localStorage.setItem(
+                                        "isRole",
+                                        "human_resource"
+                                    );
+                                    this.$router.push("/admin");
+                                } else if (
+                                    response.data.employee_role === "pilot"
+                                ) {
+                                    localStorage.setItem("isAdmin", "true");
+                                    localStorage.setItem("isRole", "pilot");
+                                    this.$router.push("/admin");
+                                } else if (
+                                    response.data.employee_role ===
+                                    "human_resource"
+                                ) {
+                                    localStorage.setItem("isAdmin", "true");
+                                    localStorage.setItem(
+                                        "isRole",
+                                        "human_resource"
+                                    );
+                                    this.$router.push("/admin");
+                                } else if (
+                                    response.data.employee_role === "admin"
+                                ) {
+                                    localStorage.setItem("isAdmin", "true");
+                                    localStorage.setItem("isRole", "admin");
+                                    this.$router.push("/admin");
+                                }
                             });
                         })
                         .catch(error => {
@@ -138,9 +183,9 @@ export default {
 </script>
 <style>
 #adminLogin {
-    background: #4ecdc4;
-    background: -webkit-linear-gradient(to right, #556270, #4ecdc4);
-    background: linear-gradient(to right, #556270, #4ecdc4);
+    background: #1d976c;
+    background: -webkit-linear-gradient(to right, #93f9b9, #1d976c);
+    background: linear-gradient(to right, #93f9b9, #1d976c);
 }
 #cardLogin {
     border: none;

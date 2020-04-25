@@ -35,3 +35,4 @@ Route::prefix("admin")->group(function () {
 
 
 Route::get('backend/getAirports', 'BackendController@getAirports');
+Route::post('backend/addAirport', 'BackendController@addAirport');

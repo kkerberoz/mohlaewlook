@@ -23,8 +23,7 @@
                                         :clear-on-select="false"
                                         placeholder="Choose"
                                         :preselect-first="false"
-                                    >
-                                    </multiselect>
+                                    ></multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -54,8 +53,7 @@
                                         :clear-on-select="false"
                                         placeholder="Choose"
                                         :preselect-first="false"
-                                    >
-                                    </multiselect>
+                                    ></multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -96,8 +94,7 @@
                                         :clear-on-select="false"
                                         placeholder="Choose"
                                         :preselect-first="false"
-                                    >
-                                    </multiselect>
+                                    ></multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>

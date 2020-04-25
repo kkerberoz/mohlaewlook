@@ -58,6 +58,16 @@ let routes = [
                 path: "addAircraft",
                 name: "addAircraft",
                 component: require("./pages/admin/addAircraft.vue").default
+            },
+            {
+                path: "addAirport",
+                name: "addAirport",
+                component: require("./pages/admin/addAirport.vue").default
+            },
+            {
+                path: "customer",
+                name: "customerCRUD",
+                component: require("./pages/admin/customerCRUD.vue").default
             }
         ]
     }
