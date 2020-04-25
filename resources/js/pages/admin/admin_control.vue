@@ -81,7 +81,7 @@
                                 </router-link>
                             </li>
 
-                            <li style="margin-top:50px">
+                            <li style="margin-top:50px; padding:10px">
                                 <div
                                     id="btnLogin"
                                     @click="logout"

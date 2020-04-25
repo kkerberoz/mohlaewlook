@@ -962,7 +962,7 @@ export default {
                 });
             } else {
                 swal.fire(
-                    "Plese Success your form!",
+                    "Please success your form!",
                     "Cilck the button to continue!",
                     "error"
                 );
