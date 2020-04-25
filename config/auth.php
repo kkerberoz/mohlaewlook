@@ -16,6 +16,7 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'customers',
+
     ],
 
     /*
@@ -35,10 +36,16 @@ return [
     |
     */
 
+
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'customers',
+        ],
+
+        'employee' => [
+            'driver' => 'session',
+            'provider' => 'employees',
         ],
 
         'api' => [
@@ -46,10 +53,7 @@ return [
             'provider' => 'customers',
             'hash' => false,
         ],
-        'employee' => [
-            'driver' => 'session',
-            'provider' => 'employees',
-        ],
+
         'employee-api' => [
             'driver' => 'token',
             'provider' => 'employees',

@@ -189,7 +189,8 @@ export default {
             if (!this.username.trim()) {
                 this.error_username = "Please fill your username.";
                 this.errors.push(this.error_username);
-            } else {
+            }
+            else {
                 this.error_username = null;
             }
 

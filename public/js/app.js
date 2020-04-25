@@ -2870,9 +2870,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/admin/logout").then(function () {
           localStorage.removeItem("isAdmin");
 
-          _this2.$router.push({
-            path: "/admin"
-          });
+          _this2.$router.push("/info");
         });
       });
     }
@@ -3419,12 +3417,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
+  props: ["csrf", "oldName"],
   data: function data() {
     return {
       input: {
@@ -3483,6 +3549,34 @@ __webpack_require__.r(__webpack_exports__);
         title: "Mr."
       }],
       degrees: ["Bachelor's degree", "Master's degree", "Doctoral degree"],
+      error: [{
+        error_start_date: "",
+        error_salary: "",
+        error_airport: "",
+        error_role: "",
+        error_status: "",
+        error_username: "",
+        error_password: "",
+        error_idcard: "",
+        error_gender: "",
+        error_title: "",
+        error_firstname: "",
+        error_lastname: "",
+        error_DOB: "",
+        error_height: "",
+        error_weight: "",
+        error_email: "",
+        error_address: "",
+        error_phone: "",
+        error_degree: "",
+        error_university: "",
+        error_faculty: "",
+        error_department: "",
+        error_gpa: "",
+        error_info: "",
+        error_note: "",
+        errors: []
+      }],
       seen: true
     };
   },
@@ -3526,6 +3620,45 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this2 = this;
 
+      this.error.error_start_date = null; //
+
+      this.error.error_salary = null; //
+
+      this.error.error_airport = null; //////
+
+      this.error.error_role = null; //
+
+      this.error.error_status = null; //
+
+      this.error.error_username = null; //
+
+      this.error.error_password = null; //
+
+      this.error.error_idcard = null; //
+
+      this.error.error_gender = null; //
+
+      this.error.error_title = null; //
+
+      this.error.error_firstname = null; //
+
+      this.error.error_lastname = null; //
+
+      this.error.error_DOB = null; //
+
+      this.error.error_height = null; //
+
+      this.error.error_weight = null; //
+
+      this.error.error_email = null; ///////
+
+      this.error.error_address = null; //
+
+      this.error.error_phone = null; //
+
+      this.error.error_edus = null; //
+
+      this.error.errors = [];
       e.preventDefault();
       var details = {
         start_date: this.input.start_date,
@@ -3557,15 +3690,154 @@ __webpack_require__.r(__webpack_exports__);
         educations: educations,
         diseases: diseases
       };
-      axios.get("/sanctum/csrf-cookie").then(function (response) {
-        axios.post("/api/admin/addEmployee", data).then(function (response) {
-          swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-            _this2.$router.push({
-              name: "/adminHome"
+
+      if (!this.input.start_date) {
+        this.error.error_start_date = "Please select your start date.";
+        this.error.errors.push(this.error.error_start_date);
+      } else {
+        this.error.error_start_date = null;
+      }
+
+      if (!this.input.salary) {
+        this.error.error_salary = "Please fill the salary.";
+        this.error.errors.push(this.error.error_salary);
+      } else if (isNaN(this.input.salary)) {
+        this.error.error_salary = "Please fill only number.";
+        this.error.errors.push(this.error.error_salary);
+      } else {
+        this.error.error_salary = null;
+      }
+
+      if (!this.input.role) {
+        this.error.error_role = "Please select your role.";
+        this.error.errors.push(this.error.error_role);
+      } else {
+        this.error.error_role = null;
+      }
+
+      if (!this.input.status) {
+        this.error.error_status = "Please select your work status.";
+        this.error.errors.push(this.error.error_status);
+      } else {
+        this.error.error_status = null;
+      }
+
+      if (!this.input.username.trim()) {
+        this.error_username = "Please fill your username.";
+        this.errors.push(this.error.error_username);
+      } else {
+        this.error.error_username = null;
+      }
+
+      if (!this.input.password) {
+        this.error.error_password = "Please fill your password.";
+        this.error.errors.push(this.error.error_password);
+      } else if (this.input.password.length < 6) {
+        this.error.error_password = "Password has to be at least 6 characters long.";
+        this.error.errors.push(this.error.error_password);
+      } else {
+        this.error.error_password = null;
+      }
+
+      if (!this.input.idcard) {
+        this.error.error_idcard = "Please fill your id card.";
+        this.error.errors.push(this.error.error_idcard);
+      } else if (this.input.idcard.length != 13) {
+        this.error.error_idcard = "Password must be 13 characters.";
+        this.error.errors.push(this.error.error_idcard);
+      } else {
+        this.error.error_idcard = null;
+      }
+
+      if (!this.input.gender) {
+        this.error.error_gender = "Please select the gender.";
+        this.error.errors.push(this.error.error_gender);
+      } else {
+        this.input.error_gender = null;
+      }
+
+      if (!this.input.title.title) {
+        this.error.error_title = "Please select your title.";
+        this.error.errors.push(this.error.error_title);
+      } else {
+        this.error.error_title = null;
+      }
+
+      if (!this.input.firstname.trim()) {
+        this.error.error_name = "Please fill your first name.";
+        this.error.errors.push(this.error.error_name);
+      } else {
+        this.error.error_name = null;
+      }
+
+      if (!this.input.lastname.trim()) {
+        this.error.error_surname = "Please fill your last name.";
+        this.error.errors.push(this.error.error_surname);
+      } else {
+        this.error.error_surname = null;
+      }
+
+      if (!this.input.DOB) {
+        this.error.error_DOB = "Please select your Date of Birth.";
+        this.error.errors.push(this.error.error_DOB);
+      } else {
+        this.error.error_DOB = null;
+      }
+
+      if (!this.input.address.trim()) {
+        this.error.error_address = "Please fill your address.";
+        this.error.errors.push(this.error.error_address);
+      } else {
+        this.error.error_address = null;
+      }
+
+      if (!this.input.phone.trim()) {
+        this.error.error_phone = "Please fill your phone number.";
+        this.error.errors.push(this.error.error_phone);
+      } else {
+        this.error.errors.push(this.error.error_phone);
+      }
+
+      if (!this.input.height) {
+        this.error.error_height = "Please fill you height.";
+        this.error.errors.push(this.error.error_height);
+      } else if (isNaN(this.input.height)) {
+        this.error.error_height = "Please fill only number.";
+        this.error.errors.push(this.error.error_height);
+      } else {
+        this.error.error_height = null;
+      }
+
+      if (!this.input.weight) {
+        this.error.error_weight = "Please fill you weight.";
+        this.error.errors.push(this.error.error_weight);
+      } else if (isNaN(this.input.weight)) {
+        this.error.error_weight = "Please fill only number.";
+        this.error.errors.push(this.error.error_weight);
+      } else {
+        this.error.error_weight = null;
+      }
+
+      if (!this.edus) {
+        this.error.error_edus = "Please fill the detail.";
+        this.error.errors.push(this.error.error_edus);
+      } else {
+        this.error.error_edus = null;
+      }
+
+      console.log(errors);
+
+      if (!this.error.errors.lenght) {
+        axios.get("/sanctum/csrf-cookie").then(function (response) {
+          axios.post("/api/admin/addEmployee", data).then(function (response) {
+            swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+              _this2.$router.push({
+                name: "/adminHome"
+              });
             });
           });
         });
-      });
+      }
     }
   }
 });
@@ -8678,7 +8950,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\n    background: #4ecdc4;\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n#adminLogin {\r\n    background: #4ecdc4;\r\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -44831,6 +45103,11 @@ var render = function() {
             _c(
               "form",
               [
+                _c("input", {
+                  attrs: { type: "hidden", name: "_token" },
+                  domProps: { value: _vm.csrf }
+                }),
+                _vm._v(" "),
                 _c(
                   "h1",
                   { staticClass: "mb-3", staticStyle: { display: "block" } },
@@ -44861,6 +45138,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.error.error_start_date
+                          },
                           attrs: { required: "", type: "date" },
                           domProps: { value: _vm.input.start_date },
                           on: {
@@ -44877,10 +45157,8 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                    start date required.\n                                "
-                          )
+                        _c("span", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.error.error_start_date))
                         ])
                       ])
                     ]),
@@ -44898,6 +45176,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error.error_salary
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.salary },
                         on: {
@@ -44912,7 +45193,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                Please enter salary\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.error.error_salary) +
+                            "\n                            "
                         )
                       ])
                     ]),
@@ -44924,6 +45207,9 @@ var render = function() {
                         _c("label", [_vm._v("Role:")]),
                         _vm._v(" "),
                         _c("multiselect", {
+                          class: {
+                            "is-invalid": _vm.error.error_role
+                          },
                           attrs: {
                             label: "name",
                             options: _vm.roles,
@@ -44947,7 +45233,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                Please enter role\n                            "
+                            "\n                                " +
+                              _vm._s(_vm.error.error_role) +
+                              "\n                            "
                           )
                         ])
                       ],
@@ -44981,13 +45269,7 @@ var render = function() {
                             },
                             expression: "input.airport"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                Please choose\n                            "
-                          )
-                        ])
+                        })
                       ],
                       1
                     ),
@@ -44999,6 +45281,9 @@ var render = function() {
                         _c("label", [_vm._v("Work Status:")]),
                         _vm._v(" "),
                         _c("multiselect", {
+                          class: {
+                            "is-invalid": _vm.error.error_status
+                          },
                           attrs: {
                             label: "name",
                             options: _vm.status,
@@ -45021,7 +45306,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                Please choose\n                            "
+                            "\n                                " +
+                              _vm._s(_vm.error.error_status) +
+                              "\n                            "
                           )
                         ])
                       ],
@@ -45050,6 +45337,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.error.error_username
+                          },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.username },
                           on: {
@@ -45074,7 +45364,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Your username is required.\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.error.error_username) +
+                                "\n                                "
                             )
                           ]
                         )
@@ -45094,6 +45386,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error.error_password
+                        },
                         attrs: { type: "password", required: "" },
                         domProps: { value: _vm.input.password },
                         on: {
@@ -45108,7 +45403,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                Please enter\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.error.error_password) +
+                            "\n                            "
                         )
                       ])
                     ])
@@ -45129,6 +45426,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.error.error_idcard
+                          },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.idcard },
                           on: {
@@ -45143,7 +45443,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Your id-card is required.\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error.error_idcard) +
+                              "\n                                "
                           )
                         ])
                       ])
@@ -45168,6 +45470,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-check-input",
+                            class: {
+                              "is-invalid": _vm.error.error_gender
+                            },
                             attrs: { type: "radio", value: "male" },
                             domProps: {
                               checked: _vm._q(_vm.input.gender, "male")
@@ -45261,6 +45566,14 @@ var render = function() {
                           )
                         ]
                       )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.error.error_gender) +
+                          "\n                            "
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -45274,6 +45587,9 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("multiselect", {
+                          class: {
+                            "is-invalid": _vm.error.error_title
+                          },
                           attrs: {
                             label: "title",
                             options: _vm.titles,
@@ -45296,7 +45612,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                Please choose\n                            "
+                            "\n                                " +
+                              _vm._s(_vm.error.error_title) +
+                              "\n                            "
                           )
                         ])
                       ],
@@ -45316,6 +45634,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error.error_firstname
+                        },
                         attrs: { type: "text", required: "" },
                         domProps: { value: _vm.input.firstname },
                         on: {
@@ -45334,7 +45655,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                Valid first name is required.\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.error.error_firstname) +
+                            "\n                            "
                         )
                       ])
                     ]),
@@ -45352,6 +45675,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error.error_lastname
+                        },
                         attrs: { type: "text", required: "" },
                         domProps: { value: _vm.input.lastname },
                         on: {
@@ -45366,7 +45692,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                Valid last name is required.\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.error.error_lastname) +
+                            "\n                            "
                         )
                       ])
                     ])
@@ -45386,6 +45714,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error.error_DOB
+                        },
                         attrs: { type: "date", required: "" },
                         domProps: { value: _vm.input.DOB },
                         on: {
@@ -45400,7 +45731,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                Please enter date\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.error.error_DOB) +
+                            "\n                            "
                         )
                       ])
                     ]),
@@ -45419,6 +45752,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.error.error_height
+                          },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.height },
                           on: {
@@ -45433,7 +45769,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Please enter height\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error.error_height) +
+                              "\n                                "
                           )
                         ])
                       ])
@@ -45453,6 +45791,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.error.error_weight
+                          },
                           attrs: { type: "text", required: "" },
                           domProps: { value: _vm.input.weight },
                           on: {
@@ -45467,7 +45808,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    plz enter weight\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error.error_weight) +
+                              "\n                                "
                           )
                         ])
                       ])
@@ -45489,7 +45832,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "email", required: "" },
+                          attrs: { type: "email" },
                           domProps: { value: _vm.input.email },
                           on: {
                             input: function($event) {
@@ -45499,13 +45842,7 @@ var render = function() {
                               _vm.$set(_vm.input, "email", $event.target.value)
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                    Your email is required.\n                                "
-                          )
-                        ])
+                        })
                       ])
                     ]),
                     _vm._v(" "),
@@ -45522,6 +45859,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error.error_phone
+                        },
                         attrs: { type: "text", required: "" },
                         domProps: { value: _vm.input.phone },
                         on: {
@@ -45536,7 +45876,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                Please enter Phone\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.error.error_phone) +
+                            "\n                            "
                         )
                       ])
                     ])
@@ -45557,6 +45899,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.error.error_address
+                          },
                           attrs: { type: "email" },
                           domProps: { value: _vm.input.address },
                           on: {
@@ -45575,7 +45920,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Your address is required.\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error.error_address) +
+                              "\n                                "
                           )
                         ])
                       ])
@@ -45639,6 +45986,9 @@ var render = function() {
                             _c("label", [_vm._v("Degree:")]),
                             _vm._v(" "),
                             _c("multiselect", {
+                              class: {
+                                "is-invalid": _vm.error.error_edus
+                              },
                               attrs: {
                                 options: _vm.degrees,
                                 searchable: true,
@@ -45660,7 +46010,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
                               _vm._v(
-                                "\n                                Please choose\n                            "
+                                "\n                                " +
+                                  _vm._s(_vm.error.error_edus) +
+                                  "\n                            "
                               )
                             ])
                           ],
@@ -45682,6 +46034,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error.error_edus
+                            },
                             attrs: { type: "text" },
                             domProps: { value: edu.university },
                             on: {
@@ -45696,7 +46051,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                university is required.\n                            "
+                              "\n                                " +
+                                _vm._s(_vm.error.error_edus) +
+                                "\n                            "
                             )
                           ])
                         ])
@@ -45716,6 +46073,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error.error_edus
+                            },
                             attrs: { type: "text" },
                             domProps: { value: edu.faculty },
                             on: {
@@ -45730,7 +46090,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                Faculty is required.\n                            "
+                              "\n                                " +
+                                _vm._s(_vm.error.error_edus) +
+                                "\n                            "
                             )
                           ])
                         ]),
@@ -45748,6 +46110,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error.error_edus
+                            },
                             attrs: { type: "text" },
                             domProps: { value: edu.department },
                             on: {
@@ -45762,7 +46127,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                Department is required.\n                            "
+                              "\n                                " +
+                                _vm._s(_vm.error.error_edus) +
+                                "\n                            "
                             )
                           ])
                         ]),
@@ -45780,6 +46147,9 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error.error_edus
+                            },
                             attrs: { type: "text" },
                             domProps: { value: edu.gpa },
                             on: {
@@ -45794,7 +46164,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                DPA is required.\n                            "
+                              "\n                                " +
+                                _vm._s(_vm.error.error_edus) +
+                                "\n                            "
                             )
                           ])
                         ])
@@ -62495,15 +62867,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue ***!
   \*******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _registerEmployee_vue_vue_type_template_id_0228415a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=template&id=0228415a& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=template&id=0228415a&");
 /* harmony import */ var _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registerEmployee.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _registerEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -62533,7 +62904,7 @@ component.options.__file = "resources/js/pages/admin/registerEmployee.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63001,8 +63372,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

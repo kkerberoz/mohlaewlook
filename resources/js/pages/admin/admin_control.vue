@@ -129,7 +129,7 @@ export default {
             axios.get("/sanctum/csrf-cookie").then(response => {
                 axios.post("/api/admin/logout").then(() => {
                     localStorage.removeItem("isAdmin");
-                    this.$router.push({ path: "/admin" });
+                    this.$router.push( "/info" );
                 });
             });
         }
