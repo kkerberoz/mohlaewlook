@@ -4179,8 +4179,6 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
-      } else {
-        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
   }
