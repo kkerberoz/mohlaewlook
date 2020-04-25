@@ -19,13 +19,13 @@
     </head>
     <body>
         <div id="app">
-            <header  v-show="$route.path==='/admin' || $route.path==='/admin/newEmployee' ||$route.path==='/admin/addFlight'||$route.path==='/admin/addAircraft'||$route.path==='/adminLogin' ? false : true">
+            <header  v-show="$route.path==='/' || $route.path==='/login' || $route.path==='/register' ||$route.path==='/info'||$route.path==='reservation'? true:false">
                 <navbar :links="navbarlinks" ></navbar>
             </header>
 
 
             <router-view csrf="{{csrf_token()}}" ></router-view>
-            <footer v-show="$route.path==='/admin' || $route.path==='/admin/newEmployee' ||$route.path==='/admin/addFlight'||$route.path==='/admin/addAircraft'||$route.path==='/adminLogin' ? false : true">
+            <footer v-show="$route.path==='/' || $route.path==='/login' || $route.path==='/register' ||$route.path==='/info'||$route.path==='reservation' ? true:false">
                 <app-footer :links ="footerlinks"></app-footer>
             </footer>
 

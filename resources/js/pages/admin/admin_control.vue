@@ -73,6 +73,12 @@
                                     <span>Add Aircraft</span>
                                 </router-link>
                             </li>
+                            <li>
+                                <router-link :to="{ name: 'addAirport' }">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <span>Add Airport</span>
+                                </router-link>
+                            </li>
 
                             <li>
                                 <router-link to="/">
@@ -83,7 +89,7 @@
 
                             <li style="margin-top:50px; padding:10px">
                                 <div
-                                    id="btnLogin"
+                                    id="btnLogout"
                                     @click="logout"
                                     class="btn btn-block"
                                 >
@@ -114,7 +120,10 @@
 export default {
     data() {
         return {
-            user: ""
+            user: "",
+            get role() {
+                return localStorage.getItem("isRole");
+            }
         };
     },
     mounted() {
@@ -143,6 +152,7 @@ export default {
             axios.get("/sanctum/csrf-cookie").then(response => {
                 axios.post("/api/admin/logout").then(() => {
                     localStorage.removeItem("isAdmin");
+                    localStorage.removeItem("isRole");
                     this.$router.push({ name: "adminLogin" });
                 });
             });
@@ -169,5 +179,21 @@ export default {
     overflow-y: hidden; /* Hide vertical scrollbar */
     overflow-x: hidden;
     display: none;
+}
+
+#btnLogout {
+    border: none;
+    border-radius: 0px;
+    background: #eb3349;
+    background: -webkit-linear-gradient(to right, #f45c43, #eb3349);
+    background: linear-gradient(to right, #f45c43, #eb3349);
+}
+#btnLogout:hover {
+    border: none;
+    transition: 0.7s;
+    border-radius: 0px;
+    background: #eb3349;
+    background: -webkit-linear-gradient(to left, #f45c43, #eb3349);
+    background: linear-gradient(to left, #f45c43, #eb3349);
 }
 </style>

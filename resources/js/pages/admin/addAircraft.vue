@@ -5,9 +5,7 @@
                 class="col-md-7 order-md-1 justify-content-between align-items-center"
             >
                 <form>
-                    <h1 class="mb-3" style="display:block ">
-                        Add aircraft
-                    </h1>
+                    <h1 class="mb-3" style="display:block ">Add aircraft</h1>
                     <hr class="mb-4" />
                     <h5 class="mb-3">Aircraft Details</h5>
                     <form>
