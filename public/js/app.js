@@ -2318,43 +2318,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2379,12 +2342,13 @@ __webpack_require__.r(__webpack_exports__);
         airportRegion: this.input.airportRegion
       };
       axios.post("/api/backend/addAirport", data).then(function (response) {
+        console.log(response.data);
         swal.fire("Add data Success!", "Cilck the button to continue!", "success").then(function () {
           _this.$router.push("/adminHome");
         });
       })["catch"](function (error) {
         if (error.response.status === 409) {
-          swal.fire(_this.response.data, "Cilck the button to continue!", "error");
+          swal.fire("Can't add you data", "Cilck the button to continue!", "error");
         }
       });
     }
@@ -2816,24 +2780,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "adminLogin",
   data: function data() {
@@ -2882,7 +2828,7 @@ __webpack_require__.r(__webpack_exports__);
         };
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/login", data).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             _this.admin = response.data;
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
               if (response.data.employee_role === "staff") {
@@ -9270,7 +9216,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n#adminLogin {\n  background: #1d976c;\n  background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n  border: none;\n  border-radius: 0px;\n}\n#btnLogin {\n  border: none;\n  background: #56ab2f;\n  background: linear-gradient(to right, #a8e063, #56ab2f);\n\n  border-radius: 0px;\n}\n#btnLogin:hover {\n  border: none;\n  transition: 0.7s;\n  background: #56ab2f;\n  background: linear-gradient(to left, #a8e063, #56ab2f);\n  border-radius: 0px;\n}\n#btnLogin2 {\n  border: none;\n  border-radius: 0px;\n}\n#btnLogin2:hover {\n  border: none;\n  transition: 0.7s;\n  border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -44616,9 +44562,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                Please enter\n                            "
-                        )
+                        _vm._v("Please enter")
                       ])
                     ]),
                     _vm._v(" "),
@@ -44652,9 +44596,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                Please enter\n                            "
-                        )
+                        _vm._v("Please enter")
                       ])
                     ])
                   ]),
@@ -44690,9 +44632,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                Please enter\n                            "
-                        )
+                        _vm._v("Please enter")
                       ])
                     ]),
                     _vm._v(" "),
@@ -44726,9 +44666,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                Please enter\n                            "
-                        )
+                        _vm._v("Please enter")
                       ])
                     ])
                   ]),
@@ -44764,9 +44702,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                Please enter\n                            "
-                        )
+                        _vm._v("Please enter")
                       ])
                     ])
                   ])
@@ -44780,11 +44716,7 @@ var render = function() {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
                     on: { click: _vm.formSubmit }
                   },
-                  [
-                    _vm._v(
-                      "\n                    Add Airport\n                "
-                    )
-                  ]
+                  [_vm._v("Add Airport")]
                 )
               ])
             ]
@@ -45450,11 +45382,7 @@ var render = function() {
                   staticClass: "card-header bg-dark",
                   attrs: { id: "cardLogin" }
                 },
-                [
-                  _vm._v(
-                    "\n                        Admin Login\n                    "
-                  )
-                ]
+                [_vm._v("Admin Login")]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
@@ -45485,11 +45413,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(_vm.error_username) +
-                        "\n                            "
-                    )
+                    _vm._v(_vm._s(_vm.error_username))
                   ])
                 ]),
                 _vm._v(" "),
@@ -45520,11 +45444,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(_vm.error_password) +
-                        "\n                            "
-                    )
+                    _vm._v(_vm._s(_vm.error_password))
                   ])
                 ])
               ]),
@@ -45539,11 +45459,7 @@ var render = function() {
                       staticClass: "btn btn-block btn-login",
                       attrs: { id: "btnLogin", type: "submiit" }
                     },
-                    [
-                      _vm._v(
-                        "\n                            Sign in\n                        "
-                      )
-                    ]
+                    [_vm._v("Sign in")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -45553,11 +45469,7 @@ var render = function() {
                       attrs: { id: "btnLogin2" },
                       on: { click: _vm.home }
                     },
-                    [
-                      _vm._v(
-                        "\n                            HOME\n                        "
-                      )
-                    ]
+                    [_vm._v("HOME")]
                   )
                 ]
               )
