@@ -35,3 +35,5 @@ Route::prefix("admin")->group(function () {
 
 
 Route::get('backend/getAirports', 'BackendController@getAirports');
+Route::get('backend/getInfoFlights', 'BackendController@getIntoFlights');
+Route::post('backend/getWorkSchedule', 'BackendController@getWorkSchedule');

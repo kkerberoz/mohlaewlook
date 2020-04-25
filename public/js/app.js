@@ -2525,49 +2525,58 @@ __webpack_require__.r(__webpack_exports__);
         coPilot: "",
         crew: []
       },
-      options: [{
-        id: "1",
-        name: "Boss"
-      }, {
-        id: "2",
-        name: "Rat"
-      }, {
-        id: "3",
-        name: "Dive"
-      }, {
-        id: "4",
-        name: "Jane"
-      }, {
-        id: "5",
-        name: "O"
-      }, {
-        id: "6",
-        name: "Pan"
-      }, {
-        id: "7",
-        name: "Cake"
-      }, {
-        id: "8",
-        name: "Min"
-      }, {
-        id: "9",
-        name: "Cream"
-      }, {
-        id: "10",
-        name: "Jo"
-      }, {
-        id: "11",
-        name: "Oh"
-      }],
-      aircrafts: ["GGF1151", " GGF1152", "GGF1153", "GGF1154"],
-      locations: ["Swiss", " Germany", "Thailand", "Kanchanaburi"]
+      options_pilot: [],
+      options_attendant: [],
+      aircrafts: [],
+      locations: [],
+      date_check: ""
     };
   },
-  methods: {
-    nameWithId: function nameWithId(_ref) {
-      var name = _ref.name,
-          id = _ref.id;
-      return "[".concat(id, "] - ").concat(name, "  ");
+  methods: {},
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios.get("/api/backend/getInfoFlights").then(function (response) {
+      console.log(response.data);
+      response.data.Airport.forEach(function (airport) {
+        _this.locations.push({
+          value: airport['airport_id'],
+          name: airport['airport_id'] + " - " + airport['airport_name']
+        });
+      });
+      response.data.Aircraft.forEach(function (aircraft) {
+        _this.aircrafts.push({
+          value: aircraft['aircraft_id'],
+          name: aircraft['aircraft_id'] + ": " + response.data.Aircraft_Brand[aircraft['aircraft_id']]['brand_name'] + " " + response.data.Aircraft_Model[aircraft['aircraft_id']]['model_name']
+        });
+      });
+    });
+  },
+  beforeUpdate: function beforeUpdate() {
+    var _this2 = this;
+
+    if (this.input.departDate == "") {// alert when didn't select depart date time
+    } else if (this.input.departDate != this.date_check) {
+      // query only work date
+      this.date_check = this.input.departDate;
+      axios.post("/api/backend/getWorkSchedule", {
+        date: this.input.departDate
+      }).then(function (response) {
+        _this2.options_attendant = [];
+        response.data.Attendant.forEach(function (attendant) {
+          _this2.options_attendant.push({
+            value: attendant['user_id'],
+            name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']
+          });
+        });
+        _this2.options_pilot = [];
+        response.data.Pilot.forEach(function (pilot) {
+          _this2.options_pilot.push({
+            value: pilot['user_id'],
+            name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']
+          });
+        });
+      });
     }
   }
 });
@@ -9054,7 +9063,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\n    background: #4ecdc4;\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n#adminLogin {\r\n    background: #4ecdc4;\r\n    background: linear-gradient(to right, #556270, #4ecdc4);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -9073,7 +9082,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\r\n", ""]);
 
 // exports
 
@@ -44373,6 +44382,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
+                            label: "name",
                             options: _vm.aircrafts,
                             searchable: true,
                             multiple: false,
@@ -44442,6 +44452,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
+                            label: "name",
                             options: _vm.locations,
                             searchable: true,
                             multiple: false,
@@ -44551,6 +44562,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
+                            label: "name",
                             options: _vm.locations,
                             searchable: true,
                             multiple: false,
@@ -44655,7 +44667,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("h5", { staticClass: "mb-3" }, [_vm._v("Crew Details")]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "row", attrs: { disabled: "" } }, [
                     _c("div", { staticClass: "col-md-6 mb-2" }, [
                       _c(
                         "div",
@@ -44665,15 +44677,14 @@ var render = function() {
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options,
+                              label: "name",
+                              options: _vm.options_pilot,
                               searchable: true,
                               multiple: false,
                               "close-on-select": true,
                               "clear-on-select": false,
                               "preserve-search": true,
                               placeholder: "Choose",
-                              label: "name",
-                              "custom-label": _vm.nameWithId,
                               "track-by": "name",
                               "preselect-first": false
                             },
@@ -44704,7 +44715,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
-                            options: _vm.options,
+                            options: _vm.options_pilot,
                             searchable: true,
                             multiple: false,
                             "close-on-select": true,
@@ -44712,7 +44723,6 @@ var render = function() {
                             "preserve-search": true,
                             placeholder: "Choose",
                             label: "name",
-                            "custom-label": _vm.nameWithId,
                             "preselect-first": false
                           },
                           model: {
@@ -44740,11 +44750,11 @@ var render = function() {
                         "div",
                         { staticClass: "form-group" },
                         [
-                          _c("label", [_vm._v("Avaliable flight adtendant")]),
+                          _c("label", [_vm._v("Avaliable Flight Adttendant")]),
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options,
+                              options: _vm.options_attendant,
                               searchable: true,
                               multiple: true,
                               "close-on-select": false,
@@ -44752,7 +44762,6 @@ var render = function() {
                               "preserve-search": true,
                               placeholder: "Choose",
                               label: "name",
-                              "custom-label": _vm.nameWithId,
                               "track-by": "name",
                               "preselect-first": false,
                               max: 6
@@ -63659,8 +63668,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

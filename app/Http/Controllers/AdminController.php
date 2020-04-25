@@ -66,7 +66,7 @@ class AdminController extends Controller
         );
         foreach ($employee_role as $role) {
             if (!strcmp(strtolower($detail_data['role']), $role["role_name"])) {
-                $user_id_search = Employee::select('user_id')->where('user_id', 'LIKE', "%" . $role["initial"] . "%")->get();
+                $user_id_search = Employee::select('user_id')->where('user_id', 'LIKE', "%". $role["initial"]. "%")->get();
                 if (!sizeof($user_id_search)) $user_id = $role["initial"] . "00000001";
                 else {
                     for ($i = 0; $i < sizeof($user_id_search); ++$i)
