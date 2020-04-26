@@ -11,38 +11,6 @@
                     <form>
                         <div class="form-group">
                             <div class="row">
-                                <span class="col-md-6 mb-2">
-                                    <label>Aircraft ID:</label>
-                                    <multiselect
-                                        label = "name"
-                                        v-model="input.aircraftID"
-                                        :options="aircrafts"
-                                        :searchable="true"
-                                        :multiple="false"
-                                        :show-labels="false"
-                                        :close-on-select="true"
-                                        :clear-on-select="false"
-                                        placeholder="Choose"
-                                        :preselect-first="false"
-                                    >
-                                    </multiselect>
-                                    <div class="invalid-feedback">
-                                        Please choose
-                                    </div>
-                                </span>
-                                <span class="col-md-6 mb-2">
-                                    <label>Flight Number:</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="input.flightNo"
-                                    />
-                                    <div class="invalid-feedback">
-                                        Please enter flight number
-                                    </div>
-                                </span>
-                            </div>
-                            <div class="row">
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Location:</label>
                                     <multiselect
@@ -56,8 +24,7 @@
                                         :clear-on-select="false"
                                         placeholder="Choose"
                                         :preselect-first="false"
-                                    >
-                                    </multiselect>
+                                    ></multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -99,8 +66,7 @@
                                         :clear-on-select="false"
                                         placeholder="Choose"
                                         :preselect-first="false"
-                                    >
-                                    </multiselect>
+                                    ></multiselect>
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
@@ -122,6 +88,37 @@
                                         type="time"
                                         class="form-control"
                                         v-model="input.arriveTime"
+                                    />
+                                    <div class="invalid-feedback">
+                                        Please enter flight number
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <span class="col-md-6 mb-2">
+                                    <label>Aircraft ID:</label>
+                                    <multiselect
+                                        label = "name"
+                                        v-model="input.aircraftID"
+                                        :options="aircrafts"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :show-labels="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
+                                    ></multiselect>
+                                    <div class="invalid-feedback">
+                                        Please choose
+                                    </div>
+                                </span>
+                                <span class="col-md-6 mb-2">
+                                    <label>Flight Number:</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="input.flightNo"
                                     />
                                     <div class="invalid-feedback">
                                         Please enter flight number
@@ -237,57 +234,74 @@ export default {
     data() {
         return {
             input: {
-                aircraftID: "",
-                flightNo: "",
-                departLocation: "",
-                departDate: "",
-                departTime: "",
-                arriveLocation: "",
-                arriveDate: "",
-                arriveTime: "",
-                captain: "",
-                coPilot: "",
+                aircraftID: null,
+                flightNo: null,
+                departLocation: null,
+                departDate: null,
+                departTime: null,
+                arriveLocation: null,
+                arriveDate: null,
+                arriveTime: null,
+                captain: null,
+                coPilot: null,
                 crew: []
             },
             options_pilot: [],
             options_attendant: [],
             aircrafts: [],
             locations: [],
-            date_check: ""
+            date_check: null,
+            time_check: null,
+            location_check: null,
+            both_check: null
         };
     },
     methods: {
 
     },
     beforeMount() {
-        axios.get("/api/backend/getInfoFlights").then(response => {
-            console.log(response.data);
-
-            (response.data.Airport).forEach(airport => {
+        axios.get("/api/backend/getAirports").then(response => {
+            (response.data).forEach(airport => {
                 this.locations.push({value: airport['airport_id'], name: airport['airport_id'] + " - " + airport['airport_name']});
             });
-            (response.data.Aircraft).forEach(aircraft => {
-                this.aircrafts.push({value: aircraft['aircraft_id'], name: aircraft['aircraft_id'] + ": " + response.data.Aircraft_Brand[aircraft['aircraft_id']]['brand_name'] + " " + response.data.Aircraft_Model[aircraft['aircraft_id']]['model_name']});
-            });
+            // var count = 0;
+            // (response.data.Aircraft).forEach(aircraft => {
+            //     this.aircrafts.push({value: aircraft['aircraft_id'], name: aircraft['aircraft_id'] + ": " + response.data.Aircraft_Brand[count]['brand_name'] + " " + response.data.Aircraft_Model[count]['model_name']});
+            //     count++;
+            // });
         });
     },
     beforeUpdate(){
-        if(this.input.departDate == ""){
-            // alert when didn't select depart date time
-        }
-        else if(this.input.departDate != this.date_check){ // query only work date
-            this.date_check = this.input.departDate;
-            axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
-                this.options_attendant = [];
-                (response.data.Attendant).forEach(attendant => {
-                    this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
-                });
-                this.options_pilot = [];
-                (response.data.Pilot).forEach(pilot => {
-                    this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
-                });
+        // if(this.input.departDate == ""){
+        //     // alert when didn't select depart date time
+        // }
+        // else if(this.input.departDate != this.date_check){ // query only work date
+        //     this.date_check = this.input.departDate;
+        //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
+        //     //     this.options_attendant = [];
+        //     //     (response.data.Attendant).forEach(attendant => {
+        //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
+        //     //     });
+        //     //     this.options_pilot = [];
+        //     //     (response.data.Pilot).forEach(pilot => {
+        //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
+        //     //     });
+        //     // });
+        // }
+
+        // for check depart location, depart date and depart time are selected.
+        if(this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) this.both_check = false;
+        else if(this.input.departLocation != null && this.input.departDate != null && this.input.departTime != null) this.both_check  = true;
+        // for query when all are selected.
+        if(this.both_check && (this.input.departLocation != this.location_check || this.input.departDate != this.date_check || this.input.departTime != this.time_check)){
+            this.location_check = this.input.departLocation; this.date_check = this.input.departDate; this.time_check = this.input.departTime;
+            axios.post("/api/backend/getAircraftAndCrew", {location: this.input.departLocation['value'], date: this.input.departDate, time: this.input.departTime}).then(response=>{
+                console.log(response.data);
+
+
             });
         }
+
     }
 };
 </script>
