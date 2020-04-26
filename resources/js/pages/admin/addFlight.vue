@@ -218,8 +218,13 @@
                     <button
                         class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
+                        :disabled="isLoading"
                     >
-                        Add Flight
+                        <span v-show="!isLoading"> Add Flight</span>
+                        <i
+                            class="fas fa-spinner fa-pulse"
+                            v-show="isLoading"
+                        ></i>
                     </button>
                 </form>
             </div>
@@ -233,6 +238,7 @@ export default {
     components: { Multiselect },
     data() {
         return {
+            isLoading: false,
             input: {
                 aircraftID: "",
                 flightNo: "",

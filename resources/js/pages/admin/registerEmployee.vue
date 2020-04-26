@@ -579,11 +579,16 @@
 
                     <hr class="mb-4" />
                     <button
-                        @click="formSubmit"
+                        @click.prevent="formSubmit"
                         class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
+                        :disabled="isLoading"
                     >
-                        Register
+                        <span v-show="!isLoading"> Register</span>
+                        <i
+                            class="fas fa-spinner fa-pulse"
+                            v-show="isLoading"
+                        ></i>
                     </button>
                 </form>
             </div>
@@ -600,6 +605,7 @@ export default {
 
     data() {
         return {
+            isLoading: false,
             input: {
                 start_date: "",
                 salary: "",
@@ -725,7 +731,7 @@ export default {
             this.diseases.splice(index, 1);
         },
         formSubmit(e) {
-
+            e.preventDefault();
             this.errors = [];
             console.log(this.errors.length);
 
@@ -752,7 +758,7 @@ export default {
             this.error_faculty = null;
             this.error_department = null;
             this.error_gpa = null; //
-            e.preventDefault();
+
             let details = {
                 start_date: this.input.start_date,
                 salary: this.input.salary,
@@ -886,7 +892,7 @@ export default {
                 this.error_phone = "Please fill your phone number.";
                 this.errors.push(this.error_phone);
             } else {
-                this.error_phone =null;
+                this.error_phone = null;
             }
 
             if (!this.input.height) {
@@ -947,7 +953,6 @@ export default {
                 this.error_gpa = null;
             }
 
-
             // if (!this.edus) {
             //     this.error_edus = "Please fill the detail.";
             //     this.errors.push(this.error_edus);
@@ -955,8 +960,8 @@ export default {
             //     this.error_edus = null;
             // }
 
-
             if (!this.errors.length) {
+                this.isLoading = true;
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
                         .post("/api/admin/addEmployee", data)
@@ -966,11 +971,12 @@ export default {
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                this.$router.push("/adminHome");
+                                this.$router.push({ name: "adminHome" });
                             });
                         });
                 });
             } else {
+                this.isLoading = false;
                 swal.fire(
                     "Please success your form!",
                     "Cilck the button to continue!",

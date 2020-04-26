@@ -37,12 +37,18 @@
                             <button
                                 id="btnLogin"
                                 type="submiit"
+                                :disabled="isLoading"
                                 class="btn btn-block btn-login"
                             >
-                                Sign in
+                                <span v-show="!isLoading">Sign in</span>
+                                <i
+                                    class="fas fa-spinner fa-pulse"
+                                    v-show="isLoading"
+                                ></i>
                             </button>
                             <button
-                                @click="home"
+                                @click.prevent="home"
+                                :disabled="isLoading"
                                 id="btnLogin2"
                                 class="btn btn-block btn-login"
                             >
@@ -61,6 +67,7 @@ export default {
     name: "adminLogin",
     data() {
         return {
+            isLoading: false,
             username: "",
             password: "",
             error_username: "",
@@ -98,6 +105,7 @@ export default {
             }
 
             if (!this.errors.length) {
+                this.isLoading = true;
                 let data = {
                     username: this.username,
                     password: this.password
@@ -163,6 +171,7 @@ export default {
                             });
                         })
                         .catch(error => {
+                            this.isLoading = false;
                             if (error.response.status === 401) {
                                 swal.fire(
                                     "Could not log you in.",

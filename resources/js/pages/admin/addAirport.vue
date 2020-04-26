@@ -65,9 +65,14 @@
                     <hr class="mb-4" />
                     <button
                         class="btn btn-primary btn-lg btn-block btn-login"
-                        @click="formSubmit"
+                        @click.prevent="formSubmit"
+                        :disabled="isLoading"
                     >
-                        Add Airport
+                        <span v-show="!isLoading"> Add Airport</span>
+                        <i
+                            class="fas fa-spinner fa-pulse"
+                            v-show="isLoading"
+                        ></i>
                     </button>
                 </form>
             </div>
@@ -79,6 +84,7 @@
 export default {
     data() {
         return {
+            isLoading: false,
             input: {
                 airportID: "",
                 airportName: "",
@@ -99,6 +105,7 @@ export default {
                 airportAddress: this.input.airportAddress,
                 airportRegion: this.input.airportRegion
             };
+            this.isLoading = true;
 
             axios
                 .post("/api/backend/addAirport", data)
@@ -114,6 +121,7 @@ export default {
                     });
                 })
                 .catch(error => {
+                    this.isLoading = false;
                     if (error.response.status === 409) {
                         swal.fire(
                             "Could not add you data.",
