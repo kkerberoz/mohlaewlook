@@ -76,12 +76,6 @@ class UserController extends Controller
         }
     }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b5dcfafde9e8f182cdaec799857efd4627e7ffaf
-
     public function logout()
     {
         Auth::logout();

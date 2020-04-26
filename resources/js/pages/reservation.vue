@@ -1,9 +1,13 @@
 <template>
-    <div class="container-fluid">
-        <div class="row full-height flex-center">
-            <div class="col-md-12">
+    <div
+        class="container-fluid"
+        id="reservation"
+        style="margin-top:5%; margin-bottom:15%"
+    >
+        <div class="row flex-center full-height" id="reservation">
+            <div class="col-md-12" id="reservation" style="padding:30px">
                 <div class="card">
-                    <div class="card-header bg-primary">Reservation</div>
+                    <div class="card-header">Reservation</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2"></div>
@@ -60,6 +64,7 @@
                                 </span>
                             </div>
                         </div>
+                        <hr class="mb-4" />
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-2">
@@ -148,7 +153,7 @@
                                 </span>
                             </div>
                         </div>
-
+                        <hr class="mb-4" />
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-2">
@@ -332,7 +337,7 @@
                                 </span>
                             </div>
                         </div>
-
+                        <hr class="mb-4" />
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-2">
@@ -423,7 +428,7 @@
                                                 checked
                                                 value="Male"
                                             />
-                                            Male 
+                                            Male
                                         </label>
                                         <label
                                             class="radio-inline"
@@ -517,9 +522,12 @@
                             </div>
                         </div>
                     </div>
-
+                    <hr class="mb-4" />
                     <div class="card-footer flex-center">
-                        <button type="button" class="btn btn-outline-primary">
+                        <button
+                            type="button"
+                            class="btn btn-block btn-outline-primary"
+                        >
                             Next
                         </button>
                     </div>
@@ -533,4 +541,14 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+.card-header {
+    background-color: #f85e09;
+    display: block;
+}
+/* #reservation {
+    background: #008997;
+    background-color: #008997;
+    display: block;
+} */
+</style>
