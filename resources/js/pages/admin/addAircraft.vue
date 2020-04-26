@@ -286,7 +286,7 @@ export default {
                     this.input.Dup_ecoPat = each_model["eco_pattern"];
                     this.input.Dup_busPat = each_model["bus_pattern"];
                     this.input.Dup_firstPat = each_model["first_pattern"];
-                } else if (!this.input.model) {
+                } else {
                     this.seenModel = true;
                 }
             });
@@ -297,7 +297,7 @@ export default {
                     this.seenBrand = false;
                     console.log("find");
                     this.input.Dup_country = each_brand["country"];
-                } else if (!this.input.brand) {
+                } else {
                     this.seenBrand = true;
                 }
             });
