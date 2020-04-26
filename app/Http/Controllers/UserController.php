@@ -33,6 +33,7 @@ class UserController extends Controller
     {
         $usernameCheck = Customer::select('username')->where('username', $request->username)->first();
         $emailCheck = Customer::select('email')->where('email', $request->email)->first();
+
         if (isset($usernameCheck)) {
             return response()->json(['errorU' => 1, 'errorE' => 0]);
         }
@@ -74,7 +75,6 @@ class UserController extends Controller
             return response()->json(['errorE' => 0, 'errorU' => 0]);
         }
     }
-
 
     public function logout()
     {

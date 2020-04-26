@@ -693,8 +693,9 @@ export default {
     mounted() {
         axios.get("/api/backend/getAirports").then(response => {
             // show all airports onto option
-            var AirportID = response.data; // get all aiport
-            this.airports = AirportID;
+            // var AirportID = response.data; // get all aiport
+            this.airports = response.data;
+            // console.log(this.airports);
         });
     },
 
@@ -933,6 +934,8 @@ export default {
             if (!this.edus.gpa) {
                 this.error_gpa = "Please enter your gpa.";
                 this.errors.push(this.error_gpa);
+            } else if (isNaN(this.edus.gpa)) {
+                this.error_gpa = "Please fill with number.";
             } else {
                 this.error_gpa = null;
             }

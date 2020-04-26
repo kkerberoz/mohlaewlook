@@ -33,6 +33,8 @@ Route::prefix("admin")->group(function () {
     Route::get('/init', 'AdminController@init');
 });
 
+Route::post('/backend/addAircraft','BackendController@addAircraft');
+Route::get('/getModelBrand','BackendController@getModelBrand');
 
 Route::get('backend/getAirports', 'BackendController@getAirports');
 Route::post('backend/getAircraftAndCrew', 'BackendController@getAircraftAndCrew');
