@@ -1,11 +1,7 @@
 <template>
-    <div
-        class="container-fluid"
-        id="reservation"
-        style="margin-top:5%; margin-bottom:15%"
-    >
-        <div class="row flex-center full-height" id="reservation">
-            <div class="col-md-12" id="reservation" style="padding:30px">
+    <div class="container-fluid" style="margin-top:5%; margin-bottom:20% ">
+        <div class="row flex-center full-height">
+            <div class="col-md-12" style="padding:60px">
                 <div class="card">
                     <div class="card-header">Reservation</div>
                     <div class="card-body">
@@ -546,9 +542,4 @@ export default {};
     background-color: #f85e09;
     display: block;
 }
-/* #reservation {
-    background: #008997;
-    background-color: #008997;
-    display: block;
-} */
 </style>
