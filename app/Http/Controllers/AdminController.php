@@ -62,18 +62,19 @@ class AdminController extends Controller
             array("role_name" => "pilot", "initial" => "PLT"),
             array("role_name" => "flight attendant", "initial" => "FAD"),
             array("role_name" => "human resource", "initial" => "HR"),
-            array("role_name" => "flight manager", "initial" => "FM")
+            array("role_name" => "flight manager", "initial" => "FM"),
+
         );
         foreach ($employee_role as $role) {
             if (!strcmp(strtolower($detail_data['role']), $role["role_name"])) {
-                $user_id_search = Employee::select('user_id')->where('user_id', 'LIKE', "%" . $role["initial"] . "%")->get();
+                $user_id_search = Employee::select('user_id')->where('user_id', 'LIKE', "%". $role["initial"]. "%")->get();
                 if (!sizeof($user_id_search)) $user_id = $role["initial"] . "00000001";
                 else {
                     for ($i = 0; $i < sizeof($user_id_search); ++$i)
                         $id[$i] = str_replace($role["initial"], "", $user_id_search[$i]['user_id']);
                     $user_id = $role["initial"] . sprintf("%08d", max($id) + 1);
                 }
-                $detail_data['role'] = str_replace(" ", "_", $detail_data['role'] );
+                $detail_data['role'] = str_replace(" ", "_", $detail_data['role']);
             }
         }
         // add into employees table
@@ -123,8 +124,8 @@ class AdminController extends Controller
 
     public function logout()
     {
-        // Auth::guard('employee')->logout();
-        Auth::logout();
+        Auth::guard('employee')->logout();
+
         return response()->json(true, 200);
     }
 }

@@ -648,6 +648,7 @@ export default {
                 { name: "Flight Attendant" },
                 { name: "Human Resource" },
                 { name: "Flight Manager" }
+                // { name: "Admin" }
             ],
             status: [
                 { value: 1, name: "Active" },
@@ -701,7 +702,7 @@ export default {
             // show all airports onto option
             // var AirportID = response.data; // get all aiport
             this.airports = response.data;
-            console.log(this.airports);
+            // console.log(this.airports);
         });
     },
 
@@ -733,6 +734,10 @@ export default {
         formSubmit(e) {
             e.preventDefault();
             this.errors = [];
+<<<<<<< HEAD
+=======
+            // console.log(this.errors.length);
+>>>>>>> 2b23cfce23c856e2711f879c8a1f22937b3901d1
 
             this.error_start_date = null; //
             this.error_salary = null; //
@@ -970,7 +975,7 @@ export default {
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                this.$router.push({ name: "adminHome" });
+                                this.$router.go({ name: "adminHome" });
                             });
                         });
                 });

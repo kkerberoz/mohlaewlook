@@ -37,4 +37,6 @@ Route::post('/backend/addAircraft','BackendController@addAircraft');
 Route::get('/getModelBrand','BackendController@getModelBrand');
 
 Route::get('backend/getAirports', 'BackendController@getAirports');
+Route::post('backend/getAircraftAndCrew', 'BackendController@getAircraftAndCrew');
+
 Route::post('backend/addAirport', 'BackendController@addAirport');

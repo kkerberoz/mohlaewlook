@@ -2780,61 +2780,76 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isLoading: false,
       input: {
-        aircraftID: "",
-        flightNo: "",
-        departLocation: "",
-        departDate: "",
-        departTime: "",
-        arriveLocation: "",
-        arriveDate: "",
-        arriveTime: "",
-        captain: "",
-        coPilot: "",
+        aircraftID: null,
+        flightNo: null,
+        departLocation: null,
+        departDate: null,
+        departTime: null,
+        arriveLocation: null,
+        arriveDate: null,
+        arriveTime: null,
+        captain: null,
+        coPilot: null,
         crew: []
       },
-      options: [{
-        id: "1",
-        name: "Boss"
-      }, {
-        id: "2",
-        name: "Rat"
-      }, {
-        id: "3",
-        name: "Dive"
-      }, {
-        id: "4",
-        name: "Jane"
-      }, {
-        id: "5",
-        name: "O"
-      }, {
-        id: "6",
-        name: "Pan"
-      }, {
-        id: "7",
-        name: "Cake"
-      }, {
-        id: "8",
-        name: "Min"
-      }, {
-        id: "9",
-        name: "Cream"
-      }, {
-        id: "10",
-        name: "Jo"
-      }, {
-        id: "11",
-        name: "Oh"
-      }],
-      aircrafts: ["GGF1151", " GGF1152", "GGF1153", "GGF1154"],
-      locations: ["Swiss", " Germany", "Thailand", "Kanchanaburi"]
+      options_pilot: [],
+      options_attendant: [],
+      aircrafts: [],
+      locations: [],
+      date_check: null,
+      time_check: null,
+      location_check: null,
+      both_check: null
     };
   },
-  methods: {
-    nameWithId: function nameWithId(_ref) {
-      var name = _ref.name,
-          id = _ref.id;
-      return "[".concat(id, "] - ").concat(name, "  ");
+  methods: {},
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios.get("/api/backend/getAirports").then(function (response) {
+      response.data.forEach(function (airport) {
+        _this.locations.push({
+          value: airport['airport_id'],
+          name: airport['airport_id'] + " - " + airport['airport_name']
+        });
+      }); // var count = 0;
+      // (response.data.Aircraft).forEach(aircraft => {
+      //     this.aircrafts.push({value: aircraft['aircraft_id'], name: aircraft['aircraft_id'] + ": " + response.data.Aircraft_Brand[count]['brand_name'] + " " + response.data.Aircraft_Model[count]['model_name']});
+      //     count++;
+      // });
+    });
+  },
+  beforeUpdate: function beforeUpdate() {
+    // if(this.input.departDate == ""){
+    //     // alert when didn't select depart date time
+    // }
+    // else if(this.input.departDate != this.date_check){ // query only work date
+    //     this.date_check = this.input.departDate;
+    //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
+    //     //     this.options_attendant = [];
+    //     //     (response.data.Attendant).forEach(attendant => {
+    //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
+    //     //     });
+    //     //     this.options_pilot = [];
+    //     //     (response.data.Pilot).forEach(pilot => {
+    //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
+    //     //     });
+    //     // });
+    // }
+    // for check depart location, depart date and depart time are selected.
+    if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) this.both_check = false;else if (this.input.departLocation != null && this.input.departDate != null && this.input.departTime != null) this.both_check = true; // for query when all are selected.
+
+    if (this.both_check && (this.input.departLocation != this.location_check || this.input.departDate != this.date_check || this.input.departTime != this.time_check)) {
+      this.location_check = this.input.departLocation;
+      this.date_check = this.input.departDate;
+      this.time_check = this.input.departTime;
+      axios.post("/api/backend/getAircraftAndCrew", {
+        location: this.input.departLocation['value'],
+        date: this.input.departDate,
+        time: this.input.departTime
+      }).then(function (response) {
+        console.log(response.data);
+      });
     }
   }
 });
@@ -3062,6 +3077,11 @@ __webpack_require__.r(__webpack_exports__);
                 localStorage.setItem("isRole", "admin");
 
                 _this.$router.push("/admin");
+              } else if (response.data.employee_role === "flight_manager") {
+                localStorage.setItem("isAdmin", "true");
+                localStorage.setItem("isRole", "flight_manager");
+
+                _this.$router.push("/admin");
               }
             });
           })["catch"](function (error) {
@@ -3092,6 +3112,39 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3322,1014 +3375,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/registerEmployee.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "registerEmployee",
-  props: ["csrf", "oldName"],
-  components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
-  },
-  data: function data() {
-    return {
-      isLoading: false,
-      input: {
-        start_date: "",
-        salary: "",
-        airport: "",
-        role: "",
-        status: "",
-        username: "",
-        password: "",
-        idcard: "",
-        gender: "",
-        title: "",
-        firstname: "",
-        lastname: "",
-        DOB: "",
-        height: "",
-        weight: "",
-        email: "",
-        address: "",
-        phone: ""
-      },
-      edus: [{
-        degree: "",
-        university: "",
-        faculty: "",
-        department: "",
-        gpa: ""
-      }],
-      diseases: [{
-        info: "",
-        note: ""
-      }],
-      airports: [],
-      roles: [{
-        name: "Staff"
-      }, {
-        name: "Pilot"
-      }, {
-        name: "Flight Attendant"
-      }, {
-        name: "Human Resource"
-      }, {
-        name: "Flight Manager"
-      }],
-      status: [{
-        value: 1,
-        name: "Active"
-      }, {
-        value: 0,
-        name: "Left"
-      }],
-      titles: [{
-        title: "Mr."
-      }, {
-        title: "Mrs."
-      }, {
-        title: "Ms."
-      }, {
-        title: "Miss"
-      }],
-      degrees: ["Bachelor's degree", "Master's degree", "Doctoral degree"],
-      error_start_date: "",
-      error_salary: "",
-      error_airport: "",
-      error_role: "",
-      error_status: "",
-      error_username: "",
-      error_password: "",
-      error_idcard: "",
-      error_gender: "",
-      error_title: "",
-      error_firstname: "",
-      error_lastname: "",
-      error_DOB: "",
-      error_height: "",
-      error_weight: "",
-      error_email: "",
-      error_address: "",
-      error_phone: "",
-      error_degree: "",
-      error_university: "",
-      error_faculty: "",
-      error_department: "",
-      error_gpa: "",
-      error_info: "",
-      error_note: "",
-      error_edus: "",
-      errors: [],
-      seen: true
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get("/api/backend/getAirports").then(function (response) {
-      // show all airports onto option
-      // var AirportID = response.data; // get all aiport
-      _this.airports = response.data;
-      console.log(_this.airports);
-    });
-  },
-  methods: {
-    airportName: function airportName(_ref) {
-      var airport_id = _ref.airport_id,
-          airport_name = _ref.airport_name;
-      return "[".concat(airport_id, "] - ").concat(airport_name);
-    },
-    addedu: function addedu(index) {
-      this.edus.push({
-        degree: "",
-        university: "",
-        faculty: "",
-        department: "",
-        gpa: ""
-      });
-    },
-    removeedu: function removeedu(index) {
-      this.edus.splice(index, 1);
-    },
-    add: function add(index) {
-      this.diseases.push({
-        info: "",
-        note: ""
-      });
-    },
-    remove: function remove(index) {
-      this.diseases.splice(index, 1);
-    },
-    formSubmit: function formSubmit(e) {
-      var _this2 = this;
-
-      e.preventDefault();
-      this.errors = [];
-      this.error_start_date = null; //
-
-      this.error_salary = null; //
-
-      this.error_airport = null; //////
-
-      this.error_role = null; //
-
-      this.error_status = null; //
-
-      this.error_username = null; //
-
-      this.error_password = null; //
-
-      this.error_idcard = null; //
-
-      this.error_gender = null; //
-
-      this.error_title = null; //
-
-      this.error_firstname = null; //
-
-      this.error_lastname = null; //
-
-      this.error_DOB = null; //
-
-      this.error_height = null; //
-
-      this.error_weight = null; //
-
-      this.error_email = null; ///////
-
-      this.error_address = null; //
-
-      this.error_phone = null; //
-
-      this.error_degree = null;
-      this.error_university = null;
-      this.error_faculty = null;
-      this.error_department = null;
-      this.error_gpa = null; //
-
-      var details = {
-        start_date: this.input.start_date,
-        salary: this.input.salary,
-        airport: this.input.airport.airport_id,
-        role: this.input.role.name,
-        status: this.input.status.value,
-        username: this.input.username,
-        password: this.input.password,
-        idcard: this.input.idcard,
-        gender: this.input.gender,
-        title: this.input.title.title,
-        firstname: this.input.firstname,
-        lastname: this.input.lastname,
-        DOB: this.input.DOB,
-        height: this.input.height,
-        weight: this.input.weight,
-        email: this.input.email,
-        address: this.input.address,
-        phone: this.input.phone
-      }; // data in detail
-
-      var educations = this.edus; // data in education
-
-      var diseases = this.diseases; // data in diseases
-
-      var data = {
-        details: details,
-        educations: educations,
-        diseases: diseases
-      };
-
-      if (!this.input.start_date) {
-        this.error_start_date = "Please select your start date.";
-        this.errors.push(this.error_start_date);
-      } else {
-        this.error_start_date = null;
-      }
-
-      if (!this.input.salary) {
-        this.error_salary = "Please fill the salary.";
-        this.errors.push(this.error_salary);
-      } else if (isNaN(this.input.salary)) {
-        this.error_salary = "Please fill only number.";
-        this.errors.push(this.error_salary);
-      } else {
-        this.error_salary = null;
-      }
-
-      if (!this.input.role) {
-        this.error_role = "Please select your role.";
-        this.errors.push(this.error_role);
-      } else {
-        this.error_role = null;
-      }
-
-      if (!this.input.status) {
-        this.error_status = "Please select your work status.";
-        this.errors.push(this.error_status);
-      } else {
-        this.error_status = null;
-      }
-
-      if (!this.input.username.trim()) {
-        this.error_username = "Please fill your username.";
-        this.errors.push(this.error_username);
-      } else {
-        this.error_username = null;
-      }
-
-      if (!this.input.password) {
-        this.error_password = "Please fill your password.";
-        this.errors.push(this.error_password);
-      } else if (this.input.password.length < 6) {
-        this.error_password = "Password has to be at least 6 characters long.";
-        this.errors.push(this.error_password);
-      } else {
-        this.error_password = null;
-      }
-
-      if (!this.input.idcard) {
-        this.error_idcard = "Please fill your id card.";
-        this.errors.push(this.error_idcard);
-      } else if (this.input.idcard.length != 13) {
-        this.error_idcard = "Password must be 13 characters.";
-        this.errors.push(this.error_idcard);
-      } else {
-        this.error_idcard = null;
-      }
-
-      if (!this.input.gender) {
-        this.error_gender = "Please select the gender.";
-        this.errors.push(this.error_gender);
-      } else {
-        this.error_gender = null;
-      }
-
-      if (!this.input.title.title) {
-        this.error_title = "Please select your title.";
-        this.errors.push(this.error_title);
-      } else {
-        this.error_title = null;
-      }
-
-      if (!this.input.firstname.trim()) {
-        this.error_firstname = "Please fill your first name.";
-        this.errors.push(this.error_firstname);
-      } else {
-        this.error_firstname = null;
-      }
-
-      if (!this.input.lastname.trim()) {
-        this.error_lastname = "Please fill your last name.";
-        this.errors.push(this.error_lastname);
-      } else {
-        this.error_lastname = null;
-      }
-
-      if (!this.input.DOB) {
-        this.error_DOB = "Please select your Date of Birth.";
-        this.errors.push(this.error_DOB);
-      } else {
-        this.error_DOB = null;
-      }
-
-      if (!this.input.address.trim()) {
-        this.error_address = "Please fill your address.";
-        this.errors.push(this.error_address);
-      } else {
-        this.error_address = null;
-      }
-
-      if (!this.input.phone.trim()) {
-        this.error_phone = "Please fill your phone number.";
-        this.errors.push(this.error_phone);
-      } else {
-        this.error_phone = null;
-      }
-
-      if (!this.input.height) {
-        this.error_height = "Please fill you height.";
-        this.errors.push(this.error_height);
-      } else if (isNaN(this.input.height)) {
-        this.error_height = "Please fill only number.";
-        this.errors.push(this.error_height);
-      } else {
-        this.error_height = null;
-      }
-
-      if (!this.input.weight) {
-        this.error_weight = "Please fill you weight.";
-        this.errors.push(this.error_weight);
-      } else if (isNaN(this.input.weight)) {
-        this.error_weight = "Please fill only number.";
-        this.errors.push(this.error_weight);
-      } else {
-        this.error_weight = null;
-      }
-
-      if (!this.edus[0].degree) {
-        this.error_degree = "Please select your degree.";
-        this.errors.push(this.error_degree);
-      } else {
-        this.error_degree = null;
-      }
-
-      if (!this.edus[0].university) {
-        this.error_university = "Please enter your university.";
-        this.errors.push(this.error_university);
-      } else {
-        this.error_university = null;
-      }
-
-      if (!this.edus[0].faculty) {
-        this.error_faculty = "Please enter your faculty.";
-        this.errors.push(this.error_faculty);
-      } else {
-        this.error_faculty = null;
-      }
-
-      if (!this.edus[0].department) {
-        this.error_department = "Please enter your department.";
-        this.errors.push(this.error_department);
-      } else {
-        this.error_department = null;
-      }
-
-      if (!this.edus[0].gpa) {
-        this.error_gpa = "Please enter your gpa.";
-        this.errors.push(this.error_gpa);
-      } else if (isNaN(this.edus[0].gpa)) {
-        this.error_gpa = "Please fill with number.";
-        this.errors.push(this.error_gpa);
-      } else {
-        this.error_gpa = null;
-      } // if (!this.edus) {
-      //     this.error_edus = "Please fill the detail.";
-      //     this.errors.push(this.error_edus);
-      // } else {
-      //     this.error_edus = null;
-      // }
-
-
-      if (!this.errors.length) {
-        this.isLoading = true;
-        axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/admin/addEmployee", data).then(function (response) {
-            swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.push({
-                name: "adminHome"
-              });
-            });
-          });
-        });
-      } else {
-        this.isLoading = false;
-        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
-      }
-    }
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\DBproject\\mohlaewlook\\resources\\js\\pages\\admin\\registerEmployee.vue: Unexpected token (737:0)\n\n\u001b[0m \u001b[90m 735 | \u001b[39m            e\u001b[33m.\u001b[39mpreventDefault()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 736 | \u001b[39m            \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39merrors \u001b[33m=\u001b[39m []\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 737 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 738 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 739 | \u001b[39m            \u001b[90m// console.log(this.errors.length);\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 740 | \u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>\u001b[39m \u001b[35m2\u001b[39mb23cfce23c856e2711f879c8a1f22937b3901d1\u001b[0m\n    at Parser._raise (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.unexpected (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:8757:16)\n    at Parser.parseExprAtom (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10052:20)\n    at Parser.parseExprSubscripts (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9602:23)\n    at Parser.parseMaybeUnary (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9582:21)\n    at Parser.parseExprOps (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9452:23)\n    at Parser.parseMaybeConditional (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9425:23)\n    at Parser.parseMaybeAssign (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9380:21)\n    at Parser.parseExpression (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9332:23)\n    at Parser.parseStatementContent (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:11210:23)\n    at Parser.parseStatement (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:11081:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:11656:25)\n    at Parser.parseBlockBody (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:11642:10)\n    at Parser.parseBlock (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:11626:10)\n    at Parser.parseFunctionBody (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10634:24)\n    at Parser.parseFunctionBodyAndFinish (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10617:10)\n    at Parser.parseMethod (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10579:10)\n    at Parser.parseObjectMethod (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10495:19)\n    at Parser.parseObjPropValue (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10537:23)\n    at Parser.parseObjectMember (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10461:10)\n    at Parser.parseObj (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10374:25)\n    at Parser.parseExprAtom (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9995:28)\n    at Parser.parseExprSubscripts (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9602:23)\n    at Parser.parseMaybeUnary (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9582:21)\n    at Parser.parseExprOps (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9452:23)\n    at Parser.parseMaybeConditional (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9425:23)\n    at Parser.parseMaybeAssign (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9380:21)\n    at Parser.parseObjectProperty (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10512:101)\n    at Parser.parseObjPropValue (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10537:101)\n    at Parser.parseObjectMember (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10461:10)\n    at Parser.parseObj (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:10374:25)\n    at Parser.parseExprAtom (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9995:28)\n    at Parser.parseExprSubscripts (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9602:23)\n    at Parser.parseMaybeUnary (D:\\DBproject\\mohlaewlook\\node_modules\\@babel\\parser\\lib\\index.js:9582:21)");
 
 /***/ }),
 
@@ -45763,81 +44811,13 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c(
                       "span",
-                      { staticClass: "col-md-6 mb-2" },
-                      [
-                        _c("label", [_vm._v("Aircraft ID:")]),
-                        _vm._v(" "),
-                        _c("multiselect", {
-                          attrs: {
-                            options: _vm.aircrafts,
-                            searchable: true,
-                            multiple: false,
-                            "show-labels": false,
-                            "close-on-select": true,
-                            "clear-on-select": false,
-                            placeholder: "Choose",
-                            "preselect-first": false
-                          },
-                          model: {
-                            value: _vm.input.aircraftID,
-                            callback: function($$v) {
-                              _vm.$set(_vm.input, "aircraftID", $$v)
-                            },
-                            expression: "input.aircraftID"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                    Please choose\n                                "
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "col-md-6 mb-2" }, [
-                      _c("label", [_vm._v("Flight Number:")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.flightNo,
-                            expression: "input.flightNo"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.input.flightNo },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.input, "flightNo", $event.target.value)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please enter flight number\n                                "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c(
-                      "span",
                       { staticClass: "col-md-4 mb-2" },
                       [
                         _c("label", [_vm._v("Depart Location:")]),
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
+                            label: "name",
                             options: _vm.locations,
                             searchable: true,
                             multiple: false,
@@ -45947,6 +44927,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
+                            label: "name",
                             options: _vm.locations,
                             searchable: true,
                             multiple: false,
@@ -46047,11 +45028,81 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "span",
+                      { staticClass: "col-md-6 mb-2" },
+                      [
+                        _c("label", [_vm._v("Aircraft ID:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            label: "name",
+                            options: _vm.aircrafts,
+                            searchable: true,
+                            multiple: false,
+                            "show-labels": false,
+                            "close-on-select": true,
+                            "clear-on-select": false,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.aircraftID,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "aircraftID", $$v)
+                            },
+                            expression: "input.aircraftID"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    Please choose\n                                "
+                          )
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "col-md-6 mb-2" }, [
+                      _c("label", [_vm._v("Flight Number:")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.input.flightNo,
+                            expression: "input.flightNo"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.input.flightNo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.input, "flightNo", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                    Please enter flight number\n                                "
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
                   _c("hr", { staticClass: "mb-4" }),
                   _vm._v(" "),
                   _c("h5", { staticClass: "mb-3" }, [_vm._v("Crew Details")]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "row", attrs: { disabled: "" } }, [
                     _c("div", { staticClass: "col-md-6 mb-2" }, [
                       _c(
                         "div",
@@ -46061,15 +45112,14 @@ var render = function() {
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options,
+                              label: "name",
+                              options: _vm.options_pilot,
                               searchable: true,
                               multiple: false,
                               "close-on-select": true,
                               "clear-on-select": false,
                               "preserve-search": true,
                               placeholder: "Choose",
-                              label: "name",
-                              "custom-label": _vm.nameWithId,
                               "track-by": "name",
                               "preselect-first": false
                             },
@@ -46100,7 +45150,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
-                            options: _vm.options,
+                            options: _vm.options_pilot,
                             searchable: true,
                             multiple: false,
                             "close-on-select": true,
@@ -46108,7 +45158,6 @@ var render = function() {
                             "preserve-search": true,
                             placeholder: "Choose",
                             label: "name",
-                            "custom-label": _vm.nameWithId,
                             "preselect-first": false
                           },
                           model: {
@@ -46136,11 +45185,11 @@ var render = function() {
                         "div",
                         { staticClass: "form-group" },
                         [
-                          _c("label", [_vm._v("Avaliable flight adtendant")]),
+                          _c("label", [_vm._v("Avaliable Flight Adttendant")]),
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options,
+                              options: _vm.options_attendant,
                               searchable: true,
                               multiple: true,
                               "close-on-select": false,
@@ -46148,7 +45197,6 @@ var render = function() {
                               "preserve-search": true,
                               placeholder: "Choose",
                               label: "name",
-                              "custom-label": _vm.nameWithId,
                               "track-by": "name",
                               "preselect-first": false,
                               max: 6
@@ -46617,7 +45665,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "newEmployee" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "human_resource" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "newEmployee" } }
+                        },
                         [
                           _c("i", { staticClass: "far fa-address-card" }),
                           _vm._v(" "),
@@ -46633,7 +45696,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addFlight" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addFlight" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-plane-departure" }),
                           _vm._v(" "),
@@ -46649,7 +45727,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addAircraft" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addAircraft" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-plane" }),
                           _vm._v(" "),
@@ -46665,7 +45758,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addAirport" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addAirport" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-map-marked-alt" }),
                           _vm._v(" "),

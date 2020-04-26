@@ -16,9 +16,9 @@ class CreateWorkSchedulesTable extends Migration
         Schema::create('work_schedules', function (Blueprint $table) {
             $table->string('user_id',11);
             $table->foreign('user_id')->references('user_id')->on('employees')->onUpdate('cascade');
-            $table->dateTime('work_date');
-            $table->foreignId('flight_id')->references('flight_id')->on('flights')->onUpdate('cascade');
-            $table->enum('confirm_status',['free','pending','confirm','cancel']);
+            $table->date('work_date');
+            $table->foreignId('flight_id')->references('flight_id')->on('flights')->onUpdate('cascade')->nullable();
+            $table->enum('confirm_status',['free','confirm','cancel']);
 
             $table->primary(['user_id','work_date']);
         });
