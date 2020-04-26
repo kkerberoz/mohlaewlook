@@ -26,6 +26,7 @@
                                 alt="User picture"
                             />
             </div>-->
+
                         <div class="user-info">
                             <span class="user-name">
                                 <strong>{{
@@ -55,26 +56,58 @@
                                     <i class="far fa-address-card"></i>
                                     <span>Add Employee</span>
                 </a>-->
-                                <router-link :to="{ name: 'newEmployee' }">
+                                <router-link
+                                    :to="{ name: 'newEmployee' }"
+                                    v-show="
+                                        role === 'human_resource' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
                                     <i class="far fa-address-card"></i>
                                     <span>Add Employee</span>
                                 </router-link>
                             </li>
 
                             <li>
-                                <router-link :to="{ name: 'addFlight' }">
+                                <router-link
+                                    :to="{ name: 'addFlight' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
                                     <i class="fas fa-plane-departure"></i>
                                     <span>Add Flight</span>
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{ name: 'addAircraft' }">
+                                <router-link
+                                    :to="{ name: 'addAircraft' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
                                     <i class="fas fa-plane"></i>
                                     <span>Add Aircraft</span>
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{ name: 'addAirport' }">
+                                <router-link
+                                    :to="{ name: 'addAirport' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
                                     <i class="fas fa-map-marked-alt"></i>
                                     <span>Add Airport</span>
                                 </router-link>

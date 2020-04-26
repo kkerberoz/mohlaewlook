@@ -167,6 +167,16 @@ export default {
                                     localStorage.setItem("isAdmin", "true");
                                     localStorage.setItem("isRole", "admin");
                                     this.$router.push("/admin");
+                                } else if (
+                                    response.data.employee_role ===
+                                    "flight_manager"
+                                ) {
+                                    localStorage.setItem("isAdmin", "true");
+                                    localStorage.setItem(
+                                        "isRole",
+                                        "flight_manager"
+                                    );
+                                    this.$router.push("/admin");
                                 }
                             });
                         })

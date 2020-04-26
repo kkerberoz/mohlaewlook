@@ -3062,6 +3062,11 @@ __webpack_require__.r(__webpack_exports__);
                 localStorage.setItem("isRole", "admin");
 
                 _this.$router.push("/admin");
+              } else if (response.data.employee_role === "flight_manager") {
+                localStorage.setItem("isAdmin", "true");
+                localStorage.setItem("isRole", "flight_manager");
+
+                _this.$router.push("/admin");
               }
             });
           })["catch"](function (error) {
@@ -3092,6 +3097,39 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3978,7 +4016,8 @@ __webpack_require__.r(__webpack_exports__);
         name: "Human Resource"
       }, {
         name: "Flight Manager"
-      }],
+      } // { name: "Admin" }
+      ],
       status: [{
         value: 1,
         name: "Active"
@@ -4032,8 +4071,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/api/backend/getAirports").then(function (response) {
       // show all airports onto option
       // var AirportID = response.data; // get all aiport
-      _this.airports = response.data;
-      console.log(_this.airports);
+      _this.airports = response.data; // console.log(this.airports);
     });
   },
   methods: {
@@ -4067,8 +4105,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       e.preventDefault();
-      this.errors = [];
-      console.log(this.errors.length);
+      this.errors = []; // console.log(this.errors.length);
+
       this.error_start_date = null; //
 
       this.error_salary = null; //
@@ -4318,7 +4356,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.push({
+              _this2.$router.go({
                 name: "adminHome"
               });
             });
@@ -46618,7 +46656,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "newEmployee" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "human_resource" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "newEmployee" } }
+                        },
                         [
                           _c("i", { staticClass: "far fa-address-card" }),
                           _vm._v(" "),
@@ -46634,7 +46687,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addFlight" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addFlight" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-plane-departure" }),
                           _vm._v(" "),
@@ -46650,7 +46718,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addAircraft" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addAircraft" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-plane" }),
                           _vm._v(" "),
@@ -46666,7 +46749,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addAirport" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addAirport" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-map-marked-alt" }),
                           _vm._v(" "),
