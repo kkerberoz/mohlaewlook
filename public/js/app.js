@@ -4010,8 +4010,8 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault();
       this.errors = [];
+      console.log(this.errors.length);
       this.error_start_date = null; //
 
       this.error_salary = null; //
@@ -4048,13 +4048,13 @@ __webpack_require__.r(__webpack_exports__);
 
       this.error_phone = null; //
 
-      this.error_edus = null;
       this.error_degree = null;
       this.error_university = null;
       this.error_faculty = null;
       this.error_department = null;
       this.error_gpa = null; //
 
+      e.preventDefault();
       var details = {
         start_date: this.input.start_date,
         salary: this.input.salary,
@@ -4148,7 +4148,7 @@ __webpack_require__.r(__webpack_exports__);
         this.error_gender = "Please select the gender.";
         this.errors.push(this.error_gender);
       } else {
-        this.input.error_gender = null;
+        this.error_gender = null;
       }
 
       if (!this.input.title.title) {
@@ -4190,7 +4190,7 @@ __webpack_require__.r(__webpack_exports__);
         this.error_phone = "Please fill your phone number.";
         this.errors.push(this.error_phone);
       } else {
-        this.errors.push(this.error_phone);
+        this.error_phone = null;
       }
 
       if (!this.input.height) {
@@ -4213,39 +4213,40 @@ __webpack_require__.r(__webpack_exports__);
         this.error_weight = null;
       }
 
-      if (!this.edus.degree) {
+      if (!this.edus[0].degree) {
         this.error_degree = "Please select your degree.";
         this.errors.push(this.error_degree);
       } else {
         this.error_degree = null;
       }
 
-      if (!this.edus.university) {
+      if (!this.edus[0].university) {
         this.error_university = "Please enter your university.";
         this.errors.push(this.error_university);
       } else {
         this.error_university = null;
       }
 
-      if (!this.edus.faculty) {
+      if (!this.edus[0].faculty) {
         this.error_faculty = "Please enter your faculty.";
         this.errors.push(this.error_faculty);
       } else {
         this.error_faculty = null;
       }
 
-      if (!this.edus.department) {
+      if (!this.edus[0].department) {
         this.error_department = "Please enter your department.";
         this.errors.push(this.error_department);
       } else {
         this.error_department = null;
       }
 
-      if (!this.edus.gpa) {
+      if (!this.edus[0].gpa) {
         this.error_gpa = "Please enter your gpa.";
         this.errors.push(this.error_gpa);
-      } else if (isNaN(this.edus.gpa)) {
+      } else if (isNaN(this.edus[0].gpa)) {
         this.error_gpa = "Please fill with number.";
+        this.errors.push(this.error_gpa);
       } else {
         this.error_gpa = null;
       } // if (!this.edus) {
@@ -4763,6 +4764,8 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.error_email = null;
       }
+
+      console.log(this.errors);
 
       if (!this.errors.length) {
         var data = {
@@ -9900,7 +9903,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n#adminLogin {\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -9938,7 +9941,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-header {\n    background-color: #f85e09;\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.card-header {\r\n    background-color: #f85e09;\r\n    display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -66200,8 +66203,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
