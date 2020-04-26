@@ -34,9 +34,14 @@
                         <div class="card-footer">
                             <button
                                 type="submiit"
+                                :disabled="isLoading"
                                 class="btn btn-block btn-login"
                             >
-                                Sign in
+                                <span v-show="!isLoading">Sign in</span>
+                                <i
+                                    class="fas fa-spinner fa-pulse"
+                                    v-show="isLoading"
+                                ></i>
                             </button>
                         </div>
                     </div>
@@ -51,6 +56,7 @@ export default {
     name: "login",
     data() {
         return {
+            isLoading: false,
             username: "",
             password: "",
             error_username: "",
@@ -89,6 +95,7 @@ export default {
                     username: this.username,
                     password: this.password
                 };
+                this.isLoading = true;
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
                         .post("/api/login", data)
@@ -104,6 +111,7 @@ export default {
                             });
                         })
                         .catch(error => {
+                            this.isLoading = false;
                             if (error.response.status === 401) {
                                 swal.fire(
                                     "Could not log you in.",

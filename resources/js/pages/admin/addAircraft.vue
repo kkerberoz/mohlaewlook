@@ -191,9 +191,14 @@
                     <hr class="mb-4" />
                     <button
                         class="btn btn-primary btn-lg btn-block btn-login"
-                        @click="handleFormCilcked()"
+                        @click.prevent="handleFormCilcked"
+                        :disabled="isLoading"
                     >
-                        Add Aircraft
+                        <span v-show="!isLoading">Add Aircraft</span>
+                        <i
+                            class="fas fa-spinner fa-pulse"
+                            v-show="isLoading"
+                        ></i>
                     </button>
                 </form>
             </div>
@@ -205,6 +210,7 @@
 export default {
     data() {
         return {
+            isLoading: false,
             model_query: [],
             brand_query: [],
             input: {
@@ -247,9 +253,10 @@ export default {
         });
     },
     methods: {
-        handleFormCilcked() {
-            // e.preventDefault();
+        handleFormCilcked(e) {
+            e.preventDefault();
             let data = { input: this.input };
+            this.isLoading = true;
             axios.post("/api/backend/addAircraft", data).then(response => {
                 console.log(response.data);
 
@@ -257,7 +264,10 @@ export default {
                     "Register Success!",
                     "Cilck the button to continue!",
                     "success"
-                );
+                ).then(() => {
+                    this.isLoading = false;
+                    this.$router.push({ name: "adminHome" });
+                });
             });
         },
         checkModel() {

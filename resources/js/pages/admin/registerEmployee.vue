@@ -579,11 +579,16 @@
 
                     <hr class="mb-4" />
                     <button
-                        @click="formSubmit"
+                        @click.prevent="formSubmit"
                         class="btn btn-primary btn-lg btn-block btn-login"
                         type="submit"
+                        :disabled="isLoading"
                     >
-                        Register
+                        <span v-show="!isLoading"> Register</span>
+                        <i
+                            class="fas fa-spinner fa-pulse"
+                            v-show="isLoading"
+                        ></i>
                     </button>
                 </form>
             </div>
@@ -600,6 +605,7 @@ export default {
 
     data() {
         return {
+            isLoading: false,
             input: {
                 start_date: "",
                 salary: "",
@@ -642,6 +648,7 @@ export default {
                 { name: "Flight Attendant" },
                 { name: "Human Resource" },
                 { name: "Flight Manager" }
+                // { name: "Admin" }
             ],
             status: [
                 { value: 1, name: "Active" },
@@ -727,6 +734,8 @@ export default {
         formSubmit(e) {
             e.preventDefault();
             this.errors = [];
+            // console.log(this.errors.length);
+
             this.error_start_date = null; //
             this.error_salary = null; //
             this.error_airport = null; //////
@@ -745,12 +754,12 @@ export default {
             this.error_email = null; ///////
             this.error_address = null; //
             this.error_phone = null; //
-            this.error_edus = null;
             this.error_degree = null;
             this.error_university = null;
             this.error_faculty = null;
             this.error_department = null;
             this.error_gpa = null; //
+
             let details = {
                 start_date: this.input.start_date,
                 salary: this.input.salary,
@@ -842,7 +851,7 @@ export default {
                 this.error_gender = "Please select the gender.";
                 this.errors.push(this.error_gender);
             } else {
-                this.input.error_gender = null;
+                this.error_gender = null;
             }
 
             if (!this.input.title.title) {
@@ -884,7 +893,7 @@ export default {
                 this.error_phone = "Please fill your phone number.";
                 this.errors.push(this.error_phone);
             } else {
-                this.errors.push(this.error_phone);
+                this.error_phone = null;
             }
 
             if (!this.input.height) {
@@ -907,35 +916,40 @@ export default {
                 this.error_weight = null;
             }
 
-            if (!this.edus.degree) {
+            if (!this.edus[0].degree) {
                 this.error_degree = "Please select your degree.";
                 this.errors.push(this.error_degree);
             } else {
                 this.error_degree = null;
             }
-            if (!this.edus.university) {
+
+            if (!this.edus[0].university) {
                 this.error_university = "Please enter your university.";
                 this.errors.push(this.error_university);
             } else {
                 this.error_university = null;
             }
-            if (!this.edus.faculty) {
+
+            if (!this.edus[0].faculty) {
                 this.error_faculty = "Please enter your faculty.";
                 this.errors.push(this.error_faculty);
             } else {
                 this.error_faculty = null;
             }
-            if (!this.edus.department) {
+
+            if (!this.edus[0].department) {
                 this.error_department = "Please enter your department.";
                 this.errors.push(this.error_department);
             } else {
                 this.error_department = null;
             }
-            if (!this.edus.gpa) {
+
+            if (!this.edus[0].gpa) {
                 this.error_gpa = "Please enter your gpa.";
                 this.errors.push(this.error_gpa);
-            } else if (isNaN(this.edus.gpa)) {
+            } else if (isNaN(this.edus[0].gpa)) {
                 this.error_gpa = "Please fill with number.";
+                this.errors.push(this.error_gpa);
             } else {
                 this.error_gpa = null;
             }
@@ -948,6 +962,7 @@ export default {
             // }
 
             if (!this.errors.length) {
+                this.isLoading = true;
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
                         .post("/api/admin/addEmployee", data)
@@ -957,11 +972,12 @@ export default {
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                this.$router.push("/adminHome");
+                                this.$router.go({ name: "adminHome" });
                             });
                         });
                 });
             } else {
+                this.isLoading = false;
                 swal.fire(
                     "Please success your form!",
                     "Cilck the button to continue!",

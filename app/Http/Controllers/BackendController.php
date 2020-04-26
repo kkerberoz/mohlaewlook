@@ -67,7 +67,7 @@ class BackendController extends Controller
     {
         $model = Aircraft_model::all();
         $brand = Aircraft_brand::all();
-        return response()->JSON([$model,$brand]);
+        return response()->JSON([$model, $brand]);
     }
 
     public function addAircraft(Request $request)
@@ -78,23 +78,28 @@ class BackendController extends Controller
 
         $input_Data = $request->input;
 
+<<<<<<< HEAD
         $model_check = Aircraft_model::where('model_name',$input_Data['model'])->first();
         $brand_check = Aircraft_brand::where('brand_name',$input_Data['brand'])->first();
         if(isset($brand_check))
         {
             if(isset($model_check))//Add only aircraft
+=======
+
+
+        $model_check = Aircraft_model::where('model_name', $input_Data['model'])->first();
+        $brand_check = Aircraft_brand::where('brand_name', $input_Data['brand'])->first();
+        if (isset($brand_check)) {
+            if (isset($model_check)) //Add only aircraft
+>>>>>>> db86a67ffe55d823c0f0dbd73b5d392c89ac1742
             {
-                $model_check = Aircraft_model::where('model_name',$input_Data['model'])->first();
-                $brand_check = Aircraft_brand::where('brand_name',$input_Data['brand'])->first();
+                $model_check = Aircraft_model::where('model_name', $input_Data['model'])->first();
+                $brand_check = Aircraft_brand::where('brand_name', $input_Data['brand'])->first();
                 $aircraft->aircraft_startdate = $input_Data['date'];
                 $aircraft->brand_id = $brand_check['brand_id'];
                 $aircraft->model_id = $model_check['model_id'];
                 $aircraft->save();
-
-
-
-            }
-            else//Add model and aircraft
+            } else //Add model and aircraft
             {
                 $aircraft_model->model_name = $input_Data['model'];
                 $aircraft_model->fuel_capacity = $input_Data['fuelCap'];
@@ -108,31 +113,34 @@ class BackendController extends Controller
                 $aircraft_model->first_pattern = $input_Data['firstPat'];
                 $aircraft_model->save();
 
-                $model_check = Aircraft_model::where('model_name',$input_Data['model'])->first();
-                $brand_check = Aircraft_brand::where('brand_name',$input_Data['brand'])->first();
+                $model_check = Aircraft_model::where('model_name', $input_Data['model'])->first();
+                $brand_check = Aircraft_brand::where('brand_name', $input_Data['brand'])->first();
                 $aircraft->aircraft_startdate = $input_Data['date'];
                 $aircraft->brand_id = $brand_check['brand_id'];
                 $aircraft->model_id = $model_check['model_id'];
                 $aircraft->save();
             }
+<<<<<<< HEAD
         }
         else
         {
             if(isset($model_check)){//Add brand & aircraft
+=======
+        } else {
+            if (isset($model_check)) { //Add brand & aircraft
+>>>>>>> db86a67ffe55d823c0f0dbd73b5d392c89ac1742
                 $aircraft_brand->brand_name = $input_Data['brand'];
                 $aircraft_brand->country = $input_Data['country'];
                 $aircraft_brand->save();
 
-                $model_check = Aircraft_model::where('model_name',$input_Data['model'])->first();
-                $brand_check = Aircraft_brand::where('brand_name',$input_Data['brand'])->first();
+                $model_check = Aircraft_model::where('model_name', $input_Data['model'])->first();
+                $brand_check = Aircraft_brand::where('brand_name', $input_Data['brand'])->first();
 
                 $aircraft->aircraft_startdate = $input_Data['date'];
                 $aircraft->brand_id = $brand_check['brand_id'];
                 $aircraft->model_id = $model_check['model_id'];
                 $aircraft->save();
-
-            }
-            else{// Add all data
+            } else { // Add all data
                 $aircraft_brand->brand_name = $input_Data['brand'];
                 $aircraft_brand->country = $input_Data['country'];
                 $aircraft_brand->save();
@@ -149,8 +157,8 @@ class BackendController extends Controller
                 $aircraft_model->first_pattern = $input_Data['firstPat'];
                 $aircraft_model->save();
 
-                $model_check = Aircraft_model::where('model_name',$input_Data['model'])->first();
-                $brand_check = Aircraft_brand::where('brand_name',$input_Data['brand'])->first();
+                $model_check = Aircraft_model::where('model_name', $input_Data['model'])->first();
+                $brand_check = Aircraft_brand::where('brand_name', $input_Data['brand'])->first();
 
                 $aircraft->aircraft_startdate = $input_Data['date'];
                 $aircraft->brand_id = $brand_check['brand_id'];
