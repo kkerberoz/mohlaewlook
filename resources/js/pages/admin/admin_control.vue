@@ -90,11 +90,17 @@
                             <li style="margin-top:50px; padding:10px">
                                 <div
                                     id="btnLogout"
-                                    @click="logout"
+                                    @click.prevent="logout"
                                     class="btn btn-block"
                                 >
-                                    <i class="fas fa-power-off"></i>
-                                    <span>Logout</span>
+                                    <span v-show="!isLoading"
+                                        ><i class="fas fa-power-off"></i>
+                                        <span>Logout</span></span
+                                    >
+                                    <i
+                                        class="fas fa-spinner fa-pulse"
+                                        v-show="isLoading"
+                                    ></i>
                                 </div>
                             </li>
                         </ul>
@@ -120,6 +126,7 @@
 export default {
     data() {
         return {
+            isLoading: false,
             user: "",
             get role() {
                 return localStorage.getItem("isRole");
@@ -148,9 +155,12 @@ export default {
         closeMenu() {
             $(".page-wrapper").toggleClass("toggled");
         },
-        logout() {
+        logout(e) {
+            e.preventDefault();
+            this.isLoading = true;
             axios.get("/sanctum/csrf-cookie").then(response => {
                 axios.post("/api/admin/logout").then(() => {
+                    this.isLoading = false;
                     localStorage.removeItem("isAdmin");
                     localStorage.removeItem("isRole");
                     this.$router.push({ name: "adminLogin" });

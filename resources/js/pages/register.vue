@@ -140,9 +140,14 @@
                         <div class="card-footer">
                             <button
                                 type="submit"
+                                :disabled="isLoading"
                                 class="btn btn-block btn-login"
                             >
-                                Sign up
+                                <span v-show="!isLoading"> Sign up</span>
+                                <i
+                                    class="fas fa-spinner fa-pulse"
+                                    v-show="isLoading"
+                                ></i>
                             </button>
                         </div>
                     </form>
@@ -156,6 +161,7 @@ export default {
     props: ["csrf", "oldName"],
     data() {
         return {
+            isLoading: false,
             username: "",
             password: "",
             title: "",
@@ -175,6 +181,7 @@ export default {
     },
     methods: {
         formSubmit(e) {
+            e.preventDefault();
             this.errors = [];
 
             this.error_name = null;
@@ -185,7 +192,6 @@ export default {
             this.error_password = null;
             this.error_title = null;
 
-            e.preventDefault();
             let currentObj = this;
             if (!this.username.trim()) {
                 this.error_username = "Please fill your username.";
@@ -240,6 +246,7 @@ export default {
             console.log(this.errors);
 
             if (!this.errors.length) {
+                this.isLoading = true;
                 let data = {
                     username: this.username,
                     password: this.password,
@@ -252,12 +259,14 @@ export default {
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios.post("/api/regis", data).then(response => {
                         if (response.data.errorU == 1) {
+                            this.isLoading = false;
                             this.username = "";
                             this.error_username =
                                 "This Username is already exist";
                             this.errors.push(this.error_username);
                             this.errors = [];
                         } else if (response.data.errorE == 1) {
+                            this.isLoading = false;
                             this.email = "";
                             this.error_email = "This E-mail is already exist";
                             this.errors.push(this.error_email);
@@ -278,6 +287,7 @@ export default {
                     });
                 });
             } else {
+                this.isLoading = false;
                 swal.fire(
                     "Please success your form!",
                     "Cilck the button to continue!",

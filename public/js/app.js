@@ -2261,9 +2261,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isLoading: false,
       model_query: [],
       brand_query: [],
       input: {
@@ -2307,49 +2313,58 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    handleFormCilcked: function handleFormCilcked() {
-      // e.preventDefault();
+    handleFormCilcked: function handleFormCilcked(e) {
+      var _this2 = this;
+
+      e.preventDefault();
       var data = {
         input: this.input
       };
+      this.isLoading = true;
       axios.post("/api/backend/addAircraft", data).then(function (response) {
         console.log(response.data);
-        swal.fire("Register Success!", "Cilck the button to continue!", "success");
+        swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+          _this2.isLoading = false;
+
+          _this2.$router.push({
+            name: "adminHome"
+          });
+        });
       });
     },
     checkModel: function checkModel() {
-      var _this2 = this;
+      var _this3 = this;
 
       console.log(this.model_query);
       console.log(this.brand_query);
       this.model_query.forEach(function (each_model) {
-        if (_this2.input.model === each_model["model_name"]) {
-          _this2.seenModel = false;
+        if (_this3.input.model === each_model["model_name"]) {
+          _this3.seenModel = false;
           console.log("find");
-          _this2.input.Dup_fuelCap = each_model["fuel_capacity"];
-          _this2.input.Dup_numberEng = each_model["number_of_engine"];
-          _this2.input.Dup_typeEng = each_model["engine_type"];
-          _this2.input.Dup_ecoCap = each_model["eco_cap"];
-          _this2.input.Dup_busCap = each_model["bus_cap"];
-          _this2.input.Dup_firstCap = each_model["first_cap"];
-          _this2.input.Dup_ecoPat = each_model["eco_pattern"];
-          _this2.input.Dup_busPat = each_model["bus_pattern"];
-          _this2.input.Dup_firstPat = each_model["first_pattern"];
-        } else if (!_this2.input.model) {
-          _this2.seenModel = true;
+          _this3.input.Dup_fuelCap = each_model["fuel_capacity"];
+          _this3.input.Dup_numberEng = each_model["number_of_engine"];
+          _this3.input.Dup_typeEng = each_model["engine_type"];
+          _this3.input.Dup_ecoCap = each_model["eco_cap"];
+          _this3.input.Dup_busCap = each_model["bus_cap"];
+          _this3.input.Dup_firstCap = each_model["first_cap"];
+          _this3.input.Dup_ecoPat = each_model["eco_pattern"];
+          _this3.input.Dup_busPat = each_model["bus_pattern"];
+          _this3.input.Dup_firstPat = each_model["first_pattern"];
+        } else {
+          _this3.seenModel = true;
         }
       });
     },
     checkBrand: function checkBrand() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.brand_query.forEach(function (each_brand) {
-        if (_this3.input.brand === each_brand["brand_name"]) {
-          _this3.seenBrand = false;
+        if (_this4.input.brand === each_brand["brand_name"]) {
+          _this4.seenBrand = false;
           console.log("find");
-          _this3.input.Dup_country = each_brand["country"];
-        } else if (!_this3.input.brand) {
-          _this3.seenBrand = true;
+          _this4.input.Dup_country = each_brand["country"];
+        } else {
+          _this4.seenBrand = true;
         }
       });
     },
@@ -2460,9 +2475,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isLoading: false,
       input: {
         airportID: "",
         airportName: "",
@@ -2485,6 +2506,7 @@ __webpack_require__.r(__webpack_exports__);
         airportAddress: this.input.airportAddress,
         airportRegion: this.input.airportRegion
       };
+      this.isLoading = true;
       axios.post("/api/backend/addAirport", data).then(function (response) {
         // console.log(response.data);
         _this.success = response.data;
@@ -2492,6 +2514,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.$router.push("/admin");
         });
       })["catch"](function (error) {
+        _this.isLoading = false;
+
         if (error.response.status === 409) {
           swal.fire("Could not add you data.", "Cilck the button to continue!", "error");
         }
@@ -2742,6 +2766,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2749,6 +2778,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isLoading: false,
       input: {
         aircraftID: "",
         flightNo: "",
@@ -2943,10 +2973,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "adminLogin",
   data: function data() {
     return {
+      isLoading: false,
       username: "",
       password: "",
       error_username: "",
@@ -2985,6 +3022,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!this.errors.length) {
+        this.isLoading = true;
         var data = {
           username: this.username,
           password: this.password
@@ -3027,6 +3065,8 @@ __webpack_require__.r(__webpack_exports__);
               }
             });
           })["catch"](function (error) {
+            _this.isLoading = false;
+
             if (error.response.status === 401) {
               swal.fire("Could not log you in.", "Cilck the button to continue!", "error").then(function () {
                 _this.errors = [];
@@ -3170,9 +3210,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isLoading: false,
       user: "",
 
       get role() {
@@ -3200,11 +3247,14 @@ __webpack_require__.r(__webpack_exports__);
     closeMenu: function closeMenu() {
       $(".page-wrapper").toggleClass("toggled");
     },
-    logout: function logout() {
+    logout: function logout(e) {
       var _this2 = this;
 
+      e.preventDefault();
+      this.isLoading = true;
       axios.get("/sanctum/csrf-cookie").then(function (response) {
         axios.post("/api/admin/logout").then(function () {
+          _this2.isLoading = false;
           localStorage.removeItem("isAdmin");
           localStorage.removeItem("isRole");
 
@@ -3871,6 +3921,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -3880,6 +3935,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isLoading: false,
       input: {
         start_date: "",
         salary: "",
@@ -4010,6 +4066,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this2 = this;
 
+      e.preventDefault();
       this.errors = [];
       this.error_start_date = null; //
 
@@ -4053,7 +4110,6 @@ __webpack_require__.r(__webpack_exports__);
       this.error_department = null;
       this.error_gpa = null; //
 
-      e.preventDefault();
       var details = {
         start_date: this.input.start_date,
         salary: this.input.salary,
@@ -4257,14 +4313,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
       if (!this.errors.length) {
+        this.isLoading = true;
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.push("/adminHome");
+              _this2.$router.push({
+                name: "adminHome"
+              });
             });
           });
         });
       } else {
+        this.isLoading = false;
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
@@ -4443,10 +4503,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "login",
   data: function data() {
     return {
+      isLoading: false,
       username: "",
       password: "",
       error_username: "",
@@ -4486,6 +4552,7 @@ __webpack_require__.r(__webpack_exports__);
           username: this.username,
           password: this.password
         };
+        this.isLoading = true;
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/login", data).then(function (response) {
             _this.customer = response.data;
@@ -4497,6 +4564,8 @@ __webpack_require__.r(__webpack_exports__);
               });
             });
           })["catch"](function (error) {
+            _this.isLoading = false;
+
             if (error.response.status === 401) {
               swal.fire("Could not log you in.", "Cilck the button to continue!", "error").then(function () {
                 _this.errors = [];
@@ -4675,10 +4744,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf", "oldName"],
   data: function data() {
     return {
+      isLoading: false,
       username: "",
       password: "",
       title: "",
@@ -4700,6 +4775,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this = this;
 
+      e.preventDefault();
       this.errors = [];
       this.error_name = null;
       this.error_surname = null;
@@ -4708,7 +4784,6 @@ __webpack_require__.r(__webpack_exports__);
       this.error_username = null;
       this.error_password = null;
       this.error_title = null;
-      e.preventDefault();
       var currentObj = this;
 
       if (!this.username.trim()) {
@@ -4767,6 +4842,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.errors);
 
       if (!this.errors.length) {
+        this.isLoading = true;
         var data = {
           username: this.username,
           password: this.password,
@@ -4779,6 +4855,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/regis", data).then(function (response) {
             if (response.data.errorU == 1) {
+              _this.isLoading = false;
               _this.username = "";
               _this.error_username = "This Username is already exist";
 
@@ -4786,6 +4863,7 @@ __webpack_require__.r(__webpack_exports__);
 
               _this.errors = [];
             } else if (response.data.errorE == 1) {
+              _this.isLoading = false;
               _this.email = "";
               _this.error_email = "This E-mail is already exist";
 
@@ -4803,6 +4881,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
       } else {
+        this.isLoading = false;
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
@@ -45302,13 +45381,42 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-primary btn-lg btn-block btn-login",
+                  attrs: { disabled: _vm.isLoading },
                   on: {
                     click: function($event) {
-                      return _vm.handleFormCilcked()
+                      $event.preventDefault()
+                      return _vm.handleFormCilcked($event)
                     }
                   }
                 },
-                [_vm._v("\n                    Add Aircraft\n                ")]
+                [
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isLoading,
+                          expression: "!isLoading"
+                        }
+                      ]
+                    },
+                    [_vm._v("Add Aircraft")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading"
+                      }
+                    ],
+                    staticClass: "fas fa-spinner fa-pulse"
+                  })
+                ]
               )
             ])
           ]
@@ -45557,12 +45665,41 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    on: { click: _vm.formSubmit }
+                    attrs: { disabled: _vm.isLoading },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.formSubmit($event)
+                      }
+                    }
                   },
                   [
-                    _vm._v(
-                      "\n                    Add Airport\n                "
-                    )
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isLoading,
+                            expression: "!isLoading"
+                          }
+                        ]
+                      },
+                      [_vm._v(" Add Airport")]
+                    ),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isLoading,
+                          expression: "isLoading"
+                        }
+                      ],
+                      staticClass: "fas fa-spinner fa-pulse"
+                    })
                   ]
                 )
               ])
@@ -46071,9 +46208,36 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                  attrs: { type: "submit" }
+                  attrs: { type: "submit", disabled: _vm.isLoading }
                 },
-                [_vm._v("\n                    Add Flight\n                ")]
+                [
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isLoading,
+                          expression: "!isLoading"
+                        }
+                      ]
+                    },
+                    [_vm._v(" Add Flight")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading"
+                      }
+                    ],
+                    staticClass: "fas fa-spinner fa-pulse"
+                  })
+                ]
               )
             ])
           ]
@@ -46316,12 +46480,39 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-block btn-login",
-                      attrs: { id: "btnLogin", type: "submiit" }
+                      attrs: {
+                        id: "btnLogin",
+                        type: "submiit",
+                        disabled: _vm.isLoading
+                      }
                     },
                     [
-                      _vm._v(
-                        "\n                            Sign in\n                        "
-                      )
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.isLoading,
+                              expression: "!isLoading"
+                            }
+                          ]
+                        },
+                        [_vm._v("Sign in")]
+                      ),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isLoading,
+                            expression: "isLoading"
+                          }
+                        ],
+                        staticClass: "fas fa-spinner fa-pulse"
+                      })
                     ]
                   ),
                   _vm._v(" "),
@@ -46329,8 +46520,13 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-block btn-login",
-                      attrs: { id: "btnLogin2" },
-                      on: { click: _vm.home }
+                      attrs: { disabled: _vm.isLoading, id: "btnLogin2" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.home($event)
+                        }
+                      }
                     },
                     [
                       _vm._v(
@@ -46501,12 +46697,44 @@ var render = function() {
                         {
                           staticClass: "btn btn-block",
                           attrs: { id: "btnLogout" },
-                          on: { click: _vm.logout }
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.logout($event)
+                            }
+                          }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-power-off" }),
+                          _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !_vm.isLoading,
+                                  expression: "!isLoading"
+                                }
+                              ]
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-power-off" }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Logout")])
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Logout")])
+                          _c("i", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isLoading,
+                                expression: "isLoading"
+                              }
+                            ],
+                            staticClass: "fas fa-spinner fa-pulse"
+                          })
                         ]
                       )
                     ]
@@ -48011,10 +48239,42 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { type: "submit" },
-                    on: { click: _vm.formSubmit }
+                    attrs: { type: "submit", disabled: _vm.isLoading },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.formSubmit($event)
+                      }
+                    }
                   },
-                  [_vm._v("\n                    Register\n                ")]
+                  [
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isLoading,
+                            expression: "!isLoading"
+                          }
+                        ]
+                      },
+                      [_vm._v(" Register")]
+                    ),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isLoading,
+                          expression: "isLoading"
+                        }
+                      ],
+                      staticClass: "fas fa-spinner fa-pulse"
+                    })
+                  ]
                 )
               ],
               2
@@ -48308,31 +48568,50 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0)
+            _c("div", { staticClass: "card-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-block btn-login",
+                  attrs: { type: "submiit", disabled: _vm.isLoading }
+                },
+                [
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isLoading,
+                          expression: "!isLoading"
+                        }
+                      ]
+                    },
+                    [_vm._v("Sign in")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading"
+                      }
+                    ],
+                    staticClass: "fas fa-spinner fa-pulse"
+                  })
+                ]
+              )
+            ])
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-block btn-login", attrs: { type: "submiit" } },
-        [
-          _vm._v(
-            "\n                            Sign in\n                        "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -48636,7 +48915,43 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "card-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-block btn-login",
+                    attrs: { type: "submit", disabled: _vm.isLoading }
+                  },
+                  [
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isLoading,
+                            expression: "!isLoading"
+                          }
+                        ]
+                      },
+                      [_vm._v(" Sign up")]
+                    ),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isLoading,
+                          expression: "isLoading"
+                        }
+                      ],
+                      staticClass: "fas fa-spinner fa-pulse"
+                    })
+                  ]
+                )
+              ])
             ])
           ])
         ])
@@ -48644,24 +48959,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-block btn-login", attrs: { type: "submit" } },
-        [
-          _vm._v(
-            "\n                            Sign up\n                        "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
