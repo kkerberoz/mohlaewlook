@@ -4011,7 +4011,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.errors = [];
-      console.log(this.errors.length);
       this.error_start_date = null; //
 
       this.error_salary = null; //

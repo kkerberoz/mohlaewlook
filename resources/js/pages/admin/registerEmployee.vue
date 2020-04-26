@@ -727,7 +727,6 @@ export default {
         formSubmit(e) {
 
             this.errors = [];
-            console.log(this.errors.length);
 
             this.error_start_date = null; //
             this.error_salary = null; //

@@ -250,6 +250,7 @@ export default {
         handleFormCilcked() {
             // e.preventDefault();
             let data = { input: this.input };
+
             axios.post("/api/backend/addAircraft", data).then(response => {
                 console.log(response.data);
 
