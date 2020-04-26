@@ -257,7 +257,7 @@ export default {
                     email: this.email
                 };
                 axios.get("/sanctum/csrf-cookie").then(response => {
-                    axios.post("/api/regis", data).then(response => {
+                    axios.post("/api/user/regis", data).then(response => {
                         if (response.data.errorU == 1) {
                             this.isLoading = false;
                             this.username = "";

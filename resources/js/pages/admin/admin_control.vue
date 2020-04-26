@@ -72,6 +72,19 @@
 
                             <li>
                                 <router-link
+                                    :to="{ name: 'customerCRUD' }"
+                                    v-show="
+                                        role === 'staff' || role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-user-edit"></i>
+                                    <span>Manage Customer</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
                                     :to="{ name: 'addFlight' }"
                                     v-show="
                                         role === 'flight_manager' ||

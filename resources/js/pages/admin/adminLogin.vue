@@ -77,6 +77,7 @@ export default {
     },
     methods: {
         home() {
+            this.isLoading = true;
             this.$router.push("/");
         },
         formSubmit(e) {

@@ -77,7 +77,7 @@ export default {
     methods: {
         logout() {
             axios.get("/sanctum/csrf-cookie").then(response => {
-                axios.post("/api/logout").then(() => {
+                axios.post("/api/user/logout").then(() => {
                     localStorage.removeItem("isLoggedIn");
                     this.$router.go({ name: "userLogin" });
                 });

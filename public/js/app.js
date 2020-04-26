@@ -2035,7 +2035,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/sanctum/csrf-cookie").then(function (response) {
-        axios.post("/api/logout").then(function () {
+        axios.post("/api/user/logout").then(function () {
           localStorage.removeItem("isLoggedIn");
 
           _this.$router.go({
@@ -2773,6 +2773,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2812,8 +2814,8 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/api/backend/getAirports").then(function (response) {
       response.data.forEach(function (airport) {
         _this.locations.push({
-          value: airport['airport_id'],
-          name: airport['airport_id'] + " - " + airport['airport_name']
+          value: airport["airport_id"],
+          name: airport["airport_id"] + " - " + airport["airport_name"]
         });
       });
     });
@@ -2848,7 +2850,7 @@ __webpack_require__.r(__webpack_exports__);
       this.date_check = this.input.departDate;
       this.time_check = this.input.departTime;
       axios.post("/api/backend/getAircraftAndCrew", {
-        location: this.input.departLocation['value'],
+        location: this.input.departLocation["value"],
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
@@ -2860,11 +2862,11 @@ __webpack_require__.r(__webpack_exports__);
 
         for (var i = 0; i < aircraft.length; ++i) {
           _this2.aircrafts.push({
-            value: aircraft[i]['aircraft_id'],
-            name: "ID: " + aircraft[i]['aircraft_id'] + " - " + aircraft_brand[i]['brand_name'] + " " + aircraft_model[i]['model_name']
+            value: aircraft[i]["aircraft_id"],
+            name: "ID: " + aircraft[i]["aircraft_id"] + " - " + aircraft_brand[i]["brand_name"] + " " + aircraft_model[i]["model_name"]
           });
 
-          _this2.aircraft_array_info[aircraft[i]['aircraft_id']] = "<b>Flight Times:</b> " + flight_time[i] + "<br>" + "<b>Last Flight: from</b> " + flight_info[i]['depart_location'] + "  <b>to</b>  " + flight_info[i]['arrive_location'] + "<br>" + "<b>When:</b> " + flight_info[i]['depart_datetime'] + "<br><b>To:</b>  " + flight_info[i]['arrive_datetime'];
+          _this2.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Flight Times:</b> " + flight_time[i] + "<br>" + "<b>Last Flight: from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<br><b>To:</b>  " + flight_info[i]["arrive_datetime"];
         }
       });
     } // show information of each aircraft
@@ -3028,6 +3030,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     home: function home() {
+      this.isLoading = true;
       this.$router.push("/");
     },
     formSubmit: function formSubmit(e) {
@@ -3132,6 +3135,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3994,11 +4010,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -4124,282 +4135,298 @@ __webpack_require__.r(__webpack_exports__);
         gpa: ""
       });
     },
-    removeedu: function removeedu(index) {
-      this.edus.splice(index, 1);
-    },
-    add: function add(index) {
-      this.diseases.push({
-        info: "",
-        note: ""
-      });
-    },
-    remove: function remove(index) {
-      this.diseases.splice(index, 1);
-    },
-    formSubmit: function formSubmit(e) {
-      var _this2 = this;
+    methods: {
+      airportName: function airportName(_ref2) {
+        var airport_id = _ref2.airport_id,
+            airport_name = _ref2.airport_name;
+        return "[".concat(airport_id, "] - ").concat(airport_name);
+      },
+      addedu: function addedu(index) {
+        this.edus.push({
+          degree: "",
+          university: "",
+          faculty: "",
+          department: "",
+          gpa: ""
+        });
+      },
+      removeedu: function removeedu(index) {
+        this.edus.splice(index, 1);
+      },
+      add: function add(index) {
+        this.diseases.push({
+          info: "",
+          note: ""
+        });
+      },
+      remove: function remove(index) {
+        this.diseases.splice(index, 1);
+      },
+      formSubmit: function formSubmit(e) {
+        var _this2 = this;
 
-      e.preventDefault();
-      this.errors = []; // console.log(this.errors.length);
+        e.preventDefault();
+        this.errors = []; // console.log(this.errors.length);
 
-      this.error_start_date = null; //
+        this.error_start_date = null; //
 
-      this.error_salary = null; //
+        this.error_salary = null; //
 
-      this.error_airport = null; //////
+        this.error_airport = null; //////
 
-      this.error_role = null; //
+        this.error_role = null; //
 
-      this.error_status = null; //
+        this.error_status = null; //
 
-      this.error_username = null; //
+        this.error_username = null; //
 
-      this.error_password = null; //
+        this.error_password = null; //
 
-      this.error_idcard = null; //
+        this.error_idcard = null; //
 
-      this.error_gender = null; //
+        this.error_gender = null; //
 
-      this.error_title = null; //
+        this.error_title = null; //
 
-      this.error_firstname = null; //
+        this.error_firstname = null; //
 
-      this.error_lastname = null; //
+        this.error_lastname = null; //
 
-      this.error_DOB = null; //
+        this.error_DOB = null; //
 
-      this.error_height = null; //
+        this.error_height = null; //
 
-      this.error_weight = null; //
+        this.error_weight = null; //
 
-      this.error_email = null; ///////
+        this.error_email = null; ///////
 
-      this.error_address = null; //
+        this.error_address = null; //
 
-      this.error_phone = null; //
+        this.error_phone = null; //
 
-      this.error_degree = null;
-      this.error_university = null;
-      this.error_faculty = null;
-      this.error_department = null;
-      this.error_gpa = null; //
-
-      var details = {
-        start_date: this.input.start_date,
-        salary: this.input.salary,
-        airport: this.input.airport.airport_id,
-        role: this.input.role.name,
-        status: this.input.status.value,
-        username: this.input.username,
-        password: this.input.password,
-        idcard: this.input.idcard,
-        gender: this.input.gender,
-        title: this.input.title.title,
-        firstname: this.input.firstname,
-        lastname: this.input.lastname,
-        DOB: this.input.DOB,
-        height: this.input.height,
-        weight: this.input.weight,
-        email: this.input.email,
-        address: this.input.address,
-        phone: this.input.phone
-      }; // data in detail
-
-      var educations = this.edus; // data in education
-
-      var diseases = this.diseases; // data in diseases
-
-      var data = {
-        details: details,
-        educations: educations,
-        diseases: diseases
-      };
-
-      if (!this.input.start_date) {
-        this.error_start_date = "Please select your start date.";
-        this.errors.push(this.error_start_date);
-      } else {
-        this.error_start_date = null;
-      }
-
-      if (!this.input.salary) {
-        this.error_salary = "Please fill the salary.";
-        this.errors.push(this.error_salary);
-      } else if (isNaN(this.input.salary)) {
-        this.error_salary = "Please fill only number.";
-        this.errors.push(this.error_salary);
-      } else {
-        this.error_salary = null;
-      }
-
-      if (!this.input.role) {
-        this.error_role = "Please select your role.";
-        this.errors.push(this.error_role);
-      } else {
-        this.error_role = null;
-      }
-
-      if (!this.input.status) {
-        this.error_status = "Please select your work status.";
-        this.errors.push(this.error_status);
-      } else {
-        this.error_status = null;
-      }
-
-      if (!this.input.username.trim()) {
-        this.error_username = "Please fill your username.";
-        this.errors.push(this.error_username);
-      } else {
-        this.error_username = null;
-      }
-
-      if (!this.input.password) {
-        this.error_password = "Please fill your password.";
-        this.errors.push(this.error_password);
-      } else if (this.input.password.length < 6) {
-        this.error_password = "Password has to be at least 6 characters long.";
-        this.errors.push(this.error_password);
-      } else {
-        this.error_password = null;
-      }
-
-      if (!this.input.idcard) {
-        this.error_idcard = "Please fill your id card.";
-        this.errors.push(this.error_idcard);
-      } else if (this.input.idcard.length != 13) {
-        this.error_idcard = "Password must be 13 characters.";
-        this.errors.push(this.error_idcard);
-      } else {
-        this.error_idcard = null;
-      }
-
-      if (!this.input.gender) {
-        this.error_gender = "Please select the gender.";
-        this.errors.push(this.error_gender);
-      } else {
-        this.error_gender = null;
-      }
-
-      if (!this.input.title.title) {
-        this.error_title = "Please select your title.";
-        this.errors.push(this.error_title);
-      } else {
-        this.error_title = null;
-      }
-
-      if (!this.input.firstname.trim()) {
-        this.error_firstname = "Please fill your first name.";
-        this.errors.push(this.error_firstname);
-      } else {
-        this.error_firstname = null;
-      }
-
-      if (!this.input.lastname.trim()) {
-        this.error_lastname = "Please fill your last name.";
-        this.errors.push(this.error_lastname);
-      } else {
-        this.error_lastname = null;
-      }
-
-      if (!this.input.DOB) {
-        this.error_DOB = "Please select your Date of Birth.";
-        this.errors.push(this.error_DOB);
-      } else {
-        this.error_DOB = null;
-      }
-
-      if (!this.input.address.trim()) {
-        this.error_address = "Please fill your address.";
-        this.errors.push(this.error_address);
-      } else {
-        this.error_address = null;
-      }
-
-      if (!this.input.phone.trim()) {
-        this.error_phone = "Please fill your phone number.";
-        this.errors.push(this.error_phone);
-      } else {
-        this.error_phone = null;
-      }
-
-      if (!this.input.height) {
-        this.error_height = "Please fill you height.";
-        this.errors.push(this.error_height);
-      } else if (isNaN(this.input.height)) {
-        this.error_height = "Please fill only number.";
-        this.errors.push(this.error_height);
-      } else {
-        this.error_height = null;
-      }
-
-      if (!this.input.weight) {
-        this.error_weight = "Please fill you weight.";
-        this.errors.push(this.error_weight);
-      } else if (isNaN(this.input.weight)) {
-        this.error_weight = "Please fill only number.";
-        this.errors.push(this.error_weight);
-      } else {
-        this.error_weight = null;
-      }
-
-      if (!this.edus[0].degree) {
-        this.error_degree = "Please select your degree.";
-        this.errors.push(this.error_degree);
-      } else {
         this.error_degree = null;
-      }
-
-      if (!this.edus[0].university) {
-        this.error_university = "Please enter your university.";
-        this.errors.push(this.error_university);
-      } else {
         this.error_university = null;
-      }
-
-      if (!this.edus[0].faculty) {
-        this.error_faculty = "Please enter your faculty.";
-        this.errors.push(this.error_faculty);
-      } else {
         this.error_faculty = null;
-      }
-
-      if (!this.edus[0].department) {
-        this.error_department = "Please enter your department.";
-        this.errors.push(this.error_department);
-      } else {
         this.error_department = null;
-      }
+        this.error_gpa = null; //
 
-      if (!this.edus[0].gpa) {
-        this.error_gpa = "Please enter your gpa.";
-        this.errors.push(this.error_gpa);
-      } else if (isNaN(this.edus[0].gpa)) {
-        this.error_gpa = "Please fill with number.";
-        this.errors.push(this.error_gpa);
-      } else {
-        this.error_gpa = null;
-      } // if (!this.edus) {
-      //     this.error_edus = "Please fill the detail.";
-      //     this.errors.push(this.error_edus);
-      // } else {
-      //     this.error_edus = null;
-      // }
+        var details = {
+          start_date: this.input.start_date,
+          salary: this.input.salary,
+          airport: this.input.airport.airport_id,
+          role: this.input.role.name,
+          status: this.input.status.value,
+          username: this.input.username,
+          password: this.input.password,
+          idcard: this.input.idcard,
+          gender: this.input.gender,
+          title: this.input.title.title,
+          firstname: this.input.firstname,
+          lastname: this.input.lastname,
+          DOB: this.input.DOB,
+          height: this.input.height,
+          weight: this.input.weight,
+          email: this.input.email,
+          address: this.input.address,
+          phone: this.input.phone
+        }; // data in detail
+
+        var educations = this.edus; // data in education
+
+        var diseases = this.diseases; // data in diseases
+
+        var data = {
+          details: details,
+          educations: educations,
+          diseases: diseases
+        };
+
+        if (!this.input.start_date) {
+          this.error_start_date = "Please select your start date.";
+          this.errors.push(this.error_start_date);
+        } else {
+          this.error_start_date = null;
+        }
+
+        if (!this.input.salary) {
+          this.error_salary = "Please fill the salary.";
+          this.errors.push(this.error_salary);
+        } else if (isNaN(this.input.salary)) {
+          this.error_salary = "Please fill only number.";
+          this.errors.push(this.error_salary);
+        } else {
+          this.error_salary = null;
+        }
+
+        if (!this.input.role) {
+          this.error_role = "Please select your role.";
+          this.errors.push(this.error_role);
+        } else {
+          this.error_role = null;
+        }
+
+        if (!this.input.status) {
+          this.error_status = "Please select your work status.";
+          this.errors.push(this.error_status);
+        } else {
+          this.error_status = null;
+        }
+
+        if (!this.input.username.trim()) {
+          this.error_username = "Please fill your username.";
+          this.errors.push(this.error_username);
+        } else {
+          this.error_username = null;
+        }
+
+        if (!this.input.password) {
+          this.error_password = "Please fill your password.";
+          this.errors.push(this.error_password);
+        } else if (this.input.password.length < 6) {
+          this.error_password = "Password has to be at least 6 characters long.";
+          this.errors.push(this.error_password);
+        } else {
+          this.error_password = null;
+        }
+
+        if (!this.input.idcard) {
+          this.error_idcard = "Please fill your id card.";
+          this.errors.push(this.error_idcard);
+        } else if (this.input.idcard.length != 13) {
+          this.error_idcard = "Password must be 13 characters.";
+          this.errors.push(this.error_idcard);
+        } else {
+          this.error_idcard = null;
+        }
+
+        if (!this.input.gender) {
+          this.error_gender = "Please select the gender.";
+          this.errors.push(this.error_gender);
+        } else {
+          this.error_gender = null;
+        }
+
+        if (!this.input.title.title) {
+          this.error_title = "Please select your title.";
+          this.errors.push(this.error_title);
+        } else {
+          this.error_title = null;
+        }
+
+        if (!this.input.firstname.trim()) {
+          this.error_firstname = "Please fill your first name.";
+          this.errors.push(this.error_firstname);
+        } else {
+          this.error_firstname = null;
+        }
+
+        if (!this.input.lastname.trim()) {
+          this.error_lastname = "Please fill your last name.";
+          this.errors.push(this.error_lastname);
+        } else {
+          this.error_lastname = null;
+        }
+
+        if (!this.input.DOB) {
+          this.error_DOB = "Please select your Date of Birth.";
+          this.errors.push(this.error_DOB);
+        } else {
+          this.error_DOB = null;
+        }
+
+        if (!this.input.address.trim()) {
+          this.error_address = "Please fill your address.";
+          this.errors.push(this.error_address);
+        } else {
+          this.error_address = null;
+        }
+
+        if (!this.input.phone.trim()) {
+          this.error_phone = "Please fill your phone number.";
+          this.errors.push(this.error_phone);
+        } else {
+          this.error_phone = null;
+        }
+
+        if (!this.input.height) {
+          this.error_height = "Please fill you height.";
+          this.errors.push(this.error_height);
+        } else if (isNaN(this.input.height)) {
+          this.error_height = "Please fill only number.";
+          this.errors.push(this.error_height);
+        } else {
+          this.error_height = null;
+        }
+
+        if (!this.input.weight) {
+          this.error_weight = "Please fill you weight.";
+          this.errors.push(this.error_weight);
+        } else if (isNaN(this.input.weight)) {
+          this.error_weight = "Please fill only number.";
+          this.errors.push(this.error_weight);
+        } else {
+          this.error_weight = null;
+        }
+
+        if (!this.edus[0].degree) {
+          this.error_degree = "Please select your degree.";
+          this.errors.push(this.error_degree);
+        } else {
+          this.error_degree = null;
+        }
+
+        if (!this.edus[0].university) {
+          this.error_university = "Please enter your university.";
+          this.errors.push(this.error_university);
+        } else {
+          this.error_university = null;
+        }
+
+        if (!this.edus[0].faculty) {
+          this.error_faculty = "Please enter your faculty.";
+          this.errors.push(this.error_faculty);
+        } else {
+          this.error_faculty = null;
+        }
+
+        if (!this.edus[0].department) {
+          this.error_department = "Please enter your department.";
+          this.errors.push(this.error_department);
+        } else {
+          this.error_department = null;
+        }
+
+        if (!this.edus[0].gpa) {
+          this.error_gpa = "Please enter your gpa.";
+          this.errors.push(this.error_gpa);
+        } else if (isNaN(this.edus[0].gpa)) {
+          this.error_gpa = "Please fill with number.";
+          this.errors.push(this.error_gpa);
+        } else {
+          this.error_gpa = null;
+        } // if (!this.edus) {
+        //     this.error_edus = "Please fill the detail.";
+        //     this.errors.push(this.error_edus);
+        // } else {
+        //     this.error_edus = null;
+        // }
 
 
-      if (!this.errors.length) {
-        this.isLoading = true;
-        axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/admin/addEmployee", data).then(function (response) {
-            swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.go({
-                name: "adminHome"
+        if (!this.errors.length) {
+          this.isLoading = true;
+          axios.get("/sanctum/csrf-cookie").then(function (response) {
+            axios.post("/api/admin/addEmployee", data).then(function (response) {
+              swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+                _this2.$router.go({
+                  name: "adminHome"
+                });
               });
             });
           });
-        });
-      } else {
-        this.isLoading = false;
-        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+        } else {
+          this.isLoading = false;
+          swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+        }
       }
     }
   }
@@ -4628,7 +4655,7 @@ __webpack_require__.r(__webpack_exports__);
         };
         this.isLoading = true;
         axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/login", data).then(function (response) {
+          axios.post("/api/user/login", data).then(function (response) {
             _this.customer = response.data;
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
               localStorage.setItem("isLoggedIn", "true");
@@ -4927,7 +4954,7 @@ __webpack_require__.r(__webpack_exports__);
           email: this.email
         };
         axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/regis", data).then(function (response) {
+          axios.post("/api/user/regis", data).then(function (response) {
             if (response.data.errorU == 1) {
               _this.isLoading = false;
               _this.username = "";
@@ -10055,7 +10082,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#adminLogin {\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n#adminLogin {\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -10074,7 +10101,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -10093,7 +10120,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-header {\r\n    background-color: #f85e09;\r\n    display: block;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-header {\n    background-color: #f85e09;\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -46730,6 +46757,36 @@ var render = function() {
                               name: "show",
                               rawName: "v-show",
                               value:
+                                _vm.role === "staff" || _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'staff' || role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "customerCRUD" } }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-user-edit" }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Manage Customer")])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
                                 _vm.role === "flight_manager" ||
                                 _vm.role === "admin"
                                   ? true
@@ -47086,7 +47143,11 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.error_start_date))
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.error_start_date) +
+                              "\n                                "
+                          )
                         ])
                       ])
                     ]),
@@ -47502,11 +47563,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.error_gender) +
-                            "\n                            "
-                        )
+                        _vm._v(_vm._s(_vm.error_gender))
                       ])
                     ])
                   ]),
@@ -47588,11 +47645,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.error_firstname) +
-                            "\n                            "
-                        )
+                        _vm._v(_vm._s(_vm.error_firstname))
                       ])
                     ]),
                     _vm._v(" "),
@@ -47625,11 +47678,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.error_lastname) +
-                            "\n                            "
-                        )
+                        _vm._v(_vm._s(_vm.error_lastname))
                       ])
                     ])
                   ]),
@@ -48396,7 +48445,7 @@ var render = function() {
                           }
                         ]
                       },
-                      [_vm._v(" Register")]
+                      [_vm._v("Register")]
                     ),
                     _vm._v(" "),
                     _c("i", {
@@ -66636,8 +66685,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

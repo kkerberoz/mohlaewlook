@@ -98,7 +98,7 @@ export default {
                 this.isLoading = true;
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios
-                        .post("/api/login", data)
+                        .post("/api/user/login", data)
                         .then(response => {
                             this.customer = response.data;
                             swal.fire(

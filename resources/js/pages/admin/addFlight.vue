@@ -14,7 +14,7 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Location:</label>
                                     <multiselect
-                                        label = "name"
+                                        label="name"
                                         v-model="input.departLocation"
                                         :options="locations"
                                         :searchable="true"
@@ -56,7 +56,7 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Location:</label>
                                     <multiselect
-                                        label = "name"
+                                        label="name"
                                         v-model="input.arriveLocation"
                                         :options="locations"
                                         :searchable="true"
@@ -101,7 +101,7 @@
                                         v-bind:class="{
                                             active: true
                                         }"
-                                        label = "name"
+                                        label="name"
                                         v-model="input.aircraftID"
                                         :options="aircrafts"
                                         :searchable="true"
@@ -112,8 +112,10 @@
                                         placeholder="Choose"
                                         :preselect-first="false"
                                     ></multiselect>
-                                    <div class="static active" id = "aircraft_info">
-                                    </div>
+                                    <div
+                                        class="static active"
+                                        id="aircraft_info"
+                                    ></div>
                                 </span>
                                 <span class="col-md-6 mb-2">
                                     <label>Flight Number:</label>
@@ -134,7 +136,7 @@
                                     <div class="form-group">
                                         <label>Captain:</label>
                                         <multiselect
-                                            label = "name"
+                                            label="name"
                                             v-model="input.captain"
                                             :options="options_pilot"
                                             :searchable="true"
@@ -262,20 +264,22 @@ export default {
             time_check: null,
             location_check: null,
             both_check: null,
-            aircraft_array_info: [],
+            aircraft_array_info: []
         };
     },
-    methods: {
-
-    },
+    methods: {},
     beforeMount() {
         axios.get("/api/backend/getAirports").then(response => {
-            (response.data).forEach(airport => {
-                this.locations.push({value: airport['airport_id'], name: airport['airport_id'] + " - " + airport['airport_name']});
+            response.data.forEach(airport => {
+                this.locations.push({
+                    value: airport["airport_id"],
+                    name:
+                        airport["airport_id"] + " - " + airport["airport_name"]
+                });
             });
         });
     },
-    beforeUpdate(){
+    beforeUpdate() {
         // if(this.input.departDate == ""){
         //     // alert when didn't select depart date time
         // }
@@ -294,25 +298,75 @@ export default {
         // }
 
         // for check depart location, depart date and depart time are selected.
-        if(this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) this.both_check = false;
-        else if(this.input.departLocation != null && this.input.departDate != null && this.input.departTime != null) this.both_check  = true;
+        if (
+            this.input.departLocation == null ||
+            this.input.departDate == null ||
+            this.input.departTime == null
+        )
+            this.both_check = false;
+        else if (
+            this.input.departLocation != null &&
+            this.input.departDate != null &&
+            this.input.departTime != null
+        )
+            this.both_check = true;
         // for query when all are selected.
-        if(this.both_check && (this.input.departLocation != this.location_check || this.input.departDate != this.date_check || this.input.departTime != this.time_check)){
-            this.aircrafts = []; this.options_pilot = []; this.options_attendant = [];
-            this.location_check = this.input.departLocation; this.date_check = this.input.departDate; this.time_check = this.input.departTime;
-            axios.post("/api/backend/getAircraftAndCrew", {location: this.input.departLocation['value'], date: this.input.departDate, time: this.input.departTime}).then(response=>{
-                var aircraft = response.data.Aircraft; var aircraft_brand = response.data.Aircraft_Brand; var aircraft_model = response.data.Aircraft_Model;
-                var flight_info = response.data.Flight_Info; var flight_time = response.data.Flight_Time;
-                for(var i=0; i<aircraft.length; ++i){
-                    this.aircrafts.push({value: aircraft[i]['aircraft_id'], name: "ID: " + aircraft[i]['aircraft_id'] + " - " + aircraft_brand[i]['brand_name'] + " " + aircraft_model[i]['model_name']});
-                    this.aircraft_array_info[aircraft[i]['aircraft_id']] = "<b>Flight Times:</b> " + flight_time[i] + "<br>" +
-                                                                           "<b>Last Flight: from</b> " + flight_info[i]['depart_location'] + "  <b>to</b>  " + flight_info[i]['arrive_location'] + "<br>" +
-                                                                           "<b>When:</b> " + flight_info[i]['depart_datetime'] + "<br><b>To:</b>  " + flight_info[i]['arrive_datetime'];
-                }
-            });
+        if (
+            this.both_check &&
+            (this.input.departLocation != this.location_check ||
+                this.input.departDate != this.date_check ||
+                this.input.departTime != this.time_check)
+        ) {
+            this.aircrafts = [];
+            this.options_pilot = [];
+            this.options_attendant = [];
+            this.location_check = this.input.departLocation;
+            this.date_check = this.input.departDate;
+            this.time_check = this.input.departTime;
+            axios
+                .post("/api/backend/getAircraftAndCrew", {
+                    location: this.input.departLocation["value"],
+                    date: this.input.departDate,
+                    time: this.input.departTime
+                })
+                .then(response => {
+                    var aircraft = response.data.Aircraft;
+                    var aircraft_brand = response.data.Aircraft_Brand;
+                    var aircraft_model = response.data.Aircraft_Model;
+                    var flight_info = response.data.Flight_Info;
+                    var flight_time = response.data.Flight_Time;
+                    for (var i = 0; i < aircraft.length; ++i) {
+                        this.aircrafts.push({
+                            value: aircraft[i]["aircraft_id"],
+                            name:
+                                "ID: " +
+                                aircraft[i]["aircraft_id"] +
+                                " - " +
+                                aircraft_brand[i]["brand_name"] +
+                                " " +
+                                aircraft_model[i]["model_name"]
+                        });
+                        this.aircraft_array_info[aircraft[i]["aircraft_id"]] =
+                            "<b>Flight Times:</b> " +
+                            flight_time[i] +
+                            "<br>" +
+                            "<b>Last Flight: from</b> " +
+                            flight_info[i]["depart_location"] +
+                            "  <b>to</b>  " +
+                            flight_info[i]["arrive_location"] +
+                            "<br>" +
+                            "<b>When:</b> " +
+                            flight_info[i]["depart_datetime"] +
+                            "<br><b>To:</b>  " +
+                            flight_info[i]["arrive_datetime"];
+                    }
+                });
         }
         // show information of each aircraft
-        if(this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];
+        if (this.input.aircraftID != null)
+            document.getElementById(
+                "aircraft_info"
+            ).innerHTML = this.aircraft_array_info[this.input.aircraftID.value];
         else document.getElementById("aircraft_info").innerHTML = null;
     }
 };
