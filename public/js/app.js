@@ -2771,6 +2771,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2799,7 +2801,8 @@ __webpack_require__.r(__webpack_exports__);
       date_check: null,
       time_check: null,
       location_check: null,
-      both_check: null
+      both_check: null,
+      aircraft_array_info: []
     };
   },
   methods: {},
@@ -2812,14 +2815,12 @@ __webpack_require__.r(__webpack_exports__);
           value: airport['airport_id'],
           name: airport['airport_id'] + " - " + airport['airport_name']
         });
-      }); // var count = 0;
-      // (response.data.Aircraft).forEach(aircraft => {
-      //     this.aircrafts.push({value: aircraft['aircraft_id'], name: aircraft['aircraft_id'] + ": " + response.data.Aircraft_Brand[count]['brand_name'] + " " + response.data.Aircraft_Model[count]['model_name']});
-      //     count++;
-      // });
+      });
     });
   },
   beforeUpdate: function beforeUpdate() {
+    var _this2 = this;
+
     // if(this.input.departDate == ""){
     //     // alert when didn't select depart date time
     // }
@@ -2840,6 +2841,9 @@ __webpack_require__.r(__webpack_exports__);
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) this.both_check = false;else if (this.input.departLocation != null && this.input.departDate != null && this.input.departTime != null) this.both_check = true; // for query when all are selected.
 
     if (this.both_check && (this.input.departLocation != this.location_check || this.input.departDate != this.date_check || this.input.departTime != this.time_check)) {
+      this.aircrafts = [];
+      this.options_pilot = [];
+      this.options_attendant = [];
       this.location_check = this.input.departLocation;
       this.date_check = this.input.departDate;
       this.time_check = this.input.departTime;
@@ -2848,9 +2852,25 @@ __webpack_require__.r(__webpack_exports__);
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
-        console.log(response.data);
+        var aircraft = response.data.Aircraft;
+        var aircraft_brand = response.data.Aircraft_Brand;
+        var aircraft_model = response.data.Aircraft_Model;
+        var flight_info = response.data.Flight_Info;
+        var flight_time = response.data.Flight_Time;
+
+        for (var i = 0; i < aircraft.length; ++i) {
+          _this2.aircrafts.push({
+            value: aircraft[i]['aircraft_id'],
+            name: "ID: " + aircraft[i]['aircraft_id'] + " - " + aircraft_brand[i]['brand_name'] + " " + aircraft_model[i]['model_name']
+          });
+
+          _this2.aircraft_array_info[aircraft[i]['aircraft_id']] = "<b>Flight Times:</b> " + flight_time[i] + "<br>" + "<b>Last Flight: from</b> " + flight_info[i]['depart_location'] + "  <b>to</b>  " + flight_info[i]['arrive_location'] + "<br>" + "<b>When:</b> " + flight_info[i]['depart_datetime'] + "<br><b>To:</b>  " + flight_info[i]['arrive_datetime'];
+        }
       });
-    }
+    } // show information of each aircraft
+
+
+    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null;
   }
 });
 
@@ -46042,6 +46062,9 @@ var render = function() {
                         _c("label", [_vm._v("Aircraft ID:")]),
                         _vm._v(" "),
                         _c("multiselect", {
+                          class: {
+                            active: true
+                          },
                           attrs: {
                             label: "name",
                             options: _vm.aircrafts,
@@ -46062,11 +46085,10 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                    Please choose\n                                "
-                          )
-                        ])
+                        _c("div", {
+                          staticClass: "static active",
+                          attrs: { id: "aircraft_info" }
+                        })
                       ],
                       1
                     ),
