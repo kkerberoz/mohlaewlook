@@ -307,28 +307,28 @@ export default {
                 this.error_date = null;
             }
 
-            if(!this.input.brand){
+            if(!this.input.brand.trim()){
                 this.error_brand = "Please fill the aircraft brand.";
                 this.errors.push(this.error_brand);
             }else{
                 this.error_brand = null;
             }
 
-            if(!this.input.model){
+            if(!this.input.model.trim()){
                 this.error_model = "Please fill the aircraft model.";
                 this.errors.push(this.error_model);
             }else{
                 this.error_model = null;
             }
 
-            if(!this.input.country){
+            if(!this.input.country.trim()){
                 this.error_country = "Please fill the country.";
                 this.errors.push(this.error_country);
             }else{
                 this.error_country = null;
             }
 
-            if(!this.input.fuelCap){
+            if(!this.input.fuelCap.trim()){
                 this.error_fuelCap = "Please fill the fuel capacity.";
                 this.errors.push(this.error_fuelCap);
             }else if(isNaN(this.input.fuelCap)){
@@ -338,7 +338,7 @@ export default {
                 this.error_fuelCap = null;
             }
 
-            if(!this.input.numberEng){
+            if(!this.input.numberEng.trim()){
                 this.error_numberEng = "Please fill the number of engine.";
                 this.errors.push(this.error_numberEng);
             }else if(isNaN(this.input.numberEng)){
@@ -348,14 +348,14 @@ export default {
                 this.error_numberEng = null;
             }
 
-            if(!this.input.typeEng){
+            if(!this.input.typeEng.trim()){
                 this.error_typeEng = "Please fill the types of engine.";
                 this.errors.push(this.error_typeEng);
             }else{
                 this.error_typeEng = null;
             }
 
-            if(!this.input.ecoCap){
+            if(!this.input.ecoCap.trim()){
                 this.error_ecoCap = "Please fill the economic class capacity.";
                 this.errors.push(this.error_ecoCap);
             }else if(isNaN(this.input.ecoCap)){
@@ -365,7 +365,7 @@ export default {
                 this.error_ecoCap = null;
             }
 
-            if(!this.input.busCap){
+            if(!this.input.busCap.trim()){
                 this.error_busCap = "Please fill the bussiness class capacity.";
                 this.errors.push(this.error_busCap);
             }else if(isNaN(this.input.busCap)){
@@ -375,7 +375,7 @@ export default {
                 this.error_busCap = null;
             }
 
-            if(!this.input.firstCap){
+            if(!this.input.firstCap.trim()){
                 this.error_firstCap = "Please fill the first class capacity.";
                 this.errors.push(this.error_firstCap);
             }else if(isNaN(this.input.firstCap)){
@@ -385,35 +385,34 @@ export default {
                 this.error_firstCap = null;
             }
 
-            if(!this.input.ecoPat){
+            if(!this.input.ecoPat.trim()){
                 this.error_ecoPat = "Please fill the economic class pattern.";
                 this.errors.push(this.error_ecoPat);
             }else{
                 this.error_ecoPat = null;
             }
 
-            if(!this.input.busPat){
+            if(!this.input.busPat.trim()){
                 this.error_busPat = "Please fill the bussiness class pattern.";
                 this.errors.push(this.error_busPat);
             }else{
                 this.error_busPat = null;
             }
 
-            if(!this.input.firstPat){
+            if(!this.input.firstPat.trim()){
                 this.error_firstPat = "Please fill the first class pattern.";
                 this.errors.push(this.error_firstPat);
             }else{
                 this.error_firstPat = null;
             }
 
-            console.log(this.errors);
 
             if(!this.errors.length)
             {
                 this.isLoading = true;
                 axios.post("/api/backend/addAircraft", data)
                 .then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     swal.fire(
                         "Register Success!",
                         "Cilck the button to continue!",
@@ -427,12 +426,12 @@ export default {
 
         },
         checkModel() {
-            console.log(this.model_query);
-            console.log(this.brand_query);
+            // console.log(this.model_query);
+            // console.log(this.brand_query);
             this.model_query.forEach(each_model => {
                 if (this.input.model === each_model["model_name"]) {
                     this.seenModel = false;
-                    console.log("find");
+                    // console.log("find");
                     this.input.Dup_fuelCap = each_model["fuel_capacity"];
                     this.input.Dup_numberEng = each_model["number_of_engine"];
                     this.input.Dup_typeEng = each_model["engine_type"];
@@ -451,7 +450,7 @@ export default {
             this.brand_query.forEach(each_brand => {
                 if (this.input.brand === each_brand["brand_name"]) {
                     this.seenBrand = false;
-                    console.log("find");
+                    // console.log("find");
                     this.input.Dup_country = each_brand["country"];
                 } else {
                     this.seenBrand = true;
