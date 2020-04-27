@@ -24,6 +24,7 @@
                                         required
                                         type="date"
                                         class="form-control"
+                                        value=""
                                         v-model="input.start_date"
                                     />
                                     <span class="invalid-feedback">
@@ -602,7 +603,7 @@ export default {
         return {
             isLoading: false,
             input: {
-                start_date: "",
+                start_date: new Date().toISOString().slice(0, 10),
                 salary: "",
                 airport: "",
                 role: "",
@@ -969,6 +970,30 @@ export default {
                             ).then(() => {
                                 this.$router.go({ name: "adminHome" });
                             });
+                        })
+                        .catch(error => {
+                            if (error.response.status === 408) {
+                                this.isLoading = false;
+                                swal.fire(
+                                    "This username alrady exist.",
+                                    "Cilck the button to continue!",
+                                    "error"
+                                ).then(() => {
+                                    this.errors = [];
+                                    this.input.username = "";
+                                });
+                            }
+                            if (error.response.status === 409) {
+                                this.isLoading = false;
+                                swal.fire(
+                                    "This IDCard alrady exist.",
+                                    "Cilck the button to continue!",
+                                    "error"
+                                ).then(() => {
+                                    this.errors = [];
+                                    this.input.idcard = "";
+                                });
+                            }
                         });
                 });
             } else {
