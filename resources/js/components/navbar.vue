@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-info fixed-top">
+        <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container">
                 <!-- {{ isLogIn }} -->
 
@@ -90,3 +90,8 @@ export default {
     }
 };
 </script>
+<style>
+.navbar {
+    background-color: #4699c2;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid " style="padding:20px">
+    <div class="container-fluid ">
         <div class="container-xl">
             <div class="row full-height ">
                 <div class="col-md-12 centerWithText">
