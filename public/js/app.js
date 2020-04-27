@@ -2291,6 +2291,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2298,7 +2324,7 @@ __webpack_require__.r(__webpack_exports__);
       model_query: [],
       brand_query: [],
       input: {
-        date: "",
+        date: new Date().toISOString().slice(0, 10),
         brand: "",
         model: "",
         country: "",
@@ -2346,7 +2372,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("/api/getModelBrand").then(function (response) {
+    axios.get("/api/backend/getModelBrand").then(function (response) {
       _this.model_query = response.data[0];
       _this.brand_query = response.data[1];
     });
@@ -2359,7 +2385,8 @@ __webpack_require__.r(__webpack_exports__);
       var data = {
         input: this.input
       };
-      this.errors = [], this.error_date = null;
+      this.errors = [];
+      this.error_date = null;
       this.error_brand = null;
       this.error_model = null;
       this.error_country = null;
@@ -2484,13 +2511,14 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/backend/addAircraft", data).then(function (response) {
           // console.log(response.data);
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-            _this2.isLoading = false;
-
             _this2.$router.push({
               name: "adminHome"
             });
           });
         });
+      } else {
+        this.isLoading = false;
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     },
     checkModel: function checkModel() {
@@ -10337,7 +10365,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -10356,7 +10384,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -10375,7 +10403,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-header {\r\n    background-color: #f85e09;\r\n    display: block;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-header {\n    background-color: #f85e09;\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -45239,7 +45267,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_date },
+                        class: {
+                          "is-invalid": _vm.error_date
+                        },
                         attrs: { type: "date" },
                         domProps: { value: _vm.input.date },
                         on: {
@@ -45276,7 +45306,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_brand },
+                        class: {
+                          "is-invalid": _vm.error_brand
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.brand },
                         on: {
@@ -45343,7 +45375,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_country },
+                        class: {
+                          "is-invalid": _vm.error_country
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.country },
                         on: {
@@ -45384,7 +45418,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_model },
+                          class: {
+                            "is-invalid": _vm.error_model
+                          },
                           attrs: { type: "text" },
                           domProps: { value: _vm.input.model },
                           on: {
@@ -45457,7 +45493,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_fuelCap },
+                        class: {
+                          "is-invalid": _vm.error_fuelCap
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.fuelCap },
                         on: {
@@ -45492,7 +45530,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_numberEng },
+                        class: {
+                          "is-invalid": _vm.error_numberEng
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.numberEng },
                         on: {
@@ -45531,7 +45571,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_typeEng },
+                        class: {
+                          "is-invalid": _vm.error_typeEng
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.typeEng },
                         on: {
@@ -45572,7 +45614,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_ecoCap },
+                        class: {
+                          "is-invalid": _vm.error_ecoCap
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.ecoCap },
                         on: {
@@ -45607,7 +45651,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_busCap },
+                        class: {
+                          "is-invalid": _vm.error_busCap
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.busCap },
                         on: {
@@ -45642,7 +45688,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_firstCap },
+                        class: {
+                          "is-invalid": _vm.error_firstCap
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.firstCap },
                         on: {
@@ -45679,7 +45727,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_ecoPat },
+                        class: {
+                          "is-invalid": _vm.error_ecoPat
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.ecoPat },
                         on: {
@@ -45714,7 +45764,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_busPat },
+                        class: {
+                          "is-invalid": _vm.error_busPat
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.busPat },
                         on: {
@@ -45749,7 +45801,9 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        class: { "is-invalid": _vm.error_firstPat },
+                        class: {
+                          "is-invalid": _vm.error_firstPat
+                        },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.firstPat },
                         on: {
@@ -66987,8 +67041,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
