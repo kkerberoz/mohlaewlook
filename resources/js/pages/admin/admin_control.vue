@@ -181,8 +181,7 @@ export default {
             user: "",
             get role() {
                 return localStorage.getItem("isRole");
-            },
-            activeClass: "active"
+            }
         };
     },
 
