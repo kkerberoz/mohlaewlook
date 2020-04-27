@@ -1,62 +1,68 @@
 <template>
-    <div class="container-fluid" id="adminLogin">
-        <div class="row flex-center full-height">
-            <div class="col-md-3">
-                <form v-on:submit="formSubmit">
-                    <div class="card" id="cardLogin">
-                        <div class="card-header bg-dark" id="cardLogin">
-                            Admin Login
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Username:</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    :class="{ 'is-invalid': error_username }"
-                                    v-model="username"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_username }}
+    <div class="container-fluid adminLogin">
+        <div class="container-xl">
+            <div class="row flex-center full-height">
+                <div class="col-md-5">
+                    <form v-on:submit="formSubmit">
+                        <div class="card" id="cardLogin">
+                            <div class="card-header bg-dark" id="cardLogin">
+                                Admin Login
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Username:</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        :class="{
+                                            'is-invalid': error_username
+                                        }"
+                                        v-model="username"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_username }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password:</label>
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        :class="{
+                                            'is-invalid': error_password
+                                        }"
+                                        v-model="password"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_password }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Password:</label>
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    :class="{ 'is-invalid': error_password }"
-                                    v-model="password"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_password }}
-                                </div>
+                            <div class="card-footer" id="cardLogin">
+                                <button
+                                    id="btnLogin"
+                                    type="submiit"
+                                    :disabled="isLoading"
+                                    class="btn btn-block btn-login"
+                                >
+                                    <span v-show="!isLoading">Sign in</span>
+                                    <i
+                                        class="fas fa-spinner fa-pulse"
+                                        v-show="isLoading"
+                                    ></i>
+                                </button>
+                                <button
+                                    @click.prevent="home"
+                                    :disabled="isLoading"
+                                    id="btnLogin2"
+                                    class="btn btn-block btn-login"
+                                >
+                                    HOME
+                                </button>
                             </div>
                         </div>
-                        <div class="card-footer" id="cardLogin">
-                            <button
-                                id="btnLogin"
-                                type="submiit"
-                                :disabled="isLoading"
-                                class="btn btn-block btn-login"
-                            >
-                                <span v-show="!isLoading">Sign in</span>
-                                <i
-                                    class="fas fa-spinner fa-pulse"
-                                    v-show="isLoading"
-                                ></i>
-                            </button>
-                            <button
-                                @click.prevent="home"
-                                :disabled="isLoading"
-                                id="btnLogin2"
-                                class="btn btn-block btn-login"
-                            >
-                                HOME
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -202,7 +208,8 @@ export default {
 };
 </script>
 <style>
-#adminLogin {
+.adminLogin {
+    width: 100%;
     background: #1d976c;
     background: -webkit-linear-gradient(to right, #93f9b9, #1d976c);
     background: linear-gradient(to right, #93f9b9, #1d976c);

@@ -1,7 +1,7 @@
 <template>
-    <div class="container-fluid" style="margin-top:5%; margin-bottom:20% ">
-        <div class="row flex-center full-height">
-            <div class="col-md-9" style="padding:60px">
+    <div class="container-xl" style="padding-top:7%;padding-bottom:5%;">
+        <div class="row flex-center">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Reservation</div>
                     <div class="card-body">
@@ -12,15 +12,14 @@
                                     <label>Depart Date :</label>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_departDate
                                         }"
                                         type="date"
                                         class="form-control"
-                                        name="DOB"
-                                        v-model="DOB"
+                                        v-model="input.departDate"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_departDate }}
                                     </div>
                                 </span>
                             </div>
@@ -29,15 +28,14 @@
                                     <label>Return Date :</label>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_returnDate
                                         }"
                                         type="date"
                                         class="form-control"
-                                        name="DOB"
-                                        v-model="DOB"
+                                        v-model="input.returnDate"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_returnDate }}
                                     </div>
                                 </span>
                             </div>
@@ -47,15 +45,14 @@
                                     <label>No. of Passenger :</label>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_noPass
                                         }"
                                         type="text"
                                         class="form-control"
-                                        name="text"
-                                        v-model="DOB"
+                                        v-model="input.noPass"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_noPass }}
                                     </div>
                                 </span>
                             </div>
@@ -71,15 +68,14 @@
                                     </span>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_flightFrom
                                         }"
                                         type="text"
                                         class="form-control"
-                                        name="DOB"
-                                        v-model="DOB"
+                                        v-model="input.flightFrom"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_flightFrom }}
                                     </div>
                                 </span>
                             </div>
@@ -89,15 +85,14 @@
                                     <span class="input-text"> <br />To : </span>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_flightTo
                                         }"
                                         type="text"
                                         class="form-control"
-                                        name="DOB"
-                                        v-model="DOB"
+                                        v-model="input.flightTo"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_flightTo }}
                                     </div>
                                 </span>
                             </div>
@@ -110,15 +105,14 @@
                                     </span>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_flightFrom2
                                         }"
                                         type="text"
                                         class="form-control"
-                                        name="DOB"
-                                        v-model="DOB"
+                                        v-model="input.flightFrom2"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_flightFrom2 }}
                                     </div>
                                 </span>
                             </div>
@@ -128,15 +122,14 @@
                                     <span class="input-text"> <br />To : </span>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_flightTo2
                                         }"
                                         type="text"
                                         class="form-control"
-                                        name="DOB"
-                                        v-model="DOB"
+                                        v-model="input.flightTo2"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_flightTo2 }}
                                     </div>
                                 </span>
                             </div>
@@ -157,8 +150,7 @@
                                             'is-invalid': error_title
                                         }"
                                         class="form-control"
-                                        name="title"
-                                        v-model="title"
+                                        v-model="passenger.title"
                                     >
                                         <option value selected disabled
                                             >Please select</option
@@ -183,7 +175,7 @@
                                         type="text"
                                         class="form-control"
                                         name="name"
-                                        v-model="name"
+                                        v-model="passenger.name"
                                     />
                                     <div class="invalid-feedback">
                                         {{ error_name }}
@@ -201,7 +193,7 @@
                                         type="text"
                                         class="form-control"
                                         name="surname"
-                                        v-model="surname"
+                                        v-model="passenger.surname"
                                     />
                                     <div class="invalid-feedback">
                                         {{ error_surname }}
@@ -224,8 +216,7 @@
                                             <input
                                                 type="radio"
                                                 id="radios-0"
-                                                name="gender"
-                                                checked
+                                                v-model="passenger.gender"
                                                 value="Male"
                                             />
                                             Male
@@ -237,7 +228,7 @@
                                             <input
                                                 type="radio"
                                                 id="radios-1"
-                                                name="gender"
+                                                v-model="passenger.gender"
                                                 value="Female"
                                             />
                                             Female
@@ -258,8 +249,7 @@
                                         }"
                                         type="date"
                                         class="form-control"
-                                        name="DOB"
-                                        v-model="DOB"
+                                        v-model="passenger.DOB"
                                     />
                                     <div class="invalid-feedback">
                                         {{ error_DOB }}
@@ -272,14 +262,14 @@
                                     <label>Nationality :</label>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_national
                                         }"
                                         type="country"
                                         class="form-control"
-                                        name="country"
+                                        v-model="passenger.national"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_national }}
                                     </div>
                                 </span>
                             </div>
@@ -292,14 +282,14 @@
                                     <label>ID card :</label>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_idcard
                                         }"
                                         type="text"
                                         class="form-control"
-                                        name="DOB"
+                                        v-model="passenger.idcard"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_idcard }}
                                     </div>
                                 </span>
                             </div>
@@ -309,14 +299,14 @@
                                     <label>Passport :</label>
                                     <input
                                         v-bind:class="{
-                                            'is-invalid': error_DOB
+                                            'is-invalid': error_passport
                                         }"
                                         type="text"
                                         class="form-control"
-                                        name="DOB"
+                                        v-model="passenger.passport"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        {{ error_passport }}
                                     </div>
                                 </span>
                             </div>
@@ -332,14 +322,7 @@
                             <div class="col-md-1">
                                 <span class="form-group">
                                     <label>Title</label>
-                                    <select
-                                        v-bind:class="{
-                                            'is-invalid': error_title
-                                        }"
-                                        class="form-control"
-                                        name="title"
-                                        v-model="title"
-                                    >
+                                    <select class="form-control">
                                         <option value selected disabled
                                             >Please select</option
                                         >
@@ -349,7 +332,7 @@
                                         <option>Miss</option>
                                     </select>
                                     <span class="invalid-feedback">
-                                        {{ error_title }}
+                                        <!-- // -->
                                     </span>
                                 </span>
                             </div>
@@ -357,16 +340,12 @@
                                 <span class="form-group">
                                     <label>Name :</label>
                                     <input
-                                        v-bind:class="{
-                                            'is-invalid': error_name
-                                        }"
                                         type="text"
                                         class="form-control"
                                         name="name"
-                                        v-model="name"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_name }}
+                                        <!-- // -->
                                     </div>
                                 </span>
                             </div>
@@ -375,16 +354,12 @@
                                 <span class="form-group">
                                     <label>Surname :</label>
                                     <input
-                                        v-bind:class="{
-                                            'is-invalid': error_surname
-                                        }"
                                         type="text"
                                         class="form-control"
                                         name="surname"
-                                        v-model="surname"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_surname }}
+                                        <!-- // -->
                                     </div>
                                 </span>
                             </div>
@@ -405,7 +380,6 @@
                                                 type="radio"
                                                 id="radios-0"
                                                 name="gender"
-                                                checked
                                                 value="Male"
                                             />
                                             Male
@@ -433,16 +407,12 @@
                                 <span class="form-group">
                                     <label>Date of Birth :</label>
                                     <input
-                                        v-bind:class="{
-                                            'is-invalid': error_DOB
-                                        }"
                                         type="date"
                                         class="form-control"
                                         name="DOB"
-                                        v-model="DOB"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        <!-- // -->
                                     </div>
                                 </span>
                             </div>
@@ -451,16 +421,11 @@
                                 <span class="form-group">
                                     <label>Nationality :</label>
                                     <input
-                                        v-bind:class="{
-                                            'is-invalid': error_DOB
-                                        }"
                                         type="country"
                                         class="form-control"
-                                        api-key="AIzaSyAhSv9zWvisiTXRPRw6K8AE0DCmrRMpQcU"
-                                        name="country"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        <!-- // -->
                                     </div>
                                 </span>
                             </div>
@@ -471,16 +436,9 @@
                             <div class="col-md-2">
                                 <span class="form-group">
                                     <label>ID card :</label>
-                                    <input
-                                        v-bind:class="{
-                                            'is-invalid': error_DOB
-                                        }"
-                                        type="text"
-                                        class="form-control"
-                                        name="DOB"
-                                    />
+                                    <input type="text" class="form-control" />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        <!-- // -->
                                     </div>
                                 </span>
                             </div>
@@ -489,15 +447,12 @@
                                 <span class="form-group">
                                     <label>Passport :</label>
                                     <input
-                                        v-bind:class="{
-                                            'is-invalid': error_DOB
-                                        }"
                                         type="text"
                                         class="form-control"
                                         name="DOB"
                                     />
                                     <div class="invalid-feedback">
-                                        {{ error_DOB }}
+                                        <!-- // -->
                                     </div>
                                 </span>
                             </div>
@@ -519,7 +474,46 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            input: {
+                departDate: "",
+                returnDate: "",
+                noPass: "",
+                flightTo: "",
+                flightFrom: "",
+                flightTo2: "",
+                flightFrom2: ""
+            },
+            passenger: {
+                title: "",
+                name: "",
+                surname: "",
+                gender: "",
+                DOB: "",
+                national: "",
+                idcard: "",
+                passport: ""
+            },
+            error_departDate: "",
+            error_returnDate: "",
+            error_noPass: "",
+            error_flightTo: "",
+            error_flightFrom: "",
+            error_flightTo2: "",
+            error_flightFrom2: "",
+            error_title: "",
+            error_name: "",
+            error_surname: "",
+            error_gender: "",
+            error_DOB: "",
+            error_national: "",
+            error_idcard: "",
+            error_passport: ""
+        };
+    }
+};
 </script>
 
 <style>

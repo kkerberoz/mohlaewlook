@@ -1,7 +1,7 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-xl" style="padding:2%">
         <div class="row flex-center full-height">
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <form v-on:submit="formSubmit">
                     <div class="card">
                         <div class="card-header bg-info">Login</div>

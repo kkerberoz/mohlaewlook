@@ -1,8 +1,11 @@
 <template>
-    <div class="container-fulid" style="margin-bottom:15%;margin-top:5%">
-        <div class="row flex-center" style="margin-bottom:3%">
+    <div
+        class="container-xl"
+        style="margin-bottom:15%;margin-top:5%;padding:3%"
+    >
+        <div class="row flex-center">
             <div
-                class="col-md-7 order-md-1 justify-content-between align-items-center"
+                class="col-md-10 order-md-1 justify-content-between align-items-center"
             >
                 <form>
                     <h1 class="mb-3" style="display:block ">Add Airport</h1>

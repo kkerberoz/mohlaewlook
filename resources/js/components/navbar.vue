@@ -21,6 +21,7 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li
+                            @click="closeMenu"
                             v-for="(link, i) in links_filtered"
                             :key="i"
                             class="nav-item"
@@ -75,6 +76,9 @@ export default {
         }
     },
     methods: {
+        closeMenu() {
+            $("#collapsibleNavbar").collapse("hide");
+        },
         logout() {
             axios.get("/sanctum/csrf-cookie").then(response => {
                 axios.post("/api/user/logout").then(() => {

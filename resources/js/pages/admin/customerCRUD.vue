@@ -1,5 +1,5 @@
 <template>
-    <div class="container fluid">
+    <div class="container xl" style="padding:3%">
         <br />
         <div>
             <div class="card">

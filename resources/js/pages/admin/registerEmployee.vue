@@ -1,8 +1,8 @@
 <template>
-    <div class="container-fulid">
+    <div class="container-xl" style="padding:3%">
         <div class="row flex-center" style="margin-bottom:3%">
             <div
-                class="col-md-7 order-md-1 justify-content-between align-items-center"
+                class="col-md-10 order-md-1 justify-content-between align-items-center"
             >
                 <input type="hidden" name="_token" v-bind:value="csrf" />
                 <form>
@@ -714,285 +714,270 @@ export default {
                 gpa: ""
             });
         },
+        removeedu(index) {
+            this.edus.splice(index, 1);
+        },
+        add(index) {
+            this.diseases.push({
+                info: "",
+                note: ""
+            });
+        },
+        remove(index) {
+            this.diseases.splice(index, 1);
+        },
+        formSubmit(e) {
+            e.preventDefault();
+            this.errors = [];
+            // console.log(this.errors.length);
 
-        methods: {
-            airportName({ airport_id, airport_name }) {
-                return `[${airport_id}] - ${airport_name}`;
-            },
-            addedu(index) {
-                this.edus.push({
-                    degree: "",
-                    university: "",
-                    faculty: "",
-                    department: "",
-                    gpa: ""
-                });
-            },
-            removeedu(index) {
-                this.edus.splice(index, 1);
-            },
-            add(index) {
-                this.diseases.push({
-                    info: "",
-                    note: ""
-                });
-            },
-            remove(index) {
-                this.diseases.splice(index, 1);
-            },
-            formSubmit(e) {
-                e.preventDefault();
-                this.errors = [];
-                // console.log(this.errors.length);
+            this.error_start_date = null; //
+            this.error_salary = null; //
+            this.error_airport = null; //////
+            this.error_role = null; //
+            this.error_status = null; //
+            this.error_username = null; //
+            this.error_password = null; //
+            this.error_idcard = null; //
+            this.error_gender = null; //
+            this.error_title = null; //
+            this.error_firstname = null; //
+            this.error_lastname = null; //
+            this.error_DOB = null; //
+            this.error_height = null; //
+            this.error_weight = null; //
+            this.error_email = null; ///////
+            this.error_address = null; //
+            this.error_phone = null; //
+            this.error_degree = null;
+            this.error_university = null;
+            this.error_faculty = null;
+            this.error_department = null;
+            this.error_gpa = null; //
 
-                this.error_start_date = null; //
-                this.error_salary = null; //
-                this.error_airport = null; //////
-                this.error_role = null; //
-                this.error_status = null; //
-                this.error_username = null; //
-                this.error_password = null; //
-                this.error_idcard = null; //
-                this.error_gender = null; //
-                this.error_title = null; //
-                this.error_firstname = null; //
-                this.error_lastname = null; //
-                this.error_DOB = null; //
-                this.error_height = null; //
-                this.error_weight = null; //
-                this.error_email = null; ///////
-                this.error_address = null; //
-                this.error_phone = null; //
+            let details = {
+                start_date: this.input.start_date,
+                salary: this.input.salary,
+                airport: this.input.airport.airport_id,
+                role: this.input.role.name,
+                status: this.input.status.value,
+                username: this.input.username,
+                password: this.input.password,
+                idcard: this.input.idcard,
+                gender: this.input.gender,
+                title: this.input.title.title,
+                firstname: this.input.firstname,
+                lastname: this.input.lastname,
+                DOB: this.input.DOB,
+                height: this.input.height,
+                weight: this.input.weight,
+                email: this.input.email,
+                address: this.input.address,
+                phone: this.input.phone
+            }; // data in detail
+            var educations = this.edus; // data in education
+            var diseases = this.diseases; // data in diseases
+            let data = {
+                details: details,
+                educations: educations,
+                diseases: diseases
+            };
+
+            if (!this.input.start_date) {
+                this.error_start_date = "Please select your start date.";
+                this.errors.push(this.error_start_date);
+            } else {
+                this.error_start_date = null;
+            }
+
+            if (!this.input.salary) {
+                this.error_salary = "Please fill the salary.";
+                this.errors.push(this.error_salary);
+            } else if (isNaN(this.input.salary)) {
+                this.error_salary = "Please fill only number.";
+                this.errors.push(this.error_salary);
+            } else {
+                this.error_salary = null;
+            }
+
+            if (!this.input.role) {
+                this.error_role = "Please select your role.";
+                this.errors.push(this.error_role);
+            } else {
+                this.error_role = null;
+            }
+
+            if (!this.input.status) {
+                this.error_status = "Please select your work status.";
+                this.errors.push(this.error_status);
+            } else {
+                this.error_status = null;
+            }
+
+            if (!this.input.username.trim()) {
+                this.error_username = "Please fill your username.";
+                this.errors.push(this.error_username);
+            } else {
+                this.error_username = null;
+            }
+
+            if (!this.input.password) {
+                this.error_password = "Please fill your password.";
+                this.errors.push(this.error_password);
+            } else if (this.input.password.length < 6) {
+                this.error_password =
+                    "Password has to be at least 6 characters long.";
+                this.errors.push(this.error_password);
+            } else {
+                this.error_password = null;
+            }
+
+            if (!this.input.idcard) {
+                this.error_idcard = "Please fill your id card.";
+                this.errors.push(this.error_idcard);
+            } else if (this.input.idcard.length != 13) {
+                this.error_idcard = "Password must be 13 characters.";
+                this.errors.push(this.error_idcard);
+            } else {
+                this.error_idcard = null;
+            }
+
+            if (!this.input.gender) {
+                this.error_gender = "Please select the gender.";
+                this.errors.push(this.error_gender);
+            } else {
+                this.error_gender = null;
+            }
+
+            if (!this.input.title.title) {
+                this.error_title = "Please select your title.";
+                this.errors.push(this.error_title);
+            } else {
+                this.error_title = null;
+            }
+
+            if (!this.input.firstname.trim()) {
+                this.error_firstname = "Please fill your first name.";
+                this.errors.push(this.error_firstname);
+            } else {
+                this.error_firstname = null;
+            }
+
+            if (!this.input.lastname.trim()) {
+                this.error_lastname = "Please fill your last name.";
+                this.errors.push(this.error_lastname);
+            } else {
+                this.error_lastname = null;
+            }
+
+            if (!this.input.DOB) {
+                this.error_DOB = "Please select your Date of Birth.";
+                this.errors.push(this.error_DOB);
+            } else {
+                this.error_DOB = null;
+            }
+
+            if (!this.input.address.trim()) {
+                this.error_address = "Please fill your address.";
+                this.errors.push(this.error_address);
+            } else {
+                this.error_address = null;
+            }
+
+            if (!this.input.phone.trim()) {
+                this.error_phone = "Please fill your phone number.";
+                this.errors.push(this.error_phone);
+            } else {
+                this.error_phone = null;
+            }
+
+            if (!this.input.height) {
+                this.error_height = "Please fill you height.";
+                this.errors.push(this.error_height);
+            } else if (isNaN(this.input.height)) {
+                this.error_height = "Please fill only number.";
+                this.errors.push(this.error_height);
+            } else {
+                this.error_height = null;
+            }
+
+            if (!this.input.weight) {
+                this.error_weight = "Please fill you weight.";
+                this.errors.push(this.error_weight);
+            } else if (isNaN(this.input.weight)) {
+                this.error_weight = "Please fill only number.";
+                this.errors.push(this.error_weight);
+            } else {
+                this.error_weight = null;
+            }
+
+            if (!this.edus[0].degree) {
+                this.error_degree = "Please select your degree.";
+                this.errors.push(this.error_degree);
+            } else {
                 this.error_degree = null;
+            }
+
+            if (!this.edus[0].university) {
+                this.error_university = "Please enter your university.";
+                this.errors.push(this.error_university);
+            } else {
                 this.error_university = null;
+            }
+
+            if (!this.edus[0].faculty) {
+                this.error_faculty = "Please enter your faculty.";
+                this.errors.push(this.error_faculty);
+            } else {
                 this.error_faculty = null;
+            }
+
+            if (!this.edus[0].department) {
+                this.error_department = "Please enter your department.";
+                this.errors.push(this.error_department);
+            } else {
                 this.error_department = null;
-                this.error_gpa = null; //
+            }
 
-                let details = {
-                    start_date: this.input.start_date,
-                    salary: this.input.salary,
-                    airport: this.input.airport.airport_id,
-                    role: this.input.role.name,
-                    status: this.input.status.value,
-                    username: this.input.username,
-                    password: this.input.password,
-                    idcard: this.input.idcard,
-                    gender: this.input.gender,
-                    title: this.input.title.title,
-                    firstname: this.input.firstname,
-                    lastname: this.input.lastname,
-                    DOB: this.input.DOB,
-                    height: this.input.height,
-                    weight: this.input.weight,
-                    email: this.input.email,
-                    address: this.input.address,
-                    phone: this.input.phone
-                }; // data in detail
-                var educations = this.edus; // data in education
-                var diseases = this.diseases; // data in diseases
-                let data = {
-                    details: details,
-                    educations: educations,
-                    diseases: diseases
-                };
+            if (!this.edus[0].gpa) {
+                this.error_gpa = "Please enter your gpa.";
+                this.errors.push(this.error_gpa);
+            } else if (isNaN(this.edus[0].gpa)) {
+                this.error_gpa = "Please fill with number.";
+                this.errors.push(this.error_gpa);
+            } else {
+                this.error_gpa = null;
+            }
 
-                if (!this.input.start_date) {
-                    this.error_start_date = "Please select your start date.";
-                    this.errors.push(this.error_start_date);
-                } else {
-                    this.error_start_date = null;
-                }
+            // if (!this.edus) {
+            //     this.error_edus = "Please fill the detail.";
+            //     this.errors.push(this.error_edus);
+            // } else {
+            //     this.error_edus = null;
+            // }
 
-                if (!this.input.salary) {
-                    this.error_salary = "Please fill the salary.";
-                    this.errors.push(this.error_salary);
-                } else if (isNaN(this.input.salary)) {
-                    this.error_salary = "Please fill only number.";
-                    this.errors.push(this.error_salary);
-                } else {
-                    this.error_salary = null;
-                }
-
-                if (!this.input.role) {
-                    this.error_role = "Please select your role.";
-                    this.errors.push(this.error_role);
-                } else {
-                    this.error_role = null;
-                }
-
-                if (!this.input.status) {
-                    this.error_status = "Please select your work status.";
-                    this.errors.push(this.error_status);
-                } else {
-                    this.error_status = null;
-                }
-
-                if (!this.input.username.trim()) {
-                    this.error_username = "Please fill your username.";
-                    this.errors.push(this.error_username);
-                } else {
-                    this.error_username = null;
-                }
-
-                if (!this.input.password) {
-                    this.error_password = "Please fill your password.";
-                    this.errors.push(this.error_password);
-                } else if (this.input.password.length < 6) {
-                    this.error_password =
-                        "Password has to be at least 6 characters long.";
-                    this.errors.push(this.error_password);
-                } else {
-                    this.error_password = null;
-                }
-
-                if (!this.input.idcard) {
-                    this.error_idcard = "Please fill your id card.";
-                    this.errors.push(this.error_idcard);
-                } else if (this.input.idcard.length != 13) {
-                    this.error_idcard = "Password must be 13 characters.";
-                    this.errors.push(this.error_idcard);
-                } else {
-                    this.error_idcard = null;
-                }
-
-                if (!this.input.gender) {
-                    this.error_gender = "Please select the gender.";
-                    this.errors.push(this.error_gender);
-                } else {
-                    this.error_gender = null;
-                }
-
-                if (!this.input.title.title) {
-                    this.error_title = "Please select your title.";
-                    this.errors.push(this.error_title);
-                } else {
-                    this.error_title = null;
-                }
-
-                if (!this.input.firstname.trim()) {
-                    this.error_firstname = "Please fill your first name.";
-                    this.errors.push(this.error_firstname);
-                } else {
-                    this.error_firstname = null;
-                }
-
-                if (!this.input.lastname.trim()) {
-                    this.error_lastname = "Please fill your last name.";
-                    this.errors.push(this.error_lastname);
-                } else {
-                    this.error_lastname = null;
-                }
-
-                if (!this.input.DOB) {
-                    this.error_DOB = "Please select your Date of Birth.";
-                    this.errors.push(this.error_DOB);
-                } else {
-                    this.error_DOB = null;
-                }
-
-                if (!this.input.address.trim()) {
-                    this.error_address = "Please fill your address.";
-                    this.errors.push(this.error_address);
-                } else {
-                    this.error_address = null;
-                }
-
-                if (!this.input.phone.trim()) {
-                    this.error_phone = "Please fill your phone number.";
-                    this.errors.push(this.error_phone);
-                } else {
-                    this.error_phone = null;
-                }
-
-                if (!this.input.height) {
-                    this.error_height = "Please fill you height.";
-                    this.errors.push(this.error_height);
-                } else if (isNaN(this.input.height)) {
-                    this.error_height = "Please fill only number.";
-                    this.errors.push(this.error_height);
-                } else {
-                    this.error_height = null;
-                }
-
-                if (!this.input.weight) {
-                    this.error_weight = "Please fill you weight.";
-                    this.errors.push(this.error_weight);
-                } else if (isNaN(this.input.weight)) {
-                    this.error_weight = "Please fill only number.";
-                    this.errors.push(this.error_weight);
-                } else {
-                    this.error_weight = null;
-                }
-
-                if (!this.edus[0].degree) {
-                    this.error_degree = "Please select your degree.";
-                    this.errors.push(this.error_degree);
-                } else {
-                    this.error_degree = null;
-                }
-
-                if (!this.edus[0].university) {
-                    this.error_university = "Please enter your university.";
-                    this.errors.push(this.error_university);
-                } else {
-                    this.error_university = null;
-                }
-
-                if (!this.edus[0].faculty) {
-                    this.error_faculty = "Please enter your faculty.";
-                    this.errors.push(this.error_faculty);
-                } else {
-                    this.error_faculty = null;
-                }
-
-                if (!this.edus[0].department) {
-                    this.error_department = "Please enter your department.";
-                    this.errors.push(this.error_department);
-                } else {
-                    this.error_department = null;
-                }
-
-                if (!this.edus[0].gpa) {
-                    this.error_gpa = "Please enter your gpa.";
-                    this.errors.push(this.error_gpa);
-                } else if (isNaN(this.edus[0].gpa)) {
-                    this.error_gpa = "Please fill with number.";
-                    this.errors.push(this.error_gpa);
-                } else {
-                    this.error_gpa = null;
-                }
-
-                // if (!this.edus) {
-                //     this.error_edus = "Please fill the detail.";
-                //     this.errors.push(this.error_edus);
-                // } else {
-                //     this.error_edus = null;
-                // }
-
-                if (!this.errors.length) {
-                    this.isLoading = true;
-                    axios.get("/sanctum/csrf-cookie").then(response => {
-                        axios
-                            .post("/api/admin/addEmployee", data)
-                            .then(response => {
-                                swal.fire(
-                                    "Register Success!",
-                                    "Cilck the button to continue!",
-                                    "success"
-                                ).then(() => {
-                                    this.$router.go({ name: "adminHome" });
-                                });
+            if (!this.errors.length) {
+                this.isLoading = true;
+                axios.get("/sanctum/csrf-cookie").then(response => {
+                    axios
+                        .post("/api/admin/addEmployee", data)
+                        .then(response => {
+                            swal.fire(
+                                "Register Success!",
+                                "Cilck the button to continue!",
+                                "success"
+                            ).then(() => {
+                                this.$router.go({ name: "adminHome" });
                             });
-                    });
-                } else {
-                    this.isLoading = false;
-                    swal.fire(
-                        "Please success your form!",
-                        "Cilck the button to continue!",
-                        "error"
-                    );
-                }
+                        });
+                });
+            } else {
+                this.isLoading = false;
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
             }
         }
     }
