@@ -1,28 +1,11 @@
 <template>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="title flex-center full-height">
-                    Welcome to our Mohlaewlook
-                </div>
-
-                <div class="title flex-center full-height">
-                    Welcome to our Mohlaewlook
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="title flex-center full-height">
-                    Welcome to our Mohlaewlook
-                </div>
-
-                <div class="content m-b-md">I'm an Mohlaewlook component.</div>
-            </div>
-            <div class="col-md-12">
-                <div class="title flex-center full-height">
-                    Welcome to our Mohlaewlook
-                </div>
-
-                <div class="content m-b-md">I'm an Mohlaewlook component.</div>
+    <div class="container-xl" style="padding:20px">
+        <div class="row flex-center full-height">
+            <div class="col-md-12 center">
+                <h1 style="font-size:6vw;" class="flex-center">
+                    Welcome To<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our Mohlaewlook
+                </h1>
             </div>
         </div>
     </div>

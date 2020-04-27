@@ -434,7 +434,46 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      input: {
+        departDate: "",
+        returnDate: "",
+        noPass: "",
+        flightTo: "",
+        flightFrom: "",
+        flightTo2: "",
+        flightFrom2: ""
+      },
+      passenger: {
+        title: "",
+        name: "",
+        surname: "",
+        gender: "",
+        DOB: "",
+        national: "",
+        idcard: "",
+        passport: ""
+      },
+      error_departDate: "",
+      error_returnDate: "",
+      error_noPass: "",
+      error_flightTo: "",
+      error_flightFrom: "",
+      error_flightTo2: "",
+      error_flightFrom2: "",
+      error_title: "",
+      error_name: "",
+      error_surname: "",
+      error_gender: "",
+      error_DOB: "",
+      error_national: "",
+      error_idcard: "",
+      error_passport: ""
+    };
+  }
+};
 </script>
 
 <style>

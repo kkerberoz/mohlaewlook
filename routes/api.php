@@ -15,20 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//route sanctum token auth
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-
     return $request->user();
 });
 
 
-// Route::get('init', 'UserController@init');
+//route for customer
 Route::prefix('user')->group(function () {
     Route::post('/login', 'UserController@login');
     Route::post('/regis', 'UserController@register');
     Route::post('/logout', 'UserController@logout');
 });
 
-
+//route for employee
 Route::prefix('admin')->group(function () {
     Route::post('/login', 'AdminController@login');
     Route::post('/logout', 'AdminController@logout');
@@ -36,11 +36,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/init', 'AdminController@init');
 });
 
+//route for CRUD admin controller
 Route::prefix('backend')->group(function () {
     Route::post('/addAircraft', 'BackendController@addAircraft');
     Route::get('/getAirports', 'BackendController@getAirports');
     Route::post('/getAircraftAndCrew', 'BackendController@getAircraftAndCrew');
     Route::post('/addAirport', 'BackendController@addAirport');
+    Route::get('/getModelBrand', 'BackendController@getModelBrand');
 });
-
-Route::get('/getModelBrand', 'BackendController@getModelBrand');

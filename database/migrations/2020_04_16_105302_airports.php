@@ -14,11 +14,11 @@ class Airports extends Migration
     public function up()
     {
         Schema::create('airports', function (Blueprint $table) {
-            $table->string('airport_id',3)->unique();
-            $table->string('airport_name',32);
+            $table->string('airport_id', 3)->unique();
+            $table->string('airport_name', 128);
             $table->unsignedInteger('airport_cap');
-            $table->string('airport_address',128);
-            $table->string('airport_region',32);
+            $table->string('airport_address', 256);
+            $table->string('airport_region', 32);
 
             $table->primary('airport_id');
         });

@@ -1,7 +1,7 @@
 <template>
-    <div class="container-fluid" id="content">
+    <div class="container-xl" style="margin-top:5%;margin-bottom:5%">
         <div class="row flex-center full-height">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header bg-info">Register</div>
                     <form v-on:submit="formSubmit">

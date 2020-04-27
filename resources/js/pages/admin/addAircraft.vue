@@ -1,8 +1,8 @@
 <template>
-    <div class="container-fulid">
-        <div class="row flex-center" style="margin-bottom:3%">
+    <div class="container-xl" style="padding:3%; margin-bottom:5%">
+        <div class="row flex-center">
             <div
-                class="col-md-7 order-md-1 justify-content-between align-items-center"
+                class="col-md-10 order-md-1 justify-content-between align-items-center"
             >
                 <form>
                     <h1 class="mb-3" style="display:block ">Add aircraft</h1>
@@ -14,12 +14,15 @@
                                 <div class="col-md-4 mb-2">
                                     <label>Start Date:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_date
+                                        }"
                                         type="date"
                                         class="form-control"
                                         v-model="input.date"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_date }}
                                     </div>
                                 </div>
                             </div>
@@ -27,6 +30,9 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Brand:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_brand
+                                        }"
                                         @input="checkBrand"
                                         type="text"
                                         class="form-control"
@@ -42,23 +48,29 @@
                                         </a>
                                     </span>
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_brand }}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Country:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_country
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.country"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_country }}
                                     </div>
                                 </span>
                                 <span id="watch-example" class="col-md-4 mb-2">
                                     <label>Model:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_model
+                                        }"
                                         @input="checkModel"
                                         type="text"
                                         class="form-control"
@@ -73,7 +85,7 @@
                                         </a>
                                     </span>
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_model }}
                                     </div>
                                 </span>
                             </div>
@@ -81,34 +93,43 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Fuel Capacity:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_fuelCap
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.fuelCap"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_fuelCap }}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Number of Engine:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_numberEng
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.numberEng"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_numberEng }}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Type of Engine:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_typeEng
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.typeEng"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_typeEng }}
                                     </div>
                                 </span>
                             </div>
@@ -118,35 +139,44 @@
                                 <div class="col-md-4 mb-2">
                                     <label>Eco Capacity:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_ecoCap
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.ecoCap"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_ecoCap }}
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label>Business Capacity:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_busCap
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.busCap"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_busCap }}
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 mb-2">
                                     <label>First Capacity:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_firstCap
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.firstCap"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_firstCap }}
                                     </div>
                                 </div>
                             </div>
@@ -154,35 +184,44 @@
                                 <div class="col-md-4 mb-2">
                                     <label>Eco Pattern:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_ecoPat
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.ecoPat"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_ecoPat }}
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label>Business Pattern:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_busPat
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.busPat"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_busPat }}
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 mb-2">
                                     <label>First Pattern:</label>
                                     <input
+                                        v-bind:class="{
+                                            'is-invalid': error_firstPat
+                                        }"
                                         type="text"
                                         class="form-control"
                                         v-model="input.firstPat"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{ error_firstPat }}
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +253,7 @@ export default {
             model_query: [],
             brand_query: [],
             input: {
-                date: "",
+                date: new Date().toISOString().slice(0, 10),
                 brand: "",
                 model: "",
                 country: "",
@@ -243,11 +282,25 @@ export default {
                 Dup_firstPat: ""
             },
             seenModel: true,
-            seenBrand: true
+            seenBrand: true,
+            errors: [],
+            error_date: "",
+            error_brand: "",
+            error_model: "",
+            error_country: "",
+            error_fuelCap: "",
+            error_numberEng: "",
+            error_typeEng: "",
+            error_ecoCap: "",
+            error_busCap: "",
+            error_firstCap: "",
+            error_ecoPat: "",
+            error_busPat: "",
+            error_firstPat: ""
         };
     },
     mounted() {
-        axios.get("/api/getModelBrand").then(response => {
+        axios.get("/api/backend/getModelBrand").then(response => {
             this.model_query = response.data[0];
             this.brand_query = response.data[1];
         });
@@ -256,27 +309,156 @@ export default {
         handleFormCilcked(e) {
             e.preventDefault();
             let data = { input: this.input };
-            this.isLoading = true;
-            axios.post("/api/backend/addAircraft", data).then(response => {
-                console.log(response.data);
 
-                swal.fire(
-                    "Register Success!",
-                    "Cilck the button to continue!",
-                    "success"
-                ).then(() => {
-                    this.isLoading = false;
-                    this.$router.push({ name: "adminHome" });
+            this.errors = [];
+            this.error_date = null;
+            this.error_brand = null;
+            this.error_model = null;
+            this.error_country = null;
+            this.error_fuelCap = null;
+            this.error_numberEng = null;
+            this.error_typeEng = null;
+            this.error_ecoCap = null;
+            this.error_busCap = null;
+            this.error_firstCap = null;
+            this.error_ecoPat = null;
+            this.error_busPat = null;
+            this.error_firstPat = null;
+
+            if (!this.input.date) {
+                this.error_date = "Please select start date.";
+                this.errors.push(this.error_date);
+            } else {
+                this.error_date = null;
+            }
+
+            if (!this.input.brand.trim()) {
+                this.error_brand = "Please fill the aircraft brand.";
+                this.errors.push(this.error_brand);
+            } else {
+                this.error_brand = null;
+            }
+
+            if (!this.input.model.trim()) {
+                this.error_model = "Please fill the aircraft model.";
+                this.errors.push(this.error_model);
+            } else {
+                this.error_model = null;
+            }
+
+            if (!this.input.country.trim()) {
+                this.error_country = "Please fill the country.";
+                this.errors.push(this.error_country);
+            } else {
+                this.error_country = null;
+            }
+
+            if (!this.input.fuelCap.trim()) {
+                this.error_fuelCap = "Please fill the fuel capacity.";
+                this.errors.push(this.error_fuelCap);
+            } else if (isNaN(this.input.fuelCap)) {
+                this.error_fuelCap = "Please fill only number.";
+                this.errors.push(this.error_fuelCap);
+            } else {
+                this.error_fuelCap = null;
+            }
+
+            if (!this.input.numberEng.trim()) {
+                this.error_numberEng = "Please fill the number of engine.";
+                this.errors.push(this.error_numberEng);
+            } else if (isNaN(this.input.numberEng)) {
+                this.error_numberEng = "Please fill only number.";
+                this.errors.push(this.error_numberEng);
+            } else {
+                this.error_numberEng = null;
+            }
+
+            if (!this.input.typeEng.trim()) {
+                this.error_typeEng = "Please fill the types of engine.";
+                this.errors.push(this.error_typeEng);
+            } else {
+                this.error_typeEng = null;
+            }
+
+            if (!this.input.ecoCap.trim()) {
+                this.error_ecoCap = "Please fill the economic class capacity.";
+                this.errors.push(this.error_ecoCap);
+            } else if (isNaN(this.input.ecoCap)) {
+                this.error_ecoCap = "Please fill only number.";
+                this.errors.push(this.error_ecoCap);
+            } else {
+                this.error_ecoCap = null;
+            }
+
+            if (!this.input.busCap.trim()) {
+                this.error_busCap = "Please fill the bussiness class capacity.";
+                this.errors.push(this.error_busCap);
+            } else if (isNaN(this.input.busCap)) {
+                this.error_busCap = "Please fill only number.";
+                this.errors.push(this.error_busCap);
+            } else {
+                this.error_busCap = null;
+            }
+
+            if (!this.input.firstCap.trim()) {
+                this.error_firstCap = "Please fill the first class capacity.";
+                this.errors.push(this.error_firstCap);
+            } else if (isNaN(this.input.firstCap)) {
+                this.error_firstCap = "Please fill only number.";
+                this.errors.push(this.error_firstCap);
+            } else {
+                this.error_firstCap = null;
+            }
+
+            if (!this.input.ecoPat.trim()) {
+                this.error_ecoPat = "Please fill the economic class pattern.";
+                this.errors.push(this.error_ecoPat);
+            } else {
+                this.error_ecoPat = null;
+            }
+
+            if (!this.input.busPat.trim()) {
+                this.error_busPat = "Please fill the bussiness class pattern.";
+                this.errors.push(this.error_busPat);
+            } else {
+                this.error_busPat = null;
+            }
+
+            if (!this.input.firstPat.trim()) {
+                this.error_firstPat = "Please fill the first class pattern.";
+                this.errors.push(this.error_firstPat);
+            } else {
+                this.error_firstPat = null;
+            }
+
+            if (!this.errors.length) {
+                this.isLoading = true;
+                axios.post("/api/backend/addAircraft", data).then(response => {
+                    // console.log(response.data);
+                    swal.fire(
+                        "Register Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    ).then(() => {
+                        this.$router.push({ name: "adminHome" });
+                    });
                 });
-            });
+            } else {
+                this.isLoading = false;
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
+            }
         },
         checkModel() {
-            console.log(this.model_query);
-            console.log(this.brand_query);
+            // console.log(this.model_query);
+            // console.log(this.brand_query);
             this.model_query.forEach(each_model => {
                 if (this.input.model === each_model["model_name"]) {
                     this.seenModel = false;
-                    console.log("find");
+                    // console.log("find");
                     this.input.Dup_fuelCap = each_model["fuel_capacity"];
                     this.input.Dup_numberEng = each_model["number_of_engine"];
                     this.input.Dup_typeEng = each_model["engine_type"];
@@ -295,7 +477,7 @@ export default {
             this.brand_query.forEach(each_brand => {
                 if (this.input.brand === each_brand["brand_name"]) {
                     this.seenBrand = false;
-                    console.log("find");
+                    // console.log("find");
                     this.input.Dup_country = each_brand["country"];
                 } else {
                     this.seenBrand = true;
