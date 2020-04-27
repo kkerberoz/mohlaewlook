@@ -5702,98 +5702,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10380,7 +10288,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\n    background-color: #4699c2;\n}\n", ""]);
+exports.push([module.i, "\n.navbar {\r\n    background-color: #4699c2;\n}\r\n", ""]);
 
 // exports
 
@@ -10399,7 +10307,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -10418,7 +10326,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
 
 // exports
 
@@ -10437,7 +10345,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\n    background-color: #55c5d1;\n}\n.card-header {\n    background-color: #ffd57e;\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.reservation {\n  background-color: #55c5d1;\n}\n.card-header {\n  background-color: #ffd57e;\n  display: block;\n}\n", ""]);
 
 // exports
 
@@ -49667,9 +49575,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-2" }),
+                  _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Depart Date :")]),
                       _vm._v(" "),
@@ -49703,16 +49611,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_departDate) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_departDate))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Return Date :")]),
                       _vm._v(" "),
@@ -49746,18 +49650,14 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_returnDate) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_returnDate))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("No. of Passenger :")]),
                       _vm._v(" "),
@@ -49787,11 +49687,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_noPass) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_noPass))
                       ])
                     ])
                   ])
@@ -49800,9 +49696,7 @@ var render = function() {
                 _c("hr", { staticClass: "mb-4" }),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Flight No :")]),
                       _vm._v(" "),
@@ -49838,16 +49732,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightFrom) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightFrom))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")]),
                       _vm._v(" "),
@@ -49879,18 +49769,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightTo) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightTo))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Flight No :")]),
                       _vm._v(" "),
@@ -49926,16 +49810,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightFrom2) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightFrom2))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")]),
                       _vm._v(" "),
@@ -49971,11 +49851,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightTo2) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightTo2))
                       ])
                     ])
                   ])
@@ -49986,7 +49862,7 @@ var render = function() {
                 _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-2" }),
+                  _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-1" }, [
                     _c("span", { staticClass: "form-group" }, [
@@ -50047,16 +49923,12 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_title) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_title))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Name :")]),
                       _vm._v(" "),
@@ -50086,16 +49958,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_name) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_name))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Surname :")]),
                       _vm._v(" "),
@@ -50129,16 +49997,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_surname) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_surname))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c(
                         "label",
@@ -50185,7 +50049,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                            Male\n                                        "
+                              "\n                      Male\n                    "
                             )
                           ]
                         ),
@@ -50225,7 +50089,47 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                            Female\n                                        "
+                              "\n                      Female\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "radio-inline",
+                            attrs: { for: "radios-2" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.passenger.gender,
+                                  expression: "passenger.gender"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                id: "radios-1",
+                                value: "Other"
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.passenger.gender, "Other")
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.passenger,
+                                    "gender",
+                                    "Other"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                      Other\n                    "
                             )
                           ]
                         )
@@ -50237,7 +50141,7 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-2" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Date of Birth :")]),
                       _vm._v(" "),
@@ -50267,18 +50171,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Nationality :")]),
                       _vm._v(" "),
@@ -50312,11 +50210,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_national) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_national))
                       ])
                     ])
                   ])
@@ -50325,7 +50219,7 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-2" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("ID card :")]),
                       _vm._v(" "),
@@ -50359,18 +50253,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_idcard) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_idcard))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Passport :")]),
                       _vm._v(" "),
@@ -50404,11 +50292,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_passport) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_passport))
                       ])
                     ])
                   ])
@@ -50442,7 +50326,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                    ")
+      _vm._v("From :\n                  ")
     ])
   },
   function() {
@@ -50451,7 +50335,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To :\n                                    ")
+      _vm._v("To :\n                  ")
     ])
   },
   function() {
@@ -50460,7 +50344,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                    ")
+      _vm._v("From :\n                  ")
     ])
   },
   function() {
@@ -50469,7 +50353,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To :\n                                    ")
+      _vm._v("To :\n                  ")
     ])
   },
   function() {
@@ -50481,7 +50365,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-2" }, [
         _c("br"),
-        _vm._v("Passenger 1 :")
+        _vm._v("Passenger 1 :\n              ")
       ])
     ])
   },
@@ -50494,7 +50378,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-2" }, [
         _c("br"),
-        _vm._v("Passenger 2 :")
+        _vm._v("Passenger 2 :\n              ")
       ])
     ])
   },
@@ -50574,9 +50458,7 @@ var staticRenderFns = [
                     value: "Male"
                   }
                 }),
-                _vm._v(
-                  "\n                                            Male\n                                        "
-                )
+                _vm._v("\n                      Male\n                    ")
               ]
             ),
             _vm._v(" "),
@@ -50592,9 +50474,7 @@ var staticRenderFns = [
                     value: "Female"
                   }
                 }),
-                _vm._v(
-                  "\n                                            Female\n                                        "
-                )
+                _vm._v("\n                      Female\n                    ")
               ]
             )
           ])
@@ -50682,7 +50562,7 @@ var staticRenderFns = [
           staticClass: "btn btn-block btn-outline-primary",
           attrs: { type: "button" }
         },
-        [_vm._v("\n                            Next\n                        ")]
+        [_vm._v("Next")]
       )
     ])
   }
@@ -67171,8 +67051,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
