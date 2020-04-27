@@ -164,7 +164,7 @@ class BackendController extends Controller
         $checkAirport_id = Airport::select('airport_id')->where('airport_id', $request->airportID)->first();
         $checkAirport_name = Airport::select('airport_name')->where('airport_name', $request->airportName)->first();
         if (isset($checkAirport_id)) {
-            return response()->json('This Airport ID is already exist', 409);
+            return response()->json('This Airport ID is already exist', 408);
         }
         if (isset($checkAirport_name)) {
             return response()->json('This Airport name is already exist', 409);

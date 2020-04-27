@@ -885,8 +885,14 @@ export default {
                 this.error_address = null;
             }
 
-            if (!this.input.phone.trim()) {
+            if (!this.input.phone) {
                 this.error_phone = "Please fill your phone number.";
+                this.errors.push(this.error_phone);
+            } else if (isNaN(this.input.phone)) {
+                this.error_phone = "Please fill only number.";
+                this.errors.push(this.error_phone);
+            } else if (this.input.phone.length != 10) {
+                this.error_phone = "Phone number must be 10 characters.";
                 this.errors.push(this.error_phone);
             } else {
                 this.error_phone = null;
@@ -972,8 +978,8 @@ export default {
                             });
                         })
                         .catch(error => {
+                            this.isLoading = false;
                             if (error.response.status === 408) {
-                                this.isLoading = false;
                                 swal.fire(
                                     "This username alrady exist.",
                                     "Cilck the button to continue!",
@@ -984,7 +990,6 @@ export default {
                                 });
                             }
                             if (error.response.status === 409) {
-                                this.isLoading = false;
                                 swal.fire(
                                     "This IDCard alrady exist.",
                                     "Cilck the button to continue!",

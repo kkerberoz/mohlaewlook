@@ -2644,6 +2644,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2655,14 +2685,65 @@ __webpack_require__.r(__webpack_exports__);
         airportAddress: "",
         airportRegion: ""
       },
-      success: ""
+      error_airportID: "",
+      error_airportName: "",
+      error_airportCap: "",
+      error_airportAddress: "",
+      error_airportRegion: "",
+      errors: []
     };
   },
   methods: {
+    userInput_id: function userInput_id() {
+      if (this.error_airportID != null) {
+        this.error_airportID = null;
+      } else if (!this.input.airportID) {
+        this.error_airportID = "Please fill your Airport ID.";
+        this.errors.push(this.error_airportID);
+      }
+    },
+    userInput_name: function userInput_name() {
+      if (this.error_airportName != null) {
+        this.error_airportName = null;
+      } else if (!this.input.airportName) {
+        this.error_airportName = "Please fill your Airport Name.";
+        this.errors.push(this.error_airportName);
+      }
+    },
+    userInput_cap: function userInput_cap() {
+      if (this.error_airportCap != null) {
+        this.error_airportCap = null;
+      } else if (!this.input.airportCap) {
+        this.error_airportCap = "Please fill your Airport Capacity.";
+        this.errors.push(this.error_airportCap);
+      }
+    },
+    userInput_address: function userInput_address() {
+      if (this.error_airportAddress != null) {
+        this.error_airportAddress = null;
+      } else if (!this.input.airportAddress) {
+        this.error_airportAddress = "Please fill your Airport Address.";
+        this.errors.push(this.error_airportAddress);
+      }
+    },
+    userInput_region: function userInput_region() {
+      if (this.error_airportRegion != null) {
+        this.error_airportRegion = null;
+      } else if (!this.input.airportRegion) {
+        this.error_airportRegion = "Please fill your Airport Region.";
+        this.errors.push(this.error_airportRegion);
+      }
+    },
     formSubmit: function formSubmit(e) {
       var _this = this;
 
       e.preventDefault();
+      this.errors = [];
+      this.error_airportID = null;
+      this.error_airportName = null;
+      this.error_airportCap = null;
+      this.error_airportAddress = null;
+      this.error_airportRegion = null;
       var data = {
         airportID: this.input.airportID,
         airportName: this.input.airportName,
@@ -2671,19 +2752,77 @@ __webpack_require__.r(__webpack_exports__);
         airportRegion: this.input.airportRegion
       };
       this.isLoading = true;
-      axios.post("/api/backend/addAirport", data).then(function (response) {
-        // console.log(response.data);
-        _this.success = response.data;
-        swal.fire("Add Data Success!", "Cilck the button to continue!", "success").then(function () {
-          _this.$router.push("/admin");
-        });
-      })["catch"](function (error) {
-        _this.isLoading = false;
 
-        if (error.response.status === 409) {
-          swal.fire("Could not add you data.", "Cilck the button to continue!", "error");
-        }
-      });
+      if (!this.input.airportID) {
+        this.error_airportID = "Please fill your Airport ID.";
+        this.errors.push(this.error_airportID);
+      } else if (this.input.airportID.length != 3) {
+        this.error_airportID = "Airport ID must be 3 characters.";
+        this.errors.push(this.error_airportID);
+      } else if (!this.input.airportID == this.input.airportID.toUpperCase()) {
+        this.error_airportID = "Airport ID must be upper case.";
+        this.errors.push(this.error_airportID);
+      } else {
+        this.error_airportID = null;
+      }
+
+      if (!this.input.airportName) {
+        this.error_airportName = "Please fill your Airport Name.";
+        this.errors.push(this.error_airportName);
+      } else {
+        this.error_airportName = null;
+      }
+
+      if (!this.input.airportCap) {
+        this.error_airportCap = "Please fill you airport Capacity.";
+        this.errors.push(this.error_airportCap);
+      } else if (isNaN(this.input.airportCap)) {
+        this.error_airportCap = "Please fill only number.";
+        this.errors.push(this.error_airportCap);
+      } else {
+        this.error_airportCap = null;
+      }
+
+      if (!this.input.airportAddress.trim()) {
+        this.error_airportAddress = "Please fill your Airport Address.";
+        this.errors.push(this.error_airportAddress);
+      } else {
+        this.error_airportAddress = null;
+      }
+
+      if (!this.input.airportRegion) {
+        this.error_airportRegion = "Please fill your Airport Region.";
+        this.errors.push(this.error_airportRegion);
+      } else {
+        this.error_airportRegion = null;
+      }
+
+      if (!this.errors.length) {
+        axios.post("/api/backend/addAirport", data).then(function (response) {
+          swal.fire("Add Data Success!", "Cilck the button to continue!", "success").then(function () {
+            _this.$router.push("/admin");
+          });
+        })["catch"](function (error) {
+          _this.isLoading = false;
+
+          if (error.response.status === 408) {
+            swal.fire("This Airport ID is already exist", "Cilck the button to continue!", "error").then(function () {
+              _this.errors = [];
+              _this.input.airportID = "";
+            });
+          }
+
+          if (error.response.status === 409) {
+            swal.fire("This Airport name is already exist", "Cilck the button to continue!", "error").then(function () {
+              _this.errors = [];
+              _this.input.airportName = "";
+            });
+          }
+        });
+      } else {
+        this.isLoading = false;
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+      }
     }
   }
 });
@@ -4474,8 +4613,14 @@ __webpack_require__.r(__webpack_exports__);
         this.error_address = null;
       }
 
-      if (!this.input.phone.trim()) {
+      if (!this.input.phone) {
         this.error_phone = "Please fill your phone number.";
+        this.errors.push(this.error_phone);
+      } else if (isNaN(this.input.phone)) {
+        this.error_phone = "Please fill only number.";
+        this.errors.push(this.error_phone);
+      } else if (this.input.phone.length != 10) {
+        this.error_phone = "Phone number must be 10 characters.";
         this.errors.push(this.error_phone);
       } else {
         this.error_phone = null;
@@ -4555,8 +4700,9 @@ __webpack_require__.r(__webpack_exports__);
               });
             });
           })["catch"](function (error) {
+            _this2.isLoading = false;
+
             if (error.response.status === 408) {
-              _this2.isLoading = false;
               swal.fire("This username alrady exist.", "Cilck the button to continue!", "error").then(function () {
                 _this2.errors = [];
                 _this2.input.username = "";
@@ -4564,7 +4710,6 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             if (error.response.status === 409) {
-              _this2.isLoading = false;
               swal.fire("This IDCard alrady exist.", "Cilck the button to continue!", "error").then(function () {
                 _this2.errors = [];
                 _this2.input.idcard = "";
@@ -45725,9 +45870,7 @@ var render = function() {
               _vm._v(" "),
               _c("hr", { staticClass: "mb-4" }),
               _vm._v(" "),
-              _c("h5", { staticClass: "mb-3" }, [
-                _vm._v("Airport Details " + _vm._s(_vm.success))
-              ]),
+              _c("h5", { staticClass: "mb-3" }, [_vm._v("Airport Details")]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("div", { staticClass: "row" }, [
@@ -45744,20 +45887,34 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_airportID
+                      },
                       attrs: { type: "text" },
                       domProps: { value: _vm.input.airportID },
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.input, "airportID", $event.target.value)
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.input,
+                              "airportID",
+                              $event.target.value
+                            )
+                          },
+                          _vm.userInput_id
+                        ]
                       }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v("Please enter")
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.error_airportID) +
+                          "\n                            "
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -45774,24 +45931,34 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_airportName
+                      },
                       attrs: { type: "text" },
                       domProps: { value: _vm.input.airportName },
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.input,
-                            "airportName",
-                            $event.target.value
-                          )
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.input,
+                              "airportName",
+                              $event.target.value
+                            )
+                          },
+                          _vm.userInput_name
+                        ]
                       }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v("Please enter")
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.error_airportName) +
+                          "\n                            "
+                      )
                     ])
                   ])
                 ]),
@@ -45810,20 +45977,34 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_airportCap
+                      },
                       attrs: { type: "text" },
                       domProps: { value: _vm.input.airportCap },
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.input, "airportCap", $event.target.value)
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.input,
+                              "airportCap",
+                              $event.target.value
+                            )
+                          },
+                          _vm.userInput_cap
+                        ]
                       }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v("Please enter")
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.error_airportCap) +
+                          "\n                            "
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -45840,24 +46021,34 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_airportRegion
+                      },
                       attrs: { type: "text" },
                       domProps: { value: _vm.input.airportRegion },
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.input,
-                            "airportRegion",
-                            $event.target.value
-                          )
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.input,
+                              "airportRegion",
+                              $event.target.value
+                            )
+                          },
+                          _vm.userInput_region
+                        ]
                       }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v("Please enter")
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.error_airportRegion) +
+                          "\n                            "
+                      )
                     ])
                   ])
                 ]),
@@ -45876,24 +46067,34 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_airportAddress
+                      },
                       attrs: { type: "text" },
                       domProps: { value: _vm.input.airportAddress },
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.input,
-                            "airportAddress",
-                            $event.target.value
-                          )
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.input,
+                              "airportAddress",
+                              $event.target.value
+                            )
+                          },
+                          _vm.userInput_address
+                        ]
                       }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v("Please enter")
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.error_airportAddress) +
+                          "\n                            "
+                      )
                     ])
                   ])
                 ])
