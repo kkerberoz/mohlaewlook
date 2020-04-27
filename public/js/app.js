@@ -4159,6 +4159,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -4170,7 +4171,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isLoading: false,
       input: {
-        start_date: "",
+        start_date: new Date().toISOString().slice(0, 10),
         salary: "",
         airport: "",
         role: "",
@@ -4555,6 +4556,22 @@ __webpack_require__.r(__webpack_exports__);
                 name: "adminHome"
               });
             });
+          })["catch"](function (error) {
+            if (error.response.status === 408) {
+              _this2.isLoading = false;
+              swal.fire("This username alrady exist.", "Cilck the button to continue!", "error").then(function () {
+                _this2.errors = [];
+                _this2.input.username = "";
+              });
+            }
+
+            if (error.response.status === 409) {
+              _this2.isLoading = false;
+              swal.fire("This IDCard alrady exist.", "Cilck the button to continue!", "error").then(function () {
+                _this2.errors = [];
+                _this2.input.idcard = "";
+              });
+            }
           });
         });
       } else {
@@ -47213,7 +47230,7 @@ var render = function() {
                             class: {
                               "is-invalid": _vm.error_start_date
                             },
-                            attrs: { required: "", type: "date" },
+                            attrs: { required: "", type: "date", value: "" },
                             domProps: { value: _vm.input.start_date },
                             on: {
                               input: function($event) {
