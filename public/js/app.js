@@ -3619,6 +3619,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3627,8 +3632,9 @@ __webpack_require__.r(__webpack_exports__);
 
       get role() {
         return localStorage.getItem("isRole");
-      }
+      },
 
+      activeClass: "active"
     };
   },
   mounted: function mounted() {
@@ -47022,6 +47028,34 @@ var render = function() {
                   _c(
                     "li",
                     [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _c("i", { staticClass: "fas fa-home" }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Homepage")])
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: { name: "adminHome" } } },
+                        [
+                          _c("i", { staticClass: "fas fa-tachometer-alt" }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Dashboard")])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
                       _c(
                         "router-link",
                         {
@@ -47169,18 +47203,6 @@ var render = function() {
                           _c("span", [_vm._v("Add Airport")])
                         ]
                       )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _c("i", { staticClass: "fas fa-home" }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Homepage")])
-                      ])
                     ],
                     1
                   ),
