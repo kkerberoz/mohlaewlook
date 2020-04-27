@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid" style="margin-top:5%; margin-bottom:20% ">
         <div class="row flex-center full-height">
-            <div class="col-md-12" style="padding:60px">
+            <div class="col-md-9" style="padding:60px">
                 <div class="card">
                     <div class="card-header">Reservation</div>
                     <div class="card-body">
@@ -44,7 +44,7 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-2">
                                 <span class="form-group">
-                                    <label>No. of Passenger : </label>
+                                    <label>No. of Passenger :</label>
                                     <input
                                         v-bind:class="{
                                             'is-invalid': error_DOB
@@ -67,9 +67,8 @@
                                 <span class="form-group">
                                     <label>Flight No :</label>
                                     <span class="input-text">
-                                        <br />
-                                        From :</span
-                                    >
+                                        <br />From :
+                                    </span>
                                     <input
                                         v-bind:class="{
                                             'is-invalid': error_DOB
@@ -86,11 +85,8 @@
                             </div>
                             <div class="col-md-2">
                                 <span class="form-group">
-                                    <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ </label>
-                                    <span class="input-text">
-                                        <br />
-                                        To :</span
-                                    >
+                                    <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
+                                    <span class="input-text"> <br />To : </span>
                                     <input
                                         v-bind:class="{
                                             'is-invalid': error_DOB
@@ -110,9 +106,8 @@
                                 <span class="form-group">
                                     <label>Flight No :</label>
                                     <span class="input-text">
-                                        <br />
-                                        From :</span
-                                    >
+                                        <br />From :
+                                    </span>
                                     <input
                                         v-bind:class="{
                                             'is-invalid': error_DOB
@@ -129,11 +124,8 @@
                             </div>
                             <div class="col-md-2">
                                 <span class="form-group">
-                                    <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ </label>
-                                    <span class="input-text">
-                                        <br />
-                                        To :</span
-                                    >
+                                    <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
+                                    <span class="input-text"> <br />To : </span>
                                     <input
                                         v-bind:class="{
                                             'is-invalid': error_DOB
@@ -152,10 +144,7 @@
                         <hr class="mb-4" />
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <div class="col-md-2">
-                                <br />
-                                Passenger 1 :
-                            </div>
+                            <div class="col-md-2"><br />Passenger 1 :</div>
                         </div>
 
                         <div class="row">
@@ -179,9 +168,9 @@
                                         <option>Mr.</option>
                                         <option>Miss</option>
                                     </select>
-                                    <span class="invalid-feedback">{{
-                                        error_title
-                                    }}</span>
+                                    <span class="invalid-feedback">
+                                        {{ error_title }}
+                                    </span>
                                 </span>
                             </div>
                             <div class="col-md-2">
@@ -204,7 +193,7 @@
 
                             <div class="col-md-2">
                                 <span class="form-group">
-                                    <label>Surname : </label>
+                                    <label>Surname :</label>
                                     <input
                                         v-bind:class="{
                                             'is-invalid': error_surname
@@ -223,12 +212,11 @@
                             <div class="col-md-2">
                                 <span class="form-group">
                                     <label
-                                        class="col-md-4 control-label"
+                                        class="col-md-6 control-label"
                                         for="radios"
+                                        >Gender :</label
                                     >
-                                        Gender :
-                                    </label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <label
                                             class="radio-inline"
                                             for="radios-0"
@@ -268,7 +256,7 @@
                                         v-bind:class="{
                                             'is-invalid': error_DOB
                                         }"
-                                        type="text"
+                                        type="date"
                                         class="form-control"
                                         name="DOB"
                                         v-model="DOB"
@@ -286,9 +274,9 @@
                                         v-bind:class="{
                                             'is-invalid': error_DOB
                                         }"
-                                        type="text"
+                                        type="country"
                                         class="form-control"
-                                        name="DOB"
+                                        name="country"
                                     />
                                     <div class="invalid-feedback">
                                         {{ error_DOB }}
@@ -336,10 +324,7 @@
                         <hr class="mb-4" />
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <div class="col-md-2">
-                                <br />
-                                Passenger 2 :
-                            </div>
+                            <div class="col-md-2"><br />Passenger 2 :</div>
                         </div>
 
                         <div class="row">
@@ -363,9 +348,9 @@
                                         <option>Mr.</option>
                                         <option>Miss</option>
                                     </select>
-                                    <span class="invalid-feedback">{{
-                                        error_title
-                                    }}</span>
+                                    <span class="invalid-feedback">
+                                        {{ error_title }}
+                                    </span>
                                 </span>
                             </div>
                             <div class="col-md-2">
@@ -388,7 +373,7 @@
 
                             <div class="col-md-2">
                                 <span class="form-group">
-                                    <label>Surname : </label>
+                                    <label>Surname :</label>
                                     <input
                                         v-bind:class="{
                                             'is-invalid': error_surname
@@ -407,12 +392,11 @@
                             <div class="col-md-2">
                                 <span class="form-group">
                                     <label
-                                        class="col-md-4 control-label"
+                                        class="col-md-6 control-label"
                                         for="radios"
+                                        >Gender :</label
                                     >
-                                        Gender :
-                                    </label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <label
                                             class="radio-inline"
                                             for="radios-0"
@@ -452,7 +436,7 @@
                                         v-bind:class="{
                                             'is-invalid': error_DOB
                                         }"
-                                        type="text"
+                                        type="date"
                                         class="form-control"
                                         name="DOB"
                                         v-model="DOB"
@@ -470,9 +454,10 @@
                                         v-bind:class="{
                                             'is-invalid': error_DOB
                                         }"
-                                        type="text"
+                                        type="country"
                                         class="form-control"
-                                        name="DOB"
+                                        api-key="AIzaSyAhSv9zWvisiTXRPRw6K8AE0DCmrRMpQcU"
+                                        name="country"
                                     />
                                     <div class="invalid-feedback">
                                         {{ error_DOB }}
