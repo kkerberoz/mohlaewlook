@@ -2278,6 +2278,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2313,7 +2326,21 @@ __webpack_require__.r(__webpack_exports__);
         Dup_firstPat: ""
       },
       seenModel: true,
-      seenBrand: true
+      seenBrand: true,
+      errors: [],
+      error_date: "",
+      error_brand: "",
+      error_model: "",
+      error_country: "",
+      error_fuelCap: "",
+      error_numberEng: "",
+      error_typeEng: "",
+      error_ecoCap: "",
+      error_busCap: "",
+      error_firstCap: "",
+      error_ecoPat: "",
+      error_busPat: "",
+      error_firstPat: ""
     };
   },
   mounted: function mounted() {
@@ -2332,17 +2359,141 @@ __webpack_require__.r(__webpack_exports__);
       var data = {
         input: this.input
       };
-      this.isLoading = true;
-      axios.post("/api/backend/addAircraft", data).then(function (response) {
-        console.log(response.data);
-        swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-          _this2.isLoading = false;
+      this.errors = [], this.error_date = null;
+      this.error_brand = null;
+      this.error_model = null;
+      this.error_country = null;
+      this.error_fuelCap = null;
+      this.error_numberEng = null;
+      this.error_typeEng = null;
+      this.error_ecoCap = null;
+      this.error_busCap = null;
+      this.error_firstCap = null;
+      this.error_ecoPat = null;
+      this.error_busPat = null;
+      this.error_firstPat = null;
 
-          _this2.$router.push({
-            name: "adminHome"
+      if (!this.input.date) {
+        this.error_date = "Please select start date.";
+        this.errors.push(this.error_date);
+      } else {
+        this.error_date = null;
+      }
+
+      if (!this.input.brand) {
+        this.error_brand = "Please fill the aircraft brand.";
+        this.errors.push(this.error_brand);
+      } else {
+        this.error_brand = null;
+      }
+
+      if (!this.input.model) {
+        this.error_model = "Please fill the aircraft model.";
+        this.errors.push(this.error_model);
+      } else {
+        this.error_model = null;
+      }
+
+      if (!this.input.country) {
+        this.error_country = "Please fill the country.";
+        this.errors.push(this.error_country);
+      } else {
+        this.error_country = null;
+      }
+
+      if (!this.input.fuelCap) {
+        this.error_fuelCap = "Please fill the fuel capacity.";
+        this.errors.push(this.error_fuelCap);
+      } else if (isNaN(this.input.fuelCap)) {
+        this.error_fuelCap = "Please fill only number.";
+        this.errors.push(this.error_fuelCap);
+      } else {
+        this.error_fuelCap = null;
+      }
+
+      if (!this.input.numberEng) {
+        this.error_numberEng = "Please fill the number of engine.";
+        this.errors.push(this.error_numberEng);
+      } else if (isNaN(this.input.numberEng)) {
+        this.error_numberEng = "Please fill only number.";
+        this.errors.push(this.error_numberEng);
+      } else {
+        this.error_numberEng = null;
+      }
+
+      if (!this.input.typeEng) {
+        this.error_typeEng = "Please fill the types of engine.";
+        this.errors.push(this.error_typeEng);
+      } else {
+        this.error_typeEng = null;
+      }
+
+      if (!this.input.ecoCap) {
+        this.error_ecoCap = "Please fill the economic class capacity.";
+        this.errors.push(this.error_ecoCap);
+      } else if (isNaN(this.input.ecoCap)) {
+        this.error_ecoCap = "Please fill only number.";
+        this.errors.push(this.error_ecoCap);
+      } else {
+        this.error_ecoCap = null;
+      }
+
+      if (!this.input.busCap) {
+        this.error_busCap = "Please fill the bussiness class capacity.";
+        this.errors.push(this.error_busCap);
+      } else if (isNaN(this.input.busCap)) {
+        this.error_busCap = "Please fill only number.";
+        this.errors.push(this.error_busCap);
+      } else {
+        this.error_busCap = null;
+      }
+
+      if (!this.input.firstCap) {
+        this.error_firstCap = "Please fill the first class capacity.";
+        this.errors.push(this.error_firstCap);
+      } else if (isNaN(this.input.firstCap)) {
+        this.error_firstCap = "Please fill only number.";
+        this.errors.push(this.error_firstCap);
+      } else {
+        this.error_firstCap = null;
+      }
+
+      if (!this.input.ecoPat) {
+        this.error_ecoPat = "Please fill the economic class pattern.";
+        this.errors.push(this.error_ecoPat);
+      } else {
+        this.error_ecoPat = null;
+      }
+
+      if (!this.input.busPat) {
+        this.error_busPat = "Please fill the bussiness class pattern.";
+        this.errors.push(this.error_busPat);
+      } else {
+        this.error_busPat = null;
+      }
+
+      if (!this.input.firstPat) {
+        this.error_firstPat = "Please fill the first class pattern.";
+        this.errors.push(this.error_firstPat);
+      } else {
+        this.error_firstPat = null;
+      }
+
+      console.log(this.errors);
+
+      if (!this.errors.length) {
+        this.isLoading = true;
+        axios.post("/api/backend/addAircraft", data).then(function (response) {
+          console.log(response.data);
+          swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+            _this2.isLoading = false;
+
+            _this2.$router.push({
+              name: "adminHome"
+            });
           });
         });
-      });
+      }
     },
     checkModel: function checkModel() {
       var _this3 = this;
@@ -10026,7 +10177,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -10045,7 +10196,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
 
 // exports
 
@@ -10064,7 +10215,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-header {\n    background-color: #f85e09;\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.card-header {\r\n    background-color: #f85e09;\r\n    display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -44928,6 +45079,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_date },
                         attrs: { type: "date" },
                         domProps: { value: _vm.input.date },
                         on: {
@@ -44942,7 +45094,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_date) +
+                            "\n                                "
                         )
                       ])
                     ])
@@ -44962,6 +45116,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_brand },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.brand },
                         on: {
@@ -45008,7 +45163,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_brand) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45026,6 +45183,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_country },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.country },
                         on: {
@@ -45040,7 +45198,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_country) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45064,6 +45224,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: { "is-invalid": _vm.error_model },
                           attrs: { type: "text" },
                           domProps: { value: _vm.input.model },
                           on: {
@@ -45113,7 +45274,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Please enter\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error_model) +
+                              "\n                                "
                           )
                         ])
                       ]
@@ -45134,6 +45297,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_fuelCap },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.fuelCap },
                         on: {
@@ -45148,7 +45312,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_fuelCap) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45166,6 +45332,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_numberEng },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.numberEng },
                         on: {
@@ -45184,7 +45351,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_numberEng) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45202,6 +45371,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_typeEng },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.typeEng },
                         on: {
@@ -45216,7 +45386,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_typeEng) +
+                            "\n                                "
                         )
                       ])
                     ])
@@ -45240,6 +45412,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_ecoCap },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.ecoCap },
                         on: {
@@ -45254,7 +45427,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_ecoCap) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45272,6 +45447,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_busCap },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.busCap },
                         on: {
@@ -45286,7 +45462,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_busCap) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45304,6 +45482,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_firstCap },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.firstCap },
                         on: {
@@ -45318,7 +45497,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_firstCap) +
+                            "\n                                "
                         )
                       ])
                     ])
@@ -45338,6 +45519,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_ecoPat },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.ecoPat },
                         on: {
@@ -45352,7 +45534,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_ecoPat) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45370,6 +45554,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_busPat },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.busPat },
                         on: {
@@ -45384,7 +45569,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_busPat) +
+                            "\n                                "
                         )
                       ])
                     ]),
@@ -45402,6 +45589,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class: { "is-invalid": _vm.error_firstPat },
                         attrs: { type: "text" },
                         domProps: { value: _vm.input.firstPat },
                         on: {
@@ -45416,7 +45604,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
                         _vm._v(
-                          "\n                                    Please enter\n                                "
+                          "\n                                    " +
+                            _vm._s(_vm.error_firstPat) +
+                            "\n                                "
                         )
                       ])
                     ])
@@ -66581,8 +66771,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
