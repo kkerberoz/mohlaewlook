@@ -18,7 +18,7 @@ class CrateAircraftModelsTable extends Migration
             $table->string('model_name',20);
             $table->double('fuel_capacity');
             $table->unsignedInteger('number_of_engine');
-            $table->string('engine_type',20);
+            $table->string('engine_type',64);
             $table->unsignedInteger('eco_cap');
             $table->unsignedInteger('bus_cap');
             $table->unsignedInteger('first_cap');

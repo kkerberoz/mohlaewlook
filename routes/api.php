@@ -22,19 +22,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // Route::get('init', 'UserController@init');
-Route::post('login', 'UserController@login');
-Route::post('regis', 'UserController@register');
-Route::post('logout', 'UserController@logout');
+Route::prefix('user')->group(function () {
+    Route::post('/login', 'UserController@login');
+    Route::post('/regis', 'UserController@register');
+    Route::post('/logout', 'UserController@logout');
+});
 
-Route::prefix("admin")->group(function () {
+
+Route::prefix('admin')->group(function () {
     Route::post('/login', 'AdminController@login');
     Route::post('/logout', 'AdminController@logout');
     Route::post('/addEmployee', 'AdminController@addEmployee');
     Route::get('/init', 'AdminController@init');
 });
 
-Route::post('/backend/addAircraft','BackendController@addAircraft');
-Route::get('/getModelBrand','BackendController@getModelBrand');
+Route::prefix('backend')->group(function () {
+    Route::post('/addAircraft', 'BackendController@addAircraft');
+    Route::get('/getAirports', 'BackendController@getAirports');
+    Route::post('/getAircraftAndCrew', 'BackendController@getAircraftAndCrew');
+    Route::post('/addAirport', 'BackendController@addAirport');
+});
 
-Route::get('backend/getAirports', 'BackendController@getAirports');
-Route::post('backend/addAirport', 'BackendController@addAirport');
+Route::get('/getModelBrand', 'BackendController@getModelBrand');

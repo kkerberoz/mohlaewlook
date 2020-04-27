@@ -6,11 +6,10 @@ use App\Aircraft;
 use App\Aircraft_brand;
 use App\Aircraft_model;
 use App\Airport;
-use App\Customer;
-use Illuminate\Http\Request;
 use App\Employee;
-use App\Disease;
-use App\Education;
+use App\Work_schedule;
+use App\Flight;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class BackendController extends Controller
@@ -20,6 +19,51 @@ class BackendController extends Controller
     {
         $AirportID = Airport::all();
         return response()->JSON($AirportID);
+    }
+
+    public function getAircraftAndCrew(Request $request){
+        $initial_location = "BKK";
+        $location = $request->location;
+        $datetime = $request->date. " ". $request->time;
+        $All_Aircraft = Aircraft::all();
+        $Flight_Filter = [];
+        foreach($All_Aircraft as $aircraft){
+            $Flight = Flight::select('*')->orderBy('depart_datetime', 'desc')->where('arrive_datetime', '>', $datetime)->where('depart_datetime', '<', $datetime)->where('aircraft_id', $aircraft['aircraft_id'])->first();
+            if(!isset($Flight)){
+                $Flight = Flight::select('*')->orderBy('depart_datetime', 'desc')->where('arrive_datetime', '<', $datetime)->where('aircraft_id', $aircraft['aircraft_id'])->first();
+                if(!strcmp($Flight['arrive_location'], $location)) array_push($Flight_Filter, $Flight);
+            }
+        }
+        $Aircraft_Brand = [];
+        $Aircraft_Model = [];
+        $Aircraft = [];
+        $Flight_Time = [];
+        foreach($Flight_Filter as $flight){
+            $aircraft = Aircraft::select('*')->where('aircraft_id', $flight['aircraft_id'])->first();
+            array_push($Aircraft, $aircraft);
+            array_push($Aircraft_Brand, Aircraft_brand::select('*')->where('brand_id', $aircraft['brand_id'])->first());
+            array_push($Aircraft_Model, Aircraft_model::select('*')->where('model_id', $aircraft['model_id'])->first());
+            array_push($Flight_Time, Flight::select('*')->where('aircraft_id', $flight['aircraft_id'])->count());
+        }
+        //return response() -> JSON($Aircraft_Model);
+        return response() -> JSON(["Flight_Info" => $Flight_Filter, "Aircraft" => $Aircraft, "Aircraft_Brand" => $Aircraft_Brand,"Aircraft_Model" => $Aircraft_Model,
+                                   "Flight_Time" => $Flight_Time]);
+    }
+
+    public function getWorkSchedule(Request $request){
+        $start_date = $request->date;
+        $Work_Schedule = Work_schedule::select('*')->where('work_date', $start_date)->get();
+        $Pilot = [];
+        $Attendant = [];
+        foreach($Work_Schedule as $work){
+            $temp = Employee::select('*')->where('user_id', 'LIKE', '%PLT%')->where('user_id', $work['user_id'])->first();
+            if(isset($temp)) array_push($Pilot, $temp);
+            $temp = Employee::select('*')->where('user_id', 'LIKE', '%FAD%')->where('user_id', $work['user_id'])->first();
+            if(isset($temp)) array_push($Attendant, $temp);
+        }
+        return response() -> JSON(["Work_Schedule" => $Work_Schedule,
+                                   "Pilot" => $Pilot,
+                                   "Attendant" => $Attendant]);
     }
 
     public function getModelBrand()
@@ -36,8 +80,6 @@ class BackendController extends Controller
         $aircraft_model = new Aircraft_model;
 
         $input_Data = $request->input;
-
-
 
         $model_check = Aircraft_model::where('model_name',$input_Data['model'])->first();
         $brand_check = Aircraft_brand::where('brand_name',$input_Data['brand'])->first();
@@ -75,13 +117,8 @@ class BackendController extends Controller
                 $aircraft->brand_id = $brand_check['brand_id'];
                 $aircraft->model_id = $model_check['model_id'];
                 $aircraft->save();
-
-
-
-
             }
         }
-
         else
         {
             if(isset($model_check)){//Add brand & aircraft
@@ -123,8 +160,6 @@ class BackendController extends Controller
                 $aircraft->model_id = $model_check['model_id'];
                 $aircraft->save();
             }
-
-
         }
     }
     public function addAirport(Request $request)

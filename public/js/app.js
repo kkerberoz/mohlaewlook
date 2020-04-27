@@ -2035,7 +2035,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/sanctum/csrf-cookie").then(function (response) {
-        axios.post("/api/logout").then(function () {
+        axios.post("/api/user/logout").then(function () {
           localStorage.removeItem("isLoggedIn");
 
           _this.$router.go({
@@ -2261,9 +2261,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isLoading: false,
       model_query: [],
       brand_query: [],
       input: {
@@ -2307,49 +2313,58 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    handleFormCilcked: function handleFormCilcked() {
-      // e.preventDefault();
+    handleFormCilcked: function handleFormCilcked(e) {
+      var _this2 = this;
+
+      e.preventDefault();
       var data = {
         input: this.input
       };
+      this.isLoading = true;
       axios.post("/api/backend/addAircraft", data).then(function (response) {
         console.log(response.data);
-        swal.fire("Register Success!", "Cilck the button to continue!", "success");
+        swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+          _this2.isLoading = false;
+
+          _this2.$router.push({
+            name: "adminHome"
+          });
+        });
       });
     },
     checkModel: function checkModel() {
-      var _this2 = this;
+      var _this3 = this;
 
       console.log(this.model_query);
       console.log(this.brand_query);
       this.model_query.forEach(function (each_model) {
-        if (_this2.input.model === each_model["model_name"]) {
-          _this2.seenModel = false;
+        if (_this3.input.model === each_model["model_name"]) {
+          _this3.seenModel = false;
           console.log("find");
-          _this2.input.Dup_fuelCap = each_model["fuel_capacity"];
-          _this2.input.Dup_numberEng = each_model["number_of_engine"];
-          _this2.input.Dup_typeEng = each_model["engine_type"];
-          _this2.input.Dup_ecoCap = each_model["eco_cap"];
-          _this2.input.Dup_busCap = each_model["bus_cap"];
-          _this2.input.Dup_firstCap = each_model["first_cap"];
-          _this2.input.Dup_ecoPat = each_model["eco_pattern"];
-          _this2.input.Dup_busPat = each_model["bus_pattern"];
-          _this2.input.Dup_firstPat = each_model["first_pattern"];
-        } else if (!_this2.input.model) {
-          _this2.seenModel = true;
+          _this3.input.Dup_fuelCap = each_model["fuel_capacity"];
+          _this3.input.Dup_numberEng = each_model["number_of_engine"];
+          _this3.input.Dup_typeEng = each_model["engine_type"];
+          _this3.input.Dup_ecoCap = each_model["eco_cap"];
+          _this3.input.Dup_busCap = each_model["bus_cap"];
+          _this3.input.Dup_firstCap = each_model["first_cap"];
+          _this3.input.Dup_ecoPat = each_model["eco_pattern"];
+          _this3.input.Dup_busPat = each_model["bus_pattern"];
+          _this3.input.Dup_firstPat = each_model["first_pattern"];
+        } else {
+          _this3.seenModel = true;
         }
       });
     },
     checkBrand: function checkBrand() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.brand_query.forEach(function (each_brand) {
-        if (_this3.input.brand === each_brand["brand_name"]) {
-          _this3.seenBrand = false;
+        if (_this4.input.brand === each_brand["brand_name"]) {
+          _this4.seenBrand = false;
           console.log("find");
-          _this3.input.Dup_country = each_brand["country"];
-        } else if (!_this3.input.brand) {
-          _this3.seenBrand = true;
+          _this4.input.Dup_country = each_brand["country"];
+        } else {
+          _this4.seenBrand = true;
         }
       });
     },
@@ -2460,9 +2475,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isLoading: false,
       input: {
         airportID: "",
         airportName: "",
@@ -2485,6 +2506,7 @@ __webpack_require__.r(__webpack_exports__);
         airportAddress: this.input.airportAddress,
         airportRegion: this.input.airportRegion
       };
+      this.isLoading = true;
       axios.post("/api/backend/addAirport", data).then(function (response) {
         // console.log(response.data);
         _this.success = response.data;
@@ -2492,6 +2514,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.$router.push("/admin");
         });
       })["catch"](function (error) {
+        _this.isLoading = false;
+
         if (error.response.status === 409) {
           swal.fire("Could not add you data.", "Cilck the button to continue!", "error");
         }
@@ -2742,6 +2766,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2749,63 +2782,97 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isLoading: false,
       input: {
-        aircraftID: "",
-        flightNo: "",
-        departLocation: "",
-        departDate: "",
-        departTime: "",
-        arriveLocation: "",
-        arriveDate: "",
-        arriveTime: "",
-        captain: "",
-        coPilot: "",
+        aircraftID: null,
+        flightNo: null,
+        departLocation: null,
+        departDate: null,
+        departTime: null,
+        arriveLocation: null,
+        arriveDate: null,
+        arriveTime: null,
+        captain: null,
+        coPilot: null,
         crew: []
       },
-      options: [{
-        id: "1",
-        name: "Boss"
-      }, {
-        id: "2",
-        name: "Rat"
-      }, {
-        id: "3",
-        name: "Dive"
-      }, {
-        id: "4",
-        name: "Jane"
-      }, {
-        id: "5",
-        name: "O"
-      }, {
-        id: "6",
-        name: "Pan"
-      }, {
-        id: "7",
-        name: "Cake"
-      }, {
-        id: "8",
-        name: "Min"
-      }, {
-        id: "9",
-        name: "Cream"
-      }, {
-        id: "10",
-        name: "Jo"
-      }, {
-        id: "11",
-        name: "Oh"
-      }],
-      aircrafts: ["GGF1151", " GGF1152", "GGF1153", "GGF1154"],
-      locations: ["Swiss", " Germany", "Thailand", "Kanchanaburi"]
+      options_pilot: [],
+      options_attendant: [],
+      aircrafts: [],
+      locations: [],
+      date_check: null,
+      time_check: null,
+      location_check: null,
+      both_check: null,
+      aircraft_array_info: []
     };
   },
-  methods: {
-    nameWithId: function nameWithId(_ref) {
-      var name = _ref.name,
-          id = _ref.id;
-      return "[".concat(id, "] - ").concat(name, "  ");
-    }
+  methods: {},
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios.get("/api/backend/getAirports").then(function (response) {
+      response.data.forEach(function (airport) {
+        _this.locations.push({
+          value: airport["airport_id"],
+          name: airport["airport_id"] + " - " + airport["airport_name"]
+        });
+      });
+    });
+  },
+  beforeUpdate: function beforeUpdate() {
+    var _this2 = this;
+
+    // if(this.input.departDate == ""){
+    //     // alert when didn't select depart date time
+    // }
+    // else if(this.input.departDate != this.date_check){ // query only work date
+    //     this.date_check = this.input.departDate;
+    //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
+    //     //     this.options_attendant = [];
+    //     //     (response.data.Attendant).forEach(attendant => {
+    //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
+    //     //     });
+    //     //     this.options_pilot = [];
+    //     //     (response.data.Pilot).forEach(pilot => {
+    //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
+    //     //     });
+    //     // });
+    // }
+    // for check depart location, depart date and depart time are selected.
+    if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) this.both_check = false;else if (this.input.departLocation != null && this.input.departDate != null && this.input.departTime != null) this.both_check = true; // for query when all are selected.
+
+    if (this.both_check && (this.input.departLocation != this.location_check || this.input.departDate != this.date_check || this.input.departTime != this.time_check)) {
+      this.aircrafts = [];
+      this.options_pilot = [];
+      this.options_attendant = [];
+      this.location_check = this.input.departLocation;
+      this.date_check = this.input.departDate;
+      this.time_check = this.input.departTime;
+      axios.post("/api/backend/getAircraftAndCrew", {
+        location: this.input.departLocation["value"],
+        date: this.input.departDate,
+        time: this.input.departTime
+      }).then(function (response) {
+        var aircraft = response.data.Aircraft;
+        var aircraft_brand = response.data.Aircraft_Brand;
+        var aircraft_model = response.data.Aircraft_Model;
+        var flight_info = response.data.Flight_Info;
+        var flight_time = response.data.Flight_Time;
+
+        for (var i = 0; i < aircraft.length; ++i) {
+          _this2.aircrafts.push({
+            value: aircraft[i]["aircraft_id"],
+            name: "ID: " + aircraft[i]["aircraft_id"] + " - " + aircraft_brand[i]["brand_name"] + " " + aircraft_model[i]["model_name"]
+          });
+
+          _this2.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Flight Times:</b> " + flight_time[i] + "<br>" + "<b>Last Flight: from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<br><b>To:</b>  " + flight_info[i]["arrive_datetime"];
+        }
+      });
+    } // show information of each aircraft
+
+
+    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null;
   }
 });
 
@@ -2943,10 +3010,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "adminLogin",
   data: function data() {
     return {
+      isLoading: false,
       username: "",
       password: "",
       error_username: "",
@@ -2956,6 +3030,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     home: function home() {
+      this.isLoading = true;
       this.$router.push("/");
     },
     formSubmit: function formSubmit(e) {
@@ -2985,6 +3060,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!this.errors.length) {
+        this.isLoading = true;
         var data = {
           username: this.username,
           password: this.password
@@ -3024,9 +3100,16 @@ __webpack_require__.r(__webpack_exports__);
                 localStorage.setItem("isRole", "admin");
 
                 _this.$router.push("/admin");
+              } else if (response.data.employee_role === "flight_manager") {
+                localStorage.setItem("isAdmin", "true");
+                localStorage.setItem("isRole", "flight_manager");
+
+                _this.$router.push("/admin");
               }
             });
           })["catch"](function (error) {
+            _this.isLoading = false;
+
             if (error.response.status === 401) {
               swal.fire("Could not log you in.", "Cilck the button to continue!", "error").then(function () {
                 _this.errors = [];
@@ -3170,9 +3253,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isLoading: false,
       user: "",
 
       get role() {
@@ -3200,11 +3336,14 @@ __webpack_require__.r(__webpack_exports__);
     closeMenu: function closeMenu() {
       $(".page-wrapper").toggleClass("toggled");
     },
-    logout: function logout() {
+    logout: function logout(e) {
       var _this2 = this;
 
+      e.preventDefault();
+      this.isLoading = true;
       axios.get("/sanctum/csrf-cookie").then(function (response) {
         axios.post("/api/admin/logout").then(function () {
+          _this2.isLoading = false;
           localStorage.removeItem("isAdmin");
           localStorage.removeItem("isRole");
 
@@ -3880,6 +4019,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isLoading: false,
       input: {
         start_date: "",
         salary: "",
@@ -3922,7 +4062,8 @@ __webpack_require__.r(__webpack_exports__);
         name: "Human Resource"
       }, {
         name: "Flight Manager"
-      }],
+      } // { name: "Admin" }
+      ],
       status: [{
         value: 1,
         name: "Active"
@@ -3976,8 +4117,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/api/backend/getAirports").then(function (response) {
       // show all airports onto option
       // var AirportID = response.data; // get all aiport
-      _this.airports = response.data;
-      console.log(_this.airports);
+      _this.airports = response.data; // console.log(this.airports);
     });
   },
   methods: {
@@ -3995,277 +4135,298 @@ __webpack_require__.r(__webpack_exports__);
         gpa: ""
       });
     },
-    removeedu: function removeedu(index) {
-      this.edus.splice(index, 1);
-    },
-    add: function add(index) {
-      this.diseases.push({
-        info: "",
-        note: ""
-      });
-    },
-    remove: function remove(index) {
-      this.diseases.splice(index, 1);
-    },
-    formSubmit: function formSubmit(e) {
-      var _this2 = this;
+    methods: {
+      airportName: function airportName(_ref2) {
+        var airport_id = _ref2.airport_id,
+            airport_name = _ref2.airport_name;
+        return "[".concat(airport_id, "] - ").concat(airport_name);
+      },
+      addedu: function addedu(index) {
+        this.edus.push({
+          degree: "",
+          university: "",
+          faculty: "",
+          department: "",
+          gpa: ""
+        });
+      },
+      removeedu: function removeedu(index) {
+        this.edus.splice(index, 1);
+      },
+      add: function add(index) {
+        this.diseases.push({
+          info: "",
+          note: ""
+        });
+      },
+      remove: function remove(index) {
+        this.diseases.splice(index, 1);
+      },
+      formSubmit: function formSubmit(e) {
+        var _this2 = this;
 
-      e.preventDefault();
-      this.errors = [];
-      this.error_start_date = null; //
+        e.preventDefault();
+        this.errors = []; // console.log(this.errors.length);
 
-      this.error_salary = null; //
+        this.error_start_date = null; //
 
-      this.error_airport = null; //////
+        this.error_salary = null; //
 
-      this.error_role = null; //
+        this.error_airport = null; //////
 
-      this.error_status = null; //
+        this.error_role = null; //
 
-      this.error_username = null; //
+        this.error_status = null; //
 
-      this.error_password = null; //
+        this.error_username = null; //
 
-      this.error_idcard = null; //
+        this.error_password = null; //
 
-      this.error_gender = null; //
+        this.error_idcard = null; //
 
-      this.error_title = null; //
+        this.error_gender = null; //
 
-      this.error_firstname = null; //
+        this.error_title = null; //
 
-      this.error_lastname = null; //
+        this.error_firstname = null; //
 
-      this.error_DOB = null; //
+        this.error_lastname = null; //
 
-      this.error_height = null; //
+        this.error_DOB = null; //
 
-      this.error_weight = null; //
+        this.error_height = null; //
 
-      this.error_email = null; ///////
+        this.error_weight = null; //
 
-      this.error_address = null; //
+        this.error_email = null; ///////
 
-      this.error_phone = null; //
+        this.error_address = null; //
 
-      this.error_edus = null;
-      this.error_degree = null;
-      this.error_university = null;
-      this.error_faculty = null;
-      this.error_department = null;
-      this.error_gpa = null; //
+        this.error_phone = null; //
 
-      var details = {
-        start_date: this.input.start_date,
-        salary: this.input.salary,
-        airport: this.input.airport.airport_id,
-        role: this.input.role.name,
-        status: this.input.status.value,
-        username: this.input.username,
-        password: this.input.password,
-        idcard: this.input.idcard,
-        gender: this.input.gender,
-        title: this.input.title.title,
-        firstname: this.input.firstname,
-        lastname: this.input.lastname,
-        DOB: this.input.DOB,
-        height: this.input.height,
-        weight: this.input.weight,
-        email: this.input.email,
-        address: this.input.address,
-        phone: this.input.phone
-      }; // data in detail
-
-      var educations = this.edus; // data in education
-
-      var diseases = this.diseases; // data in diseases
-
-      var data = {
-        details: details,
-        educations: educations,
-        diseases: diseases
-      };
-
-      if (!this.input.start_date) {
-        this.error_start_date = "Please select your start date.";
-        this.errors.push(this.error_start_date);
-      } else {
-        this.error_start_date = null;
-      }
-
-      if (!this.input.salary) {
-        this.error_salary = "Please fill the salary.";
-        this.errors.push(this.error_salary);
-      } else if (isNaN(this.input.salary)) {
-        this.error_salary = "Please fill only number.";
-        this.errors.push(this.error_salary);
-      } else {
-        this.error_salary = null;
-      }
-
-      if (!this.input.role) {
-        this.error_role = "Please select your role.";
-        this.errors.push(this.error_role);
-      } else {
-        this.error_role = null;
-      }
-
-      if (!this.input.status) {
-        this.error_status = "Please select your work status.";
-        this.errors.push(this.error_status);
-      } else {
-        this.error_status = null;
-      }
-
-      if (!this.input.username.trim()) {
-        this.error_username = "Please fill your username.";
-        this.errors.push(this.error_username);
-      } else {
-        this.error_username = null;
-      }
-
-      if (!this.input.password) {
-        this.error_password = "Please fill your password.";
-        this.errors.push(this.error_password);
-      } else if (this.input.password.length < 6) {
-        this.error_password = "Password has to be at least 6 characters long.";
-        this.errors.push(this.error_password);
-      } else {
-        this.error_password = null;
-      }
-
-      if (!this.input.idcard) {
-        this.error_idcard = "Please fill your id card.";
-        this.errors.push(this.error_idcard);
-      } else if (this.input.idcard.length != 13) {
-        this.error_idcard = "Password must be 13 characters.";
-        this.errors.push(this.error_idcard);
-      } else {
-        this.error_idcard = null;
-      }
-
-      if (!this.input.gender) {
-        this.error_gender = "Please select the gender.";
-        this.errors.push(this.error_gender);
-      } else {
-        this.input.error_gender = null;
-      }
-
-      if (!this.input.title.title) {
-        this.error_title = "Please select your title.";
-        this.errors.push(this.error_title);
-      } else {
-        this.error_title = null;
-      }
-
-      if (!this.input.firstname.trim()) {
-        this.error_firstname = "Please fill your first name.";
-        this.errors.push(this.error_firstname);
-      } else {
-        this.error_firstname = null;
-      }
-
-      if (!this.input.lastname.trim()) {
-        this.error_lastname = "Please fill your last name.";
-        this.errors.push(this.error_lastname);
-      } else {
-        this.error_lastname = null;
-      }
-
-      if (!this.input.DOB) {
-        this.error_DOB = "Please select your Date of Birth.";
-        this.errors.push(this.error_DOB);
-      } else {
-        this.error_DOB = null;
-      }
-
-      if (!this.input.address.trim()) {
-        this.error_address = "Please fill your address.";
-        this.errors.push(this.error_address);
-      } else {
-        this.error_address = null;
-      }
-
-      if (!this.input.phone.trim()) {
-        this.error_phone = "Please fill your phone number.";
-        this.errors.push(this.error_phone);
-      } else {
-        this.errors.push(this.error_phone);
-      }
-
-      if (!this.input.height) {
-        this.error_height = "Please fill you height.";
-        this.errors.push(this.error_height);
-      } else if (isNaN(this.input.height)) {
-        this.error_height = "Please fill only number.";
-        this.errors.push(this.error_height);
-      } else {
-        this.error_height = null;
-      }
-
-      if (!this.input.weight) {
-        this.error_weight = "Please fill you weight.";
-        this.errors.push(this.error_weight);
-      } else if (isNaN(this.input.weight)) {
-        this.error_weight = "Please fill only number.";
-        this.errors.push(this.error_weight);
-      } else {
-        this.error_weight = null;
-      }
-
-      if (!this.edus.degree) {
-        this.error_degree = "Please select your degree.";
-        this.errors.push(this.error_degree);
-      } else {
         this.error_degree = null;
-      }
-
-      if (!this.edus.university) {
-        this.error_university = "Please enter your university.";
-        this.errors.push(this.error_university);
-      } else {
         this.error_university = null;
-      }
-
-      if (!this.edus.faculty) {
-        this.error_faculty = "Please enter your faculty.";
-        this.errors.push(this.error_faculty);
-      } else {
         this.error_faculty = null;
-      }
-
-      if (!this.edus.department) {
-        this.error_department = "Please enter your department.";
-        this.errors.push(this.error_department);
-      } else {
         this.error_department = null;
-      }
+        this.error_gpa = null; //
 
-      if (!this.edus.gpa) {
-        this.error_gpa = "Please enter your gpa.";
-        this.errors.push(this.error_gpa);
-      } else if (isNaN(this.edus.gpa)) {
-        this.error_gpa = "Please fill with number.";
-      } else {
-        this.error_gpa = null;
-      } // if (!this.edus) {
-      //     this.error_edus = "Please fill the detail.";
-      //     this.errors.push(this.error_edus);
-      // } else {
-      //     this.error_edus = null;
-      // }
+        var details = {
+          start_date: this.input.start_date,
+          salary: this.input.salary,
+          airport: this.input.airport.airport_id,
+          role: this.input.role.name,
+          status: this.input.status.value,
+          username: this.input.username,
+          password: this.input.password,
+          idcard: this.input.idcard,
+          gender: this.input.gender,
+          title: this.input.title.title,
+          firstname: this.input.firstname,
+          lastname: this.input.lastname,
+          DOB: this.input.DOB,
+          height: this.input.height,
+          weight: this.input.weight,
+          email: this.input.email,
+          address: this.input.address,
+          phone: this.input.phone
+        }; // data in detail
+
+        var educations = this.edus; // data in education
+
+        var diseases = this.diseases; // data in diseases
+
+        var data = {
+          details: details,
+          educations: educations,
+          diseases: diseases
+        };
+
+        if (!this.input.start_date) {
+          this.error_start_date = "Please select your start date.";
+          this.errors.push(this.error_start_date);
+        } else {
+          this.error_start_date = null;
+        }
+
+        if (!this.input.salary) {
+          this.error_salary = "Please fill the salary.";
+          this.errors.push(this.error_salary);
+        } else if (isNaN(this.input.salary)) {
+          this.error_salary = "Please fill only number.";
+          this.errors.push(this.error_salary);
+        } else {
+          this.error_salary = null;
+        }
+
+        if (!this.input.role) {
+          this.error_role = "Please select your role.";
+          this.errors.push(this.error_role);
+        } else {
+          this.error_role = null;
+        }
+
+        if (!this.input.status) {
+          this.error_status = "Please select your work status.";
+          this.errors.push(this.error_status);
+        } else {
+          this.error_status = null;
+        }
+
+        if (!this.input.username.trim()) {
+          this.error_username = "Please fill your username.";
+          this.errors.push(this.error_username);
+        } else {
+          this.error_username = null;
+        }
+
+        if (!this.input.password) {
+          this.error_password = "Please fill your password.";
+          this.errors.push(this.error_password);
+        } else if (this.input.password.length < 6) {
+          this.error_password = "Password has to be at least 6 characters long.";
+          this.errors.push(this.error_password);
+        } else {
+          this.error_password = null;
+        }
+
+        if (!this.input.idcard) {
+          this.error_idcard = "Please fill your id card.";
+          this.errors.push(this.error_idcard);
+        } else if (this.input.idcard.length != 13) {
+          this.error_idcard = "Password must be 13 characters.";
+          this.errors.push(this.error_idcard);
+        } else {
+          this.error_idcard = null;
+        }
+
+        if (!this.input.gender) {
+          this.error_gender = "Please select the gender.";
+          this.errors.push(this.error_gender);
+        } else {
+          this.error_gender = null;
+        }
+
+        if (!this.input.title.title) {
+          this.error_title = "Please select your title.";
+          this.errors.push(this.error_title);
+        } else {
+          this.error_title = null;
+        }
+
+        if (!this.input.firstname.trim()) {
+          this.error_firstname = "Please fill your first name.";
+          this.errors.push(this.error_firstname);
+        } else {
+          this.error_firstname = null;
+        }
+
+        if (!this.input.lastname.trim()) {
+          this.error_lastname = "Please fill your last name.";
+          this.errors.push(this.error_lastname);
+        } else {
+          this.error_lastname = null;
+        }
+
+        if (!this.input.DOB) {
+          this.error_DOB = "Please select your Date of Birth.";
+          this.errors.push(this.error_DOB);
+        } else {
+          this.error_DOB = null;
+        }
+
+        if (!this.input.address.trim()) {
+          this.error_address = "Please fill your address.";
+          this.errors.push(this.error_address);
+        } else {
+          this.error_address = null;
+        }
+
+        if (!this.input.phone.trim()) {
+          this.error_phone = "Please fill your phone number.";
+          this.errors.push(this.error_phone);
+        } else {
+          this.error_phone = null;
+        }
+
+        if (!this.input.height) {
+          this.error_height = "Please fill you height.";
+          this.errors.push(this.error_height);
+        } else if (isNaN(this.input.height)) {
+          this.error_height = "Please fill only number.";
+          this.errors.push(this.error_height);
+        } else {
+          this.error_height = null;
+        }
+
+        if (!this.input.weight) {
+          this.error_weight = "Please fill you weight.";
+          this.errors.push(this.error_weight);
+        } else if (isNaN(this.input.weight)) {
+          this.error_weight = "Please fill only number.";
+          this.errors.push(this.error_weight);
+        } else {
+          this.error_weight = null;
+        }
+
+        if (!this.edus[0].degree) {
+          this.error_degree = "Please select your degree.";
+          this.errors.push(this.error_degree);
+        } else {
+          this.error_degree = null;
+        }
+
+        if (!this.edus[0].university) {
+          this.error_university = "Please enter your university.";
+          this.errors.push(this.error_university);
+        } else {
+          this.error_university = null;
+        }
+
+        if (!this.edus[0].faculty) {
+          this.error_faculty = "Please enter your faculty.";
+          this.errors.push(this.error_faculty);
+        } else {
+          this.error_faculty = null;
+        }
+
+        if (!this.edus[0].department) {
+          this.error_department = "Please enter your department.";
+          this.errors.push(this.error_department);
+        } else {
+          this.error_department = null;
+        }
+
+        if (!this.edus[0].gpa) {
+          this.error_gpa = "Please enter your gpa.";
+          this.errors.push(this.error_gpa);
+        } else if (isNaN(this.edus[0].gpa)) {
+          this.error_gpa = "Please fill with number.";
+          this.errors.push(this.error_gpa);
+        } else {
+          this.error_gpa = null;
+        } // if (!this.edus) {
+        //     this.error_edus = "Please fill the detail.";
+        //     this.errors.push(this.error_edus);
+        // } else {
+        //     this.error_edus = null;
+        // }
 
 
-      if (!this.errors.length) {
-        axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/admin/addEmployee", data).then(function (response) {
-            swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.push("/adminHome");
+        if (!this.errors.length) {
+          this.isLoading = true;
+          axios.get("/sanctum/csrf-cookie").then(function (response) {
+            axios.post("/api/admin/addEmployee", data).then(function (response) {
+              swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+                _this2.$router.go({
+                  name: "adminHome"
+                });
+              });
             });
           });
-        });
-      } else {
-        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+        } else {
+          this.isLoading = false;
+          swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+        }
       }
     }
   }
@@ -4443,10 +4604,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "login",
   data: function data() {
     return {
+      isLoading: false,
       username: "",
       password: "",
       error_username: "",
@@ -4486,8 +4653,9 @@ __webpack_require__.r(__webpack_exports__);
           username: this.username,
           password: this.password
         };
+        this.isLoading = true;
         axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/login", data).then(function (response) {
+          axios.post("/api/user/login", data).then(function (response) {
             _this.customer = response.data;
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
               localStorage.setItem("isLoggedIn", "true");
@@ -4497,6 +4665,8 @@ __webpack_require__.r(__webpack_exports__);
               });
             });
           })["catch"](function (error) {
+            _this.isLoading = false;
+
             if (error.response.status === 401) {
               swal.fire("Could not log you in.", "Cilck the button to continue!", "error").then(function () {
                 _this.errors = [];
@@ -4675,10 +4845,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf", "oldName"],
   data: function data() {
     return {
+      isLoading: false,
       username: "",
       password: "",
       title: "",
@@ -4700,6 +4876,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this = this;
 
+      e.preventDefault();
       this.errors = [];
       this.error_name = null;
       this.error_surname = null;
@@ -4708,7 +4885,6 @@ __webpack_require__.r(__webpack_exports__);
       this.error_username = null;
       this.error_password = null;
       this.error_title = null;
-      e.preventDefault();
       var currentObj = this;
 
       if (!this.username.trim()) {
@@ -4764,7 +4940,10 @@ __webpack_require__.r(__webpack_exports__);
         this.error_email = null;
       }
 
+      console.log(this.errors);
+
       if (!this.errors.length) {
+        this.isLoading = true;
         var data = {
           username: this.username,
           password: this.password,
@@ -4775,8 +4954,9 @@ __webpack_require__.r(__webpack_exports__);
           email: this.email
         };
         axios.get("/sanctum/csrf-cookie").then(function (response) {
-          axios.post("/api/regis", data).then(function (response) {
+          axios.post("/api/user/regis", data).then(function (response) {
             if (response.data.errorU == 1) {
+              _this.isLoading = false;
               _this.username = "";
               _this.error_username = "This Username is already exist";
 
@@ -4784,6 +4964,7 @@ __webpack_require__.r(__webpack_exports__);
 
               _this.errors = [];
             } else if (response.data.errorE == 1) {
+              _this.isLoading = false;
               _this.email = "";
               _this.error_email = "This E-mail is already exist";
 
@@ -4801,6 +4982,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
       } else {
+        this.isLoading = false;
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
@@ -45285,13 +45467,42 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-primary btn-lg btn-block btn-login",
+                  attrs: { disabled: _vm.isLoading },
                   on: {
                     click: function($event) {
-                      return _vm.handleFormCilcked()
+                      $event.preventDefault()
+                      return _vm.handleFormCilcked($event)
                     }
                   }
                 },
-                [_vm._v("\n                    Add Aircraft\n                ")]
+                [
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isLoading,
+                          expression: "!isLoading"
+                        }
+                      ]
+                    },
+                    [_vm._v("Add Aircraft")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading"
+                      }
+                    ],
+                    staticClass: "fas fa-spinner fa-pulse"
+                  })
+                ]
               )
             ])
           ]
@@ -45540,12 +45751,41 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    on: { click: _vm.formSubmit }
+                    attrs: { disabled: _vm.isLoading },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.formSubmit($event)
+                      }
+                    }
                   },
                   [
-                    _vm._v(
-                      "\n                    Add Airport\n                "
-                    )
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isLoading,
+                            expression: "!isLoading"
+                          }
+                        ]
+                      },
+                      [_vm._v(" Add Airport")]
+                    ),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isLoading,
+                          expression: "isLoading"
+                        }
+                      ],
+                      staticClass: "fas fa-spinner fa-pulse"
+                    })
                   ]
                 )
               ])
@@ -45609,81 +45849,13 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c(
                       "span",
-                      { staticClass: "col-md-6 mb-2" },
-                      [
-                        _c("label", [_vm._v("Aircraft ID:")]),
-                        _vm._v(" "),
-                        _c("multiselect", {
-                          attrs: {
-                            options: _vm.aircrafts,
-                            searchable: true,
-                            multiple: false,
-                            "show-labels": false,
-                            "close-on-select": true,
-                            "clear-on-select": false,
-                            placeholder: "Choose",
-                            "preselect-first": false
-                          },
-                          model: {
-                            value: _vm.input.aircraftID,
-                            callback: function($$v) {
-                              _vm.$set(_vm.input, "aircraftID", $$v)
-                            },
-                            expression: "input.aircraftID"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                    Please choose\n                                "
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "col-md-6 mb-2" }, [
-                      _c("label", [_vm._v("Flight Number:")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.flightNo,
-                            expression: "input.flightNo"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.input.flightNo },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.input, "flightNo", $event.target.value)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    Please enter flight number\n                                "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c(
-                      "span",
                       { staticClass: "col-md-4 mb-2" },
                       [
                         _c("label", [_vm._v("Depart Location:")]),
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
+                            label: "name",
                             options: _vm.locations,
                             searchable: true,
                             multiple: false,
@@ -45793,6 +45965,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
+                            label: "name",
                             options: _vm.locations,
                             searchable: true,
                             multiple: false,
@@ -45893,11 +46066,83 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "span",
+                      { staticClass: "col-md-6 mb-2" },
+                      [
+                        _c("label", [_vm._v("Aircraft ID:")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          class: {
+                            active: true
+                          },
+                          attrs: {
+                            label: "name",
+                            options: _vm.aircrafts,
+                            searchable: true,
+                            multiple: false,
+                            "show-labels": false,
+                            "close-on-select": true,
+                            "clear-on-select": false,
+                            placeholder: "Choose",
+                            "preselect-first": false
+                          },
+                          model: {
+                            value: _vm.input.aircraftID,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "aircraftID", $$v)
+                            },
+                            expression: "input.aircraftID"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "static active",
+                          attrs: { id: "aircraft_info" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "col-md-6 mb-2" }, [
+                      _c("label", [_vm._v("Flight Number:")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.input.flightNo,
+                            expression: "input.flightNo"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.input.flightNo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.input, "flightNo", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                    Please enter flight number\n                                "
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
                   _c("hr", { staticClass: "mb-4" }),
                   _vm._v(" "),
                   _c("h5", { staticClass: "mb-3" }, [_vm._v("Crew Details")]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "row", attrs: { disabled: "" } }, [
                     _c("div", { staticClass: "col-md-6 mb-2" }, [
                       _c(
                         "div",
@@ -45907,15 +46152,14 @@ var render = function() {
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options,
+                              label: "name",
+                              options: _vm.options_pilot,
                               searchable: true,
                               multiple: false,
                               "close-on-select": true,
                               "clear-on-select": false,
                               "preserve-search": true,
                               placeholder: "Choose",
-                              label: "name",
-                              "custom-label": _vm.nameWithId,
                               "track-by": "name",
                               "preselect-first": false
                             },
@@ -45946,7 +46190,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("multiselect", {
                           attrs: {
-                            options: _vm.options,
+                            options: _vm.options_pilot,
                             searchable: true,
                             multiple: false,
                             "close-on-select": true,
@@ -45954,7 +46198,6 @@ var render = function() {
                             "preserve-search": true,
                             placeholder: "Choose",
                             label: "name",
-                            "custom-label": _vm.nameWithId,
                             "preselect-first": false
                           },
                           model: {
@@ -45982,11 +46225,11 @@ var render = function() {
                         "div",
                         { staticClass: "form-group" },
                         [
-                          _c("label", [_vm._v("Avaliable flight adtendant")]),
+                          _c("label", [_vm._v("Avaliable Flight Adttendant")]),
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options,
+                              options: _vm.options_attendant,
                               searchable: true,
                               multiple: true,
                               "close-on-select": false,
@@ -45994,7 +46237,6 @@ var render = function() {
                               "preserve-search": true,
                               placeholder: "Choose",
                               label: "name",
-                              "custom-label": _vm.nameWithId,
                               "track-by": "name",
                               "preselect-first": false,
                               max: 6
@@ -46054,9 +46296,36 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                  attrs: { type: "submit" }
+                  attrs: { type: "submit", disabled: _vm.isLoading }
                 },
-                [_vm._v("\n                    Add Flight\n                ")]
+                [
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isLoading,
+                          expression: "!isLoading"
+                        }
+                      ]
+                    },
+                    [_vm._v(" Add Flight")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading"
+                      }
+                    ],
+                    staticClass: "fas fa-spinner fa-pulse"
+                  })
+                ]
               )
             ])
           ]
@@ -46299,12 +46568,39 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-block btn-login",
-                      attrs: { id: "btnLogin", type: "submiit" }
+                      attrs: {
+                        id: "btnLogin",
+                        type: "submiit",
+                        disabled: _vm.isLoading
+                      }
                     },
                     [
-                      _vm._v(
-                        "\n                            Sign in\n                        "
-                      )
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.isLoading,
+                              expression: "!isLoading"
+                            }
+                          ]
+                        },
+                        [_vm._v("Sign in")]
+                      ),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isLoading,
+                            expression: "isLoading"
+                          }
+                        ],
+                        staticClass: "fas fa-spinner fa-pulse"
+                      })
                     ]
                   ),
                   _vm._v(" "),
@@ -46312,8 +46608,13 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-block btn-login",
-                      attrs: { id: "btnLogin2" },
-                      on: { click: _vm.home }
+                      attrs: { disabled: _vm.isLoading, id: "btnLogin2" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.home($event)
+                        }
+                      }
                     },
                     [
                       _vm._v(
@@ -46404,7 +46705,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "newEmployee" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "human_resource" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "newEmployee" } }
+                        },
                         [
                           _c("i", { staticClass: "far fa-address-card" }),
                           _vm._v(" "),
@@ -46420,7 +46736,52 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addFlight" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "staff" || _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'staff' || role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "customerCRUD" } }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-user-edit" }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Manage Customer")])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addFlight" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-plane-departure" }),
                           _vm._v(" "),
@@ -46436,7 +46797,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addAircraft" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addAircraft" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-plane" }),
                           _vm._v(" "),
@@ -46452,7 +46828,22 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "addAirport" } } },
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value:
+                                _vm.role === "flight_manager" ||
+                                _vm.role === "admin"
+                                  ? true
+                                  : false,
+                              expression:
+                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                            }
+                          ],
+                          attrs: { to: { name: "addAirport" } }
+                        },
                         [
                           _c("i", { staticClass: "fas fa-map-marked-alt" }),
                           _vm._v(" "),
@@ -46484,12 +46875,44 @@ var render = function() {
                         {
                           staticClass: "btn btn-block",
                           attrs: { id: "btnLogout" },
-                          on: { click: _vm.logout }
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.logout($event)
+                            }
+                          }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-power-off" }),
+                          _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !_vm.isLoading,
+                                  expression: "!isLoading"
+                                }
+                              ]
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-power-off" }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Logout")])
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Logout")])
+                          _c("i", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isLoading,
+                                expression: "isLoading"
+                              }
+                            ],
+                            staticClass: "fas fa-spinner fa-pulse"
+                          })
                         ]
                       )
                     ]
@@ -46705,7 +47128,11 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.error_start_date))
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.error_start_date) +
+                              "\n                                "
+                          )
                         ])
                       ])
                     ]),
@@ -47121,11 +47548,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.error_gender) +
-                            "\n                            "
-                        )
+                        _vm._v(_vm._s(_vm.error_gender))
                       ])
                     ])
                   ]),
@@ -47207,11 +47630,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.error_firstname) +
-                            "\n                            "
-                        )
+                        _vm._v(_vm._s(_vm.error_firstname))
                       ])
                     ]),
                     _vm._v(" "),
@@ -47244,11 +47663,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.error_lastname) +
-                            "\n                            "
-                        )
+                        _vm._v(_vm._s(_vm.error_lastname))
                       ])
                     ])
                   ]),
@@ -47994,10 +48409,42 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { type: "submit" },
-                    on: { click: _vm.formSubmit }
+                    attrs: { type: "submit", disabled: _vm.isLoading },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.formSubmit($event)
+                      }
+                    }
                   },
-                  [_vm._v("\n                    Register\n                ")]
+                  [
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isLoading,
+                            expression: "!isLoading"
+                          }
+                        ]
+                      },
+                      [_vm._v("Register")]
+                    ),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isLoading,
+                          expression: "isLoading"
+                        }
+                      ],
+                      staticClass: "fas fa-spinner fa-pulse"
+                    })
+                  ]
                 )
               ],
               2
@@ -48291,31 +48738,50 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0)
+            _c("div", { staticClass: "card-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-block btn-login",
+                  attrs: { type: "submiit", disabled: _vm.isLoading }
+                },
+                [
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isLoading,
+                          expression: "!isLoading"
+                        }
+                      ]
+                    },
+                    [_vm._v("Sign in")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading"
+                      }
+                    ],
+                    staticClass: "fas fa-spinner fa-pulse"
+                  })
+                ]
+              )
+            ])
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-block btn-login", attrs: { type: "submiit" } },
-        [
-          _vm._v(
-            "\n                            Sign in\n                        "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -48619,7 +49085,43 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "card-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-block btn-login",
+                    attrs: { type: "submit", disabled: _vm.isLoading }
+                  },
+                  [
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isLoading,
+                            expression: "!isLoading"
+                          }
+                        ]
+                      },
+                      [_vm._v(" Sign up")]
+                    ),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isLoading,
+                          expression: "isLoading"
+                        }
+                      ],
+                      staticClass: "fas fa-spinner fa-pulse"
+                    })
+                  ]
+                )
+              ])
             ])
           ])
         ])
@@ -48627,24 +49129,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-block btn-login", attrs: { type: "submit" } },
-        [
-          _vm._v(
-            "\n                            Sign up\n                        "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
