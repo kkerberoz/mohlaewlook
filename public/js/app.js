@@ -5435,91 +5435,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -10105,7 +10020,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-header {\n    background-color: #f85e09;\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.card-header {\n  background-color: #f85e09;\n  display: block;\n}\n", ""]);
 
 // exports
 
@@ -49202,11 +49117,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49241,11 +49152,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49282,11 +49189,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ])
@@ -49329,11 +49232,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49370,11 +49269,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49413,11 +49308,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49454,11 +49345,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ])
@@ -49469,7 +49356,7 @@ var render = function() {
                 _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-2" }),
+                  _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-1" }, [
                     _c("span", { staticClass: "form-group" }, [
@@ -49527,16 +49414,12 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_title) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_title))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Name :")]),
                       _vm._v(" "),
@@ -49566,16 +49449,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_name) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_name))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Surname :")]),
                       _vm._v(" "),
@@ -49605,11 +49484,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_surname) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_surname))
                       ])
                     ])
                   ]),
@@ -49650,11 +49525,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49674,11 +49545,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ])
@@ -49700,11 +49567,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49724,11 +49587,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ])
@@ -49739,7 +49598,7 @@ var render = function() {
                 _vm._m(6),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-2" }),
+                  _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-1" }, [
                     _c("span", { staticClass: "form-group" }, [
@@ -49797,16 +49656,12 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_title) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_title))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Name :")]),
                       _vm._v(" "),
@@ -49836,16 +49691,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_name) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_name))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Surname :")]),
                       _vm._v(" "),
@@ -49875,11 +49726,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_surname) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_surname))
                       ])
                     ])
                   ]),
@@ -49920,11 +49767,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49948,11 +49791,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ])
@@ -49974,11 +49813,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
@@ -49998,11 +49833,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ])
@@ -50026,7 +49857,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                ")
+      _vm._v("From :\n                ")
     ])
   },
   function() {
@@ -50035,7 +49866,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To : ")
+      _vm._v("To :\n                ")
     ])
   },
   function() {
@@ -50044,7 +49875,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                ")
+      _vm._v("From :\n                ")
     ])
   },
   function() {
@@ -50053,7 +49884,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To : ")
+      _vm._v("To :\n                ")
     ])
   },
   function() {
@@ -50065,7 +49896,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-2" }, [
         _c("br"),
-        _vm._v("Passenger 1 :")
+        _vm._v("Passenger 1 :\n            ")
       ])
     ])
   },
@@ -50073,7 +49904,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
+    return _c("div", { staticClass: "col-md-3" }, [
       _c("span", { staticClass: "form-group" }, [
         _c(
           "label",
@@ -50095,9 +49926,7 @@ var staticRenderFns = [
                   value: "Male"
                 }
               }),
-              _vm._v(
-                "\n                                        Male\n                                    "
-              )
+              _vm._v("\n                    Male\n                  ")
             ]
           ),
           _vm._v(" "),
@@ -50113,9 +49942,7 @@ var staticRenderFns = [
                   value: "Female"
                 }
               }),
-              _vm._v(
-                "\n                                        Female\n                                    "
-              )
+              _vm._v("\n                    Female\n                  ")
             ]
           )
         ])
@@ -50131,7 +49958,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-2" }, [
         _c("br"),
-        _vm._v("Passenger 2 :")
+        _vm._v("Passenger 2 :\n            ")
       ])
     ])
   },
@@ -50161,9 +49988,7 @@ var staticRenderFns = [
                   value: "Male"
                 }
               }),
-              _vm._v(
-                "\n                                        Male\n                                    "
-              )
+              _vm._v("\n                    Male\n                  ")
             ]
           ),
           _vm._v(" "),
@@ -50179,9 +50004,7 @@ var staticRenderFns = [
                   value: "Female"
                 }
               }),
-              _vm._v(
-                "\n                                        Female\n                                    "
-              )
+              _vm._v("\n                    Female\n                  ")
             ]
           )
         ])
@@ -50199,7 +50022,7 @@ var staticRenderFns = [
           staticClass: "btn btn-block btn-outline-primary",
           attrs: { type: "button" }
         },
-        [_vm._v("\n                        Next\n                    ")]
+        [_vm._v("Next")]
       )
     ])
   }
