@@ -4234,6 +4234,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< Updated upstream
 //
 //
 //
@@ -4331,6 +4332,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+=======
+>>>>>>> Stashed changes
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
@@ -47435,11 +47438,7 @@ var render = function() {
                   _c(
                     "h1",
                     { staticClass: "mb-3", staticStyle: { display: "block" } },
-                    [
-                      _vm._v(
-                        "\n                    Employee's Register\n                "
-                      )
-                    ]
+                    [_vm._v("Employee's Register")]
                   ),
                   _vm._v(" "),
                   _c("hr", { staticClass: "mb-4" }),
@@ -47482,11 +47481,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("span", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.error_start_date) +
-                                "\n                                "
-                            )
+                            _vm._v(_vm._s(_vm.error_start_date))
                           ])
                         ])
                       ]),
@@ -47520,11 +47515,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.error_salary) +
-                              "\n                            "
-                          )
+                          _vm._v(_vm._s(_vm.error_salary))
                         ])
                       ]),
                       _vm._v(" "),
@@ -47560,11 +47551,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(_vm.error_role) +
-                                "\n                            "
-                            )
+                            _vm._v(_vm._s(_vm.error_role))
                           ])
                         ],
                         1
@@ -47633,11 +47620,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(_vm.error_status) +
-                                "\n                            "
-                            )
+                            _vm._v(_vm._s(_vm.error_status))
                           ])
                         ],
                         1
@@ -47690,13 +47673,7 @@ var render = function() {
                               staticClass: "invalid-feedback",
                               staticStyle: { width: "100%" }
                             },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm.error_username) +
-                                  "\n                                "
-                              )
-                            ]
+                            [_vm._v(_vm._s(_vm.error_username))]
                           )
                         ])
                       ]),
@@ -47734,11 +47711,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.error_password) +
-                              "\n                            "
-                          )
+                          _vm._v(_vm._s(_vm.error_password))
                         ])
                       ])
                     ]),
@@ -47778,11 +47751,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.error_idcard) +
-                                "\n                                "
-                            )
+                            _vm._v(_vm._s(_vm.error_idcard))
                           ])
                         ])
                       ]),
@@ -47910,7 +47879,11 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.error_gender))
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.error_gender) +
+                              "\n              "
+                          )
                         ])
                       ])
                     ]),
@@ -47949,11 +47922,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(_vm.error_title) +
-                                "\n                            "
-                            )
+                            _vm._v(_vm._s(_vm.error_title))
                           ])
                         ],
                         1
@@ -47992,7 +47961,11 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.error_firstname))
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.error_firstname) +
+                              "\n              "
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -48029,7 +48002,11 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.error_lastname))
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.error_lastname) +
+                              "\n              "
+                          )
                         ])
                       ])
                     ]),
@@ -48064,11 +48041,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.error_DOB) +
-                              "\n                            "
-                          )
+                          _vm._v(_vm._s(_vm.error_DOB))
                         ])
                       ]),
                       _vm._v(" "),
@@ -48106,11 +48079,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.error_height) +
-                                "\n                                "
-                            )
+                            _vm._v(_vm._s(_vm.error_height))
                           ])
                         ])
                       ]),
@@ -48149,11 +48118,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.error_weight) +
-                                "\n                                "
-                            )
+                            _vm._v(_vm._s(_vm.error_weight))
                           ])
                         ])
                       ])
@@ -48221,11 +48186,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.error_phone) +
-                              "\n                            "
-                          )
+                          _vm._v(_vm._s(_vm.error_phone))
                         ])
                       ])
                     ]),
@@ -48265,11 +48226,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.error_address) +
-                                "\n                                "
-                            )
+                            _vm._v(_vm._s(_vm.error_address))
                           ])
                         ])
                       ])
@@ -48318,9 +48275,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                        Educations " +
-                                _vm._s(Number(counter) + 1) +
-                                " :\n                    "
+                              "Educations " + _vm._s(Number(counter) + 1) + " :"
                             )
                           ]
                         ),
@@ -48356,11 +48311,7 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(_vm.error_degree) +
-                                    "\n                            "
-                                )
+                                _vm._v(_vm._s(_vm.error_degree))
                               ])
                             ],
                             1
@@ -48401,11 +48352,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.error_university) +
-                                  "\n                            "
-                              )
+                              _vm._v(_vm._s(_vm.error_university))
                             ])
                           ])
                         ]),
@@ -48440,11 +48387,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.error_faculty) +
-                                  "\n                            "
-                              )
+                              _vm._v(_vm._s(_vm.error_faculty))
                             ])
                           ]),
                           _vm._v(" "),
@@ -48481,11 +48424,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.error_department) +
-                                  "\n                            "
-                              )
+                              _vm._v(_vm._s(_vm.error_department))
                             ])
                           ]),
                           _vm._v(" "),
@@ -48518,11 +48457,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.error_gpa) +
-                                  "\n                            "
-                              )
+                              _vm._v(_vm._s(_vm.error_gpa))
                             ])
                           ])
                         ]),
@@ -48554,7 +48489,7 @@ var render = function() {
                                 value:
                                   counter || (!counter && _vm.edus.length > 1),
                                 expression:
-                                  "\n                                counter || (!counter && edus.length > 1)\n                            "
+                                  "\n                                  counter || (!counter && edus.length > 1)\n                              "
                               }
                             ],
                             staticClass: "fas fa-minus-circle",
@@ -48660,9 +48595,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                            Disease info " +
+                                    "Disease info " +
                                       _vm._s(Number(k) + 1) +
-                                      " :\n                        "
+                                      " :"
                                   )
                                 ]
                               ),
@@ -48701,11 +48636,7 @@ var render = function() {
                                     _c(
                                       "div",
                                       { staticClass: "invalid-feedback" },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Please enter\n                                    "
-                                        )
-                                      ]
+                                      [_vm._v("Please enter")]
                                     )
                                   ])
                                 ]),
@@ -48742,11 +48673,7 @@ var render = function() {
                                   _c(
                                     "div",
                                     { staticClass: "invalid-feedback" },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Please enter\n                                "
-                                      )
-                                    ]
+                                    [_vm._v("Please enter")]
                                   )
                                 ])
                               ]),
@@ -66977,8 +66904,13 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< Updated upstream
 __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> Stashed changes
 
 
 /***/ })
