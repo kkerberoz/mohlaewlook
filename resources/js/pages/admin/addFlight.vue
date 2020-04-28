@@ -263,7 +263,7 @@ export default {
             date_check: null,
             time_check: null,
             location_check: null,
-            both_check: null,
+            all_check: null,
             aircraft_array_info: []
         };
     },
@@ -302,24 +302,26 @@ export default {
             this.input.departLocation == null ||
             this.input.departDate == null ||
             this.input.departTime == null
-        )
-            this.both_check = false;
+        ){
+            this.aircrafts = [];
+            this.options_pilot = [];
+            this.options_attendant = [];
+            this.location_check = this.input.departLocation;
+            this.all_check = false;
+        }
         else if (
             this.input.departLocation != null &&
             this.input.departDate != null &&
             this.input.departTime != null
         )
-            this.both_check = true;
+            this.all_check = true;
         // for query when all are selected.
         if (
-            this.both_check &&
+            this.all_check &&
             (this.input.departLocation != this.location_check ||
                 this.input.departDate != this.date_check ||
                 this.input.departTime != this.time_check)
         ) {
-            this.aircrafts = [];
-            this.options_pilot = [];
-            this.options_attendant = [];
             this.location_check = this.input.departLocation;
             this.date_check = this.input.departDate;
             this.time_check = this.input.departTime;
@@ -330,7 +332,7 @@ export default {
                     time: this.input.departTime
                 })
                 .then(response => {
-                    // console.log(response.data);
+                    console.log(response.data);
                     var aircraft = response.data.Aircraft;
                     var aircraft_brand = response.data.Aircraft_Brand;
                     var aircraft_model = response.data.Aircraft_Model;
@@ -341,6 +343,9 @@ export default {
                     var other_model = response.data.Other_Model;
                     this.input.aircraftID = null; // clear aircraft id
                     document.getElementById("aircraft_info").innerHTML = null;
+                    this.aircrafts = [];
+                    this.options_pilot = [];
+                    this.options_attendant = [];
                     for (var i = 0; i < aircraft.length; ++i) {
                         this.aircrafts.push({
                             value: aircraft[i]["aircraft_id"],

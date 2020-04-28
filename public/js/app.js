@@ -3134,7 +3134,7 @@ __webpack_require__.r(__webpack_exports__);
       date_check: null,
       time_check: null,
       location_check: null,
-      both_check: null,
+      all_check: null,
       aircraft_array_info: []
     };
   },
@@ -3171,12 +3171,16 @@ __webpack_require__.r(__webpack_exports__);
     //     // });
     // }
     // for check depart location, depart date and depart time are selected.
-    if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) this.both_check = false;else if (this.input.departLocation != null && this.input.departDate != null && this.input.departTime != null) this.both_check = true; // for query when all are selected.
-
-    if (this.both_check && (this.input.departLocation != this.location_check || this.input.departDate != this.date_check || this.input.departTime != this.time_check)) {
+    if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
       this.aircrafts = [];
       this.options_pilot = [];
       this.options_attendant = [];
+      this.location_check = this.input.departLocation;
+      this.all_check = false;
+    } else if (this.input.departLocation != null && this.input.departDate != null && this.input.departTime != null) this.all_check = true; // for query when all are selected.
+
+
+    if (this.all_check && (this.input.departLocation != this.location_check || this.input.departDate != this.date_check || this.input.departTime != this.time_check)) {
       this.location_check = this.input.departLocation;
       this.date_check = this.input.departDate;
       this.time_check = this.input.departTime;
@@ -3185,7 +3189,7 @@ __webpack_require__.r(__webpack_exports__);
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
-        // console.log(response.data);
+        console.log(response.data);
         var aircraft = response.data.Aircraft;
         var aircraft_brand = response.data.Aircraft_Brand;
         var aircraft_model = response.data.Aircraft_Model;
@@ -3197,6 +3201,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.input.aircraftID = null; // clear aircraft id
 
         document.getElementById("aircraft_info").innerHTML = null;
+        _this2.aircrafts = [];
+        _this2.options_pilot = [];
+        _this2.options_attendant = [];
 
         for (var i = 0; i < aircraft.length; ++i) {
           _this2.aircrafts.push({
@@ -5326,98 +5333,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -10453,7 +10368,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    background-color: #55c5d1;\n}\n.card-header {\r\n    background-color: #ffd57e;\r\n    display: block;\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\r\n  background-color: #55c5d1;\n}\n.card-header {\r\n  background-color: #ffd57e;\r\n  display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -49683,9 +49598,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-2" }),
+                  _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Depart Date :")]),
                       _vm._v(" "),
@@ -49719,16 +49634,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_departDate) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_departDate))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Return Date :")]),
                       _vm._v(" "),
@@ -49762,18 +49673,14 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_returnDate) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_returnDate))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("No. of Passenger :")]),
                       _vm._v(" "),
@@ -49803,11 +49710,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_noPass) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_noPass))
                       ])
                     ])
                   ])
@@ -49816,9 +49719,7 @@ var render = function() {
                 _c("hr", { staticClass: "mb-4" }),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Flight No :")]),
                       _vm._v(" "),
@@ -49854,16 +49755,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightFrom) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightFrom))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")]),
                       _vm._v(" "),
@@ -49895,18 +49792,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightTo) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightTo))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Flight No :")]),
                       _vm._v(" "),
@@ -49942,16 +49833,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightFrom2) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightFrom2))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")]),
                       _vm._v(" "),
@@ -49987,11 +49874,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_flightTo2) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_flightTo2))
                       ])
                     ])
                   ])
@@ -50002,7 +49885,7 @@ var render = function() {
                 _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-2" }),
+                  _c("div", { staticClass: "col-md-1" }),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-1" }, [
                     _c("span", { staticClass: "form-group" }, [
@@ -50063,16 +49946,12 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_title) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_title))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Name :")]),
                       _vm._v(" "),
@@ -50102,16 +49981,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_name) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_name))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Surname :")]),
                       _vm._v(" "),
@@ -50145,16 +50020,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_surname) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_surname))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c(
                         "label",
@@ -50201,7 +50072,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                            Male\n                                        "
+                              "\n                      Male\n                    "
                             )
                           ]
                         ),
@@ -50241,7 +50112,47 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                            Female\n                                        "
+                              "\n                      Female\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "radio-inline",
+                            attrs: { for: "radios-2" }
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.passenger.gender,
+                                  expression: "passenger.gender"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                id: "radios-1",
+                                value: "Other"
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.passenger.gender, "Other")
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.passenger,
+                                    "gender",
+                                    "Other"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                      Other\n                    "
                             )
                           ]
                         )
@@ -50253,7 +50164,7 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-2" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Date of Birth :")]),
                       _vm._v(" "),
@@ -50283,18 +50194,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_DOB) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_DOB))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Nationality :")]),
                       _vm._v(" "),
@@ -50328,11 +50233,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_national) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_national))
                       ])
                     ])
                   ])
@@ -50341,7 +50242,7 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-2" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("ID card :")]),
                       _vm._v(" "),
@@ -50375,18 +50276,12 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_idcard) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_idcard))
                       ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
                     _c("span", { staticClass: "form-group" }, [
                       _c("label", [_vm._v("Passport :")]),
                       _vm._v(" "),
@@ -50420,11 +50315,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_passport) +
-                            "\n                                    "
-                        )
+                        _vm._v(_vm._s(_vm.error_passport))
                       ])
                     ])
                   ])
@@ -50458,7 +50349,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                    ")
+      _vm._v("From :\n                  ")
     ])
   },
   function() {
@@ -50467,7 +50358,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To :\n                                    ")
+      _vm._v("To :\n                  ")
     ])
   },
   function() {
@@ -50476,7 +50367,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                    ")
+      _vm._v("From :\n                  ")
     ])
   },
   function() {
@@ -50485,7 +50376,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To :\n                                    ")
+      _vm._v("To :\n                  ")
     ])
   },
   function() {
@@ -50497,7 +50388,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-2" }, [
         _c("br"),
-        _vm._v("Passenger 1 :")
+        _vm._v("Passenger 1 :\n              ")
       ])
     ])
   },
@@ -50510,7 +50401,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-2" }, [
         _c("br"),
-        _vm._v("Passenger 2 :")
+        _vm._v("Passenger 2 :\n              ")
       ])
     ])
   },
@@ -50590,9 +50481,7 @@ var staticRenderFns = [
                     value: "Male"
                   }
                 }),
-                _vm._v(
-                  "\n                                            Male\n                                        "
-                )
+                _vm._v("\n                      Male\n                    ")
               ]
             ),
             _vm._v(" "),
@@ -50608,9 +50497,7 @@ var staticRenderFns = [
                     value: "Female"
                   }
                 }),
-                _vm._v(
-                  "\n                                            Female\n                                        "
-                )
+                _vm._v("\n                      Female\n                    ")
               ]
             )
           ])
@@ -50698,7 +50585,7 @@ var staticRenderFns = [
           staticClass: "btn btn-block btn-outline-primary",
           attrs: { type: "button" }
         },
-        [_vm._v("\n                            Next\n                        ")]
+        [_vm._v("Next")]
       )
     ])
   }
