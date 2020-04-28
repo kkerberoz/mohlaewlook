@@ -493,9 +493,10 @@ export default {
 .card-header {
     border: none;
     border-radius: 0;
-    background-color: #f8d49b;
+    background-color: #f79c65;
     display: block;
 }
+/* #f8d49b */
 #card-reservation {
     border: none;
     border-radius: 0;
