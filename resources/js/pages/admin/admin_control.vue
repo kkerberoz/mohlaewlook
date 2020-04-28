@@ -45,6 +45,18 @@
                             <li class="header-menu">
                                 <span>Menu</span>
                             </li>
+                            <li>
+                                <router-link to="/">
+                                    <i class="fas fa-home"></i>
+                                    <span>Homepage</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'adminHome' }">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </router-link>
+                            </li>
 
                             <li>
                                 <!-- <a
@@ -126,13 +138,6 @@
                                 </router-link>
                             </li>
 
-                            <li>
-                                <router-link to="/">
-                                    <i class="fas fa-home"></i>
-                                    <span>Homepage</span>
-                                </router-link>
-                            </li>
-
                             <li style="margin-top:50px; padding:10px">
                                 <div
                                     id="btnLogout"
@@ -179,6 +184,7 @@ export default {
             }
         };
     },
+
     mounted() {
         axios
             .get("/api/admin/init")

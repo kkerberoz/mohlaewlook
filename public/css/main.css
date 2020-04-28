@@ -86,13 +86,13 @@ body {
 }
 
 #footers {
-    background-color: #6cb2eb;
+    background-color: #f79c65;
     align-items: center;
     display: flex;
     justify-content: center;
     color: #fff;
 }
-
+/* #6cb2eb */
 nav {
     margin: 0;
     padding: 0;
