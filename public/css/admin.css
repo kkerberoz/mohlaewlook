@@ -1346,10 +1346,10 @@ body {
 .router-link-exact-active {
     opacity: 1;
     visibility: visible;
-
-    margin: 10px;
+    border-color: #fff;
+    margin: 7px;
     transition: all 0.25s;
-
-    /* background-color: #e65a55;
-    padding: 20px; */
+    /*
+    background-color: #e65a55; */
+    padding: 7px;
 }
