@@ -53,17 +53,19 @@ body {
 
 .btn-login {
     color: #fff;
-    background-color: #6cb2eb;
-    border-radius: 5px;
+    background-color: #f79c65;
+    border-radius: 0;
+    border: none;
     border-color: #636b6f;
     font-size: 16px;
 }
 .btn-login:hover {
     color: #fff;
     transition: 0.3s;
-    border-radius: 5px;
+    border: none;
+    border-radius: 0;
     font-size: 20px;
-    background-color: #339bf0;
+    background-color: #f87a2b;
 }
 .card-header {
     font-size: 30px;
@@ -86,13 +88,15 @@ body {
 }
 
 #footers {
-    background-color: #f79c65;
+    background-color: #3b84c4;
     align-items: center;
     display: flex;
     justify-content: center;
     color: #fff;
 }
-/* #6cb2eb */
+/* #6cb2eb
+#f79c65
+*/
 nav {
     margin: 0;
     padding: 0;
