@@ -10,7 +10,11 @@
                         <div class="card-header" id="card-reservation">
                             Reservation
                         </div>
-                        <div class="card-body" id="card-reservation">
+                        <div
+                            class="card-body"
+                            id="card-reservation"
+                            v-show="changePage"
+                        >
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
@@ -370,14 +374,40 @@
                             </div>
                         </div>
 
+                        <!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 -->
+
+                        <div
+                            class="card-body"
+                            id="card-reservation"
+                            v-show="!changePage"
+                        >
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Mohalewlook
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-footer flex-center">
                             <button
+                                v-show="changePage"
                                 style="color:#fff"
                                 id="card-reservation"
                                 type="button"
+                                @click="changePage = !changePage"
                                 class="btn btn-block btn-login"
                             >
                                 Next
+                            </button>
+                            <button
+                                v-show="!changePage"
+                                style="color:#fff"
+                                id="card-reservation"
+                                type="button"
+                                @click="changePage = !changePage"
+                                class="btn btn-block btn-success"
+                            >
+                                Back
                             </button>
                         </div>
                     </div>
@@ -393,6 +423,7 @@ export default {
     components: { Multiselect },
     data() {
         return {
+            changePage: true,
             counter: "",
             titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
 

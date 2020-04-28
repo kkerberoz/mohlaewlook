@@ -5712,6 +5712,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -5719,6 +5749,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      changePage: true,
       counter: "",
       titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
       input: {
@@ -10378,11 +10409,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-<<<<<<< HEAD
-exports.push([module.i, "\n.reservation {\r\n  background-color: #55c5d1;\n}\n.card-header {\r\n  background-color: #ffd57e;\r\n  display: block;\n}\r\n", ""]);
-=======
 exports.push([module.i, "\n.reservation {\n    background-color: #4bb4de;\n}\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f8d49b;\n    display: block;\n}\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
->>>>>>> 4b1901a088b3608a2b067fc0b1c997d41e935e27
 
 // exports
 
@@ -49626,6 +49653,14 @@ var render = function() {
                   _c(
                     "div",
                     {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.changePage,
+                          expression: "changePage"
+                        }
+                      ],
                       staticClass: "card-body",
                       attrs: { id: "card-reservation" }
                     },
@@ -50463,7 +50498,78 @@ var render = function() {
                     2
                   ),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.changePage,
+                          expression: "!changePage"
+                        }
+                      ],
+                      staticClass: "card-body",
+                      attrs: { id: "card-reservation" }
+                    },
+                    [_vm._m(6)]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-footer flex-center" }, [
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.changePage,
+                            expression: "changePage"
+                          }
+                        ],
+                        staticClass: "btn btn-block btn-login",
+                        staticStyle: { color: "#fff" },
+                        attrs: { id: "card-reservation", type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.changePage = !_vm.changePage
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Next\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.changePage,
+                            expression: "!changePage"
+                          }
+                        ],
+                        staticClass: "btn btn-block btn-success",
+                        staticStyle: { color: "#fff" },
+                        attrs: { id: "card-reservation", type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.changePage = !_vm.changePage
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Back\n                        "
+                        )
+                      ]
+                    )
+                  ])
                 ]
               )
             ])
@@ -50538,16 +50644,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer flex-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-block btn-login",
-          staticStyle: { color: "#fff" },
-          attrs: { id: "card-reservation", type: "button" }
-        },
-        [_vm._v("\n                            Next\n                        ")]
-      )
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _vm._v(
+          "\n                                Mohalewlook\n                            "
+        )
+      ])
     ])
   }
 ]
@@ -67035,13 +67137,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
 __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 4b1901a088b3608a2b067fc0b1c997d41e935e27
 
 
 /***/ })
