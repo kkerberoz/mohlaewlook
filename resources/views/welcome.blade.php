@@ -19,18 +19,21 @@
 
     </head>
     <body>
-        <div id="app">
-            <header  v-show="$route.path==='/' || $route.path==='/login' || $route.path==='/register' ||$route.path==='/info'||$route.path==='/reservation'? true:false">
-                <navbar :links="navbarlinks" ></navbar>
-            </header>
+        <section class="section">
+            <div id="app">
+                <header  v-show="$route.path==='/' || $route.path==='/login' || $route.path==='/register' ||$route.path==='/info'||$route.path==='/reservation'? true:false">
+                    <navbar :links="navbarlinks" ></navbar>
+                </header>
 
+                <router-view csrf="{{csrf_token()}}" ></router-view>
 
-            <router-view csrf="{{csrf_token()}}" ></router-view>
-            <footer v-show="$route.path==='/' || $route.path==='/login' || $route.path==='/register' ||$route.path==='/info'||$route.path==='/reservation' ? true:false">
-                <app-footer :links ="footerlinks"></app-footer>
-            </footer>
+                <footer v-show="$route.path==='/' || $route.path==='/login' || $route.path==='/register' ||$route.path==='/info'||$route.path==='/reservation' ? true:false">
+                    <app-footer :links ="footerlinks"></app-footer>
+                </footer>
 
-        </div>
+            </div>
+        </section>
+
     </body>
 
     <script src="{{ asset('js/app.js') }}"></script>

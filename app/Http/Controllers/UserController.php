@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function getCustomer()
+    {
+        $customer = Customer::all();
+        return response()->json($customer);
+    }
 
     public function login(Request $request)
     {

@@ -7,6 +7,7 @@ use App\Aircraft_brand;
 use App\Aircraft_model;
 use App\Airport;
 use App\Employee;
+use App\Customer;
 use App\Work_schedule;
 use App\Flight;
 use Illuminate\Http\Request;
