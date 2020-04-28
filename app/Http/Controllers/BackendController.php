@@ -23,16 +23,28 @@ class BackendController extends Controller
 
     public function getAircraftAndCrew(Request $request)
     {
+        // Get Aircraft
         $initial_location = "BKK";
         $location = $request->location;
+        $date = $request->date;
         $datetime = $request->date . " " . $request->time;
         $All_Aircraft = Aircraft::all();
         $Flight_Filter = [];
-        foreach ($All_Aircraft as $aircraft) {
+        foreach ($All_Aircraft as $aircraft) { // check location of each aircraft
             $Flight = Flight::select('*')->orderBy('depart_datetime', 'desc')->where('arrive_datetime', '>', $datetime)->where('depart_datetime', '<', $datetime)->where('aircraft_id', $aircraft['aircraft_id'])->first();
             if (!isset($Flight)) {
                 $Flight = Flight::select('*')->orderBy('depart_datetime', 'desc')->where('arrive_datetime', '<', $datetime)->where('aircraft_id', $aircraft['aircraft_id'])->first();
                 if (!strcmp($Flight['arrive_location'], $location)) array_push($Flight_Filter, $Flight);
+            }
+        }
+        if(!strcmp($location, $initial_location)){ // get all aircraft that start in the initial locations
+            $Temp = []; $Other_Brand = []; $Other_Model = [];
+            $Aircraft_Id_In_Flight = Flight::select('aircraft_id')->get();
+            foreach ($Aircraft_Id_In_Flight as $AIIF) array_push($Temp, $AIIF['aircraft_id']);
+            $Other_Aircraft = Aircraft::select('*')->whereNotIn('aircraft_id', $Temp)->get();
+            foreach ($Other_Aircraft as $OA) {
+                array_push($Other_Brand, Aircraft_brand::select('*')->where('brand_id', $OA['brand_id'])->first());
+                array_push($Other_Model, Aircraft_model::select('*')->where('model_id', $OA['model_id'])->first());
             }
         }
         $Aircraft_Brand = [];
@@ -46,10 +58,10 @@ class BackendController extends Controller
             array_push($Aircraft_Model, Aircraft_model::select('*')->where('model_id', $aircraft['model_id'])->first());
             array_push($Flight_Time, Flight::select('*')->where('aircraft_id', $flight['aircraft_id'])->count());
         }
-        //return response() -> JSON($Aircraft_Model);
+        // Get Crew
         return response()->JSON([
             "Flight_Info" => $Flight_Filter, "Aircraft" => $Aircraft, "Aircraft_Brand" => $Aircraft_Brand, "Aircraft_Model" => $Aircraft_Model,
-            "Flight_Time" => $Flight_Time
+            "Flight_Time" => $Flight_Time, "Other_Aircraft" => $Other_Aircraft, "Other_Brand" => $Other_Brand, "Other_Model" => $Other_Model
         ]);
     }
 

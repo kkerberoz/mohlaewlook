@@ -19,7 +19,6 @@ class CreateWorkSchedulesTable extends Migration
             $table->date('work_date');
             $table->foreignId('flight_id')->references('flight_id')->on('flights')->onUpdate('cascade')->nullable();
             $table->enum('confirm_status',['free','confirm','cancel']);
-
             $table->primary(['user_id','work_date']);
         });
     }
