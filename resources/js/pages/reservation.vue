@@ -375,7 +375,7 @@
                                 style="color:#fff"
                                 id="card-reservation"
                                 type="button"
-                                class="btn btn-block btn-info"
+                                class="btn btn-block btn-login"
                             >
                                 Next
                             </button>
