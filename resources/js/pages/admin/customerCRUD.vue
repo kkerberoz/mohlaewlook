@@ -43,7 +43,6 @@
                                     <td>{{ user.email }}</td>
                                     <td>
                                         <a
-                                            class="btn float-left"
                                             @click="editCustomer(user, user.id)"
                                             style="color: Dodgerblue;"
                                         >
@@ -51,7 +50,6 @@
                                         </a>
                                         |
                                         <a
-                                            class="btn float-left"
                                             @click="deleteCustomer(user.id)"
                                             style="color: Tomato;"
                                         >
