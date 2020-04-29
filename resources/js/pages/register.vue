@@ -1,9 +1,11 @@
 <template>
-    <div class="container-xl" style="margin-top:5%;margin-bottom:5%">
+    <div class="container-xl" style="margin-top:7%;margin-bottom:5%">
         <div class="row flex-center full-height">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-info">Register</div>
+                <div class="card shadow-lg bg-white">
+                    <div class="card-header" style="border-radius: 0px;">
+                        Register
+                    </div>
                     <form v-on:submit="formSubmit">
                         <!-- <form method="post" action="/regis"> -->
                         <input

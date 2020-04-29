@@ -3978,6 +3978,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4034,19 +4035,19 @@ __webpack_require__.r(__webpack_exports__);
     deleteCustomer: function deleteCustomer(id) {
       var _this2 = this;
 
-      swalWithBootstrapButtons.fire({
+      swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
-        reverseButtons: true
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.value) {
           axios.get("/sanctum/csrf-cookie").then(function (response) {
             axios["delete"]("/api/backend/customer/".concat(id)).then(function () {
-              swalWithBootstrapButtons.fire("Deleted!", "Customer has been deleted.", "success").then(function () {
+              swal.fire("Deleted!", "Your customer data has been deleted.", "success").then(function () {
                 _this2.$router.go({
                   name: "customerCRUD"
                 });
@@ -4055,10 +4056,8 @@ __webpack_require__.r(__webpack_exports__);
               swal.fire("Failed!", "There was something wronge.", "warning");
             });
           });
-        } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire("Cancelled", "Your imaginary file is safe :)", "error");
+        } else {
+          swal.fire("Cancelled", "Your Customer data is safe :)", "error");
         }
       });
     },
@@ -5463,6 +5462,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "login",
   data: function data() {
@@ -5546,6 +5547,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -47394,161 +47397,168 @@ var render = function() {
       _c("div", { staticClass: "row flex-center full-height" }, [
         _c("div", { staticClass: "col-md-5" }, [
           _c("form", { on: { submit: _vm.formSubmit } }, [
-            _c("div", { staticClass: "card", attrs: { id: "cardLogin" } }, [
-              _c(
-                "div",
-                {
-                  staticClass: "card-header bg-dark",
-                  attrs: { id: "cardLogin" }
-                },
-                [
-                  _vm._v(
-                    "\n                            Admin Login\n                        "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Username:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.username,
-                        expression: "username"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.error_username
-                    },
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.username },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.username = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "invalid-feedback" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card shadow-lg bg-white",
+                attrs: { id: "cardLogin" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-header bg-dark",
+                    attrs: { id: "cardLogin" }
+                  },
+                  [
                     _vm._v(
-                      "\n                                    " +
-                        _vm._s(_vm.error_username) +
-                        "\n                                "
+                      "\n                            Admin Login\n                        "
                     )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Username:")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.username,
+                          expression: "username"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_username
+                      },
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.username },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.username = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(_vm.error_username) +
+                          "\n                                "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Password:")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password,
+                          expression: "password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_password
+                      },
+                      attrs: { type: "password" },
+                      domProps: { value: _vm.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(_vm.error_password) +
+                          "\n                                "
+                      )
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Password:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
+                _c(
+                  "div",
+                  { staticClass: "card-footer", attrs: { id: "cardLogin" } },
+                  [
+                    _c(
+                      "button",
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.password,
-                        expression: "password"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.error_password
-                    },
-                    attrs: { type: "password" },
-                    domProps: { value: _vm.password },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                        staticClass: "btn btn-block btn-login",
+                        attrs: {
+                          id: "btnLogin",
+                          type: "submiit",
+                          disabled: _vm.isLoading
                         }
-                        _vm.password = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                                    " +
-                        _vm._s(_vm.error_password) +
-                        "\n                                "
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "card-footer", attrs: { id: "cardLogin" } },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-login",
-                      attrs: {
-                        id: "btnLogin",
-                        type: "submiit",
-                        disabled: _vm.isLoading
-                      }
-                    },
-                    [
-                      _c(
-                        "span",
-                        {
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.isLoading,
+                                expression: "!isLoading"
+                              }
+                            ]
+                          },
+                          [_vm._v("Sign in")]
+                        ),
+                        _vm._v(" "),
+                        _c("i", {
                           directives: [
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: !_vm.isLoading,
-                              expression: "!isLoading"
+                              value: _vm.isLoading,
+                              expression: "isLoading"
                             }
-                          ]
-                        },
-                        [_vm._v("Sign in")]
-                      ),
-                      _vm._v(" "),
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.isLoading,
-                            expression: "isLoading"
+                          ],
+                          staticClass: "fas fa-spinner fa-pulse"
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-login",
+                        attrs: { disabled: _vm.isLoading, id: "btnLogin2" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.home($event)
                           }
-                        ],
-                        staticClass: "fas fa-spinner fa-pulse"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-login",
-                      attrs: { disabled: _vm.isLoading, id: "btnLogin2" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.home($event)
                         }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                HOME\n                            "
-                      )
-                    ]
-                  )
-                ]
-              )
-            ])
+                      },
+                      [
+                        _vm._v(
+                          "\n                                HOME\n                            "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
           ])
         ])
       ])
@@ -47929,34 +47939,23 @@ var render = function() {
       _c("br"),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12 full-height" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header bg-info" }, [
-            _c("div", { staticClass: "card-title" }, [
-              _vm._v(
-                "\n                    Manage Customer\n                    "
-              ),
+        _c("div", { staticClass: "card shadow-lg bg-white" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "float-right", staticStyle: { padding: "20px" } },
+            [
               _c(
-                "span",
-                {
-                  staticClass: "card-subtile",
-                  staticStyle: { "margin-left": "80%" }
-                },
+                "button",
+                { staticClass: "btn btn-success", on: { click: _vm.newModal } },
                 [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      on: { click: _vm.newModal }
-                    },
-                    [
-                      _vm._v("\n                            Add New "),
-                      _c("i", { staticClass: "fas fa-user-plus fa-fw" })
-                    ]
-                  )
+                  _vm._v("\n                    Add New\n                    "),
+                  _c("i", { staticClass: "fas fa-user-plus fa-fw" })
                 ]
               )
-            ])
-          ]),
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "table-responsive" }, [
@@ -47964,7 +47963,7 @@ var render = function() {
                 "table",
                 { staticClass: "table" },
                 [
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _vm._l(_vm.users, function(user, id) {
                     return _c("tbody", { key: id }, [
@@ -47989,9 +47988,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [
                           _c(
-                            "button",
+                            "a",
                             {
-                              staticClass: "btn",
+                              staticClass: "btn float-left",
                               staticStyle: { color: "Dodgerblue" },
                               on: {
                                 click: function($event) {
@@ -48005,9 +48004,9 @@ var render = function() {
                             "\n                                    |\n                                    "
                           ),
                           _c(
-                            "button",
+                            "a",
                             {
-                              staticClass: "btn",
+                              staticClass: "btn float-left",
                               staticStyle: { color: "Tomato" },
                               on: {
                                 click: function($event) {
@@ -48095,7 +48094,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(2)
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
@@ -48508,6 +48507,20 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header ", staticStyle: { "border-radius": "0px" } },
+      [
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v("\n                    Manage Customer\n                ")
+        ])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -50227,12 +50240,21 @@ var render = function() {
     { staticClass: "container-xl", staticStyle: { padding: "2%" } },
     [
       _c("div", { staticClass: "row flex-center full-height" }, [
-        _c("div", { staticClass: "col-md-5" }, [
+        _c("div", { staticClass: "col-md-5 " }, [
           _c("form", { on: { submit: _vm.formSubmit } }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-header bg-info" }, [
-                _vm._v("Login")
-              ]),
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card-header",
+                  staticStyle: { "border-radius": "0px" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Login\n                    "
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -50376,15 +50398,20 @@ var render = function() {
     "div",
     {
       staticClass: "container-xl",
-      staticStyle: { "margin-top": "5%", "margin-bottom": "5%" }
+      staticStyle: { "margin-top": "7%", "margin-bottom": "5%" }
     },
     [
       _c("div", { staticClass: "row flex-center full-height" }, [
         _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header bg-info" }, [
-              _vm._v("Register")
-            ]),
+          _c("div", { staticClass: "card shadow-lg bg-white" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card-header",
+                staticStyle: { "border-radius": "0px" }
+              },
+              [_vm._v("\n                    Register\n                ")]
+            ),
             _vm._v(" "),
             _c("form", { on: { submit: _vm.formSubmit } }, [
               _c("input", {

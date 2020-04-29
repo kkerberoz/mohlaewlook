@@ -52,35 +52,46 @@ body {
 }
 
 .btn-login {
+    background: #f79c65;
+    background: -webkit-linear-gradient(to right, #f87a2b, #f79c65);
+    background: linear-gradient(to right, #f87a2b, #f79c65);
     color: #fff;
-    background-color: #f79c65;
-    border-radius: 0;
+    border-radius: 0px;
     border: none;
     border-color: #636b6f;
     font-size: 16px;
 }
 .btn-login:hover {
+    background: #f79c65;
+    background: -webkit-linear-gradient(to left, #f87a2b, #f79c65);
+    background: linear-gradient(to left, #f87a2b, #f79c65);
     color: #fff;
     transition: 0.3s;
     border: none;
-    border-radius: 0;
+    border-radius: 0px;
     font-size: 20px;
-    background-color: #f87a2b;
 }
 .card-header {
+    background-color: #f87a2b;
+    border: none;
     font-size: 30px;
-    border-radius: 5px;
+    border-radius: 0px;
     color: #fff;
 }
 .card {
+    border: none;
     font-size: 16px;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 .card-footer {
     border: none;
+    border-radius: 0px;
     background-color: #fff;
 }
+/* .form-control {
+    border-radius: 2px;
+} */
 
 #content {
     margin-top: 5%;

@@ -2,16 +2,17 @@
     <div class="container-fluid" style="padding:3%">
         <br />
         <div class="col-md-12 full-height">
-            <div class="card">
-                <div class="card-header bg-info">
+            <div class="card shadow-lg bg-white">
+                <div class="card-header " style="border-radius: 0px;">
                     <div class="card-title">
                         Manage Customer
-                        <span class="card-subtile" style="margin-left:80% ">
-                            <button class="btn btn-success" @click="newModal">
-                                Add New <i class="fas fa-user-plus fa-fw"></i>
-                            </button>
-                        </span>
                     </div>
+                </div>
+                <div style="padding:20px;" class="float-right">
+                    <button class="btn btn-success" @click="newModal">
+                        Add New
+                        <i class="fas fa-user-plus fa-fw"></i>
+                    </button>
                 </div>
 
                 <div class="card-body">
@@ -41,21 +42,21 @@
                                     <td>{{ user.DOB }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>
-                                        <button
-                                            class="btn"
+                                        <a
+                                            class="btn float-left"
                                             @click="editCustomer(user, user.id)"
                                             style="color: Dodgerblue;"
                                         >
                                             <i class="fa fa-edit "></i>
-                                        </button>
+                                        </a>
                                         |
-                                        <button
-                                            class="btn"
+                                        <a
+                                            class="btn float-left"
                                             @click="deleteCustomer(user.id)"
                                             style="color: Tomato;"
                                         >
                                             <i class="fa fa-trash "></i>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -141,7 +142,7 @@
                                     }"
                                     type="password"
                                     class="form-control"
-                                    v-model="password"
+                                    v-model="input.password"
                                     name="password"
                                     pattern="(?=.[a-z])(?=.*[A-Z]).{6,}"
                                     title="Must contain at least one uppercase and lowercase letter, and at least 6 or more characters "
@@ -322,53 +323,46 @@ export default {
 
         //delete customer
         deleteCustomer(id) {
-            swalWithBootstrapButtons
-                .fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
-                    reverseButtons: true
-                })
-                .then(result => {
-                    if (result.value) {
-                        axios.get("/sanctum/csrf-cookie").then(response => {
-                            axios
-                                .delete(`/api/backend/customer/${id}`)
-                                .then(() => {
-                                    swalWithBootstrapButtons
-                                        .fire(
-                                            "Deleted!",
-                                            "Customer has been deleted.",
-                                            "success"
-                                        )
-                                        .then(() => {
-                                            this.$router.go({
-                                                name: "customerCRUD"
-                                            });
-                                        });
-                                })
-                                .catch(() => {
-                                    swal.fire(
-                                        "Failed!",
-                                        "There was something wronge.",
-                                        "warning"
-                                    );
+            swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(result => {
+                if (result.value) {
+                    axios.get("/sanctum/csrf-cookie").then(response => {
+                        axios
+                            .delete(`/api/backend/customer/${id}`)
+                            .then(() => {
+                                swal.fire(
+                                    "Deleted!",
+                                    "Your customer data has been deleted.",
+                                    "success"
+                                ).then(() => {
+                                    this.$router.go({
+                                        name: "customerCRUD"
+                                    });
                                 });
-                        });
-                    } else if (
-                        /* Read more about handling dismissals below */
-                        result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        swalWithBootstrapButtons.fire(
-                            "Cancelled",
-                            "Your imaginary file is safe :)",
-                            "error"
-                        );
-                    }
-                });
+                            })
+                            .catch(() => {
+                                swal.fire(
+                                    "Failed!",
+                                    "There was something wronge.",
+                                    "warning"
+                                );
+                            });
+                    });
+                } else {
+                    swal.fire(
+                        "Cancelled",
+                        "Your Customer data is safe :)",
+                        "error"
+                    );
+                }
+            });
         },
 
         //update customer
