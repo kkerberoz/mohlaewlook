@@ -6,7 +6,7 @@
         <div class="container-xl" style="margin-top:5%;padding-bottom:5%;">
             <div class="row flex-center">
                 <div class="col-md-12">
-                    <div class="card" id="card-reservation">
+                    <div class="card shadow-lg bg-white" id="card-reservation">
                         <div class="card-header" id="card-reservation">
                             Reservation
                         </div>

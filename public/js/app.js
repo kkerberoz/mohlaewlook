@@ -3971,12 +3971,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4003,7 +3997,7 @@ __webpack_require__.r(__webpack_exports__);
       errors: []
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this = this;
 
     axios.get("/api/backend/getCustomer").then(function (response) {
@@ -4972,7 +4966,7 @@ __webpack_require__.r(__webpack_exports__);
       seen: true
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this = this;
 
     axios.get("/api/backend/getAirports").then(function (response) {
@@ -10886,7 +10880,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -10905,7 +10899,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -10924,7 +10918,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -10943,7 +10937,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    background-color: #4bb4de;\n}\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\n    background-color: #4bb4de;\n}\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
 
 // exports
 
@@ -47995,7 +47989,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_c("i", { staticClass: "fa fa-edit " })]
+                            [_c("i", { staticClass: "fa fa-edit" })]
                           ),
                           _vm._v(
                             "\n                                    |\n                                    "
@@ -48010,7 +48004,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_c("i", { staticClass: "fa fa-trash " })]
+                            [_c("i", { staticClass: "fa fa-trash" })]
                           )
                         ])
                       ])
@@ -48083,9 +48077,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Update User's Info" +
-                          _vm._s(_vm.currentID) +
-                          "\n                    "
+                        "\n                        Update Customer's Info\n                    "
                       )
                     ]
                   ),
@@ -48123,7 +48115,11 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("span", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.error_username))
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error_username) +
+                          "\n                        "
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -48184,7 +48180,11 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("span", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.error_password))
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error_password) +
+                          "\n                        "
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -48243,7 +48243,11 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("span", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.error_title))
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error_title) +
+                          "\n                        "
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -48274,11 +48278,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.error_name) +
-                          "\n                        "
-                      )
+                      _vm._v(_vm._s(_vm.error_name))
                     ])
                   ]),
                   _vm._v(" "),
@@ -48346,11 +48346,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.error_DOB) +
-                          "\n                        "
-                      )
+                      _vm._v(_vm._s(_vm.error_DOB))
                     ])
                   ]),
                   _vm._v(" "),
@@ -48432,7 +48428,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._v(" Create")]
+                        [_vm._v("Create")]
                       ),
                       _vm._v(" "),
                       _c("i", {
@@ -48477,7 +48473,7 @@ var render = function() {
                             }
                           ]
                         },
-                        [_vm._v(" Update")]
+                        [_vm._v("Update")]
                       ),
                       _vm._v(" "),
                       _c("i", {
@@ -48509,12 +48505,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "card-header ", staticStyle: { "border-radius": "0px" } },
-      [
-        _c("div", { staticClass: "card-title" }, [
-          _vm._v("\n                    Manage Customer\n                ")
-        ])
-      ]
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
+      [_c("div", { staticClass: "card-title" }, [_vm._v("Manage Customer")])]
     )
   },
   function() {
@@ -48658,7 +48650,11 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("span", { staticClass: "invalid-feedback" }, [
-                            _vm._v(_vm._s(_vm.error_start_date))
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.error_start_date) +
+                                "\n                                "
+                            )
                           ])
                         ])
                       ]),
@@ -49082,11 +49078,7 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.error_gender) +
-                              "\n                            "
-                          )
+                          _vm._v(_vm._s(_vm.error_gender))
                         ])
                       ])
                     ]),
@@ -49168,11 +49160,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.error_firstname) +
-                              "\n                            "
-                          )
+                          _vm._v(_vm._s(_vm.error_firstname))
                         ])
                       ]),
                       _vm._v(" "),
@@ -49209,11 +49197,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "invalid-feedback" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.error_lastname) +
-                              "\n                            "
-                          )
+                          _vm._v(_vm._s(_vm.error_lastname))
                         ])
                       ])
                     ]),
@@ -50764,7 +50748,10 @@ var render = function() {
             _c("div", { staticClass: "col-md-12" }, [
               _c(
                 "div",
-                { staticClass: "card", attrs: { id: "card-reservation" } },
+                {
+                  staticClass: "card shadow-lg bg-white",
+                  attrs: { id: "card-reservation" }
+                },
                 [
                   _c(
                     "div",
@@ -68277,8 +68264,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
