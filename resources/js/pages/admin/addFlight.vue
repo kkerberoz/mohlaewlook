@@ -263,7 +263,7 @@ export default {
             date_check: null,
             time_check: null,
             location_check: null,
-            both_check: null,
+            all_check: null,
             aircraft_array_info: []
         };
     },
@@ -302,63 +302,81 @@ export default {
             this.input.departLocation == null ||
             this.input.departDate == null ||
             this.input.departTime == null
-        )
-            this.both_check = false;
+        ){
+            this.aircrafts = [];
+            this.options_pilot = [];
+            this.options_attendant = [];
+            this.location_check = this.input.departLocation;
+            this.all_check = false;
+        }
         else if (
             this.input.departLocation != null &&
             this.input.departDate != null &&
             this.input.departTime != null
         )
-            this.both_check = true;
+            this.all_check = true;
         // for query when all are selected.
         if (
-            this.both_check &&
+            this.all_check &&
             (this.input.departLocation != this.location_check ||
                 this.input.departDate != this.date_check ||
                 this.input.departTime != this.time_check)
         ) {
-            this.aircrafts = [];
-            this.options_pilot = [];
-            this.options_attendant = [];
             this.location_check = this.input.departLocation;
             this.date_check = this.input.departDate;
             this.time_check = this.input.departTime;
             axios
                 .post("/api/backend/getAircraftAndCrew", {
-                    location: this.input.departLocation["value"],
+                    location: this.input.departLocation.value,
                     date: this.input.departDate,
                     time: this.input.departTime
                 })
                 .then(response => {
+                    console.log(response.data);
                     var aircraft = response.data.Aircraft;
                     var aircraft_brand = response.data.Aircraft_Brand;
                     var aircraft_model = response.data.Aircraft_Model;
                     var flight_info = response.data.Flight_Info;
                     var flight_time = response.data.Flight_Time;
+                    var other_aircraft = response.data.Other_Aircraft;
+                    var other_brand = response.data.Other_Brand;
+                    var other_model = response.data.Other_Model;
+                    this.input.aircraftID = null; // clear aircraft id
+                    document.getElementById("aircraft_info").innerHTML = null;
+                    this.aircrafts = [];
+                    this.options_pilot = [];
+                    this.options_attendant = [];
                     for (var i = 0; i < aircraft.length; ++i) {
                         this.aircrafts.push({
                             value: aircraft[i]["aircraft_id"],
                             name:
-                                "ID: " +
-                                aircraft[i]["aircraft_id"] +
-                                " - " +
-                                aircraft_brand[i]["brand_name"] +
-                                " " +
-                                aircraft_model[i]["model_name"]
+                                "ID: " + aircraft[i]["aircraft_id"] +
+                                " - " + aircraft_brand[i]["brand_name"] +
+                                " " + aircraft_model[i]["model_name"]
                         });
                         this.aircraft_array_info[aircraft[i]["aircraft_id"]] =
-                            "<b>Flight Times:</b> " +
-                            flight_time[i] +
-                            "<br>" +
-                            "<b>Last Flight: from</b> " +
+                            "<b>Number of Flight Times:</b> " + flight_time[i] +
+                            " Times <br>" + "<b>Last Flight</b>: " +
+                            flight_info[i]["flight_no"] +
+                            "<b> from</b> " +
                             flight_info[i]["depart_location"] +
                             "  <b>to</b>  " +
                             flight_info[i]["arrive_location"] +
                             "<br>" +
                             "<b>When:</b> " +
                             flight_info[i]["depart_datetime"] +
-                            "<br><b>To:</b>  " +
+                            "<b> To:</b>  " +
                             flight_info[i]["arrive_datetime"];
+                    }
+                    for (var i=0; i<other_aircraft.length; ++i){
+                        this.aircrafts.push({
+                            value: other_aircraft[i]["aircraft_id"],
+                            name:
+                                "ID: " + other_aircraft[i]["aircraft_id"] +
+                                " - " + other_brand[i]["brand_name"] +
+                                " " + other_model[i]["model_name"]
+                        });
+                        this.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight"
                     }
                 });
         }

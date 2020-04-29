@@ -14,13 +14,12 @@ class CreateWorkSchedulesTable extends Migration
     public function up()
     {
         Schema::create('work_schedules', function (Blueprint $table) {
+            $table->id('work_id')->unique();
             $table->string('user_id',11);
             $table->foreign('user_id')->references('user_id')->on('employees')->onUpdate('cascade');
             $table->date('work_date');
             $table->foreignId('flight_id')->references('flight_id')->on('flights')->onUpdate('cascade')->nullable();
             $table->enum('confirm_status',['free','confirm','cancel']);
-
-            $table->primary(['user_id','work_date']);
         });
     }
 
