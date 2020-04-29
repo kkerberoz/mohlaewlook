@@ -1,6 +1,5 @@
 <template>
     <div class="container-fluid" style="padding:3%">
-        <input type="hidden" name="_token" v-bind:value="csrf" />
         <br />
         <div class="col-md-12 full-height">
             <div class="card">
@@ -8,11 +7,7 @@
                     <div class="card-title">
                         Manage Customer
                         <span class="card-subtile" style="margin-left:80% ">
-                            <button
-                                class="btn btn-success"
-                                data-toggle="modal"
-                                data-target="#addNew"
-                            >
+                            <button class="btn btn-success" @click="newModal">
                                 Add New <i class="fas fa-user-plus fa-fw"></i>
                             </button>
                         </span>
@@ -37,7 +32,7 @@
                             </thead>
                             <tbody v-for="(user, id) in users" :key="id">
                                 <tr>
-                                    <th scope="row">{{ user.id }}</th>
+                                    <th scope="row">{{ Number(id) + 1 }}</th>
                                     <td>{{ user.user_id }}</td>
                                     <td>{{ user.username }}</td>
                                     <td>{{ user.title }}</td>
@@ -48,7 +43,7 @@
                                     <td>
                                         <button
                                             class="btn"
-                                            @click="editCustomer"
+                                            @click="editCustomer(user, user.id)"
                                             style="color: Dodgerblue;"
                                         >
                                             <i class="fa fa-edit "></i>
@@ -56,7 +51,7 @@
                                         |
                                         <button
                                             class="btn"
-                                            @click="deleteCustomer"
+                                            @click="deleteCustomer(user.id)"
                                             style="color: Tomato;"
                                         >
                                             <i class="fa fa-trash "></i>
@@ -82,8 +77,19 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addNew">
+                        <h5
+                            class="modal-title"
+                            v-show="!editMode"
+                            id="addNewLabel"
+                        >
                             New Customer
+                        </h5>
+                        <h5
+                            class="modal-title"
+                            v-show="editMode"
+                            id="addNewLabel"
+                        >
+                            Update User's Info{{ currentID }}
                         </h5>
                         <button
                             type="button"
@@ -103,7 +109,7 @@
                                 }"
                                 type="text"
                                 class="form-control"
-                                v-model="username"
+                                v-model="input.username"
                                 name="username"
                             />
                             <span class="invalid-feedback">{{
@@ -112,14 +118,15 @@
                         </span>
 
                         <span class="form-group">
-                            <label>Password:</label>
+                            <label v-show="editMode">Change Password:</label>
+                            <label v-show="!editMode">Password:</label>
                             <input
                                 v-bind:class="{
                                     'is-invalid': error_password
                                 }"
                                 type="password"
                                 class="form-control"
-                                v-model="password"
+                                v-model="input.password"
                                 name="password"
                             />
                             <span class="invalid-feedback">{{
@@ -150,7 +157,7 @@
                                 v-bind:class="{ 'is-invalid': error_title }"
                                 class="form-control"
                                 name="title"
-                                v-model="title"
+                                v-model="input.title"
                             >
                                 <option value selected disabled
                                     >Please select</option
@@ -171,7 +178,7 @@
                                 type="text"
                                 class="form-control"
                                 name="name"
-                                v-model="name"
+                                v-model="input.name"
                             />
                             <div class="invalid-feedback">
                                 {{ error_name }}
@@ -186,7 +193,7 @@
                                 type="text"
                                 class="form-control"
                                 name="surname"
-                                v-model="surname"
+                                v-model="input.surname"
                             />
                             <div class="invalid-feedback">
                                 {{ error_surname }}
@@ -199,7 +206,7 @@
                                 type="date"
                                 class="form-control"
                                 name="DOB"
-                                v-model="DOB"
+                                v-model="input.DOB"
                             />
                             <div class="invalid-feedback">
                                 {{ error_DOB }}
@@ -208,7 +215,7 @@
                         <span class="form-group">
                             <label>Email:</label>
                             <input
-                                v-model="email"
+                                v-model="input.email"
                                 v-bind:class="{ 'is-invalid': error_email }"
                                 type="email"
                                 class="form-control"
@@ -230,10 +237,24 @@
                         <button
                             @click="formSubmit"
                             type="submit"
+                            v-show="!editMode"
                             :disabled="isLoading"
                             class="btn btn-primary"
                         >
                             <span v-show="!isLoading"> Create</span>
+                            <i
+                                class="fas fa-spinner fa-pulse"
+                                v-show="isLoading"
+                            ></i>
+                        </button>
+                        <button
+                            v-show="editMode"
+                            @click="updateUser"
+                            :disabled="isLoading"
+                            type="submit"
+                            class="btn btn-success"
+                        >
+                            <span v-show="!isLoading"> Update</span>
                             <i
                                 class="fas fa-spinner fa-pulse"
                                 v-show="isLoading"
@@ -248,18 +269,21 @@
 
 <script>
 export default {
-    props: ["csrf", "oldName"],
     data() {
         return {
             users: [],
             isLoading: false,
-            username: "",
-            password: "",
-            title: "",
-            name: "",
-            surname: "",
-            DOB: "",
-            email: "",
+            editMode: false,
+            input: {
+                username: "",
+                password: "",
+                title: "",
+                name: "",
+                surname: "",
+                DOB: "",
+                email: ""
+            },
+            currentID: "",
             error_username: "",
             error_password: "",
             error_title: "",
@@ -277,6 +301,166 @@ export default {
         });
     },
     methods: {
+        newModal() {
+            this.editMode = false;
+            $("#addNew").modal("show");
+        },
+
+        //edit customer
+        editCustomer(user) {
+            this.editMode = true;
+            $("#addNew").modal("show");
+            this.input.username = user.username;
+            this.input.password = user.password;
+            this.input.title = user.title;
+            this.input.name = user.name;
+            this.input.surname = user.surname;
+            this.input.DOB = user.DOB;
+            this.input.email = user.email;
+            return (this.currentID = user.id);
+        },
+
+        //delete customer
+        deleteCustomer(id) {
+            swalWithBootstrapButtons
+                .fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: true
+                })
+                .then(result => {
+                    if (result.value) {
+                        axios.get("/sanctum/csrf-cookie").then(response => {
+                            axios
+                                .delete(`/api/backend/customer/${id}`)
+                                .then(() => {
+                                    swalWithBootstrapButtons
+                                        .fire(
+                                            "Deleted!",
+                                            "Customer has been deleted.",
+                                            "success"
+                                        )
+                                        .then(() => {
+                                            this.$router.go({
+                                                name: "customerCRUD"
+                                            });
+                                        });
+                                })
+                                .catch(() => {
+                                    swal.fire(
+                                        "Failed!",
+                                        "There was something wronge.",
+                                        "warning"
+                                    );
+                                });
+                        });
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            "Cancelled",
+                            "Your imaginary file is safe :)",
+                            "error"
+                        );
+                    }
+                });
+        },
+
+        //update customer
+        updateUser() {
+            this.errors = [];
+            this.error_name = null;
+            this.error_surname = null;
+            this.error_DOB = null;
+            this.error_email = null;
+            this.error_username = null;
+            this.error_password = null;
+            this.error_title = null;
+
+            let currentObj = this;
+            if (!this.input.username.trim()) {
+                this.error_username = "Please fill your username.";
+                this.errors.push(this.error_username);
+            } else {
+                this.error_username = null;
+            }
+
+            if (!this.input.title) {
+                this.error_title = "Please select your title.";
+                this.errors.push(this.error_title);
+            } else {
+                this.error_title = null;
+            }
+            if (!this.input.name.trim()) {
+                this.error_name = "Please fill your name.";
+                this.errors.push(this.error_name);
+            } else {
+                this.error_name = null;
+            }
+            if (!this.input.surname.trim()) {
+                this.error_surname = "Please fill your surname.";
+                this.errors.push(this.error_surname);
+            } else {
+                this.error_surname = null;
+            }
+
+            if (!this.input.DOB) {
+                this.error_DOB = "Please select your Date of Birth.";
+                this.errors.push(this.error_DOB);
+            } else {
+                this.error_DOB = null;
+            }
+            if (!this.input.email.trim()) {
+                this.error_email = "Please fill your E-mail.";
+                this.errors.push(this.error_email);
+            } else {
+                this.error_email = null;
+            }
+            console.log(this.errors.length);
+
+            if (!this.errors.length) {
+                this.isLoading = true;
+                let data = {
+                    username: this.input.username,
+                    password: this.input.password,
+                    title: this.input.title,
+                    name: this.input.name,
+                    surname: this.input.surname,
+                    DOB: this.input.DOB,
+                    email: this.input.email
+                };
+                axios.get("/sanctum/csrf-cookie").then(response => {
+                    axios
+                        .put(`/api/backend/customer/${this.currentID}`, data)
+                        .then(response => {
+                            swal.fire(
+                                "Update Success!",
+                                "Cilck the button to continue!",
+                                "success"
+                            ).then(() => {
+                                this.isLoading = false;
+                                $("#addNew").modal("hide");
+                                this.$router.go({ name: "customerCRUD" });
+                            });
+                        });
+                });
+            } else {
+                this.isLoading = false;
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
+            }
+        },
+
+        // add new customer
+
         formSubmit(e) {
             e.preventDefault();
             this.errors = [];
@@ -290,18 +474,18 @@ export default {
             this.error_title = null;
 
             let currentObj = this;
-            if (!this.username.trim()) {
+            if (!this.input.username.trim()) {
                 this.error_username = "Please fill your username.";
                 this.errors.push(this.error_username);
             } else {
                 this.error_username = null;
             }
 
-            if (!this.password) {
+            if (!this.input.password) {
                 //Check password constrain 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                 this.error_password = "Please fill your password.";
                 this.errors.push(this.error_password);
-            } else if (this.password.length < 6) {
+            } else if (this.input.password.length < 6) {
                 this.error_password =
                     "Password has to be at least 6 characters long.";
                 this.errors.push(this.error_password);
@@ -309,62 +493,62 @@ export default {
                 this.error_password = null;
             }
 
-            if (!this.title) {
+            if (!this.input.title) {
                 this.error_title = "Please select your title.";
                 this.errors.push(this.error_title);
             } else {
                 this.error_title = null;
             }
-            if (!this.name.trim()) {
+            if (!this.input.name.trim()) {
                 this.error_name = "Please fill your name.";
                 this.errors.push(this.error_name);
             } else {
                 this.error_name = null;
             }
-            if (!this.surname.trim()) {
+            if (!this.input.surname.trim()) {
                 this.error_surname = "Please fill your surname.";
                 this.errors.push(this.error_surname);
             } else {
                 this.error_surname = null;
             }
 
-            if (!this.DOB) {
+            if (!this.input.DOB) {
                 this.error_DOB = "Please select your Date of Birth.";
                 this.errors.push(this.error_DOB);
             } else {
                 this.error_DOB = null;
             }
-            if (!this.email.trim()) {
+            if (!this.input.email.trim()) {
                 this.error_email = "Please fill your E-mail.";
                 this.errors.push(this.error_email);
             } else {
                 this.error_email = null;
             }
-            console.log(this.errors);
+            console.log(this.errors.length);
 
             if (!this.errors.length) {
                 this.isLoading = true;
                 let data = {
-                    username: this.username,
-                    password: this.password,
-                    title: this.title,
-                    name: this.name,
-                    surname: this.surname,
-                    DOB: this.DOB,
-                    email: this.email
+                    username: this.input.username,
+                    password: this.input.password,
+                    title: this.input.title,
+                    name: this.input.name,
+                    surname: this.input.surname,
+                    DOB: this.input.DOB,
+                    email: this.input.email
                 };
                 axios.get("/sanctum/csrf-cookie").then(response => {
                     axios.post("/api/user/regis", data).then(response => {
                         if (response.data.errorU == 1) {
                             this.isLoading = false;
-                            this.username = "";
-                            this.error_username =
+                            this.input.username = "";
+                            this.input.error_username =
                                 "This Username is already exist";
                             this.errors.push(this.error_username);
                             this.errors = [];
                         } else if (response.data.errorE == 1) {
                             this.isLoading = false;
-                            this.email = "";
+                            this.input.email = "";
                             this.error_email = "This E-mail is already exist";
                             this.errors.push(this.error_email);
                             this.errors = [];
@@ -379,7 +563,7 @@ export default {
                                 "success"
                             ).then(() => {
                                 $("#addNew").modal("hide");
-                                this.$router.push({ name: "customerCRUD" });
+                                this.$router.go({ name: "customerCRUD" });
                             });
                         }
                     });
@@ -392,20 +576,6 @@ export default {
                     "error"
                 );
             }
-        },
-        editCustomer() {
-            swal.fire(
-                "Yang mai dai tum",
-                "Cilck the button to continue!",
-                "error"
-            );
-        },
-        deleteCustomer() {
-            swal.fire(
-                "Yang mai dai tum",
-                "Cilck the button to continue!",
-                "error"
-            );
         }
     }
 };
