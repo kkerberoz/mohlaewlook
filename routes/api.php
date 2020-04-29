@@ -38,7 +38,11 @@ Route::prefix('admin')->group(function () {
 
 //route for CRUD admin controller
 Route::prefix('backend')->group(function () {
-    Route::get('/getCustomer', 'BackendController@getCustomer');
+    Route::get('/getCustomer', 'UserController@getCustomer');
+    Route::delete('/customer/{id}', 'UserController@destroy');
+    Route::put('/customer/{id}', 'UserController@update');
+
+
     Route::post('/addAircraft', 'BackendController@addAircraft');
     Route::get('/getAirports', 'BackendController@getAirports');
     Route::post('/getAircraftAndCrew', 'BackendController@getAircraftAndCrew');

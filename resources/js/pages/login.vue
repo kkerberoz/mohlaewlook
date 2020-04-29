@@ -1,10 +1,12 @@
 <template>
     <div class="container-xl" style="padding:2%">
         <div class="row flex-center full-height">
-            <div class="col-md-5">
+            <div class="col-md-5 ">
                 <form v-on:submit="formSubmit">
-                    <div class="card">
-                        <div class="card-header bg-info">Login</div>
+                    <div class="card shadow-lg bg-white">
+                        <div class="card-header" style="border-radius: 0px;">
+                            Login
+                        </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Username:</label>

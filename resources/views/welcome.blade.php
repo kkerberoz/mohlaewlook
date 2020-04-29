@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+        <script type="text/javascript">window.csrf_token = "{{ csrf_token() }}"</script>
         <title>{{ config('APP_NAME','Mohlaewlook') }}</title>
 
         <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
@@ -19,6 +19,7 @@
 
     </head>
     <body>
+
         <section class="section">
             <div id="app">
                 <header  v-show="$route.path==='/' || $route.path==='/login' || $route.path==='/register' ||$route.path==='/info'||$route.path==='/reservation'? true:false">

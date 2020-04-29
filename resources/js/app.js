@@ -14,6 +14,14 @@ const toast = swal.mixin({
 });
 
 window.toast = toast;
+const swalWithBootstrapButtons = swal.mixin({
+    customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+    },
+    buttonsStyling: false
+});
+window.swalWithBootstrapButtons = swalWithBootstrapButtons;
 
 import routes from "./routes";
 
