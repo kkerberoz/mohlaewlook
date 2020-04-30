@@ -88,7 +88,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer"></div>
+                        <div class="card-footer">
+                            <hr class="mb-4" />
+                            <button
+                                class="btn btn-primary btn-lg btn-block btn-login"
+                                @click.prevent="formSubmit"
+                                :disabled="isLoading"
+                            >
+                            <span >Submit</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,15 +138,15 @@ export default {
             depart_datetime,
             arrive_datetime
         }) {
-            return `[${flight_no}] - ${depart_location} to ${arrive_location} (${depart_datetime})-(${arrive_datetime}) `;
+            return `[${flight_no}] - ${depart_location} to ${arrive_location}`;
         },
-        handleModal() {
-            swal.fire(
-                "Please success your form!",
-                "Cilck the button to continue!",
-                "error"
-            );
-        },
+        // handleModal() {
+        //     swal.fire(
+        //         "Please success your form!",
+        //         "Cilck the button to continue!",
+        //         "error"
+        //     );
+        // },
         handleSelect(option) {
             return option;
         }

@@ -3349,6 +3349,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3384,11 +3393,15 @@ __webpack_require__.r(__webpack_exports__);
           arrive_location = _ref.arrive_location,
           depart_datetime = _ref.depart_datetime,
           arrive_datetime = _ref.arrive_datetime;
-      return "[".concat(flight_no, "] - ").concat(depart_location, " to ").concat(arrive_location, " (").concat(depart_datetime, ")-(").concat(arrive_datetime, ") ");
+      return "[".concat(flight_no, "] - ").concat(depart_location, " to ").concat(arrive_location);
     },
-    handleModal: function handleModal() {
-      swal.fire("Please success your form!", "Cilck the button to continue!", "error");
-    },
+    // handleModal() {
+    //     swal.fire(
+    //         "Please success your form!",
+    //         "Cilck the button to continue!",
+    //         "error"
+    //     );
+    // },
     handleSelect: function handleSelect(option) {
       return option;
     }
@@ -11150,7 +11163,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
 
 // exports
 
@@ -11169,7 +11182,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
+exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
 
 // exports
 
@@ -11188,7 +11201,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -47807,7 +47820,24 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "card-footer" })
+              _c("div", { staticClass: "card-footer" }, [
+                _c("hr", { staticClass: "mb-4" }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-lg btn-block btn-login",
+                    attrs: { disabled: _vm.isLoading },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.formSubmit($event)
+                      }
+                    }
+                  },
+                  [_c("span", [_vm._v("Submit")])]
+                )
+              ])
             ])
           ])
         ])
