@@ -1,53 +1,62 @@
 <template>
-    <div class="container-xl" style="padding:2%">
-        <div class="row flex-center full-height">
-            <div class="col-md-5 ">
-                <form v-on:submit="formSubmit">
-                    <div class="card shadow-lg bg-white">
-                        <div class="card-header" style="border-radius: 0px;">
-                            Login
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Username:</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    :class="{ 'is-invalid': error_username }"
-                                    v-model="username"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_username }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Password:</label>
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    :class="{ 'is-invalid': error_password }"
-                                    v-model="password"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_password }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button
-                                type="submiit"
-                                :disabled="isLoading"
-                                class="btn btn-block btn-login"
+    <div class="container-fluid">
+        <div class="container-xl" style="padding:2%">
+            <div class="row flex-center full-height">
+                <div class="col-md-5 ">
+                    <form v-on:submit="formSubmit">
+                        <div class="card shadow-lg bg-white">
+                            <div
+                                class="card-header"
+                                style="border-radius: 0px;"
                             >
-                                <span v-show="!isLoading">Sign in</span>
-                                <i
-                                    class="fas fa-spinner fa-pulse"
-                                    v-show="isLoading"
-                                ></i>
-                            </button>
+                                Login
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Username:</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        :class="{
+                                            'is-invalid': error_username
+                                        }"
+                                        v-model="username"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_username }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password:</label>
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        :class="{
+                                            'is-invalid': error_password
+                                        }"
+                                        v-model="password"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_password }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button
+                                    type="submiit"
+                                    :disabled="isLoading"
+                                    class="btn btn-block btn-login"
+                                >
+                                    <span v-show="!isLoading">Sign in</span>
+                                    <i
+                                        class="fas fa-spinner fa-pulse"
+                                        v-show="isLoading"
+                                    ></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
