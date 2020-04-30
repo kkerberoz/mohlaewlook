@@ -297,6 +297,13 @@ export default {
         newModal() {
             this.editMode = false;
             $("#addNew").modal("show");
+            this.input.username = "";
+            this.input.password = "";
+            this.input.title = "";
+            this.input.name = "";
+            this.input.surname = "";
+            this.input.DOB = "";
+            this.input.email = "";
         },
 
         //edit customer
