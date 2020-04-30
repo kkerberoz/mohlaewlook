@@ -51,12 +51,18 @@
 export default {
     data() {
         return {
+            user: "",
             isLoggedIn: false
         };
     },
     props: {
         links: Array
         // isLoggedIn: { type: Boolean, default: false }
+    },
+    beforeMount() {
+        axios.get("/api/user").then(response => {
+            this.user = response.data;
+        });
     },
     mounted() {
         this.isLoggedIn = localStorage.getItem("isLoggedIn");

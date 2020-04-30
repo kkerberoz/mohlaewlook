@@ -24,12 +24,12 @@
                                         required
                                         type="date"
                                         class="form-control"
-                                        value=""
+                                        value
                                         v-model="input.start_date"
                                     />
-                                    <span class="invalid-feedback">{{
-                                        error_start_date
-                                    }}</span>
+                                    <span class="invalid-feedback">
+                                        {{ error_start_date }}
+                                    </span>
                                 </div>
                             </span>
                             <span class="col-md-4 mb-2">
@@ -218,9 +218,9 @@
                                         >other</label
                                     >
                                 </div>
-                                <span class="invalid-feedback">
-                                    {{ error_gender }}
-                                </span>
+                                <span class="invalid-feedback">{{
+                                    error_gender
+                                }}</span>
                             </span>
                         </div>
 
@@ -257,9 +257,9 @@
                                     v-model="input.firstname"
                                     required
                                 />
-                                <span class="invalid-feedback">
-                                    {{ error_firstname }}
-                                </span>
+                                <span class="invalid-feedback">{{
+                                    error_firstname
+                                }}</span>
                             </div>
 
                             <div class="col-md-5 mb-2">
@@ -273,9 +273,9 @@
                                     v-model="input.lastname"
                                     required
                                 />
-                                <span class="invalid-feedback">
-                                    {{ error_lastname }}
-                                </span>
+                                <span class="invalid-feedback">{{
+                                    error_lastname
+                                }}</span>
                             </div>
                         </div>
 
@@ -693,7 +693,7 @@ export default {
             seen: true
         };
     },
-    mounted() {
+    beforeMount() {
         axios.get("/api/backend/getAirports").then(response => {
             // show all airports onto option
             // var AirportID = response.data; // get all aiport

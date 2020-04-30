@@ -68,6 +68,11 @@ let routes = [
                 path: "customer",
                 name: "customerCRUD",
                 component: require("./pages/admin/customerCRUD.vue").default
+            },
+            {
+                path: "addPrice",
+                name: "addPrice",
+                component: require("./pages/admin/addPrice.vue").default
             }
         ]
     }

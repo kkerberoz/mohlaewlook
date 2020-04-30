@@ -2,16 +2,15 @@
     <div class="container-fluid" style="padding:3%">
         <br />
         <div class="col-md-12 full-height">
-            <div class="card">
-                <div class="card-header bg-info">
-                    <div class="card-title">
-                        Manage Customer
-                        <span class="card-subtile" style="margin-left:80% ">
-                            <button class="btn btn-success" @click="newModal">
-                                Add New <i class="fas fa-user-plus fa-fw"></i>
-                            </button>
-                        </span>
-                    </div>
+            <div class="card shadow-lg bg-white">
+                <div class="card-header" style="border-radius: 0px;">
+                    <div class="card-title">Manage Customer</div>
+                </div>
+                <div style="padding:20px;" class="float-right">
+                    <button class="btn btn-success" @click="newModal">
+                        Add New
+                        <i class="fas fa-user-plus fa-fw"></i>
+                    </button>
                 </div>
 
                 <div class="card-body">
@@ -41,21 +40,19 @@
                                     <td>{{ user.DOB }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>
-                                        <button
-                                            class="btn"
+                                        <a
                                             @click="editCustomer(user, user.id)"
                                             style="color: Dodgerblue;"
                                         >
-                                            <i class="fa fa-edit "></i>
-                                        </button>
+                                            <i class="fa fa-edit"></i>
+                                        </a>
                                         |
-                                        <button
-                                            class="btn"
+                                        <a
                                             @click="deleteCustomer(user.id)"
                                             style="color: Tomato;"
                                         >
-                                            <i class="fa fa-trash "></i>
-                                        </button>
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -89,7 +86,7 @@
                             v-show="editMode"
                             id="addNewLabel"
                         >
-                            Update User's Info{{ currentID }}
+                            Update Customer's Info
                         </h5>
                         <button
                             type="button"
@@ -112,9 +109,9 @@
                                 v-model="input.username"
                                 name="username"
                             />
-                            <span class="invalid-feedback">{{
-                                error_username
-                            }}</span>
+                            <span class="invalid-feedback">
+                                {{ error_username }}
+                            </span>
                         </span>
 
                         <span class="form-group">
@@ -129,9 +126,9 @@
                                 v-model="input.password"
                                 name="password"
                             />
-                            <span class="invalid-feedback">{{
-                                error_password
-                            }}</span>
+                            <span class="invalid-feedback">
+                                {{ error_password }}
+                            </span>
                         </span>
                         <!-- <span class="form-group">
                                 <label>Password:</label>
@@ -141,7 +138,7 @@
                                     }"
                                     type="password"
                                     class="form-control"
-                                    v-model="password"
+                                    v-model="input.password"
                                     name="password"
                                     pattern="(?=.[a-z])(?=.*[A-Z]).{6,}"
                                     title="Must contain at least one uppercase and lowercase letter, and at least 6 or more characters "
@@ -149,7 +146,7 @@
                                 <span class="invalid-feedback">{{
                                     error_password
                                 }}</span>
-                            </span> -->
+            </span>-->
 
                         <span class="form-group">
                             <label>Title</label>
@@ -167,9 +164,9 @@
                                 <option>Mr.</option>
                                 <option>Miss</option>
                             </select>
-                            <span class="invalid-feedback">{{
-                                error_title
-                            }}</span>
+                            <span class="invalid-feedback">
+                                {{ error_title }}
+                            </span>
                         </span>
                         <span class="form-group">
                             <label>Name:</label>
@@ -180,9 +177,7 @@
                                 name="name"
                                 v-model="input.name"
                             />
-                            <div class="invalid-feedback">
-                                {{ error_name }}
-                            </div>
+                            <div class="invalid-feedback">{{ error_name }}</div>
                         </span>
                         <span class="form-group">
                             <label>Surname:</label>
@@ -208,9 +203,7 @@
                                 name="DOB"
                                 v-model="input.DOB"
                             />
-                            <div class="invalid-feedback">
-                                {{ error_DOB }}
-                            </div>
+                            <div class="invalid-feedback">{{ error_DOB }}</div>
                         </span>
                         <span class="form-group">
                             <label>Email:</label>
@@ -241,7 +234,7 @@
                             :disabled="isLoading"
                             class="btn btn-primary"
                         >
-                            <span v-show="!isLoading"> Create</span>
+                            <span v-show="!isLoading">Create</span>
                             <i
                                 class="fas fa-spinner fa-pulse"
                                 v-show="isLoading"
@@ -254,7 +247,7 @@
                             type="submit"
                             class="btn btn-success"
                         >
-                            <span v-show="!isLoading"> Update</span>
+                            <span v-show="!isLoading">Update</span>
                             <i
                                 class="fas fa-spinner fa-pulse"
                                 v-show="isLoading"
@@ -294,7 +287,7 @@ export default {
             errors: []
         };
     },
-    mounted() {
+    beforeMount() {
         axios.get("/api/backend/getCustomer").then(response => {
             this.users = response.data;
             console.log(this.users);
@@ -304,6 +297,13 @@ export default {
         newModal() {
             this.editMode = false;
             $("#addNew").modal("show");
+            this.input.username = "";
+            this.input.password = "";
+            this.input.title = "";
+            this.input.name = "";
+            this.input.surname = "";
+            this.input.DOB = "";
+            this.input.email = "";
         },
 
         //edit customer
@@ -322,53 +322,46 @@ export default {
 
         //delete customer
         deleteCustomer(id) {
-            swalWithBootstrapButtons
-                .fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
-                    reverseButtons: true
-                })
-                .then(result => {
-                    if (result.value) {
-                        axios.get("/sanctum/csrf-cookie").then(response => {
-                            axios
-                                .delete(`/api/backend/customer/${id}`)
-                                .then(() => {
-                                    swalWithBootstrapButtons
-                                        .fire(
-                                            "Deleted!",
-                                            "Customer has been deleted.",
-                                            "success"
-                                        )
-                                        .then(() => {
-                                            this.$router.go({
-                                                name: "customerCRUD"
-                                            });
-                                        });
-                                })
-                                .catch(() => {
-                                    swal.fire(
-                                        "Failed!",
-                                        "There was something wronge.",
-                                        "warning"
-                                    );
+            swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(result => {
+                if (result.value) {
+                    axios.get("/sanctum/csrf-cookie").then(response => {
+                        axios
+                            .delete(`/api/backend/customer/${id}`)
+                            .then(() => {
+                                swal.fire(
+                                    "Deleted!",
+                                    "Your customer data has been deleted.",
+                                    "success"
+                                ).then(() => {
+                                    this.$router.go({
+                                        name: "customerCRUD"
+                                    });
                                 });
-                        });
-                    } else if (
-                        /* Read more about handling dismissals below */
-                        result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        swalWithBootstrapButtons.fire(
-                            "Cancelled",
-                            "Your imaginary file is safe :)",
-                            "error"
-                        );
-                    }
-                });
+                            })
+                            .catch(() => {
+                                swal.fire(
+                                    "Failed!",
+                                    "There was something wronge.",
+                                    "warning"
+                                );
+                            });
+                    });
+                } else {
+                    swal.fire(
+                        "Cancelled",
+                        "Your Customer data is safe :)",
+                        "error"
+                    );
+                }
+            });
         },
 
         //update customer

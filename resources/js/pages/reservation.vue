@@ -1,12 +1,12 @@
 <template>
     <div
-        class="container-fluid reservation"
+        class="container-fluid "
         style="padding-top:5%;padding-bottom:10%;"
     >
         <div class="container-xl" style="margin-top:5%;padding-bottom:5%;">
             <div class="row flex-center">
                 <div class="col-md-12">
-                    <div class="card" id="card-reservation">
+                    <div class="card shadow-lg bg-white" id="card-reservation">
                         <div class="card-header" id="card-reservation">
                             Reservation
                         </div>
@@ -487,9 +487,9 @@ export default {
 </script>
 
 <style>
-.reservation {
+/* .reservation {
     background-color: #4bb4de;
-}
+} */
 .card-header {
     border: none;
     border-radius: 0;
