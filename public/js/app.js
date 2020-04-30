@@ -2016,12 +2016,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      user: "",
       isLoggedIn: false
     };
   },
   props: {
     links: Array // isLoggedIn: { type: Boolean, default: false }
 
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios.get("/api/user").then(function (response) {
+      _this.user = response.data;
+    });
   },
   mounted: function mounted() {
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -2044,13 +2052,13 @@ __webpack_require__.r(__webpack_exports__);
       $("#collapsibleNavbar").collapse("hide");
     },
     logout: function logout() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/sanctum/csrf-cookie").then(function (response) {
         axios.post("/api/user/logout").then(function () {
           localStorage.removeItem("isLoggedIn");
 
-          _this.$router.go({
+          _this2.$router.go({
             name: "userLogin"
           });
         });
@@ -3418,19 +3426,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: ""
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this = this;
 
     axios.get("/api/admin/init").then(function (response) {
@@ -11167,7 +11169,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n\n    background: #ff7e5f;\n    background: linear-gradient(to right, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -47853,12 +47855,6 @@ var render = function() {
   return _c("div", { staticClass: "container-fluid " }, [
     _c("div", { staticClass: "container-xl" }, [
       _c("div", { staticClass: "row full-height " }, [
-        _c("img", {
-          staticClass: " center",
-          staticStyle: { width: "100%", "max-width": "80%", height: "auto" },
-          attrs: { src: "/assets/undraw_journey_lwlj.svg", alt: "Monkey face" }
-        }),
-        _vm._v(" "),
         _c(
           "div",
           {
@@ -47866,7 +47862,7 @@ var render = function() {
             staticStyle: { color: "#ff7e5f" }
           },
           [
-            _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card " }, [
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticStyle: { "font-size": "5vw" } }, [
                   _vm._v(
@@ -50615,9 +50611,13 @@ var staticRenderFns = [
           _c("div", { staticClass: "row flex-center full-height" }, [
             _c("img", {
               staticClass: " center",
-              staticStyle: { width: "100%", height: "auto" },
+              staticStyle: {
+                width: "100%",
+                height: "auto",
+                "max-width": "1400px"
+              },
               attrs: {
-                src: "/assets/undraw_aircraft_fbvl.svg",
+                src: "/assets/undraw_air_support_wy1q.svg",
                 alt: "Monkey face"
               }
             }),
@@ -50626,8 +50626,12 @@ var staticRenderFns = [
               _c(
                 "h1",
                 {
-                  staticClass: "flex-center font-weight-bold",
-                  staticStyle: { "font-size": "6vw", color: "#fff" }
+                  staticClass: "flex-center font-weight-bold ",
+                  staticStyle: {
+                    "font-size": "7vw",
+                    color: "#fff",
+                    "text-shadow": "2px 2px 10px rgba(150, 150, 150, 1)"
+                  }
                 },
                 [
                   _vm._v(
@@ -50635,7 +50639,7 @@ var staticRenderFns = [
                   ),
                   _c("br"),
                   _vm._v(
-                    "        Our\n                    Mohlaewlook\n                "
+                    "       \n                    Mohlaewlook\n                "
                   )
                 ]
               )
