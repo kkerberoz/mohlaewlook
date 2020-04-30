@@ -487,9 +487,9 @@ export default {
 </script>
 
 <style>
-.reservation {
+/* .reservation {
     background-color: #4bb4de;
-}
+} */
 .card-header {
     border: none;
     border-radius: 0;

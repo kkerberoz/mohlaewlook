@@ -236,4 +236,10 @@ class BackendController extends Controller
         $class_price = new Class_price;
         $flight = new Flight;
     }
+
+    public function getFlightNo()
+    {
+        $flightNo = Flight::all();
+        return response()->JSON($flightNo);
+    }
 }

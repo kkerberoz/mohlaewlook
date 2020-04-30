@@ -3241,6 +3241,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3261,7 +3263,129 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  data: function data() {
+    return {
+      flights: [],
+      input: {
+        flightNo: "",
+        ecoPrice: "",
+        businessPrice: "",
+        firstPrice: ""
+      },
+      error_flightNo: "",
+      error_ecoPrice: "",
+      error_businessPrice: "",
+      error_firstPrice: ""
+    };
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios.get("/api/backend/getFlightNo").then(function (response) {
+      _this.flights = response.data;
+      console.log(_this.flights);
+    });
+  },
+  methods: {
+    flightNo: function flightNo(_ref) {
+      var flight_no = _ref.flight_no,
+          depart_location = _ref.depart_location,
+          arrive_location = _ref.arrive_location,
+          depart_datetime = _ref.depart_datetime,
+          arrive_datetime = _ref.arrive_datetime;
+      return "[".concat(flight_no, "] - ").concat(depart_location, " to ").concat(arrive_location, " (").concat(depart_datetime, ")-(").concat(arrive_datetime, ") ");
+    },
+    handleModal: function handleModal() {
+      swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+    },
+    handleSelect: function handleSelect(option) {
+      return option;
+    }
+  }
+});
 
 /***/ }),
 
@@ -10985,7 +11109,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    background-color: #4bb4de;\n}\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
 
 // exports
 
@@ -47386,7 +47510,201 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    [
+      _c("div", { staticClass: "container-xl" }, [
+        _c("div", { staticClass: "row flex-center " }, [
+          _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-12 mb-2" },
+                    [
+                      _c("label", [
+                        _vm._v(
+                          "Flignt Number:\n                                    " +
+                            _vm._s(_vm.input.flightNo.flight_no)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          "custom-label": _vm.flightNo,
+                          options: _vm.flights,
+                          searchable: true,
+                          multiple: false,
+                          "close-on-select": true,
+                          "clear-on-select": false,
+                          "preserve-search": true,
+                          placeholder: "Choose",
+                          "preselect-first": false
+                        },
+                        on: {
+                          select: _vm.handleSelect,
+                          close: _vm.handleModal
+                        },
+                        model: {
+                          value: _vm.input.flightNo,
+                          callback: function($$v) {
+                            _vm.$set(_vm.input, "flightNo", $$v)
+                          },
+                          expression: "input.flightNo"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(_vm.error_flightNo) +
+                            "\n                                "
+                        )
+                      ])
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4 mt-2" }, [
+                    _c("label", [_vm._v("Economy Class Price:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.input.ecoPrice,
+                            expression: "input.ecoPrice"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error_ecoPrice
+                        },
+                        attrs: { required: "", type: "text" },
+                        domProps: { value: _vm.input.ecoPrice },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.input, "ecoPrice", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(_vm.error_ecoPrice) +
+                            "\n                                    "
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4 mt-2" }, [
+                    _c("label", [_vm._v("Business Class Price:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.input.businessPrice,
+                            expression: "input.businessPrice"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error_businessPrice
+                        },
+                        attrs: { required: "", type: "text" },
+                        domProps: { value: _vm.input.businessPrice },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.input,
+                              "businessPrice",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(_vm.error_businessPrice) +
+                            "\n                                    "
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4 mt-2" }, [
+                    _c("label", [_vm._v("First Class Price:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.input.firstPrice,
+                            expression: "input.firstPrice"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.error_firstPrice
+                        },
+                        attrs: { required: "", type: "text" },
+                        domProps: { value: _vm.input.firstPrice },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.input,
+                              "firstPrice",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                                        " +
+                            _vm._s(_vm.error_firstPrice) +
+                            "\n                                    "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" })
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -47395,36 +47713,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "container-xl" }, [
-          _c("div", { staticClass: "row flex-center " }, [
-            _c("div", { staticClass: "col-md-12 " }, [
-              _c("div", { staticClass: "card shadow-lg bg-white" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { "border-radius": "0px" }
-                  },
-                  [
-                    _c("div", { staticClass: "card-title" }, [
-                      _vm._v("Manage Flight Price")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", {
-                  staticClass: "float-right",
-                  staticStyle: { padding: "20px" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer" })
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v("Manage Flight Price")
         ])
       ]
     )
