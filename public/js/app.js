@@ -2024,13 +2024,6 @@ __webpack_require__.r(__webpack_exports__);
     links: Array // isLoggedIn: { type: Boolean, default: false }
 
   },
-  beforeMount: function beforeMount() {
-    var _this = this;
-
-    axios.get("/api/user").then(function (response) {
-      _this.user = response.data;
-    });
-  },
   mounted: function mounted() {
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
   },
@@ -2052,13 +2045,13 @@ __webpack_require__.r(__webpack_exports__);
       $("#collapsibleNavbar").collapse("hide");
     },
     logout: function logout() {
-      var _this2 = this;
+      var _this = this;
 
       axios.get("/sanctum/csrf-cookie").then(function (response) {
         axios.post("/api/user/logout").then(function () {
           localStorage.removeItem("isLoggedIn");
 
-          _this2.$router.go({
+          _this.$router.push({
             name: "userLogin"
           });
         });
@@ -6096,9 +6089,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
 //
 //
 //
@@ -11201,7 +11191,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -50636,15 +50626,15 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container-fluid reservation" }, [
       _c(
         "div",
-        { staticClass: "container-xl ", staticStyle: { padding: "20px" } },
+        { staticClass: "container-xl", staticStyle: { padding: "20px" } },
         [
           _c("div", { staticClass: "row flex-center full-height" }, [
             _c("img", {
-              staticClass: " center",
+              staticClass: "center",
               staticStyle: {
                 width: "100%",
                 height: "auto",
-                "max-width": "1400px"
+                "max-width": "1300px"
               },
               attrs: {
                 src: "/assets/undraw_air_support_wy1q.svg",
@@ -50656,7 +50646,7 @@ var staticRenderFns = [
               _c(
                 "h1",
                 {
-                  staticClass: "flex-center font-weight-bold ",
+                  staticClass: "flex-center font-weight-bold",
                   staticStyle: {
                     "font-size": "7vw",
                     color: "#fff",

@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="container-fluid "
-        style="padding-top:5%;padding-bottom:10%;"
-    >
+    <div class="container-fluid " style="padding-top:5%;padding-bottom:10%;">
         <div class="container-xl" style="margin-top:5%;padding-bottom:5%;">
             <div class="row flex-center">
                 <div class="col-md-12">

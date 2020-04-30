@@ -59,11 +59,7 @@ export default {
         links: Array
         // isLoggedIn: { type: Boolean, default: false }
     },
-    beforeMount() {
-        axios.get("/api/user").then(response => {
-            this.user = response.data;
-        });
-    },
+
     mounted() {
         this.isLoggedIn = localStorage.getItem("isLoggedIn");
     },
@@ -89,7 +85,7 @@ export default {
             axios.get("/sanctum/csrf-cookie").then(response => {
                 axios.post("/api/user/logout").then(() => {
                     localStorage.removeItem("isLoggedIn");
-                    this.$router.go({ name: "userLogin" });
+                    this.$router.push({ name: "userLogin" });
                 });
             });
         }
