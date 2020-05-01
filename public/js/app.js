@@ -3106,6 +3106,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3128,6 +3136,7 @@ __webpack_require__.r(__webpack_exports__);
         crew: []
       },
       options_pilot: [],
+      options_copilot: [],
       options_attendant: [],
       aircrafts: [],
       locations: [],
@@ -3135,7 +3144,8 @@ __webpack_require__.r(__webpack_exports__);
       time_check: null,
       location_check: null,
       all_check: null,
-      aircraft_array_info: []
+      aircraft_array_info: [],
+      crew_array_info: null
     };
   },
   methods: {},
@@ -3154,22 +3164,6 @@ __webpack_require__.r(__webpack_exports__);
   beforeUpdate: function beforeUpdate() {
     var _this2 = this;
 
-    // if(this.input.departDate == ""){
-    //     // alert when didn't select depart date time
-    // }
-    // else if(this.input.departDate != this.date_check){ // query only work date
-    //     this.date_check = this.input.departDate;
-    //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
-    //     //     this.options_attendant = [];
-    //     //     (response.data.Attendant).forEach(attendant => {
-    //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
-    //     //     });
-    //     //     this.options_pilot = [];
-    //     //     (response.data.Pilot).forEach(pilot => {
-    //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
-    //     //     });
-    //     // });
-    // }
     // for check depart location, depart date and depart time are selected.
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
       this.aircrafts = [];
@@ -3189,7 +3183,8 @@ __webpack_require__.r(__webpack_exports__);
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
-        console.log(response.data);
+        console.log(response.data); // show aircraft
+
         var aircraft = response.data.Aircraft;
         var aircraft_brand = response.data.Aircraft_Brand;
         var aircraft_model = response.data.Aircraft_Model;
@@ -3202,8 +3197,6 @@ __webpack_require__.r(__webpack_exports__);
 
         document.getElementById("aircraft_info").innerHTML = null;
         _this2.aircrafts = [];
-        _this2.options_pilot = [];
-        _this2.options_attendant = [];
 
         for (var i = 0; i < aircraft.length; ++i) {
           _this2.aircrafts.push({
@@ -3222,11 +3215,33 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
         }
+
+        _this2.options_pilot = [];
+        _this2.options_attendant = [];
+        var pilot = response.data.Pilot;
+        var attendant = response.data.Attendant;
+        _this2.crew_array_info = response.data.Personal_Detail;
+
+        for (var i = 0; i < pilot.length; ++i) {
+          _this2.options_pilot.push({
+            value: pilot[i]['data']['user_id'],
+            name: "ID: " + pilot[i]['data']['user_id']
+          });
+        }
+
+        for (var i = 0; i < attendant.length; ++i) {
+          _this2.options_attendant.push({
+            value: attendant[i]['data']['user_id'],
+            name: "ID: " + attendant[i]['data']['user_id']
+          });
+        }
       });
     } // show information of each aircraft
 
 
-    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null;
+    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null; // show information of each pilot
+
+    if (this.input.captain != null) document.getElementById("pilot_info").innerHTML = this.crew_array_info[this.input.captain.value]['name'] + " " + this.crew_array_info[this.input.captain.value]['surname'];else document.getElementById("pilot_info").innerHTML = null;
   }
 });
 
@@ -47006,7 +47021,12 @@ var render = function() {
                               _vm._v(
                                 "\n                                        Please choose\n                                    "
                               )
-                            ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", {
+                              staticClass: "static active",
+                              attrs: { id: "pilot_info" }
+                            })
                           ],
                           1
                         )
@@ -47020,7 +47040,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options_pilot,
+                              options: _vm.options_copilot,
                               searchable: true,
                               multiple: false,
                               "close-on-select": true,
@@ -47043,7 +47063,12 @@ var render = function() {
                             _vm._v(
                               "\n                                    Please choose\n                                "
                             )
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass: "static active",
+                            attrs: { id: "copilot_info" }
+                          })
                         ],
                         1
                       )
@@ -67965,8 +67990,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
