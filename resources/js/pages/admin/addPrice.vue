@@ -17,7 +17,6 @@
                                     >
                                     <multiselect
                                         @select="handleSelect"
-                                        @close="handleModal"
                                         :custom-label="flightNo"
                                         v-model="input.flightNo"
                                         :options="flights"
@@ -93,7 +92,6 @@
                             <button
                                 class="btn btn-primary btn-lg btn-block btn-login"
                                 @click.prevent="formSubmit"
-                                :disabled="isLoading"
                             >
                             <span >Submit</span>
                             </button>
@@ -112,6 +110,7 @@ export default {
     data() {
         return {
             flights: [],
+            empty_price: [],
             input: {
                 flightNo: "",
                 ecoPrice: "",
@@ -126,11 +125,29 @@ export default {
     },
     beforeMount() {
         axios.get("/api/backend/getFlightNo").then(response => {
-            this.flights = response.data;
-            console.log(this.flights);
+            this.flights = response.data[0];
+            this.empty_price = response.data[1];
+            console.log("flight",this.flights);
+            console.log("missing price",this.empty_price);
+
         });
+
     },
     methods: {
+        formSubmit(e) {
+            e.preventDefault();
+            let data = { input: this.input };
+            axios.post("/api/backend/addPrice", data).then(response => {
+                    console.log(response.data);
+                    swal.fire(
+                        "Update Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    ).then(() => {
+                        this.$router.push({ name: "adminHome" });
+                    });
+                });
+        },
         flightNo({
             flight_no,
             depart_location,

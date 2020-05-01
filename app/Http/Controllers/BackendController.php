@@ -215,28 +215,36 @@ class BackendController extends Controller
 
     public function addPrice(Request $request)
     {
+        $data = $request->input;
         $class_price = new Class_price;
-        // $priceData = DB::select('select * FROM class_prices WHERE flight_no = :flight_no',['flight_no'=>$request->flight_no]);
-        // if(isset($priceData)){
-
-        // }
-        $class_price->flight_no = $request->flight_no;
-        $class_price->eco_price = $request->eco_price;
-        $class_price->bus_price = $request->bus_price;
-        $class_price->first_price = $request->first_price;
-
+        // $priceData = DB::select('select * FROM class_prices WHERE flight_no = ?',[$data['flightNo']]);
+        $priceData = Class_price::where('flight_no',$data['flightNo'])->first();
+        $class_price->flight_no = $data['flightNo'];
+        $class_price->eco_price = $data['ecoPrice'];
+        $class_price->bus_price = $data['businessPrice'];
+        $class_price->first_price = $data['firstPrice'];
+        if(isset($priceData)){
+            Class_price::where('flight_no',$priceData['flight_no'])->update(['eco_price'=>$class_price->eco_price,'bus_price'=>$class_price->bus_price,'first_price'=>$class_price->first_price]);
+        }
+        else{
+            $class_price->save();
+        }
     }
 
-    public function checkFlightNoPrice()
-    {
-        $class_price = new Class_price;
-        $Fflight_no = DB::select('SELECT DISTINCT * FROM flights');
-
-    }
 
     public function getFlightNo()
     {
         $flightNo = Flight::distinct()->get(['flight_no','depart_location','arrive_location']);
-        return response()->JSON($flightNo);
+
+        $C_flight_no = Class_price::get('flight_no');
+        $miss_flight_no = [];
+
+        foreach ($C_flight_no as $each_no) {
+            $check = Flight::where('flight_no',$each_no['flight_no'])->first();
+            if(!isset($check)){
+                array_push($miss_flight_no,$each_no);
+            }
+        }
+        return response()->JSON([$flightNo,$miss_flight_no]);
     }
 }

@@ -3349,8 +3349,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3359,6 +3357,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       flights: [],
+      empty_price: [],
       input: {
         flightNo: "",
         ecoPrice: "",
@@ -3375,11 +3374,29 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("/api/backend/getFlightNo").then(function (response) {
-      _this.flights = response.data;
-      console.log(_this.flights);
+      _this.flights = response.data[0];
+      _this.empty_price = response.data[1];
+      console.log("flight", _this.flights);
+      console.log("missing price", _this.empty_price);
     });
   },
   methods: {
+    formSubmit: function formSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var data = {
+        input: this.input
+      };
+      axios.post("/api/backend/addPrice", data).then(function (response) {
+        console.log(response.data);
+        swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
+          _this2.$router.push({
+            name: "adminHome"
+          });
+        });
+      });
+    },
     flightNo: function flightNo(_ref) {
       var flight_no = _ref.flight_no,
           depart_location = _ref.depart_location,
@@ -47657,10 +47674,7 @@ var render = function() {
                           placeholder: "Choose",
                           "preselect-first": false
                         },
-                        on: {
-                          select: _vm.handleSelect,
-                          close: _vm.handleModal
-                        },
+                        on: { select: _vm.handleSelect },
                         model: {
                           value: _vm.input.flightNo,
                           callback: function($$v) {
@@ -47817,7 +47831,6 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { disabled: _vm.isLoading },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
