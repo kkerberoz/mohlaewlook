@@ -38,12 +38,16 @@ Route::prefix('admin')->group(function () {
 
 //route for CRUD admin controller
 Route::prefix('backend')->group(function () {
+    //customer
     Route::get('/getCustomer', 'UserController@getCustomer');
+    Route::delete('/customer/{id}', 'UserController@destroy');
+    Route::put('/customer/{id}', 'UserController@update');
+
+    //Flight
+    Route::get('/getFlightNo', 'BackendController@getFlightNo');
     Route::post('/addAircraft', 'BackendController@addAircraft');
     Route::get('/getAirports', 'BackendController@getAirports');
     Route::post('/getAircraftAndCrew', 'BackendController@getAircraftAndCrew');
     Route::post('/addAirport', 'BackendController@addAirport');
     Route::get('/getModelBrand', 'BackendController@getModelBrand');
-    Route::post('/addPrice','BackendController@addPrice');
-    Route::get('/checkFlightNoPrice','BackendController@checkFlightNoPrice');
 });

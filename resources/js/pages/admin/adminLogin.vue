@@ -4,7 +4,7 @@
             <div class="row flex-center full-height">
                 <div class="col-md-5">
                     <form v-on:submit="formSubmit">
-                        <div class="card" id="cardLogin">
+                        <div class="card shadow-lg bg-white" id="cardLogin">
                             <div class="card-header bg-dark" id="cardLogin">
                                 Admin Login
                             </div>

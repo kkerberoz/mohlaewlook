@@ -1,49 +1,52 @@
 <template>
-    <div class="container-xl" style="margin-top:5%;margin-bottom:5%">
-        <div class="row flex-center full-height">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-info">Register</div>
-                    <form v-on:submit="formSubmit">
-                        <!-- <form method="post" action="/regis"> -->
-                        <input
-                            type="hidden"
-                            name="_token"
-                            v-bind:value="csrf"
-                        />
-                        <div class="card-body">
-                            <span class="form-group">
-                                <label>Username:</label>
-                                <input
-                                    v-bind:class="{
-                                        'is-invalid': error_username
-                                    }"
-                                    type="text"
-                                    class="form-control"
-                                    v-model="username"
-                                    name="username"
-                                />
-                                <span class="invalid-feedback">{{
-                                    error_username
-                                }}</span>
-                            </span>
+    <div class="container-fluid" style="margin-top:8%;margin-bottom:10%">
+        <div class="container-xl">
+            <div class="row flex-center full-height">
+                <div class="col-md-6">
+                    <div class="card shadow-lg bg-white">
+                        <div class="card-header" style="border-radius: 0px;">
+                            Register
+                        </div>
+                        <form v-on:submit="formSubmit">
+                            <!-- <form method="post" action="/regis"> -->
+                            <input
+                                type="hidden"
+                                name="_token"
+                                v-bind:value="csrf"
+                            />
+                            <div class="card-body">
+                                <span class="form-group">
+                                    <label>Username:</label>
+                                    <input
+                                        v-bind:class="{
+                                            'is-invalid': error_username
+                                        }"
+                                        type="text"
+                                        class="form-control"
+                                        v-model="username"
+                                        name="username"
+                                    />
+                                    <span class="invalid-feedback">{{
+                                        error_username
+                                    }}</span>
+                                </span>
 
-                            <span class="form-group">
-                                <label>Password:</label>
-                                <input
-                                    v-bind:class="{
-                                        'is-invalid': error_password
-                                    }"
-                                    type="password"
-                                    class="form-control"
-                                    v-model="password"
-                                    name="password"
-                                />
-                                <span class="invalid-feedback">{{
-                                    error_password
-                                }}</span>
-                            </span>
-                            <!-- <span class="form-group">
+                                <span class="form-group">
+                                    <label>Password:</label>
+                                    <input
+                                        v-bind:class="{
+                                            'is-invalid': error_password
+                                        }"
+                                        type="password"
+                                        class="form-control"
+                                        v-model="password"
+                                        name="password"
+                                    />
+                                    <span class="invalid-feedback">{{
+                                        error_password
+                                    }}</span>
+                                </span>
+                                <!-- <span class="form-group">
                                 <label>Password:</label>
                                 <input
                                     v-bind:class="{
@@ -61,96 +64,105 @@
                                 }}</span>
                             </span> -->
 
-                            <span class="form-group">
-                                <label>Title</label>
-                                <select
-                                    v-bind:class="{ 'is-invalid': error_title }"
-                                    class="form-control"
-                                    name="title"
-                                    v-model="title"
-                                >
-                                    <option value selected disabled
-                                        >Please select</option
+                                <span class="form-group">
+                                    <label>Title</label>
+                                    <select
+                                        v-bind:class="{
+                                            'is-invalid': error_title
+                                        }"
+                                        class="form-control"
+                                        name="title"
+                                        v-model="title"
                                     >
-                                    <option>Mrs.</option>
-                                    <option>Ms.</option>
-                                    <option>Mr.</option>
-                                    <option>Miss</option>
-                                </select>
-                                <span class="invalid-feedback">{{
-                                    error_title
-                                }}</span>
-                            </span>
-                            <span class="form-group">
-                                <label>Name:</label>
-                                <input
-                                    v-bind:class="{ 'is-invalid': error_name }"
-                                    type="text"
-                                    class="form-control"
-                                    name="name"
-                                    v-model="name"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_name }}
-                                </div>
-                            </span>
-                            <span class="form-group">
-                                <label>Surname:</label>
-                                <input
-                                    v-bind:class="{
-                                        'is-invalid': error_surname
-                                    }"
-                                    type="text"
-                                    class="form-control"
-                                    name="surname"
-                                    v-model="surname"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_surname }}
-                                </div>
-                            </span>
-                            <span class="form-group">
-                                <label>DOB:</label>
-                                <input
-                                    v-bind:class="{ 'is-invalid': error_DOB }"
-                                    type="date"
-                                    class="form-control"
-                                    name="DOB"
-                                    v-model="DOB"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_DOB }}
-                                </div>
-                            </span>
-                            <span class="form-group">
-                                <label>Email:</label>
-                                <input
-                                    v-model="email"
-                                    v-bind:class="{ 'is-invalid': error_email }"
-                                    type="email"
-                                    class="form-control"
-                                    name="email"
-                                />
-                                <div class="invalid-feedback">
-                                    {{ error_email }}
-                                </div>
-                            </span>
-                        </div>
+                                        <option value selected disabled
+                                            >Please select</option
+                                        >
+                                        <option>Mrs.</option>
+                                        <option>Ms.</option>
+                                        <option>Mr.</option>
+                                        <option>Miss</option>
+                                    </select>
+                                    <span class="invalid-feedback">{{
+                                        error_title
+                                    }}</span>
+                                </span>
+                                <span class="form-group">
+                                    <label>Name:</label>
+                                    <input
+                                        v-bind:class="{
+                                            'is-invalid': error_name
+                                        }"
+                                        type="text"
+                                        class="form-control"
+                                        name="name"
+                                        v-model="name"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_name }}
+                                    </div>
+                                </span>
+                                <span class="form-group">
+                                    <label>Surname:</label>
+                                    <input
+                                        v-bind:class="{
+                                            'is-invalid': error_surname
+                                        }"
+                                        type="text"
+                                        class="form-control"
+                                        name="surname"
+                                        v-model="surname"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_surname }}
+                                    </div>
+                                </span>
+                                <span class="form-group">
+                                    <label>DOB:</label>
+                                    <input
+                                        v-bind:class="{
+                                            'is-invalid': error_DOB
+                                        }"
+                                        type="date"
+                                        class="form-control"
+                                        name="DOB"
+                                        v-model="DOB"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_DOB }}
+                                    </div>
+                                </span>
+                                <span class="form-group">
+                                    <label>Email:</label>
+                                    <input
+                                        v-model="email"
+                                        v-bind:class="{
+                                            'is-invalid': error_email
+                                        }"
+                                        type="email"
+                                        class="form-control"
+                                        name="email"
+                                    />
+                                    <div class="invalid-feedback">
+                                        {{ error_email }}
+                                    </div>
+                                </span>
+                            </div>
 
-                        <div class="card-footer">
-                            <button
-                                type="submit"
-                                :disabled="isLoading"
-                                class="btn btn-block btn-login"
-                            >
-                                <span v-show="!isLoading"> Sign up</span>
-                                <i
-                                    class="fas fa-spinner fa-pulse"
-                                    v-show="isLoading"
-                                ></i>
-                            </button>
-                        </div>
-                    </form>
+                            <div class="card-footer">
+                                <button
+                                    type="submit"
+                                    :disabled="isLoading"
+                                    class="btn btn-block btn-login"
+                                >
+                                    <span v-show="!isLoading"> Sign up</span>
+                                    <i
+                                        class="fas fa-spinner fa-pulse"
+                                        v-show="isLoading"
+                                    ></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

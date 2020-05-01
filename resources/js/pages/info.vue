@@ -46,13 +46,13 @@
 export default {
     data() {
         return {
-            user: ""
+            user: "",
         };
     },
     mounted() {
-        axios.get("/api/user").then(response => {
+        axios.get("/api/user").then((response) => {
             this.user = response.data;
         });
-    }
+    },
 };
 </script>

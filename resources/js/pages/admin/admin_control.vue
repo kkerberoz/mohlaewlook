@@ -45,6 +45,7 @@
                             <li class="header-menu">
                                 <span>Menu</span>
                             </li>
+
                             <li>
                                 <router-link to="/">
                                     <i class="fas fa-home"></i>
@@ -93,6 +94,20 @@
                                 >
                                     <i class="fas fa-user-edit"></i>
                                     <span>Manage Customer</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'addPrice' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <span>Manage Flight Price</span>
                                 </router-link>
                             </li>
                             <li>

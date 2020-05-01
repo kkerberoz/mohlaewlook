@@ -295,14 +295,13 @@ export default {
             this.input.departLocation == null ||
             this.input.departDate == null ||
             this.input.departTime == null
-        ){
+        ) {
             this.aircrafts = [];
             this.options_pilot = [];
             this.options_attendant = [];
             this.location_check = this.input.departLocation;
             this.all_check = false;
-        }
-        else if (
+        } else if (
             this.input.departLocation != null &&
             this.input.departDate != null &&
             this.input.departTime != null
@@ -341,13 +340,18 @@ export default {
                         this.aircrafts.push({
                             value: aircraft[i]["aircraft_id"],
                             name:
-                                "ID: " + aircraft[i]["aircraft_id"] +
-                                " - " + aircraft_brand[i]["brand_name"] +
-                                " " + aircraft_model[i]["model_name"]
+                                "ID: " +
+                                aircraft[i]["aircraft_id"] +
+                                " - " +
+                                aircraft_brand[i]["brand_name"] +
+                                " " +
+                                aircraft_model[i]["model_name"]
                         });
                         this.aircraft_array_info[aircraft[i]["aircraft_id"]] =
-                            "<b>Number of Flight Times:</b> " + flight_time[i] +
-                            " Times <br>" + "<b>Last Flight</b>: " +
+                            "<b>Number of Flight Times:</b> " +
+                            flight_time[i] +
+                            " Times <br>" +
+                            "<b>Last Flight</b>: " +
                             flight_info[i]["flight_no"] +
                             "<b> from</b> " +
                             flight_info[i]["depart_location"] +
@@ -359,15 +363,20 @@ export default {
                             "<b> To:</b>  " +
                             flight_info[i]["arrive_datetime"];
                     }
-                    for (var i=0; i<other_aircraft.length; ++i){
+                    for (var i = 0; i < other_aircraft.length; ++i) {
                         this.aircrafts.push({
                             value: other_aircraft[i]["aircraft_id"],
                             name:
-                                "ID: " + other_aircraft[i]["aircraft_id"] +
-                                " - " + other_brand[i]["brand_name"] +
-                                " " + other_model[i]["model_name"]
+                                "ID: " +
+                                other_aircraft[i]["aircraft_id"] +
+                                " - " +
+                                other_brand[i]["brand_name"] +
+                                " " +
+                                other_model[i]["model_name"]
                         });
-                        this.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight"
+                        this.aircraft_array_info[
+                            other_aircraft[i]["aircraft_id"]
+                        ] = "Never Used to Flight";
                     }
                     this.options_pilot = [];
                     this.options_attendant = [];

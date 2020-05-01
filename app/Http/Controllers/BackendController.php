@@ -247,7 +247,13 @@ class BackendController extends Controller
     public function checkFlightNoPrice()
     {
         $class_price = new Class_price;
-        $flight = new Flight;
+        $Fflight_no = DB::select('SELECT DISTINCT * FROM flights');
 
+    }
+
+    public function getFlightNo()
+    {
+        $flightNo = Flight::distinct()->get(['flight_no','depart_location','arrive_location']);
+        return response()->JSON($flightNo);
     }
 }
