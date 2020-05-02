@@ -245,7 +245,7 @@ export default {
                             "Cilck the button to continue!",
                             "success"
                         ).then(() => {
-                            this.$router.push("/admin");
+                            this.$router.push({ name: "addAirport" });
                         });
                     })
                     .catch(error => {

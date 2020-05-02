@@ -974,7 +974,7 @@ export default {
                                 "Cilck the button to continue!",
                                 "success"
                             ).then(() => {
-                                this.$router.go({ name: "adminHome" });
+                                this.$router.replace({ name: "newEmployee" });
                             });
                         })
                         .catch(error => {

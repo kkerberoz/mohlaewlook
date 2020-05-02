@@ -2513,7 +2513,7 @@ __webpack_require__.r(__webpack_exports__);
           // console.log(response.data);
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
             _this2.$router.push({
-              name: "adminHome"
+              name: "addAircraft"
             });
           });
         });
@@ -2829,7 +2829,9 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.errors.length) {
         axios.post("/api/backend/addAirport", data).then(function (response) {
           swal.fire("Add Data Success!", "Cilck the button to continue!", "success").then(function () {
-            _this.$router.push("/admin");
+            _this.$router.push({
+              name: "addAirport"
+            });
           });
         })["catch"](function (error) {
           _this.isLoading = false;
@@ -3602,7 +3604,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data);
         swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
           _this2.$router.push({
-            name: "adminHome"
+            name: "addPrice"
           });
         });
       });
@@ -4464,7 +4466,7 @@ __webpack_require__.r(__webpack_exports__);
           axios.get("/sanctum/csrf-cookie").then(function (response) {
             axios["delete"]("/api/backend/customer/".concat(id)).then(function () {
               swal.fire("Deleted!", "Your customer data has been deleted.", "success").then(function () {
-                _this2.$router.go({
+                _this2.$router.replace({
                   name: "customerCRUD"
                 });
               });
@@ -4552,7 +4554,7 @@ __webpack_require__.r(__webpack_exports__);
               _this3.isLoading = false;
               $("#addNew").modal("hide");
 
-              _this3.$router.go({
+              _this3.$router.replace({
                 name: "customerCRUD"
               });
             });
@@ -4667,7 +4669,7 @@ __webpack_require__.r(__webpack_exports__);
               swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
                 $("#addNew").modal("hide");
 
-                _this4.$router.go({
+                _this4.$router.replace({
                   name: "customerCRUD"
                 });
               });
@@ -5687,8 +5689,8 @@ __webpack_require__.r(__webpack_exports__);
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.go({
-                name: "adminHome"
+              _this2.$router.replace({
+                name: "newEmployee"
               });
             });
           })["catch"](function (error) {
@@ -5832,6 +5834,14 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/api/user").then(function (response) {
       _this.user = response.data;
+    })["catch"](function (error) {
+      if (error.response.status === 401) {
+        swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
+          _this.$router.push({
+            name: "userLogin"
+          });
+        });
+      }
     });
   }
 });
@@ -5962,7 +5972,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
               localStorage.setItem("isLoggedIn", "true");
 
-              _this.$router.go({
+              _this.$router.push({
                 name: "info"
               });
             });
