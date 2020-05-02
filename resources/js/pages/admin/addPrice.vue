@@ -17,7 +17,6 @@
                                     >
                                     <multiselect
                                         @select="handleSelect"
-                                        @close="handleModal"
                                         :custom-label="flightNo"
                                         v-model="input.flightNo"
                                         :options="flights"
@@ -93,7 +92,6 @@
                             <button
                                 class="btn btn-primary btn-lg btn-block btn-login"
                                 @click.prevent="formSubmit"
-                                :disabled="isLoading"
                             >
                             <span >Submit</span>
                             </button>
@@ -127,10 +125,26 @@ export default {
     beforeMount() {
         axios.get("/api/backend/getFlightNo").then(response => {
             this.flights = response.data;
-            console.log(this.flights);
+            console.log("flight",this.flights);
+
         });
+
     },
     methods: {
+        formSubmit(e) {
+            e.preventDefault();
+            let data = { input: this.input };
+            axios.post("/api/backend/addPrice", data).then(response => {
+                    console.log(response.data);
+                    swal.fire(
+                        "Update Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    ).then(() => {
+                        this.$router.push({ name: "adminHome" });
+                    });
+                });
+        },
         flightNo({
             flight_no,
             depart_location,

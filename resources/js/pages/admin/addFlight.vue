@@ -95,7 +95,7 @@
                                 </span>
                             </div>
                             <div class="row">
-                                <span class="col-md-6 mb-2">
+                                <span class="col-md-4 mb-2">
                                     <label>Aircraft ID:</label>
                                     <multiselect
                                         v-bind:class="{
@@ -119,11 +119,31 @@
                                 </span>
                                 <span class="col-md-6 mb-2">
                                     <label>Flight Number:</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
+                                    <multiselect
+                                        :custom-label="flightNo"
                                         v-model="input.flightNo"
-                                    />
+                                        :options="flights"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        :preserve-search="true"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
+                                    ></multiselect>
+                                    <div class="invalid-feedback">
+                                        Please enter flight number
+                                    </div>
+                                </span>
+                                <span class="col-md-2 mb-2">
+                                    <label>Other Flight:</label>
+                                    <div
+                                        @click="handleShowModal"
+                                        class="btn btn-info btn-block"
+                                        style="color:#fff"
+                                    >
+                                        NewFlight
+                                    </div>
                                     <div class="invalid-feedback">
                                         Please enter flight number
                                     </div>
@@ -241,6 +261,103 @@
                 </form>
             </div>
         </div>
+        <div
+            class="modal fade"
+            id="addNew"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addNewLabel">
+                            New Flight
+                        </h5>
+                    </div>
+                    <span class="col-md-12 mt-2 mb-2">
+                        <label>Flight Number:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="input.flightNo"
+                        />
+                        <div class="invalid-feedback">
+                            Please enter flight number
+                        </div>
+                    </span>
+                    <div class="col-md-12 mt-2 mb-2">
+                        <label>Economy Class Price:</label>
+                        <div class="input-group">
+                            <input
+                                v-bind:class="{
+                                    'is-invalid': error_ecoPrice
+                                }"
+                                required
+                                type="text"
+                                class="form-control"
+                                v-model="modalInput.ecoPrice"
+                            />
+                            <span class="invalid-feedback">
+                                {{ error_ecoPrice }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-2">
+                        <label>Business Class Price:</label>
+                        <div class="input-group">
+                            <input
+                                v-bind:class="{
+                                    'is-invalid': error_businessPrice
+                                }"
+                                required
+                                type="text"
+                                class="form-control"
+                                v-model="modalInput.businessPrice"
+                            />
+                            <span class="invalid-feedback">
+                                {{ error_businessPrice }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-2">
+                        <label>First Class Price:</label>
+                        <div class="input-group">
+                            <input
+                                v-bind:class="{
+                                    'is-invalid': error_firstPrice
+                                }"
+                                required
+                                type="text"
+                                class="form-control"
+                                v-model="modalInput.firstPrice"
+                            />
+                            <span class="invalid-feedback">
+                                {{ error_firstPrice }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal"
+                            @click="handleCloseModal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            @click="handleCreateModal"
+                        >
+                            <span>Create</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -250,7 +367,14 @@ export default {
     components: { Multiselect },
     data() {
         return {
+            modalOpen: false,
+            flights: [],
             isLoading: false,
+            modalInput: {
+                ecoPrice: "",
+                businessPrice: "",
+                firstPrice: ""
+            },
             input: {
                 aircraftID: null,
                 flightNo: null,
@@ -264,6 +388,10 @@ export default {
                 coPilot: null,
                 crew: []
             },
+            errors: [],
+            error_ecoPrice: "",
+            error_businessPrice: "",
+            error_firstPrice: "",
             options_pilot: [],
             options_copilot: [],
             options_attendant: [],
@@ -278,8 +406,40 @@ export default {
             crew_array_info: null
         };
     },
-    methods: {},
+    methods: {
+        handleShowModal() {
+            if (this.modalOpen) {
+                $("#addNew").modal("show");
+            } else {
+                this.input.flightNo = "";
+                this.modalInput.ecoPrice = "";
+                this.modalInput.businessPrice = "";
+                this.modalInput.firstPrice = "";
+                $("#addNew").modal("show");
+            }
+        },
+        flightNo({ flight_no }) {
+            return `${flight_no} `;
+        },
+        handleCreateModal() {
+            this.modalOpen = true;
+            $("#addNew").modal("hide");
+        },
+        handleCloseModal() {
+            this.modalOpen = false;
+            this.input.flightNo = "";
+            this.modalInput.ecoPrice = "";
+            this.modalInput.businessPrice = "";
+            this.modalInput.firstPrice = "";
+            $("#addNew").modal("hide");
+        }
+    },
     beforeMount() {
+        axios.get("/api/backend/getFlightNo").then(response => {
+            this.flights = response.data;
+            console.log("flight", this.flights);
+        });
+
         axios.get("/api/backend/getAirports").then(response => {
             response.data.forEach(airport => {
                 this.locations.push({
