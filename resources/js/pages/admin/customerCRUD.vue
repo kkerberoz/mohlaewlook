@@ -341,7 +341,7 @@ export default {
                                     "Your customer data has been deleted.",
                                     "success"
                                 ).then(() => {
-                                    this.$router.replace({
+                                    this.$router.go({
                                         name: "customerCRUD"
                                     });
                                 });
@@ -438,7 +438,7 @@ export default {
                             ).then(() => {
                                 this.isLoading = false;
                                 $("#addNew").modal("hide");
-                                this.$router.replace({ name: "customerCRUD" });
+                                this.$router.go({ name: "customerCRUD" });
                             });
                         });
                 });
@@ -556,7 +556,7 @@ export default {
                                 "success"
                             ).then(() => {
                                 $("#addNew").modal("hide");
-                                this.$router.replace({ name: "customerCRUD" });
+                                this.$router.go({ name: "customerCRUD" });
                             });
                         }
                     });
