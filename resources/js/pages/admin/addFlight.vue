@@ -171,13 +171,17 @@
                                         <div class="invalid-feedback">
                                             Please choose
                                         </div>
+                                        <div
+                                            class="static active"
+                                            id="pilot_info"
+                                        ></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label>Co-pilot:</label>
                                     <multiselect
                                         v-model="input.coPilot"
-                                        :options="options_pilot"
+                                        :options="options_copilot"
                                         :searchable="true"
                                         :multiple="false"
                                         :close-on-select="true"
@@ -190,6 +194,10 @@
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
+                                    <div
+                                        class="static active"
+                                        id="copilot_info"
+                                    ></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -385,6 +393,7 @@ export default {
             error_businessPrice: "",
             error_firstPrice: "",
             options_pilot: [],
+            options_copilot: [],
             options_attendant: [],
             aircrafts: [],
             locations: [],
@@ -392,7 +401,9 @@ export default {
             time_check: null,
             location_check: null,
             all_check: null,
-            aircraft_array_info: []
+            aircraft_array_info: [],
+            pilot_on_flight: [],
+            crew_array_info: null
         };
     },
     methods: {
@@ -440,23 +451,6 @@ export default {
         });
     },
     beforeUpdate() {
-        // if(this.input.departDate == ""){
-        //     // alert when didn't select depart date time
-        // }
-        // else if(this.input.departDate != this.date_check){ // query only work date
-        //     this.date_check = this.input.departDate;
-        //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
-        //     //     this.options_attendant = [];
-        //     //     (response.data.Attendant).forEach(attendant => {
-        //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
-        //     //     });
-        //     //     this.options_pilot = [];
-        //     //     (response.data.Pilot).forEach(pilot => {
-        //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
-        //     //     });
-        //     // });
-        // }
-
         // for check depart location, depart date and depart time are selected.
         if (
             this.input.departLocation == null ||
@@ -484,14 +478,14 @@ export default {
             this.location_check = this.input.departLocation;
             this.date_check = this.input.departDate;
             this.time_check = this.input.departTime;
-            axios
-                .post("/api/backend/getAircraftAndCrew", {
+            axios.post("/api/backend/getAircraftAndCrew", {
                     location: this.input.departLocation.value,
                     date: this.input.departDate,
                     time: this.input.departTime
                 })
                 .then(response => {
                     console.log(response.data);
+                    // show aircraft
                     var aircraft = response.data.Aircraft;
                     var aircraft_brand = response.data.Aircraft_Brand;
                     var aircraft_model = response.data.Aircraft_Model;
@@ -503,8 +497,6 @@ export default {
                     this.input.aircraftID = null; // clear aircraft id
                     document.getElementById("aircraft_info").innerHTML = null;
                     this.aircrafts = [];
-                    this.options_pilot = [];
-                    this.options_attendant = [];
                     for (var i = 0; i < aircraft.length; ++i) {
                         this.aircrafts.push({
                             value: aircraft[i]["aircraft_id"],
@@ -547,6 +539,31 @@ export default {
                             other_aircraft[i]["aircraft_id"]
                         ] = "Never Used to Flight";
                     }
+                    this.options_pilot = [];
+                    this.options_attendant = [];
+                    var pilot = this.pilot_on_flight = response.data.Pilot;
+                    var attendant = response.data.Attendant;
+                    this.crew_array_info = response.data.Personal_Detail;
+                    // pilot
+                    for(var i=0; i<pilot.length; ++i){
+                        this.options_pilot.push({
+                            value: pilot[i]['data']['user_id'],
+                            name: "ID: " + pilot[i]['data']['user_id']
+                        });
+                    }
+                    // co-pilot
+                    for(var i=0; i<pilot.length; ++i){
+                        this.options_copilot.push({
+                            value: pilot[i]['data']['user_id'],
+                            name: "ID: " + pilot[i]['data']['user_id']
+                        });
+                    }
+                    for(var i=0; i<attendant.length; ++i){
+                        this.options_attendant.push({
+                            value: attendant[i]['data']['user_id'],
+                            name: "ID: " + attendant[i]['data']['user_id']
+                        });
+                    }
                 });
         }
         // show information of each aircraft
@@ -555,6 +572,40 @@ export default {
                 "aircraft_info"
             ).innerHTML = this.aircraft_array_info[this.input.aircraftID.value];
         else document.getElementById("aircraft_info").innerHTML = null;
+        // show information of each pilot
+        if (this.input.captain != null){
+            document.getElementById("pilot_info").innerHTML =
+            "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]['name'] + " " + this.crew_array_info[this.input.captain.value]['surname'] + "<br>" +
+            "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]['count'] + " Times"
+            this.options_copilot = [];
+            for(var i=0; i<(this.pilot_on_flight).length; ++i){
+                if(this.input.captain.value != this.pilot_on_flight[i]['data']['user_id']){
+                    this.options_copilot.push({
+                            value: this.pilot_on_flight[i]['data']['user_id'],
+                            name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+                        });
+                }
+            }
+        }
+        else {
+            document.getElementById("pilot_info").innerHTML = null;
+            this.options_copilot = [];
+            for(var i=0; i<(this.pilot_on_flight).length; ++i){
+                this.options_copilot.push({
+                        value: this.pilot_on_flight[i]['data']['user_id'],
+                        name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+                });
+            }
+        }
+        // show information of each co-pilot
+        if (this.input.coPilot != null){
+            document.getElementById("copilot_info").innerHTML =
+            "<b>Name</b>: " + this.crew_array_info[this.input.coPilot.value]['name'] + " " + this.crew_array_info[this.input.coPilot.value]['surname'] + "<br>" +
+            "<b>Flying experience:</b> " + this.crew_array_info[this.input.coPilot.value]['count'] + " Times"
+        }
+        else {
+            document.getElementById("copilot_info").innerHTML = null;
+        }
     }
 };
 </script>

@@ -93,7 +93,7 @@
                                 class="btn btn-primary btn-lg btn-block btn-login"
                                 @click.prevent="formSubmit"
                             >
-                            <span >Submit</span>
+                                <span>Submit</span>
                             </button>
                         </div>
                     </div>
@@ -125,25 +125,23 @@ export default {
     beforeMount() {
         axios.get("/api/backend/getFlightNo").then(response => {
             this.flights = response.data;
-            console.log("flight",this.flights);
-
+            console.log("flight", this.flights);
         });
-
     },
     methods: {
         formSubmit(e) {
             e.preventDefault();
             let data = { input: this.input };
             axios.post("/api/backend/addPrice", data).then(response => {
-                    console.log(response.data);
-                    swal.fire(
-                        "Update Success!",
-                        "Cilck the button to continue!",
-                        "success"
-                    ).then(() => {
-                        this.$router.push({ name: "adminHome" });
-                    });
+                console.log(response.data);
+                swal.fire(
+                    "Update Success!",
+                    "Cilck the button to continue!",
+                    "success"
+                ).then(() => {
+                    this.$router.push({ name: "addPrice" });
                 });
+            });
         },
         flightNo({
             flight_no,

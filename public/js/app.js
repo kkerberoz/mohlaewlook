@@ -2513,7 +2513,7 @@ __webpack_require__.r(__webpack_exports__);
           // console.log(response.data);
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
             _this2.$router.push({
-              name: "adminHome"
+              name: "addAircraft"
             });
           });
         });
@@ -2829,7 +2829,9 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.errors.length) {
         axios.post("/api/backend/addAirport", data).then(function (response) {
           swal.fire("Add Data Success!", "Cilck the button to continue!", "success").then(function () {
-            _this.$router.push("/admin");
+            _this.$router.push({
+              name: "addAirport"
+            });
           });
         })["catch"](function (error) {
           _this.isLoading = false;
@@ -3224,6 +3226,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3257,6 +3267,7 @@ __webpack_require__.r(__webpack_exports__);
       error_businessPrice: "",
       error_firstPrice: "",
       options_pilot: [],
+      options_copilot: [],
       options_attendant: [],
       aircrafts: [],
       locations: [],
@@ -3264,7 +3275,9 @@ __webpack_require__.r(__webpack_exports__);
       time_check: null,
       location_check: null,
       all_check: null,
-      aircraft_array_info: []
+      aircraft_array_info: [],
+      pilot_on_flight: [],
+      crew_array_info: null
     };
   },
   methods: {
@@ -3315,22 +3328,6 @@ __webpack_require__.r(__webpack_exports__);
   beforeUpdate: function beforeUpdate() {
     var _this2 = this;
 
-    // if(this.input.departDate == ""){
-    //     // alert when didn't select depart date time
-    // }
-    // else if(this.input.departDate != this.date_check){ // query only work date
-    //     this.date_check = this.input.departDate;
-    //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
-    //     //     this.options_attendant = [];
-    //     //     (response.data.Attendant).forEach(attendant => {
-    //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
-    //     //     });
-    //     //     this.options_pilot = [];
-    //     //     (response.data.Pilot).forEach(pilot => {
-    //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
-    //     //     });
-    //     // });
-    // }
     // for check depart location, depart date and depart time are selected.
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
       this.aircrafts = [];
@@ -3350,7 +3347,8 @@ __webpack_require__.r(__webpack_exports__);
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
-        console.log(response.data);
+        console.log(response.data); // show aircraft
+
         var aircraft = response.data.Aircraft;
         var aircraft_brand = response.data.Aircraft_Brand;
         var aircraft_model = response.data.Aircraft_Model;
@@ -3363,8 +3361,6 @@ __webpack_require__.r(__webpack_exports__);
 
         document.getElementById("aircraft_info").innerHTML = null;
         _this2.aircrafts = [];
-        _this2.options_pilot = [];
-        _this2.options_attendant = [];
 
         for (var i = 0; i < aircraft.length; ++i) {
           _this2.aircrafts.push({
@@ -3383,11 +3379,70 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
         }
+
+        _this2.options_pilot = [];
+        _this2.options_attendant = [];
+        var pilot = _this2.pilot_on_flight = response.data.Pilot;
+        var attendant = response.data.Attendant;
+        _this2.crew_array_info = response.data.Personal_Detail; // pilot
+
+        for (var i = 0; i < pilot.length; ++i) {
+          _this2.options_pilot.push({
+            value: pilot[i]['data']['user_id'],
+            name: "ID: " + pilot[i]['data']['user_id']
+          });
+        } // co-pilot
+
+
+        for (var i = 0; i < pilot.length; ++i) {
+          _this2.options_copilot.push({
+            value: pilot[i]['data']['user_id'],
+            name: "ID: " + pilot[i]['data']['user_id']
+          });
+        }
+
+        for (var i = 0; i < attendant.length; ++i) {
+          _this2.options_attendant.push({
+            value: attendant[i]['data']['user_id'],
+            name: "ID: " + attendant[i]['data']['user_id']
+          });
+        }
       });
     } // show information of each aircraft
 
 
-    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null;
+    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null; // show information of each pilot
+
+    if (this.input.captain != null) {
+      document.getElementById("pilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]['name'] + " " + this.crew_array_info[this.input.captain.value]['surname'] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]['count'] + " Times";
+      this.options_copilot = [];
+
+      for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+        if (this.input.captain.value != this.pilot_on_flight[i]['data']['user_id']) {
+          this.options_copilot.push({
+            value: this.pilot_on_flight[i]['data']['user_id'],
+            name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+          });
+        }
+      }
+    } else {
+      document.getElementById("pilot_info").innerHTML = null;
+      this.options_copilot = [];
+
+      for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+        this.options_copilot.push({
+          value: this.pilot_on_flight[i]['data']['user_id'],
+          name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+        });
+      }
+    } // show information of each co-pilot
+
+
+    if (this.input.coPilot != null) {
+      document.getElementById("copilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.coPilot.value]['name'] + " " + this.crew_array_info[this.input.coPilot.value]['surname'] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.coPilot.value]['count'] + " Times";
+    } else {
+      document.getElementById("copilot_info").innerHTML = null;
+    }
   }
 });
 
@@ -3549,7 +3604,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data);
         swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
           _this2.$router.push({
-            name: "adminHome"
+            name: "addPrice"
           });
         });
       });
@@ -5634,8 +5689,8 @@ __webpack_require__.r(__webpack_exports__);
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.go({
-                name: "adminHome"
+              _this2.$router.replace({
+                name: "newEmployee"
               });
             });
           })["catch"](function (error) {
@@ -5779,6 +5834,14 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/api/user").then(function (response) {
       _this.user = response.data;
+    })["catch"](function (error) {
+      if (error.response.status === 401) {
+        swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
+          _this.$router.push({
+            name: "userLogin"
+          });
+        });
+      }
     });
   }
 });
@@ -5909,7 +5972,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
               localStorage.setItem("isLoggedIn", "true");
 
-              _this.$router.go({
+              _this.$router.push({
                 name: "info"
               });
             });
@@ -47637,7 +47700,12 @@ var render = function() {
                               _vm._v(
                                 "\n                                        Please choose\n                                    "
                               )
-                            ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", {
+                              staticClass: "static active",
+                              attrs: { id: "pilot_info" }
+                            })
                           ],
                           1
                         )
@@ -47651,7 +47719,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options_pilot,
+                              options: _vm.options_copilot,
                               searchable: true,
                               multiple: false,
                               "close-on-select": true,
@@ -47674,7 +47742,12 @@ var render = function() {
                             _vm._v(
                               "\n                                    Please choose\n                                "
                             )
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass: "static active",
+                            attrs: { id: "copilot_info" }
+                          })
                         ],
                         1
                       )
