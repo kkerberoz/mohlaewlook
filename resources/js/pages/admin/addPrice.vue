@@ -139,7 +139,7 @@ export default {
                     "Cilck the button to continue!",
                     "success"
                 ).then(() => {
-                    this.$router.push({ name: "addPrice" });
+                    this.$router.go({ name: "addPrice" });
                 });
             });
         },

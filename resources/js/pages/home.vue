@@ -5,7 +5,7 @@
                 <img
                     src="/assets/undraw_air_support_wy1q.svg"
                     alt="Monkey face"
-                    style="width: 100%; height: auto;  max-width:1300px"
+                    style="width: 100%; height: auto;  max-width:900px"
                     class="center"
                 />
                 <!-- <img

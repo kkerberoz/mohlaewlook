@@ -2051,7 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/user/logout").then(function () {
           localStorage.removeItem("isLoggedIn");
 
-          _this.$router.push({
+          _this.$router.go({
             name: "userLogin"
           });
         });
@@ -3388,23 +3388,23 @@ __webpack_require__.r(__webpack_exports__);
 
         for (var i = 0; i < pilot.length; ++i) {
           _this2.options_pilot.push({
-            value: pilot[i]['data']['user_id'],
-            name: "ID: " + pilot[i]['data']['user_id']
+            value: pilot[i]["data"]["user_id"],
+            name: "ID: " + pilot[i]["data"]["user_id"]
           });
         } // co-pilot
 
 
         for (var i = 0; i < pilot.length; ++i) {
           _this2.options_copilot.push({
-            value: pilot[i]['data']['user_id'],
-            name: "ID: " + pilot[i]['data']['user_id']
+            value: pilot[i]["data"]["user_id"],
+            name: "ID: " + pilot[i]["data"]["user_id"]
           });
         }
 
         for (var i = 0; i < attendant.length; ++i) {
           _this2.options_attendant.push({
-            value: attendant[i]['data']['user_id'],
-            name: "ID: " + attendant[i]['data']['user_id']
+            value: attendant[i]["data"]["user_id"],
+            name: "ID: " + attendant[i]["data"]["user_id"]
           });
         }
       });
@@ -3414,14 +3414,14 @@ __webpack_require__.r(__webpack_exports__);
     if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null; // show information of each pilot
 
     if (this.input.captain != null) {
-      document.getElementById("pilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]['name'] + " " + this.crew_array_info[this.input.captain.value]['surname'] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]['count'] + " Times";
+      document.getElementById("pilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]["name"] + " " + this.crew_array_info[this.input.captain.value]["surname"] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]["count"] + " Times";
       this.options_copilot = [];
 
       for (var i = 0; i < this.pilot_on_flight.length; ++i) {
-        if (this.input.captain.value != this.pilot_on_flight[i]['data']['user_id']) {
+        if (this.input.captain.value != this.pilot_on_flight[i]["data"]["user_id"]) {
           this.options_copilot.push({
-            value: this.pilot_on_flight[i]['data']['user_id'],
-            name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+            value: this.pilot_on_flight[i]["data"]["user_id"],
+            name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
           });
         }
       }
@@ -3431,15 +3431,15 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.pilot_on_flight.length; ++i) {
         this.options_copilot.push({
-          value: this.pilot_on_flight[i]['data']['user_id'],
-          name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+          value: this.pilot_on_flight[i]["data"]["user_id"],
+          name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
         });
       }
     } // show information of each co-pilot
 
 
     if (this.input.coPilot != null) {
-      document.getElementById("copilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.coPilot.value]['name'] + " " + this.crew_array_info[this.input.coPilot.value]['surname'] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.coPilot.value]['count'] + " Times";
+      document.getElementById("copilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.coPilot.value]["name"] + " " + this.crew_array_info[this.input.coPilot.value]["surname"] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.coPilot.value]["count"] + " Times";
     } else {
       document.getElementById("copilot_info").innerHTML = null;
     }
@@ -3603,7 +3603,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/backend/addPrice", data).then(function (response) {
         console.log(response.data);
         swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
-          _this2.$router.push({
+          _this2.$router.go({
             name: "addPrice"
           });
         });
@@ -5689,7 +5689,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.get("/sanctum/csrf-cookie").then(function (response) {
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-              _this2.$router.replace({
+              _this2.$router.go({
                 name: "newEmployee"
               });
             });
@@ -5837,7 +5837,7 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (error) {
       if (error.response.status === 401) {
         swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
-          _this.$router.push({
+          _this.$router.go({
             name: "userLogin"
           });
         });
@@ -5972,7 +5972,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire("Login Success!", "Cilck the button to continue!", "success").then(function () {
               localStorage.setItem("isLoggedIn", "true");
 
-              _this.$router.push({
+              _this.$router.go({
                 name: "info"
               });
             });
@@ -11352,7 +11352,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -11390,7 +11390,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -11409,7 +11409,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -47333,7 +47333,7 @@ var render = function() {
                 _c(
                   "h1",
                   { staticClass: "mb-3", staticStyle: { display: "block" } },
-                  [_vm._v("Add flight")]
+                  [_vm._v("Add Route")]
                 ),
                 _vm._v(" "),
                 _c("hr", { staticClass: "mb-4" }),
@@ -48808,7 +48808,7 @@ var render = function() {
                         [
                           _c("i", { staticClass: "fas fa-plane-departure" }),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Add Flight")])
+                          _c("span", [_vm._v("Add Route")])
                         ]
                       )
                     ],
@@ -51127,7 +51127,7 @@ var staticRenderFns = [
               staticStyle: {
                 width: "100%",
                 height: "auto",
-                "max-width": "1300px"
+                "max-width": "900px"
               },
               attrs: {
                 src: "/assets/undraw_air_support_wy1q.svg",

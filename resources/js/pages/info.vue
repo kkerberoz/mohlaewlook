@@ -62,7 +62,7 @@ export default {
                         "Cilck the button to continue!",
                         "error"
                     ).then(() => {
-                        this.$router.push({ name: "userLogin" });
+                        this.$router.go({ name: "userLogin" });
                     });
                 }
             });
