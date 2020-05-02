@@ -274,6 +274,7 @@ export default {
             location_check: null,
             all_check: null,
             aircraft_array_info: [],
+            pilot_on_flight: [],
             crew_array_info: null
         };
     },
@@ -380,11 +381,19 @@ export default {
                     }
                     this.options_pilot = [];
                     this.options_attendant = [];
-                    var pilot = response.data.Pilot;
+                    var pilot = this.pilot_on_flight = response.data.Pilot;
                     var attendant = response.data.Attendant;
                     this.crew_array_info = response.data.Personal_Detail;
+                    // pilot
                     for(var i=0; i<pilot.length; ++i){
                         this.options_pilot.push({
+                            value: pilot[i]['data']['user_id'],
+                            name: "ID: " + pilot[i]['data']['user_id']
+                        });
+                    }
+                    // co-pilot
+                    for(var i=0; i<pilot.length; ++i){
+                        this.options_copilot.push({
                             value: pilot[i]['data']['user_id'],
                             name: "ID: " + pilot[i]['data']['user_id']
                         });
@@ -404,9 +413,39 @@ export default {
             ).innerHTML = this.aircraft_array_info[this.input.aircraftID.value];
         else document.getElementById("aircraft_info").innerHTML = null;
         // show information of each pilot
-        if (this.input.captain != null)
-            document.getElementById("pilot_info").innerHTML = this.crew_array_info[this.input.captain.value]['name'] + " " + this.crew_array_info[this.input.captain.value]['surname']
-        else document.getElementById("pilot_info").innerHTML = null
+        if (this.input.captain != null){
+            document.getElementById("pilot_info").innerHTML =
+            "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]['name'] + " " + this.crew_array_info[this.input.captain.value]['surname'] + "<br>" +
+            "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]['count'] + " Times"
+            this.options_copilot = [];
+            for(var i=0; i<(this.pilot_on_flight).length; ++i){
+                if(this.input.captain.value != this.pilot_on_flight[i]['data']['user_id']){
+                    this.options_copilot.push({
+                            value: this.pilot_on_flight[i]['data']['user_id'],
+                            name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+                        });
+                }
+            }
+        }
+        else {
+            document.getElementById("pilot_info").innerHTML = null;
+            this.options_copilot = [];
+            for(var i=0; i<(this.pilot_on_flight).length; ++i){
+                this.options_copilot.push({
+                        value: this.pilot_on_flight[i]['data']['user_id'],
+                        name: "ID: " + this.pilot_on_flight[i]['data']['user_id']
+                });
+            }
+        }
+        // show information of each co-pilot
+        if (this.input.coPilot != null){
+            document.getElementById("copilot_info").innerHTML =
+            "<b>Name</b>: " + this.crew_array_info[this.input.coPilot.value]['name'] + " " + this.crew_array_info[this.input.coPilot.value]['surname'] + "<br>" +
+            "<b>Flying experience:</b> " + this.crew_array_info[this.input.coPilot.value]['count'] + " Times"
+        }
+        else {
+            document.getElementById("copilot_info").innerHTML = null;
+        }
     }
 };
 </script>
