@@ -110,7 +110,6 @@ export default {
     data() {
         return {
             flights: [],
-            empty_price: [],
             input: {
                 flightNo: "",
                 ecoPrice: "",
@@ -125,10 +124,8 @@ export default {
     },
     beforeMount() {
         axios.get("/api/backend/getFlightNo").then(response => {
-            this.flights = response.data[0];
-            this.empty_price = response.data[1];
+            this.flights = response.data;
             console.log("flight",this.flights);
-            console.log("missing price",this.empty_price);
 
         });
 

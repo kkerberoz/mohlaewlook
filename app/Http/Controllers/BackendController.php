@@ -226,9 +226,6 @@ class BackendController extends Controller
         if(isset($priceData)){
             Class_price::where('flight_no',$priceData['flight_no'])->update(['eco_price'=>$class_price->eco_price,'bus_price'=>$class_price->bus_price,'first_price'=>$class_price->first_price]);
         }
-        else{
-            $class_price->save();
-        }
     }
 
 
@@ -236,15 +233,7 @@ class BackendController extends Controller
     {
         $flightNo = Flight::distinct()->get(['flight_no','depart_location','arrive_location']);
 
-        $C_flight_no = Class_price::get('flight_no');
-        $miss_flight_no = [];
 
-        foreach ($C_flight_no as $each_no) {
-            $check = Flight::where('flight_no',$each_no['flight_no'])->first();
-            if(!isset($check)){
-                array_push($miss_flight_no,$each_no);
-            }
-        }
-        return response()->JSON([$flightNo,$miss_flight_no]);
+        return response()->JSON($flightNo);
     }
 }

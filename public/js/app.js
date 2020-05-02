@@ -3357,7 +3357,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       flights: [],
-      empty_price: [],
       input: {
         flightNo: "",
         ecoPrice: "",
@@ -3374,10 +3373,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("/api/backend/getFlightNo").then(function (response) {
-      _this.flights = response.data[0];
-      _this.empty_price = response.data[1];
+      _this.flights = response.data;
       console.log("flight", _this.flights);
-      console.log("missing price", _this.empty_price);
     });
   },
   methods: {
