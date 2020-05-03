@@ -3342,10 +3342,6 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this2 = this;
 
-    axios.get("/api/backend/getFlightNo").then(function (response) {
-      _this2.flights = response.data;
-      console.log("flight", _this2.flights);
-    });
     axios.get("/api/backend/getAirports").then(function (response) {
       response.data.forEach(function (airport) {
         _this2.locations.push({
@@ -3358,7 +3354,11 @@ __webpack_require__.r(__webpack_exports__);
   beforeUpdate: function beforeUpdate() {
     var _this3 = this;
 
-    // for check depart location, depart date and depart time are selected.
+    axios.get("/api/backend/getFlightNo").then(function (response) {
+      _this3.flights = response.data;
+      console.log("flight", _this3.flights);
+    }); // for check depart location, depart date and depart time are selected.
+
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
       this.aircrafts = [];
       this.options_pilot = [];

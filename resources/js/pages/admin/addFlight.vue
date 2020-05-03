@@ -464,11 +464,6 @@ export default {
         }
     },
     beforeMount() {
-        axios.get("/api/backend/getFlightNo").then(response => {
-            this.flights = response.data;
-            console.log("flight", this.flights);
-        });
-
         axios.get("/api/backend/getAirports").then(response => {
             response.data.forEach(airport => {
                 this.locations.push({
@@ -480,6 +475,11 @@ export default {
         });
     },
     beforeUpdate() {
+        axios.get("/api/backend/getFlightNo").then(response => {
+            this.flights = response.data;
+            console.log("flight", this.flights);
+        });
+
         // for check depart location, depart date and depart time are selected.
         if (
             this.input.departLocation == null ||

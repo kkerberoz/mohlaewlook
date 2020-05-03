@@ -288,7 +288,7 @@ class BackendController extends Controller
 
     public function getFlightNo()
     {
-        $flightNo = Flight::distinct()->get(['flight_no', 'depart_location', 'arrive_location']);
+        $flightNo = Class_price::select('flight_no')->get();
         return response()->JSON($flightNo);
     }
 }
