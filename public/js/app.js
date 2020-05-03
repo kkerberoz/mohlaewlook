@@ -2051,7 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/user/logout").then(function () {
           localStorage.removeItem("isLoggedIn");
 
-          _this.$router.push({
+          _this.$router.go({
             name: "userLogin"
           });
         });
@@ -2513,7 +2513,7 @@ __webpack_require__.r(__webpack_exports__);
           // console.log(response.data);
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
             _this2.$router.push({
-              name: "adminHome"
+              name: "addAircraft"
             });
           });
         });
@@ -2829,7 +2829,9 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.errors.length) {
         axios.post("/api/backend/addAirport", data).then(function (response) {
           swal.fire("Add Data Success!", "Cilck the button to continue!", "success").then(function () {
-            _this.$router.push("/admin");
+            _this.$router.push({
+              name: "addAirport"
+            });
           });
         })["catch"](function (error) {
           _this.isLoading = false;
@@ -3107,6 +3109,131 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3114,7 +3241,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      modalOpen: false,
+      flights: [],
       isLoading: false,
+      modalInput: {
+        ecoPrice: "",
+        businessPrice: "",
+        firstPrice: ""
+      },
       input: {
         aircraftID: null,
         flightNo: null,
@@ -3128,7 +3262,12 @@ __webpack_require__.r(__webpack_exports__);
         coPilot: null,
         crew: []
       },
+      errors: [],
+      error_ecoPrice: "",
+      error_businessPrice: "",
+      error_firstPrice: "",
       options_pilot: [],
+      options_copilot: [],
       options_attendant: [],
       aircrafts: [],
       locations: [],
@@ -3136,13 +3275,47 @@ __webpack_require__.r(__webpack_exports__);
       time_check: null,
       location_check: null,
       all_check: null,
-      aircraft_array_info: []
+      aircraft_array_info: [],
+      pilot_on_flight: [],
+      crew_array_info: null
     };
   },
-  methods: {},
+  methods: {
+    handleShowModal: function handleShowModal() {
+      if (this.modalOpen) {
+        $("#addNew").modal("show");
+      } else {
+        this.input.flightNo = "";
+        this.modalInput.ecoPrice = "";
+        this.modalInput.businessPrice = "";
+        this.modalInput.firstPrice = "";
+        $("#addNew").modal("show");
+      }
+    },
+    flightNo: function flightNo(_ref) {
+      var flight_no = _ref.flight_no;
+      return "".concat(flight_no, " ");
+    },
+    handleCreateModal: function handleCreateModal() {
+      this.modalOpen = true;
+      $("#addNew").modal("hide");
+    },
+    handleCloseModal: function handleCloseModal() {
+      this.modalOpen = false;
+      this.input.flightNo = "";
+      this.modalInput.ecoPrice = "";
+      this.modalInput.businessPrice = "";
+      this.modalInput.firstPrice = "";
+      $("#addNew").modal("hide");
+    }
+  },
   beforeMount: function beforeMount() {
     var _this = this;
 
+    axios.get("/api/backend/getFlightNo").then(function (response) {
+      _this.flights = response.data;
+      console.log("flight", _this.flights);
+    });
     axios.get("/api/backend/getAirports").then(function (response) {
       response.data.forEach(function (airport) {
         _this.locations.push({
@@ -3155,22 +3328,6 @@ __webpack_require__.r(__webpack_exports__);
   beforeUpdate: function beforeUpdate() {
     var _this2 = this;
 
-    // if(this.input.departDate == ""){
-    //     // alert when didn't select depart date time
-    // }
-    // else if(this.input.departDate != this.date_check){ // query only work date
-    //     this.date_check = this.input.departDate;
-    //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
-    //     //     this.options_attendant = [];
-    //     //     (response.data.Attendant).forEach(attendant => {
-    //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
-    //     //     });
-    //     //     this.options_pilot = [];
-    //     //     (response.data.Pilot).forEach(pilot => {
-    //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
-    //     //     });
-    //     // });
-    // }
     // for check depart location, depart date and depart time are selected.
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
       this.aircrafts = [];
@@ -3190,7 +3347,8 @@ __webpack_require__.r(__webpack_exports__);
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
-        console.log(response.data);
+        console.log(response.data); // show aircraft
+
         var aircraft = response.data.Aircraft;
         var aircraft_brand = response.data.Aircraft_Brand;
         var aircraft_model = response.data.Aircraft_Model;
@@ -3203,8 +3361,6 @@ __webpack_require__.r(__webpack_exports__);
 
         document.getElementById("aircraft_info").innerHTML = null;
         _this2.aircrafts = [];
-        _this2.options_pilot = [];
-        _this2.options_attendant = [];
 
         for (var i = 0; i < aircraft.length; ++i) {
           _this2.aircrafts.push({
@@ -3223,11 +3379,70 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
         }
+
+        _this2.options_pilot = [];
+        _this2.options_attendant = [];
+        var pilot = _this2.pilot_on_flight = response.data.Pilot;
+        var attendant = response.data.Attendant;
+        _this2.crew_array_info = response.data.Personal_Detail; // pilot
+
+        for (var i = 0; i < pilot.length; ++i) {
+          _this2.options_pilot.push({
+            value: pilot[i]["data"]["user_id"],
+            name: "ID: " + pilot[i]["data"]["user_id"]
+          });
+        } // co-pilot
+
+
+        for (var i = 0; i < pilot.length; ++i) {
+          _this2.options_copilot.push({
+            value: pilot[i]["data"]["user_id"],
+            name: "ID: " + pilot[i]["data"]["user_id"]
+          });
+        }
+
+        for (var i = 0; i < attendant.length; ++i) {
+          _this2.options_attendant.push({
+            value: attendant[i]["data"]["user_id"],
+            name: "ID: " + attendant[i]["data"]["user_id"]
+          });
+        }
       });
     } // show information of each aircraft
 
 
-    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null;
+    if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null; // show information of each pilot
+
+    if (this.input.captain != null) {
+      document.getElementById("pilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]["name"] + " " + this.crew_array_info[this.input.captain.value]["surname"] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]["count"] + " Times";
+      this.options_copilot = [];
+
+      for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+        if (this.input.captain.value != this.pilot_on_flight[i]["data"]["user_id"]) {
+          this.options_copilot.push({
+            value: this.pilot_on_flight[i]["data"]["user_id"],
+            name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
+          });
+        }
+      }
+    } else {
+      document.getElementById("pilot_info").innerHTML = null;
+      this.options_copilot = [];
+
+      for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+        this.options_copilot.push({
+          value: this.pilot_on_flight[i]["data"]["user_id"],
+          name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
+        });
+      }
+    } // show information of each co-pilot
+
+
+    if (this.input.coPilot != null) {
+      document.getElementById("copilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.coPilot.value]["name"] + " " + this.crew_array_info[this.input.coPilot.value]["surname"] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.coPilot.value]["count"] + " Times";
+    } else {
+      document.getElementById("copilot_info").innerHTML = null;
+    }
   }
 });
 
@@ -3244,8 +3459,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
 //
 //
 //
@@ -3376,10 +3589,26 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/api/backend/getFlightNo").then(function (response) {
       _this.flights = response.data;
-      console.log(_this.flights);
+      console.log("flight", _this.flights);
     });
   },
   methods: {
+    formSubmit: function formSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var data = {
+        input: this.input
+      };
+      axios.post("/api/backend/addPrice", data).then(function (response) {
+        console.log(response.data);
+        swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
+          _this2.$router.go({
+            name: "addPrice"
+          });
+        });
+      });
+    },
     flightNo: function flightNo(_ref) {
       var flight_no = _ref.flight_no,
           depart_location = _ref.depart_location,
@@ -5461,7 +5690,7 @@ __webpack_require__.r(__webpack_exports__);
           axios.post("/api/admin/addEmployee", data).then(function (response) {
             swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
               _this2.$router.go({
-                name: "adminHome"
+                name: "newEmployee"
               });
             });
           })["catch"](function (error) {
@@ -5605,6 +5834,14 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/api/user").then(function (response) {
       _this.user = response.data;
+    })["catch"](function (error) {
+      if (error.response.status === 401) {
+        swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
+          _this.$router.go({
+            name: "userLogin"
+          });
+        });
+      }
     });
   }
 });
@@ -47096,7 +47333,7 @@ var render = function() {
                 _c(
                   "h1",
                   { staticClass: "mb-3", staticStyle: { display: "block" } },
-                  [_vm._v("Add flight")]
+                  [_vm._v("Add Route")]
                 ),
                 _vm._v(" "),
                 _c("hr", { staticClass: "mb-4" }),
@@ -47328,7 +47565,7 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c(
                         "span",
-                        { staticClass: "col-md-6 mb-2" },
+                        { staticClass: "col-md-4 mb-2" },
                         [
                           _c("label", [_vm._v("Aircraft ID:")]),
                           _vm._v(" "),
@@ -47364,34 +47601,58 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("span", { staticClass: "col-md-6 mb-2" }, [
-                        _c("label", [_vm._v("Flight Number:")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
+                      _c(
+                        "span",
+                        { staticClass: "col-md-6 mb-2" },
+                        [
+                          _c("label", [_vm._v("Flight Number:")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            attrs: {
+                              "custom-label": _vm.flightNo,
+                              options: _vm.flights,
+                              searchable: true,
+                              multiple: false,
+                              "close-on-select": true,
+                              "clear-on-select": false,
+                              "preserve-search": true,
+                              placeholder: "Choose",
+                              "preselect-first": false
+                            },
+                            model: {
                               value: _vm.input.flightNo,
+                              callback: function($$v) {
+                                _vm.$set(_vm.input, "flightNo", $$v)
+                              },
                               expression: "input.flightNo"
                             }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.input.flightNo },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.input,
-                                "flightNo",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    Please enter flight number\n                                "
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "col-md-2 mb-2" }, [
+                        _c("label", [_vm._v("Other Flight:")]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn btn-info btn-block",
+                            staticStyle: { color: "#fff" },
+                            on: { click: _vm.handleShowModal }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    NewFlight\n                                "
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
@@ -47439,7 +47700,12 @@ var render = function() {
                               _vm._v(
                                 "\n                                        Please choose\n                                    "
                               )
-                            ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", {
+                              staticClass: "static active",
+                              attrs: { id: "pilot_info" }
+                            })
                           ],
                           1
                         )
@@ -47453,7 +47719,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options_pilot,
+                              options: _vm.options_copilot,
                               searchable: true,
                               multiple: false,
                               "close-on-select": true,
@@ -47476,7 +47742,12 @@ var render = function() {
                             _vm._v(
                               "\n                                    Please choose\n                                "
                             )
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass: "static active",
+                            attrs: { id: "copilot_info" }
+                          })
                         ],
                         1
                       )
@@ -47596,11 +47867,237 @@ var render = function() {
             ]
           )
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "addNew",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalCenterTitle",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("span", { staticClass: "col-md-12 mt-2 mb-2" }, [
+                  _c("label", [_vm._v("Flight Number:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.input.flightNo,
+                        expression: "input.flightNo"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.input.flightNo },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.input, "flightNo", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n                        Please enter flight number\n                    "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12 mt-2 mb-2" }, [
+                  _c("label", [_vm._v("Economy Class Price:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.modalInput.ecoPrice,
+                          expression: "modalInput.ecoPrice"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_ecoPrice
+                      },
+                      attrs: { required: "", type: "text" },
+                      domProps: { value: _vm.modalInput.ecoPrice },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.modalInput,
+                            "ecoPrice",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error_ecoPrice) +
+                          "\n                        "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12 mt-2 mb-2" }, [
+                  _c("label", [_vm._v("Business Class Price:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.modalInput.businessPrice,
+                          expression: "modalInput.businessPrice"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_businessPrice
+                      },
+                      attrs: { required: "", type: "text" },
+                      domProps: { value: _vm.modalInput.businessPrice },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.modalInput,
+                            "businessPrice",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error_businessPrice) +
+                          "\n                        "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12 mt-2 mb-2" }, [
+                  _c("label", [_vm._v("First Class Price:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.modalInput.firstPrice,
+                          expression: "modalInput.firstPrice"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_firstPrice
+                      },
+                      attrs: { required: "", type: "text" },
+                      domProps: { value: _vm.modalInput.firstPrice },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.modalInput,
+                            "firstPrice",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error_firstPrice) +
+                          "\n                        "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button", "data-dismiss": "modal" },
+                      on: { click: _vm.handleCloseModal }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Close\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { "data-dismiss": "modal" },
+                      on: { click: _vm.handleCreateModal }
+                    },
+                    [_c("span", [_vm._v("Create")])]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
       )
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "addNewLabel" } }, [
+        _vm._v("\n                        New Flight\n                    ")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -47657,10 +48154,7 @@ var render = function() {
                           placeholder: "Choose",
                           "preselect-first": false
                         },
-                        on: {
-                          select: _vm.handleSelect,
-                          close: _vm.handleModal
-                        },
+                        on: { select: _vm.handleSelect },
                         model: {
                           value: _vm.input.flightNo,
                           callback: function($$v) {
@@ -47817,7 +48311,6 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { disabled: _vm.isLoading },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
@@ -48315,7 +48808,7 @@ var render = function() {
                         [
                           _c("i", { staticClass: "fas fa-plane-departure" }),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Add Flight")])
+                          _c("span", [_vm._v("Add Route")])
                         ]
                       )
                     ],
@@ -50634,7 +51127,7 @@ var staticRenderFns = [
               staticStyle: {
                 width: "100%",
                 height: "auto",
-                "max-width": "1300px"
+                "max-width": "900px"
               },
               attrs: {
                 src: "/assets/undraw_air_support_wy1q.svg",

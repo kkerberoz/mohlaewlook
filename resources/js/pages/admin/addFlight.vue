@@ -5,7 +5,7 @@
                 class="col-md-10 order-md-1 justify-content-between align-items-center"
             >
                 <form>
-                    <h1 class="mb-3" style="display:block ">Add flight</h1>
+                    <h1 class="mb-3" style="display:block ">Add Route</h1>
                     <hr class="mb-4" />
                     <h5 class="mb-3">Flight Details</h5>
                     <form>
@@ -95,7 +95,7 @@
                                 </span>
                             </div>
                             <div class="row">
-                                <span class="col-md-6 mb-2">
+                                <span class="col-md-4 mb-2">
                                     <label>Aircraft ID:</label>
                                     <multiselect
                                         v-bind:class="{
@@ -119,11 +119,31 @@
                                 </span>
                                 <span class="col-md-6 mb-2">
                                     <label>Flight Number:</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
+                                    <multiselect
+                                        :custom-label="flightNo"
                                         v-model="input.flightNo"
-                                    />
+                                        :options="flights"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        :preserve-search="true"
+                                        placeholder="Choose"
+                                        :preselect-first="false"
+                                    ></multiselect>
+                                    <div class="invalid-feedback">
+                                        Please enter flight number
+                                    </div>
+                                </span>
+                                <span class="col-md-2 mb-2">
+                                    <label>Other Flight:</label>
+                                    <div
+                                        @click="handleShowModal"
+                                        class="btn btn-info btn-block"
+                                        style="color:#fff"
+                                    >
+                                        NewFlight
+                                    </div>
                                     <div class="invalid-feedback">
                                         Please enter flight number
                                     </div>
@@ -151,13 +171,17 @@
                                         <div class="invalid-feedback">
                                             Please choose
                                         </div>
+                                        <div
+                                            class="static active"
+                                            id="pilot_info"
+                                        ></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label>Co-pilot:</label>
                                     <multiselect
                                         v-model="input.coPilot"
-                                        :options="options_pilot"
+                                        :options="options_copilot"
                                         :searchable="true"
                                         :multiple="false"
                                         :close-on-select="true"
@@ -170,6 +194,10 @@
                                     <div class="invalid-feedback">
                                         Please choose
                                     </div>
+                                    <div
+                                        class="static active"
+                                        id="copilot_info"
+                                    ></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -233,6 +261,103 @@
                 </form>
             </div>
         </div>
+        <div
+            class="modal fade"
+            id="addNew"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addNewLabel">
+                            New Flight
+                        </h5>
+                    </div>
+                    <span class="col-md-12 mt-2 mb-2">
+                        <label>Flight Number:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="input.flightNo"
+                        />
+                        <div class="invalid-feedback">
+                            Please enter flight number
+                        </div>
+                    </span>
+                    <div class="col-md-12 mt-2 mb-2">
+                        <label>Economy Class Price:</label>
+                        <div class="input-group">
+                            <input
+                                v-bind:class="{
+                                    'is-invalid': error_ecoPrice
+                                }"
+                                required
+                                type="text"
+                                class="form-control"
+                                v-model="modalInput.ecoPrice"
+                            />
+                            <span class="invalid-feedback">
+                                {{ error_ecoPrice }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-2">
+                        <label>Business Class Price:</label>
+                        <div class="input-group">
+                            <input
+                                v-bind:class="{
+                                    'is-invalid': error_businessPrice
+                                }"
+                                required
+                                type="text"
+                                class="form-control"
+                                v-model="modalInput.businessPrice"
+                            />
+                            <span class="invalid-feedback">
+                                {{ error_businessPrice }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-2">
+                        <label>First Class Price:</label>
+                        <div class="input-group">
+                            <input
+                                v-bind:class="{
+                                    'is-invalid': error_firstPrice
+                                }"
+                                required
+                                type="text"
+                                class="form-control"
+                                v-model="modalInput.firstPrice"
+                            />
+                            <span class="invalid-feedback">
+                                {{ error_firstPrice }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal"
+                            @click="handleCloseModal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            @click="handleCreateModal"
+                        >
+                            <span>Create</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -242,7 +367,14 @@ export default {
     components: { Multiselect },
     data() {
         return {
+            modalOpen: false,
+            flights: [],
             isLoading: false,
+            modalInput: {
+                ecoPrice: "",
+                businessPrice: "",
+                firstPrice: ""
+            },
             input: {
                 aircraftID: null,
                 flightNo: null,
@@ -256,7 +388,12 @@ export default {
                 coPilot: null,
                 crew: []
             },
+            errors: [],
+            error_ecoPrice: "",
+            error_businessPrice: "",
+            error_firstPrice: "",
             options_pilot: [],
+            options_copilot: [],
             options_attendant: [],
             aircrafts: [],
             locations: [],
@@ -264,11 +401,45 @@ export default {
             time_check: null,
             location_check: null,
             all_check: null,
-            aircraft_array_info: []
+            aircraft_array_info: [],
+            pilot_on_flight: [],
+            crew_array_info: null
         };
     },
-    methods: {},
+    methods: {
+        handleShowModal() {
+            if (this.modalOpen) {
+                $("#addNew").modal("show");
+            } else {
+                this.input.flightNo = "";
+                this.modalInput.ecoPrice = "";
+                this.modalInput.businessPrice = "";
+                this.modalInput.firstPrice = "";
+                $("#addNew").modal("show");
+            }
+        },
+        flightNo({ flight_no }) {
+            return `${flight_no} `;
+        },
+        handleCreateModal() {
+            this.modalOpen = true;
+            $("#addNew").modal("hide");
+        },
+        handleCloseModal() {
+            this.modalOpen = false;
+            this.input.flightNo = "";
+            this.modalInput.ecoPrice = "";
+            this.modalInput.businessPrice = "";
+            this.modalInput.firstPrice = "";
+            $("#addNew").modal("hide");
+        }
+    },
     beforeMount() {
+        axios.get("/api/backend/getFlightNo").then(response => {
+            this.flights = response.data;
+            console.log("flight", this.flights);
+        });
+
         axios.get("/api/backend/getAirports").then(response => {
             response.data.forEach(airport => {
                 this.locations.push({
@@ -280,23 +451,6 @@ export default {
         });
     },
     beforeUpdate() {
-        // if(this.input.departDate == ""){
-        //     // alert when didn't select depart date time
-        // }
-        // else if(this.input.departDate != this.date_check){ // query only work date
-        //     this.date_check = this.input.departDate;
-        //     // axios.post("/api/backend/getWorkSchedule", {date: this.input.departDate}).then(response => {
-        //     //     this.options_attendant = [];
-        //     //     (response.data.Attendant).forEach(attendant => {
-        //     //         this.options_attendant.push({value: attendant['user_id'], name: attendant['user_id'] + ": " + attendant['name'] + " " + attendant['surname']});
-        //     //     });
-        //     //     this.options_pilot = [];
-        //     //     (response.data.Pilot).forEach(pilot => {
-        //     //         this.options_pilot.push({value: pilot['user_id'], name: pilot['user_id'] + " - " + pilot['name'] + " " + pilot['surname']});
-        //     //     });
-        //     // });
-        // }
-
         // for check depart location, depart date and depart time are selected.
         if (
             this.input.departLocation == null ||
@@ -332,6 +486,7 @@ export default {
                 })
                 .then(response => {
                     console.log(response.data);
+                    // show aircraft
                     var aircraft = response.data.Aircraft;
                     var aircraft_brand = response.data.Aircraft_Brand;
                     var aircraft_model = response.data.Aircraft_Model;
@@ -343,8 +498,6 @@ export default {
                     this.input.aircraftID = null; // clear aircraft id
                     document.getElementById("aircraft_info").innerHTML = null;
                     this.aircrafts = [];
-                    this.options_pilot = [];
-                    this.options_attendant = [];
                     for (var i = 0; i < aircraft.length; ++i) {
                         this.aircrafts.push({
                             value: aircraft[i]["aircraft_id"],
@@ -387,6 +540,31 @@ export default {
                             other_aircraft[i]["aircraft_id"]
                         ] = "Never Used to Flight";
                     }
+                    this.options_pilot = [];
+                    this.options_attendant = [];
+                    var pilot = (this.pilot_on_flight = response.data.Pilot);
+                    var attendant = response.data.Attendant;
+                    this.crew_array_info = response.data.Personal_Detail;
+                    // pilot
+                    for (var i = 0; i < pilot.length; ++i) {
+                        this.options_pilot.push({
+                            value: pilot[i]["data"]["user_id"],
+                            name: "ID: " + pilot[i]["data"]["user_id"]
+                        });
+                    }
+                    // co-pilot
+                    for (var i = 0; i < pilot.length; ++i) {
+                        this.options_copilot.push({
+                            value: pilot[i]["data"]["user_id"],
+                            name: "ID: " + pilot[i]["data"]["user_id"]
+                        });
+                    }
+                    for (var i = 0; i < attendant.length; ++i) {
+                        this.options_attendant.push({
+                            value: attendant[i]["data"]["user_id"],
+                            name: "ID: " + attendant[i]["data"]["user_id"]
+                        });
+                    }
                 });
         }
         // show information of each aircraft
@@ -395,6 +573,54 @@ export default {
                 "aircraft_info"
             ).innerHTML = this.aircraft_array_info[this.input.aircraftID.value];
         else document.getElementById("aircraft_info").innerHTML = null;
+        // show information of each pilot
+        if (this.input.captain != null) {
+            document.getElementById("pilot_info").innerHTML =
+                "<b>Name</b>: " +
+                this.crew_array_info[this.input.captain.value]["name"] +
+                " " +
+                this.crew_array_info[this.input.captain.value]["surname"] +
+                "<br>" +
+                "<b>Flying experience:</b> " +
+                this.crew_array_info[this.input.captain.value]["count"] +
+                " Times";
+            this.options_copilot = [];
+            for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+                if (
+                    this.input.captain.value !=
+                    this.pilot_on_flight[i]["data"]["user_id"]
+                ) {
+                    this.options_copilot.push({
+                        value: this.pilot_on_flight[i]["data"]["user_id"],
+                        name:
+                            "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
+                    });
+                }
+            }
+        } else {
+            document.getElementById("pilot_info").innerHTML = null;
+            this.options_copilot = [];
+            for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+                this.options_copilot.push({
+                    value: this.pilot_on_flight[i]["data"]["user_id"],
+                    name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
+                });
+            }
+        }
+        // show information of each co-pilot
+        if (this.input.coPilot != null) {
+            document.getElementById("copilot_info").innerHTML =
+                "<b>Name</b>: " +
+                this.crew_array_info[this.input.coPilot.value]["name"] +
+                " " +
+                this.crew_array_info[this.input.coPilot.value]["surname"] +
+                "<br>" +
+                "<b>Flying experience:</b> " +
+                this.crew_array_info[this.input.coPilot.value]["count"] +
+                " Times";
+        } else {
+            document.getElementById("copilot_info").innerHTML = null;
+        }
     }
 };
 </script>

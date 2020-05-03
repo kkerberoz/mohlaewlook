@@ -121,7 +121,7 @@
                                     "
                                 >
                                     <i class="fas fa-plane-departure"></i>
-                                    <span>Add Flight</span>
+                                    <span>Add Route</span>
                                 </router-link>
                             </li>
                             <li>

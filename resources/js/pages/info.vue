@@ -46,13 +46,26 @@
 export default {
     data() {
         return {
-            user: "",
+            user: ""
         };
     },
     mounted() {
-        axios.get("/api/user").then((response) => {
-            this.user = response.data;
-        });
-    },
+        axios
+            .get("/api/user")
+            .then(response => {
+                this.user = response.data;
+            })
+            .catch(error => {
+                if (error.response.status === 401) {
+                    swal.fire(
+                        "Please log in.",
+                        "Cilck the button to continue!",
+                        "error"
+                    ).then(() => {
+                        this.$router.go({ name: "userLogin" });
+                    });
+                }
+            });
+    }
 };
 </script>

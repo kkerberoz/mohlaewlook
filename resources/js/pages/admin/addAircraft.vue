@@ -440,7 +440,7 @@ export default {
                         "Cilck the button to continue!",
                         "success"
                     ).then(() => {
-                        this.$router.push({ name: "adminHome" });
+                        this.$router.push({ name: "addAircraft" });
                     });
                 });
             } else {
