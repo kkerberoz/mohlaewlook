@@ -256,17 +256,17 @@ class BackendController extends Controller
     public function addPrice(Request $request)
     {
         $data = $request->input;
+
         $class_price = new Class_price;
         // $priceData = DB::select('select * FROM class_prices WHERE flight_no = ?',[$data['flightNo']]);
-        $priceData = Class_price::where('flight_no', $data['flightNo'])->first();
-        $class_price->flight_no = $data['flightNo'];
+        $priceData = Class_price::where('flight_no', $request->flight_no)->first();
+        $class_price->flight_no = $request->flight_no;
         $class_price->eco_price = $data['ecoPrice'];
         $class_price->bus_price = $data['businessPrice'];
         $class_price->first_price = $data['firstPrice'];
         if (isset($priceData)) {
             Class_price::where('flight_no', $priceData['flight_no'])->update(['eco_price' => $class_price->eco_price, 'bus_price' => $class_price->bus_price, 'first_price' => $class_price->first_price]);
-        }
-        else{
+        } else {
             $class_price->save();
         }
     }
@@ -291,4 +291,29 @@ class BackendController extends Controller
         $flightNo = Class_price::select('flight_no')->get();
         return response()->JSON($flightNo);
     }
+
+
+
+    public function analytic1()
+    {
+        $todayDate = date("Y-m-d");
+        list($nowyear, $nowmonth, $nowday) = str_split("-", $todayDate);
+        return response()->JSON([$nowyear, $nowmonth, $nowday]);
+    }
+
+    public function analytic2()
+    {
+
+    }
+
+    public function analytic3()
+    {
+
+    }
+
+    public function analytic4()
+    {
+
+    }
+
 }

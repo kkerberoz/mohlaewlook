@@ -216,10 +216,17 @@ export default {
             error_firstPrice: ""
         };
     },
+
     beforeMount() {
+
         axios.get("/api/backend/getPrice").then(response => {
             this.flights = response.data;
             console.log("flight", this.flights);
+        });
+    },
+    mounted(){
+        axios.get("/api/backend/analytic1").then(response =>{
+            console.log(response.data);
         });
     },
     methods: {
