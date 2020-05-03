@@ -6,7 +6,7 @@
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
                             <div class="card-title">
-                                Analysis 1
+                                Analysis 3
                             </div>
                         </div>
                         <div class="card-body"></div>
