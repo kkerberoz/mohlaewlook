@@ -149,23 +149,49 @@
                                     </div>
                                 </span>
                             </div>
-                            <hr class="mb-4" />
-                            <h5 class="mb-3">Crew Details</h5>
-                            <div class="row" disabled>
-                                <div class="col-md-6 mb-2">
-                                    <div class="form-group">
-                                        <label>Captain:</label>
+                            <div v-show="all_check">
+                                <hr class="mb-4" />
+                                <h5 class="mb-3">Crew Details</h5>
+                                <div class="row" disabled>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="form-group">
+                                            <label>Captain:</label>
+                                            <multiselect
+                                                label="name"
+                                                @select="showCo"
+                                                v-model="input.captain"
+                                                :options="options_pilot"
+                                                :searchable="true"
+                                                :multiple="false"
+                                                :close-on-select="true"
+                                                :clear-on-select="false"
+                                                :preserve-search="true"
+                                                placeholder="Choose"
+                                                track-by="name"
+                                                :preselect-first="false"
+                                            ></multiselect>
+                                            <div class="invalid-feedback">
+                                                Please choose
+                                            </div>
+                                            <div
+                                                class="static active"
+                                                id="pilot_info"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>Co-pilot:</label>
                                         <multiselect
-                                            label="name"
-                                            v-model="input.captain"
-                                            :options="options_pilot"
+                                            :disabled="waitPilot"
+                                            v-model="input.coPilot"
+                                            :options="options_copilot"
                                             :searchable="true"
                                             :multiple="false"
                                             :close-on-select="true"
                                             :clear-on-select="false"
                                             :preserve-search="true"
                                             placeholder="Choose"
-                                            track-by="name"
+                                            label="name"
                                             :preselect-first="false"
                                         ></multiselect>
                                         <div class="invalid-feedback">
@@ -173,73 +199,53 @@
                                         </div>
                                         <div
                                             class="static active"
-                                            id="pilot_info"
+                                            id="copilot_info"
                                         ></div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <label>Co-pilot:</label>
-                                    <multiselect
-                                        v-model="input.coPilot"
-                                        :options="options_copilot"
-                                        :searchable="true"
-                                        :multiple="false"
-                                        :close-on-select="true"
-                                        :clear-on-select="false"
-                                        :preserve-search="true"
-                                        placeholder="Choose"
-                                        label="name"
-                                        :preselect-first="false"
-                                    ></multiselect>
-                                    <div class="invalid-feedback">
-                                        Please choose
-                                    </div>
-                                    <div
-                                        class="static active"
-                                        id="copilot_info"
-                                    ></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <div class="form-group">
-                                        <label
-                                            >Avaliable Flight Adttendant</label
-                                        >
-                                        <multiselect
-                                            v-model="input.crew"
-                                            :options="options_attendant"
-                                            :searchable="true"
-                                            :multiple="true"
-                                            :close-on-select="false"
-                                            :clear-on-select="false"
-                                            :preserve-search="true"
-                                            placeholder="Choose"
-                                            label="name"
-                                            track-by="name"
-                                            :preselect-first="false"
-                                            :max="6"
-                                        >
-                                            <template
-                                                slot="selection"
-                                                slot-scope="{
-                                                    values,
-                                                    search,
-                                                    isOpen
-                                                }"
+                                <div class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-group">
+                                            <label
+                                                >Avaliable Flight
+                                                Adttendant</label
                                             >
-                                                <span
-                                                    class="multiselect__single"
-                                                    v-if="values.length &amp;&amp; !isOpen"
+                                            <multiselect
+                                                :disabled="waitPilot"
+                                                v-model="input.crew"
+                                                :options="options_attendant"
+                                                :searchable="true"
+                                                :multiple="true"
+                                                :close-on-select="false"
+                                                :clear-on-select="false"
+                                                :preserve-search="true"
+                                                placeholder="Choose"
+                                                label="name"
+                                                track-by="name"
+                                                :preselect-first="false"
+                                                :max="6"
+                                            >
+                                                <template
+                                                    slot="selection"
+                                                    slot-scope="{
+                                                        values,
+                                                        search,
+                                                        isOpen
+                                                    }"
                                                 >
-                                                    {{ values.length }} crew
-                                                    selected
-                                                </span>
-                                            </template>
-                                        </multiselect>
+                                                    <span
+                                                        class="multiselect__single"
+                                                        v-if="values.length &amp;&amp; !isOpen"
+                                                    >
+                                                        {{ values.length }} crew
+                                                        selected
+                                                    </span>
+                                                </template>
+                                            </multiselect>
 
-                                        <div class="invalid-feedback">
-                                            Please choose
+                                            <div class="invalid-feedback">
+                                                Please choose
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -342,17 +348,20 @@
                         <button
                             type="button"
                             class="btn btn-danger"
-                            data-dismiss="modal"
+                            datadismiss="modal"
                             @click="handleCloseModal"
                         >
                             Close
                         </button>
                         <button
                             class="btn btn-primary"
-                            data-dismiss="modal"
-                            @click="handleCreateModal"
+                            @click.prevent="handleNewFlight"
                         >
-                            <span>Create</span>
+                            <span v-show="!isLoading">Create</span>
+                            <i
+                                class="fas fa-spinner fa-pulse"
+                                v-show="isLoading"
+                            ></i>
                         </button>
                     </div>
                 </div>
@@ -367,6 +376,7 @@ export default {
     components: { Multiselect },
     data() {
         return {
+            waitPilot: true,
             modalOpen: false,
             flights: [],
             isLoading: false,
@@ -400,13 +410,16 @@ export default {
             date_check: null,
             time_check: null,
             location_check: null,
-            all_check: null,
+            all_check: false,
             aircraft_array_info: [],
             pilot_on_flight: [],
             crew_array_info: null
         };
     },
     methods: {
+        showCo() {
+            this.waitPilot = false;
+        },
         handleShowModal() {
             if (this.modalOpen) {
                 $("#addNew").modal("show");
@@ -421,10 +434,6 @@ export default {
         flightNo({ flight_no }) {
             return `${flight_no} `;
         },
-        handleCreateModal() {
-            this.modalOpen = true;
-            $("#addNew").modal("hide");
-        },
         handleCloseModal() {
             this.modalOpen = false;
             this.input.flightNo = "";
@@ -432,6 +441,26 @@ export default {
             this.modalInput.businessPrice = "";
             this.modalInput.firstPrice = "";
             $("#addNew").modal("hide");
+        },
+        handleNewFlight(e) {
+            e.preventDefault();
+            this.modalOpen = true;
+            this.isLoading = true;
+            let data = {
+                flight_no: this.input.flightNo,
+                input: this.modalInput
+            };
+            axios.post("/api/backend/addPrice", data).then(response => {
+                swal.fire(
+                    "Create Success!",
+                    "Cilck the button to continue!",
+                    "success"
+                ).then(() => {
+                    this.isLoading = false;
+                    $("#addNew").modal("hide");
+                    this.$router.go({ name: "addFlight" });
+                });
+            });
         }
     },
     beforeMount() {

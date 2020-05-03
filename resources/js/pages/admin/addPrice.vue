@@ -229,10 +229,7 @@ export default {
             e.preventDefault();
             this.isLoading = true;
             let data = {
-                flight_no: this.input.flightNo,
-                eco_price: this.input.ecoPrice,
-                bus_price: this.input.businessPrice,
-                first_price: this.input.firstPrice
+                input: this.input
             };
             axios.post("/api/backend/editPrice", data).then(response => {
                 swal.fire(
