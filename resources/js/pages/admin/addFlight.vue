@@ -486,6 +486,7 @@ export default {
                 })
                 .then(response => {
                     console.log(response.data);
+
                     // show aircraft
                     var aircraft = response.data.Aircraft;
                     var aircraft_brand = response.data.Aircraft_Brand;
@@ -498,6 +499,8 @@ export default {
                     this.input.aircraftID = null; // clear aircraft id
                     document.getElementById("aircraft_info").innerHTML = null;
                     this.aircrafts = [];
+                    console.log(aircraft.length);
+
                     for (var i = 0; i < aircraft.length; ++i) {
                         this.aircrafts.push({
                             value: aircraft[i]["aircraft_id"],
