@@ -38,12 +38,14 @@ class BackendController extends Controller
             //$Flight = Flight::select('*')->orderBy('depart_datetime', 'desc')->where('arrive_datetime', '>', $datetime)->where('depart_datetime', '<', $datetime)->where('aircraft_id', $aircraft['aircraft_id'])->first();
             $Flight = Flight::select('*')->orderBy('arrive_datetime', 'desc')->where('aircraft_id', $aircraft['aircraft_id'])->first();
             if (isset($Flight)) {
-                 // $Flight = Flight::select('*')->orderBy('depart_datetime', 'desc')->where('arrive_datetime', '<', $datetime)->where('aircraft_id', $aircraft['aircraft_id'])->first();
-                 if (!strcmp($Flight['arrive_location'], $location) && $Flight['arrive_datetime'] < $datetime) array_push($Flight_Filter, $Flight);
+                // $Flight = Flight::select('*')->orderBy('depart_datetime', 'desc')->where('arrive_datetime', '<', $datetime)->where('aircraft_id', $aircraft['aircraft_id'])->first();
+                if (!strcmp($Flight['arrive_location'], $location) && $Flight['arrive_datetime'] < $datetime) array_push($Flight_Filter, $Flight);
             }
         }
-        $Other_Aircraft = []; $Other_Brand = []; $Other_Model = [];
-        if(!strcmp($location, $initial_location)){ // get all aircraft that start in the initial locations
+        $Other_Aircraft = [];
+        $Other_Brand = [];
+        $Other_Model = [];
+        if (!strcmp($location, $initial_location)) { // get all aircraft that start in the initial locations
             $Temp = [];
             $Aircraft_Id_In_Flight = Flight::select('aircraft_id')->get();
             foreach ($Aircraft_Id_In_Flight as $AIIF) array_push($Temp, $AIIF['aircraft_id']);
@@ -53,7 +55,10 @@ class BackendController extends Controller
                 array_push($Other_Model, Aircraft_model::select('*')->where('model_id', $OA['model_id'])->first());
             }
         }
-        $Aircraft_Brand = []; $Aircraft_Model = []; $Aircraft = []; $Flight_Time = [];
+        $Aircraft_Brand = [];
+        $Aircraft_Model = [];
+        $Aircraft = [];
+        $Flight_Time = [];
         foreach ($Flight_Filter as $flight) {
             $aircraft = Aircraft::select('*')->where('aircraft_id', $flight['aircraft_id'])->first();
             array_push($Aircraft, $aircraft);
@@ -62,28 +67,63 @@ class BackendController extends Controller
             array_push($Flight_Time, Flight::select('*')->where('aircraft_id', $flight['aircraft_id'])->count());
         }
         // Get Crew
-        $Pilot = []; $Attendant = [];
+        $Pilot = [];
+        $Attendant = [];
         $All_Pilot = Employee::select('*')->where('user_id', 'LIKE', '%PLT%')->get();
         foreach ($All_Pilot as $pilot) {
-            $Recently_Work_Flight = Work_schedule::leftJoin('flights', 'work_schedules.flight_id', '=', 'flights.flight_id')->
-                                    select('*')->orderBy('arrive_datetime', 'desc')->where('user_id', $pilot['user_id'])->where('work_date', $date)->where('confirm_status', 'confirm')->first();
-            if(isset($Recently_Work_Flight) && !strcmp($Recently_Work_Flight['arrive_location'], $location) &&
-                       $Recently_Work_Flight['arrive_datetime'] < $datetime) array_push($Pilot, $Recently_Work_Flight);
+            $Recently_Work_Flight = Work_schedule::leftJoin('flights', 'work_schedules.flight_id', '=', 'flights.flight_id')->select('*')->orderBy('arrive_datetime', 'desc')->where('user_id', $pilot['user_id'])->where('work_date', $date)->where('confirm_status', 'confirm')->first();
+            // when flight in one day
+            if (
+                isset($Recently_Work_Flight) && !strcmp($Recently_Work_Flight['arrive_location'], $location) &&
+                $Recently_Work_Flight['arrive_datetime'] < $datetime
+            )
+                array_push($Pilot, array('data' => $Recently_Work_Flight, 'type' => 1));
 
-            $New_Work_Flight = Work_schedule::leftJoin('flights', 'work_schedules.flight_id', '=', 'flights.flight_id')->
-                               select('*')->where('user_id', $pilot['user_id'])->where('work_date', $date)->where('confirm_status', 'free')->first();
-            if(isset($New_Work_Flight)){
-                $Last_Work_Flight = Work_schedule::leftJoin('flights', 'work_schedules.flight_id', '=', 'flights.flight_id')->
-                                    select('*')->orderBy('arrive_location', 'desc')->first();
-                if(isset($Last_Work_Flight) && !strcmp($Last_Work_Flight['arrive_location'], $location)) array_push($Pilot, $Last_Work_Flight);
+            $New_Work_Flight = Work_schedule::select('*')->where('user_id', $pilot['user_id'])->where('work_date', $date)->where('confirm_status', 'free')->first();
+            if (isset($New_Work_Flight)) {
+                $Last_Work_Flight = Work_schedule::leftJoin('flights', 'work_schedules.flight_id', '=', 'flights.flight_id')->select('*')->orderBy('arrive_datetime', 'desc')->where('user_id', $pilot['user_id'])->where('confirm_status', 'confirm')->first();
+                // check last position
+                if (isset($Last_Work_Flight)) {
+                    if (!strcmp($Last_Work_Flight['arrive_location'], $location)) array_push($Pilot, array('data' => $Last_Work_Flight, 'type' => 2));
+                }
+                // when new user
+                else if (!isset($Last_Work_Flight) && !strcmp($initial_location, $location)) array_push($Pilot, array('data' => $New_Work_Flight, 'type' => 3));
             }
         }
+        $All_FAD = Employee::select('*')->where('user_id', 'LIKE', '%FAD%')->get();
+        foreach ($All_FAD as $FAD) {
+            $Recently_Work_FAD = Work_schedule::leftJoin('flights', 'work_schedules.flight_id', '=', 'flights.flight_id')->select('*')->orderBy('arrive_datetime', 'desc')->where('user_id', $FAD['user_id'])->where('work_date', $date)->where('confirm_status', 'confirm')->first();
+            // when flight in one day
+            if (
+                isset($Recently_Work_FAD) && !strcmp($Recently_Work_FAD['arrive_location'], $location) &&
+                $Recently_Work_FAD['arrive_datetime'] < $datetime
+            )
+                array_push($Attendant, array('data' => $Recently_Work_FAD, 'type' => 1));
 
-
+            $New_Work_FAD = Work_schedule::select('*')->where('user_id', $FAD['user_id'])->where('work_date', $date)->where('confirm_status', 'free')->first();
+            if (isset($New_Work_FAD)) {
+                $Last_Work_FAD = Work_schedule::leftJoin('flights', 'work_schedules.flight_id', '=', 'flights.flight_id')->select('*')->orderBy('arrive_datetime', 'desc')->where('user_id', $FAD['user_id'])->where('confirm_status', 'confirm')->first();
+                // check last position
+                if (isset($Last_Work_FAD)) {
+                    if (!strcmp($Last_Work_FAD['arrive_location'], $location)) array_push($Attendant, array('data' => $Last_Work_FAD, 'type' => 2));
+                }
+                // when new user
+                else if (!isset($Last_Work_FAD) && !strcmp($initial_location, $location)) array_push($Attendant, array('data' => $New_Work_FAD, 'type' => 3));
+            }
+        }
+        $Personal_Detail = [];
+        foreach ($Pilot as $i) {
+            $Personal_Detail += array($i['data']['user_id'] => Employee::select('*')->where('user_id', $i['data']['user_id'])->first());
+            $Personal_Detail[$i['data']['user_id']]->count = Work_schedule::select('*')->where('user_id', $i['data']['user_id'])->where('confirm_status', 'confirm')->count();
+        }
+        foreach ($Attendant as $i) {
+            $Personal_Detail += array($i['data']['user_id'] => Employee::select('*')->where('user_id', $i['data']['user_id'])->first());
+            $Personal_Detail[$i['data']['user_id']]->count = Work_schedule::select('*')->where('user_id', $i['data']['user_id'])->where('confirm_status', 'confirm')->count();
+        }
         return response()->JSON([
             "Flight_Info" => $Flight_Filter, "Aircraft" => $Aircraft, "Aircraft_Brand" => $Aircraft_Brand, "Aircraft_Model" => $Aircraft_Model,
             "Flight_Time" => $Flight_Time, "Other_Aircraft" => $Other_Aircraft, "Other_Brand" => $Other_Brand, "Other_Model" => $Other_Model,
-            "test" => $Pilot
+            "Pilot" => $Pilot, "Attendant" => $Attendant, "Personal_Detail" => $Personal_Detail
         ]);
     }
 
@@ -218,13 +258,13 @@ class BackendController extends Controller
         $data = $request->input;
         $class_price = new Class_price;
         // $priceData = DB::select('select * FROM class_prices WHERE flight_no = ?',[$data['flightNo']]);
-        $priceData = Class_price::where('flight_no',$data['flightNo'])->first();
+        $priceData = Class_price::where('flight_no', $data['flightNo'])->first();
         $class_price->flight_no = $data['flightNo'];
         $class_price->eco_price = $data['ecoPrice'];
         $class_price->bus_price = $data['businessPrice'];
         $class_price->first_price = $data['firstPrice'];
-        if(isset($priceData)){
-            Class_price::where('flight_no',$priceData['flight_no'])->update(['eco_price'=>$class_price->eco_price,'bus_price'=>$class_price->bus_price,'first_price'=>$class_price->first_price]);
+        if (isset($priceData)) {
+            Class_price::where('flight_no', $priceData['flight_no'])->update(['eco_price' => $class_price->eco_price, 'bus_price' => $class_price->bus_price, 'first_price' => $class_price->first_price]);
         }
     }
 
@@ -237,15 +277,15 @@ class BackendController extends Controller
     public function editPrice(Request $request)
     {
         $priceEdit = $request->input;
-        $priceData = Class_price::where('flight_no',$priceEdit['flightNo'])->first();
-        if(isset($priceData)){
-            Class_price::where('flight_no',$priceEdit['flightNo'])->update(['eco_price'=>$priceEdit['ecoPrice'],'bus_price'=>$priceEdit['businessPrice'],'first_price'=>$priceEdit['firstPrice']]);
+        $priceData = Class_price::where('flight_no', $priceEdit['flightNo'])->first();
+        if (isset($priceData)) {
+            Class_price::where('flight_no', $priceEdit['flightNo'])->update(['eco_price' => $priceEdit['ecoPrice'], 'bus_price' => $priceEdit['businessPrice'], 'first_price' => $priceEdit['firstPrice']]);
         }
     }
 
     public function getFlightNo()
     {
-        $flightNo = Flight::distinct()->get(['flight_no','depart_location','arrive_location']);
+        $flightNo = Flight::distinct()->get(['flight_no', 'depart_location', 'arrive_location']);
         return response()->JSON($flightNo);
     }
 }
