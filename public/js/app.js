@@ -3565,6 +3565,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3572,7 +3663,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isLoading: false,
+      editMode: true,
       flights: [],
+      errors: [],
       input: {
         flightNo: "",
         ecoPrice: "",
@@ -3588,45 +3682,83 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this = this;
 
-    axios.get("/api/backend/getFlightNo").then(function (response) {
+    axios.get("/api/backend/getPrice").then(function (response) {
       _this.flights = response.data;
       console.log("flight", _this.flights);
     });
   },
   methods: {
-    formSubmit: function formSubmit(e) {
+    editPrice: function editPrice(flight) {
+      $("#addNew").modal("show");
+      this.input.flightNo = flight.flight_no;
+      this.input.ecoPrice = flight.eco_price;
+      this.input.businessPrice = flight.bus_price;
+      this.input.firstPrice = flight.first_price;
+    },
+    handleUpdated: function handleUpdated(e) {
       var _this2 = this;
 
       e.preventDefault();
-      var data = {
-        input: this.input
-      };
-      axios.post("/api/backend/addPrice", data).then(function (response) {
-        console.log(response.data);
-        swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
-          _this2.$router.go({
-            name: "addPrice"
+      this.errors = [];
+      this.error_flightNo = null;
+      this.error_ecoPrice = null;
+      this.error_businessPrice = null;
+      this.error_firstPrice = null;
+
+      if (!this.input.flightNo) {
+        this.error_flightNo = "Please fill Flight number.";
+        this.errors.push(this.error_flightNo);
+      } else {
+        this.error_flightNo = null;
+      }
+
+      if (!this.input.ecoPrice) {
+        this.error_ecoPrice = "Please fill economic class price.";
+        this.errors.push(this.error_ecoPrice);
+      } else if (isNaN(this.input.ecoPrice) || this.input.ecoPrice < 0) {
+        this.error_ecoPrice = "Please fill only number that is positive number.";
+        this.errors.push(this.error_ecoPrice);
+      } else {
+        this.error_ecoPrice = null;
+      }
+
+      if (!this.input.businessPrice) {
+        this.error_businessPrice = "Please fill business class price.";
+        this.errors.push(this.error_businessPrice);
+      } else if (isNaN(this.input.businessPrice) || this.input.businessPrice < 0) {
+        this.error_businessPrice = "Please fill only number that is positive number.";
+        this.errors.push(this.error_businessPrice);
+      } else {
+        this.error_businessPrice = null;
+      }
+
+      if (!this.input.firstPrice) {
+        this.error_firstPrice = "Please fill first class price.";
+        this.errors.push(this.error_firstPrice);
+      } else if (isNaN(this.input.firstPrice) || this.input.firstPrice < 0) {
+        this.error_firstPrice = "Please fill only number that is positive number.";
+        this.errors.push(this.error_firstPrice);
+      } else {
+        this.error_firstPrice = null;
+      } // console.log(this.errors);
+
+
+      if (!this.errors.length) {
+        this.isLoading = true;
+        var data = {
+          input: this.input
+        };
+        axios.post("/api/backend/editPrice", data).then(function (response) {
+          swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
+            _this2.isLoading = false;
+            $("#addNew").modal("hide");
+
+            _this2.$router.go({
+              name: "addPrice"
+            });
           });
         });
-      });
-    },
-    flightNo: function flightNo(_ref) {
-      var flight_no = _ref.flight_no,
-          depart_location = _ref.depart_location,
-          arrive_location = _ref.arrive_location,
-          depart_datetime = _ref.depart_datetime,
-          arrive_datetime = _ref.arrive_datetime;
-      return "[".concat(flight_no, "] - ").concat(depart_location, " to ").concat(arrive_location);
-    },
-    // handleModal() {
-    //     swal.fire(
-    //         "Please success your form!",
-    //         "Cilck the button to continue!",
-    //         "error"
-    //     );
-    // },
-    handleSelect: function handleSelect(option) {
-      return option;
+      }
     }
   }
 });
@@ -48131,200 +48263,363 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "table-responsive" }, [
                   _c(
-                    "div",
-                    { staticClass: "col-md-12 mb-2" },
+                    "table",
+                    { staticClass: "table" },
                     [
-                      _c("label", [
-                        _vm._v(
-                          "Flignt Number:\n                                    " +
-                            _vm._s(_vm.input.flightNo.flight_no)
-                        )
-                      ]),
+                      _vm._m(1),
                       _vm._v(" "),
-                      _c("multiselect", {
-                        attrs: {
-                          "custom-label": _vm.flightNo,
-                          options: _vm.flights,
-                          searchable: true,
-                          multiple: false,
-                          "close-on-select": true,
-                          "clear-on-select": false,
-                          "preserve-search": true,
-                          placeholder: "Choose",
-                          "preselect-first": false
-                        },
-                        on: { select: _vm.handleSelect },
-                        model: {
-                          value: _vm.input.flightNo,
-                          callback: function($$v) {
-                            _vm.$set(_vm.input, "flightNo", $$v)
-                          },
-                          expression: "input.flightNo"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_flightNo) +
-                            "\n                                "
-                        )
-                      ])
+                      _vm._l(_vm.flights, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.flight_no) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.eco_price) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.bus_price))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.first_price) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  staticStyle: { color: "Dodgerblue" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.editPrice(flight)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-edit" })]
+                              )
+                            ])
+                          ])
+                        ])
+                      })
                     ],
-                    1
+                    2
                   )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-4 mt-2" }, [
-                    _c("label", [_vm._v("Economy Class Price:")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.ecoPrice,
-                            expression: "input.ecoPrice"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid": _vm.error_ecoPrice
-                        },
-                        attrs: { required: "", type: "text" },
-                        domProps: { value: _vm.input.ecoPrice },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.input, "ecoPrice", $event.target.value)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_ecoPrice) +
-                            "\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4 mt-2" }, [
-                    _c("label", [_vm._v("Business Class Price:")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.businessPrice,
-                            expression: "input.businessPrice"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid": _vm.error_businessPrice
-                        },
-                        attrs: { required: "", type: "text" },
-                        domProps: { value: _vm.input.businessPrice },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.input,
-                              "businessPrice",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_businessPrice) +
-                            "\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4 mt-2" }, [
-                    _c("label", [_vm._v("First Class Price:")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.firstPrice,
-                            expression: "input.firstPrice"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid": _vm.error_firstPrice
-                        },
-                        attrs: { required: "", type: "text" },
-                        domProps: { value: _vm.input.firstPrice },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.input,
-                              "firstPrice",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_firstPrice) +
-                            "\n                                    "
-                        )
-                      ])
-                    ])
-                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c("hr", { staticClass: "mb-4" }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.formSubmit($event)
-                      }
-                    }
-                  },
-                  [_c("span", [_vm._v("Submit")])]
-                )
               ])
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "addNew",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalCenterTitle",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewLabel" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Update Flight Price\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mb-2" }, [
+                        _c("label", [_vm._v("Flight Number: ")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.input.flightNo,
+                              expression: "input.flightNo"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.error_flightNo
+                          },
+                          attrs: { type: "text", disabled: "" },
+                          domProps: { value: _vm.input.flightNo },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.input,
+                                "flightNo",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.error_flightNo) +
+                              "\n                                "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mt-2" }, [
+                        _c("label", [_vm._v("Economy Class Price:")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.ecoPrice,
+                                expression: "input.ecoPrice"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error_ecoPrice
+                            },
+                            attrs: { required: "", type: "text" },
+                            domProps: { value: _vm.input.ecoPrice },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "ecoPrice",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.error_ecoPrice) +
+                                "\n                                    "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mt-2" }, [
+                        _c("label", [_vm._v("Business Class Price:")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.businessPrice,
+                                expression: "input.businessPrice"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error_businessPrice
+                            },
+                            attrs: { required: "", type: "text" },
+                            domProps: { value: _vm.input.businessPrice },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "businessPrice",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.error_businessPrice) +
+                                "\n                                    "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mt-2" }, [
+                        _c("label", [_vm._v("First Class Price:")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.firstPrice,
+                                expression: "input.firstPrice"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error_firstPrice
+                            },
+                            attrs: { required: "", type: "text" },
+                            domProps: { value: _vm.input.firstPrice },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "firstPrice",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.error_firstPrice) +
+                                "\n                                    "
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Close\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { disabled: _vm.isLoading, type: "submit" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.handleUpdated($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.isLoading,
+                                expression: "!isLoading"
+                              }
+                            ]
+                          },
+                          [_vm._v("Update")]
+                        ),
+                        _vm._v(" "),
+                        _c("i", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.isLoading,
+                              expression: "isLoading"
+                            }
+                          ],
+                          staticClass: "fas fa-spinner fa-pulse"
+                        })
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
       ])
     ]
   )
@@ -48342,6 +48637,57 @@ var staticRenderFns = [
           _vm._v("Manage Flight Price")
         ])
       ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Flight Number\n                                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Economy class Price\n                                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Business class Price\n                                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            First class Price\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   }
 ]

@@ -258,13 +258,16 @@ class BackendController extends Controller
         $data = $request->input;
         $class_price = new Class_price;
         // $priceData = DB::select('select * FROM class_prices WHERE flight_no = ?',[$data['flightNo']]);
-        $priceData = Class_price::where('flight_no',$data['flightNo'])->first();
+        $priceData = Class_price::where('flight_no', $data['flightNo'])->first();
         $class_price->flight_no = $data['flightNo'];
         $class_price->eco_price = $data['ecoPrice'];
         $class_price->bus_price = $data['businessPrice'];
         $class_price->first_price = $data['firstPrice'];
-        if(isset($priceData)){
-            Class_price::where('flight_no',$priceData['flight_no'])->update(['eco_price'=>$class_price->eco_price,'bus_price'=>$class_price->bus_price,'first_price'=>$class_price->first_price]);
+        if (isset($priceData)) {
+            Class_price::where('flight_no', $priceData['flight_no'])->update(['eco_price' => $class_price->eco_price, 'bus_price' => $class_price->bus_price, 'first_price' => $class_price->first_price]);
+        }
+        else{
+            $class_price->save();
         }
     }
 
@@ -277,15 +280,15 @@ class BackendController extends Controller
     public function editPrice(Request $request)
     {
         $priceEdit = $request->input;
-        $priceData = Class_price::where('flight_no',$priceEdit['flightNo'])->first();
-        if(isset($priceData)){
-            Class_price::where('flight_no',$priceEdit['flightNo'])->update(['eco_price'=>$priceEdit['ecoPrice'],'bus_price'=>$priceEdit['businessPrice'],'first_price'=>$priceEdit['firstPrice']]);
+        $priceData = Class_price::where('flight_no', $priceEdit['flightNo'])->first();
+        if (isset($priceData)) {
+            Class_price::where('flight_no', $priceEdit['flightNo'])->update(['eco_price' => $priceEdit['ecoPrice'], 'bus_price' => $priceEdit['businessPrice'], 'first_price' => $priceEdit['firstPrice']]);
         }
     }
 
     public function getFlightNo()
     {
-        $flightNo = Flight::distinct()->get(['flight_no','depart_location','arrive_location']);
+        $flightNo = Class_price::select('flight_no')->get();
         return response()->JSON($flightNo);
     }
 }
