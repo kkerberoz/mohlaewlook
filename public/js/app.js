@@ -6666,6 +6666,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6673,34 +6718,45 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      selected: "",
+      selectForm: "",
+      selectTo: "",
       start: null,
       end: null,
-      years: [],
-      male: [],
-      female: []
+      values: []
     };
   },
-  methods: {
-    Analysis4: function Analysis4() {
-      // simulate
-      this.start = 2015;
-      this.end = 2020; //
-
-      axios.post("/api/backend/analytic4", {
-        'start': this.start,
-        'end': this.end
-      }).then(function (response) {
-        console.log(response.data);
+  computed: {
+    years: function years() {
+      var year = new Date().getFullYear();
+      return Array.from({
+        length: year - 2000
+      }, function (value, index) {
+        return 2001 + index;
       });
     }
   },
-  beforeMount: function beforeMount() {
-    var _this = this;
+  methods: {
+    Analysis4: function Analysis4() {
+      var _this = this;
 
-    axios.get("/api/backend/analytic1_get").then(function (response) {
-      _this.years = response.data;
-    });
+      console.log("form", this.selectForm);
+      console.log("to", this.selectTo); // simulate
+
+      this.start = this.selectForm;
+      this.end = this.selectTo;
+      axios.post("/api/backend/analytic4", {
+        start: this.start,
+        end: this.end
+      }).then(function (response) {
+        // this.males = response.data.Male;
+        // console.log(response.data);
+        _this.values = response.data.value; // this.females = response.data.Female;
+      });
+    }
+  },
+  beforeMount: function beforeMount() {// axios.get("/api/backend/analytic1_get").then(response => {
+    //     this.years = response.data;
+    // });
   }
 });
 
@@ -6822,8 +6878,14 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (error) {
       if (error.response.status === 401) {
         swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
-          _this.$router.go({
-            name: "userLogin"
+          axios.get("/sanctum/csrf-cookie").then(function (response) {
+            axios.post("/api/user/logout").then(function () {
+              localStorage.removeItem("isLoggedIn");
+
+              _this.$router.go({
+                name: "userLogin"
+              });
+            });
           });
         });
       }
@@ -56627,7 +56689,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    {
+      staticClass: "container-fluid",
+      staticStyle: { padding: "3%", "margin-bottom": "10%" }
+    },
     [
       _c("div", { staticClass: "container-xl" }, [
         _c("div", { staticClass: "row flex-center " }, [
@@ -56636,34 +56701,101 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "span",
-                  { staticClass: "col-md-4 mb-2" },
-                  [
-                    _c("label", [_vm._v("Year :")]),
-                    _vm._v(" "),
-                    _c("multiselect", {
-                      attrs: {
-                        label: "year",
-                        options: _vm.years,
-                        searchable: true,
-                        multiple: false,
-                        "close-on-select": true,
-                        "clear-on-select": false,
-                        placeholder: "Choose Year"
-                      },
-                      on: { close: _vm.Analysis4 },
-                      model: {
-                        value: _vm.selected,
-                        callback: function($$v) {
-                          _vm.selected = $$v
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "span",
+                    { staticClass: "col-md-6 mb-2" },
+                    [
+                      _c("label", [_vm._v("Form :" + _vm._s(_vm.selectForm))]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          options: _vm.years,
+                          searchable: true,
+                          multiple: false,
+                          "close-on-select": true,
+                          "clear-on-select": false,
+                          placeholder: "Choose Year"
                         },
-                        expression: "selected"
-                      }
-                    })
-                  ],
-                  1
-                )
+                        model: {
+                          value: _vm.selectForm,
+                          callback: function($$v) {
+                            _vm.selectForm = $$v
+                          },
+                          expression: "selectForm"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { staticClass: "col-md-6 mb-2" },
+                    [
+                      _c("label", [_vm._v("To :" + _vm._s(_vm.selectTo))]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          options: _vm.years,
+                          searchable: true,
+                          multiple: false,
+                          "close-on-select": true,
+                          "clear-on-select": false,
+                          placeholder: "Choose Year"
+                        },
+                        on: { close: _vm.Analysis4 },
+                        model: {
+                          value: _vm.selectTo,
+                          callback: function($$v) {
+                            _vm.selectTo = $$v
+                          },
+                          expression: "selectTo"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.values, function(value, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(value.year) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(value.male))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(value.female))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(
+                                    Number(value.male) + Number(value.female)
+                                  ) +
+                                  "\n                                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
               ])
             ])
           ])
@@ -56688,6 +56820,22 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("year")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Male")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Female")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total")])
+      ])
+    ])
   }
 ]
 render._withStripped = true

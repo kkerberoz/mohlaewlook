@@ -394,23 +394,27 @@ class BackendController extends Controller
         return response()->JSON($data);
     }
 
-    public function analytic4(Request $request){
+    public function analytic4(Request $request)
+    {
         $start_year = $request->start;
         $end_year = $request->end;
-        $Male = []; $Female = [];
-        for($year = $start_year; $year <= $end_year; ++$year){
-            $flight_year = Flight::select('flight_id')->where('depart_datetime', 'LIKE', $year. '%')->get();
-            $M = 0; $F = 0;
-            foreach($flight_year as $flight){
+        $value = [];
+        for ($year = $start_year; $year <= $end_year; ++$year) {
+            $flight_year = Flight::select('flight_id')->where('depart_datetime', 'LIKE', $year . '%')->get();
+            $M = 0;
+            $F = 0;
+            foreach ($flight_year as $flight) {
                 $M += Ticket::leftJoin('passengers', 'tickets.passenger_id', '=', 'passengers.passenger_id')
-                                        ->where('flight_id', $flight['flight_id'])->where('gender', 'male')->count();
+                    ->where('flight_id', $flight['flight_id'])->where('gender', 'male')->count();
                 $F += Ticket::leftJoin('passengers', 'tickets.passenger_id', '=', 'passengers.passenger_id')
-                                        ->where('flight_id', $flight['flight_id'])->where('gender', 'female')->count();
+                    ->where('flight_id', $flight['flight_id'])->where('gender', 'female')->count();
             }
-            $Male += array($year => $M);
-            $Female += array($year => $F);
+
+
+            array_push($value, ['male' => $M, 'female' => $F, 'year' => $year]);
         }
-        return response()->JSON(['Male' => $Male, 'Female' => $Female]);
+
+        return response()->JSON(['value' => $value]);
     }
 
     public function schedule(Request $request,$id){

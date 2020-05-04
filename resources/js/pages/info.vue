@@ -62,7 +62,12 @@ export default {
                         "Cilck the button to continue!",
                         "error"
                     ).then(() => {
-                        this.$router.go({ name: "userLogin" });
+                        axios.get("/sanctum/csrf-cookie").then(response => {
+                            axios.post("/api/user/logout").then(() => {
+                                localStorage.removeItem("isLoggedIn");
+                                this.$router.go({ name: "userLogin" });
+                            });
+                        });
                     });
                 }
             });
