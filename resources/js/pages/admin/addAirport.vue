@@ -3,6 +3,15 @@
         class="container-xl"
         style="margin-bottom:15%;margin-top:5%;padding:3%"
     >
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="row flex-center">
             <div
                 class="col-md-10 order-md-1 justify-content-between align-items-center"
@@ -114,9 +123,14 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
+    components: { Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             isLoading: false,
             input: {
                 airportID: "",
@@ -132,6 +146,12 @@ export default {
             error_airportRegion: "",
             errors: []
         };
+    },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 1000);
     },
     methods: {
         userInput_id() {

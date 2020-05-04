@@ -110,32 +110,37 @@ export default {
                     console.log(response.data);
                 });
 
-            axios.get(`/api/backend/schedule/${this.id}`).then(response => {
-                //console.log(response.data);
+            axios
+                .get(`/api/backend/schedule/${this.id}`)
+                .then(response => {
+                    //console.log(response.data);
 
-                response.data.forEach(each_day => {
-                    var Sdate = each_day["work_date"].split("-");
-                    var newDate =
-                        Number(Sdate[2]) +
-                        "/" +
-                        Number(Sdate[1]) +
-                        "/" +
-                        Sdate[0];
-                    if (each_day["confirm_status"] == "confirm") {
-                        this.calendarConfigs.markedDates.push({
-                            date: newDate,
-                            class: "green-line"
-                        });
-                    } else if (each_day["confirm_status"] == "free") {
-                        //console.log(newDate);
-                        this.calendarConfigs.markedDates.push({
-                            date: newDate,
-                            class: "grey-line"
-                        });
-                    }
+                    response.data.forEach(each_day => {
+                        var Sdate = each_day["work_date"].split("-");
+                        var newDate =
+                            Number(Sdate[2]) +
+                            "/" +
+                            Number(Sdate[1]) +
+                            "/" +
+                            Sdate[0];
+                        if (each_day["confirm_status"] == "confirm") {
+                            this.calendarConfigs.markedDates.push({
+                                date: newDate,
+                                class: "green-line"
+                            });
+                        } else if (each_day["confirm_status"] == "free") {
+                            //console.log(newDate);
+                            this.calendarConfigs.markedDates.push({
+                                date: newDate,
+                                class: "grey-line"
+                            });
+                        }
+                    });
+                    this.loadingPage = false;
+                })
+                .catch(error => {
                     this.loadingPage = false;
                 });
-            });
         });
     }
 };

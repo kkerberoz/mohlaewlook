@@ -1,5 +1,14 @@
 <template>
     <div class="container-fluid reservation">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl" style="padding:20px">
             <div class="row flex-center full-height">
                 <img
@@ -31,9 +40,18 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
+    components: { Loading },
     data() {
-        return {};
+        return { loadingPage: false, fullPage: true };
+    },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 2000);
     }
 };
 </script>

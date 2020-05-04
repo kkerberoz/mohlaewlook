@@ -1,5 +1,14 @@
 <template>
     <div class="container-fluid" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl">
             <div class="row flex-center ">
                 <div class="col-md-12 ">
@@ -195,11 +204,15 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 import Multiselect from "vue-multiselect";
 export default {
-    components: { Multiselect },
+    components: { Multiselect, Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             isLoading: false,
             editMode: true,
             flights: [],
@@ -218,14 +231,11 @@ export default {
     },
 
     beforeMount() {
+        this.loadingPage = true;
         axios.get("/api/backend/getPrice").then(response => {
             this.flights = response.data;
             console.log("flight", this.flights);
-        });
-    },
-    mounted() {
-        axios.get("/api/backend/analytic1_get").then(response => {
-            console.log(response.data);
+            this.loadingPage = false;
         });
     },
     methods: {

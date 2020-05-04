@@ -1,5 +1,14 @@
 <template>
     <div class="container-xl" style="padding:3%; margin-bottom:5%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="row flex-center">
             <div
                 class="col-md-10 order-md-1 justify-content-between align-items-center"
@@ -246,9 +255,14 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
+    components: { Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             isLoading: false,
             model_query: [],
             brand_query: [],
@@ -300,9 +314,11 @@ export default {
         };
     },
     mounted() {
+        this.loadingPage = true;
         axios.get("/api/backend/getModelBrand").then(response => {
             this.model_query = response.data[0];
             this.brand_query = response.data[1];
+            this.loadingPage = false;
         });
     },
     methods: {

@@ -4,7 +4,7 @@
             :active.sync="loadingPage"
             :can-cancel="false"
             :is-full-page="fullPage"
-            opacity="0.9"
+            :opacity="0.9"
             color="#f87a2b"
             loader="bars"
             background-color="#fff"
