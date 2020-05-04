@@ -11,6 +11,7 @@ use App\Customer;
 use App\Work_schedule;
 use App\Flight;
 use App\Class_price;
+use App\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -352,8 +353,6 @@ class BackendController extends Controller
         return response()->JSON($flightNo);
     }
 
-
-
     public function analytic1_show(Request $request)
     {
         if (isset($request->year)) {
@@ -395,7 +394,22 @@ class BackendController extends Controller
         return response()->JSON($data);
     }
 
-    public function analytic4()
-    {
+    public function analytic4(Request $request){
+        $start_year = $request->start;
+        $end_year = $request->end;
+        $Male = []; $Female = [];
+        for($year = $start_year; $year <= $end_year; ++$year){
+            $flight_year = Flight::select('flight_id')->where('depart_datetime', 'LIKE', $year. '%')->get();
+            $M = 0; $F = 0;
+            foreach($flight_year as $flight){
+                $M += Ticket::leftJoin('passengers', 'tickets.passenger_id', '=', 'passengers.passenger_id')
+                                        ->where('flight_id', $flight['flight_id'])->where('gender', 'male')->count();
+                $F += Ticket::leftJoin('passengers', 'tickets.passenger_id', '=', 'passengers.passenger_id')
+                                        ->where('flight_id', $flight['flight_id'])->where('gender', 'female')->count();
+            }
+            $Male += array($year => $M);
+            $Female += array($year => $F);
+        }
+        return response()->JSON(['Male' => $Male, 'Female' => $Female]);
     }
 }
