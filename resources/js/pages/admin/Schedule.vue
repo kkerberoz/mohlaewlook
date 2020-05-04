@@ -21,7 +21,7 @@
                         v-on:choseDay="clickDay"
                         class="calendar"
                         v-model="calendar"
-                        :is-multiple-date-picker="true"
+                        :configs="calendarConfigs"
                     ></functional-calendar>
                 </div>
             </div>
@@ -39,7 +39,16 @@ export default {
             data: [],
             selected: [],
             datePick: [],
-            calendar: {}
+            calendar: {},
+            calendarConfigs: {
+                disabledDates: [
+                    "beforeToday",
+                    "afterToday",
+                    "24/12/2020",
+                    "27/12/2020"
+                ],
+                isMultipleDatePicker: true
+            }
         };
     },
     methods: {
