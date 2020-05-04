@@ -12,7 +12,7 @@
           </div>-->
 
           <div>
-            <span v-for="(data, i) in selected" :key="i">{{ data.date }}</span>
+            <span v-for="(data, i) in selected" :key="i">{{ data.date }},</span>
           </div>
 
           <functional-calendar
@@ -34,13 +34,18 @@ export default {
   components: { FunctionalCalendar },
   data() {
     return {
+      start_date: new Date(),
       data: [],
       selected: [],
       datePick: [],
       calendar: {},
       calendarConfigs: {
         disabledDates: ["beforeToday"],
-        isMultipleDatePicker: true
+        isMultipleDatePicker: true,
+        markedDates: [
+          { date: "7/5/2020", class: "green-line" },
+          { date: "afterToday", class: "green-line" }
+        ]
       }
     };
   },
@@ -54,12 +59,12 @@ export default {
 
 <style lang="scss">
 .green-line {
-  width: 15px;
-  position: absolute;
-  height: 2px;
+  width: 30px;
+  line-height: 30px;
+  color: #ffffff;
   background-color: #45cc0d;
-  bottom: 3px;
-  left: calc(50% - 7.5px);
+  border-radius: 100%;
+  margin: 0 auto;
 }
 
 .green-point {

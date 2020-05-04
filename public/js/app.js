@@ -2108,13 +2108,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      start_date: new Date(),
       data: [],
       selected: [],
       datePick: [],
       calendar: {},
       calendarConfigs: {
         disabledDates: ["beforeToday"],
-        isMultipleDatePicker: true
+        isMultipleDatePicker: true,
+        markedDates: [{
+          date: "7/5/2020",
+          "class": "green-line"
+        }, {
+          date: "afterToday",
+          "class": "green-line"
+        }]
       }
     };
   },
@@ -11995,7 +12003,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".green-line {\n  width: 15px;\n  position: absolute;\n  height: 2px;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 7.5px);\n}\n.green-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}\n.orange-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #ebae05;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}", ""]);
+exports.push([module.i, ".green-line {\n  width: 30px;\n  line-height: 30px;\n  color: #ffffff;\n  background-color: #45cc0d;\n  border-radius: 100%;\n  margin: 0 auto;\n}\n.green-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}\n.orange-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #ebae05;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}", ""]);
 
 // exports
 
@@ -50384,7 +50392,7 @@ var render = function() {
             _c(
               "div",
               _vm._l(_vm.selected, function(data, i) {
-                return _c("span", { key: i }, [_vm._v(_vm._s(data.date))])
+                return _c("span", { key: i }, [_vm._v(_vm._s(data.date) + ",")])
               }),
               0
             ),
