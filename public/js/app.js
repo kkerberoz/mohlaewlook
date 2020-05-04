@@ -2103,149 +2103,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "App",
+  components: {
+    FunctionalCalendar: vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__["FunctionalCalendar"]
+  },
   data: function data() {
     return {
-      calendar: {},
-      data: {
-        clieckedToday: false
-      },
-      markedDateRange: {
-        start: "2/" + this.getCurrentMonth() + "/2020",
-        end: "7/" + this.getCurrentMonth() + "/2020"
-      },
-      markedDates: ["16/" + this.getCurrentMonth() + "/2020", "18/" + this.getCurrentMonth() + "/2020", "20/" + this.getCurrentMonth() + "/2020", "21/" + this.getCurrentMonth() + "/2020"]
+      data: [],
+      selected: [],
+      datePick: [],
+      calendar: {}
     };
   },
   methods: {
-    preMonth: function preMonth() {
-      this.$refs.Calendar.PreMonth();
-    },
-    nextMonth: function nextMonth() {
-      this.$refs.Calendar.NextMonth();
-    },
-    preYear: function preYear() {
-      this.$refs.Calendar.PreYear();
-    },
-    nextYear: function nextYear() {
-      this.$refs.Calendar.NextYear();
-    },
-    chooseDate: function chooseDate(date) {
-      this.$refs.Calendar.ChooseDate(date);
-    },
-    getCurrentMonth: function getCurrentMonth() {
-      return new Date().getMonth() + 1;
+    clickDay: function clickDay() {
+      this.selected = this.calendar.selectedDates;
     }
-  },
-  components: {
-    FunctionalCalendar: vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__["FunctionalCalendar"]
   }
 });
 
@@ -3906,11 +3780,11 @@ __webpack_require__.r(__webpack_exports__);
       console.log("flight", _this.flights);
     });
   },
-  mounted: function mounted() {
-    axios.get("/api/backend/analytic1_get").then(function (response) {
-      console.log(response.data);
-    });
-  },
+  // mounted(){
+  //     axios.get("/api/backend/analytic1_get").then(response =>{
+  //         console.log(response.data);
+  //     });
+  // },
   methods: {
     editPrice: function editPrice(flight) {
       $("#addNew").modal("show");
@@ -50105,247 +49979,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container mt-5 mb-5" }, [
-    _c("div", { staticClass: "row row-eq-height" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4" },
-        [
-          _c("h4", [_vm._v("Sample Calendar")]),
-          _vm._v(" "),
-          _c("h5", [_vm._v("...")]),
-          _vm._v(" "),
-          _c("functional-calendar", { staticClass: "calendar" }),
-          _vm._v(" "),
-          _c("highlight-code", {
-            attrs: {
-              lang: "html",
-              code: "<functional-calendar :configs='{}'></functional-calendar>"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4" },
-        [
-          _c("h4", [_vm._v("Dark theme")]),
-          _vm._v(" "),
-          _c("h5", [_vm._v("...")]),
-          _vm._v(" "),
-          _c("functional-calendar", {
-            staticClass: "calendar",
-            attrs: {
-              "change-month-function": true,
-              "change-year-function": true,
-              "is-date-range": true,
-              "is-dark": true
-            }
-          }),
-          _vm._v(" "),
-          _c("highlight-code", {
-            attrs: {
-              lang: "html",
-              code:
-                "<functional-calendar :is-dark='true'></functional-calendar>"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4" },
-        [
-          _c("h4", [_vm._v("Date Picker")]),
-          _vm._v(" "),
-          _c("h5", [_vm._v("...")]),
-          _vm._v(" "),
-          _c("functional-calendar", {
-            staticClass: "calendar",
-            attrs: { "is-date-picker": true },
-            model: {
-              value: _vm.calendar,
-              callback: function($$v) {
-                _vm.calendar = $$v
-              },
-              expression: "calendar"
-            }
-          }),
-          _vm._v(" "),
-          _c("highlight-code", {
-            attrs: {
-              lang: "html",
-              code:
-                "<functional-calendar :is-date-picker='true'></functional-calendar>"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4" },
-        [
-          _c("h4", [_vm._v("Multiple Date Picker")]),
-          _vm._v(" "),
-          _c("h5", [_vm._v("...")]),
-          _vm._v(" "),
-          _c("functional-calendar", {
-            staticClass: "calendar",
-            attrs: { "is-multiple-date-picker": true },
-            model: {
-              value: _vm.calendar,
-              callback: function($$v) {
-                _vm.calendar = $$v
-              },
-              expression: "calendar"
-            }
-          }),
-          _vm._v(" "),
-          _c("highlight-code", {
-            attrs: {
-              lang: "html",
-              code:
-                "<functional-calendar :is-multiple-date-picker='true'></functional-calendar>"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4" },
-        [
-          _c("h4", [_vm._v("Multiple Date Picker With Time")]),
-          _vm._v(" "),
-          _c("h5", [_vm._v("...")]),
-          _vm._v(" "),
-          _c("functional-calendar", {
-            staticClass: "calendar",
-            attrs: {
-              "is-multiple-date-picker": true,
-              "with-time-picker": true
-            },
-            model: {
-              value: _vm.calendar,
-              callback: function($$v) {
-                _vm.calendar = $$v
-              },
-              expression: "calendar"
-            }
-          }),
-          _vm._v(" "),
-          _c("highlight-code", {
-            attrs: {
-              lang: "html",
-              code:
-                "<functional-calendar :is-multiple-date-picker='true' :with-time-picker='true'></functional-calendar>"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-12" },
-        [
-          _c("h4", [_vm._v("Mutliple Calendars")]),
-          _vm._v(" "),
-          _c("functional-calendar", {
-            staticClass: "calendar multiple",
-            attrs: {
-              "is-date-range": true,
-              "is-multiple": true,
-              "calendars-count": 2
-            }
-          }),
-          _vm._v(" "),
-          _c("highlight-code", {
-            attrs: {
-              lang: "html",
-              code:
-                "<functional-calendar :is-multiple='true' :calendars-count='2' :is-date-range='true'></functional-calendar>"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("h4", [_vm._v("API")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-5" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-sm btn-primary m-1",
-              on: { click: _vm.preMonth }
-            },
-            [_vm._v("\n                    Pre Month\n                ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-sm btn-primary m-1",
-              on: { click: _vm.nextMonth }
-            },
-            [_vm._v("\n                    Next Month\n                ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-sm btn-primary m-1",
-              on: { click: _vm.preYear }
-            },
-            [_vm._v("\n                    Pre Year\n                ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-sm btn-primary m-1",
-              on: { click: _vm.nextYear }
-            },
-            [_vm._v("\n                    Next Year\n                ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-sm btn-primary m-1",
-              on: {
-                click: function($event) {
-                  return _vm.chooseDate("31/06/2020")
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n                    Change Date (31/06/2020)\n                "
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
+  return _c("div", { staticClass: "container-fulid" }, [
+    _c("div", { staticClass: "container-xl" }, [
+      _c("div", { staticClass: "row flex-center" }, [
         _c(
           "div",
           { staticClass: "col-md-6" },
           [
+            _c("h4", [_vm._v("Multiple Date Picker")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              _vm._l(_vm.selected, function(data, i) {
+                return _c("span", { key: i }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(data.date) +
+                      "\n                    "
+                  )
+                ])
+              }),
+              0
+            ),
+            _vm._v(" "),
             _c("functional-calendar", {
-              ref: "Calendar",
-              staticClass: "calendar multiple",
-              attrs: { "is-date-picker": true }
+              staticClass: "calendar",
+              attrs: { "is-multiple-date-picker": true },
+              on: { choseDay: _vm.clickDay },
+              model: {
+                value: _vm.calendar,
+                callback: function($$v) {
+                  _vm.calendar = $$v
+                },
+                expression: "calendar"
+              }
             })
           ],
           1
@@ -50354,23 +50021,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 mb-5" }, [
-      _c("h1", [_vm._v("VueJS Functional Calendar")]),
-      _vm._v(" "),
-      _c("h5", [
-        _vm._v("\n                Developed By\n                "),
-        _c("a", { attrs: { href: "https://github.com/ManukMinasyan" } }, [
-          _vm._v("Manuk Minasyan (GitHub)")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

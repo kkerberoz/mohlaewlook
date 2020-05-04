@@ -224,11 +224,11 @@ export default {
             console.log("flight", this.flights);
         });
     },
-    mounted(){
-        axios.get("/api/backend/analytic1_get").then(response =>{
-            console.log(response.data);
-        });
-    },
+    // mounted(){
+    //     axios.get("/api/backend/analytic1_get").then(response =>{
+    //         console.log(response.data);
+    //     });
+    // },
     methods: {
         editPrice(flight) {
             $("#addNew").modal("show");
