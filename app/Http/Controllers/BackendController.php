@@ -307,8 +307,14 @@ class BackendController extends Controller
         return response()->JSON($data);
     }
 
-    public function analytic2()
+    public function analytic2_show(Request $request)
     {
+        $scope = $request;
+        $data = DB::select('SELECT class_name,COUNT(*) AS class_count
+                            FROM tickets
+                            WHERE flight_id IN (SELECT flight_id FROM flights WHERE depart_datetime BETWEEN ? AND ?)
+                            GROUP BY class_name',[$scope['first'],$scope['second']]);
+        return response()->JSON($data);
 
     }
 
