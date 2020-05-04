@@ -294,11 +294,17 @@ class BackendController extends Controller
 
 
 
-    public function analytic1()
+    public function analytic1_show(Request $request)
     {
-        $todayDate = date("Y-m-d");
-        list($nowyear, $nowmonth, $nowday) = str_split("-", $todayDate);
-        return response()->JSON([$nowyear, $nowmonth, $nowday]);
+        $yearLIKE = ($request->year)."%";
+        $analyticData = DB::select('SELECT flight_no,COUNT(*) AS flight_no_count FROM flights WHERE depart_datetime LIKE ? GROUP BY flight_no ORDER BY flight_no_count DESC',[$yearLIKE]);
+        return response()->JSON($analyticData);
+    }
+
+    public function analytic1_get()
+    {
+        $data = DB::select('SELECT DISTINCT YEAR(depart_datetime) AS year FROM flights');
+        return response()->JSON($data);
     }
 
     public function analytic2()

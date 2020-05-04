@@ -225,7 +225,7 @@ export default {
         });
     },
     mounted(){
-        axios.get("/api/backend/analytic1").then(response =>{
+        axios.get("/api/backend/analytic1_get").then(response =>{
             console.log(response.data);
         });
     },
