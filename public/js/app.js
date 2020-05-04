@@ -2134,7 +2134,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6344,7 +6343,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6431,7 +6429,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_3__);
-//
 //
 //
 //
@@ -6693,7 +6690,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6769,7 +6765,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
-//
 //
 //
 //
@@ -51035,7 +51030,6 @@ var render = function() {
         attrs: {
           active: _vm.loadingPage,
           "can-cancel": false,
-          "on-cancel": _vm.onCancel,
           "is-full-page": _vm.fullPage,
           opacity: 0.9,
           color: "#f87a2b",
@@ -56479,7 +56473,6 @@ var render = function() {
         attrs: {
           active: _vm.loadingPage,
           "can-cancel": false,
-          "on-cancel": _vm.onCancel,
           "is-full-page": _vm.fullPage,
           opacity: "0.9",
           color: "#f87a2b",
@@ -56666,7 +56659,6 @@ var render = function() {
         attrs: {
           active: _vm.loadingPage,
           "can-cancel": false,
-          "on-cancel": _vm.onCancel,
           "is-full-page": _vm.fullPage,
           opacity: "0.9",
           color: "#f87a2b",
@@ -56882,7 +56874,6 @@ var render = function() {
         attrs: {
           active: _vm.loadingPage,
           "can-cancel": false,
-          "on-cancel": _vm.onCancel,
           "is-full-page": _vm.fullPage,
           opacity: "0.9",
           color: "#f87a2b",
@@ -57078,7 +57069,6 @@ var render = function() {
         attrs: {
           active: _vm.loadingPage,
           "can-cancel": false,
-          "on-cancel": _vm.onCancel,
           "is-full-page": _vm.fullPage,
           opacity: "0.9",
           color: "#f87a2b",
