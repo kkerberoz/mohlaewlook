@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid" style="padding:3%">
+    <div class="container-fluid" style="padding:3%; margin-bottom:10%">
         <div class="container-xl">
             <div class="row flex-center ">
                 <div class="col-md-12 ">
@@ -10,21 +10,66 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <span class="col-md-4 mb-2">
-                                <label>Year :</label>
+                            <div class="row">
+                                <span class="col-md-6 mb-2">
+                                    <label>Form :{{ selectForm }}</label>
 
-                                <multiselect
-                                    v-model="selected"
-                                    label="year"
-                                    @close ="Analysis4"
-                                    :options="years"
-                                    :searchable="true"
-                                    :multiple="false"
-                                    :close-on-select="true"
-                                    :clear-on-select="false"
-                                    placeholder="Choose Year"
-                                ></multiselect>
-                            </span>
+                                    <multiselect
+                                        v-model="selectForm"
+                                        :options="years"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        placeholder="Choose Year"
+                                    ></multiselect>
+                                </span>
+
+                                <span class="col-md-6 mb-2">
+                                    <label>To :{{ selectTo }}</label>
+
+                                    <multiselect
+                                        v-model="selectTo"
+                                        @close="Analysis4"
+                                        :options="years"
+                                        :searchable="true"
+                                        :multiple="false"
+                                        :close-on-select="true"
+                                        :clear-on-select="false"
+                                        placeholder="Choose Year"
+                                    ></multiselect>
+                                </span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">year</th>
+                                            <th scope="col">Male</th>
+                                            <th scope="col">Female</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        v-for="(value, id) in values"
+                                        :key="id"
+                                    >
+                                        <tr>
+                                            <th scope="row">
+                                                {{ value.year }}
+                                            </th>
+                                            <td>{{ value.male }}</td>
+                                            <td>{{ value.female }}</td>
+                                            <td>
+                                                {{
+                                                    Number(value.male) +
+                                                        Number(value.female)
+                                                }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,29 +84,47 @@ export default {
     components: { Multiselect },
     data() {
         return {
-            selected: "",
+            selectForm: "",
+            selectTo: "",
             start: null,
             end: null,
-            years: [],
-            male: [],
-            female: [],
+            values: []
         };
     },
-    methods: {
-        Analysis4(){
-            // simulate
-            this.start = 2015;
-            this.end = 2020;
-            //
-            axios.post("/api/backend/analytic4", {'start': this.start, 'end': this.end}).then(response => {
-                console.log(response.data);
-            });
+    computed: {
+        years() {
+            const year = new Date().getFullYear();
+            return Array.from(
+                { length: year - 2000 },
+                (value, index) => 2001 + index
+            );
         }
     },
-    beforeMount(){
-        axios.get("/api/backend/analytic1_get").then(response => {
-            this.years = response.data;
-        });
+    methods: {
+        Analysis4() {
+            console.log("form", this.selectForm);
+            console.log("to", this.selectTo);
+            // simulate
+            this.start = this.selectForm;
+            this.end = this.selectTo;
+
+            axios
+                .post("/api/backend/analytic4", {
+                    start: this.start,
+                    end: this.end
+                })
+                .then(response => {
+                    // this.males = response.data.Male;
+                    // console.log(response.data);
+                    this.values = response.data.value;
+                    // this.females = response.data.Female;
+                });
+        }
+    },
+    beforeMount() {
+        // axios.get("/api/backend/analytic1_get").then(response => {
+        //     this.years = response.data;
+        // });
     }
 };
 </script>
