@@ -1,5 +1,14 @@
 <template>
     <div class="container-fluid " style="padding-top:5%;padding-bottom:10%;">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl" style="margin-top:5%;padding-bottom:5%;">
             <div class="row flex-center">
                 <div class="col-md-12">
@@ -416,10 +425,14 @@
 
 <script>
 import Multiselect from "vue-multiselect";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
-    components: { Multiselect },
+    components: { Multiselect, Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             changePage: true,
             counter: "",
             titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
@@ -462,6 +475,12 @@ export default {
             error_idcard: "",
             error_passport: ""
         };
+    },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 2000);
     },
     methods: {
         addPass(index) {

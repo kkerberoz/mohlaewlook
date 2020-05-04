@@ -1,5 +1,14 @@
 <template>
     <div class="container-fluid" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <br />
         <div class="col-md-12 full-height">
             <div class="card shadow-lg bg-white">
@@ -261,9 +270,14 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
+    components: { Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             users: [],
             isLoading: false,
             editMode: false,
@@ -288,9 +302,11 @@ export default {
         };
     },
     beforeMount() {
+        this.loadingPage = true;
         axios.get("/api/backend/getCustomer").then(response => {
             this.users = response.data;
             console.log(this.users);
+            this.loadingPage = false;
         });
     },
     methods: {
