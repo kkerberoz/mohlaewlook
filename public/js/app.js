@@ -3308,6 +3308,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3352,7 +3364,20 @@ __webpack_require__.r(__webpack_exports__);
       all_check: false,
       aircraft_array_info: [],
       pilot_on_flight: [],
-      crew_array_info: null
+      crew_array_info: null,
+      // error input
+      errors_input: null,
+      error_departLocation: null,
+      error_departDate: null,
+      error_departTime: null,
+      error_arriveLocation: null,
+      error_arriveDate: null,
+      error_arriveTime: null,
+      error_aircraftID: null,
+      error_flightNo: null,
+      error_captain: null,
+      error_coPilot: null,
+      error_crew: null
     };
   },
   methods: {
@@ -3398,6 +3423,50 @@ __webpack_require__.r(__webpack_exports__);
           $("#addNew").modal("hide"); // this.$router.go({ name: "addFlight" });
         });
       });
+    },
+    formSubmit: function formSubmit(e) {
+      e.preventDefault();
+      this.errors_input = true; // condition for input
+
+      this.error_departLocation = !this.input.departLocation ? "Please select the depart location." : null;
+      this.error_departDate = !this.input.departDate ? "Please fill the depart date." : null;
+      this.error_departTime = !this.input.departTime ? "Please fill the depart time." : null;
+      /**/
+
+      this.errors_input = !this.errors_input || this.error_departLocation || this.error_departDate || this.error_departTime ? false : true;
+      this.error_arriveLocation = !this.input.arriveLocation ? "Please select the arrive location." : null;
+      this.error_arriveDate = !this.input.arriveDate ? "Please fill the arrive date." : null;
+      this.error_arriveTime = !this.input.arriveTime ? "Please fill the arrive time." : null;
+      /**/
+
+      this.errors_input = !this.errors_input || this.error_arriveLocation || this.error_arriveDate || this.error_arriveTime ? false : true;
+      this.error_aircraftID = !this.input.aircraftID ? "Please select aircraft ID" : null;
+      this.error_flightNo = !this.input.flightNo ? "Please select flight number" : null;
+      /**/
+
+      this.errors_input = !this.errors_input || this.error_aircraftID || this.error_flightNo ? false : true;
+      this.error_captain = !this.input.captain ? "Please select captain" : null;
+      this.error_coPilot = !this.input.coPilot ? "Please select co-pilot" : null;
+      this.error_crew = !this.input.crew.length ? "Please select flight attendant" : null;
+      /**/
+
+      this.errors_input = !this.errors_input || this.error_captain || this.error_coPilot || this.error_crew ? false : true; // another condition
+
+      this.error_arriveLocation = !this.error_arriveLocation && !this.error_departLocation && this.input.arriveLocation.value == this.input.departLocation.value ? "The arrive location must be different form the depart location" : this.error_arriveLocation;
+      this.error_arriveDate = !this.error_arriveDate && !this.error_departDate && this.input.arriveDate < this.input.departDate ? "The arrive date must be not less than the depart date" : this.error_arriveDate;
+      this.error_arriveTime = !this.error_arriveDate && !this.error_departDate && !this.error_arriveTime && !this.error_departTime && this.input.arriveDate == this.input.departDate && this.input.arriveTime <= this.input.departTime ? "On the same day, The arrive time must be more than the depart time" : this.error_arriveTime;
+      /**/
+
+      this.errors_input = !this.errors_input || this.error_arriveLocation || this.error_arriveDate || this.error_arriveTime ? false : true;
+
+      if (this.errors_input) {
+        axios.post("/api/backend/addFlight", this.input).then(function (response) {
+          console.log(response.data);
+          swal.fire("Register Success!", "Cilck the button to continue!", "success");
+        });
+      } else {
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+      }
     }
   },
   beforeMount: function beforeMount() {
@@ -3411,15 +3480,14 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     });
+    axios.get("/api/backend/getFlightNo").then(function (response) {
+      _this2.flights = response.data;
+    });
   },
   beforeUpdate: function beforeUpdate() {
     var _this3 = this;
 
-    axios.get("/api/backend/getFlightNo").then(function (response) {
-      _this3.flights = response.data;
-      console.log("flight", _this3.flights);
-    }); // for check depart location, depart date and depart time are selected.
-
+    // for check depart location, depart date and depart time are selected.
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
       this.aircrafts = [];
       this.options_pilot = [];
@@ -3473,15 +3541,22 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this3.options_pilot = [];
+        _this3.input.captain = null;
+        document.getElementById("pilot_info").innerHTML = null;
         _this3.options_attendant = [];
+        _this3.input.coPilot = null;
+        document.getElementById("copilot_info").innerHTML = null;
         var pilot = _this3.pilot_on_flight = response.data.Pilot;
         var attendant = response.data.Attendant;
+        _this3.input.crew = [];
         _this3.crew_array_info = response.data.Personal_Detail; // pilot
 
         for (var i = 0; i < pilot.length; ++i) {
           _this3.options_pilot.push({
             value: pilot[i]["data"]["user_id"],
-            name: "ID: " + pilot[i]["data"]["user_id"]
+            name: "ID: " + pilot[i]["data"]["user_id"],
+            work_id: pilot[i]["data"]["work_id"],
+            type: pilot[i]["type"]
           });
         } // co-pilot
 
@@ -3489,14 +3564,19 @@ __webpack_require__.r(__webpack_exports__);
         for (var i = 0; i < pilot.length; ++i) {
           _this3.options_copilot.push({
             value: pilot[i]["data"]["user_id"],
-            name: "ID: " + pilot[i]["data"]["user_id"]
+            name: "ID: " + pilot[i]["data"]["user_id"],
+            work_id: pilot[i]["data"]["work_id"],
+            type: pilot[i]["type"]
           });
-        }
+        } // attendant
+
 
         for (var i = 0; i < attendant.length; ++i) {
           _this3.options_attendant.push({
             value: attendant[i]["data"]["user_id"],
-            name: "ID: " + attendant[i]["data"]["user_id"]
+            name: "ID: " + attendant[i]["data"]["user_id"] + ", " + "Name: " + _this3.crew_array_info[attendant[i]["data"]["user_id"]]["name"] + " " + _this3.crew_array_info[attendant[i]["data"]["user_id"]]["surname"],
+            work_id: attendant[i]["data"]["work_id"],
+            type: attendant[i]["type"]
           });
         }
       });
@@ -3513,19 +3593,11 @@ __webpack_require__.r(__webpack_exports__);
         if (this.input.captain.value != this.pilot_on_flight[i]["data"]["user_id"]) {
           this.options_copilot.push({
             value: this.pilot_on_flight[i]["data"]["user_id"],
-            name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
+            name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"],
+            work_id: this.pilot_on_flight[i]["data"]["work_id"],
+            type: this.pilot_on_flight[i]["type"]
           });
         }
-      }
-    } else {
-      document.getElementById("pilot_info").innerHTML = null;
-      this.options_copilot = [];
-
-      for (var i = 0; i < this.pilot_on_flight.length; ++i) {
-        this.options_copilot.push({
-          value: this.pilot_on_flight[i]["data"]["user_id"],
-          name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
-        });
       }
     } // show information of each co-pilot
 
@@ -6115,12 +6187,29 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  beforeMount: function beforeMount() {
+  mounted: function mounted() {
     var _this2 = this;
 
-    swal.fire("Please select year to show data", "Cilck the button to continue!", "warning");
+    var year = this.selected;
+    axios.post("/api/backend/analytic1_show", year).then(function (response) {
+      _this2.data = response.data.analysis;
+      _this2.selected = [{
+        year: response.data.year
+      }];
+      console.log(_this2.selected);
+      console.log(response.data);
+    });
+  },
+  beforeMount: function beforeMount() {
+    var _this3 = this;
+
+    // swal.fire(
+    //     "Please select year to show data",
+    //     "Cilck the button to continue!",
+    //     "warning"
+    // );
     axios.get("/api/backend/analytic1_get").then(function (response) {
-      _this2.years = response.data;
+      _this3.years = response.data;
     });
   }
 });
@@ -51381,6 +51470,7 @@ var render = function() {
                           _c("label", [_vm._v("Depart Location:")]),
                           _vm._v(" "),
                           _c("multiselect", {
+                            class: { "is-invalid": _vm.error_departLocation },
                             attrs: {
                               label: "name",
                               options: _vm.locations,
@@ -51403,7 +51493,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                    Please choose\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.error_departLocation) +
+                                "\n                                "
                             )
                           ])
                         ],
@@ -51423,6 +51515,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: { "is-invalid": _vm.error_departDate },
                           attrs: { type: "date" },
                           domProps: { value: _vm.input.departDate },
                           on: {
@@ -51441,7 +51534,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Please enter\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error_departDate) +
+                              "\n                                "
                           )
                         ])
                       ]),
@@ -51459,6 +51554,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: { "is-invalid": _vm.error_departTime },
                           attrs: { type: "time" },
                           domProps: { value: _vm.input.departTime },
                           on: {
@@ -51477,7 +51573,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Please enter\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error_departTime) +
+                              "\n                                "
                           )
                         ])
                       ])
@@ -51491,6 +51589,7 @@ var render = function() {
                           _c("label", [_vm._v("Arrive Location:")]),
                           _vm._v(" "),
                           _c("multiselect", {
+                            class: { "is-invalid": _vm.error_arriveLocation },
                             attrs: {
                               label: "name",
                               options: _vm.locations,
@@ -51513,7 +51612,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                    Please choose\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.error_arriveLocation) +
+                                "\n                                "
                             )
                           ])
                         ],
@@ -51533,6 +51634,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: { "is-invalid": _vm.error_arriveDate },
                           attrs: { type: "date" },
                           domProps: { value: _vm.input.arriveDate },
                           on: {
@@ -51551,7 +51653,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Please enter\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error_arriveDate) +
+                              "\n                                "
                           )
                         ])
                       ]),
@@ -51569,6 +51673,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class: { "is-invalid": _vm.error_arriveTime },
                           attrs: { type: "time" },
                           domProps: { value: _vm.input.arriveTime },
                           on: {
@@ -51587,7 +51692,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(
-                            "\n                                    Please enter flight number\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.error_arriveTime) +
+                              "\n                                "
                           )
                         ])
                       ])
@@ -51601,9 +51708,7 @@ var render = function() {
                           _c("label", [_vm._v("Aircraft ID:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: {
-                              active: true
-                            },
+                            class: { "is-invalid": _vm.error_aircraftID },
                             attrs: {
                               label: "name",
                               options: _vm.aircrafts,
@@ -51627,7 +51732,15 @@ var render = function() {
                           _c("div", {
                             staticClass: "static active",
                             attrs: { id: "aircraft_info" }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.error_aircraftID) +
+                                "\n                                "
+                            )
+                          ])
                         ],
                         1
                       ),
@@ -51639,6 +51752,7 @@ var render = function() {
                           _c("label", [_vm._v("Flight Number:")]),
                           _vm._v(" "),
                           _c("multiselect", {
+                            class: { "is-invalid": _vm.error_flightNo },
                             attrs: {
                               "custom-label": _vm.flightNo,
                               options: _vm.flights,
@@ -51661,7 +51775,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "invalid-feedback" }, [
                             _vm._v(
-                              "\n                                    Please enter flight number\n                                "
+                              "\n                                    " +
+                                _vm._s(_vm.error_flightNo) +
+                                "\n                                "
                             )
                           ])
                         ],
@@ -51724,6 +51840,7 @@ var render = function() {
                                   _c("label", [_vm._v("Captain:")]),
                                   _vm._v(" "),
                                   _c("multiselect", {
+                                    class: { "is-invalid": _vm.error_captain },
                                     attrs: {
                                       label: "name",
                                       options: _vm.options_pilot,
@@ -51746,20 +51863,22 @@ var render = function() {
                                     }
                                   }),
                                   _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "static active",
+                                    attrs: { id: "pilot_info" }
+                                  }),
+                                  _vm._v(" "),
                                   _c(
                                     "div",
                                     { staticClass: "invalid-feedback" },
                                     [
                                       _vm._v(
-                                        "\n                                            Please choose\n                                        "
+                                        "\n                                            " +
+                                          _vm._s(_vm.error_captain) +
+                                          "\n                                        "
                                       )
                                     ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "static active",
-                                    attrs: { id: "pilot_info" }
-                                  })
+                                  )
                                 ],
                                 1
                               )
@@ -51772,6 +51891,7 @@ var render = function() {
                                 _c("label", [_vm._v("Co-pilot:")]),
                                 _vm._v(" "),
                                 _c("multiselect", {
+                                  class: { "is-invalid": _vm.error_coPilot },
                                   attrs: {
                                     disabled: _vm.waitPilot,
                                     options: _vm.options_copilot,
@@ -51793,16 +51913,18 @@ var render = function() {
                                   }
                                 }),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "invalid-feedback" }, [
-                                  _vm._v(
-                                    "\n                                        Please choose\n                                    "
-                                  )
-                                ]),
-                                _vm._v(" "),
                                 _c("div", {
                                   staticClass: "static active",
                                   attrs: { id: "copilot_info" }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "invalid-feedback" }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(_vm.error_coPilot) +
+                                      "\n                                    "
+                                  )
+                                ])
                               ],
                               1
                             )
@@ -51822,6 +51944,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("multiselect", {
+                                  class: { "is-invalid": _vm.error_crew },
                                   attrs: {
                                     disabled: _vm.waitPilot,
                                     options: _vm.options_attendant,
@@ -51875,7 +51998,9 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "invalid-feedback" }, [
                                   _vm._v(
-                                    "\n                                            Please choose\n                                        "
+                                    "\n                                            " +
+                                      _vm._s(_vm.error_crew) +
+                                      "\n                                        "
                                   )
                                 ])
                               ],
@@ -51894,7 +52019,13 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { type: "submit", disabled: _vm.isLoading }
+                    attrs: { type: "submit", disabled: _vm.isLoading },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.formSubmit($event)
+                      }
+                    }
                   },
                   [
                     _c(
@@ -74623,8 +74754,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

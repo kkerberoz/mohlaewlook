@@ -48,6 +48,7 @@ Route::prefix('backend')->group(function () {
     Route::post('/addAircraft', 'BackendController@addAircraft');
     Route::get('/getAirports', 'BackendController@getAirports');
     Route::post('/getAircraftAndCrew', 'BackendController@getAircraftAndCrew');
+    Route::post('/addFlight', 'BackendController@addFlight');
     Route::post('/addAirport', 'BackendController@addAirport');
     Route::get('/getModelBrand', 'BackendController@getModelBrand');
     Route::post('/addPrice','BackendController@addPrice');
