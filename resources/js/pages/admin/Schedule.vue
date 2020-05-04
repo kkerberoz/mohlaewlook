@@ -27,8 +27,15 @@
                         :configs="calendarConfigs"
                     ></functional-calendar>
                 </div>
-                <button type="submit" @click="submit" class="btn btn-success">
-                    <span>Submit free day</span>
+                <button
+                    style="padding:20px;margin-top:10px"
+                    type="submit"
+                    :disabled="isLoading"
+                    @click.prevent="submit"
+                    class="btn btn-success"
+                >
+                    <span v-show="!isLoading">Submit free day</span>
+                    <i class="fas fa-spinner fa-pulse" v-show="isLoading"></i>
                 </button>
             </div>
             <hr class="mb-4 mt-4" />
@@ -64,16 +71,16 @@ export default {
     components: { FunctionalCalendar, Loading },
     data() {
         return {
+            isLoading: false,
             loadingPage: false,
             fullPage: true,
             works: [],
             showWork: [],
             data: [],
-            id:"",
-            user_id:"",
-            flights:[],
+            id: "",
+            user_id: "",
+            flights: [],
             selected: [],
-            datePick: [],
             calendar: {},
             calendarConfigs: {
                 disabledDates: ["beforeToday"],
@@ -88,29 +95,50 @@ export default {
             // console.log(this.selected);
             // console.log(this.calendar.selectedDates);
         },
-        submit() {
-            console.log("!!!!!!!!!!!!!!!!!");
-
-            let data = {
-                user_id: this.user_id,
-                array_date: this.selected
-            };
-            axios.post("/api/backend/addNewWork", data).then(response => {
-                console.log(response.data);
-                this.loadingPage = false;
-            });
+        submit(e) {
+            this.isLoading = true;
+            if (this.selected.length) {
+                e.preventDefault();
+                let data = {
+                    user_id: this.user_id,
+                    array_date: this.selected
+                };
+                axios
+                    .post("/api/backend/addNewWork", data)
+                    .then(response => {
+                        swal.fire(
+                            "Add Success!",
+                            "Cilck the button to continue!",
+                            "success"
+                        ).then(() => {
+                            this.isLoading = false;
+                            this.$router.go({ name: "Schedule" });
+                        });
+                    })
+                    .catch(error => {
+                        this.isLoading = false;
+                    });
+            } else {
+                this.isLoading = false;
+                swal.fire(
+                    "Please select date before submit!",
+                    "Cilck the button to continue!",
+                    "warning"
+                );
+            }
         }
     },
     beforeMount() {
         this.loadingPage = true;
         axios.get("/api/admin/init").then(response => {
             this.id = response.data.id;
-            axios.post('/api/backend/getflightdetail',{id: this.id}).then(response =>{
-                // console.log(response.data);
-                this.user_id = response.data[0];
-                this.works = response.data[1];
-
-            });
+            axios
+                .post("/api/backend/getflightdetail", { id: this.id })
+                .then(response => {
+                    // console.log(response.data);
+                    this.user_id = response.data[0];
+                    this.works = response.data[1];
+                });
 
             axios
                 .get(`/api/backend/schedule/${this.id}`)
