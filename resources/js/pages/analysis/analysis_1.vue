@@ -2,7 +2,7 @@
     <div class="container-fluid" style="padding:3%">
         <div class="container-xl">
             <div class="row flex-center ">
-                <div class="col-md-12 ">
+                <div class="col-md-12 " style="padding:10px">
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
                             <div class="card-title">
@@ -48,6 +48,14 @@
                                             </td>
                                         </tr>
                                     </tbody>
+
+                                    <tfoot>
+                                        <tr v-show="showTotal">
+                                            <td>&nbsp;</td>
+                                            <td>Total</td>
+                                            <td>{{ sum }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -64,6 +72,8 @@ export default {
     components: { Multiselect },
     data() {
         return {
+            showTotal: false,
+            sum: 0,
             selected: "",
             years: [],
             data: []
@@ -72,13 +82,20 @@ export default {
     methods: {
         queryAnalyssis() {
             var year = this.selected;
+            this.sum = 0;
+            this.showTotal = true;
             axios
                 .post("/api/backend/analytic1_show", year)
                 .then(response => {
                     this.data = response.data.analysis;
-                    console.log(this.data);
+                    this.data.forEach(each_data => {
+                        this.sum += each_data["flight_no_count"];
+                    });
+
+                    // console.log(this.data);
                 })
                 .catch(error => {
+                    this.showTotal = false;
                     swal.fire(
                         "Error.",
                         "Cilck the button to continue!",
@@ -88,12 +105,17 @@ export default {
         }
     },
     beforeMount() {
+        this.sum = 0;
         var year = this.selected;
         axios.post("/api/backend/analytic1_show", year).then(response => {
             this.data = response.data.analysis;
             this.selected = [{ year: response.data.year }];
             console.log(this.selected);
             console.log(response.data);
+            this.showTotal = true;
+            this.data.forEach(each_data => {
+                this.sum += each_data["flight_no_count"];
+            });
         });
         axios.get("/api/backend/analytic1_get").then(response => {
             this.years = response.data;

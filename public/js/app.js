@@ -2116,7 +2116,14 @@ __webpack_require__.r(__webpack_exports__);
       calendar: {},
       calendarConfigs: {
         disabledDates: ["beforeToday"],
-        isMultipleDatePicker: true
+        isMultipleDatePicker: true,
+        markedDates: [{
+          date: "10/5/2020",
+          "class": "green-line"
+        }, {
+          date: "12/5/2020",
+          "class": "green-line"
+        }]
       }
     };
   },
@@ -3324,6 +3331,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3452,6 +3481,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     formSubmit: function formSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
       this.errors_input = true; // condition for input
 
@@ -3489,7 +3520,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.errors_input) {
         axios.post("/api/backend/addFlight", this.input).then(function (response) {
           console.log(response.data);
-          swal.fire("Register Success!", "Cilck the button to continue!", "success");
+          swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+            _this2.$router.go({
+              name: "addFlight"
+            });
+          });
         });
       } else {
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
@@ -3497,22 +3532,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get("/api/backend/getAirports").then(function (response) {
       response.data.forEach(function (airport) {
-        _this2.locations.push({
+        _this3.locations.push({
           value: airport["airport_id"],
           name: airport["airport_id"] + " - " + airport["airport_name"]
         });
       });
     });
     axios.get("/api/backend/getFlightNo").then(function (response) {
-      _this2.flights = response.data;
+      _this3.flights = response.data;
     });
   },
   beforeUpdate: function beforeUpdate() {
-    var _this3 = this;
+    var _this4 = this;
 
     // for check depart location, depart date and depart time are selected.
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
@@ -3543,42 +3578,42 @@ __webpack_require__.r(__webpack_exports__);
         var other_aircraft = response.data.Other_Aircraft;
         var other_brand = response.data.Other_Brand;
         var other_model = response.data.Other_Model;
-        _this3.input.aircraftID = null; // clear aircraft id
+        _this4.input.aircraftID = null; // clear aircraft id
 
         document.getElementById("aircraft_info").innerHTML = null;
-        _this3.aircrafts = [];
+        _this4.aircrafts = [];
 
         for (var i = 0; i < aircraft.length; ++i) {
-          _this3.aircrafts.push({
+          _this4.aircrafts.push({
             value: aircraft[i]["aircraft_id"],
             name: "ID: " + aircraft[i]["aircraft_id"] + " - " + aircraft_brand[i]["brand_name"] + " " + aircraft_model[i]["model_name"]
           });
 
-          _this3.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Number of Flight Times:</b> " + flight_time[i] + " Times <br>" + "<b>Last Flight</b>: " + flight_info[i]["flight_no"] + "<b> from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<b> To:</b>  " + flight_info[i]["arrive_datetime"];
+          _this4.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Number of Flight Times:</b> " + flight_time[i] + " Times <br>" + "<b>Last Flight</b>: " + flight_info[i]["flight_no"] + "<b> from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<b> To:</b>  " + flight_info[i]["arrive_datetime"];
         }
 
         for (var i = 0; i < other_aircraft.length; ++i) {
-          _this3.aircrafts.push({
+          _this4.aircrafts.push({
             value: other_aircraft[i]["aircraft_id"],
             name: "ID: " + other_aircraft[i]["aircraft_id"] + " - " + other_brand[i]["brand_name"] + " " + other_model[i]["model_name"]
           });
 
-          _this3.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
+          _this4.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
         }
 
-        _this3.options_pilot = [];
-        _this3.input.captain = null;
+        _this4.options_pilot = [];
+        _this4.input.captain = null;
         document.getElementById("pilot_info").innerHTML = null;
-        _this3.options_attendant = [];
-        _this3.input.coPilot = null;
+        _this4.options_attendant = [];
+        _this4.input.coPilot = null;
         document.getElementById("copilot_info").innerHTML = null;
-        var pilot = _this3.pilot_on_flight = response.data.Pilot;
+        var pilot = _this4.pilot_on_flight = response.data.Pilot;
         var attendant = response.data.Attendant;
-        _this3.input.crew = [];
-        _this3.crew_array_info = response.data.Personal_Detail; // pilot
+        _this4.input.crew = [];
+        _this4.crew_array_info = response.data.Personal_Detail; // pilot
 
         for (var i = 0; i < pilot.length; ++i) {
-          _this3.options_pilot.push({
+          _this4.options_pilot.push({
             value: pilot[i]["data"]["user_id"],
             name: "ID: " + pilot[i]["data"]["user_id"],
             work_id: pilot[i]["data"]["work_id"],
@@ -3588,7 +3623,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
         for (var i = 0; i < pilot.length; ++i) {
-          _this3.options_copilot.push({
+          _this4.options_copilot.push({
             value: pilot[i]["data"]["user_id"],
             name: "ID: " + pilot[i]["data"]["user_id"],
             work_id: pilot[i]["data"]["work_id"],
@@ -3598,9 +3633,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
         for (var i = 0; i < attendant.length; ++i) {
-          _this3.options_attendant.push({
+          _this4.options_attendant.push({
             value: attendant[i]["data"]["user_id"],
-            name: "ID: " + attendant[i]["data"]["user_id"] + ", " + "Name: " + _this3.crew_array_info[attendant[i]["data"]["user_id"]]["name"] + " " + _this3.crew_array_info[attendant[i]["data"]["user_id"]]["surname"],
+            name: "ID: " + attendant[i]["data"]["user_id"] + ", " + "Name: " + _this4.crew_array_info[attendant[i]["data"]["user_id"]]["name"] + " " + _this4.crew_array_info[attendant[i]["data"]["user_id"]]["surname"],
             work_id: attendant[i]["data"]["work_id"],
             type: attendant[i]["type"]
           });
@@ -6200,6 +6235,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6207,6 +6250,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      showTotal: false,
+      sum: 0,
       selected: "",
       years: [],
       data: []
@@ -6217,10 +6262,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var year = this.selected;
+      this.sum = 0;
+      this.showTotal = true;
       axios.post("/api/backend/analytic1_show", year).then(function (response) {
         _this.data = response.data.analysis;
-        console.log(_this.data);
+
+        _this.data.forEach(function (each_data) {
+          _this.sum += each_data["flight_no_count"];
+        }); // console.log(this.data);
+
       })["catch"](function (error) {
+        _this.showTotal = false;
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
     }
@@ -6228,6 +6280,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this2 = this;
 
+    this.sum = 0;
     var year = this.selected;
     axios.post("/api/backend/analytic1_show", year).then(function (response) {
       _this2.data = response.data.analysis;
@@ -6236,6 +6289,11 @@ __webpack_require__.r(__webpack_exports__);
       }];
       console.log(_this2.selected);
       console.log(response.data);
+      _this2.showTotal = true;
+
+      _this2.data.forEach(function (each_data) {
+        _this2.sum += each_data["flight_no_count"];
+      });
     });
     axios.get("/api/backend/analytic1_get").then(function (response) {
       _this2.years = response.data;
@@ -6332,6 +6390,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6341,9 +6406,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      showTotal: false,
       data: [],
       calendar_from: {},
       calendar_to: {},
+      sum: 0,
       calendarConfigs: {
         isDatePicker: true,
         dateFormat: "yyyy-mm-dd 00:00:00"
@@ -6358,14 +6425,21 @@ __webpack_require__.r(__webpack_exports__);
     clickDay: function clickDay() {
       var _this = this;
 
+      this.sum = 0;
       var scope = {
         first: this.calendar_from.selectedDate,
         second: this.calendar_to.selectedDate
       };
       axios.post("/api/backend/analytic2_show", scope).then(function (response) {
+        _this.showTotal = true;
         _this.data = response.data;
         console.log(_this.data);
+
+        _this.data.forEach(function (each_data) {
+          _this.sum += each_data["class_count"];
+        });
       })["catch"](function (error) {
+        _this.showTotal = false;
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
     }
@@ -6385,6 +6459,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -12234,7 +12310,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".green-line {\n  width: 15px;\n  position: absolute;\n  height: 2px;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 7.5px);\n}\n.green-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}\n.orange-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #ebae05;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}", ""]);
+exports.push([module.i, ".green-line {\n  width: 30px;\n  line-height: 30px;\n  color: #ffffff;\n  background-color: #45cc0d;\n  border-radius: 100%;\n  margin: 0 auto;\n}\n.green-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}\n.orange-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #ebae05;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}", ""]);
 
 // exports
 
@@ -51715,7 +51791,9 @@ var render = function() {
                           _c("label", [_vm._v("Depart Location:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_departLocation },
+                            class: {
+                              "is-invalid": _vm.error_departLocation
+                            },
                             attrs: {
                               label: "name",
                               options: _vm.locations,
@@ -51760,7 +51838,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_departDate },
+                          class: {
+                            "is-invalid": _vm.error_departDate
+                          },
                           attrs: { type: "date" },
                           domProps: { value: _vm.input.departDate },
                           on: {
@@ -51799,7 +51879,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_departTime },
+                          class: {
+                            "is-invalid": _vm.error_departTime
+                          },
                           attrs: { type: "time" },
                           domProps: { value: _vm.input.departTime },
                           on: {
@@ -51834,7 +51916,9 @@ var render = function() {
                           _c("label", [_vm._v("Arrive Location:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_arriveLocation },
+                            class: {
+                              "is-invalid": _vm.error_arriveLocation
+                            },
                             attrs: {
                               label: "name",
                               options: _vm.locations,
@@ -51879,7 +51963,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_arriveDate },
+                          class: {
+                            "is-invalid": _vm.error_arriveDate
+                          },
                           attrs: { type: "date" },
                           domProps: { value: _vm.input.arriveDate },
                           on: {
@@ -51918,7 +52004,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_arriveTime },
+                          class: {
+                            "is-invalid": _vm.error_arriveTime
+                          },
                           attrs: { type: "time" },
                           domProps: { value: _vm.input.arriveTime },
                           on: {
@@ -51953,7 +52041,9 @@ var render = function() {
                           _c("label", [_vm._v("Aircraft ID:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_aircraftID },
+                            class: {
+                              "is-invalid": _vm.error_aircraftID
+                            },
                             attrs: {
                               label: "name",
                               options: _vm.aircrafts,
@@ -51997,7 +52087,9 @@ var render = function() {
                           _c("label", [_vm._v("Flight Number:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_flightNo },
+                            class: {
+                              "is-invalid": _vm.error_flightNo
+                            },
                             attrs: {
                               "custom-label": _vm.flightNo,
                               options: _vm.flights,
@@ -52085,7 +52177,9 @@ var render = function() {
                                   _c("label", [_vm._v("Captain:")]),
                                   _vm._v(" "),
                                   _c("multiselect", {
-                                    class: { "is-invalid": _vm.error_captain },
+                                    class: {
+                                      "is-invalid": _vm.error_captain
+                                    },
                                     attrs: {
                                       label: "name",
                                       options: _vm.options_pilot,
@@ -52136,7 +52230,9 @@ var render = function() {
                                 _c("label", [_vm._v("Co-pilot:")]),
                                 _vm._v(" "),
                                 _c("multiselect", {
-                                  class: { "is-invalid": _vm.error_coPilot },
+                                  class: {
+                                    "is-invalid": _vm.error_coPilot
+                                  },
                                   attrs: {
                                     disabled: _vm.waitPilot,
                                     options: _vm.options_copilot,
@@ -52189,7 +52285,9 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("multiselect", {
-                                  class: { "is-invalid": _vm.error_crew },
+                                  class: {
+                                    "is-invalid": _vm.error_crew
+                                  },
                                   attrs: {
                                     options: _vm.options_attendant,
                                     searchable: true,
@@ -55957,77 +56055,104 @@ var render = function() {
     [
       _c("div", { staticClass: "container-xl" }, [
         _c("div", { staticClass: "row flex-center " }, [
-          _c("div", { staticClass: "col-md-12 " }, [
-            _c("div", { staticClass: "card shadow-lg bg-white" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "span",
-                  { staticClass: "col-md-4 mb-2" },
-                  [
-                    _c("label", [_vm._v("Year :")]),
-                    _vm._v(" "),
-                    _c("multiselect", {
-                      attrs: {
-                        label: "year",
-                        options: _vm.years,
-                        searchable: true,
-                        multiple: false,
-                        "close-on-select": true,
-                        "clear-on-select": false,
-                        placeholder: "Choose Year"
-                      },
-                      on: { select: _vm.queryAnalyssis },
-                      model: {
-                        value: _vm.selected,
-                        callback: function($$v) {
-                          _vm.selected = $$v
-                        },
-                        expression: "selected"
-                      }
-                    })
-                  ],
-                  1
-                ),
+          _c(
+            "div",
+            { staticClass: "col-md-12 ", staticStyle: { padding: "10px" } },
+            [
+              _c("div", { staticClass: "card shadow-lg bg-white" }, [
+                _vm._m(0),
                 _vm._v(" "),
-                _c("div", { staticClass: "table-responsive" }, [
+                _c("div", { staticClass: "card-body" }, [
                   _c(
-                    "table",
-                    { staticClass: "table" },
+                    "span",
+                    { staticClass: "col-md-4 mb-2" },
                     [
-                      _vm._m(1),
+                      _c("label", [_vm._v("Year :")]),
                       _vm._v(" "),
-                      _vm._l(_vm.data, function(flight, id) {
-                        return _c("tbody", { key: id }, [
-                          _c("tr", [
-                            _c("th", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(Number(id) + 1) +
-                                  "\n                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(flight.flight_no))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(flight.flight_no_count) +
-                                  "\n                                        "
-                              )
-                            ])
-                          ])
-                        ])
+                      _c("multiselect", {
+                        attrs: {
+                          label: "year",
+                          options: _vm.years,
+                          searchable: true,
+                          multiple: false,
+                          "close-on-select": true,
+                          "clear-on-select": false,
+                          placeholder: "Choose Year"
+                        },
+                        on: { select: _vm.queryAnalyssis },
+                        model: {
+                          value: _vm.selected,
+                          callback: function($$v) {
+                            _vm.selected = $$v
+                          },
+                          expression: "selected"
+                        }
                       })
                     ],
-                    2
-                  )
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "table-responsive" }, [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._l(_vm.data, function(flight, id) {
+                          return _c("tbody", { key: id }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(Number(id) + 1) +
+                                    "\n                                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(flight.flight_no))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(flight.flight_no_count) +
+                                    "\n                                        "
+                                )
+                              ])
+                            ])
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c("tfoot", [
+                          _c(
+                            "tr",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.showTotal,
+                                  expression: "showTotal"
+                                }
+                              ]
+                            },
+                            [
+                              _c("td", [_vm._v(" ")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Total")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.sum))])
+                            ]
+                          )
+                        ])
+                      ],
+                      2
+                    )
+                  ])
                 ])
               ])
-            ])
-          ])
+            ]
+          )
         ])
       ])
     ]
@@ -56152,40 +56277,70 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c(
-                    "table",
-                    { staticClass: "table" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _vm._l(_vm.data, function(flight, id) {
-                        return _c("tbody", { key: id }, [
-                          _c("tr", [
-                            _c("th", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(Number(id) + 1) +
-                                  "\n                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(flight.class_name))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(flight.class_count) +
-                                  "\n                                        "
-                              )
+                _c(
+                  "div",
+                  {
+                    staticClass: "table-responsive",
+                    staticStyle: { padding: "10px" }
+                  },
+                  [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._l(_vm.data, function(flight, id) {
+                          return _c("tbody", { key: id }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(Number(id) + 1) +
+                                    "\n                                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(flight.class_name))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(flight.class_count) +
+                                    "\n                                        "
+                                )
+                              ])
                             ])
                           ])
-                        ])
-                      })
-                    ],
-                    2
-                  )
-                ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "tfoot",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.showTotal,
+                                expression: "showTotal"
+                              }
+                            ]
+                          },
+                          [
+                            _c("tr", [
+                              _c("td", [_vm._v(" ")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Total")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.sum))])
+                            ])
+                          ]
+                        )
+                      ],
+                      2
+                    )
+                  ]
+                )
               ])
             ])
           ])
@@ -56330,6 +56485,8 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.user_id))]),
+                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(flight.username))]),
                             _vm._v(" "),
                             _c("td", [
@@ -56378,6 +56535,8 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("User_id")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Username")]),
         _vm._v(" "),

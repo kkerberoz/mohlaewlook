@@ -40,7 +40,7 @@
                                 </div>
                             </div>
 
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="padding:10px">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -63,6 +63,13 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot v-show="showTotal">
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>Total</td>
+                                            <td>{{ sum }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -80,9 +87,11 @@ export default {
     components: { Multiselect, FunctionalCalendar },
     data() {
         return {
+            showTotal: false,
             data: [],
             calendar_from: {},
             calendar_to: {},
+            sum: 0,
             calendarConfigs: {
                 isDatePicker: true,
                 dateFormat: "yyyy-mm-dd 00:00:00"
@@ -95,6 +104,7 @@ export default {
     },
     methods: {
         clickDay() {
+            this.sum = 0;
             let scope = {
                 first: this.calendar_from.selectedDate,
                 second: this.calendar_to.selectedDate
@@ -102,10 +112,15 @@ export default {
             axios
                 .post("/api/backend/analytic2_show", scope)
                 .then(response => {
+                    this.showTotal = true;
                     this.data = response.data;
                     console.log(this.data);
+                    this.data.forEach(each_data => {
+                        this.sum += each_data["class_count"];
+                    });
                 })
                 .catch(error => {
+                    this.showTotal = false;
                     swal.fire(
                         "Error.",
                         "Cilck the button to continue!",
