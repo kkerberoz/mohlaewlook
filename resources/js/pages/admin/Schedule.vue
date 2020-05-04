@@ -42,7 +42,11 @@ export default {
             calendar: {},
             calendarConfigs: {
                 disabledDates: ["beforeToday"],
-                isMultipleDatePicker: true
+                isMultipleDatePicker: true,
+                markedDates: [
+                    { date: "10/5/2020", class: "green-line" },
+                    { date: "12/5/2020", class: "green-line" }
+                ]
             }
         };
     },
@@ -56,12 +60,12 @@ export default {
 
 <style lang="scss">
 .green-line {
-    width: 15px;
-    position: absolute;
-    height: 2px;
+    width: 30px;
+    line-height: 30px;
+    color: #ffffff;
     background-color: #45cc0d;
-    bottom: 3px;
-    left: calc(50% - 7.5px);
+    border-radius: 100%;
+    margin: 0 auto;
 }
 
 .green-point {
