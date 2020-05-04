@@ -1,5 +1,14 @@
 <template>
     <div class="container-fluid" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl">
             <div class="row flex-center ">
                 <div class="col-md-12 ">
@@ -85,11 +94,15 @@
 
 <script>
 import { FunctionalCalendar } from "vue-functional-calendar";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 import Multiselect from "vue-multiselect";
 export default {
-    components: { Multiselect, FunctionalCalendar },
+    components: { Multiselect, FunctionalCalendar, Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             showTotal: false,
             data: [],
             calendar_from: {},
@@ -105,8 +118,15 @@ export default {
             }
         };
     },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 2000);
+    },
     methods: {
         clickDay() {
+            this.loadingPage = true;
             this.sum = 0;
             let scope = {
                 first: this.calendar_from.selectedDate,
@@ -130,6 +150,9 @@ export default {
                         "error"
                     );
                 });
+            setTimeout(() => {
+                this.loadingPage = false;
+            }, 2000);
         }
     }
 };

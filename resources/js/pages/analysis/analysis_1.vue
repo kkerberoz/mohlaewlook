@@ -1,5 +1,14 @@
 <template>
     <div class="container-fluid" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl">
             <div class="row flex-center ">
                 <div class="col-md-12 " style="padding:10px">
@@ -71,10 +80,14 @@
 
 <script>
 import Multiselect from "vue-multiselect";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
-    components: { Multiselect },
+    components: { Multiselect, Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             showTotal: false,
             sum: 0,
             selected: "",
@@ -84,6 +97,7 @@ export default {
     },
     methods: {
         queryAnalyssis() {
+            this.loadingPage = true;
             var year = this.selected;
             this.sum = 0;
             this.showTotal = true;
@@ -94,7 +108,7 @@ export default {
                     this.data.forEach(each_data => {
                         this.sum += each_data["flight_no_count"];
                     });
-
+                    this.loadingPage = false;
                     // console.log(this.data);
                 })
                 .catch(error => {
@@ -108,6 +122,7 @@ export default {
         }
     },
     beforeMount() {
+        this.loadingPage = true;
         this.sum = 0;
         var year = this.selected;
         axios.post("/api/backend/analytic1_show", year).then(response => {
@@ -119,6 +134,7 @@ export default {
             this.data.forEach(each_data => {
                 this.sum += each_data["flight_no_count"];
             });
+            this.loadingPage = false;
         });
         axios.get("/api/backend/analytic1_get").then(response => {
             this.years = response.data;

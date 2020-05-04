@@ -143,7 +143,8 @@
                                     :to="{ name: 'Schedule' }"
                                     v-show="
                                         role === 'pilot' ||
-                                        role === 'admin'
+                                        role === 'admin' ||
+                                        role === 'flight_attendant'
                                             ? true
                                             : false
                                     "
