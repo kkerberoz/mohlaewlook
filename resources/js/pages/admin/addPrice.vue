@@ -98,8 +98,8 @@
                                         type="text"
                                         class="form-control"
                                         v-bind:class="{
-                                                'is-invalid': error_flightNo
-                                            }"
+                                            'is-invalid': error_flightNo
+                                        }"
                                         v-model="input.flightNo"
                                         disabled
                                     />
@@ -218,17 +218,16 @@ export default {
     },
 
     beforeMount() {
-
         axios.get("/api/backend/getPrice").then(response => {
             this.flights = response.data;
             console.log("flight", this.flights);
         });
     },
-    // mounted(){
-    //     axios.get("/api/backend/analytic1_get").then(response =>{
-    //         console.log(response.data);
-    //     });
-    // },
+    mounted() {
+        axios.get("/api/backend/analytic1_get").then(response => {
+            console.log(response.data);
+        });
+    },
     methods: {
         editPrice(flight) {
             $("#addNew").modal("show");
@@ -245,47 +244,56 @@ export default {
             this.error_businessPrice = null;
             this.error_firstPrice = null;
 
-            if(!this.input.flightNo){
+            if (!this.input.flightNo) {
                 this.error_flightNo = "Please fill Flight number.";
                 this.errors.push(this.error_flightNo);
-            }else{
+            } else {
                 this.error_flightNo = null;
             }
 
-            if(!this.input.ecoPrice){
+            if (!this.input.ecoPrice) {
                 this.error_ecoPrice = "Please fill economic class price.";
                 this.errors.push(this.error_ecoPrice);
-            }else if(isNaN(this.input.ecoPrice) || this.input.ecoPrice < 0){
-                this.error_ecoPrice = "Please fill only number that is positive number.";
+            } else if (isNaN(this.input.ecoPrice) || this.input.ecoPrice < 0) {
+                this.error_ecoPrice =
+                    "Please fill only number that is positive number.";
                 this.errors.push(this.error_ecoPrice);
-            }else{
+            } else {
                 this.error_ecoPrice = null;
             }
 
-            if(!this.input.businessPrice){
+            if (!this.input.businessPrice) {
                 this.error_businessPrice = "Please fill business class price.";
                 this.errors.push(this.error_businessPrice);
-            }else if(isNaN(this.input.businessPrice) || this.input.businessPrice < 0){
-                this.error_businessPrice = "Please fill only number that is positive number.";
+            } else if (
+                isNaN(this.input.businessPrice) ||
+                this.input.businessPrice < 0
+            ) {
+                this.error_businessPrice =
+                    "Please fill only number that is positive number.";
                 this.errors.push(this.error_businessPrice);
-            }else{
+            } else {
                 this.error_businessPrice = null;
             }
 
-            if(!this.input.firstPrice){
+            if (!this.input.firstPrice) {
                 this.error_firstPrice = "Please fill first class price.";
                 this.errors.push(this.error_firstPrice);
-            }else if(isNaN(this.input.firstPrice) || this.input.firstPrice < 0){
-                this.error_firstPrice = "Please fill only number that is positive number.";
+            } else if (
+                isNaN(this.input.firstPrice) ||
+                this.input.firstPrice < 0
+            ) {
+                this.error_firstPrice =
+                    "Please fill only number that is positive number.";
                 this.errors.push(this.error_firstPrice);
-            }else{
+            } else {
                 this.error_firstPrice = null;
             }
 
             // console.log(this.errors);
-            if(!this.errors.length){
+            if (!this.errors.length) {
                 this.isLoading = true;
-                let data = { input : this.input};
+                let data = { input: this.input };
                 axios.post("/api/backend/editPrice", data).then(response => {
                     swal.fire(
                         "Update Success!",
@@ -298,7 +306,6 @@ export default {
                     });
                 });
             }
-
         }
     }
 };

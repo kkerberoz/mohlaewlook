@@ -78,6 +78,26 @@ let routes = [
                 path: "Schedule",
                 name: "Schedule",
                 component: require("./pages/admin/Schedule.vue").default
+            },
+            {
+                path: "analysis_1",
+                name: "analysis_1",
+                component: require("./pages/analysis/analysis_1.vue").default
+            },
+            {
+                path: "analysis_2",
+                name: "analysis_2",
+                component: require("./pages/analysis/analysis_2.vue").default
+            },
+            {
+                path: "analysis_3",
+                name: "analysis_3",
+                component: require("./pages/analysis/analysis_3.vue").default
+            },
+            {
+                path: "analysis_4",
+                name: "analysis_4",
+                component: require("./pages/analysis/analysis_4.vue").default
             }
         ]
     }

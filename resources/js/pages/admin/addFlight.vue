@@ -458,7 +458,7 @@ export default {
                 ).then(() => {
                     this.isLoading = false;
                     $("#addNew").modal("hide");
-                    this.$router.go({ name: "addFlight" });
+                    // this.$router.go({ name: "addFlight" });
                 });
             });
         }
