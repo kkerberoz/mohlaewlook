@@ -9,7 +9,48 @@
                                 Analysis 1
                             </div>
                         </div>
-                        <div class="card-body"></div>
+                        <div class="card-body">
+                            <span class="col-md-4 mb-2">
+                                <label>Year :</label>
+
+                                <multiselect
+                                    v-model="selected"
+                                    label="year"
+                                    @select="queryAnalyssis"
+                                    :options="years"
+                                    :searchable="true"
+                                    :multiple="false"
+                                    :close-on-select="true"
+                                    :clear-on-select="false"
+                                    placeholder="Choose Year"
+                                ></multiselect>
+                            </span>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Flight Number</th>
+                                            <th scope="col">Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        v-for="(flight, id) in data"
+                                        :key="id"
+                                    >
+                                        <tr>
+                                            <th scope="row">
+                                                {{ Number(id) + 1 }}
+                                            </th>
+                                            <td>{{ flight.flight_no }}</td>
+                                            <td>
+                                                {{ flight.flight_no_count }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -22,9 +63,50 @@ import Multiselect from "vue-multiselect";
 export default {
     components: { Multiselect },
     data() {
-        return {};
+        return {
+            selected: "",
+            years: [],
+            data: []
+        };
     },
-    methods: {}
+    methods: {
+        queryAnalyssis() {
+            var year = this.selected;
+            axios
+                .post("/api/backend/analytic1_show", year)
+                .then(response => {
+                    this.data = response.data;
+                    console.log(this.data);
+                })
+                .catch(error => {
+                    swal.fire(
+                        "Error.",
+                        "Cilck the button to continue!",
+                        "error"
+                    );
+                });
+        }
+    },
+    mounted(){
+        var year = this.selected;
+        axios.post("/api/backend/analytic1_show", year)
+                .then(response => {
+                    this.data = response.data.analysis;
+                    this.selected = [{year:response.data.year}]
+                    console.log(this.selected);
+                    console.log(response.data);
+                })
+    },
+    beforeMount() {
+        // swal.fire(
+        //     "Please select year to show data",
+        //     "Cilck the button to continue!",
+        //     "warning"
+        // );
+        axios.get("/api/backend/analytic1_get").then(response => {
+            this.years = response.data;
+        });
+    }
 };
 </script>
 

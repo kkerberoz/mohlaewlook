@@ -140,6 +140,20 @@
                             </li>
                             <li>
                                 <router-link
+                                    :to="{ name: 'Schedule' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Schedule</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
                                     :to="{ name: 'addAirport' }"
                                     v-show="
                                         role === 'flight_manager' ||
@@ -152,8 +166,63 @@
                                     <span>Add Airport</span>
                                 </router-link>
                             </li>
-
-                            <li style="margin-top:50px; padding:10px">
+                            <li>
+                                <router-link
+                                    :to="{ name: 'analysis_1' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>analysis_1</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'analysis_2' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>analysis_2</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'analysis_3' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>analysis_3</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'analysis_4' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>analysis_4</span>
+                                </router-link>
+                            </li>
+                            <li style="margin-top:10px; padding:10px">
                                 <div
                                     id="btnLogout"
                                     @click.prevent="logout"

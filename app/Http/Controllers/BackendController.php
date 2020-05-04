@@ -354,4 +354,48 @@ class BackendController extends Controller
         $flightNo = Class_price::select('flight_no')->get();
         return response()->JSON($flightNo);
     }
+
+
+
+    public function analytic1_show(Request $request)
+    {
+        if(isset($request->year)){
+            $year = $request->year;
+            $yearLIKE = ($year)."%";
+        }
+        else{
+            $year = date('Y');
+            $yearLIKE = ($year)."%";
+        }
+        $analyticData = DB::select('SELECT flight_no,COUNT(*) AS flight_no_count FROM flights WHERE depart_datetime LIKE ? GROUP BY flight_no ORDER BY flight_no_count DESC',[$yearLIKE]);
+        return response()->JSON(['year' =>$year,'analysis'=>$analyticData]);
+    }
+
+    public function analytic1_get()
+    {
+        $data = DB::select('SELECT DISTINCT YEAR(depart_datetime) AS year FROM flights');
+        return response()->JSON($data);
+    }
+
+    public function analytic2_show(Request $request)
+    {
+        $scope = $request;
+        $data = DB::select('SELECT class_name,COUNT(*) AS class_count
+                            FROM tickets
+                            WHERE flight_id IN (SELECT flight_id FROM flights WHERE depart_datetime BETWEEN ? AND ?)
+                            GROUP BY class_name',[$scope['first'],$scope['second']]);
+        return response()->JSON($data);
+
+    }
+
+    public function analytic3()
+    {
+
+    }
+
+    public function analytic4()
+    {
+
+    }
+
 }
