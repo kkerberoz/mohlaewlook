@@ -222,7 +222,6 @@
                                             >
                                             <multiselect
                                                 v-bind:class="{'is-invalid': error_crew}"
-                                                :disabled="waitPilot"
                                                 v-model="input.crew"
                                                 :options="options_attendant"
                                                 :searchable="true"
@@ -297,12 +296,15 @@
                     <span class="col-md-12 mt-2 mb-2">
                         <label>Flight Number:</label>
                         <input
+                            v-bind:class="{
+                                    'is-invalid': error_newFlightNo
+                            }"
                             type="text"
                             class="form-control"
                             v-model="input.flightNo"
                         />
                         <div class="invalid-feedback">
-                            Please enter flight number
+                            {{error_newFlightNo}}
                         </div>
                     </span>
                     <div class="col-md-12 mt-2 mb-2">
@@ -393,9 +395,9 @@ export default {
             flights: [],
             isLoading: false,
             modalInput: {
-                ecoPrice: "",
-                businessPrice: "",
-                firstPrice: ""
+                ecoPrice: null,
+                businessPrice: null,
+                firstPrice: null
             },
             input: {
                 aircraftID: null,
@@ -410,10 +412,11 @@ export default {
                 coPilot: null,
                 crew: []
             },
-            errors: [],
-            error_ecoPrice: "",
-            error_businessPrice: "",
-            error_firstPrice: "",
+            errors_newFlight: null,
+            error_newFlightNo: null,
+            error_ecoPrice: null,
+            error_businessPrice: null,
+            error_firstPrice: null,
             options_pilot: [],
             options_copilot: [],
             options_attendant: [],
@@ -426,6 +429,7 @@ export default {
             aircraft_array_info: [],
             pilot_on_flight: [],
             crew_array_info: null,
+            caption_check: null,
             // error input
             errors_input: null,
             error_departLocation: null,
@@ -449,10 +453,10 @@ export default {
             if (this.modalOpen) {
                 $("#addNew").modal("show");
             } else {
-                this.input.flightNo = "";
-                this.modalInput.ecoPrice = "";
-                this.modalInput.businessPrice = "";
-                this.modalInput.firstPrice = "";
+                this.input.flightNo = null;
+                this.modalInput.ecoPrice = null;
+                this.modalInput.businessPrice = null;
+                this.modalInput.firstPrice = null;
                 $("#addNew").modal("show");
             }
         },
@@ -461,10 +465,11 @@ export default {
         },
         handleCloseModal() {
             this.modalOpen = false;
-            this.input.flightNo = "";
-            this.modalInput.ecoPrice = "";
-            this.modalInput.businessPrice = "";
-            this.modalInput.firstPrice = "";
+            this.input.flightNo = null;
+            this.modalInput.ecoPrice = null;
+            this.modalInput.businessPrice = null;
+            this.modalInput.firstPrice = null;
+            this.error_newFlightNo = this.error_ecoPrice = this.error_businessPrice = this.error_firstPrice = null;
             $("#addNew").modal("hide");
         },
         handleNewFlight(e) {
@@ -475,17 +480,41 @@ export default {
                 flight_no: this.input.flightNo,
                 input: this.modalInput
             };
-            axios.post("/api/backend/addPrice", data).then(response => {
-                swal.fire(
-                    "Create Success!",
-                    "Cilck the button to continue!",
-                    "success"
-                ).then(() => {
-                    this.isLoading = false;
-                    $("#addNew").modal("hide");
-                    // this.$router.go({ name: "addFlight" });
+            this.errors_newFlight = true;
+            this.error_newFlightNo = !this.input.flightNo ? "Please fill flight number" : null;
+            this.error_ecoPrice = !this.modalInput.ecoPrice ? "Please fill economy class price" : null;
+            this.error_businessPrice = !this.modalInput.businessPrice ? "Please fill business class price" : null;
+            this.error_firstPrice = !this.modalInput.firstPrice ? "Please fill first class price" : null;
+            //**/
+            this.error_ecoPrice = !this.error_ecoPrice && isNaN(this.modalInput.ecoPrice) ? "economy class price must be number" : this.error_ecoPrice;
+            this.error_businessPrice = !this.error_businessPrice && isNaN(this.modalInput.businessPrice) ? "business class price must be number" : this.error_businessPrice;
+            this.error_firstPrice = !this.error_firstPrice && isNaN(this.modalInput.firstPrice) ? "first class price must be number" : this.error_firstPrice;
+            //**/
+            this.error_ecoPrice = !this.error_ecoPrice && this.modalInput.ecoPrice < 0 ? "economy class price must be not less than 0" : this.error_ecoPrice;
+            this.error_businessPrice = !this.error_businessPrice && this.modalInput.businessPrice < 0 ? "business class price must be not less than 0" : this.error_businessPrice;
+            this.error_firstPrice = !this.error_firstPrice && this.modalInput.firstPrice < 0 ? "first class price must be not less than 0" : this.error_firstPrice;
+            this.errors_newFlight = !this.errors_newFlight || this.error_newFlightNo || this.error_ecoPrice || this.error_businessPrice || this.error_firstPrice ? false : true;
+            if(this.errors_newFlight){
+                axios.post("/api/backend/addPrice", data).then(response => {
+                    swal.fire(
+                        "Create Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    ).then(() => {
+                        this.isLoading = false;
+                        $("#addNew").modal("hide");
+                        // this.$router.go({ name: "addFlight" });
+                    });
                 });
-            });
+            }
+            else {
+                this.isLoading = false;
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
+            }
         },
         formSubmit(e){
             e.preventDefault();
@@ -597,7 +626,6 @@ export default {
                     this.input.aircraftID = null; // clear aircraft id
                     document.getElementById("aircraft_info").innerHTML = null;
                     this.aircrafts = [];
-                    console.log(aircraft.length);
 
                     for (var i = 0; i < aircraft.length; ++i) {
                         this.aircrafts.push({
@@ -688,8 +716,12 @@ export default {
             ).innerHTML = this.aircraft_array_info[this.input.aircraftID.value];
         else document.getElementById("aircraft_info").innerHTML = null;
         // show information of each pilot
-        if (this.input.captain != null) {
-            document.getElementById("pilot_info").innerHTML =
+        if (this.input.captain != this.caption_check) {
+            this.caption_check = this.input.captain;
+            console.log(this.input.captain);
+
+            if(this.input.captain) {
+                document.getElementById("pilot_info").innerHTML =
                 "<b>Name</b>: " +
                 this.crew_array_info[this.input.captain.value]["name"] +
                 " " +
@@ -698,19 +730,25 @@ export default {
                 "<b>Flying experience:</b> " +
                 this.crew_array_info[this.input.captain.value]["count"] +
                 " Times";
-            this.options_copilot = [];
-            for (var i = 0; i < this.pilot_on_flight.length; ++i) {
-                if (
-                    this.input.captain.value !=
-                    this.pilot_on_flight[i]["data"]["user_id"]
-                ) {
-                    this.options_copilot.push({
-                        value: this.pilot_on_flight[i]["data"]["user_id"],
-                        name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"],
-                        work_id: this.pilot_on_flight[i]["data"]["work_id"],
-                        type: this.pilot_on_flight[i]["type"]
-                    });
+                this.options_copilot = [];
+                document.getElementById("copilot_info").innerHTML = null;
+                this.input.coPilot = null;
+                for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+                    if (this.input.captain.value != this.pilot_on_flight[i]["data"]["user_id"]) {
+                        this.options_copilot.push({
+                            value: this.pilot_on_flight[i]["data"]["user_id"],
+                            name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"],
+                            work_id: this.pilot_on_flight[i]["data"]["work_id"],
+                            type: this.pilot_on_flight[i]["type"]
+                        });
+                    }
                 }
+            }
+            else {
+                document.getElementById("pilot_info").innerHTML = null;
+                document.getElementById("copilot_info").innerHTML = null;
+                this.input.coPilot = null;
+                this.waitPilot = true;
             }
         }
         // show information of each co-pilot
