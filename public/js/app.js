@@ -2101,6 +2101,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2108,7 +2110,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      start_date: new Date(),
       data: [],
       selected: [],
       datePick: [],
@@ -2117,10 +2118,10 @@ __webpack_require__.r(__webpack_exports__);
         disabledDates: ["beforeToday"],
         isMultipleDatePicker: true,
         markedDates: [{
-          date: "7/5/2020",
+          date: "10/5/2020",
           "class": "green-line"
         }, {
-          date: "afterToday",
+          date: "12/5/2020",
           "class": "green-line"
         }]
       }
@@ -3328,6 +3329,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3340,9 +3365,9 @@ __webpack_require__.r(__webpack_exports__);
       flights: [],
       isLoading: false,
       modalInput: {
-        ecoPrice: "",
-        businessPrice: "",
-        firstPrice: ""
+        ecoPrice: null,
+        businessPrice: null,
+        firstPrice: null
       },
       input: {
         aircraftID: null,
@@ -3357,10 +3382,11 @@ __webpack_require__.r(__webpack_exports__);
         coPilot: null,
         crew: []
       },
-      errors: [],
-      error_ecoPrice: "",
-      error_businessPrice: "",
-      error_firstPrice: "",
+      errors_newFlight: null,
+      error_newFlightNo: null,
+      error_ecoPrice: null,
+      error_businessPrice: null,
+      error_firstPrice: null,
       options_pilot: [],
       options_copilot: [],
       options_attendant: [],
@@ -3373,6 +3399,7 @@ __webpack_require__.r(__webpack_exports__);
       aircraft_array_info: [],
       pilot_on_flight: [],
       crew_array_info: null,
+      caption_check: null,
       // error input
       errors_input: null,
       error_departLocation: null,
@@ -3396,10 +3423,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.modalOpen) {
         $("#addNew").modal("show");
       } else {
-        this.input.flightNo = "";
-        this.modalInput.ecoPrice = "";
-        this.modalInput.businessPrice = "";
-        this.modalInput.firstPrice = "";
+        this.input.flightNo = null;
+        this.modalInput.ecoPrice = null;
+        this.modalInput.businessPrice = null;
+        this.modalInput.firstPrice = null;
         $("#addNew").modal("show");
       }
     },
@@ -3409,10 +3436,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     handleCloseModal: function handleCloseModal() {
       this.modalOpen = false;
-      this.input.flightNo = "";
-      this.modalInput.ecoPrice = "";
-      this.modalInput.businessPrice = "";
-      this.modalInput.firstPrice = "";
+      this.input.flightNo = null;
+      this.modalInput.ecoPrice = null;
+      this.modalInput.businessPrice = null;
+      this.modalInput.firstPrice = null;
+      this.error_newFlightNo = this.error_ecoPrice = this.error_businessPrice = this.error_firstPrice = null;
       $("#addNew").modal("hide");
     },
     handleNewFlight: function handleNewFlight(e) {
@@ -3425,14 +3453,36 @@ __webpack_require__.r(__webpack_exports__);
         flight_no: this.input.flightNo,
         input: this.modalInput
       };
-      axios.post("/api/backend/addPrice", data).then(function (response) {
-        swal.fire("Create Success!", "Cilck the button to continue!", "success").then(function () {
-          _this.isLoading = false;
-          $("#addNew").modal("hide"); // this.$router.go({ name: "addFlight" });
+      this.errors_newFlight = true;
+      this.error_newFlightNo = !this.input.flightNo ? "Please fill flight number" : null;
+      this.error_ecoPrice = !this.modalInput.ecoPrice ? "Please fill economy class price" : null;
+      this.error_businessPrice = !this.modalInput.businessPrice ? "Please fill business class price" : null;
+      this.error_firstPrice = !this.modalInput.firstPrice ? "Please fill first class price" : null; //**/
+
+      this.error_ecoPrice = !this.error_ecoPrice && isNaN(this.modalInput.ecoPrice) ? "economy class price must be number" : this.error_ecoPrice;
+      this.error_businessPrice = !this.error_businessPrice && isNaN(this.modalInput.businessPrice) ? "business class price must be number" : this.error_businessPrice;
+      this.error_firstPrice = !this.error_firstPrice && isNaN(this.modalInput.firstPrice) ? "first class price must be number" : this.error_firstPrice; //**/
+
+      this.error_ecoPrice = !this.error_ecoPrice && this.modalInput.ecoPrice < 0 ? "economy class price must be not less than 0" : this.error_ecoPrice;
+      this.error_businessPrice = !this.error_businessPrice && this.modalInput.businessPrice < 0 ? "business class price must be not less than 0" : this.error_businessPrice;
+      this.error_firstPrice = !this.error_firstPrice && this.modalInput.firstPrice < 0 ? "first class price must be not less than 0" : this.error_firstPrice;
+      this.errors_newFlight = !this.errors_newFlight || this.error_newFlightNo || this.error_ecoPrice || this.error_businessPrice || this.error_firstPrice ? false : true;
+
+      if (this.errors_newFlight) {
+        axios.post("/api/backend/addPrice", data).then(function (response) {
+          swal.fire("Create Success!", "Cilck the button to continue!", "success").then(function () {
+            _this.isLoading = false;
+            $("#addNew").modal("hide"); // this.$router.go({ name: "addFlight" });
+          });
         });
-      });
+      } else {
+        this.isLoading = false;
+        swal.fire("Please success your form!", "Cilck the button to continue!", "error");
+      }
     },
     formSubmit: function formSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
       this.errors_input = true; // condition for input
 
@@ -3470,7 +3520,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.errors_input) {
         axios.post("/api/backend/addFlight", this.input).then(function (response) {
           console.log(response.data);
-          swal.fire("Register Success!", "Cilck the button to continue!", "success");
+          swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+            _this2.$router.go({
+              name: "addFlight"
+            });
+          });
         });
       } else {
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
@@ -3478,22 +3532,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get("/api/backend/getAirports").then(function (response) {
       response.data.forEach(function (airport) {
-        _this2.locations.push({
+        _this3.locations.push({
           value: airport["airport_id"],
           name: airport["airport_id"] + " - " + airport["airport_name"]
         });
       });
     });
     axios.get("/api/backend/getFlightNo").then(function (response) {
-      _this2.flights = response.data;
+      _this3.flights = response.data;
     });
   },
   beforeUpdate: function beforeUpdate() {
-    var _this3 = this;
+    var _this4 = this;
 
     // for check depart location, depart date and depart time are selected.
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
@@ -3524,43 +3578,42 @@ __webpack_require__.r(__webpack_exports__);
         var other_aircraft = response.data.Other_Aircraft;
         var other_brand = response.data.Other_Brand;
         var other_model = response.data.Other_Model;
-        _this3.input.aircraftID = null; // clear aircraft id
+        _this4.input.aircraftID = null; // clear aircraft id
 
         document.getElementById("aircraft_info").innerHTML = null;
-        _this3.aircrafts = [];
-        console.log(aircraft.length);
+        _this4.aircrafts = [];
 
         for (var i = 0; i < aircraft.length; ++i) {
-          _this3.aircrafts.push({
+          _this4.aircrafts.push({
             value: aircraft[i]["aircraft_id"],
             name: "ID: " + aircraft[i]["aircraft_id"] + " - " + aircraft_brand[i]["brand_name"] + " " + aircraft_model[i]["model_name"]
           });
 
-          _this3.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Number of Flight Times:</b> " + flight_time[i] + " Times <br>" + "<b>Last Flight</b>: " + flight_info[i]["flight_no"] + "<b> from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<b> To:</b>  " + flight_info[i]["arrive_datetime"];
+          _this4.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Number of Flight Times:</b> " + flight_time[i] + " Times <br>" + "<b>Last Flight</b>: " + flight_info[i]["flight_no"] + "<b> from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<b> To:</b>  " + flight_info[i]["arrive_datetime"];
         }
 
         for (var i = 0; i < other_aircraft.length; ++i) {
-          _this3.aircrafts.push({
+          _this4.aircrafts.push({
             value: other_aircraft[i]["aircraft_id"],
             name: "ID: " + other_aircraft[i]["aircraft_id"] + " - " + other_brand[i]["brand_name"] + " " + other_model[i]["model_name"]
           });
 
-          _this3.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
+          _this4.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
         }
 
-        _this3.options_pilot = [];
-        _this3.input.captain = null;
+        _this4.options_pilot = [];
+        _this4.input.captain = null;
         document.getElementById("pilot_info").innerHTML = null;
-        _this3.options_attendant = [];
-        _this3.input.coPilot = null;
+        _this4.options_attendant = [];
+        _this4.input.coPilot = null;
         document.getElementById("copilot_info").innerHTML = null;
-        var pilot = _this3.pilot_on_flight = response.data.Pilot;
+        var pilot = _this4.pilot_on_flight = response.data.Pilot;
         var attendant = response.data.Attendant;
-        _this3.input.crew = [];
-        _this3.crew_array_info = response.data.Personal_Detail; // pilot
+        _this4.input.crew = [];
+        _this4.crew_array_info = response.data.Personal_Detail; // pilot
 
         for (var i = 0; i < pilot.length; ++i) {
-          _this3.options_pilot.push({
+          _this4.options_pilot.push({
             value: pilot[i]["data"]["user_id"],
             name: "ID: " + pilot[i]["data"]["user_id"],
             work_id: pilot[i]["data"]["work_id"],
@@ -3570,7 +3623,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
         for (var i = 0; i < pilot.length; ++i) {
-          _this3.options_copilot.push({
+          _this4.options_copilot.push({
             value: pilot[i]["data"]["user_id"],
             name: "ID: " + pilot[i]["data"]["user_id"],
             work_id: pilot[i]["data"]["work_id"],
@@ -3580,9 +3633,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
         for (var i = 0; i < attendant.length; ++i) {
-          _this3.options_attendant.push({
+          _this4.options_attendant.push({
             value: attendant[i]["data"]["user_id"],
-            name: "ID: " + attendant[i]["data"]["user_id"] + ", " + "Name: " + _this3.crew_array_info[attendant[i]["data"]["user_id"]]["name"] + " " + _this3.crew_array_info[attendant[i]["data"]["user_id"]]["surname"],
+            name: "ID: " + attendant[i]["data"]["user_id"] + ", " + "Name: " + _this4.crew_array_info[attendant[i]["data"]["user_id"]]["name"] + " " + _this4.crew_array_info[attendant[i]["data"]["user_id"]]["surname"],
             work_id: attendant[i]["data"]["work_id"],
             type: attendant[i]["type"]
           });
@@ -3593,19 +3646,31 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null; // show information of each pilot
 
-    if (this.input.captain != null) {
-      document.getElementById("pilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]["name"] + " " + this.crew_array_info[this.input.captain.value]["surname"] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]["count"] + " Times";
-      this.options_copilot = [];
+    if (this.input.captain != this.caption_check) {
+      this.caption_check = this.input.captain;
+      console.log(this.input.captain);
 
-      for (var i = 0; i < this.pilot_on_flight.length; ++i) {
-        if (this.input.captain.value != this.pilot_on_flight[i]["data"]["user_id"]) {
-          this.options_copilot.push({
-            value: this.pilot_on_flight[i]["data"]["user_id"],
-            name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"],
-            work_id: this.pilot_on_flight[i]["data"]["work_id"],
-            type: this.pilot_on_flight[i]["type"]
-          });
+      if (this.input.captain) {
+        document.getElementById("pilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]["name"] + " " + this.crew_array_info[this.input.captain.value]["surname"] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]["count"] + " Times";
+        this.options_copilot = [];
+        document.getElementById("copilot_info").innerHTML = null;
+        this.input.coPilot = null;
+
+        for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+          if (this.input.captain.value != this.pilot_on_flight[i]["data"]["user_id"]) {
+            this.options_copilot.push({
+              value: this.pilot_on_flight[i]["data"]["user_id"],
+              name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"],
+              work_id: this.pilot_on_flight[i]["data"]["work_id"],
+              type: this.pilot_on_flight[i]["type"]
+            });
+          }
         }
+      } else {
+        document.getElementById("pilot_info").innerHTML = null;
+        document.getElementById("copilot_info").innerHTML = null;
+        this.input.coPilot = null;
+        this.waitPilot = true;
       }
     } // show information of each co-pilot
 
@@ -6170,6 +6235,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6177,6 +6249,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      sum: 0,
       selected: "",
       years: [],
       data: []
@@ -6188,14 +6261,19 @@ __webpack_require__.r(__webpack_exports__);
 
       var year = this.selected;
       axios.post("/api/backend/analytic1_show", year).then(function (response) {
-        _this.data = response.data;
+        _this.data = response.data.analysis;
+
+        _this.data.forEach(function (each_data) {
+          _this.sum += each_data['flight_no_count'];
+        });
+
         console.log(_this.data);
       })["catch"](function (error) {
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
     }
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this2 = this;
 
     var year = this.selected;
@@ -6206,18 +6284,13 @@ __webpack_require__.r(__webpack_exports__);
       }];
       console.log(_this2.selected);
       console.log(response.data);
-    });
-  },
-  beforeMount: function beforeMount() {
-    var _this3 = this;
 
-    // swal.fire(
-    //     "Please select year to show data",
-    //     "Cilck the button to continue!",
-    //     "warning"
-    // );
+      _this2.data.forEach(function (each_data) {
+        _this2.sum += each_data['flight_no_count'];
+      });
+    });
     axios.get("/api/backend/analytic1_get").then(function (response) {
-      _this3.years = response.data;
+      _this2.years = response.data;
     });
   }
 });
@@ -6233,8 +6306,72 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-functional-calendar */ "./node_modules/vue-functional-calendar/index.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6255,14 +6392,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a,
+    FunctionalCalendar: vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__["FunctionalCalendar"]
   },
   data: function data() {
-    return {};
+    return {
+      data: [],
+      calendar_from: {},
+      calendar_to: {},
+      sum: 0,
+      calendarConfigs: {
+        isDatePicker: true,
+        dateFormat: "yyyy-mm-dd 00:00:00"
+      },
+      calendarConfigs2: {
+        isDatePicker: true,
+        dateFormat: "yyyy-mm-dd 23:59:59"
+      }
+    };
   },
-  methods: {}
+  methods: {
+    clickDay: function clickDay() {
+      var _this = this;
+
+      var scope = {
+        first: this.calendar_from.selectedDate,
+        second: this.calendar_to.selectedDate
+      };
+      axios.post("/api/backend/analytic2_show", scope).then(function (response) {
+        _this.data = response.data;
+        console.log(_this.data);
+
+        _this.data.forEach(function (each_data) {
+          _this.sum += each_data['class_count'];
+        });
+      })["catch"](function (error) {
+        swal.fire("Error.", "Cilck the button to continue!", "error");
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -6297,15 +6468,98 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   data: function data() {
-    return {};
+    return {
+      isDisable: false,
+      input: "",
+      data: [],
+      errors: [],
+      error_input: ""
+    };
   },
-  methods: {}
+  methods: {
+    inputNumber: function inputNumber() {
+      if (isNaN(this.input) || this.input < 0) {
+        this.isDisable = true;
+        this.error_input = "Please fill only number that is positive number.";
+        this.errors.push(this.error_input);
+      } else {
+        this.isDisable = false;
+        this.error_input = null;
+      }
+    },
+    queryAnalysis: function queryAnalysis() {
+      var _this = this;
+
+      var data = {
+        top: Number(this.input)
+      };
+      axios.post("/api/backend/analytic3_show", data).then(function (response) {
+        _this.data = response.data;
+        console.log(_this.data);
+      })["catch"](function (error) {
+        swal.fire("Error.", "Cilck the button to continue!", "error");
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -50392,7 +50646,13 @@ var render = function() {
             _c(
               "div",
               _vm._l(_vm.selected, function(data, i) {
-                return _c("span", { key: i }, [_vm._v(_vm._s(data.date) + ",")])
+                return _c("span", { key: i }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(data.date) +
+                      "\n                    "
+                  )
+                ])
               }),
               0
             ),
@@ -51478,7 +51738,9 @@ var render = function() {
                           _c("label", [_vm._v("Depart Location:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_departLocation },
+                            class: {
+                              "is-invalid": _vm.error_departLocation
+                            },
                             attrs: {
                               label: "name",
                               options: _vm.locations,
@@ -51523,7 +51785,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_departDate },
+                          class: {
+                            "is-invalid": _vm.error_departDate
+                          },
                           attrs: { type: "date" },
                           domProps: { value: _vm.input.departDate },
                           on: {
@@ -51562,7 +51826,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_departTime },
+                          class: {
+                            "is-invalid": _vm.error_departTime
+                          },
                           attrs: { type: "time" },
                           domProps: { value: _vm.input.departTime },
                           on: {
@@ -51597,7 +51863,9 @@ var render = function() {
                           _c("label", [_vm._v("Arrive Location:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_arriveLocation },
+                            class: {
+                              "is-invalid": _vm.error_arriveLocation
+                            },
                             attrs: {
                               label: "name",
                               options: _vm.locations,
@@ -51642,7 +51910,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_arriveDate },
+                          class: {
+                            "is-invalid": _vm.error_arriveDate
+                          },
                           attrs: { type: "date" },
                           domProps: { value: _vm.input.arriveDate },
                           on: {
@@ -51681,7 +51951,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.error_arriveTime },
+                          class: {
+                            "is-invalid": _vm.error_arriveTime
+                          },
                           attrs: { type: "time" },
                           domProps: { value: _vm.input.arriveTime },
                           on: {
@@ -51716,7 +51988,9 @@ var render = function() {
                           _c("label", [_vm._v("Aircraft ID:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_aircraftID },
+                            class: {
+                              "is-invalid": _vm.error_aircraftID
+                            },
                             attrs: {
                               label: "name",
                               options: _vm.aircrafts,
@@ -51760,7 +52034,9 @@ var render = function() {
                           _c("label", [_vm._v("Flight Number:")]),
                           _vm._v(" "),
                           _c("multiselect", {
-                            class: { "is-invalid": _vm.error_flightNo },
+                            class: {
+                              "is-invalid": _vm.error_flightNo
+                            },
                             attrs: {
                               "custom-label": _vm.flightNo,
                               options: _vm.flights,
@@ -51848,7 +52124,9 @@ var render = function() {
                                   _c("label", [_vm._v("Captain:")]),
                                   _vm._v(" "),
                                   _c("multiselect", {
-                                    class: { "is-invalid": _vm.error_captain },
+                                    class: {
+                                      "is-invalid": _vm.error_captain
+                                    },
                                     attrs: {
                                       label: "name",
                                       options: _vm.options_pilot,
@@ -51899,7 +52177,9 @@ var render = function() {
                                 _c("label", [_vm._v("Co-pilot:")]),
                                 _vm._v(" "),
                                 _c("multiselect", {
-                                  class: { "is-invalid": _vm.error_coPilot },
+                                  class: {
+                                    "is-invalid": _vm.error_coPilot
+                                  },
                                   attrs: {
                                     disabled: _vm.waitPilot,
                                     options: _vm.options_copilot,
@@ -51952,9 +52232,10 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("multiselect", {
-                                  class: { "is-invalid": _vm.error_crew },
+                                  class: {
+                                    "is-invalid": _vm.error_crew
+                                  },
                                   attrs: {
-                                    disabled: _vm.waitPilot,
                                     options: _vm.options_attendant,
                                     searchable: true,
                                     multiple: true,
@@ -52106,6 +52387,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    class: {
+                      "is-invalid": _vm.error_newFlightNo
+                    },
                     attrs: { type: "text" },
                     domProps: { value: _vm.input.flightNo },
                     on: {
@@ -52120,7 +52404,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "invalid-feedback" }, [
                     _vm._v(
-                      "\n                        Please enter flight number\n                    "
+                      "\n                        " +
+                        _vm._s(_vm.error_newFlightNo) +
+                        "\n                    "
                     )
                   ])
                 ]),
@@ -55779,7 +56065,17 @@ var render = function() {
                             ])
                           ])
                         ])
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("tfoot", [
+                        _c("tr", [
+                          _c("td", [_vm._v(" ")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Total")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.sum))])
+                        ])
+                      ])
                     ],
                     2
                   )
@@ -55845,7 +56141,123 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    [
+      _c("div", { staticClass: "container-xl" }, [
+        _c("div", { staticClass: "row flex-center " }, [
+          _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row flex-center" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4 mb-4" },
+                    [
+                      _c("label", [
+                        _vm._v(
+                          "From :\n                                    " +
+                            _vm._s(this.calendar_from.selectedDate)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("functional-calendar", {
+                        staticClass: "calendar",
+                        attrs: { configs: _vm.calendarConfigs },
+                        model: {
+                          value: _vm.calendar_from,
+                          callback: function($$v) {
+                            _vm.calendar_from = $$v
+                          },
+                          expression: "calendar_from"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4 mb-4" },
+                    [
+                      _c("label", [
+                        _vm._v(
+                          "To :\n                                    " +
+                            _vm._s(this.calendar_to.selectedDate)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("functional-calendar", {
+                        staticClass: "calendar",
+                        attrs: { configs: _vm.calendarConfigs2 },
+                        on: { choseDay: _vm.clickDay },
+                        model: {
+                          value: _vm.calendar_to,
+                          callback: function($$v) {
+                            _vm.calendar_to = $$v
+                          },
+                          expression: "calendar_to"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.data, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.class_name))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.class_count) +
+                                  "\n                                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c("tfoot", [
+                        _c("tr", [
+                          _c("td", [_vm._v(" ")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Total")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.sum))])
+                        ])
+                      ])
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -55854,34 +56266,29 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "container-xl" }, [
-          _c("div", { staticClass: "row flex-center " }, [
-            _c("div", { staticClass: "col-md-12 " }, [
-              _c("div", { staticClass: "card shadow-lg bg-white" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { "border-radius": "0px" }
-                  },
-                  [
-                    _c("div", { staticClass: "card-title" }, [
-                      _vm._v(
-                        "\n                            Analysis 2\n                        "
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" })
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v(
+            "\n                            Analysis 2\n                        "
+          )
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Class")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Count")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -55905,7 +56312,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    [
+      _c("div", { staticClass: "container-xl" }, [
+        _c("div", { staticClass: "row flex-center " }, [
+          _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "col-md-3 mb-2 float-right" }, [
+                  _c("label", [_vm._v("Top :" + _vm._s(_vm.input))]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.input,
+                        expression: "input"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: {
+                      "is-invalid": _vm.error_input
+                    },
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.input },
+                    on: {
+                      input: [
+                        function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input = $event.target.value
+                        },
+                        _vm.inputNumber
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(_vm.error_input) +
+                        "\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-login mt-1",
+                      attrs: { disabled: _vm.isDisable },
+                      on: { click: _vm.queryAnalysis }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                search\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.data, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.user_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.username))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.reserve_count) +
+                                  "\n                                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -55914,34 +56428,35 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "container-xl" }, [
-          _c("div", { staticClass: "row flex-center " }, [
-            _c("div", { staticClass: "col-md-12 " }, [
-              _c("div", { staticClass: "card shadow-lg bg-white" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { "border-radius": "0px" }
-                  },
-                  [
-                    _c("div", { staticClass: "card-title" }, [
-                      _vm._v(
-                        "\n                            Analysis 3\n                        "
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" })
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v(
+            "\n                            Analysis 3\n                        "
+          )
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("User_id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Username")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Reservetion Count\n                                        "
+          )
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true

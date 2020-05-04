@@ -14,7 +14,9 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Location:</label>
                                     <multiselect
-                                        v-bind:class="{'is-invalid': error_departLocation}"
+                                        v-bind:class="{
+                                            'is-invalid': error_departLocation
+                                        }"
                                         label="name"
                                         v-model="input.departLocation"
                                         :options="locations"
@@ -27,31 +29,35 @@
                                         :preselect-first="false"
                                     ></multiselect>
                                     <div class="invalid-feedback">
-                                        {{error_departLocation}}
+                                        {{ error_departLocation }}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Date:</label>
                                     <input
-                                        v-bind:class="{'is-invalid': error_departDate}"
+                                        v-bind:class="{
+                                            'is-invalid': error_departDate
+                                        }"
                                         type="date"
                                         class="form-control"
                                         v-model="input.departDate"
                                     />
                                     <div class="invalid-feedback">
-                                        {{error_departDate}}
+                                        {{ error_departDate }}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Time:</label>
                                     <input
-                                        v-bind:class="{'is-invalid': error_departTime}"
+                                        v-bind:class="{
+                                            'is-invalid': error_departTime
+                                        }"
                                         type="time"
                                         class="form-control"
                                         v-model="input.departTime"
                                     />
                                     <div class="invalid-feedback">
-                                        {{error_departTime}}
+                                        {{ error_departTime }}
                                     </div>
                                 </span>
                             </div>
@@ -59,7 +65,9 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Location:</label>
                                     <multiselect
-                                        v-bind:class="{'is-invalid': error_arriveLocation}"
+                                        v-bind:class="{
+                                            'is-invalid': error_arriveLocation
+                                        }"
                                         label="name"
                                         v-model="input.arriveLocation"
                                         :options="locations"
@@ -72,31 +80,35 @@
                                         :preselect-first="false"
                                     ></multiselect>
                                     <div class="invalid-feedback">
-                                        {{error_arriveLocation}}
+                                        {{ error_arriveLocation }}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Date:</label>
                                     <input
-                                        v-bind:class="{'is-invalid': error_arriveDate}"
+                                        v-bind:class="{
+                                            'is-invalid': error_arriveDate
+                                        }"
                                         type="date"
                                         class="form-control"
                                         v-model="input.arriveDate"
                                     />
                                     <div class="invalid-feedback">
-                                        {{error_arriveDate}}
+                                        {{ error_arriveDate }}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Time:</label>
                                     <input
-                                        v-bind:class="{'is-invalid': error_arriveTime}"
+                                        v-bind:class="{
+                                            'is-invalid': error_arriveTime
+                                        }"
                                         type="time"
                                         class="form-control"
                                         v-model="input.arriveTime"
                                     />
                                     <div class="invalid-feedback">
-                                        {{error_arriveTime}}
+                                        {{ error_arriveTime }}
                                     </div>
                                 </span>
                             </div>
@@ -104,7 +116,9 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Aircraft ID:</label>
                                     <multiselect
-                                        v-bind:class="{'is-invalid': error_aircraftID}"
+                                        v-bind:class="{
+                                            'is-invalid': error_aircraftID
+                                        }"
                                         label="name"
                                         v-model="input.aircraftID"
                                         :options="aircrafts"
@@ -121,13 +135,15 @@
                                         id="aircraft_info"
                                     ></div>
                                     <div class="invalid-feedback">
-                                        {{error_aircraftID}}
+                                        {{ error_aircraftID }}
                                     </div>
                                 </span>
                                 <span class="col-md-6 mb-2">
                                     <label>Flight Number:</label>
                                     <multiselect
-                                        v-bind:class="{'is-invalid': error_flightNo}"
+                                        v-bind:class="{
+                                            'is-invalid': error_flightNo
+                                        }"
                                         :custom-label="flightNo"
                                         v-model="input.flightNo"
                                         :options="flights"
@@ -140,7 +156,7 @@
                                         :preselect-first="false"
                                     ></multiselect>
                                     <div class="invalid-feedback">
-                                        {{error_flightNo}}
+                                        {{ error_flightNo }}
                                     </div>
                                 </span>
                                 <span class="col-md-2 mb-2">
@@ -165,7 +181,9 @@
                                         <div class="form-group">
                                             <label>Captain:</label>
                                             <multiselect
-                                                v-bind:class="{'is-invalid': error_captain}"
+                                                v-bind:class="{
+                                                    'is-invalid': error_captain
+                                                }"
                                                 label="name"
                                                 @select="showCo"
                                                 v-model="input.captain"
@@ -184,14 +202,16 @@
                                                 id="pilot_info"
                                             ></div>
                                             <div class="invalid-feedback">
-                                                {{error_captain}}
+                                                {{ error_captain }}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label>Co-pilot:</label>
                                         <multiselect
-                                            v-bind:class="{'is-invalid': error_coPilot}"
+                                            v-bind:class="{
+                                                'is-invalid': error_coPilot
+                                            }"
                                             :disabled="waitPilot"
                                             v-model="input.coPilot"
                                             :options="options_copilot"
@@ -209,7 +229,7 @@
                                             id="copilot_info"
                                         ></div>
                                         <div class="invalid-feedback">
-                                            {{error_coPilot}}
+                                            {{ error_coPilot }}
                                         </div>
                                     </div>
                                 </div>
@@ -221,8 +241,9 @@
                                                 Adttendant</label
                                             >
                                             <multiselect
-                                                v-bind:class="{'is-invalid': error_crew}"
-                                                :disabled="waitPilot"
+                                                v-bind:class="{
+                                                    'is-invalid': error_crew
+                                                }"
                                                 v-model="input.crew"
                                                 :options="options_attendant"
                                                 :searchable="true"
@@ -255,7 +276,7 @@
                                             </multiselect>
 
                                             <div class="invalid-feedback">
-                                                {{error_crew}}
+                                                {{ error_crew }}
                                             </div>
                                         </div>
                                     </div>
@@ -297,12 +318,15 @@
                     <span class="col-md-12 mt-2 mb-2">
                         <label>Flight Number:</label>
                         <input
+                            v-bind:class="{
+                                'is-invalid': error_newFlightNo
+                            }"
                             type="text"
                             class="form-control"
                             v-model="input.flightNo"
                         />
                         <div class="invalid-feedback">
-                            Please enter flight number
+                            {{ error_newFlightNo }}
                         </div>
                     </span>
                     <div class="col-md-12 mt-2 mb-2">
@@ -393,9 +417,9 @@ export default {
             flights: [],
             isLoading: false,
             modalInput: {
-                ecoPrice: "",
-                businessPrice: "",
-                firstPrice: ""
+                ecoPrice: null,
+                businessPrice: null,
+                firstPrice: null
             },
             input: {
                 aircraftID: null,
@@ -410,10 +434,11 @@ export default {
                 coPilot: null,
                 crew: []
             },
-            errors: [],
-            error_ecoPrice: "",
-            error_businessPrice: "",
-            error_firstPrice: "",
+            errors_newFlight: null,
+            error_newFlightNo: null,
+            error_ecoPrice: null,
+            error_businessPrice: null,
+            error_firstPrice: null,
             options_pilot: [],
             options_copilot: [],
             options_attendant: [],
@@ -426,6 +451,7 @@ export default {
             aircraft_array_info: [],
             pilot_on_flight: [],
             crew_array_info: null,
+            caption_check: null,
             // error input
             errors_input: null,
             error_departLocation: null,
@@ -449,10 +475,10 @@ export default {
             if (this.modalOpen) {
                 $("#addNew").modal("show");
             } else {
-                this.input.flightNo = "";
-                this.modalInput.ecoPrice = "";
-                this.modalInput.businessPrice = "";
-                this.modalInput.firstPrice = "";
+                this.input.flightNo = null;
+                this.modalInput.ecoPrice = null;
+                this.modalInput.businessPrice = null;
+                this.modalInput.firstPrice = null;
                 $("#addNew").modal("show");
             }
         },
@@ -461,10 +487,11 @@ export default {
         },
         handleCloseModal() {
             this.modalOpen = false;
-            this.input.flightNo = "";
-            this.modalInput.ecoPrice = "";
-            this.modalInput.businessPrice = "";
-            this.modalInput.firstPrice = "";
+            this.input.flightNo = null;
+            this.modalInput.ecoPrice = null;
+            this.modalInput.businessPrice = null;
+            this.modalInput.firstPrice = null;
+            this.error_newFlightNo = this.error_ecoPrice = this.error_businessPrice = this.error_firstPrice = null;
             $("#addNew").modal("hide");
         },
         handleNewFlight(e) {
@@ -475,57 +502,183 @@ export default {
                 flight_no: this.input.flightNo,
                 input: this.modalInput
             };
-            axios.post("/api/backend/addPrice", data).then(response => {
-                swal.fire(
-                    "Create Success!",
-                    "Cilck the button to continue!",
-                    "success"
-                ).then(() => {
-                    this.isLoading = false;
-                    $("#addNew").modal("hide");
-                    // this.$router.go({ name: "addFlight" });
+            this.errors_newFlight = true;
+            this.error_newFlightNo = !this.input.flightNo
+                ? "Please fill flight number"
+                : null;
+            this.error_ecoPrice = !this.modalInput.ecoPrice
+                ? "Please fill economy class price"
+                : null;
+            this.error_businessPrice = !this.modalInput.businessPrice
+                ? "Please fill business class price"
+                : null;
+            this.error_firstPrice = !this.modalInput.firstPrice
+                ? "Please fill first class price"
+                : null;
+            //**/
+            this.error_ecoPrice =
+                !this.error_ecoPrice && isNaN(this.modalInput.ecoPrice)
+                    ? "economy class price must be number"
+                    : this.error_ecoPrice;
+            this.error_businessPrice =
+                !this.error_businessPrice &&
+                isNaN(this.modalInput.businessPrice)
+                    ? "business class price must be number"
+                    : this.error_businessPrice;
+            this.error_firstPrice =
+                !this.error_firstPrice && isNaN(this.modalInput.firstPrice)
+                    ? "first class price must be number"
+                    : this.error_firstPrice;
+            //**/
+            this.error_ecoPrice =
+                !this.error_ecoPrice && this.modalInput.ecoPrice < 0
+                    ? "economy class price must be not less than 0"
+                    : this.error_ecoPrice;
+            this.error_businessPrice =
+                !this.error_businessPrice && this.modalInput.businessPrice < 0
+                    ? "business class price must be not less than 0"
+                    : this.error_businessPrice;
+            this.error_firstPrice =
+                !this.error_firstPrice && this.modalInput.firstPrice < 0
+                    ? "first class price must be not less than 0"
+                    : this.error_firstPrice;
+            this.errors_newFlight =
+                !this.errors_newFlight ||
+                this.error_newFlightNo ||
+                this.error_ecoPrice ||
+                this.error_businessPrice ||
+                this.error_firstPrice
+                    ? false
+                    : true;
+            if (this.errors_newFlight) {
+                axios.post("/api/backend/addPrice", data).then(response => {
+                    swal.fire(
+                        "Create Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    ).then(() => {
+                        this.isLoading = false;
+                        $("#addNew").modal("hide");
+                        // this.$router.go({ name: "addFlight" });
+                    });
                 });
-            });
+            } else {
+                this.isLoading = false;
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
+            }
         },
-        formSubmit(e){
+        formSubmit(e) {
             e.preventDefault();
             this.errors_input = true;
             // condition for input
-            this.error_departLocation = !this.input.departLocation ? "Please select the depart location." : null;
-            this.error_departDate = !this.input.departDate ? "Please fill the depart date." : null;
-            this.error_departTime = !this.input.departTime ? "Please fill the depart time." : null;
-            /**/this.errors_input = !this.errors_input || this.error_departLocation || this.error_departDate || this.error_departTime ? false : true;
-            this.error_arriveLocation = !this.input.arriveLocation ? "Please select the arrive location." : null;
-            this.error_arriveDate = !this.input.arriveDate ? "Please fill the arrive date." : null;
-            this.error_arriveTime = !this.input.arriveTime ? "Please fill the arrive time." : null;
-            /**/this.errors_input = !this.errors_input || this.error_arriveLocation || this.error_arriveDate || this.error_arriveTime ? false : true;
-            this.error_aircraftID = !this.input.aircraftID ? "Please select aircraft ID" : null;
-            this.error_flightNo = !this.input.flightNo ? "Please select flight number": null;
-            /**/this.errors_input = !this.errors_input || this.error_aircraftID || this.error_flightNo ? false : true;
-            this.error_captain = !this.input.captain ? "Please select captain" : null;
-            this.error_coPilot = !this.input.coPilot ? "Please select co-pilot" : null;
-            this.error_crew = !this.input.crew.length ? "Please select flight attendant" : null;
-            /**/this.errors_input = !this.errors_input || this.error_captain || this.error_coPilot || this.error_crew ? false : true;
+            this.error_departLocation = !this.input.departLocation
+                ? "Please select the depart location."
+                : null;
+            this.error_departDate = !this.input.departDate
+                ? "Please fill the depart date."
+                : null;
+            this.error_departTime = !this.input.departTime
+                ? "Please fill the depart time."
+                : null;
+            /**/ this.errors_input =
+                !this.errors_input ||
+                this.error_departLocation ||
+                this.error_departDate ||
+                this.error_departTime
+                    ? false
+                    : true;
+            this.error_arriveLocation = !this.input.arriveLocation
+                ? "Please select the arrive location."
+                : null;
+            this.error_arriveDate = !this.input.arriveDate
+                ? "Please fill the arrive date."
+                : null;
+            this.error_arriveTime = !this.input.arriveTime
+                ? "Please fill the arrive time."
+                : null;
+            /**/ this.errors_input =
+                !this.errors_input ||
+                this.error_arriveLocation ||
+                this.error_arriveDate ||
+                this.error_arriveTime
+                    ? false
+                    : true;
+            this.error_aircraftID = !this.input.aircraftID
+                ? "Please select aircraft ID"
+                : null;
+            this.error_flightNo = !this.input.flightNo
+                ? "Please select flight number"
+                : null;
+            /**/ this.errors_input =
+                !this.errors_input ||
+                this.error_aircraftID ||
+                this.error_flightNo
+                    ? false
+                    : true;
+            this.error_captain = !this.input.captain
+                ? "Please select captain"
+                : null;
+            this.error_coPilot = !this.input.coPilot
+                ? "Please select co-pilot"
+                : null;
+            this.error_crew = !this.input.crew.length
+                ? "Please select flight attendant"
+                : null;
+            /**/ this.errors_input =
+                !this.errors_input ||
+                this.error_captain ||
+                this.error_coPilot ||
+                this.error_crew
+                    ? false
+                    : true;
             // another condition
-            this.error_arriveLocation = !this.error_arriveLocation && !this.error_departLocation && this.input.arriveLocation.value == this.input.departLocation.value ?
-                                        "The arrive location must be different form the depart location" : this.error_arriveLocation;
-            this.error_arriveDate = !this.error_arriveDate && !this.error_departDate && this.input.arriveDate < this.input.departDate ?
-                                        "The arrive date must be not less than the depart date" : this.error_arriveDate;
-            this.error_arriveTime = !this.error_arriveDate && !this.error_departDate && !this.error_arriveTime && !this.error_departTime &&
-                                    this.input.arriveDate == this.input.departDate && this.input.arriveTime <= this.input.departTime ?
-                                    "On the same day, The arrive time must be more than the depart time" : this.error_arriveTime;
-            /**/this.errors_input = !this.errors_input || this.error_arriveLocation || this.error_arriveDate || this.error_arriveTime ? false : true;
-            if(this.errors_input){
-                axios.post("/api/backend/addFlight", this.input).then(response => {
-                    console.log(response.data);
-                    swal.fire(
-                        "Register Success!",
-                        "Cilck the button to continue!",
-                        "success"
-                    )
-                });
-            }
-            else {
+            this.error_arriveLocation =
+                !this.error_arriveLocation &&
+                !this.error_departLocation &&
+                this.input.arriveLocation.value ==
+                    this.input.departLocation.value
+                    ? "The arrive location must be different form the depart location"
+                    : this.error_arriveLocation;
+            this.error_arriveDate =
+                !this.error_arriveDate &&
+                !this.error_departDate &&
+                this.input.arriveDate < this.input.departDate
+                    ? "The arrive date must be not less than the depart date"
+                    : this.error_arriveDate;
+            this.error_arriveTime =
+                !this.error_arriveDate &&
+                !this.error_departDate &&
+                !this.error_arriveTime &&
+                !this.error_departTime &&
+                this.input.arriveDate == this.input.departDate &&
+                this.input.arriveTime <= this.input.departTime
+                    ? "On the same day, The arrive time must be more than the depart time"
+                    : this.error_arriveTime;
+            /**/ this.errors_input =
+                !this.errors_input ||
+                this.error_arriveLocation ||
+                this.error_arriveDate ||
+                this.error_arriveTime
+                    ? false
+                    : true;
+            if (this.errors_input) {
+                axios
+                    .post("/api/backend/addFlight", this.input)
+                    .then(response => {
+                        console.log(response.data);
+                        swal.fire(
+                            "Register Success!",
+                            "Cilck the button to continue!",
+                            "success"
+                        ).then(() => {
+                            this.$router.go({ name: "addFlight" });
+                        });
+                    });
+            } else {
                 swal.fire(
                     "Please success your form!",
                     "Cilck the button to continue!",
@@ -597,7 +750,6 @@ export default {
                     this.input.aircraftID = null; // clear aircraft id
                     document.getElementById("aircraft_info").innerHTML = null;
                     this.aircrafts = [];
-                    console.log(aircraft.length);
 
                     for (var i = 0; i < aircraft.length; ++i) {
                         this.aircrafts.push({
@@ -656,7 +808,7 @@ export default {
                         this.options_pilot.push({
                             value: pilot[i]["data"]["user_id"],
                             name: "ID: " + pilot[i]["data"]["user_id"],
-                            work_id : pilot[i]["data"]["work_id"],
+                            work_id: pilot[i]["data"]["work_id"],
                             type: pilot[i]["type"]
                         });
                     }
@@ -673,9 +825,19 @@ export default {
                     for (var i = 0; i < attendant.length; ++i) {
                         this.options_attendant.push({
                             value: attendant[i]["data"]["user_id"],
-                            name: "ID: " + attendant[i]["data"]["user_id"] + ", " +
-                                  "Name: " + this.crew_array_info[attendant[i]["data"]["user_id"]]["name"] + " " + this.crew_array_info[attendant[i]["data"]["user_id"]]["surname"],
-                            work_id : attendant[i]["data"]["work_id"],
+                            name:
+                                "ID: " +
+                                attendant[i]["data"]["user_id"] +
+                                ", " +
+                                "Name: " +
+                                this.crew_array_info[
+                                    attendant[i]["data"]["user_id"]
+                                ]["name"] +
+                                " " +
+                                this.crew_array_info[
+                                    attendant[i]["data"]["user_id"]
+                                ]["surname"],
+                            work_id: attendant[i]["data"]["work_id"],
                             type: attendant[i]["type"]
                         });
                     }
@@ -688,29 +850,43 @@ export default {
             ).innerHTML = this.aircraft_array_info[this.input.aircraftID.value];
         else document.getElementById("aircraft_info").innerHTML = null;
         // show information of each pilot
-        if (this.input.captain != null) {
-            document.getElementById("pilot_info").innerHTML =
-                "<b>Name</b>: " +
-                this.crew_array_info[this.input.captain.value]["name"] +
-                " " +
-                this.crew_array_info[this.input.captain.value]["surname"] +
-                "<br>" +
-                "<b>Flying experience:</b> " +
-                this.crew_array_info[this.input.captain.value]["count"] +
-                " Times";
-            this.options_copilot = [];
-            for (var i = 0; i < this.pilot_on_flight.length; ++i) {
-                if (
-                    this.input.captain.value !=
-                    this.pilot_on_flight[i]["data"]["user_id"]
-                ) {
-                    this.options_copilot.push({
-                        value: this.pilot_on_flight[i]["data"]["user_id"],
-                        name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"],
-                        work_id: this.pilot_on_flight[i]["data"]["work_id"],
-                        type: this.pilot_on_flight[i]["type"]
-                    });
+        if (this.input.captain != this.caption_check) {
+            this.caption_check = this.input.captain;
+            console.log(this.input.captain);
+
+            if (this.input.captain) {
+                document.getElementById("pilot_info").innerHTML =
+                    "<b>Name</b>: " +
+                    this.crew_array_info[this.input.captain.value]["name"] +
+                    " " +
+                    this.crew_array_info[this.input.captain.value]["surname"] +
+                    "<br>" +
+                    "<b>Flying experience:</b> " +
+                    this.crew_array_info[this.input.captain.value]["count"] +
+                    " Times";
+                this.options_copilot = [];
+                document.getElementById("copilot_info").innerHTML = null;
+                this.input.coPilot = null;
+                for (var i = 0; i < this.pilot_on_flight.length; ++i) {
+                    if (
+                        this.input.captain.value !=
+                        this.pilot_on_flight[i]["data"]["user_id"]
+                    ) {
+                        this.options_copilot.push({
+                            value: this.pilot_on_flight[i]["data"]["user_id"],
+                            name:
+                                "ID: " +
+                                this.pilot_on_flight[i]["data"]["user_id"],
+                            work_id: this.pilot_on_flight[i]["data"]["work_id"],
+                            type: this.pilot_on_flight[i]["type"]
+                        });
+                    }
                 }
+            } else {
+                document.getElementById("pilot_info").innerHTML = null;
+                document.getElementById("copilot_info").innerHTML = null;
+                this.input.coPilot = null;
+                this.waitPilot = true;
             }
         }
         // show information of each co-pilot

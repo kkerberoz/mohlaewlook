@@ -9,7 +9,70 @@
                                 Analysis 2
                             </div>
                         </div>
-                        <div class="card-body"></div>
+                        <div class="card-body">
+                            <div class="row flex-center">
+                                <div class="col-md-4 mb-4">
+                                    <label
+                                        >From :
+                                        {{
+                                            this.calendar_from.selectedDate
+                                        }}</label
+                                    >
+                                    <functional-calendar
+                                        class="calendar"
+                                        v-model="calendar_from"
+                                        :configs="calendarConfigs"
+                                    ></functional-calendar>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label
+                                        >To :
+                                        {{
+                                            this.calendar_to.selectedDate
+                                        }}</label
+                                    >
+                                    <functional-calendar
+                                        v-on:choseDay="clickDay"
+                                        class="calendar"
+                                        v-model="calendar_to"
+                                        :configs="calendarConfigs2"
+                                    ></functional-calendar>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Class</th>
+                                            <th scope="col">Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        v-for="(flight, id) in data"
+                                        :key="id"
+                                    >
+                                        <tr>
+                                            <th scope="row">
+                                                {{ Number(id) + 1 }}
+                                            </th>
+                                            <td>{{ flight.class_name }}</td>
+                                            <td>
+                                                {{ flight.class_count }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>Total</td>
+                                            <td>{{sum}}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -18,13 +81,50 @@
 </template>
 
 <script>
+import { FunctionalCalendar } from "vue-functional-calendar";
 import Multiselect from "vue-multiselect";
 export default {
-    components: { Multiselect },
+    components: { Multiselect, FunctionalCalendar },
     data() {
-        return {};
+        return {
+            data: [],
+            calendar_from: {},
+            calendar_to: {},
+            sum:0,
+            calendarConfigs: {
+                isDatePicker: true,
+                dateFormat: "yyyy-mm-dd 00:00:00"
+            },
+            calendarConfigs2: {
+                isDatePicker: true,
+                dateFormat: "yyyy-mm-dd 23:59:59"
+            }
+        };
     },
-    methods: {}
+    methods: {
+        clickDay() {
+            let scope = {
+                first: this.calendar_from.selectedDate,
+                second: this.calendar_to.selectedDate
+            };
+            axios
+                .post("/api/backend/analytic2_show", scope)
+                .then(response => {
+                    this.data = response.data;
+                    console.log(this.data);
+                    this.data.forEach (each_data => {
+                        this.sum += each_data['class_count'];
+                    });
+                })
+                .catch(error => {
+                    swal.fire(
+                        "Error.",
+                        "Cilck the button to continue!",
+                        "error"
+                    );
+                });
+        }
+    }
 };
 </script>
 
