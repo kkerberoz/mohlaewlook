@@ -2101,8 +2101,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2113,7 +2111,11 @@ __webpack_require__.r(__webpack_exports__);
       data: [],
       selected: [],
       datePick: [],
-      calendar: {}
+      calendar: {},
+      calendarConfigs: {
+        disabledDates: ["beforeToday", "afterToday", "24/12/2020", "27/12/2020"],
+        isMultipleDatePicker: true
+      }
     };
   },
   methods: {
@@ -50310,20 +50312,14 @@ var render = function() {
             _c(
               "div",
               _vm._l(_vm.selected, function(data, i) {
-                return _c("span", { key: i }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(data.date) +
-                      "\n                    "
-                  )
-                ])
+                return _c("span", { key: i }, [_vm._v(_vm._s(data.date))])
               }),
               0
             ),
             _vm._v(" "),
             _c("functional-calendar", {
               staticClass: "calendar",
-              attrs: { "is-multiple-date-picker": true },
+              attrs: { configs: _vm.calendarConfigs },
               on: { choseDay: _vm.clickDay },
               model: {
                 value: _vm.calendar,
@@ -74644,8 +74640,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
