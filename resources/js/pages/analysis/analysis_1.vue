@@ -75,7 +75,7 @@ export default {
             axios
                 .post("/api/backend/analytic1_show", year)
                 .then(response => {
-                    this.data = response.data;
+                    this.data = response.data.analysis;
                     console.log(this.data);
                 })
                 .catch(error => {
@@ -87,22 +87,14 @@ export default {
                 });
         }
     },
-    mounted(){
-        var year = this.selected;
-        axios.post("/api/backend/analytic1_show", year)
-                .then(response => {
-                    this.data = response.data.analysis;
-                    this.selected = [{year:response.data.year}]
-                    console.log(this.selected);
-                    console.log(response.data);
-                })
-    },
     beforeMount() {
-        // swal.fire(
-        //     "Please select year to show data",
-        //     "Cilck the button to continue!",
-        //     "warning"
-        // );
+        var year = this.selected;
+        axios.post("/api/backend/analytic1_show", year).then(response => {
+            this.data = response.data.analysis;
+            this.selected = [{ year: response.data.year }];
+            console.log(this.selected);
+            console.log(response.data);
+        });
         axios.get("/api/backend/analytic1_get").then(response => {
             this.years = response.data;
         });

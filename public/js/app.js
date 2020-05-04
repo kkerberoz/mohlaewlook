@@ -2101,6 +2101,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2113,7 +2115,7 @@ __webpack_require__.r(__webpack_exports__);
       datePick: [],
       calendar: {},
       calendarConfigs: {
-        disabledDates: ["beforeToday", "afterToday", "24/12/2020", "27/12/2020"],
+        disabledDates: ["beforeToday"],
         isMultipleDatePicker: true
       }
     };
@@ -6216,14 +6218,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var year = this.selected;
       axios.post("/api/backend/analytic1_show", year).then(function (response) {
-        _this.data = response.data;
+        _this.data = response.data.analysis;
         console.log(_this.data);
       })["catch"](function (error) {
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
     }
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this2 = this;
 
     var year = this.selected;
@@ -6235,17 +6237,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(_this2.selected);
       console.log(response.data);
     });
-  },
-  beforeMount: function beforeMount() {
-    var _this3 = this;
-
-    // swal.fire(
-    //     "Please select year to show data",
-    //     "Cilck the button to continue!",
-    //     "warning"
-    // );
     axios.get("/api/backend/analytic1_get").then(function (response) {
-      _this3.years = response.data;
+      _this2.years = response.data;
     });
   }
 });
@@ -6261,8 +6254,65 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-functional-calendar */ "./node_modules/vue-functional-calendar/index.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6283,14 +6333,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a,
+    FunctionalCalendar: vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__["FunctionalCalendar"]
   },
   data: function data() {
-    return {};
+    return {
+      data: [],
+      calendar_from: {},
+      calendar_to: {},
+      calendarConfigs: {
+        isDatePicker: true,
+        dateFormat: "yyyy-mm-dd 00:00:00"
+      },
+      calendarConfigs2: {
+        isDatePicker: true,
+        dateFormat: "yyyy-mm-dd 23:59:59"
+      }
+    };
   },
-  methods: {}
+  methods: {
+    clickDay: function clickDay() {
+      var _this = this;
+
+      var scope = {
+        first: this.calendar_from.selectedDate,
+        second: this.calendar_to.selectedDate
+      };
+      axios.post("/api/backend/analytic2_show", scope).then(function (response) {
+        _this.data = response.data;
+        console.log(_this.data);
+      })["catch"](function (error) {
+        swal.fire("Error.", "Cilck the button to continue!", "error");
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -6325,15 +6404,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   data: function data() {
-    return {};
+    return {
+      isDisable: false,
+      input: "",
+      data: [],
+      errors: [],
+      error_input: ""
+    };
   },
-  methods: {}
+  methods: {
+    inputNumber: function inputNumber() {
+      if (isNaN(this.input) || this.input < 0) {
+        this.isDisable = true;
+        this.error_input = "Please fill only number that is positive number.";
+        this.errors.push(this.error_input);
+      } else {
+        this.isDisable = false;
+        this.error_input = null;
+      }
+    },
+    queryAnalysis: function queryAnalysis() {
+      var _this = this;
+
+      var data = {
+        top: Number(this.input)
+      };
+      axios.post("/api/backend/analytic3_show", data).then(function (response) {
+        _this.data = response.data;
+        console.log(_this.data);
+      })["catch"](function (error) {
+        swal.fire("Error.", "Cilck the button to continue!", "error");
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -12050,7 +12210,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -12069,7 +12229,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -12088,7 +12248,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -12107,7 +12267,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -50420,7 +50580,13 @@ var render = function() {
             _c(
               "div",
               _vm._l(_vm.selected, function(data, i) {
-                return _c("span", { key: i }, [_vm._v(_vm._s(data.date))])
+                return _c("span", { key: i }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(data.date) +
+                      "\n                    "
+                  )
+                ])
               }),
               0
             ),
@@ -55877,7 +56043,113 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    [
+      _c("div", { staticClass: "container-xl" }, [
+        _c("div", { staticClass: "row flex-center " }, [
+          _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row flex-center" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4 mb-4" },
+                    [
+                      _c("label", [
+                        _vm._v(
+                          "From :\n                                    " +
+                            _vm._s(this.calendar_from.selectedDate)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("functional-calendar", {
+                        staticClass: "calendar",
+                        attrs: { configs: _vm.calendarConfigs },
+                        model: {
+                          value: _vm.calendar_from,
+                          callback: function($$v) {
+                            _vm.calendar_from = $$v
+                          },
+                          expression: "calendar_from"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4 mb-4" },
+                    [
+                      _c("label", [
+                        _vm._v(
+                          "To :\n                                    " +
+                            _vm._s(this.calendar_to.selectedDate)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("functional-calendar", {
+                        staticClass: "calendar",
+                        attrs: { configs: _vm.calendarConfigs2 },
+                        on: { choseDay: _vm.clickDay },
+                        model: {
+                          value: _vm.calendar_to,
+                          callback: function($$v) {
+                            _vm.calendar_to = $$v
+                          },
+                          expression: "calendar_to"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.data, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.class_name))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.class_count) +
+                                  "\n                                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -55886,34 +56158,29 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "container-xl" }, [
-          _c("div", { staticClass: "row flex-center " }, [
-            _c("div", { staticClass: "col-md-12 " }, [
-              _c("div", { staticClass: "card shadow-lg bg-white" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { "border-radius": "0px" }
-                  },
-                  [
-                    _c("div", { staticClass: "card-title" }, [
-                      _vm._v(
-                        "\n                            Analysis 2\n                        "
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" })
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v(
+            "\n                            Analysis 2\n                        "
+          )
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Class")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Count")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -55937,7 +56204,112 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    [
+      _c("div", { staticClass: "container-xl" }, [
+        _c("div", { staticClass: "row flex-center " }, [
+          _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "col-md-3 mb-2 float-right" }, [
+                  _c("label", [_vm._v("Top :" + _vm._s(_vm.input))]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.input,
+                        expression: "input"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: {
+                      "is-invalid": _vm.error_input
+                    },
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.input },
+                    on: {
+                      input: [
+                        function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input = $event.target.value
+                        },
+                        _vm.inputNumber
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(_vm.error_input) +
+                        "\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-login mt-1",
+                      attrs: { disabled: _vm.isDisable },
+                      on: { click: _vm.queryAnalysis }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                search\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.data, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.username))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.reserve_count) +
+                                  "\n                                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -55946,34 +56318,33 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "container-xl" }, [
-          _c("div", { staticClass: "row flex-center " }, [
-            _c("div", { staticClass: "col-md-12 " }, [
-              _c("div", { staticClass: "card shadow-lg bg-white" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { "border-radius": "0px" }
-                  },
-                  [
-                    _c("div", { staticClass: "card-title" }, [
-                      _vm._v(
-                        "\n                            Analysis 3\n                        "
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" })
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v(
+            "\n                            Analysis 3\n                        "
+          )
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Username")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Reservetion Count\n                                        "
+          )
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -74794,8 +75165,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

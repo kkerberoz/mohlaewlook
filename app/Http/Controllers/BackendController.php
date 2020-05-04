@@ -25,7 +25,8 @@ class BackendController extends Controller
         return response()->JSON($AirportID);
     }
 
-    public function getAircraftAndCrew(Request $request){
+    public function getAircraftAndCrew(Request $request)
+    {
 
         // Get Aircraft
         $initial_location = "BKK";
@@ -127,68 +128,64 @@ class BackendController extends Controller
         ]);
     }
 
-    public function addFlight(Request $request){
+    public function addFlight(Request $request)
+    {
         $flight = new Flight;
         $flight->flight_no = $request->flightNo["flight_no"];
         $flight->depart_location = $request->departLocation["value"];
         $flight->arrive_location = $request->arriveLocation["value"];
-        $flight->depart_datetime = $request->departDate. " ". $request->departTime;
-        $flight->arrive_datetime = $request->arriveDate. " ". $request->arriveTime;
+        $flight->depart_datetime = $request->departDate . " " . $request->departTime;
+        $flight->arrive_datetime = $request->arriveDate . " " . $request->arriveTime;
         $flight->aircraft_id = $request->aircraftID["value"];
         $flight->save();
 
-        $flightID = Flight::select('flight_id')->where('flight_no', $request->flightNo["flight_no"])->
-                    where('depart_datetime', $request->departDate. " ". $request->departTime)->
-                    where('aircraft_id', $request->aircraftID["value"])->first();
+        $flightID = Flight::select('flight_id')->where('flight_no', $request->flightNo["flight_no"])->where('depart_datetime', $request->departDate . " " . $request->departTime)->where('aircraft_id', $request->aircraftID["value"])->first();
         // captian
         $work_already = Work_schedule::where('work_id', $request->captain['work_id'])->first();
-        if(isset($work_already)){
-            if($request->captain['type'] == 1){
+        if (isset($work_already)) {
+            if ($request->captain['type'] == 1) {
                 $work_schedule = new Work_schedule;
                 $work_schedule->user_id = $request->captain['value'];
                 $work_schedule->work_date = $request->departDate;
                 $work_schedule->flight_id = $flightID['flight_id'];
                 $work_schedule->confirm_status = "confirm";
                 $work_schedule->save();
-            }
-            else{
+            } else {
                 work_schedule::where('work_id', $request->captain['work_id'])->update(['flight_id' => $flightID['flight_id'], 'confirm_status' => 'confirm']);
             }
         }
         // co-pilot
         $work_already = Work_schedule::where('work_id', $request->coPilot['work_id'])->first();
-        if(isset($work_already)){
-            if($request->coPilot['type'] == 1){
+        if (isset($work_already)) {
+            if ($request->coPilot['type'] == 1) {
                 $work_schedule = new Work_schedule;
                 $work_schedule->user_id = $request->coPilot['value'];
                 $work_schedule->work_date = $request->departDate;
                 $work_schedule->flight_id = $flightID['flight_id'];
                 $work_schedule->confirm_status = "confirm";
                 $work_schedule->save();
-            }
-            else{
+            } else {
                 work_schedule::where('work_id', $request->coPilot['work_id'])->update(['flight_id' => $flightID['flight_id'], 'confirm_status' => 'confirm']);
             }
         }
         // attendant
-        foreach($request->crew as $crew){
+        foreach ($request->crew as $crew) {
             $work_already = Work_schedule::where('work_id', $crew['work_id'])->first();
-            if(isset($work_already)){
-                if($crew['type'] == 1){
+            if (isset($work_already)) {
+                if ($crew['type'] == 1) {
                     $work_schedule = new Work_schedule;
                     $work_schedule->user_id = $crew['value'];
                     $work_schedule->work_date = $request->departDate;
                     $work_schedule->flight_id = $flightID['flight_id'];
                     $work_schedule->confirm_status = "confirm";
                     $work_schedule->save();
-                }
-                else{
+                } else {
                     work_schedule::where('work_id', $crew['work_id'])->update(['flight_id' => $flightID['flight_id'], 'confirm_status' => 'confirm']);
                 }
             }
         }
 
-        return response() -> JSON($flightID);
+        return response()->JSON($flightID);
     }
 
     public function getWorkSchedule(Request $request)
@@ -359,16 +356,15 @@ class BackendController extends Controller
 
     public function analytic1_show(Request $request)
     {
-        if(isset($request->year)){
+        if (isset($request->year)) {
             $year = $request->year;
-            $yearLIKE = ($year)."%";
-        }
-        else{
+            $yearLIKE = ($year) . "%";
+        } else {
             $year = date('Y');
-            $yearLIKE = ($year)."%";
+            $yearLIKE = ($year) . "%";
         }
-        $analyticData = DB::select('SELECT flight_no,COUNT(*) AS flight_no_count FROM flights WHERE depart_datetime LIKE ? GROUP BY flight_no ORDER BY flight_no_count DESC',[$yearLIKE]);
-        return response()->JSON(['year' =>$year,'analysis'=>$analyticData]);
+        $analyticData = DB::select('SELECT flight_no,COUNT(*) AS flight_no_count FROM flights WHERE depart_datetime LIKE ? GROUP BY flight_no ORDER BY flight_no_count DESC', [$yearLIKE]);
+        return response()->JSON(['year' => $year, 'analysis' => $analyticData]);
     }
 
     public function analytic1_get()
@@ -383,19 +379,23 @@ class BackendController extends Controller
         $data = DB::select('SELECT class_name,COUNT(*) AS class_count
                             FROM tickets
                             WHERE flight_id IN (SELECT flight_id FROM flights WHERE depart_datetime BETWEEN ? AND ?)
-                            GROUP BY class_name',[$scope['first'],$scope['second']]);
+                            GROUP BY class_name', [$scope['first'], $scope['second']]);
         return response()->JSON($data);
-
     }
 
-    public function analytic3()
+    public function analytic3_show(Request $request)
     {
-
+        $data = DB::select('SELECT c.username, COUNT(*) AS reserve_count
+                            FROM reservations r LEFT JOIN
+                            customers c ON r.user_id = c.user_id
+                            WHERE r.reservation_status = "confirm"
+                            GROUP BY r.user_id
+                            ORDER BY reserve_count DESC
+                            LIMIT ?', [$request->top]);
+        return response()->JSON($data);
     }
 
     public function analytic4()
     {
-
     }
-
 }
