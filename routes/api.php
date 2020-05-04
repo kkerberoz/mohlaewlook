@@ -57,7 +57,7 @@ Route::prefix('backend')->group(function () {
     Route::post('/analytic1_show','BackendController@analytic1_show');
     Route::get('/analytic1_get','BackendController@analytic1_get');
     Route::post('/analytic2_show','BackendController@analytic2_show');
-    Route::get('/analytic3','BackendController@analytic3');
+    Route::post('/analytic3_show','BackendController@analytic3_show');
     Route::get('/analytic4','BackendController@analytic4');
 
 

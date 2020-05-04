@@ -2113,7 +2113,7 @@ __webpack_require__.r(__webpack_exports__);
       datePick: [],
       calendar: {},
       calendarConfigs: {
-        disabledDates: ["beforeToday", "afterToday", "24/12/2020", "27/12/2020"],
+        disabledDates: ["beforeToday"],
         isMultipleDatePicker: true
       }
     };
