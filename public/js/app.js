@@ -56081,15 +56081,26 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("tfoot", [
-                          _vm.showTotal
-                            ? _c("tr", [
-                                _c("td", [_vm._v(" ")]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v("Total")]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(_vm.sum))])
-                              ])
-                            : _vm._e()
+                          _c(
+                            "tr",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.showTotal,
+                                  expression: "showTotal"
+                                }
+                              ]
+                            },
+                            [
+                              _c("td", [_vm._v(" ")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Total")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.sum))])
+                            ]
+                          )
                         ])
                       ],
                       2
