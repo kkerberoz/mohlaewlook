@@ -24,6 +24,14 @@
                         :configs="calendarConfigs"
                     ></functional-calendar>
                 </div>
+                <button
+                    type="submit"
+                    @click="submit"
+                    class="btn btn-success"
+                >
+
+                    <span >Submit free day</span>
+                </button>
             </div>
         </div>
     </div>
@@ -37,23 +45,68 @@ export default {
     data() {
         return {
             data: [],
+            id:"",
             selected: [],
             datePick: [],
             calendar: {},
             calendarConfigs: {
                 disabledDates: ["beforeToday"],
                 isMultipleDatePicker: true,
-                markedDates: [
-                    { date: "10/5/2020", class: "green-line" },
-                    { date: "12/5/2020", class: "green-line" }
-                ]
+                markedDates: []
             }
         };
     },
     methods: {
         clickDay() {
             this.selected = this.calendar.selectedDates;
+            // console.log(this.selected);
+            // console.log(this.calendar.selectedDates);
+        },
+        submit(){
+            console.log("!!!!!!!!!!!!!!!!!");
+
+            let data = {
+                id:this.id,
+                array_date:this.selected
+            }
+            axios.post('/api/backend/addNewWork',data).then(response=> {
+                console.log(response.data);
+
+            });
         }
+    },
+    beforeMount(){
+
+
+        axios.get('/api/admin/init').then(response => {
+            this.id = response.data.id;
+            axios.post('/api/backend/getflightdetail',{id: this.id}).then(response =>{
+                console.log(response.data);
+            });
+
+            axios.get(`/api/backend/schedule/${this.id}`).then(response =>{
+                //console.log(response.data);
+
+                response.data.forEach(each_day => {
+                    var Sdate = each_day['work_date'].split("-");
+                    var newDate = Number(Sdate[2])+"/"+Number(Sdate[1])+"/"+Sdate[0];
+                    if(each_day['confirm_status'] == "confirm"){
+
+                        this.calendarConfigs.markedDates.push({date:newDate,class:"green-line"});
+                    }
+                    else if (each_day['confirm_status'] == "free"){
+                        //console.log(newDate);
+                        this.calendarConfigs.markedDates.push({date: newDate,class:"grey-line"});
+                    }
+                });
+            });
+        });
+
+
+
+
+
+
     }
 };
 </script>
@@ -64,6 +117,15 @@ export default {
     line-height: 30px;
     color: #ffffff;
     background-color: #45cc0d;
+    border-radius: 100%;
+    margin: 0 auto;
+}
+
+.grey-line {
+    width: 30px;
+    line-height: 30px;
+    color: #ffffff;
+    background-color: 	#A9A9A9;
     border-radius: 100%;
     margin: 0 auto;
 }

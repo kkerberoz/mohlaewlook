@@ -2103,6 +2103,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2111,26 +2119,64 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       data: [],
+      id: "",
       selected: [],
       datePick: [],
       calendar: {},
       calendarConfigs: {
         disabledDates: ["beforeToday"],
         isMultipleDatePicker: true,
-        markedDates: [{
-          date: "10/5/2020",
-          "class": "green-line"
-        }, {
-          date: "12/5/2020",
-          "class": "green-line"
-        }]
+        markedDates: []
       }
     };
   },
   methods: {
     clickDay: function clickDay() {
-      this.selected = this.calendar.selectedDates;
+      this.selected = this.calendar.selectedDates; // console.log(this.selected);
+      // console.log(this.calendar.selectedDates);
+    },
+    submit: function submit() {
+      console.log("!!!!!!!!!!!!!!!!!");
+      var data = {
+        id: this.id,
+        array_date: this.selected
+      };
+      axios.post('/api/backend/addNewWork', data).then(function (response) {
+        console.log(response.data);
+      });
     }
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    axios.get('/api/admin/init').then(function (response) {
+      _this.id = response.data.id;
+      axios.post('/api/backend/getflightdetail', {
+        id: _this.id
+      }).then(function (response) {
+        console.log(response.data);
+      });
+      axios.get("/api/backend/schedule/".concat(_this.id)).then(function (response) {
+        //console.log(response.data);
+        response.data.forEach(function (each_day) {
+          var Sdate = each_day['work_date'].split("-");
+          var newDate = Number(Sdate[2]) + "/" + Number(Sdate[1]) + "/" + Sdate[0];
+
+          if (each_day['confirm_status'] == "confirm") {
+            _this.calendarConfigs.markedDates.push({
+              date: newDate,
+              "class": "green-line"
+            });
+          } else if (each_day['confirm_status'] == "free") {
+            //console.log(newDate);
+            _this.calendarConfigs.markedDates.push({
+              date: newDate,
+              "class": "grey-line"
+            });
+          }
+        });
+      });
+    });
   }
 });
 
@@ -12310,7 +12356,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".green-line {\n  width: 30px;\n  line-height: 30px;\n  color: #ffffff;\n  background-color: #45cc0d;\n  border-radius: 100%;\n  margin: 0 auto;\n}\n.green-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}\n.orange-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #ebae05;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}", ""]);
+exports.push([module.i, ".green-line {\n  width: 30px;\n  line-height: 30px;\n  color: #ffffff;\n  background-color: #45cc0d;\n  border-radius: 100%;\n  margin: 0 auto;\n}\n.grey-line {\n  width: 30px;\n  line-height: 30px;\n  color: #ffffff;\n  background-color: #A9A9A9;\n  border-radius: 100%;\n  margin: 0 auto;\n}\n.green-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}\n.orange-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #ebae05;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}", ""]);
 
 // exports
 
@@ -12367,7 +12413,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -50724,6 +50770,16 @@ var render = function() {
             })
           ],
           1
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { type: "submit" },
+            on: { click: _vm.submit }
+          },
+          [_c("span", [_vm._v("Submit free day")])]
         )
       ])
     ])
@@ -53642,12 +53698,11 @@ var render = function() {
                               name: "show",
                               rawName: "v-show",
                               value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
+                                _vm.role === "pilot" || _vm.role === "admin"
                                   ? true
                                   : false,
                               expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                                "\n                                    role === 'pilot' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
                             }
                           ],
                           attrs: { to: { name: "Schedule" } }
@@ -75393,8 +75448,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

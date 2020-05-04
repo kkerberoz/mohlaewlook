@@ -412,4 +412,36 @@ class BackendController extends Controller
         }
         return response()->JSON(['Male' => $Male, 'Female' => $Female]);
     }
+
+    public function schedule(Request $request,$id){
+        $employee = Employee::findOrFail($id);
+        $data = Work_schedule::select('*')->where('user_id',$employee->user_id)->get();
+        return response()->JSON($data);
+    }
+
+    public function addNewWork(Request $request){
+        $schedule = new Work_schedule;
+        $array_date = $request->array_date;
+        foreach ($array_date as $each_date){
+
+            list($day,$month,$year) = explode("/", $each_date['date']);
+            $newDate = $year."-".sprintf("%02d",$month)."-".sprintf("%02d",$day);
+
+            $schedule->user_id = $request->id;
+            $schedule->work_date = $newDate;
+            $schedule->confirm_status = "free";
+            $schedule->save();
+
+        }
+    }
+
+    public function getflightdetail(Request $request){
+        $employee = Employee::findOrFail($request->id);
+        $data = DB::select('SELECT *
+                            FROM flights
+                            WHERE flight_id IN (SELECT flight_id FROM work_schedules WHERE user_id = ? AND confirm_status = ?)
+                            ORDER BY depart_datetime DESC',[$employee->user_id,"confirm"]);
+        return response()->JSON($data);
+    }
+
 }

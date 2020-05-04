@@ -142,7 +142,7 @@
                                 <router-link
                                     :to="{ name: 'Schedule' }"
                                     v-show="
-                                        role === 'flight_manager' ||
+                                        role === 'pilot' ||
                                         role === 'admin'
                                             ? true
                                             : false
