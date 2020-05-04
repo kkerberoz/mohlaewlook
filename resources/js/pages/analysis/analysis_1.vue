@@ -50,7 +50,7 @@
                                     </tbody>
 
                                     <tfoot>
-                                        <tr v-if="showTotal">
+                                        <tr v-show="showTotal">
                                             <td>&nbsp;</td>
                                             <td>Total</td>
                                             <td>{{ sum }}</td>
