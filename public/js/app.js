@@ -6113,12 +6113,29 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  beforeMount: function beforeMount() {
+  mounted: function mounted() {
     var _this2 = this;
 
-    swal.fire("Please select year to show data", "Cilck the button to continue!", "warning");
+    var year = this.selected;
+    axios.post("/api/backend/analytic1_show", year).then(function (response) {
+      _this2.data = response.data.analysis;
+      _this2.selected = [{
+        year: response.data.year
+      }];
+      console.log(_this2.selected);
+      console.log(response.data);
+    });
+  },
+  beforeMount: function beforeMount() {
+    var _this3 = this;
+
+    // swal.fire(
+    //     "Please select year to show data",
+    //     "Cilck the button to continue!",
+    //     "warning"
+    // );
     axios.get("/api/backend/analytic1_get").then(function (response) {
-      _this2.years = response.data;
+      _this3.years = response.data;
     });
   }
 });

@@ -296,9 +296,16 @@ class BackendController extends Controller
 
     public function analytic1_show(Request $request)
     {
-        $yearLIKE = ($request->year)."%";
+        if(isset($request->year)){
+            $year = $request->year;
+            $yearLIKE = ($year)."%";
+        }
+        else{
+            $year = date('Y');
+            $yearLIKE = ($year)."%";
+        }
         $analyticData = DB::select('SELECT flight_no,COUNT(*) AS flight_no_count FROM flights WHERE depart_datetime LIKE ? GROUP BY flight_no ORDER BY flight_no_count DESC',[$yearLIKE]);
-        return response()->JSON($analyticData);
+        return response()->JSON(['year' =>$year,'analysis'=>$analyticData]);
     }
 
     public function analytic1_get()
