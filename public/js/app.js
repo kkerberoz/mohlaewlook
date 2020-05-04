@@ -2101,6 +2101,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6366,15 +6368,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   data: function data() {
-    return {};
+    return {
+      isDisable: false,
+      input: "",
+      data: [],
+      errors: [],
+      error_input: ""
+    };
   },
-  methods: {}
+  methods: {
+    inputNumber: function inputNumber() {
+      if (isNaN(this.input) || this.input < 0) {
+        this.isDisable = true;
+        this.error_input = "Please fill only number that is positive number.";
+        this.errors.push(this.error_input);
+      } else {
+        this.isDisable = false;
+        this.error_input = null;
+      }
+    },
+    queryAnalysis: function queryAnalysis() {
+      var _this = this;
+
+      var data = {
+        top: Number(this.input)
+      };
+      axios.post("/api/backend/analytic3_show", data).then(function (response) {
+        _this.data = response.data;
+        console.log(_this.data);
+      })["catch"](function (error) {
+        swal.fire("Error.", "Cilck the button to continue!", "error");
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -50461,7 +50544,13 @@ var render = function() {
             _c(
               "div",
               _vm._l(_vm.selected, function(data, i) {
-                return _c("span", { key: i }, [_vm._v(_vm._s(data.date))])
+                return _c("span", { key: i }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(data.date) +
+                      "\n                    "
+                  )
+                ])
               }),
               0
             ),
@@ -56075,7 +56164,112 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    [
+      _c("div", { staticClass: "container-xl" }, [
+        _c("div", { staticClass: "row flex-center " }, [
+          _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "col-md-3 mb-2 float-right" }, [
+                  _c("label", [_vm._v("Top :" + _vm._s(_vm.input))]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.input,
+                        expression: "input"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: {
+                      "is-invalid": _vm.error_input
+                    },
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.input },
+                    on: {
+                      input: [
+                        function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input = $event.target.value
+                        },
+                        _vm.inputNumber
+                      ]
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "invalid-feedback" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(_vm.error_input) +
+                        "\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-login mt-1",
+                      attrs: { disabled: _vm.isDisable },
+                      on: { click: _vm.queryAnalysis }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                search\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.data, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.username))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.reserve_count) +
+                                  "\n                                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -56084,34 +56278,33 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "container-xl" }, [
-          _c("div", { staticClass: "row flex-center " }, [
-            _c("div", { staticClass: "col-md-12 " }, [
-              _c("div", { staticClass: "card shadow-lg bg-white" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { "border-radius": "0px" }
-                  },
-                  [
-                    _c("div", { staticClass: "card-title" }, [
-                      _vm._v(
-                        "\n                            Analysis 3\n                        "
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" })
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v(
+            "\n                            Analysis 3\n                        "
+          )
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Username")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Reservetion Count\n                                        "
+          )
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true
