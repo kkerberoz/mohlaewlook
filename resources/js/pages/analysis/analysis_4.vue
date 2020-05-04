@@ -1,5 +1,15 @@
 <template>
     <div class="container-fluid" style="padding:3%; margin-bottom:10%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :on-cancel="onCancel"
+            :is-full-page="fullPage"
+            opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl">
             <div class="row flex-center ">
                 <div class="col-md-12 ">
@@ -83,10 +93,14 @@
 
 <script>
 import Multiselect from "vue-multiselect";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
-    components: { Multiselect },
+    components: { Multiselect, Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             selectForm: "",
             selectTo: "",
             start: null,
@@ -105,6 +119,7 @@ export default {
     },
     methods: {
         Analysis4() {
+            this.loadingPage = true;
             console.log("form", this.selectForm);
             console.log("to", this.selectTo);
             // simulate
@@ -120,11 +135,16 @@ export default {
                     // this.males = response.data.Male;
                     // console.log(response.data);
                     this.values = response.data.value;
+                    this.loadingPage = false;
                     // this.females = response.data.Female;
                 });
         }
     },
     beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 2000);
         // axios.get("/api/backend/analytic1_get").then(response => {
         //     this.years = response.data;
         // });

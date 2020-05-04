@@ -1,5 +1,15 @@
 <template>
     <div class="container-fluid" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :on-cancel="onCancel"
+            :is-full-page="fullPage"
+            opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl">
             <div class="row flex-center ">
                 <div class="col-md-12 ">
@@ -75,16 +85,26 @@
 
 <script>
 import Multiselect from "vue-multiselect";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
-    components: { Multiselect },
+    components: { Multiselect, Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             isDisable: false,
             input: "",
             data: [],
             errors: [],
             error_input: ""
         };
+    },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 2000);
     },
     methods: {
         inputNumber() {
@@ -99,6 +119,7 @@ export default {
             }
         },
         queryAnalysis() {
+            this.loadingPage = true;
             let data = {
                 top: Number(this.input)
             };
@@ -115,6 +136,9 @@ export default {
                         "error"
                     );
                 });
+            setTimeout(() => {
+                this.loadingPage = false;
+            }, 2000);
         }
     }
 };
