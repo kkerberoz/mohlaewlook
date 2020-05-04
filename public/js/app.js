@@ -3234,6 +3234,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3241,6 +3251,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      waitPilot: true,
       modalOpen: false,
       flights: [],
       isLoading: false,
@@ -3274,13 +3285,16 @@ __webpack_require__.r(__webpack_exports__);
       date_check: null,
       time_check: null,
       location_check: null,
-      all_check: null,
+      all_check: false,
       aircraft_array_info: [],
       pilot_on_flight: [],
       crew_array_info: null
     };
   },
   methods: {
+    showCo: function showCo() {
+      this.waitPilot = false;
+    },
     handleShowModal: function handleShowModal() {
       if (this.modalOpen) {
         $("#addNew").modal("show");
@@ -3296,10 +3310,6 @@ __webpack_require__.r(__webpack_exports__);
       var flight_no = _ref.flight_no;
       return "".concat(flight_no, " ");
     },
-    handleCreateModal: function handleCreateModal() {
-      this.modalOpen = true;
-      $("#addNew").modal("hide");
-    },
     handleCloseModal: function handleCloseModal() {
       this.modalOpen = false;
       this.input.flightNo = "";
@@ -3307,26 +3317,56 @@ __webpack_require__.r(__webpack_exports__);
       this.modalInput.businessPrice = "";
       this.modalInput.firstPrice = "";
       $("#addNew").modal("hide");
+    },
+    handleNewFlight: function handleNewFlight(e) {
+      var _this = this;
+
+      e.preventDefault();
+      this.modalOpen = true;
+      this.isLoading = true;
+      var data = {
+        flight_no: this.input.flightNo,
+        input: this.modalInput
+      };
+      axios.post("/api/backend/addPrice", data).then(function (response) {
+        swal.fire("Create Success!", "Cilck the button to continue!", "success").then(function () {
+          _this.isLoading = false;
+          $("#addNew").modal("hide");
+
+          _this.$router.go({
+            name: "addFlight"
+          });
+
+          axios.get("/api/backend/getFlightNo").then(function (response) {
+            _this.flights = response.data;
+          });
+        });
+      });
+    },
+    formSubmit: function formSubmit(e) {
+      e.preventDefault();
+      axios.post("/api/backend/addFlight", this.input).then(function (response) {
+        console.log(response.data);
+      });
     }
   },
   beforeMount: function beforeMount() {
-    var _this = this;
+    var _this2 = this;
 
-    axios.get("/api/backend/getFlightNo").then(function (response) {
-      _this.flights = response.data;
-      console.log("flight", _this.flights);
-    });
     axios.get("/api/backend/getAirports").then(function (response) {
       response.data.forEach(function (airport) {
-        _this.locations.push({
+        _this2.locations.push({
           value: airport["airport_id"],
           name: airport["airport_id"] + " - " + airport["airport_name"]
         });
       });
     });
+    axios.get("/api/backend/getFlightNo").then(function (response) {
+      _this2.flights = response.data;
+    });
   },
   beforeUpdate: function beforeUpdate() {
-    var _this2 = this;
+    var _this3 = this;
 
     // for check depart location, depart date and depart time are selected.
     if (this.input.departLocation == null || this.input.departDate == null || this.input.departTime == null) {
@@ -3347,8 +3387,8 @@ __webpack_require__.r(__webpack_exports__);
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
-        console.log(response.data); // show aircraft
-
+        //console.log(response.data);
+        // show aircraft
         var aircraft = response.data.Aircraft;
         var aircraft_brand = response.data.Aircraft_Brand;
         var aircraft_model = response.data.Aircraft_Model;
@@ -3357,54 +3397,62 @@ __webpack_require__.r(__webpack_exports__);
         var other_aircraft = response.data.Other_Aircraft;
         var other_brand = response.data.Other_Brand;
         var other_model = response.data.Other_Model;
-        _this2.input.aircraftID = null; // clear aircraft id
+        _this3.input.aircraftID = null; // clear aircraft id
 
         document.getElementById("aircraft_info").innerHTML = null;
-        _this2.aircrafts = [];
+        _this3.aircrafts = [];
 
         for (var i = 0; i < aircraft.length; ++i) {
-          _this2.aircrafts.push({
+          _this3.aircrafts.push({
             value: aircraft[i]["aircraft_id"],
             name: "ID: " + aircraft[i]["aircraft_id"] + " - " + aircraft_brand[i]["brand_name"] + " " + aircraft_model[i]["model_name"]
           });
 
-          _this2.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Number of Flight Times:</b> " + flight_time[i] + " Times <br>" + "<b>Last Flight</b>: " + flight_info[i]["flight_no"] + "<b> from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<b> To:</b>  " + flight_info[i]["arrive_datetime"];
+          _this3.aircraft_array_info[aircraft[i]["aircraft_id"]] = "<b>Number of Flight Times:</b> " + flight_time[i] + " Times <br>" + "<b>Last Flight</b>: " + flight_info[i]["flight_no"] + "<b> from</b> " + flight_info[i]["depart_location"] + "  <b>to</b>  " + flight_info[i]["arrive_location"] + "<br>" + "<b>When:</b> " + flight_info[i]["depart_datetime"] + "<b> To:</b>  " + flight_info[i]["arrive_datetime"];
         }
 
         for (var i = 0; i < other_aircraft.length; ++i) {
-          _this2.aircrafts.push({
+          _this3.aircrafts.push({
             value: other_aircraft[i]["aircraft_id"],
             name: "ID: " + other_aircraft[i]["aircraft_id"] + " - " + other_brand[i]["brand_name"] + " " + other_model[i]["model_name"]
           });
 
-          _this2.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
+          _this3.aircraft_array_info[other_aircraft[i]["aircraft_id"]] = "Never Used to Flight";
         }
 
-        _this2.options_pilot = [];
-        _this2.options_attendant = [];
-        var pilot = _this2.pilot_on_flight = response.data.Pilot;
+        _this3.options_pilot = [];
+        _this3.input.captain = null;
+        document.getElementById("pilot_info").innerHTML = null;
+        _this3.options_attendant = [];
+        _this3.input.coPilot = null;
+        document.getElementById("copilot_info").innerHTML = null;
+        var pilot = _this3.pilot_on_flight = response.data.Pilot;
         var attendant = response.data.Attendant;
-        _this2.crew_array_info = response.data.Personal_Detail; // pilot
+        _this3.input.crew = [];
+        _this3.crew_array_info = response.data.Personal_Detail; // pilot
 
         for (var i = 0; i < pilot.length; ++i) {
-          _this2.options_pilot.push({
+          _this3.options_pilot.push({
             value: pilot[i]["data"]["user_id"],
-            name: "ID: " + pilot[i]["data"]["user_id"]
+            name: "ID: " + pilot[i]["data"]["user_id"],
+            work_id: pilot[i]["data"]["work_id"]
           });
         } // co-pilot
 
 
         for (var i = 0; i < pilot.length; ++i) {
-          _this2.options_copilot.push({
+          _this3.options_copilot.push({
             value: pilot[i]["data"]["user_id"],
-            name: "ID: " + pilot[i]["data"]["user_id"]
+            name: "ID: " + pilot[i]["data"]["user_id"],
+            work_id: pilot[i]["data"]["work_id"]
           });
         }
 
         for (var i = 0; i < attendant.length; ++i) {
-          _this2.options_attendant.push({
+          _this3.options_attendant.push({
             value: attendant[i]["data"]["user_id"],
-            name: "ID: " + attendant[i]["data"]["user_id"]
+            name: "ID: " + attendant[i]["data"]["user_id"],
+            work_id: attendant[i]["data"]["work_id"]
           });
         }
       });
@@ -3564,6 +3612,93 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3571,6 +3706,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isLoading: false,
+      editMode: true,
       flights: [],
       input: {
         flightNo: "",
@@ -3587,45 +3724,37 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this = this;
 
-    axios.get("/api/backend/getFlightNo").then(function (response) {
+    axios.get("/api/backend/getPrice").then(function (response) {
       _this.flights = response.data;
       console.log("flight", _this.flights);
     });
   },
   methods: {
-    formSubmit: function formSubmit(e) {
+    editPrice: function editPrice(flight) {
+      $("#addNew").modal("show");
+      this.input.flightNo = flight.flight_no;
+      this.input.ecoPrice = flight.eco_price;
+      this.input.businessPrice = flight.bus_price;
+      this.input.firstPrice = flight.first_price;
+    },
+    handleUpdated: function handleUpdated(e) {
       var _this2 = this;
 
       e.preventDefault();
+      this.isLoading = true;
       var data = {
         input: this.input
       };
-      axios.post("/api/backend/addPrice", data).then(function (response) {
-        console.log(response.data);
+      axios.post("/api/backend/editPrice", data).then(function (response) {
         swal.fire("Update Success!", "Cilck the button to continue!", "success").then(function () {
+          _this2.isLoading = false;
+          $("#addNew").modal("hide");
+
           _this2.$router.go({
             name: "addPrice"
           });
         });
       });
-    },
-    flightNo: function flightNo(_ref) {
-      var flight_no = _ref.flight_no,
-          depart_location = _ref.depart_location,
-          arrive_location = _ref.arrive_location,
-          depart_datetime = _ref.depart_datetime,
-          arrive_datetime = _ref.arrive_datetime;
-      return "[".concat(flight_no, "] - ").concat(depart_location, " to ").concat(arrive_location);
-    },
-    // handleModal() {
-    //     swal.fire(
-    //         "Please success your form!",
-    //         "Cilck the button to continue!",
-    //         "error"
-    //     );
-    // },
-    handleSelect: function handleSelect(option) {
-      return option;
     }
   }
 });
@@ -47662,167 +47791,198 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("hr", { staticClass: "mb-4" }),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-3" }, [_vm._v("Crew Details")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row", attrs: { disabled: "" } }, [
-                      _c("div", { staticClass: "col-md-6 mb-2" }, [
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.all_check,
+                            expression: "all_check"
+                          }
+                        ]
+                      },
+                      [
+                        _c("hr", { staticClass: "mb-4" }),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "mb-3" }, [
+                          _vm._v("Crew Details")
+                        ]),
+                        _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "form-group" },
+                          { staticClass: "row", attrs: { disabled: "" } },
                           [
-                            _c("label", [_vm._v("Captain:")]),
-                            _vm._v(" "),
-                            _c("multiselect", {
-                              attrs: {
-                                label: "name",
-                                options: _vm.options_pilot,
-                                searchable: true,
-                                multiple: false,
-                                "close-on-select": true,
-                                "clear-on-select": false,
-                                "preserve-search": true,
-                                placeholder: "Choose",
-                                "track-by": "name",
-                                "preselect-first": false
-                              },
-                              model: {
-                                value: _vm.input.captain,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.input, "captain", $$v)
-                                },
-                                expression: "input.captain"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                        Please choose\n                                    "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", {
-                              staticClass: "static active",
-                              attrs: { id: "pilot_info" }
-                            })
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col-md-6 mb-2" },
-                        [
-                          _c("label", [_vm._v("Co-pilot:")]),
-                          _vm._v(" "),
-                          _c("multiselect", {
-                            attrs: {
-                              options: _vm.options_copilot,
-                              searchable: true,
-                              multiple: false,
-                              "close-on-select": true,
-                              "clear-on-select": false,
-                              "preserve-search": true,
-                              placeholder: "Choose",
-                              label: "name",
-                              "preselect-first": false
-                            },
-                            model: {
-                              value: _vm.input.coPilot,
-                              callback: function($$v) {
-                                _vm.$set(_vm.input, "coPilot", $$v)
-                              },
-                              expression: "input.coPilot"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(
-                              "\n                                    Please choose\n                                "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", {
-                            staticClass: "static active",
-                            attrs: { id: "copilot_info" }
-                          })
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-md-12 mb-2" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-group" },
-                          [
-                            _c("label", [
-                              _vm._v("Avaliable Flight Adttendant")
-                            ]),
-                            _vm._v(" "),
-                            _c("multiselect", {
-                              attrs: {
-                                options: _vm.options_attendant,
-                                searchable: true,
-                                multiple: true,
-                                "close-on-select": false,
-                                "clear-on-select": false,
-                                "preserve-search": true,
-                                placeholder: "Choose",
-                                label: "name",
-                                "track-by": "name",
-                                "preselect-first": false,
-                                max: 6
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "selection",
-                                  fn: function(ref) {
-                                    var values = ref.values
-                                    var search = ref.search
-                                    var isOpen = ref.isOpen
-                                    return [
-                                      values.length && !isOpen
-                                        ? _c(
-                                            "span",
-                                            {
-                                              staticClass: "multiselect__single"
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                " +
-                                                  _vm._s(values.length) +
-                                                  " crew\n                                                selected\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
+                            _c("div", { staticClass: "col-md-6 mb-2" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("label", [_vm._v("Captain:")]),
+                                  _vm._v(" "),
+                                  _c("multiselect", {
+                                    attrs: {
+                                      label: "name",
+                                      options: _vm.options_pilot,
+                                      searchable: true,
+                                      multiple: false,
+                                      "close-on-select": true,
+                                      "clear-on-select": false,
+                                      "preserve-search": true,
+                                      placeholder: "Choose",
+                                      "track-by": "name",
+                                      "preselect-first": false
+                                    },
+                                    on: { select: _vm.showCo },
+                                    model: {
+                                      value: _vm.input.captain,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.input, "captain", $$v)
+                                      },
+                                      expression: "input.captain"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                                            Please choose\n                                        "
+                                      )
                                     ]
-                                  }
-                                }
-                              ]),
-                              model: {
-                                value: _vm.input.crew,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.input, "crew", $$v)
-                                },
-                                expression: "input.crew"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                "\n                                        Please choose\n                                    "
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "static active",
+                                    attrs: { id: "pilot_info" }
+                                  })
+                                ],
+                                1
                               )
-                            ])
-                          ],
-                          1
-                        )
-                      ])
-                    ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-md-6 mb-2" },
+                              [
+                                _c("label", [_vm._v("Co-pilot:")]),
+                                _vm._v(" "),
+                                _c("multiselect", {
+                                  attrs: {
+                                    disabled: _vm.waitPilot,
+                                    options: _vm.options_copilot,
+                                    searchable: true,
+                                    multiple: false,
+                                    "close-on-select": true,
+                                    "clear-on-select": false,
+                                    "preserve-search": true,
+                                    placeholder: "Choose",
+                                    label: "name",
+                                    "preselect-first": false
+                                  },
+                                  model: {
+                                    value: _vm.input.coPilot,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.input, "coPilot", $$v)
+                                    },
+                                    expression: "input.coPilot"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "invalid-feedback" }, [
+                                  _vm._v(
+                                    "\n                                        Please choose\n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", {
+                                  staticClass: "static active",
+                                  attrs: { id: "copilot_info" }
+                                })
+                              ],
+                              1
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-12 mb-2" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", [
+                                  _vm._v(
+                                    "Avaliable Flight\n                                            Adttendant"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("multiselect", {
+                                  attrs: {
+                                    disabled: _vm.waitPilot,
+                                    options: _vm.options_attendant,
+                                    searchable: true,
+                                    multiple: true,
+                                    "close-on-select": false,
+                                    "clear-on-select": false,
+                                    "preserve-search": true,
+                                    placeholder: "Choose",
+                                    label: "name",
+                                    "track-by": "name",
+                                    "preselect-first": false,
+                                    max: 6
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "selection",
+                                      fn: function(ref) {
+                                        var values = ref.values
+                                        var search = ref.search
+                                        var isOpen = ref.isOpen
+                                        return [
+                                          values.length && !isOpen
+                                            ? _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "multiselect__single"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                    " +
+                                                      _vm._s(values.length) +
+                                                      " crew\n                                                    selected\n                                                "
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.input.crew,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.input, "crew", $$v)
+                                    },
+                                    expression: "input.crew"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "invalid-feedback" }, [
+                                  _vm._v(
+                                    "\n                                            Please choose\n                                        "
+                                  )
+                                ])
+                              ],
+                              1
+                            )
+                          ])
+                        ])
+                      ]
+                    )
                   ])
                 ]),
                 _vm._v(" "),
@@ -47832,7 +47992,13 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    attrs: { type: "submit", disabled: _vm.isLoading }
+                    attrs: { type: "submit", disabled: _vm.isLoading },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.formSubmit($event)
+                      }
+                    }
                   },
                   [
                     _c(
@@ -48058,7 +48224,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-danger",
-                      attrs: { type: "button", "data-dismiss": "modal" },
+                      attrs: { type: "button", datadismiss: "modal" },
                       on: { click: _vm.handleCloseModal }
                     },
                     [
@@ -48072,10 +48238,41 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary",
-                      attrs: { "data-dismiss": "modal" },
-                      on: { click: _vm.handleCreateModal }
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.handleNewFlight($event)
+                        }
+                      }
                     },
-                    [_c("span", [_vm._v("Create")])]
+                    [
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.isLoading,
+                              expression: "!isLoading"
+                            }
+                          ]
+                        },
+                        [_vm._v("Create")]
+                      ),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isLoading,
+                            expression: "isLoading"
+                          }
+                        ],
+                        staticClass: "fas fa-spinner fa-pulse"
+                      })
+                    ]
                   )
                 ])
               ])
@@ -48130,200 +48327,360 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "table-responsive" }, [
                   _c(
-                    "div",
-                    { staticClass: "col-md-12 mb-2" },
+                    "table",
+                    { staticClass: "table" },
                     [
-                      _c("label", [
-                        _vm._v(
-                          "Flignt Number:\n                                    " +
-                            _vm._s(_vm.input.flightNo.flight_no)
-                        )
-                      ]),
+                      _vm._m(1),
                       _vm._v(" "),
-                      _c("multiselect", {
-                        attrs: {
-                          "custom-label": _vm.flightNo,
-                          options: _vm.flights,
-                          searchable: true,
-                          multiple: false,
-                          "close-on-select": true,
-                          "clear-on-select": false,
-                          "preserve-search": true,
-                          placeholder: "Choose",
-                          "preselect-first": false
-                        },
-                        on: { select: _vm.handleSelect },
-                        model: {
-                          value: _vm.input.flightNo,
-                          callback: function($$v) {
-                            _vm.$set(_vm.input, "flightNo", $$v)
-                          },
-                          expression: "input.flightNo"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.error_flightNo) +
-                            "\n                                "
-                        )
-                      ])
+                      _vm._l(_vm.flights, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.flight_no) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.eco_price) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.bus_price))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.first_price) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  staticStyle: { color: "Dodgerblue" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.editPrice(flight)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-edit" })]
+                              )
+                            ])
+                          ])
+                        ])
+                      })
                     ],
-                    1
+                    2
                   )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-4 mt-2" }, [
-                    _c("label", [_vm._v("Economy Class Price:")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.ecoPrice,
-                            expression: "input.ecoPrice"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid": _vm.error_ecoPrice
-                        },
-                        attrs: { required: "", type: "text" },
-                        domProps: { value: _vm.input.ecoPrice },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.input, "ecoPrice", $event.target.value)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_ecoPrice) +
-                            "\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4 mt-2" }, [
-                    _c("label", [_vm._v("Business Class Price:")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.businessPrice,
-                            expression: "input.businessPrice"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid": _vm.error_businessPrice
-                        },
-                        attrs: { required: "", type: "text" },
-                        domProps: { value: _vm.input.businessPrice },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.input,
-                              "businessPrice",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_businessPrice) +
-                            "\n                                    "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4 mt-2" }, [
-                    _c("label", [_vm._v("First Class Price:")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.input.firstPrice,
-                            expression: "input.firstPrice"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid": _vm.error_firstPrice
-                        },
-                        attrs: { required: "", type: "text" },
-                        domProps: { value: _vm.input.firstPrice },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.input,
-                              "firstPrice",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "invalid-feedback" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(_vm.error_firstPrice) +
-                            "\n                                    "
-                        )
-                      ])
-                    ])
-                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c("hr", { staticClass: "mb-4" }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary btn-lg btn-block btn-login",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.formSubmit($event)
-                      }
-                    }
-                  },
-                  [_c("span", [_vm._v("Submit")])]
-                )
               ])
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "addNew",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalCenterTitle",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewLabel" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Update Flight Price\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mb-2" }, [
+                        _c("label", [_vm._v("Flight Number: ")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.input.flightNo,
+                              expression: "input.flightNo"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.input.flightNo },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.input,
+                                "flightNo",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "invalid-feedback" }, [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.error_flightNo) +
+                              "\n                                "
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mt-2" }, [
+                        _c("label", [_vm._v("Economy Class Price:")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.ecoPrice,
+                                expression: "input.ecoPrice"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error_ecoPrice
+                            },
+                            attrs: { required: "", type: "text" },
+                            domProps: { value: _vm.input.ecoPrice },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "ecoPrice",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.error_ecoPrice) +
+                                "\n                                    "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mt-2" }, [
+                        _c("label", [_vm._v("Business Class Price:")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.businessPrice,
+                                expression: "input.businessPrice"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error_businessPrice
+                            },
+                            attrs: { required: "", type: "text" },
+                            domProps: { value: _vm.input.businessPrice },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "businessPrice",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.error_businessPrice) +
+                                "\n                                    "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 mt-2" }, [
+                        _c("label", [_vm._v("First Class Price:")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.firstPrice,
+                                expression: "input.firstPrice"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.error_firstPrice
+                            },
+                            attrs: { required: "", type: "text" },
+                            domProps: { value: _vm.input.firstPrice },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input,
+                                  "firstPrice",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.error_firstPrice) +
+                                "\n                                    "
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Close\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { disabled: _vm.isLoading, type: "submit" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.handleUpdated($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.isLoading,
+                                expression: "!isLoading"
+                              }
+                            ]
+                          },
+                          [_vm._v("Update")]
+                        ),
+                        _vm._v(" "),
+                        _c("i", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.isLoading,
+                              expression: "isLoading"
+                            }
+                          ],
+                          staticClass: "fas fa-spinner fa-pulse"
+                        })
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
       ])
     ]
   )
@@ -48341,6 +48698,57 @@ var staticRenderFns = [
           _vm._v("Manage Flight Price")
         ])
       ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Flight Number\n                                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Economy class Price\n                                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Business class Price\n                                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            First class Price\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   }
 ]
