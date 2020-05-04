@@ -6180,14 +6180,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var year = this.selected;
       axios.post("/api/backend/analytic1_show", year).then(function (response) {
-        _this.data = response.data;
+        _this.data = response.data.analysis;
         console.log(_this.data);
       })["catch"](function (error) {
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
     }
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this2 = this;
 
     var year = this.selected;
@@ -6199,17 +6199,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(_this2.selected);
       console.log(response.data);
     });
-  },
-  beforeMount: function beforeMount() {
-    var _this3 = this;
-
-    // swal.fire(
-    //     "Please select year to show data",
-    //     "Cilck the button to continue!",
-    //     "warning"
-    // );
     axios.get("/api/backend/analytic1_get").then(function (response) {
-      _this3.years = response.data;
+      _this2.years = response.data;
     });
   }
 });
@@ -74754,8 +74745,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
