@@ -39,7 +39,7 @@ export default {
       datePick: [],
       calendar: {},
       calendarConfigs: {
-        disabledDates: ["beforeToday", "24/12/2020", "27/12/2020"],
+        disabledDates: ["beforeToday"],
         isMultipleDatePicker: true
       }
     };
