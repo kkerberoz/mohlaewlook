@@ -2101,12 +2101,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2117,7 +2111,11 @@ __webpack_require__.r(__webpack_exports__);
       data: [],
       selected: [],
       datePick: [],
-      calendar: {}
+      calendar: {},
+      calendarConfigs: {
+        disabledDates: ["beforeToday", "afterToday", "24/12/2020", "27/12/2020"],
+        isMultipleDatePicker: true
+      }
     };
   },
   methods: {
@@ -6051,15 +6049,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   data: function data() {
-    return {};
+    return {
+      selected: "",
+      years: [],
+      data: []
+    };
   },
-  methods: {}
+  methods: {
+    queryAnalyssis: function queryAnalyssis() {
+      var _this = this;
+
+      var year = this.selected;
+      axios.post("/api/backend/analytic1_show", year).then(function (response) {
+        _this.data = response.data;
+        console.log(_this.data);
+      })["catch"](function (error) {
+        swal.fire("Error.", "Cilck the button to continue!", "error");
+      });
+    }
+  },
+  beforeMount: function beforeMount() {
+    var _this2 = this;
+
+    swal.fire("Please select year to show data", "Cilck the button to continue!", "warning");
+    axios.get("/api/backend/analytic1_get").then(function (response) {
+      _this2.years = response.data;
+    });
+  }
 });
 
 /***/ }),
@@ -50237,11 +50300,9 @@ var render = function() {
               0
             ),
             _vm._v(" "),
-            _c("div"),
-            _vm._v(" "),
             _c("functional-calendar", {
               staticClass: "calendar",
-              attrs: { "is-multiple-date-picker": true, "is-dark": true },
+              attrs: { configs: _vm.calendarConfigs },
               on: { choseDay: _vm.clickDay },
               model: {
                 value: _vm.calendar,
@@ -50249,14 +50310,6 @@ var render = function() {
                   _vm.calendar = $$v
                 },
                 expression: "calendar"
-              }
-            }),
-            _vm._v(" "),
-            _c("highlight-code", {
-              attrs: {
-                lang: "html",
-                code:
-                  "<functional-calendar :is-dark='true'></functional-calendar>"
               }
             })
           ],
@@ -55518,7 +55571,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+    [
+      _c("div", { staticClass: "container-xl" }, [
+        _c("div", { staticClass: "row flex-center " }, [
+          _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "card shadow-lg bg-white" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "span",
+                  { staticClass: "col-md-4 mb-2" },
+                  [
+                    _c("label", [_vm._v("Year :")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      attrs: {
+                        label: "year",
+                        options: _vm.years,
+                        searchable: true,
+                        multiple: false,
+                        "close-on-select": true,
+                        "clear-on-select": false,
+                        placeholder: "Choose Year"
+                      },
+                      on: { select: _vm.queryAnalyssis },
+                      model: {
+                        value: _vm.selected,
+                        callback: function($$v) {
+                          _vm.selected = $$v
+                        },
+                        expression: "selected"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._l(_vm.data, function(flight, id) {
+                        return _c("tbody", { key: id }, [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "row" } }, [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(Number(id) + 1) +
+                                  "\n                                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.flight_no))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                            " +
+                                  _vm._s(flight.flight_no_count) +
+                                  "\n                                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -55527,34 +55660,29 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
+      { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "container-xl" }, [
-          _c("div", { staticClass: "row flex-center " }, [
-            _c("div", { staticClass: "col-md-12 " }, [
-              _c("div", { staticClass: "card shadow-lg bg-white" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { "border-radius": "0px" }
-                  },
-                  [
-                    _c("div", { staticClass: "card-title" }, [
-                      _vm._v(
-                        "\n                            Analysis 1\n                        "
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" })
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v(
+            "\n                            Analysis 1\n                        "
+          )
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Flight Number")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Count")])
+      ])
+    ])
   }
 ]
 render._withStripped = true

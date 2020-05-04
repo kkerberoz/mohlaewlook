@@ -14,19 +14,13 @@
           <div>
             <span v-for="(data, i) in selected" :key="i">{{ data.date }}</span>
           </div>
-          <div></div>
+
           <functional-calendar
             v-on:choseDay="clickDay"
             class="calendar"
             v-model="calendar"
-            :is-multiple-date-picker="true"
-            :is-dark="true"
-            
+            :configs="calendarConfigs"
           ></functional-calendar>
-          <highlight-code
-            lang="html"
-            code="<functional-calendar :is-dark='true'></functional-calendar>"
-          ></highlight-code>
         </div>
       </div>
     </div>
@@ -43,7 +37,16 @@ export default {
       data: [],
       selected: [],
       datePick: [],
-      calendar: {}
+      calendar: {},
+      calendarConfigs: {
+        disabledDates: [
+          "beforeToday",
+          "afterToday",
+          "24/12/2020",
+          "27/12/2020"
+        ],
+        isMultipleDatePicker: true
+      }
     };
   },
   methods: {
