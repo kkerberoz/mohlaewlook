@@ -89,13 +89,12 @@ export default {
     },
     beforeMount() {
         var year = this.selected;
-        axios.post("/api/backend/analytic1_show", year)
-                .then(response => {
-                    this.data = response.data.analysis;
-                    this.selected = [{year:response.data.year}]
-                    console.log(this.selected);
-                    console.log(response.data);
-                });
+        axios.post("/api/backend/analytic1_show", year).then(response => {
+            this.data = response.data.analysis;
+            this.selected = [{ year: response.data.year }];
+            console.log(this.selected);
+            console.log(response.data);
+        });
         axios.get("/api/backend/analytic1_get").then(response => {
             this.years = response.data;
         });
