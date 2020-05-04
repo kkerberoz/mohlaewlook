@@ -424,18 +424,17 @@ class BackendController extends Controller
     }
 
     public function addNewWork(Request $request){
-        $schedule = new Work_schedule;
+
         $array_date = $request->array_date;
         foreach ($array_date as $each_date){
-
+            $schedule = new Work_schedule;
             list($day,$month,$year) = explode("/", $each_date['date']);
             $newDate = $year."-".sprintf("%02d",$month)."-".sprintf("%02d",$day);
 
-            $schedule->user_id = $request->id;
+            $schedule->user_id = $request->user_id;
             $schedule->work_date = $newDate;
             $schedule->confirm_status = "free";
             $schedule->save();
-
         }
     }
 
@@ -443,9 +442,9 @@ class BackendController extends Controller
         $employee = Employee::findOrFail($request->id);
         $data = DB::select('SELECT *
                             FROM flights
-                            WHERE flight_id IN (SELECT flight_id FROM work_schedules WHERE user_id = ? AND confirm_status = ?)
+                            WHERE flight_id IN (SELECT flight_id FROM work_schedules w WHERE w.user_id = ? AND confirm_status = ?)
                             ORDER BY depart_datetime DESC',[$employee->user_id,"confirm"]);
-        return response()->JSON($data);
+        return response()->JSON([$employee->user_id,$data]);
     }
 
 }

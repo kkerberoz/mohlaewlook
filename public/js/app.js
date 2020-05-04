@@ -2120,6 +2120,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       data: [],
       id: "",
+      user_id: "",
+      flights: [],
       selected: [],
       datePick: [],
       calendar: {},
@@ -2136,13 +2138,12 @@ __webpack_require__.r(__webpack_exports__);
       // console.log(this.calendar.selectedDates);
     },
     submit: function submit() {
-      console.log("!!!!!!!!!!!!!!!!!");
+      // console.log("!!!!!!!!!!!!!!!!!");
       var data = {
-        id: this.id,
+        user_id: this.user_id,
         array_date: this.selected
       };
-      axios.post('/api/backend/addNewWork', data).then(function (response) {
-        console.log(response.data);
+      axios.post('/api/backend/addNewWork', data).then(function (response) {// console.log(response.data);
       });
     }
   },
@@ -2154,7 +2155,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/backend/getflightdetail', {
         id: _this.id
       }).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
+        _this.user_id = response.data[0];
+
+        _this.flights.push(response.data[1]);
       });
       axios.get("/api/backend/schedule/".concat(_this.id)).then(function (response) {
         //console.log(response.data);
