@@ -127,17 +127,16 @@ export default {
                 .then(response => {
                     this.data = response.data;
                     console.log(this.data);
+                    this.loadingPage = false;
                 })
                 .catch(error => {
+                    this.loadingPage = false;
                     swal.fire(
                         "Error.",
                         "Cilck the button to continue!",
                         "error"
                     );
                 });
-            setTimeout(() => {
-                this.loadingPage = false;
-            }, 2000);
         }
     }
 };

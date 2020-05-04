@@ -2253,6 +2253,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2500,9 +2504,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   data: function data() {
     return {
+      loadingPage: false,
+      fullPage: true,
       isLoading: false,
       model_query: [],
       brand_query: [],
@@ -2555,9 +2575,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    this.loadingPage = true;
     axios.get("/api/backend/getModelBrand").then(function (response) {
       _this.model_query = response.data[0];
       _this.brand_query = response.data[1];
+      _this.loadingPage = false;
     });
   },
   methods: {
@@ -3079,8 +3101,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3490,12 +3525,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a,
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   data: function data() {
     return {
+      loadingPage: false,
+      fullPage: true,
       waitPilot: true,
       modalOpen: false,
       flights: [],
@@ -3670,6 +3710,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this3 = this;
 
+    this.loadingPage = true;
     axios.get("/api/backend/getAirports").then(function (response) {
       response.data.forEach(function (airport) {
         _this3.locations.push({
@@ -3677,6 +3718,7 @@ __webpack_require__.r(__webpack_exports__);
           name: airport["airport_id"] + " - " + airport["airport_name"]
         });
       });
+      _this3.loadingPage = false;
     });
     axios.get("/api/backend/getFlightNo").then(function (response) {
       _this3.flights = response.data;
@@ -4773,6 +4815,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -5035,9 +5081,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   data: function data() {
     return {
+      loadingPage: false,
+      fullPage: true,
       users: [],
       isLoading: false,
       editMode: false,
@@ -5064,9 +5126,11 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this = this;
 
+    this.loadingPage = true;
     axios.get("/api/backend/getCustomer").then(function (response) {
       _this.users = response.data;
       console.log(_this.users);
+      _this.loadingPage = false;
     });
   },
   methods: {
@@ -5342,6 +5406,19 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5937,14 +6014,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registerEmployee",
   props: ["csrf", "oldName"],
   components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a,
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     return {
+      loadingPage: false,
+      fullPage: true,
       isLoading: false,
       input: {
         start_date: new Date().toISOString().slice(0, 10),
@@ -6040,10 +6122,12 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this = this;
 
+    this.loadingPage = true;
     axios.get("/api/backend/getAirports").then(function (response) {
       // show all airports onto option
       // var AirportID = response.data; // get all aiport
-      _this.airports = response.data; // console.log(this.airports);
+      _this.airports = response.data;
+      _this.loadingPage = false; // console.log(this.airports);
     });
   },
   methods: {
@@ -6696,13 +6780,13 @@ __webpack_require__.r(__webpack_exports__);
         _this2.data.forEach(function (each_data) {
           _this2.sum += each_data["class_count"];
         });
+
+        _this2.loadingPage = false;
       })["catch"](function (error) {
+        _this2.loadingPage = false;
         _this2.showTotal = false;
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
-      setTimeout(function () {
-        _this2.loadingPage = false;
-      }, 2000);
     }
   }
 });
@@ -6856,12 +6940,11 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/backend/analytic3_show", data).then(function (response) {
         _this2.data = response.data;
         console.log(_this2.data);
+        _this2.loadingPage = false;
       })["catch"](function (error) {
+        _this2.loadingPage = false;
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
-      setTimeout(function () {
-        _this2.loadingPage = false;
-      }, 2000);
     }
   }
 });
@@ -51457,6 +51540,23 @@ var render = function() {
       staticStyle: { padding: "3%", "margin-bottom": "5%" }
     },
     [
+      _c("loading", {
+        attrs: {
+          active: _vm.loadingPage,
+          "can-cancel": false,
+          "is-full-page": _vm.fullPage,
+          opacity: 0.9,
+          color: "#f87a2b",
+          loader: "bars",
+          "background-color": "#fff"
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.loadingPage = $event
+          }
+        }
+      }),
+      _vm._v(" "),
       _c("div", { staticClass: "row flex-center" }, [
         _c(
           "div",
@@ -52100,7 +52200,8 @@ var render = function() {
           ]
         )
       ])
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -52473,6 +52574,23 @@ var render = function() {
     "div",
     { staticClass: "container-xl", staticStyle: { padding: "3%" } },
     [
+      _c("loading", {
+        attrs: {
+          active: _vm.loadingPage,
+          "can-cancel": false,
+          "is-full-page": _vm.fullPage,
+          opacity: 0.9,
+          color: "#f87a2b",
+          loader: "bars",
+          "background-color": "#fff"
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.loadingPage = $event
+          }
+        }
+      }),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -53371,7 +53489,8 @@ var render = function() {
           )
         ]
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = [
@@ -54717,6 +54836,23 @@ var render = function() {
     "div",
     { staticClass: "container-fluid", staticStyle: { padding: "3%" } },
     [
+      _c("loading", {
+        attrs: {
+          active: _vm.loadingPage,
+          "can-cancel": false,
+          "is-full-page": _vm.fullPage,
+          opacity: 0.9,
+          color: "#f87a2b",
+          loader: "bars",
+          "background-color": "#fff"
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.loadingPage = $event
+          }
+        }
+      }),
+      _vm._v(" "),
       _c("br"),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12 full-height" }, [
@@ -55284,7 +55420,8 @@ var render = function() {
           )
         ]
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = [
@@ -55367,6 +55504,23 @@ var render = function() {
     "div",
     { staticClass: "container-xl", staticStyle: { padding: "3%" } },
     [
+      _c("loading", {
+        attrs: {
+          active: _vm.loadingPage,
+          "can-cancel": false,
+          "is-full-page": _vm.fullPage,
+          opacity: 0.9,
+          color: "#f87a2b",
+          loader: "bars",
+          "background-color": "#fff"
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.loadingPage = $event
+          }
+        }
+      }),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -56804,7 +56958,8 @@ var render = function() {
           )
         ]
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []

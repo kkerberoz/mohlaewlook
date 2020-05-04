@@ -141,8 +141,10 @@ export default {
                     this.data.forEach(each_data => {
                         this.sum += each_data["class_count"];
                     });
+                    this.loadingPage = false;
                 })
                 .catch(error => {
+                    this.loadingPage = false;
                     this.showTotal = false;
                     swal.fire(
                         "Error.",
@@ -150,9 +152,6 @@ export default {
                         "error"
                     );
                 });
-            setTimeout(() => {
-                this.loadingPage = false;
-            }, 2000);
         }
     }
 };
