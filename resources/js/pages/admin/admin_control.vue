@@ -176,7 +176,7 @@
                                             : false
                                     "
                                 >
-                                    <i class="fas fa-calendar-alt"></i>
+                                    <i class="fas fa-chart-line"></i>
                                     <span>analysis_1</span>
                                 </router-link>
                             </li>
@@ -190,7 +190,7 @@
                                             : false
                                     "
                                 >
-                                    <i class="fas fa-calendar-alt"></i>
+                                    <i class="fas fa-chart-line"></i>
                                     <span>analysis_2</span>
                                 </router-link>
                             </li>
@@ -204,7 +204,7 @@
                                             : false
                                     "
                                 >
-                                    <i class="fas fa-calendar-alt"></i>
+                                    <i class="fas fa-chart-line"></i>
                                     <span>analysis_3</span>
                                 </router-link>
                             </li>
@@ -218,7 +218,7 @@
                                             : false
                                     "
                                 >
-                                    <i class="fas fa-calendar-alt"></i>
+                                    <i class="fas fa-chart-line"></i>
                                     <span>analysis_4</span>
                                 </router-link>
                             </li>

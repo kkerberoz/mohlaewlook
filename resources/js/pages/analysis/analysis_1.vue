@@ -8,6 +8,9 @@
                             <div class="card-title">
                                 Analysis 1
                             </div>
+                            <div class="card-subtitle mb-2">
+                                สวัสดีครับ
+                            </div>
                         </div>
                         <div class="card-body">
                             <span class="col-md-4 mb-2">
@@ -124,4 +127,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.card-subtitle {
+    font-family: "Kanit", sans-serif;
+    font-size: 20px;
+    color: #fff;
+}
+</style>

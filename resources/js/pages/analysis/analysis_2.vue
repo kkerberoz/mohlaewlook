@@ -8,6 +8,9 @@
                             <div class="card-title">
                                 Analysis 2
                             </div>
+                            <div class="card-subtitle mb-2">
+                                สวัสดีครับ
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row flex-center">

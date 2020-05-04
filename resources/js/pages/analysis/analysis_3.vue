@@ -8,6 +8,9 @@
                             <div class="card-title">
                                 Analysis 3
                             </div>
+                            <div class="card-subtitle mb-2">
+                                สวัสดีครับ
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="col-md-3 mb-2 float-right">
@@ -53,7 +56,7 @@
                                             <th scope="row">
                                                 {{ Number(id) + 1 }}
                                             </th>
-                                            <td>{{flight.user_id}}</td>
+                                            <td>{{ flight.user_id }}</td>
                                             <td>{{ flight.username }}</td>
                                             <td>
                                                 {{ flight.reserve_count }}
@@ -104,7 +107,6 @@ export default {
                 .then(response => {
                     this.data = response.data;
                     console.log(this.data);
-
                 })
                 .catch(error => {
                     swal.fire(
