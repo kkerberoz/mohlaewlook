@@ -135,15 +135,60 @@ class BackendController extends Controller
         $flight->depart_datetime = $request->departDate. " ". $request->departTime;
         $flight->arrive_datetime = $request->arriveDate. " ". $request->arriveTime;
         $flight->aircraft_id = $request->aircraftID["value"];
-        //$flight->save();
+        $flight->save();
 
-        // $work_schedule = Work_schedule::where('work_id', $request->captain['work_id'])->first();
-        // $work_schedule->confirm_status = "confirm";
-        // $work_schedule->save();
-        Work_schedule::where('work_id', $request->captain['work_id'])->update(['confirm_status' => 'confirm']);
-        //DB::update('work_schedules set confirm_status = ? where work_id = ?', 'confirm', $request->captain['work_id']);
+        $flightID = Flight::select('flight_id')->where('flight_no', $request->flightNo["flight_no"])->
+                    where('depart_datetime', $request->departDate. " ". $request->departTime)->
+                    where('aircraft_id', $request->aircraftID["value"])->first();
+        // captian
+        $work_already = Work_schedule::where('work_id', $request->captain['work_id'])->first();
+        if(isset($work_already)){
+            if($request->captain['type'] == 1){
+                $work_schedule = new Work_schedule;
+                $work_schedule->user_id = $request->captain['value'];
+                $work_schedule->work_date = $request->departDate;
+                $work_schedule->flight_id = $flightID['flight_id'];
+                $work_schedule->confirm_status = "confirm";
+                $work_schedule->save();
+            }
+            else{
+                work_schedule::where('work_id', $request->captain['work_id'])->update(['flight_id' => $flightID['flight_id'], 'confirm_status' => 'confirm']);
+            }
+        }
+        // co-pilot
+        $work_already = Work_schedule::where('work_id', $request->coPilot['work_id'])->first();
+        if(isset($work_already)){
+            if($request->coPilot['type'] == 1){
+                $work_schedule = new Work_schedule;
+                $work_schedule->user_id = $request->coPilot['value'];
+                $work_schedule->work_date = $request->departDate;
+                $work_schedule->flight_id = $flightID['flight_id'];
+                $work_schedule->confirm_status = "confirm";
+                $work_schedule->save();
+            }
+            else{
+                work_schedule::where('work_id', $request->coPilot['work_id'])->update(['flight_id' => $flightID['flight_id'], 'confirm_status' => 'confirm']);
+            }
+        }
+        // attendant
+        foreach($request->crew as $crew){
+            $work_already = Work_schedule::where('work_id', $crew['work_id'])->first();
+            if(isset($work_already)){
+                if($crew['type'] == 1){
+                    $work_schedule = new Work_schedule;
+                    $work_schedule->user_id = $crew['value'];
+                    $work_schedule->work_date = $request->departDate;
+                    $work_schedule->flight_id = $flightID['flight_id'];
+                    $work_schedule->confirm_status = "confirm";
+                    $work_schedule->save();
+                }
+                else{
+                    work_schedule::where('work_id', $crew['work_id'])->update(['flight_id' => $flightID['flight_id'], 'confirm_status' => 'confirm']);
+                }
+            }
+        }
 
-        return response() -> JSON(1);
+        return response() -> JSON($flightID);
     }
 
     public function getWorkSchedule(Request $request)

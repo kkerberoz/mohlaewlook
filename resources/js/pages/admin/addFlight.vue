@@ -14,6 +14,7 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Location:</label>
                                     <multiselect
+                                        v-bind:class="{'is-invalid': error_departLocation}"
                                         label="name"
                                         v-model="input.departLocation"
                                         :options="locations"
@@ -26,29 +27,31 @@
                                         :preselect-first="false"
                                     ></multiselect>
                                     <div class="invalid-feedback">
-                                        Please choose
+                                        {{error_departLocation}}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Date:</label>
                                     <input
+                                        v-bind:class="{'is-invalid': error_departDate}"
                                         type="date"
                                         class="form-control"
                                         v-model="input.departDate"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{error_departDate}}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Depart Time:</label>
                                     <input
+                                        v-bind:class="{'is-invalid': error_departTime}"
                                         type="time"
                                         class="form-control"
                                         v-model="input.departTime"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{error_departTime}}
                                     </div>
                                 </span>
                             </div>
@@ -56,6 +59,7 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Location:</label>
                                     <multiselect
+                                        v-bind:class="{'is-invalid': error_arriveLocation}"
                                         label="name"
                                         v-model="input.arriveLocation"
                                         :options="locations"
@@ -68,29 +72,31 @@
                                         :preselect-first="false"
                                     ></multiselect>
                                     <div class="invalid-feedback">
-                                        Please choose
+                                        {{error_arriveLocation}}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Date:</label>
                                     <input
+                                        v-bind:class="{'is-invalid': error_arriveDate}"
                                         type="date"
                                         class="form-control"
                                         v-model="input.arriveDate"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter
+                                        {{error_arriveDate}}
                                     </div>
                                 </span>
                                 <span class="col-md-4 mb-2">
                                     <label>Arrive Time:</label>
                                     <input
+                                        v-bind:class="{'is-invalid': error_arriveTime}"
                                         type="time"
                                         class="form-control"
                                         v-model="input.arriveTime"
                                     />
                                     <div class="invalid-feedback">
-                                        Please enter flight number
+                                        {{error_arriveTime}}
                                     </div>
                                 </span>
                             </div>
@@ -98,9 +104,7 @@
                                 <span class="col-md-4 mb-2">
                                     <label>Aircraft ID:</label>
                                     <multiselect
-                                        v-bind:class="{
-                                            active: true
-                                        }"
+                                        v-bind:class="{'is-invalid': error_aircraftID}"
                                         label="name"
                                         v-model="input.aircraftID"
                                         :options="aircrafts"
@@ -116,10 +120,14 @@
                                         class="static active"
                                         id="aircraft_info"
                                     ></div>
+                                    <div class="invalid-feedback">
+                                        {{error_aircraftID}}
+                                    </div>
                                 </span>
                                 <span class="col-md-6 mb-2">
                                     <label>Flight Number:</label>
                                     <multiselect
+                                        v-bind:class="{'is-invalid': error_flightNo}"
                                         :custom-label="flightNo"
                                         v-model="input.flightNo"
                                         :options="flights"
@@ -132,7 +140,7 @@
                                         :preselect-first="false"
                                     ></multiselect>
                                     <div class="invalid-feedback">
-                                        Please enter flight number
+                                        {{error_flightNo}}
                                     </div>
                                 </span>
                                 <span class="col-md-2 mb-2">
@@ -157,6 +165,7 @@
                                         <div class="form-group">
                                             <label>Captain:</label>
                                             <multiselect
+                                                v-bind:class="{'is-invalid': error_captain}"
                                                 label="name"
                                                 @select="showCo"
                                                 v-model="input.captain"
@@ -170,18 +179,19 @@
                                                 track-by="name"
                                                 :preselect-first="false"
                                             ></multiselect>
-                                            <div class="invalid-feedback">
-                                                Please choose
-                                            </div>
                                             <div
                                                 class="static active"
                                                 id="pilot_info"
                                             ></div>
+                                            <div class="invalid-feedback">
+                                                {{error_captain}}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label>Co-pilot:</label>
                                         <multiselect
+                                            v-bind:class="{'is-invalid': error_coPilot}"
                                             :disabled="waitPilot"
                                             v-model="input.coPilot"
                                             :options="options_copilot"
@@ -194,13 +204,13 @@
                                             label="name"
                                             :preselect-first="false"
                                         ></multiselect>
-                                        <div class="invalid-feedback">
-                                            Please choose
-                                        </div>
                                         <div
                                             class="static active"
                                             id="copilot_info"
                                         ></div>
+                                        <div class="invalid-feedback">
+                                            {{error_coPilot}}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -211,6 +221,7 @@
                                                 Adttendant</label
                                             >
                                             <multiselect
+                                                v-bind:class="{'is-invalid': error_crew}"
                                                 :disabled="waitPilot"
                                                 v-model="input.crew"
                                                 :options="options_attendant"
@@ -244,7 +255,7 @@
                                             </multiselect>
 
                                             <div class="invalid-feedback">
-                                                Please choose
+                                                {{error_crew}}
                                             </div>
                                         </div>
                                     </div>
@@ -414,7 +425,20 @@ export default {
             all_check: false,
             aircraft_array_info: [],
             pilot_on_flight: [],
-            crew_array_info: null
+            crew_array_info: null,
+            // error input
+            errors_input: null,
+            error_departLocation: null,
+            error_departDate: null,
+            error_departTime: null,
+            error_arriveLocation: null,
+            error_arriveDate: null,
+            error_arriveTime: null,
+            error_aircraftID: null,
+            error_flightNo: null,
+            error_captain: null,
+            error_coPilot: null,
+            error_crew: null
         };
     },
     methods: {
@@ -468,9 +492,49 @@ export default {
         },
         formSubmit(e){
             e.preventDefault();
-            axios.post("/api/backend/addFlight", this.input).then(response => {
-                console.log(response.data);
-            });
+            this.errors_input = true;
+            // condition for input
+            this.error_departLocation = !this.input.departLocation ? "Please select the depart location." : null;
+            this.error_departDate = !this.input.departDate ? "Please fill the depart date." : null;
+            this.error_departTime = !this.input.departTime ? "Please fill the depart time." : null;
+            /**/this.errors_input = !this.errors_input || this.error_departLocation || this.error_departDate || this.error_departTime ? false : true;
+            this.error_arriveLocation = !this.input.arriveLocation ? "Please select the arrive location." : null;
+            this.error_arriveDate = !this.input.arriveDate ? "Please fill the arrive date." : null;
+            this.error_arriveTime = !this.input.arriveTime ? "Please fill the arrive time." : null;
+            /**/this.errors_input = !this.errors_input || this.error_arriveLocation || this.error_arriveDate || this.error_arriveTime ? false : true;
+            this.error_aircraftID = !this.input.aircraftID ? "Please select aircraft ID" : null;
+            this.error_flightNo = !this.input.flightNo ? "Please select flight number": null;
+            /**/this.errors_input = !this.errors_input || this.error_aircraftID || this.error_flightNo ? false : true;
+            this.error_captain = !this.input.captain ? "Please select captain" : null;
+            this.error_coPilot = !this.input.coPilot ? "Please select co-pilot" : null;
+            this.error_crew = !this.input.crew.length ? "Please select flight attendant" : null;
+            /**/this.errors_input = !this.errors_input || this.error_captain || this.error_coPilot || this.error_crew ? false : true;
+            // another condition
+            this.error_arriveLocation = !this.error_arriveLocation && !this.error_departLocation && this.input.arriveLocation.value == this.input.departLocation.value ?
+                                        "The arrive location must be different form the depart location" : this.error_arriveLocation;
+            this.error_arriveDate = !this.error_arriveDate && !this.error_departDate && this.input.arriveDate < this.input.departDate ?
+                                        "The arrive date must be not less than the depart date" : this.error_arriveDate;
+            this.error_arriveTime = !this.error_arriveDate && !this.error_departDate && !this.error_arriveTime && !this.error_departTime &&
+                                    this.input.arriveDate == this.input.departDate && this.input.arriveTime <= this.input.departTime ?
+                                    "On the same day, The arrive time must be more than the depart time" : this.error_arriveTime;
+            /**/this.errors_input = !this.errors_input || this.error_arriveLocation || this.error_arriveDate || this.error_arriveTime ? false : true;
+            if(this.errors_input){
+                axios.post("/api/backend/addFlight", this.input).then(response => {
+                    console.log(response.data);
+                    swal.fire(
+                        "Register Success!",
+                        "Cilck the button to continue!",
+                        "success"
+                    )
+                });
+            }
+            else {
+                swal.fire(
+                    "Please success your form!",
+                    "Cilck the button to continue!",
+                    "error"
+                );
+            }
         }
     },
     beforeMount() {
@@ -522,7 +586,7 @@ export default {
                     time: this.input.departTime
                 })
                 .then(response => {
-                    //console.log(response.data);
+                    console.log(response.data);
                     // show aircraft
                     var aircraft = response.data.Aircraft;
                     var aircraft_brand = response.data.Aircraft_Brand;
@@ -592,7 +656,8 @@ export default {
                         this.options_pilot.push({
                             value: pilot[i]["data"]["user_id"],
                             name: "ID: " + pilot[i]["data"]["user_id"],
-                            work_id : pilot[i]["data"]["work_id"]
+                            work_id : pilot[i]["data"]["work_id"],
+                            type: pilot[i]["type"]
                         });
                     }
                     // co-pilot
@@ -600,14 +665,18 @@ export default {
                         this.options_copilot.push({
                             value: pilot[i]["data"]["user_id"],
                             name: "ID: " + pilot[i]["data"]["user_id"],
-                            work_id : pilot[i]["data"]["work_id"]
+                            work_id: pilot[i]["data"]["work_id"],
+                            type: pilot[i]["type"]
                         });
                     }
+                    // attendant
                     for (var i = 0; i < attendant.length; ++i) {
                         this.options_attendant.push({
                             value: attendant[i]["data"]["user_id"],
-                            name: "ID: " + attendant[i]["data"]["user_id"],
-                            work_id : attendant[i]["data"]["work_id"]
+                            name: "ID: " + attendant[i]["data"]["user_id"] + ", " +
+                                  "Name: " + this.crew_array_info[attendant[i]["data"]["user_id"]]["name"] + " " + this.crew_array_info[attendant[i]["data"]["user_id"]]["surname"],
+                            work_id : attendant[i]["data"]["work_id"],
+                            type: attendant[i]["type"]
                         });
                     }
                 });
@@ -637,19 +706,11 @@ export default {
                 ) {
                     this.options_copilot.push({
                         value: this.pilot_on_flight[i]["data"]["user_id"],
-                        name:
-                            "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
+                        name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"],
+                        work_id: this.pilot_on_flight[i]["data"]["work_id"],
+                        type: this.pilot_on_flight[i]["type"]
                     });
                 }
-            }
-        } else {
-            document.getElementById("pilot_info").innerHTML = null;
-            this.options_copilot = [];
-            for (var i = 0; i < this.pilot_on_flight.length; ++i) {
-                this.options_copilot.push({
-                    value: this.pilot_on_flight[i]["data"]["user_id"],
-                    name: "ID: " + this.pilot_on_flight[i]["data"]["user_id"]
-                });
             }
         }
         // show information of each co-pilot
