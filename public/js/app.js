@@ -6242,6 +6242,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6249,6 +6250,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      showTotal: false,
       sum: 0,
       selected: "",
       years: [],
@@ -6260,15 +6262,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var year = this.selected;
+      this.sum = 0;
+      this.showTotal = true;
       axios.post("/api/backend/analytic1_show", year).then(function (response) {
         _this.data = response.data.analysis;
 
         _this.data.forEach(function (each_data) {
-          _this.sum += each_data['flight_no_count'];
-        });
+          _this.sum += each_data["flight_no_count"];
+        }); // console.log(this.data);
 
-        console.log(_this.data);
       })["catch"](function (error) {
+        _this.showTotal = false;
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
     }
@@ -6276,6 +6280,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this2 = this;
 
+    this.sum = 0;
     var year = this.selected;
     axios.post("/api/backend/analytic1_show", year).then(function (response) {
       _this2.data = response.data.analysis;
@@ -6284,9 +6289,10 @@ __webpack_require__.r(__webpack_exports__);
       }];
       console.log(_this2.selected);
       console.log(response.data);
+      _this2.showTotal = true;
 
       _this2.data.forEach(function (each_data) {
-        _this2.sum += each_data['flight_no_count'];
+        _this2.sum += each_data["flight_no_count"];
       });
     });
     axios.get("/api/backend/analytic1_get").then(function (response) {
@@ -6400,6 +6406,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      showTotal: false,
       data: [],
       calendar_from: {},
       calendar_to: {},
@@ -6418,18 +6425,21 @@ __webpack_require__.r(__webpack_exports__);
     clickDay: function clickDay() {
       var _this = this;
 
+      this.sum = 0;
       var scope = {
         first: this.calendar_from.selectedDate,
         second: this.calendar_to.selectedDate
       };
       axios.post("/api/backend/analytic2_show", scope).then(function (response) {
+        _this.showTotal = true;
         _this.data = response.data;
         console.log(_this.data);
 
         _this.data.forEach(function (each_data) {
-          _this.sum += each_data['class_count'];
+          _this.sum += each_data["class_count"];
         });
       })["catch"](function (error) {
+        _this.showTotal = false;
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
     }
@@ -12276,7 +12286,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -12295,7 +12305,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -12314,7 +12324,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -12333,7 +12343,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -56002,87 +56012,93 @@ var render = function() {
     [
       _c("div", { staticClass: "container-xl" }, [
         _c("div", { staticClass: "row flex-center " }, [
-          _c("div", { staticClass: "col-md-12 " }, [
-            _c("div", { staticClass: "card shadow-lg bg-white" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "span",
-                  { staticClass: "col-md-4 mb-2" },
-                  [
-                    _c("label", [_vm._v("Year :")]),
-                    _vm._v(" "),
-                    _c("multiselect", {
-                      attrs: {
-                        label: "year",
-                        options: _vm.years,
-                        searchable: true,
-                        multiple: false,
-                        "close-on-select": true,
-                        "clear-on-select": false,
-                        placeholder: "Choose Year"
-                      },
-                      on: { select: _vm.queryAnalyssis },
-                      model: {
-                        value: _vm.selected,
-                        callback: function($$v) {
-                          _vm.selected = $$v
-                        },
-                        expression: "selected"
-                      }
-                    })
-                  ],
-                  1
-                ),
+          _c(
+            "div",
+            { staticClass: "col-md-12 ", staticStyle: { padding: "10px" } },
+            [
+              _c("div", { staticClass: "card shadow-lg bg-white" }, [
+                _vm._m(0),
                 _vm._v(" "),
-                _c("div", { staticClass: "table-responsive" }, [
+                _c("div", { staticClass: "card-body" }, [
                   _c(
-                    "table",
-                    { staticClass: "table" },
+                    "span",
+                    { staticClass: "col-md-4 mb-2" },
                     [
-                      _vm._m(1),
+                      _c("label", [_vm._v("Year :")]),
                       _vm._v(" "),
-                      _vm._l(_vm.data, function(flight, id) {
-                        return _c("tbody", { key: id }, [
-                          _c("tr", [
-                            _c("th", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(Number(id) + 1) +
-                                  "\n                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(flight.flight_no))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(flight.flight_no_count) +
-                                  "\n                                        "
-                              )
+                      _c("multiselect", {
+                        attrs: {
+                          label: "year",
+                          options: _vm.years,
+                          searchable: true,
+                          multiple: false,
+                          "close-on-select": true,
+                          "clear-on-select": false,
+                          placeholder: "Choose Year"
+                        },
+                        on: { select: _vm.queryAnalyssis },
+                        model: {
+                          value: _vm.selected,
+                          callback: function($$v) {
+                            _vm.selected = $$v
+                          },
+                          expression: "selected"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "table-responsive" }, [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._l(_vm.data, function(flight, id) {
+                          return _c("tbody", { key: id }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(Number(id) + 1) +
+                                    "\n                                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(flight.flight_no))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(flight.flight_no_count) +
+                                    "\n                                        "
+                                )
+                              ])
                             ])
                           ])
+                        }),
+                        _vm._v(" "),
+                        _c("tfoot", [
+                          _vm.showTotal
+                            ? _c("tr", [
+                                _c("td", [_vm._v(" ")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("Total")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.sum))])
+                              ])
+                            : _vm._e()
                         ])
-                      }),
-                      _vm._v(" "),
-                      _c("tfoot", [
-                        _c("tr", [
-                          _c("td", [_vm._v(" ")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Total")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.sum))])
-                        ])
-                      ])
-                    ],
-                    2
-                  )
+                      ],
+                      2
+                    )
+                  ])
                 ])
               ])
-            ])
-          ])
+            ]
+          )
         ])
       ])
     ]
@@ -56207,50 +56223,70 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c(
-                    "table",
-                    { staticClass: "table" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _vm._l(_vm.data, function(flight, id) {
-                        return _c("tbody", { key: id }, [
-                          _c("tr", [
-                            _c("th", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(Number(id) + 1) +
-                                  "\n                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(flight.class_name))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(flight.class_count) +
-                                  "\n                                        "
-                              )
+                _c(
+                  "div",
+                  {
+                    staticClass: "table-responsive",
+                    staticStyle: { padding: "10px" }
+                  },
+                  [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._l(_vm.data, function(flight, id) {
+                          return _c("tbody", { key: id }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(Number(id) + 1) +
+                                    "\n                                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(flight.class_name))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(flight.class_count) +
+                                    "\n                                        "
+                                )
+                              ])
                             ])
                           ])
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _c("tfoot", [
-                        _c("tr", [
-                          _c("td", [_vm._v(" ")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Total")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.sum))])
-                        ])
-                      ])
-                    ],
-                    2
-                  )
-                ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "tfoot",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.showTotal,
+                                expression: "showTotal"
+                              }
+                            ]
+                          },
+                          [
+                            _c("tr", [
+                              _c("td", [_vm._v(" ")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("Total")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.sum))])
+                            ])
+                          ]
+                        )
+                      ],
+                      2
+                    )
+                  ]
+                )
               ])
             ])
           ])
@@ -75277,8 +75313,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
