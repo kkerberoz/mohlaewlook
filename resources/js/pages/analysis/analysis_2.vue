@@ -63,6 +63,13 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>Total</td>
+                                            <td>{{sum}}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -83,6 +90,7 @@ export default {
             data: [],
             calendar_from: {},
             calendar_to: {},
+            sum:0,
             calendarConfigs: {
                 isDatePicker: true,
                 dateFormat: "yyyy-mm-dd 00:00:00"
@@ -104,6 +112,9 @@ export default {
                 .then(response => {
                     this.data = response.data;
                     console.log(this.data);
+                    this.data.forEach (each_data => {
+                        this.sum += each_data['class_count'];
+                    });
                 })
                 .catch(error => {
                     swal.fire(

@@ -38,6 +38,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">User_id</th>
                                             <th scope="col">Username</th>
                                             <th scope="col">
                                                 Reservetion Count
@@ -52,6 +53,7 @@
                                             <th scope="row">
                                                 {{ Number(id) + 1 }}
                                             </th>
+                                            <td>{{flight.user_id}}</td>
                                             <td>{{ flight.username }}</td>
                                             <td>
                                                 {{ flight.reserve_count }}
@@ -102,6 +104,7 @@ export default {
                 .then(response => {
                     this.data = response.data;
                     console.log(this.data);
+
                 })
                 .catch(error => {
                     swal.fire(

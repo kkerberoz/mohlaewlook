@@ -6200,6 +6200,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6207,6 +6214,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      sum: 0,
       selected: "",
       years: [],
       data: []
@@ -6219,6 +6227,11 @@ __webpack_require__.r(__webpack_exports__);
       var year = this.selected;
       axios.post("/api/backend/analytic1_show", year).then(function (response) {
         _this.data = response.data.analysis;
+
+        _this.data.forEach(function (each_data) {
+          _this.sum += each_data['flight_no_count'];
+        });
+
         console.log(_this.data);
       })["catch"](function (error) {
         swal.fire("Error.", "Cilck the button to continue!", "error");
@@ -6236,6 +6249,10 @@ __webpack_require__.r(__webpack_exports__);
       }];
       console.log(_this2.selected);
       console.log(response.data);
+
+      _this2.data.forEach(function (each_data) {
+        _this2.sum += each_data['flight_no_count'];
+      });
     });
     axios.get("/api/backend/analytic1_get").then(function (response) {
       _this2.years = response.data;
@@ -6332,6 +6349,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6344,6 +6368,7 @@ __webpack_require__.r(__webpack_exports__);
       data: [],
       calendar_from: {},
       calendar_to: {},
+      sum: 0,
       calendarConfigs: {
         isDatePicker: true,
         dateFormat: "yyyy-mm-dd 00:00:00"
@@ -6365,6 +6390,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/backend/analytic2_show", scope).then(function (response) {
         _this.data = response.data;
         console.log(_this.data);
+
+        _this.data.forEach(function (each_data) {
+          _this.sum += each_data['class_count'];
+        });
       })["catch"](function (error) {
         swal.fire("Error.", "Cilck the button to continue!", "error");
       });
@@ -6385,6 +6414,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -55977,7 +56008,17 @@ var render = function() {
                             ])
                           ])
                         ])
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("tfoot", [
+                        _c("tr", [
+                          _c("td", [_vm._v(" ")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Total")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.sum))])
+                        ])
+                      ])
                     ],
                     2
                   )
@@ -56138,7 +56179,17 @@ var render = function() {
                             ])
                           ])
                         ])
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("tfoot", [
+                        _c("tr", [
+                          _c("td", [_vm._v(" ")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Total")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.sum))])
+                        ])
+                      ])
                     ],
                     2
                   )
@@ -56287,6 +56338,8 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(flight.user_id))]),
+                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(flight.username))]),
                             _vm._v(" "),
                             _c("td", [
@@ -56335,6 +56388,8 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("User_id")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Username")]),
         _vm._v(" "),

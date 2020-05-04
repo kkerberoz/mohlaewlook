@@ -48,6 +48,13 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>Total</td>
+                                            <td>{{sum}}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -64,6 +71,7 @@ export default {
     components: { Multiselect },
     data() {
         return {
+            sum:0,
             selected: "",
             years: [],
             data: []
@@ -76,6 +84,9 @@ export default {
                 .post("/api/backend/analytic1_show", year)
                 .then(response => {
                     this.data = response.data.analysis;
+                    this.data.forEach(each_data => {
+                        this.sum += each_data['flight_no_count'];
+                    });
                     console.log(this.data);
                 })
                 .catch(error => {
@@ -94,6 +105,9 @@ export default {
             this.selected = [{ year: response.data.year }];
             console.log(this.selected);
             console.log(response.data);
+            this.data.forEach(each_data => {
+                this.sum += each_data['flight_no_count'];
+            });
         });
         axios.get("/api/backend/analytic1_get").then(response => {
             this.years = response.data;

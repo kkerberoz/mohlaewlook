@@ -385,7 +385,7 @@ class BackendController extends Controller
 
     public function analytic3_show(Request $request)
     {
-        $data = DB::select('SELECT c.username, COUNT(*) AS reserve_count
+        $data = DB::select('SELECT c.user_id,c.username, COUNT(*) AS reserve_count
                             FROM reservations r LEFT JOIN
                             customers c ON r.user_id = c.user_id
                             WHERE r.reservation_status = "confirm"
