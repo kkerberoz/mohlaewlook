@@ -4318,6 +4318,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4673,10 +4674,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/customerCrud.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/customerCrud.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageCustomer.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/manageCustomer.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5043,7 +5044,7 @@ __webpack_require__.r(__webpack_exports__);
             axios["delete"]("/api/backend/customer/".concat(id)).then(function () {
               swal.fire("Deleted!", "Your customer data has been deleted.", "success").then(function () {
                 _this2.$router.go({
-                  name: "customerCRUD"
+                  name: "manageCustomer"
                 });
               });
             })["catch"](function () {
@@ -5131,7 +5132,7 @@ __webpack_require__.r(__webpack_exports__);
               $("#addNew").modal("hide");
 
               _this3.$router.go({
-                name: "customerCRUD"
+                name: "manageCustomer"
               });
             });
           });
@@ -5246,7 +5247,7 @@ __webpack_require__.r(__webpack_exports__);
                 $("#addNew").modal("hide");
 
                 _this4.$router.go({
-                  name: "customerCRUD"
+                  name: "manageCustomer"
                 });
               });
             }
@@ -6698,7 +6699,7 @@ __webpack_require__.r(__webpack_exports__);
             _this.isLoading = false;
 
             _this.$router.go({
-              name: "Schedule"
+              name: "workSchedule"
             });
           });
         })["catch"](function (error) {
@@ -55574,7 +55575,7 @@ var render = function() {
                                   "\n                                    role === 'staff' || role === 'admin'\n                                        ? true\n                                        : false\n                                "
                               }
                             ],
-                            attrs: { to: { name: "customerCrud" } }
+                            attrs: { to: { name: "manageCustomer" } }
                           },
                           [
                             _c("i", { staticClass: "fas fa-user-edit" }),
@@ -55691,12 +55692,11 @@ var render = function() {
                                 rawName: "v-show",
                                 value:
                                   _vm.role === "pilot" ||
-                                  _vm.role === "admin" ||
                                   _vm.role === "flight_attendant"
                                     ? true
                                     : false,
                                 expression:
-                                  "\n                                    role === 'pilot' ||\n                                    role === 'admin' ||\n                                    role === 'flight_attendant'\n                                        ? true\n                                        : false\n                                "
+                                  "\n                                    role === 'pilot' ||\n                                    role === 'flight_attendant'\n                                        ? true\n                                        : false\n                                "
                               }
                             ],
                             attrs: { to: { name: "workSchedule" } }
@@ -55722,12 +55722,12 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value:
-                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "human_resource" ||
                                   _vm.role === "admin"
                                     ? true
                                     : false,
                                 expression:
-                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                                  "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
                               }
                             ],
                             attrs: { to: { name: "manageSchedule" } }
@@ -55816,11 +55816,12 @@ var render = function() {
                                 rawName: "v-show",
                                 value:
                                   _vm.role === "flight_manager" ||
+                                  _vm.role === "staff" ||
                                   _vm.role === "admin"
                                     ? true
                                     : false,
                                 expression:
-                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'staff' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
                               }
                             ],
                             attrs: { to: { name: "analysis_2" } }
@@ -55846,12 +55847,13 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value:
-                                  _vm.role === "flight_manager" ||
-                                  _vm.role === "admin"
+                                  _vm.role === "staff" ||
+                                  _vm.role === "admin" ||
+                                  _vm.role === "human_resource"
                                     ? true
                                     : false,
                                 expression:
-                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                                  "\n                                    role === 'staff' ||\n                                    role === 'admin' ||\n                                    role === 'human_resource'\n                                        ? true\n                                        : false\n                                "
                               }
                             ],
                             attrs: { to: { name: "analysis_3" } }
@@ -56298,10 +56300,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/customerCrud.vue?vue&type=template&id=5e0843b6&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/customerCrud.vue?vue&type=template&id=5e0843b6& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageCustomer.vue?vue&type=template&id=750dc2e8&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/manageCustomer.vue?vue&type=template&id=750dc2e8& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -79414,17 +79416,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/admin/customerCrud.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/pages/admin/customerCrud.vue ***!
-  \***************************************************/
+/***/ "./resources/js/pages/admin/manageCustomer.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/pages/admin/manageCustomer.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _customerCrud_vue_vue_type_template_id_5e0843b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./customerCrud.vue?vue&type=template&id=5e0843b6& */ "./resources/js/pages/admin/customerCrud.vue?vue&type=template&id=5e0843b6&");
-/* harmony import */ var _customerCrud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./customerCrud.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/customerCrud.vue?vue&type=script&lang=js&");
+/* harmony import */ var _manageCustomer_vue_vue_type_template_id_750dc2e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./manageCustomer.vue?vue&type=template&id=750dc2e8& */ "./resources/js/pages/admin/manageCustomer.vue?vue&type=template&id=750dc2e8&");
+/* harmony import */ var _manageCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./manageCustomer.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/manageCustomer.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -79434,9 +79436,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _customerCrud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _customerCrud_vue_vue_type_template_id_5e0843b6___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _customerCrud_vue_vue_type_template_id_5e0843b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _manageCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _manageCustomer_vue_vue_type_template_id_750dc2e8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _manageCustomer_vue_vue_type_template_id_750dc2e8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -79446,38 +79448,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/admin/customerCrud.vue"
+component.options.__file = "resources/js/pages/admin/manageCustomer.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/admin/customerCrud.vue?vue&type=script&lang=js&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/pages/admin/customerCrud.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************/
+/***/ "./resources/js/pages/admin/manageCustomer.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/pages/admin/manageCustomer.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_customerCrud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./customerCrud.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/customerCrud.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_customerCrud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_manageCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./manageCustomer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageCustomer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_manageCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/admin/customerCrud.vue?vue&type=template&id=5e0843b6&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/pages/admin/customerCrud.vue?vue&type=template&id=5e0843b6& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/pages/admin/manageCustomer.vue?vue&type=template&id=750dc2e8&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/pages/admin/manageCustomer.vue?vue&type=template&id=750dc2e8& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_customerCrud_vue_vue_type_template_id_5e0843b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./customerCrud.vue?vue&type=template&id=5e0843b6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/customerCrud.vue?vue&type=template&id=5e0843b6&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_customerCrud_vue_vue_type_template_id_5e0843b6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_manageCustomer_vue_vue_type_template_id_750dc2e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./manageCustomer.vue?vue&type=template&id=750dc2e8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageCustomer.vue?vue&type=template&id=750dc2e8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_manageCustomer_vue_vue_type_template_id_750dc2e8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_customerCrud_vue_vue_type_template_id_5e0843b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_manageCustomer_vue_vue_type_template_id_750dc2e8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -80473,9 +80475,9 @@ var routes = [{
     name: "addAirport",
     component: __webpack_require__(/*! ./pages/admin/addAirport.vue */ "./resources/js/pages/admin/addAirport.vue")["default"]
   }, {
-    path: "customer",
-    name: "customerCrud",
-    component: __webpack_require__(/*! ./pages/admin/customerCrud.vue */ "./resources/js/pages/admin/customerCrud.vue")["default"]
+    path: "manageCustomer",
+    name: "manageCustomer",
+    component: __webpack_require__(/*! ./pages/admin/manageCustomer.vue */ "./resources/js/pages/admin/manageCustomer.vue")["default"]
   }, {
     path: "addPrice",
     name: "addPrice",

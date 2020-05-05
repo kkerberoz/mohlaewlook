@@ -94,7 +94,7 @@
 
                             <li>
                                 <router-link
-                                    :to="{ name: 'customerCrud' }"
+                                    :to="{ name: 'manageCustomer' }"
                                     v-show="
                                         role === 'staff' || role === 'admin'
                                             ? true
@@ -152,7 +152,6 @@
                                     :to="{ name: 'workSchedule' }"
                                     v-show="
                                         role === 'pilot' ||
-                                        role === 'admin' ||
                                         role === 'flight_attendant'
                                             ? true
                                             : false
@@ -166,7 +165,7 @@
                                 <router-link
                                     :to="{ name: 'manageSchedule' }"
                                     v-show="
-                                        role === 'flight_manager' ||
+                                        role === 'human_resource' ||
                                         role === 'admin'
                                             ? true
                                             : false
@@ -209,6 +208,7 @@
                                     :to="{ name: 'analysis_2' }"
                                     v-show="
                                         role === 'flight_manager' ||
+                                        role === 'staff' ||
                                         role === 'admin'
                                             ? true
                                             : false
@@ -222,8 +222,9 @@
                                 <router-link
                                     :to="{ name: 'analysis_3' }"
                                     v-show="
-                                        role === 'flight_manager' ||
-                                        role === 'admin'
+                                        role === 'staff' ||
+                                        role === 'admin' ||
+                                        role === 'human_resource'
                                             ? true
                                             : false
                                     "

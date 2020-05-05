@@ -65,9 +65,9 @@ let routes = [
                 component: require("./pages/admin/addAirport.vue").default
             },
             {
-                path: "customer",
-                name: "customerCrud",
-                component: require("./pages/admin/customerCrud.vue").default
+                path: "manageCustomer",
+                name: "manageCustomer",
+                component: require("./pages/admin/manageCustomer.vue").default
             },
             {
                 path: "addPrice",
