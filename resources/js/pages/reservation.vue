@@ -362,6 +362,7 @@
                                                         v-bind:class="{
                                                             'is-invalid': error_name
                                                         }"
+                                                        placeholder="อาหลีเฮีย"
                                                         type="text"
                                                         class="form-control"
                                                         name="name"
@@ -382,6 +383,7 @@
                                                         v-bind:class="{
                                                             'is-invalid': error_surname
                                                         }"
+                                                        placeholder="อาเฮียหลี"
                                                         type="text"
                                                         class="form-control"
                                                         name="surname"
@@ -494,6 +496,25 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Religion :</label>
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_religion
+                                                        }"
+                                                        class="form-control"
+                                                        v-model="
+                                                            passenger.religion
+                                                        "
+                                                    />
+                                                    <div
+                                                        class="invalid-feedback"
+                                                    >
+                                                        {{ error_religion }}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -536,6 +557,52 @@
                                                         class="invalid-feedback"
                                                     >
                                                         {{ error_passport }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Phone Number :</label>
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_phone
+                                                        }"
+                                                        placeholder="098-7654321"
+                                                        type="text"
+                                                        class="form-control"
+                                                        v-model="
+                                                            passenger.phone
+                                                        "
+                                                    />
+                                                    <div
+                                                        class="invalid-feedback"
+                                                    >
+                                                        {{ error_phone }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Email :</label>
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_email
+                                                        }"
+                                                        placeholder="example@hotmail.com"
+                                                        type="text"
+                                                        class="form-control"
+                                                        v-model="
+                                                            passenger.email
+                                                        "
+                                                    />
+                                                    <div
+                                                        class="invalid-feedback"
+                                                    >
+                                                        {{ error_email }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -636,7 +703,10 @@ export default {
                     dob: "",
                     national: "",
                     idcard: "",
-                    passport: ""
+                    passport: "",
+                    religion:"",
+                    phone:"",
+                    email:""
                 }
             ],
 
@@ -654,7 +724,10 @@ export default {
             error_dob: "",
             error_national: "",
             error_idcard: "",
-            error_passport: ""
+            error_passport: "",
+            error_religion: "",
+            error_phone: "",
+            error_email: ""
         };
     },
     // beforeMount() {
@@ -682,7 +755,10 @@ export default {
                 dob: "",
                 national: "",
                 idcard: "",
-                passport: ""
+                passport: "",
+                religion:"",
+                phone:"",
+                email:""
             });
         },
         removePass(index) {
