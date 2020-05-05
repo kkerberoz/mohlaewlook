@@ -94,7 +94,7 @@
 
                             <li>
                                 <router-link
-                                    :to="{ name: 'customerCRUD' }"
+                                    :to="{ name: 'customerCrud' }"
                                     v-show="
                                         role === 'staff' || role === 'admin'
                                             ? true
@@ -149,7 +149,7 @@
                             </li>
                             <li>
                                 <router-link
-                                    :to="{ name: 'Schedule' }"
+                                    :to="{ name: 'workSchedule' }"
                                     v-show="
                                         role === 'pilot' ||
                                         role === 'admin' ||
