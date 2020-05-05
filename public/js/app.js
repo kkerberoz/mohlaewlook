@@ -4779,6 +4779,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5429,6 +5443,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -6748,25 +6777,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
->>>>>>> ac485c66246866ae559edd47e71c1ade127751ec
 
 
 
@@ -13042,7 +13053,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -13080,7 +13091,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -13099,7 +13110,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\n  font-family: \"Kanit\", sans-serif;\n  font-size: 20px;\n  color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\r\n  font-family: \"Kanit\", sans-serif;\r\n  font-size: 20px;\r\n  color: #fff;\n}\r\n", ""]);
 
 // exports
 
@@ -13118,7 +13129,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -54698,6 +54709,37 @@ var render = function() {
                                   "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
                               }
                             ],
+                            attrs: { to: { name: "manageSchedule" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-chart-line" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Manage Schedule")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
                             attrs: { to: { name: "addAirport" } }
                           },
                           [
@@ -55601,6 +55643,30 @@ var staticRenderFns = [
     )
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=template&id=55d7a676&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/manageSchedule.vue?vue&type=template&id=55d7a676& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -75878,6 +75944,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/admin/manageSchedule.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/pages/admin/manageSchedule.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./manageSchedule.vue?vue&type=template&id=55d7a676& */ "./resources/js/pages/admin/manageSchedule.vue?vue&type=template&id=55d7a676&");
+/* harmony import */ var _manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./manageSchedule.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/admin/manageSchedule.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./manageSchedule.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/admin/manageSchedule.vue?vue&type=template&id=55d7a676&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/pages/admin/manageSchedule.vue?vue&type=template&id=55d7a676& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./manageSchedule.vue?vue&type=template&id=55d7a676& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=template&id=55d7a676&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/admin/registerEmployee.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/pages/admin/registerEmployee.vue ***!
@@ -76721,6 +76856,10 @@ var routes = [{
     path: "analysis_4",
     name: "analysis_4",
     component: __webpack_require__(/*! ./pages/analysis/analysis_4.vue */ "./resources/js/pages/analysis/analysis_4.vue")["default"]
+  }, {
+    path: "manageSchedule",
+    name: "manageSchedule",
+    component: __webpack_require__(/*! ./pages/admin/manageSchedule.vue */ "./resources/js/pages/admin/manageSchedule.vue")["default"]
   }]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -76745,8 +76884,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

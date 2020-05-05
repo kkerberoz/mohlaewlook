@@ -164,6 +164,20 @@
                             </li>
                             <li>
                                 <router-link
+                                    :to="{ name: 'manageSchedule' }"
+                                    v-show="
+                                        role === 'flight_manager' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Manage Schedule</span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
                                     :to="{ name: 'addAirport' }"
                                     v-show="
                                         role === 'flight_manager' ||
