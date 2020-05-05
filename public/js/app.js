@@ -6774,6 +6774,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -6815,27 +6816,33 @@ __webpack_require__.r(__webpack_exports__);
     clickDay: function clickDay() {
       var _this2 = this;
 
-      this.loadingPage = true;
-      this.sum = 0;
-      var scope = {
-        first: this.calendar_from.selectedDate,
-        second: this.calendar_to.selectedDate
-      };
-      axios.post("/api/backend/analytic2_show", scope).then(function (response) {
-        _this2.showTotal = true;
-        _this2.data = response.data;
-        console.log(_this2.data);
+      if (!this.calendar_from.selectedDate) {
+        this.loadingPage = false;
+        this.showTotal = false;
+        swal.fire("Please Selete start day first", "Cilck the button to continue!", "warning");
+      } else if (this.calendar_from.selectedDate && this.calendar_to.selectedDate) {
+        this.loadingPage = true;
+        this.sum = 0;
+        var scope = {
+          first: this.calendar_from.selectedDate,
+          second: this.calendar_to.selectedDate
+        };
+        axios.post("/api/backend/analytic2_show", scope).then(function (response) {
+          _this2.showTotal = true;
+          _this2.data = response.data;
+          console.log(_this2.data);
 
-        _this2.data.forEach(function (each_data) {
-          _this2.sum += each_data["class_count"];
+          _this2.data.forEach(function (each_data) {
+            _this2.sum += each_data["class_count"];
+          });
+
+          _this2.loadingPage = false;
+        })["catch"](function (error) {
+          _this2.loadingPage = false;
+          _this2.showTotal = false;
+          swal.fire("Error.", "Cilck the button to continue!", "error");
         });
-
-        _this2.loadingPage = false;
-      })["catch"](function (error) {
-        _this2.loadingPage = false;
-        _this2.showTotal = false;
-        swal.fire("Error.", "Cilck the button to continue!", "error");
-      });
+      }
     }
   }
 });
@@ -57363,6 +57370,7 @@ var render = function() {
                       _c("functional-calendar", {
                         staticClass: "calendar",
                         attrs: { configs: _vm.calendarConfigs },
+                        on: { choseDay: _vm.clickDay },
                         model: {
                           value: _vm.calendar_from,
                           callback: function($$v) {
