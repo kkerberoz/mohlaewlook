@@ -89,12 +89,12 @@ export default {
             errors: []
         };
     },
-    beforeMount() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 2000);
-    },
+    // beforeMount() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //         this.loadingPage = false;
+    //     }, 2000);
+    // },
     methods: {
         formSubmit(e) {
             this.errors = [];

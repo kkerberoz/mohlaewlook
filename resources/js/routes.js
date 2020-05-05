@@ -98,6 +98,11 @@ let routes = [
                 path: "analysis_4",
                 name: "analysis_4",
                 component: require("./pages/analysis/analysis_4.vue").default
+            },
+            {
+                path: "manageSchedule",
+                name: "manageSchedule",
+                component: require("./pages/admin/manageSchedule.vue").default
             }
         ]
     }
