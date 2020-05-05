@@ -227,7 +227,7 @@
                             </div>
                             <hr class="mb-4" />
                             <div
-                                v-show="queryFlight"
+                                v-show="queryFlight.length"
                                 class="container-xl"
                                 style="margin-top:2%;margin-bottom:10%"
                             >
@@ -528,7 +528,8 @@
                                                     <h2
                                                         style="margin-top:90px;"
                                                     >
-                                                        Please select a seat
+                                                        plaese select depart
+                                                        seat
                                                     </h2>
                                                 </div>
                                                 <div
@@ -701,7 +702,8 @@
                                                     <h2
                                                         style="margin-top:90px;"
                                                     >
-                                                        select return seat
+                                                        plaese select return
+                                                        seat
                                                     </h2>
                                                 </div>
                                                 <div
@@ -1182,58 +1184,52 @@
                                             </div>
                                         </div>
                                         <hr />
-                                        <h4 style="margin-left:15px">
-                                            Payment :
-                                        </h4>
-                                        <br />
-                                        <div class="container-xl">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    Total:
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label
-                                                        >Payment Methods
-                                                        :</label
-                                                    >
-                                                    <multiselect
-                                                        v-bind:class="{
-                                                            'is-invalid': error_payMethod
-                                                        }"
-                                                        v-model="payment.method"
-                                                        :options="paymentMethod"
-                                                        :searchable="false"
-                                                        :show-labels="false"
-                                                        :multiple="false"
-                                                        :close-on-select="true"
-                                                        :clear-on-select="false"
-                                                        placeholder="Please select payment method"
-                                                        :preselect-first="false"
-                                                    ></multiselect>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="row"
-                                                v-show="
-                                                    payment.method ==
-                                                        'Credit Card'
-                                                "
-                                            >
-                                                <div class="col-md-6"></div>
-                                                <div class="col-md-6 mt-2">
-                                                    <label>Credit Card :</label>
-                                                    <input
-                                                        v-bind:class="{
-                                                            'is-invalid': error_cardNumber
-                                                        }"
-                                                        type="text"
-                                                        class="form-control"
-                                                        v-model="
-                                                            payment.cardNumber
-                                                        "
-                                                    />
-                                                </div>
-                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding:30px">
+                                <h4 style="margin-left:15px;">
+                                    Payment :
+                                </h4>
+                                <br />
+                                <div class="container-xl">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Total:
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Payment Methods :</label>
+                                            <multiselect
+                                                v-bind:class="{
+                                                    'is-invalid': error_payMethod
+                                                }"
+                                                v-model="payment.method"
+                                                :options="paymentMethod"
+                                                :searchable="false"
+                                                :show-labels="false"
+                                                :multiple="false"
+                                                :close-on-select="true"
+                                                :clear-on-select="false"
+                                                placeholder="Please select payment method"
+                                                :preselect-first="false"
+                                            ></multiselect>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="row"
+                                        v-show="payment.method == 'Credit Card'"
+                                    >
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6 mt-2">
+                                            <label>Credit Card :</label>
+                                            <input
+                                                v-bind:class="{
+                                                    'is-invalid': error_cardNumber
+                                                }"
+                                                type="text"
+                                                class="form-control"
+                                                v-model="payment.cardNumber"
+                                            />
                                         </div>
                                     </div>
                                 </div>

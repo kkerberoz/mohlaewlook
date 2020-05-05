@@ -128,7 +128,8 @@ class UserController extends Controller
         return response()->json(true, 200);
     }
 
-    public function reserveSendData(Request $request){
+    public function reserveSendData(Request $request)
+    {
 
         $reserve_data = $request->reserve_data;
         $user_id = $request->user_id;
@@ -142,7 +143,7 @@ class UserController extends Controller
         //reservation Table
 
         $reservation = new Reservation;
-        $currrent_date= date("Y-m-d H:i:s");
+        $currrent_date = date("Y-m-d H:i:s");
         $reservation->user_id = $user_id;
         $reservation->reservation_datetime = $currrent_date;
         $reservation->reservation_status = $reserve_data['status'];
@@ -152,18 +153,17 @@ class UserController extends Controller
 
 
         //passenger Table
-        foreach($passenger_array as $each_passenger){
+        foreach ($passenger_array as $each_passenger) {
             $passenger = new Passenger;
             $passenger_oldID = "";
-            if(isset($each_passenger['idcard']) && !isset($each_passenger['passport'])){
-                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard',$each_passenger['idcard']);
-            }
-            else //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
+            if (isset($each_passenger['idcard']) && !isset($each_passenger['passport'])) {
+                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard', $each_passenger['idcard']);
+            } else //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
             {
-                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport',$each_passenger['passport']);
+                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport', $each_passenger['passport']);
             }
 
-            if(isset($passenger_oldID)){
+            if (isset($passenger_oldID)) {
                 $passenger->passenger_id = $passenger_oldID;
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
@@ -177,25 +177,22 @@ class UserController extends Controller
                 $passenger->passenger_phone = $each_passenger['phone'];
                 $passenger->passenger_email = $each_passenger['email'];
                 $passenger->save();
-            }
-            else{
-                $prefix="";
-                $age = floor(((date_diff(date_create($each_passenger['dob']),date_create(date('Y-m-d'))))->days)/365);
-                if($age >=18){
-                    if(!strcmp($each_passenger['gender'],"male")){
+            } else {
+                $prefix = "";
+                $age = floor(((date_diff(date_create($each_passenger['dob']), date_create(date('Y-m-d'))))->days) / 365);
+                if ($age >= 18) {
+                    if (!strcmp($each_passenger['gender'], "male")) {
                         $prefix = "M";
-                    }
-                    else if(!strcmp($each_passenger['gender'],"female")){
+                    } else if (!strcmp($each_passenger['gender'], "female")) {
                         $prefix = "F";
                     }
-                }
-                else{
+                } else {
                     $prefix = "K";
                 }
 
-                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE',$prefix. "%")->order_By('passenger_id','desc')->first();
-                $number = str_replace($prefix,"",$check_id['passenger_id']) + 1 ;
-                $passenger->passenger_id = $prefix.sprintf("%08d",$number);
+                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->order_By('passenger_id', 'desc')->first();
+                $number = str_replace($prefix, "", $check_id['passenger_id']) + 1;
+                $passenger->passenger_id = $prefix . sprintf("%08d", $number);
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
                 $passenger->passenger_surname = $each_passenger['surname'];
@@ -209,27 +206,29 @@ class UserController extends Controller
                 $passenger->passenger_email = $each_passenger['email'];
                 $passenger->save();
             }
-
-
         }
 
         //payment
 
         $payment = new Payment;
-        $reserve_id = Reservation::select('reservation_id')->where('user_id',$user_id)->where('reservation_datetime',$currrent_date)->first();
+        $reserve_id = Reservation::select('reservation_id')->where('user_id', $user_id)->where('reservation_datetime', $currrent_date)->first();
         $payment->payment_method = $payment_method;
         $payment->payment_card = $payment_card;
+<<<<<<< refs/remotes/origin/master
         $payment ->total_price = $price;
+=======
+        $payment->total_price = $price;
+>>>>>>> fix payment
         $payment->reservaton_id = $reserve_id;
         $payment->reservation_status = "confirm";
         $payment->save();
 
 
         //ticket create
-        foreach($seat_array as $seat_each_flight){
-            $j=0;
+        foreach ($seat_array as $seat_each_flight) {
+            $j = 0;
             $ticket = new Ticket;
-            for($i=0;$i<sizeof($passenger_array[$j]);$i++){
+            for ($i = 0; $i < sizeof($passenger_array[$j]); $i++) {
                 $ticket->seat_no = $seat_each_flight[$i];
                 $ticket->class_name = $reserve_data['class'];
                 $ticket->flight_id = $flight_id_array[$j];
@@ -268,5 +267,4 @@ class UserController extends Controller
         }
         return response()->JSON($avaliable_flight);
     }
-
 }
