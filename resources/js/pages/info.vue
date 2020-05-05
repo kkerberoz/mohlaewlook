@@ -72,6 +72,7 @@ export default {
                 this.loadingPage = false;
             })
             .catch(error => {
+                this.loadingPage = false;
                 if (error.response.status === 401) {
                     swal.fire(
                         "Please log in.",
