@@ -645,27 +645,40 @@
                             </div>
                         </div>
 
-                        <div class="card-footer flex-center">
-                            <button
-                                v-show="changePage"
-                                style="color:#fff"
-                                id="card-reservation"
-                                type="button"
-                                @click="changePage = !changePage"
-                                class="btn btn-block btn-login"
-                            >
-                                Next
-                            </button>
-                            <button
-                                v-show="!changePage"
-                                style="color:#fff"
-                                id="card-reservation"
-                                type="button"
-                                @click="changePage = !changePage"
-                                class="btn btn-block btn-success"
-                            >
-                                Back
-                            </button>
+                        <div class="card-footer ">
+                            <div class="col-md-12">
+                                <button
+                                    v-if="changePage"
+                                    style="color:#fff"
+                                    id="card-reservation"
+                                    type="button"
+                                    @click="changePage = !changePage"
+                                    class="btn btn-block btn-login"
+                                >
+                                    Next
+                                </button>
+                            </div>
+                            <div class="col-md-12">
+                                <button
+                                    v-if="!changePage"
+                                    style="color:#fff"
+                                    id="card-reservation"
+                                    type="submit"
+                                    class="btn btn-block btn-info"
+                                >
+                                    Submit
+                                </button>
+                                <button
+                                    v-if="!changePage"
+                                    style="color:#fff"
+                                    id="card-reservation"
+                                    type="button"
+                                    @click="changePage = !changePage"
+                                    class="btn btn-block btn-success"
+                                >
+                                    Back
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
