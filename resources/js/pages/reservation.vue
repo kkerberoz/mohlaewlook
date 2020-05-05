@@ -765,7 +765,9 @@
                                             <div class="col-md-2"></div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Phone Number :</label>
+                                                    <label
+                                                        >Phone Number :</label
+                                                    >
                                                     <input
                                                         v-bind:class="{
                                                             'is-invalid': error_phone
@@ -808,6 +810,59 @@
                                             </div>
                                         </div>
                                         <hr />
+                                        <h4 style="margin-left:15px">
+                                            Payment :
+                                        </h4>
+                                        <br />
+                                        <div class="container-xl">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    Total:
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label
+                                                        >Payment Methods
+                                                        :</label
+                                                    >
+                                                    <multiselect
+                                                        v-bind:class="{
+                                                            'is-invalid': error_payMethod
+                                                        }"
+                                                        v-model="payment.method"
+                                                        :options="paymentMethod"
+                                                        :searchable="false"
+                                                        :show-labels="false"
+                                                        :multiple="false"
+                                                        :close-on-select="true"
+                                                        :clear-on-select="false"
+                                                        placeholder="Please select payment method"
+                                                        :preselect-first="false"
+                                                    ></multiselect>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="row"
+                                                v-show="
+                                                    payment.method ==
+                                                        'Credit Card'
+                                                "
+                                            >
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label>Credit Card :</label>
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_cardNumber
+                                                        }"
+                                                        type="text"
+                                                        class="form-control"
+                                                        v-model="
+                                                            payment.cardNumber
+                                                        "
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -958,11 +1013,17 @@ export default {
                     national: "",
                     idcard: "",
                     passport: "",
-                    religion:"",
-                    phone:"",
-                    email:""
+                    religion: "",
+                    phone: "",
+                    email: ""
                 }
             ],
+            payment: {
+                method: "",
+                cardNumber: "",
+                total: ""
+            },
+            paymentMethod: ["Credit Card", "Cash"],
 
             error_departDate: "",
             error_returnDate: "",
@@ -980,7 +1041,9 @@ export default {
             error_passport: "",
             error_religion: "",
             error_phone: "",
-            error_email: ""
+            error_email: "",
+            error_payMethod: "",
+            error_cardNumber: ""
         };
     },
     beforeMount() {
@@ -1024,9 +1087,9 @@ export default {
                 national: "",
                 idcard: "",
                 passport: "",
-                religion:"",
-                phone:"",
-                email:""
+                religion: "",
+                phone: "",
+                email: ""
             });
         },
         removePass(index) {
