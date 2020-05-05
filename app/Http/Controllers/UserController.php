@@ -9,6 +9,8 @@ use App\Employee;
 use App\Payment;
 use App\Passenger;
 use App\Reservation;
+use App\Airport;
+use App\Flight;
 use App\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -236,6 +238,35 @@ class UserController extends Controller
             }
             $j++;
         }
-
     }
+
+    public function getLocation()
+    {
+        $airport = Airport::all();
+        return response()->JSON($airport);
+    }
+    public function getFlight(Request $request)
+    {
+        $class = $request->input['class'];
+        $no_of_passenger = $request->passengerCount;
+        // for depart
+        $from = $request->input['flightFrom']['value']['airport_id'];
+        $to = $request->input['flightTo']['value']['airport_id'];
+        list($day, $month, $year) = explode("/", $request->input['departDate']);
+        $depart_date = $year . "-" . sprintf("%02d", $month) . "-" . sprintf("%02d", $day);
+        $all_flight = Flight::leftJoin('class_prices', 'flights.flight_no', '=', 'class_prices.flight_no')->where('depart_location', $from)->where('arrive_location', $to)->where('depart_datetime', 'LIKE', $depart_date . "%")->get();
+        $avaliable_flight = [];
+        foreach ($all_flight as $flight) {
+            $flight_detail = DB::select("SELECT * FROM flights AS d1 INNER JOIN aircrafts AS d2 ON (d1.aircraft_id = d2.aircraft_id) INNER JOIN aircraft_models AS d3 ON (d2.model_id = d3.model_id) WHERE d1.flight_id = ?", [$flight['flight_id']]);
+            if (isset($flight_detail)) {
+                $ticketCount = Ticket::where('class_name', $class)->where('flight_id', $flight['flight_id'])->count();
+                $class_type = (!strcmp($class, "Economy")) ? "eco_cap" : ((!strcmp($class, "Business")) ? "bus_cap" : "first_cap");
+                if ($flight_detail[0]->$class_type - $ticketCount > $no_of_passenger) {
+                    array_push($avaliable_flight, $flight);
+                }
+            }
+        }
+        return response()->JSON($avaliable_flight);
+    }
+
 }
