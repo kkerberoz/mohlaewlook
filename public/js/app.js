@@ -7126,6 +7126,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      showTotal: false,
       waitFrom: true,
       loadingPage: false,
       fullPage: true,
@@ -7163,9 +7164,8 @@ __webpack_require__.r(__webpack_exports__);
     Analysis4: function Analysis4() {
       var _this2 = this;
 
-      this.loadingPage = true;
-      console.log("form", this.selectForm);
-      console.log("to", this.selectTo); // simulate
+      this.loadingPage = true; // console.log("form", this.selectForm);
+      // console.log("to", this.selectTo);
 
       this.start = this.selectForm;
       this.end = this.selectTo;
@@ -7176,6 +7176,7 @@ __webpack_require__.r(__webpack_exports__);
         // this.males = response.data.Male;
         // console.log(response.data);
         _this2.values = response.data.value;
+        _this2.showTotal = true;
         _this2.loadingPage = false; // this.females = response.data.Female;
       });
     }
@@ -57782,44 +57783,58 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c(
-                    "table",
-                    { staticClass: "table" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _vm._l(_vm.values, function(value, id) {
-                        return _c("tbody", { key: id }, [
-                          _c("tr", [
-                            _c("th", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(value.year) +
-                                  "\n                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(value.male))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(value.female))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(
-                                    Number(value.male) + Number(value.female)
-                                  ) +
-                                  "\n                                        "
-                              )
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.showTotal,
+                        expression: "showTotal"
+                      }
+                    ],
+                    staticClass: "table-responsive"
+                  },
+                  [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._l(_vm.values, function(value, id) {
+                          return _c("tbody", { key: id }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(value.year) +
+                                    "\n                                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(value.male))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(value.female))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(
+                                      Number(value.male) + Number(value.female)
+                                    ) +
+                                    "\n                                        "
+                                )
+                              ])
                             ])
                           ])
-                        ])
-                      })
-                    ],
-                    2
-                  )
-                ])
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                )
               ])
             ])
           ])
