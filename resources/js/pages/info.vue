@@ -1,5 +1,14 @@
 <template>
     <div class="container-xl" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="title flex-center full-height">
@@ -43,17 +52,24 @@
     </div>
 </template>
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
+    components: { Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             user: ""
         };
     },
-    mounted() {
+    beforeMount() {
+        this.loadingPage = true;
         axios
             .get("/api/user")
             .then(response => {
                 this.user = response.data;
+                this.loadingPage = false;
             })
             .catch(error => {
                 if (error.response.status === 401) {

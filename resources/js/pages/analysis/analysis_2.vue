@@ -4,7 +4,7 @@
             :active.sync="loadingPage"
             :can-cancel="false"
             :is-full-page="fullPage"
-            opacity="0.9"
+            :opacity="0.9"
             color="#f87a2b"
             loader="bars"
             background-color="#fff"
@@ -52,7 +52,11 @@
                                 </div>
                             </div>
 
-                            <div class="table-responsive" style="padding:10px">
+                            <div
+                                class="table-responsive"
+                                style="padding:10px"
+                                v-show="showTotal"
+                            >
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -75,7 +79,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <tfoot v-show="showTotal">
+                                    <tfoot>
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td>Total</td>
@@ -141,8 +145,10 @@ export default {
                     this.data.forEach(each_data => {
                         this.sum += each_data["class_count"];
                     });
+                    this.loadingPage = false;
                 })
                 .catch(error => {
+                    this.loadingPage = false;
                     this.showTotal = false;
                     swal.fire(
                         "Error.",
@@ -150,9 +156,6 @@ export default {
                         "error"
                     );
                 });
-            setTimeout(() => {
-                this.loadingPage = false;
-            }, 2000);
         }
     }
 };

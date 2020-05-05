@@ -4,7 +4,7 @@
             :active.sync="loadingPage"
             :can-cancel="false"
             :is-full-page="fullPage"
-            opacity="0.9"
+            :opacity="0.9"
             color="#f87a2b"
             loader="bars"
             background-color="#fff"
@@ -28,6 +28,7 @@
 
                                     <multiselect
                                         v-model="selectForm"
+                                        @input="checkTO"
                                         :options="years"
                                         :searchable="true"
                                         :multiple="false"
@@ -41,9 +42,10 @@
                                     <label>To :{{ selectTo }}</label>
 
                                     <multiselect
+                                        :disabled="waitFrom"
                                         v-model="selectTo"
-                                        @close="Analysis4"
-                                        :options="years"
+                                        @input="Analysis4"
+                                        :options="otheryears"
                                         :searchable="true"
                                         :multiple="false"
                                         :close-on-select="true"
@@ -52,7 +54,7 @@
                                     ></multiselect>
                                 </span>
                             </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive" v-show="showTotal">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -98,6 +100,8 @@ export default {
     components: { Multiselect, Loading },
     data() {
         return {
+            showTotal: false,
+            waitFrom: true,
             loadingPage: false,
             fullPage: true,
             selectForm: "",
@@ -111,17 +115,28 @@ export default {
         years() {
             const year = new Date().getFullYear();
             return Array.from(
-                { length: year - 2000 },
-                (value, index) => 2001 + index
+                { length: year - 1999 },
+                (value, index) => 2000 + index
+            );
+        },
+        otheryears() {
+            const year = new Date().getFullYear();
+            return Array.from(
+                { length: year - this.selectForm },
+                (value, index) => this.selectForm + index + 1
             );
         }
     },
     methods: {
+        checkTO() {
+            this.waitFrom = false;
+        },
+
         Analysis4() {
             this.loadingPage = true;
-            console.log("form", this.selectForm);
-            console.log("to", this.selectTo);
-            // simulate
+            // console.log("form", this.selectForm);
+            // console.log("to", this.selectTo);
+
             this.start = this.selectForm;
             this.end = this.selectTo;
 
@@ -134,6 +149,7 @@ export default {
                     // this.males = response.data.Male;
                     // console.log(response.data);
                     this.values = response.data.value;
+                    this.showTotal = true;
                     this.loadingPage = false;
                     // this.females = response.data.Female;
                 });

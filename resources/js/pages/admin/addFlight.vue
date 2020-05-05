@@ -1,5 +1,14 @@
 <template>
     <div class="container-xl" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="row flex-center" style="margin-bottom:3%">
             <div
                 class="col-md-10 order-md-1 justify-content-between align-items-center"
@@ -245,6 +254,7 @@
                                                     'is-invalid': error_crew
                                                 }"
                                                 v-model="input.crew"
+                                                :disabled="waitPilot"
                                                 :options="options_attendant"
                                                 :searchable="true"
                                                 :multiple="true"
@@ -407,11 +417,15 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 import Multiselect from "vue-multiselect";
 export default {
-    components: { Multiselect },
+    components: { Multiselect, Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             waitPilot: true,
             modalOpen: false,
             flights: [],
@@ -688,6 +702,7 @@ export default {
         }
     },
     beforeMount() {
+        this.loadingPage = true;
         axios.get("/api/backend/getAirports").then(response => {
             response.data.forEach(airport => {
                 this.locations.push({
@@ -696,6 +711,7 @@ export default {
                         airport["airport_id"] + " - " + airport["airport_name"]
                 });
             });
+            this.loadingPage = false;
         });
         axios.get("/api/backend/getFlightNo").then(response => {
             this.flights = response.data;

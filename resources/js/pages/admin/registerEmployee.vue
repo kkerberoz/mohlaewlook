@@ -1,5 +1,14 @@
 <template>
     <div class="container-xl" style="padding:3%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="row flex-center" style="margin-bottom:3%">
             <div
                 class="col-md-10 order-md-1 justify-content-between align-items-center"
@@ -594,13 +603,17 @@
 ~
 <script>
 import Multiselect from "vue-multiselect";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
     name: "registerEmployee",
     props: ["csrf", "oldName"],
-    components: { Multiselect },
+    components: { Multiselect, Loading },
 
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             isLoading: false,
             input: {
                 start_date: new Date().toISOString().slice(0, 10),
@@ -694,10 +707,12 @@ export default {
         };
     },
     beforeMount() {
+        this.loadingPage = true;
         axios.get("/api/backend/getAirports").then(response => {
             // show all airports onto option
             // var AirportID = response.data; // get all aiport
             this.airports = response.data;
+            this.loadingPage = false;
             // console.log(this.airports);
         });
     },

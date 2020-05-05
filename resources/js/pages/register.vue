@@ -1,5 +1,14 @@
 <template>
     <div class="container-fluid" style="margin-top:8%;margin-bottom:10%">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl">
             <div class="row flex-center full-height">
                 <div class="col-md-6">
@@ -169,10 +178,15 @@
     </div>
 </template>
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
     props: ["csrf", "oldName"],
+    components: { Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             isLoading: false,
             username: "",
             password: "",
@@ -190,6 +204,12 @@ export default {
             error_email: "",
             errors: []
         };
+    },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 2000);
     },
     methods: {
         formSubmit(e) {
