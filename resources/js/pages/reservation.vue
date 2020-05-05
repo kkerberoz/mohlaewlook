@@ -135,7 +135,7 @@
                                             <br />From :
                                         </span>
                                         <multiselect
-                                            label = "name"
+                                            label="name"
                                             v-model="input.flightFrom"
                                             :options="airports"
                                             :show-labels="false"
@@ -158,7 +158,7 @@
                                             <br />To :
                                         </span>
                                         <multiselect
-                                            label = "name"
+                                            label="name"
                                             v-model="input.flightTo"
                                             :options="airports"
                                             :show-labels="false"
@@ -226,6 +226,103 @@
                                 <div class="col-md-1"></div>
                             </div>
                             <hr class="mb-4" />
+                            <div
+                                class="container-xl"
+                                style="margin-top:2%;margin-bottom:10%"
+                            >
+                                <div class="row-reservation">
+                                    <div
+                                        class="column-reservation"
+                                        v-for="(showFlight, i) in queryFlight"
+                                        :key="i"
+                                    >
+                                        <div class="card-reser">
+                                            <div class="row ml-4">
+                                                <h4>
+                                                    Flight Number:
+                                                    {{ showFlight.flight_no }}
+                                                </h4>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-4">
+                                                    <h4>
+                                                        From:
+                                                        <b>{{
+                                                            showFlight.depart_location
+                                                        }}</b>
+                                                        &nbsp;To:
+                                                        <b>{{
+                                                            showFlight.arrive_location
+                                                        }}</b>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h4>
+                                                        Time :
+                                                        <b
+                                                            >{{
+                                                                showFlight.depart_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}
+                                                            -{{
+                                                                showFlight.arrive_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}</b
+                                                        >
+                                                    </h4>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'Economy'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{
+                                                            showFlight.eco_price
+                                                        }}
+                                                        <i
+                                                            class="fas fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'Business'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{ showFlight.bus_price
+                                                        }}<i
+                                                            class="fas fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'First'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{
+                                                            showFlight.first_price
+                                                        }}<i
+                                                            class="fab fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 -->
@@ -761,6 +858,7 @@ export default {
                 ]
             ],
             seats: [],
+            queryFlight: [],
             oneway: false,
             back: false,
             loadingPage: false,
@@ -781,7 +879,7 @@ export default {
                 departDate: "",
                 returnDate: "",
                 flightTo: "",
-                flightFrom: "",
+                flightFrom: ""
             },
             passengers: [
                 {
@@ -820,7 +918,16 @@ export default {
 
         axios.get("api/user/getLocation").then(response => {
             response.data.forEach(element => {
-                this.airports.push({"name": element['airport_id'] + " - " + element['airport_name'] + " [" + element['airport_region'] + "]", "value" : element});
+                this.airports.push({
+                    name:
+                        element["airport_id"] +
+                        " - " +
+                        element["airport_name"] +
+                        " [" +
+                        element["airport_region"] +
+                        "]",
+                    value: element
+                });
             });
         });
     },
@@ -850,19 +957,24 @@ export default {
             this.passengers.splice(index, 1);
         }
     },
-    beforeUpdate(){
-        if((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate &&
-            !!this.input.flightTo && !!this.input.flightFrom && !!this.input.class){
+    beforeUpdate() {
+        if (
+            (!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) &&
+            !!this.calendar_from.selectedDate &&
+            !!this.input.flightTo &&
+            !!this.input.flightFrom &&
+            !!this.input.class
+        ) {
             this.input.departDate = this.calendar_from.selectedDate;
             this.input.returnDate = this.calendar_to.selectedDate;
             let data = {
                 back: this.back,
                 input: this.input,
                 passengerCount: this.passengers.length
-            }
+            };
             axios.post("/api/user/getFlight", data).then(response => {
-                console.log(response.data);
-
+                console.log("query", response.data);
+                this.queryFlight = response.data;
             });
         }
     }
@@ -883,5 +995,18 @@ export default {
 #card-reservation {
     border: none;
     border-radius: 0;
+}
+.column-reservation {
+    float: left;
+    width: 100%;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+.card-reser {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    background-color: #2197e6;
 }
 </style>
