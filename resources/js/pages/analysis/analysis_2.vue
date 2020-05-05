@@ -10,26 +10,22 @@
             background-color="#fff"
         ></loading>
         <div class="container-xl">
-            <div class="row flex-center ">
-                <div class="col-md-12 ">
+            <div class="row flex-center">
+                <div class="col-md-12">
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
-                            <div class="card-title">
-                                Analysis 2
-                            </div>
+                            <div class="card-title">Seat Level</div>
                             <div class="card-subtitle mb-2">
-                                สวัสดีครับ
+                                จำนวนการเข้าใช้บริการในแต่ละระดับที่นั่ง
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row flex-center">
                                 <div class="col-md-4 mb-4">
-                                    <label
-                                        >From :
-                                        {{
-                                            this.calendar_from.selectedDate
-                                        }}</label
-                                    >
+                                    <label>
+                                        From :
+                                        {{ this.calendar_from.selectedDate }}
+                                    </label>
                                     <functional-calendar
                                         v-on:choseDay="clickDay"
                                         class="calendar"
@@ -38,12 +34,10 @@
                                     ></functional-calendar>
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <label
-                                        >To :
-                                        {{
-                                            this.calendar_to.selectedDate
-                                        }}</label
-                                    >
+                                    <label>
+                                        To :
+                                        {{ this.calendar_to.selectedDate }}
+                                    </label>
                                     <functional-calendar
                                         v-on:choseDay="clickDay"
                                         class="calendar"
@@ -75,9 +69,7 @@
                                                 {{ Number(id) + 1 }}
                                             </th>
                                             <td>{{ flight.class_name }}</td>
-                                            <td>
-                                                {{ flight.class_count }}
-                                            </td>
+                                            <td>{{ flight.class_count }}</td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
@@ -123,12 +115,12 @@ export default {
             }
         };
     },
-    beforeMount() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 2000);
-    },
+    //   beforeMount() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //       this.loadingPage = false;
+    //     }, 2000);
+    //   },
     methods: {
         clickDay() {
             if (!this.calendar_from.selectedDate) {

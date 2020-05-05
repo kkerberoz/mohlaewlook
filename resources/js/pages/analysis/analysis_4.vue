@@ -10,15 +10,14 @@
             background-color="#fff"
         ></loading>
         <div class="container-xl">
-            <div class="row flex-center ">
-                <div class="col-md-12 ">
+            <div class="row flex-center">
+                <div class="col-md-12">
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
-                            <div class="card-title">
-                                Analysis 4
-                            </div>
+                            <div class="card-title">Number Of Passengers</div>
                             <div class="card-subtitle mb-2">
-                                สวัสดีครับ
+                                จํานวนผู้โดยสารที่เข้าใช้บริการตั้งแต่ปี ... ถึง
+                                ...
                             </div>
                         </div>
                         <div class="card-body">
@@ -154,16 +153,16 @@ export default {
                     // this.females = response.data.Female;
                 });
         }
-    },
-    beforeMount() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 2000);
-        // axios.get("/api/backend/analytic1_get").then(response => {
-        //     this.years = response.data;
-        // });
     }
+    // beforeMount() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //         this.loadingPage = false;
+    //     }, 2000);
+    //     // axios.get("/api/backend/analytic1_get").then(response => {
+    //     //     this.years = response.data;
+    //     // });
+    // }
 };
 </script>
 

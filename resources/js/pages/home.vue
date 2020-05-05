@@ -46,13 +46,13 @@ export default {
     components: { Loading },
     data() {
         return { loadingPage: false, fullPage: true };
-    },
-    beforeMount() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 2000);
     }
+    // beforeMount() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //         this.loadingPage = false;
+    //     }, 2000);
+    // }
 };
 </script>
 <style>

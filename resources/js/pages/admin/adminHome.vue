@@ -39,16 +39,23 @@ export default {
             user: ""
         };
     },
-    mounted() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 1000);
-    },
+    // mounted() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //         this.loadingPage = false;
+    //     }, 1000);
+    // },
     beforeMount() {
-        axios.get("/api/admin/init").then(response => {
-            this.user = response.data;
-        });
+        this.loadingPage = true;
+        axios
+            .get("/api/admin/init")
+            .then(response => {
+                this.user = response.data;
+                this.loadingPage = false;
+            })
+            .catch(error => {
+                this.loadingPage = false;
+            });
     }
 };
 </script>

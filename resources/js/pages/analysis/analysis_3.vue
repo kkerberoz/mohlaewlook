@@ -10,20 +10,19 @@
             background-color="#fff"
         ></loading>
         <div class="container-xl">
-            <div class="row flex-center ">
-                <div class="col-md-12 ">
+            <div class="row flex-center">
+                <div class="col-md-12">
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
-                            <div class="card-title">
-                                Analysis 3
-                            </div>
+                            <div class="card-title">Most Reserved Account</div>
                             <div class="card-subtitle mb-2">
-                                สวัสดีครับ
+                                account ที่มีจำนวนครั้งในการจองมากที่สุด ...
+                                อันดับแรก
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-10 mb-2 ">
+                                <div class="col-md-10 mb-2">
                                     <label>Top :{{ input }}</label>
 
                                     <input
@@ -35,11 +34,11 @@
                                         v-model="input"
                                         class="form-control"
                                     />
-                                    <span class="invalid-feedback">
-                                        {{ error_input }}
-                                    </span>
+                                    <span class="invalid-feedback">{{
+                                        error_input
+                                    }}</span>
                                 </div>
-                                <div class="col-md-2 mt-4 ">
+                                <div class="col-md-2 mt-4">
                                     <button
                                         :disabled="isDisable"
                                         @click="queryAnalysis"
@@ -72,9 +71,7 @@
                                             </th>
                                             <td>{{ flight.user_id }}</td>
                                             <td>{{ flight.username }}</td>
-                                            <td>
-                                                {{ flight.reserve_count }}
-                                            </td>
+                                            <td>{{ flight.reserve_count }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -105,12 +102,12 @@ export default {
             error_input: ""
         };
     },
-    beforeMount() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 2000);
-    },
+    //   beforeMount() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //       this.loadingPage = false;
+    //     }, 2000);
+    //   },
     methods: {
         inputNumber() {
             if (isNaN(this.input) || this.input < 0) {

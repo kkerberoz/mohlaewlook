@@ -22,48 +22,36 @@
                             v-show="changePage"
                         >
                             <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <label>Date :</label>
-
-                                    <functional-calendar
-                                        :configs="calendarConfigs"
-                                        v-model="calendar"
-                                    ></functional-calendar>
-                                    <div class="invalid-feedback">
-                                        {{ error_departDate }}
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Return Date :</label>
+                                <div class="col-md-1"></div>
+                                <div
+                                    class="col-md-3"
+                                    style="margin-top:15px;padding:30px;margin-right:20x;"
+                                >
+                                    <label class="container-ratio">
+                                        One Way
                                         <input
-                                            v-bind:class="{
-                                                'is-invalid': error_returnDate
-                                            }"
-                                            type="date"
-                                            class="form-control"
-                                            v-model="input.returnDate"
+                                            type="radio"
+                                            name="radio"
+                                            @click="showOneway"
                                         />
-                                        <div class="invalid-feedback">
-                                            {{ error_returnDate }}
-                                        </div>
-                                    </div>
-                                </div> -->
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
                                 <div
                                     class="col-md-2"
                                     style="margin-top:15px;padding:30px;margin-right:20x;"
                                 >
-                                    <label class="container-checkbox">
+                                    <label class="container-ratio">
                                         Return
                                         <input
-                                            type="checkbox"
+                                            type="radio"
+                                            name="radio"
                                             @click="showReturn"
                                         />
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Number of Passenger :</label>
 
@@ -83,101 +71,158 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Class :</label>
+                                        <multiselect
+                                            v-model="input.class"
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Class"
+                                        ></multiselect>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row flex-center" v-show="back">
+                                <div class="col-md-4 mb-4">
+                                    <label>
+                                        From :
+                                        {{ this.calendar_from.selectedDate }}
+                                    </label>
+                                    <functional-calendar
+                                        v-on:choseDay="clickDay"
+                                        class="calendar"
+                                        v-model="calendar_from"
+                                        :configs="calendarConfigs"
+                                    ></functional-calendar>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label>
+                                        To :
+                                        {{ this.calendar_to.selectedDate }}
+                                    </label>
+                                    <functional-calendar
+                                        v-on:choseDay="clickDay"
+                                        class="calendar"
+                                        v-model="calendar_to"
+                                        :configs="calendarConfigs"
+                                    ></functional-calendar>
+                                </div>
+                            </div>
+                            <div class="row flex-center" v-show="oneway">
+                                <div class="col-md-4 mb-4">
+                                    <label>
+                                        Date :
+                                        {{ this.calendar_from.selectedDate }}
+                                    </label>
+                                    <functional-calendar
+                                        v-on:choseDay="clickDay"
+                                        class="calendar"
+                                        v-model="calendar_from"
+                                        :configs="calendarConfigs"
+                                    ></functional-calendar>
+                                </div>
                             </div>
                             <hr class="mb-4" />
                             <div class="row">
-                                <div class="col-md-2">
-                                    <br />
-                                    <br />
-                                    <h5>&nbsp; &nbsp; &nbsp;Depart:</h5>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Flight No :</label>
+                                        <label> Depart Flight No :</label>
                                         <span class="input-text">
                                             <br />From :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightFrom
-                                            }"
-                                            type="text"
-                                            class="form-control"
+                                        <multiselect
                                             v-model="input.flightFrom"
-                                        />
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Flight"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
                                             {{ error_flightFrom }}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
                                         <span class="input-text">
                                             <br />To :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightTo
-                                            }"
-                                            type="text"
-                                            class="form-control"
+                                        <multiselect
                                             v-model="input.flightTo"
-                                        />
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Class"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
                                             {{ error_flightTo }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <div class="col-md-1"></div>
                             </div>
                             <br />
                             <div class="row" v-show="back">
-                                <div class="col-md-2">
-                                    <br />
-                                    <br />
-                                    <h5>&nbsp; &nbsp; &nbsp;Return:</h5>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Flight No :</label>
+                                        <label> Return Flight No :</label>
                                         <span class="input-text">
                                             <br />From :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightFrom2
-                                            }"
-                                            type="text"
-                                            class="form-control"
-                                            v-model="input.flightFrom2"
-                                        />
+                                        <multiselect
+                                            v-model="input.flightFrom"
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Flight"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
-                                            {{ error_flightFrom2 }}
+                                            {{ error_flightFrom }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
                                         <span class="input-text">
                                             <br />To :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightTo2
-                                            }"
-                                            type="text"
-                                            class="form-control"
-                                            v-model="input.flightTo2"
-                                        />
+                                        <multiselect
+                                            v-model="input.flightTo"
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Class"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
-                                            {{ error_flightTo2 }}
+                                            {{ error_flightTo }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <div class="col-md-1"></div>
                             </div>
                             <hr class="mb-4" />
                         </div>
@@ -189,6 +234,174 @@
                             id="card-reservation"
                             v-show="!changePage"
                         >
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="plane">
+                                        <div class="cockpit">
+                                            <h2 style="margin-top:80px">
+                                                Please select a seat
+                                            </h2>
+                                        </div>
+                                        <div
+                                            class="exit exit--front fuselage"
+                                        ></div>
+                                        <ol class="cabin fuselage">
+                                            <li
+                                                class="row row--1"
+                                                style="padding-left:35px"
+                                            >
+                                                <ol class="seats" type="A">
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="1A"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="1A"
+                                                            >1A</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="1B"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="1B"
+                                                            >1B</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="1C"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="1C"
+                                                            >1C</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            disabled
+                                                            id="1D"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="1D"
+                                                            >Occupied</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="1E"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="1E"
+                                                            >1E</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="1F"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="1F"
+                                                            >1F</label
+                                                        >
+                                                    </li>
+                                                </ol>
+                                            </li>
+
+                                            <li
+                                                class="row row--2"
+                                                style="padding-left:35px"
+                                            >
+                                                <ol class="seats" type="A">
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="2A"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="2A"
+                                                            >2A</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="2B"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="2B"
+                                                            >2B</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="2C"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="2C"
+                                                            >2C</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="2D"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="2D"
+                                                            >2D</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="2E"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="2E"
+                                                            >2E</label
+                                                        >
+                                                    </li>
+                                                    <li class="seat">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="2F"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff"
+                                                            for="2F"
+                                                            >2F</label
+                                                        >
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                        <div
+                                            class="exit exit--back fuselage"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-4" />
                             <div class="row">
                                 <div class="col-md-12">
                                     <div
@@ -464,21 +677,22 @@ export default {
     components: { Multiselect, Loading, FunctionalCalendar },
     data() {
         return {
+            oneway: false,
             back: false,
             loadingPage: false,
             fullPage: true,
             changePage: true,
             counter: "",
+            allClass: ["Economy", "Business", "First"],
             titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
-            calendar: {},
+            calendar_from: {},
+            calendar_to: {},
             calendarConfigs: {
                 disabledDates: ["beforeToday"],
-                isAutoCloseable: true,
-                isModal: true,
-                isDateRange: true,
                 isDatePicker: true
             },
             input: {
+                class: "",
                 departDate: "",
                 returnDate: "",
                 noPass: "",
@@ -530,7 +744,12 @@ export default {
     },
     methods: {
         showReturn() {
-            this.back = !this.back;
+            this.back = true;
+            this.oneway = false;
+        },
+        showOneway() {
+            this.back = false;
+            this.oneway = true;
         },
 
         addPass(index) {
