@@ -227,7 +227,7 @@
                             </div>
                             <hr class="mb-4" />
                             <div
-                                v-show="queryFlight"
+                                v-show="queryFlight.length"
                                 class="container-xl"
                                 style="margin-top:2%;margin-bottom:10%"
                             >
@@ -528,7 +528,8 @@
                                                     <h2
                                                         style="margin-top:90px;"
                                                     >
-                                                        Please select a seat
+                                                        plaese select depart
+                                                        seat
                                                     </h2>
                                                 </div>
                                                 <div
@@ -701,7 +702,8 @@
                                                     <h2
                                                         style="margin-top:90px;"
                                                     >
-                                                        select return seat
+                                                        plaese select return
+                                                        seat
                                                     </h2>
                                                 </div>
                                                 <div
