@@ -9073,6 +9073,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9085,55 +9103,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      firsts: [[{
-        id: 1,
-        seat: "1A",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 2,
-        seat: "1B",
-        status: false
-      }, {
-        id: 3,
-        seat: "1C",
-        status: true
-      }, {
-        id: 4,
-        seat: "1D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 5,
-        seat: "1E",
-        status: false
-      }], [{
-        id: 6,
-        seat: "2A",
-        status: true
-      }, {
-        id: 7,
-        seat: "2B",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 8,
-        seat: "2C",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 9,
-        seat: "2D",
-        status: false
-      }, {
-        id: 10,
-        seat: "2E",
-        status: false
-      }]],
+      firsts: [],
       buss: [[{
         id: 11,
         seat: "3A",
@@ -9232,8 +9202,13 @@ __webpack_require__.r(__webpack_exports__);
         seat: "6E",
         status: true
       }]],
+      alteredState: false,
+      seleted: false,
+      activeColor: "",
       seats: [],
       queryFlight: [],
+      depart_Selected: null,
+      return_Selected: null,
       oneway: false,
       back: false,
       loadingPage: false,
@@ -9322,6 +9297,29 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    departSelected: function departSelected(showFlight) {
+      var _this2 = this;
+
+      this.depart_Selected = showFlight;
+      console.log(this.depart_Selected);
+      this.seleted = !this.seleted;
+
+      if (this.alteredState) {
+        this.activeColor = "#2197e6 ";
+        this.alteredState = false;
+      } else {
+        this.activeColor = "#f79c65";
+        this.alteredState = true;
+      }
+
+      this.depart_Selected["class"] = this.input["class"];
+      axios.post("/api/user/checkSeat", this.depart_Selected).then(function (response) {
+        console.log(response.data);
+        _this2.firsts = response.data.firsts;
+        _this2.buss = response.data.buss;
+        _this2.ecos = response.data.ecos;
+      });
+    },
     showReturn: function showReturn() {
       this.back = true;
       this.oneway = false;
@@ -9350,7 +9348,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeUpdate: function beforeUpdate() {
-    var _this2 = this;
+    var _this3 = this;
 
     if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"] && (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate || this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo || this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input["class"] || this.passengers.length != this.temp_passenger)) {
       //*---------------------------------------------------------------------------------------------------*//
@@ -9366,7 +9364,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/api/user/getFlight", data).then(function (response) {
         console.log("query", response.data);
-        _this2.queryFlight = response.data;
+        _this3.queryFlight = response.data;
       });
     }
   }
@@ -14088,7 +14086,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n.column-reservation {\n    float: left;\n    width: 100%;\n    padding: 0 10px;\n    margin-top: 10px;\n}\n.card-reser {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    padding: 16px;\n    text-align: center;\n    color: #fff;\n    background-color: #2197e6;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n.column-reservation {\n    float: left;\n    width: 100%;\n    padding: 0 10px;\n    margin-top: 10px;\n}\n.card-reser {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    padding: 16px;\n    text-align: center;\n    color: #fff;\n    background-color: #2197e6;\n}\n", ""]);
 
 // exports
 
@@ -60487,108 +60485,177 @@ var render = function() {
                                 "div",
                                 { key: i, staticClass: "column-reservation" },
                                 [
-                                  _c("div", { staticClass: "card-reser" }, [
-                                    _c("div", { staticClass: "row ml-4" }, [
-                                      _c("h4", [
-                                        _vm._v(
-                                          "\n                                                Flight Number:\n                                                " +
-                                            _vm._s(showFlight.flight_no) +
-                                            "\n                                            "
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("div", { staticClass: "col-md-2" }),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "col-md-4" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "card-reser",
+                                      style: {
+                                        backgroundColor: _vm.activeColor
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row ml-4" }, [
                                         _c("h4", [
                                           _vm._v(
-                                            "\n                                                    From:\n                                                    "
-                                          ),
-                                          _c("b", [
-                                            _vm._v(
-                                              _vm._s(showFlight.depart_location)
-                                            )
-                                          ]),
-                                          _vm._v(
-                                            "\n                                                     To:\n                                                    "
-                                          ),
-                                          _c("b", [
-                                            _vm._v(
-                                              _vm._s(showFlight.arrive_location)
-                                            )
-                                          ])
+                                            "\n                                                Flight Number:\n                                                " +
+                                              _vm._s(showFlight.flight_no) +
+                                              "\n                                            "
+                                          )
                                         ])
                                       ]),
                                       _vm._v(" "),
-                                      _c("div", { staticClass: "col-md-4" }, [
-                                        _c("h4", [
-                                          _vm._v(
-                                            "\n                                                    Time :\n                                                    "
-                                          ),
-                                          _c("b", [
+                                      _c("div", { staticClass: "row" }, [
+                                        _c("div", { staticClass: "col-md-2" }),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("h4", [
                                             _vm._v(
-                                              _vm._s(
-                                                showFlight.depart_datetime.split(
-                                                  " "
-                                                )[1]
-                                              ) +
-                                                "\n                                                        -" +
+                                              "\n                                                    From:\n                                                    "
+                                            ),
+                                            _c("b", [
+                                              _vm._v(
                                                 _vm._s(
-                                                  showFlight.arrive_datetime.split(
+                                                  showFlight.depart_location
+                                                )
+                                              )
+                                            ]),
+                                            _vm._v(
+                                              "\n                                                     To:\n                                                    "
+                                            ),
+                                            _c("b", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  showFlight.arrive_location
+                                                )
+                                              )
+                                            ])
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("h4", [
+                                            _vm._v(
+                                              "\n                                                    Time :\n                                                    "
+                                            ),
+                                            _c("b", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  showFlight.depart_datetime.split(
                                                     " "
                                                   )[1]
-                                                )
-                                            )
+                                                ) +
+                                                  "\n                                                        -" +
+                                                  _vm._s(
+                                                    showFlight.arrive_datetime.split(
+                                                      " "
+                                                    )[1]
+                                                  )
+                                              )
+                                            ])
                                           ])
-                                        ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-2" })
                                       ]),
                                       _vm._v(" "),
-                                      _c("div", { staticClass: "col-md-2" })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("div", { staticClass: "col-md-12" }, [
-                                        _vm.input.class == "Economy"
-                                          ? _c("h3", [
-                                              _vm._v(
-                                                "\n                                                    Price :\n                                                    " +
-                                                  _vm._s(showFlight.eco_price) +
-                                                  "\n                                                    "
-                                              ),
-                                              _c("i", {
-                                                staticClass: "fas fa-btc"
-                                              })
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.input.class == "Business"
-                                          ? _c("h3", [
-                                              _vm._v(
-                                                "\n                                                    Price :\n                                                    " +
-                                                  _vm._s(showFlight.bus_price)
-                                              ),
-                                              _c("i", {
-                                                staticClass: "fas fa-btc"
-                                              })
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.input.class == "First"
-                                          ? _c("h3", [
-                                              _vm._v(
-                                                "\n                                                    Price :\n                                                    " +
-                                                  _vm._s(showFlight.first_price)
-                                              ),
-                                              _c("i", {
-                                                staticClass: "fab fa-btc"
-                                              })
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    ])
-                                  ])
+                                      _c("div", { staticClass: "row" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-12" },
+                                          [
+                                            _vm.input.class == "Economy"
+                                              ? _c("h3", [
+                                                  _vm._v(
+                                                    "\n                                                    Price :\n                                                    " +
+                                                      _vm._s(
+                                                        showFlight.eco_price
+                                                      ) +
+                                                      "\n                                                    "
+                                                  ),
+                                                  _c("i", {
+                                                    staticClass: "fas fa-btc"
+                                                  })
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.input.class == "Business"
+                                              ? _c("h3", [
+                                                  _vm._v(
+                                                    "\n                                                    Price :\n                                                    " +
+                                                      _vm._s(
+                                                        showFlight.bus_price
+                                                      )
+                                                  ),
+                                                  _c("i", {
+                                                    staticClass: "fas fa-btc"
+                                                  })
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.input.class == "First"
+                                              ? _c("h3", [
+                                                  _vm._v(
+                                                    "\n                                                    Price :\n                                                    " +
+                                                      _vm._s(
+                                                        showFlight.first_price
+                                                      )
+                                                  ),
+                                                  _c("i", {
+                                                    staticClass: "fab fa-btc"
+                                                  })
+                                                ])
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "btn btn-block bg-warning",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.departSelected(
+                                                showFlight
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value: !_vm.seleted,
+                                                  expression: "!seleted"
+                                                }
+                                              ]
+                                            },
+                                            [_vm._v("Select")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value: _vm.seleted,
+                                                  expression: "seleted"
+                                                }
+                                              ]
+                                            },
+                                            [_vm._v("Selected")]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
                                 ]
                               )
                             }),

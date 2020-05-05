@@ -236,7 +236,12 @@
                                         v-for="(showFlight, i) in queryFlight"
                                         :key="i"
                                     >
-                                        <div class="card-reser">
+                                        <div
+                                            class="card-reser"
+                                            v-bind:style="{
+                                                backgroundColor: activeColor
+                                            }"
+                                        >
                                             <div class="row ml-4">
                                                 <h4>
                                                     Flight Number:
@@ -319,6 +324,19 @@
                                                     </h3>
                                                 </div>
                                             </div>
+                                            <button
+                                                @click="
+                                                    departSelected(showFlight)
+                                                "
+                                                class="btn btn-block bg-warning"
+                                            >
+                                                <span v-show="!seleted"
+                                                    >Select</span
+                                                >
+                                                <span v-show="seleted"
+                                                    >Selected</span
+                                                >
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -919,26 +937,7 @@ export default {
     components: { Multiselect, Loading, FunctionalCalendar },
     data() {
         return {
-            firsts: [
-                [
-                    { id: 1, seat: "1A", status: false },
-                    { patt: true },
-                    { id: 2, seat: "1B", status: false },
-                    { id: 3, seat: "1C", status: true },
-                    { id: 4, seat: "1D", status: false },
-                    { patt: true },
-                    { id: 5, seat: "1E", status: false }
-                ],
-                [
-                    { id: 6, seat: "2A", status: true },
-                    { id: 7, seat: "2B", status: false },
-                    { patt: true },
-                    { id: 8, seat: "2C", status: false },
-                    { patt: true },
-                    { id: 9, seat: "2D", status: false },
-                    { id: 10, seat: "2E", status: false }
-                ]
-            ],
+            firsts: [],
             buss: [
                 [
                     { id: 11, seat: "3A", status: false },
@@ -979,8 +978,13 @@ export default {
                     { id: 30, seat: "6E", status: true }
                 ]
             ],
+            alteredState: false,
+            seleted: false,
+            activeColor: "",
             seats: [],
             queryFlight: [],
+            depart_Selected: null,
+            return_Selected: null,
             oneway: false,
             back: false,
             loadingPage: false,
@@ -1077,6 +1081,26 @@ export default {
         });
     },
     methods: {
+        departSelected(showFlight) {
+            this.depart_Selected = showFlight;
+            console.log(this.depart_Selected);
+            this.seleted = !this.seleted;
+            if (this.alteredState) {
+                this.activeColor = "#2197e6 ";
+                this.alteredState = false;
+            } else {
+                this.activeColor = "#f79c65";
+                this.alteredState = true;
+            }
+            this.depart_Selected.class = this.input.class
+            axios.post("/api/user/checkSeat", this.depart_Selected).then(response => {
+                console.log(response.data);
+                this.firsts = response.data.firsts;
+                this.buss = response.data.buss;
+                this.ecos = response.data.ecos;
+            });
+
+        },
         showReturn() {
             this.back = true;
             this.oneway = false;

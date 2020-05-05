@@ -122,19 +122,86 @@ class UserController extends Controller
         $to = $request->input['flightTo']['value']['airport_id'];
         list($day, $month, $year) = explode("/", $request->input['departDate']);
         $depart_date = $year . "-" . sprintf("%02d", $month) . "-" . sprintf("%02d", $day);
-        $all_flight = Flight::leftJoin('class_prices', 'flights.flight_no', '=', 'class_prices.flight_no')->where('depart_location', $from)->where('arrive_location', $to)->where('depart_datetime', 'LIKE', $depart_date . "%")->get();
+        $all_flight = Flight::select('*')->where('depart_location', $from)->where('arrive_location', $to)->where('depart_datetime', 'LIKE', $depart_date . "%")->get();
         $avaliable_flight = [];
         foreach ($all_flight as $flight) {
-            $flight_detail = DB::select("SELECT * FROM flights AS d1 INNER JOIN aircrafts AS d2 ON (d1.aircraft_id = d2.aircraft_id) INNER JOIN aircraft_models AS d3 ON (d2.model_id = d3.model_id) WHERE d1.flight_id = ?", [$flight['flight_id']]);
+            $flight_detail = DB::select("SELECT * FROM flights AS d1 INNER JOIN aircrafts AS d2 ON (d1.aircraft_id = d2.aircraft_id) INNER JOIN aircraft_models AS d3 ON (d2.model_id = d3.model_id) INNER JOIN class_prices AS d4 ON (d1.flight_no = d4.flight_no) WHERE d1.flight_id = ?", [$flight['flight_id']]);
             if (isset($flight_detail)) {
                 $ticketCount = Ticket::where('class_name', $class)->where('flight_id', $flight['flight_id'])->count();
                 $class_type = (!strcmp($class, "Economy")) ? "eco_cap" : ((!strcmp($class, "Business")) ? "bus_cap" : "first_cap");
                 if ($flight_detail[0]->$class_type - $ticketCount > $no_of_passenger) {
-                    array_push($avaliable_flight, $flight);
+                    array_push($avaliable_flight, $flight_detail[0]);
                 }
             }
         }
         return response()->JSON($avaliable_flight);
+    }
+    public function checkSeat(Request $request){
+        $flight_id = $request->flight_id;
+        $class = strtolower($request->class);
+        $firsts = []; $buss = []; $ecos = [];
+        $all_seat = Ticket::select('seat_no')->where('flight_id', $flight_id)->where('class_name', $class)->get();
+        $already_seat = [];
+        foreach($all_seat as $seat) array_push($already_seat, $seat['seat_no']);
+        $alphas = range('A', 'Z');
+        // $first class
+        $sum =  explode("-", $request->first_pattern);
+        $first_amount = $first_total = ($request->first_cap) / array_sum($sum);
+        $count_id = 1;
+        while($first_amount--){
+            $temp = [];
+            $pettern = $request->first_pattern;
+            $count_alphas = 0;
+            for($i=0 ;$i<strlen($pettern); ++$i){
+                if(is_numeric($pettern[$i])){
+                    for($j=0; $j<$pettern[$i]; ++$j){
+                        $seat = sprintf("%02d",($first_total - $first_amount)). $alphas[$count_alphas++];
+                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
+                    }
+                }
+                else array_push($temp, ["patt" => true]);
+            }
+            array_push($firsts, $temp);
+        }
+        // $bussiness class
+        $sum =  explode("-", $request->bus_pattern);
+        $bus_amount = $bus_total = ($request->bus_cap) / array_sum($sum);
+        $count_id = 1;
+        while($bus_amount--){
+            $temp = [];
+            $pettern = $request->bus_pattern;
+            $count_alphas = 0;
+            for($i=0 ;$i<strlen($pettern); ++$i){
+                if(is_numeric($pettern[$i])){
+                    for($j=0; $j<$pettern[$i]; ++$j){
+                        $seat = sprintf("%02d",($bus_total - $bus_amount)). $alphas[$count_alphas++];
+                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "bussiness")) ?  true : false)]);
+                    }
+                }
+                else array_push($temp, ["patt" => true]);
+            }
+            array_push($buss, $temp);
+        }
+        // economy class
+        $sum =  explode("-", $request->eco_pattern);
+        $eco_amount = $eco_total = ($request->eco_cap) / array_sum($sum);
+        $count_id = 1;
+        while($eco_amount--){
+            $temp = [];
+            $pettern = $request->eco_pattern;
+            $count_alphas = 0;
+            for($i=0 ;$i<strlen($pettern); ++$i){
+                if(is_numeric($pettern[$i])){
+                    for($j=0; $j<$pettern[$i]; ++$j){
+                        $seat = sprintf("%02d",($eco_total - $eco_amount)). $alphas[$count_alphas++];
+                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
+                    }
+                }
+                else array_push($temp, ["patt" => true]);
+            }
+            array_push($ecos, $temp);
+        }
+        return response()->JSON(["firsts" => $firsts, "buss" => $buss, "ecos" => $ecos]);
     }
     public function reserveSendData(Request $request)
     {
