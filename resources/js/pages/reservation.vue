@@ -95,7 +95,6 @@
                                         {{ this.calendar_from.selectedDate }}
                                     </label>
                                     <functional-calendar
-                                        v-on:choseDay="clickDay"
                                         class="calendar"
                                         v-model="calendar_from"
                                         :configs="calendarConfigs"
@@ -107,7 +106,6 @@
                                         {{ this.calendar_to.selectedDate }}
                                     </label>
                                     <functional-calendar
-                                        v-on:choseDay="clickDay"
                                         class="calendar"
                                         v-model="calendar_to"
                                         :configs="calendarConfigs"
@@ -121,7 +119,6 @@
                                         {{ this.calendar_from.selectedDate }}
                                     </label>
                                     <functional-calendar
-                                        v-on:choseDay="clickDay"
                                         class="calendar"
                                         v-model="calendar_from"
                                         :configs="calendarConfigs"
