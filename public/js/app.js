@@ -8498,6 +8498,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8510,42 +8609,152 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      sets: [[{
+      firsts: [[{
         id: 1,
-        seat: "A1"
+        seat: "1A",
+        status: false
+      }, {
+        patt: true
       }, {
         id: 2,
-        seat: "A2"
+        seat: "1B",
+        status: false
       }, {
         id: 3,
-        seat: "A3"
+        seat: "1C",
+        status: true
       }, {
         id: 4,
-        seat: "A4"
+        seat: "1D",
+        status: false
+      }, {
+        patt: true
       }, {
         id: 5,
-        seat: "A5"
-      }, {
-        id: 6,
-        seat: "A6"
+        seat: "1E",
+        status: false
       }], [{
+        id: 6,
+        seat: "2A",
+        status: true
+      }, {
         id: 7,
-        seat: "A7"
+        seat: "2B",
+        status: false
+      }, {
+        patt: true
       }, {
         id: 8,
-        seat: "A8"
+        seat: "2C",
+        status: false
+      }, {
+        patt: true
       }, {
         id: 9,
-        seat: "A9"
+        seat: "2D",
+        status: false
       }, {
         id: 10,
-        seat: "A10"
-      }, {
+        seat: "2E",
+        status: false
+      }]],
+      buss: [[{
         id: 11,
-        seat: "A11"
+        seat: "3A",
+        status: false
+      }, {
+        patt: true
       }, {
         id: 12,
-        seat: "A12"
+        seat: "3B",
+        status: false
+      }, {
+        id: 13,
+        seat: "3C",
+        status: false
+      }, {
+        id: 14,
+        seat: "3D",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 15,
+        seat: "3E",
+        status: true
+      }], [{
+        id: 16,
+        seat: "4A",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 17,
+        seat: "4B",
+        status: false
+      }, {
+        id: 18,
+        seat: "4C",
+        status: true
+      }, {
+        id: 19,
+        seat: "4D",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 20,
+        seat: "4E",
+        status: true
+      }]],
+      ecos: [[{
+        id: 21,
+        seat: "5A",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 22,
+        seat: "5B",
+        status: true
+      }, {
+        id: 23,
+        seat: "5C",
+        status: true
+      }, {
+        id: 24,
+        seat: "5D",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 25,
+        seat: "5E",
+        status: true
+      }], [{
+        id: 26,
+        seat: "6A",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 27,
+        seat: "6B",
+        status: true
+      }, {
+        id: 28,
+        seat: "6C",
+        status: true
+      }, {
+        id: 29,
+        seat: "6D",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 30,
+        seat: "6E",
+        status: true
       }]],
       seats: [],
       oneway: false,
@@ -13329,7 +13538,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
 
 // exports
 
@@ -59473,103 +59682,116 @@ var render = function() {
                         _c("div", { staticClass: "col-md-12" }, [
                           _c("div", { staticClass: "row" }, [
                             _c("div", { staticClass: "plane" }, [
-                              _c("div", { staticClass: "cockpit" }, [
-                                _c(
-                                  "h2",
-                                  { staticStyle: { "margin-top": "80px" } },
-                                  [
-                                    _vm._v(
-                                      "\n                                                Please select a seat\n                                                " +
-                                        _vm._s(_vm.seats) +
-                                        "\n                                            "
-                                    )
-                                  ]
-                                )
-                              ]),
+                              _vm._m(4),
                               _vm._v(" "),
                               _c("div", {
                                 staticClass: "exit exit--front fuselage"
                               }),
                               _vm._v(" "),
-                              _c("ol", { staticClass: "cabin fuselage" }, [
-                                _c(
-                                  "li",
-                                  {
-                                    staticClass: "row row--1",
-                                    staticStyle: { padding: "25px" }
-                                  },
-                                  _vm._l(_vm.sets, function(set, i) {
+                              _c(
+                                "ol",
+                                { staticClass: "cabin fuselage" },
+                                [
+                                  _c("h4", { staticClass: "flex-center" }, [
+                                    _vm._v(
+                                      "\n                                                First Class\n                                            "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.firsts, function(seatt, i) {
                                     return _c(
                                       "ol",
                                       { key: i, staticClass: "seats" },
-                                      _vm._l(set, function(n, k) {
+                                      _vm._l(seatt, function(f, k) {
                                         return _c(
                                           "li",
                                           { key: k, staticClass: "seat" },
                                           [
-                                            _c("input", {
-                                              directives: [
-                                                {
-                                                  name: "model",
-                                                  rawName: "v-model",
-                                                  value: _vm.seats,
-                                                  expression: "seats"
-                                                }
-                                              ],
-                                              staticStyle: { padding: "5px" },
-                                              attrs: {
-                                                id: n.id,
-                                                type: "checkbox"
-                                              },
-                                              domProps: {
-                                                value: n.id,
-                                                checked: Array.isArray(
-                                                  _vm.seats
-                                                )
-                                                  ? _vm._i(_vm.seats, n.id) > -1
-                                                  : _vm.seats
-                                              },
-                                              on: {
-                                                change: function($event) {
-                                                  var $$a = _vm.seats,
-                                                    $$el = $event.target,
-                                                    $$c = $$el.checked
-                                                      ? true
-                                                      : false
-                                                  if (Array.isArray($$a)) {
-                                                    var $$v = n.id,
-                                                      $$i = _vm._i($$a, $$v)
-                                                    if ($$el.checked) {
-                                                      $$i < 0 &&
-                                                        (_vm.seats = $$a.concat(
-                                                          [$$v]
-                                                        ))
-                                                    } else {
-                                                      $$i > -1 &&
-                                                        (_vm.seats = $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          ))
-                                                    }
-                                                  } else {
-                                                    _vm.seats = $$c
-                                                  }
-                                                }
-                                              }
-                                            }),
-                                            _vm._v(" "),
                                             _c(
-                                              "label",
+                                              "div",
                                               {
-                                                staticStyle: {
-                                                  padding: "5px",
-                                                  color: "#fff",
-                                                  "font-size": "10px"
-                                                },
-                                                attrs: { for: n.id }
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: !f.patt == true,
+                                                    expression:
+                                                      "\n                                                            !f.patt == true\n                                                        "
+                                                  }
+                                                ]
                                               },
-                                              [_vm._v(_vm._s(n.seat))]
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.seats,
+                                                      expression: "seats"
+                                                    }
+                                                  ],
+                                                  staticStyle: {
+                                                    padding: "5px"
+                                                  },
+                                                  attrs: {
+                                                    id: f.id,
+                                                    disabled: f.status == true,
+                                                    type: "checkbox"
+                                                  },
+                                                  domProps: {
+                                                    value: f,
+                                                    checked: Array.isArray(
+                                                      _vm.seats
+                                                    )
+                                                      ? _vm._i(_vm.seats, f) >
+                                                        -1
+                                                      : _vm.seats
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a = _vm.seats,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = f,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.seats = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.seats = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.seats = $$c
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticStyle: {
+                                                      padding: "5px",
+                                                      color: "#fff",
+                                                      "font-size": "10px"
+                                                    },
+                                                    attrs: { for: f.id }
+                                                  },
+                                                  [_vm._v(_vm._s(f.seat))]
+                                                )
+                                              ]
                                             )
                                           ]
                                         )
@@ -59577,9 +59799,240 @@ var render = function() {
                                       0
                                     )
                                   }),
-                                  0
-                                )
-                              ]),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "toliet toliet--back fuselage"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("h4", { staticClass: "flex-center" }, [
+                                    _vm._v(
+                                      "\n                                                Business Class\n                                            "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.buss, function(seatt, i) {
+                                    return _c(
+                                      "ol",
+                                      { key: "a" + i, staticClass: "seats" },
+                                      _vm._l(seatt, function(f, k) {
+                                        return _c(
+                                          "li",
+                                          { key: "b" + k, staticClass: "seat" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: !f.patt == true,
+                                                    expression:
+                                                      "\n                                                            !f.patt == true\n                                                        "
+                                                  }
+                                                ]
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.seats,
+                                                      expression: "seats"
+                                                    }
+                                                  ],
+                                                  staticStyle: {
+                                                    padding: "5px"
+                                                  },
+                                                  attrs: {
+                                                    id: f.id,
+                                                    disabled: f.status == true,
+                                                    type: "checkbox"
+                                                  },
+                                                  domProps: {
+                                                    value: f,
+                                                    checked: Array.isArray(
+                                                      _vm.seats
+                                                    )
+                                                      ? _vm._i(_vm.seats, f) >
+                                                        -1
+                                                      : _vm.seats
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a = _vm.seats,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = f,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.seats = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.seats = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.seats = $$c
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticStyle: {
+                                                      padding: "5px",
+                                                      color: "#fff",
+                                                      "font-size": "10px"
+                                                    },
+                                                    attrs: { for: f.id }
+                                                  },
+                                                  [_vm._v(_vm._s(f.seat))]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "toliet toliet--back fuselage"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("h4", { staticClass: "flex-center" }, [
+                                    _vm._v(
+                                      "\n                                                Economy Class\n                                            "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.ecos, function(eco, e) {
+                                    return _c(
+                                      "ol",
+                                      { key: "c" + e, staticClass: "seats" },
+                                      _vm._l(eco, function(index, p) {
+                                        return _c(
+                                          "li",
+                                          { key: "d" + p, staticClass: "seat" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: !index.patt == true,
+                                                    expression:
+                                                      "\n                                                            !index.patt ==\n                                                                true\n                                                        "
+                                                  }
+                                                ]
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.seats,
+                                                      expression: "seats"
+                                                    }
+                                                  ],
+                                                  staticStyle: {
+                                                    padding: "5px"
+                                                  },
+                                                  attrs: {
+                                                    id: index.id,
+                                                    disabled:
+                                                      index.status == true,
+                                                    type: "checkbox"
+                                                  },
+                                                  domProps: {
+                                                    value: index,
+                                                    checked: Array.isArray(
+                                                      _vm.seats
+                                                    )
+                                                      ? _vm._i(
+                                                          _vm.seats,
+                                                          index
+                                                        ) > -1
+                                                      : _vm.seats
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a = _vm.seats,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = index,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.seats = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.seats = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.seats = $$c
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticStyle: {
+                                                      padding: "5px",
+                                                      color: "#fff",
+                                                      "font-size": "10px"
+                                                    },
+                                                    attrs: { for: index.id }
+                                                  },
+                                                  [_vm._v(_vm._s(index.seat))]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "toliet toliet--back"
+                                  })
+                                ],
+                                2
+                              ),
                               _vm._v(" "),
                               _c("div", {
                                 staticClass: "exit exit--back fuselage"
@@ -60213,6 +60666,18 @@ var staticRenderFns = [
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
       _vm._v("To :\n                                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cockpit" }, [
+      _c("h2", { staticStyle: { "margin-top": "90px" } }, [
+        _vm._v(
+          "\n                                                Please select a seat\n                                            "
+        )
+      ])
     ])
   }
 ]

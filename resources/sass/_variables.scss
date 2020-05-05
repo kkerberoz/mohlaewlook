@@ -30,7 +30,6 @@ $cyan: #6cb2eb;
 }
 
 .cockpit {
-    padding: 20px;
     height: 250px;
     position: relative;
     overflow: hidden;
@@ -49,7 +48,6 @@ $cyan: #6cb2eb;
         border-left: 5px solid #d8d8d8;
     }
     h1 {
-        padding: 20px;
         width: 60%;
         margin: 100px auto 35px auto;
     }
@@ -80,19 +78,40 @@ $cyan: #6cb2eb;
     }
 }
 
+.toliet {
+    position: relative;
+    height: 50px;
+    &:before,
+    &:after {
+        content: "TOLIET";
+        font-size: 14px;
+        line-height: 18px;
+        padding: 0px 2px;
+        font-family: "Arial Narrow", Arial, sans-serif;
+        display: block;
+        position: absolute;
+        background: pink;
+        color: white;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+    &:before {
+        left: 0;
+    }
+    &:after {
+        right: 0;
+    }
+}
+
 .fuselage {
     border-right: 5px solid #d8d8d8;
     border-left: 5px solid #d8d8d8;
 }
 
 ol {
-    padding: 20px;
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.row {
 }
 
 .seats {
@@ -107,9 +126,12 @@ ol {
     flex: 0 0 14.28571428571429%;
     padding: 5px;
     position: relative;
-    &:nth-child(3) {
-        margin-right: 14.28571428571429%;
-    }
+    // &:nth-child(1) {
+    //     margin-right: 14.28571428571429%;
+    // }
+    // &:nth-child(4) {
+    //     margin-right: 14.28571428571429%;
+    // }
     input[type="checkbox"] {
         position: absolute;
         opacity: 0;
@@ -126,6 +148,7 @@ ol {
     input[type="checkbox"]:disabled {
         + label {
             background: #dddddd;
+            width: 30px;
             text-indent: -9999px;
             overflow: hidden;
             &:after {
