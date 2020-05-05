@@ -22,48 +22,36 @@
                             v-show="changePage"
                         >
                             <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <label>Date :</label>
-
-                                    <functional-calendar
-                                        :configs="calendarConfigs"
-                                        v-model="calendar"
-                                    ></functional-calendar>
-                                    <div class="invalid-feedback">
-                                        {{ error_departDate }}
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Return Date :</label>
+                                <div class="col-md-1"></div>
+                                <div
+                                    class="col-md-3"
+                                    style="margin-top:15px;padding:30px;margin-right:20x;"
+                                >
+                                    <label class="container-ratio">
+                                        One Way
                                         <input
-                                            v-bind:class="{
-                                                'is-invalid': error_returnDate
-                                            }"
-                                            type="date"
-                                            class="form-control"
-                                            v-model="input.returnDate"
+                                            type="radio"
+                                            name="radio"
+                                            @click="showOneway"
                                         />
-                                        <div class="invalid-feedback">
-                                            {{ error_returnDate }}
-                                        </div>
-                                    </div>
-                                </div> -->
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
                                 <div
                                     class="col-md-2"
                                     style="margin-top:15px;padding:30px;margin-right:20x;"
                                 >
-                                    <label class="container-checkbox">
+                                    <label class="container-ratio">
                                         Return
                                         <input
-                                            type="checkbox"
+                                            type="radio"
+                                            name="radio"
                                             @click="showReturn"
                                         />
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Number of Passenger :</label>
 
@@ -83,101 +71,155 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Class :</label>
+                                        <multiselect
+                                            v-model="input.class"
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Class"
+                                        ></multiselect>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row flex-center" v-show="back">
+                                <div class="col-md-4 mb-4">
+                                    <label>
+                                        From :
+                                        {{ this.calendar_from.selectedDate }}
+                                    </label>
+                                    <functional-calendar
+                                        class="calendar"
+                                        v-model="calendar_from"
+                                        :configs="calendarConfigs"
+                                    ></functional-calendar>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label>
+                                        To :
+                                        {{ this.calendar_to.selectedDate }}
+                                    </label>
+                                    <functional-calendar
+                                        class="calendar"
+                                        v-model="calendar_to"
+                                        :configs="calendarConfigs"
+                                    ></functional-calendar>
+                                </div>
+                            </div>
+                            <div class="row flex-center" v-show="oneway">
+                                <div class="col-md-4 mb-4">
+                                    <label>
+                                        Date :
+                                        {{ this.calendar_from.selectedDate }}
+                                    </label>
+                                    <functional-calendar
+                                        class="calendar"
+                                        v-model="calendar_from"
+                                        :configs="calendarConfigs"
+                                    ></functional-calendar>
+                                </div>
                             </div>
                             <hr class="mb-4" />
                             <div class="row">
-                                <div class="col-md-2">
-                                    <br />
-                                    <br />
-                                    <h5>&nbsp; &nbsp; &nbsp;Depart:</h5>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Flight No :</label>
+                                        <label> Depart Flight No :</label>
                                         <span class="input-text">
                                             <br />From :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightFrom
-                                            }"
-                                            type="text"
-                                            class="form-control"
+                                        <multiselect
                                             v-model="input.flightFrom"
-                                        />
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Flight"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
                                             {{ error_flightFrom }}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
                                         <span class="input-text">
                                             <br />To :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightTo
-                                            }"
-                                            type="text"
-                                            class="form-control"
+                                        <multiselect
                                             v-model="input.flightTo"
-                                        />
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Class"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
                                             {{ error_flightTo }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <div class="col-md-1"></div>
                             </div>
                             <br />
                             <div class="row" v-show="back">
-                                <div class="col-md-2">
-                                    <br />
-                                    <br />
-                                    <h5>&nbsp; &nbsp; &nbsp;Return:</h5>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Flight No :</label>
+                                        <label> Return Flight No :</label>
                                         <span class="input-text">
                                             <br />From :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightFrom2
-                                            }"
-                                            type="text"
-                                            class="form-control"
-                                            v-model="input.flightFrom2"
-                                        />
+                                        <multiselect
+                                            v-model="input.flightFrom"
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Flight"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
-                                            {{ error_flightFrom2 }}
+                                            {{ error_flightFrom }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
                                         <span class="input-text">
                                             <br />To :
                                         </span>
-                                        <input
-                                            v-bind:class="{
-                                                'is-invalid': error_flightTo2
-                                            }"
-                                            type="text"
-                                            class="form-control"
-                                            v-model="input.flightTo2"
-                                        />
+                                        <multiselect
+                                            v-model="input.flightTo"
+                                            :options="allClass"
+                                            :show-labels="false"
+                                            :searchable="true"
+                                            :multiple="false"
+                                            :close-on-select="true"
+                                            :clear-on-select="false"
+                                            placeholder="Choose Class"
+                                        ></multiselect>
                                         <div class="invalid-feedback">
-                                            {{ error_flightTo2 }}
+                                            {{ error_flightTo }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <div class="col-md-1"></div>
                             </div>
                             <hr class="mb-4" />
                         </div>
@@ -189,6 +231,84 @@
                             id="card-reservation"
                             v-show="!changePage"
                         >
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <div class="container-xl">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="plane">
+                                            <div class="cockpit">
+                                                <h2 style="margin-top:80px">
+                                                    Please select a seat
+                                                    {{ seats }}
+                                                </h2>
+                                            </div>
+                                            <div
+                                                class="exit exit--front fuselage"
+                                            ></div>
+
+                                            <ol class="cabin fuselage">
+                                                <li
+                                                    class="row row--1"
+                                                    style="padding:25px"
+                                                >
+                                                    <ol
+                                                        class="seats"
+                                                        v-for="(set, i) in sets"
+                                                        :key="i"
+                                                    >
+                                                        <li
+                                                            class="seat"
+                                                            v-for="(n,
+                                                            k) in set"
+                                                            :key="k"
+                                                        >
+                                                            <input
+                                                                style="padding:5px;"
+                                                                :value="n.id"
+                                                                :id="n.id"
+                                                                type="checkbox"
+                                                                v-model="seats"
+                                                            />
+                                                            <label
+                                                                style="padding:5px; color:#fff; font-size:10px"
+                                                                :for="n.id"
+                                                                >{{
+                                                                    n.seat
+                                                                }}</label
+                                                            >
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                            </ol>
+
+                                            <div
+                                                class="exit exit--back fuselage"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <hr class="mb-4" />
                             <div class="row">
                                 <div class="col-md-12">
                                     <div
@@ -464,21 +584,41 @@ export default {
     components: { Multiselect, Loading, FunctionalCalendar },
     data() {
         return {
+            sets: [
+                [
+                    { id: 1, seat: "A1" },
+                    { id: 2, seat: "A2" },
+                    { id: 3, seat: "A3" },
+                    { id: 4, seat: "A4" },
+                    { id: 5, seat: "A5" },
+                    { id: 6, seat: "A6" }
+                ],
+                [
+                    { id: 7, seat: "A7" },
+                    { id: 8, seat: "A8" },
+                    { id: 9, seat: "A9" },
+                    { id: 10, seat: "A10" },
+                    { id: 11, seat: "A11" },
+                    { id: 12, seat: "A12" }
+                ]
+            ],
+            seats: [],
+            oneway: false,
             back: false,
             loadingPage: false,
             fullPage: true,
             changePage: true,
             counter: "",
+            allClass: ["Economy", "Business", "First"],
             titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
-            calendar: {},
+            calendar_from: {},
+            calendar_to: {},
             calendarConfigs: {
                 disabledDates: ["beforeToday"],
-                isAutoCloseable: true,
-                isModal: true,
-                isDateRange: true,
                 isDatePicker: true
             },
             input: {
+                class: "",
                 departDate: "",
                 returnDate: "",
                 noPass: "",
@@ -517,15 +657,20 @@ export default {
             error_passport: ""
         };
     },
-    beforeMount() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 2000);
-    },
+    // beforeMount() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //         this.loadingPage = false;
+    //     }, 2000);
+    // },
     methods: {
         showReturn() {
-            this.back = !this.back;
+            this.back = true;
+            this.oneway = false;
+        },
+        showOneway() {
+            this.back = false;
+            this.oneway = true;
         },
 
         addPass(index) {
