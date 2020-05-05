@@ -56,6 +56,8 @@ Route::prefix('backend')->group(function () {
     Route::post('/editPrice','BackendController@editPrice');
     Route::post('/addNewWork','BackendController@addNewWork');
     Route::post('/getflightdetail','BackendController@getflightdetail');
+    Route::post('/getworkday','BackendController@getworkday');
+    Route::post('/updateWorkStatus','BackendController@updateWorkStatus');
     // Analytic
     Route::post('/analytic1_show','BackendController@analytic1_show');
     Route::get('/analytic1_get','BackendController@analytic1_get');
