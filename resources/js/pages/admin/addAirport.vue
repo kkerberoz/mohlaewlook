@@ -147,12 +147,12 @@ export default {
             errors: []
         };
     },
-    beforeMount() {
-        this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 1000);
-    },
+    // beforeMount() {
+    //     this.loadingPage = true;
+    //     setTimeout(() => {
+    //         this.loadingPage = false;
+    //     }, 1000);
+    // },
     methods: {
         userInput_id() {
             if (this.error_airportID != null) {
