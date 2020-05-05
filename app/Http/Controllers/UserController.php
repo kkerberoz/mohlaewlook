@@ -49,23 +49,6 @@ class UserController extends Controller
         if (isset($emailCheck)) {
             return response()->json(['errorE' => 1, 'errorU' => 0]);
         } else {
-            // $count = Customer::count();
-            // if ($count < 10)
-            //     $value = '0000000' . (string) $count;
-            // else if ($count >= 10 && $count < 100)
-            //     $value = '000000' . (string) $count;
-            // else if ($count >= 100 && $count < 1000)
-            //     $value = '00000' . (string) $count;
-            // else if ($count >= 1000 && $count < 10000)
-            //     $value = '0000' . (string) $count;
-            // else if ($count >= 10000 && $count < 100000)
-            //     $value = '000' . (string) $count;
-            // else if ($count >= 100000 && $count < 1000000)
-            //     $value = '00' . (string) $count;
-            // else if ($count >= 1000000 && $count < 10000000)
-            //     $value = '0' . (string) $count;
-            // else if ($count >= 10000000 && $count < 100000000)
-            //     $value = (string) $count;
 
             $user_id_search = Customer::select('user_id')->where('user_id', 'LIKE', "%" . 'CST' . "%")->get();
             if (!sizeof($user_id_search)) $user_id = 'CST' . "00000001";
@@ -147,7 +130,7 @@ class UserController extends Controller
                 $ticketCount = Ticket::where('class_name', $class)->where('flight_id', $flight['flight_id'])->count();
                 $class_type = (!strcmp($class, "Economy")) ? "eco_cap" : ((!strcmp($class, "Business")) ? "bus_cap" : "first_cap");
                 if($flight_detail[0]->$class_type - $ticketCount > $no_of_passenger){
-                    array_push($avaliable_flight, $flight_detail[0]);
+                    array_push($avaliable_flight, $flight);
                 }
             }
         }

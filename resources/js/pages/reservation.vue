@@ -795,7 +795,6 @@ export default {
                     passport: ""
                 }
             ],
-
             error_departDate: "",
             error_returnDate: "",
             error_flightTo: "",
@@ -809,7 +808,15 @@ export default {
             error_dob: "",
             error_national: "",
             error_idcard: "",
-            error_passport: ""
+            error_passport: "",
+            ///
+            temp_back: null,
+            temp_calendar_to: null,
+            temp_calendar_from: null,
+            temp_flightTo: null,
+            temp_flightFrom: null,
+            temp_class: null,
+            temp_passenger: null
         };
     },
     beforeMount() {
@@ -852,7 +859,15 @@ export default {
     },
     beforeUpdate(){
         if((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate &&
-            !!this.input.flightTo && !!this.input.flightFrom && !!this.input.class){
+            !!this.input.flightTo && !!this.input.flightFrom && !!this.input.class &&
+            (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate ||
+            this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo ||
+            this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input.class || this.passengers.length != this.temp_passenger)){
+            //*---------------------------------------------------------------------------------------------------*//
+            this.temp_back = this.back, this.temp_calendar_to = this.calendar_to.selectedDate;
+            this.temp_calendar_from = this.calendar_from.selectedDate, this.temp_flightTo = this.input.flightTo;
+            this.temp_flightFrom = this.input.flightFrom, this.temp_class = this.input.class, this.temp_passenger = this.passengers.length;
+
             this.input.departDate = this.calendar_from.selectedDate;
             this.input.returnDate = this.calendar_to.selectedDate;
             let data = {
