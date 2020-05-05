@@ -121,4 +121,10 @@ class UserController extends Controller
 
         return response()->json(true, 200);
     }
+
+    public function reserveSendData(Request $request){
+        $passenger_array = $request->passenger;
+        $seat_array = $request->seat;
+
+    }
 }

@@ -26,6 +26,7 @@ Route::prefix('user')->group(function () {
     Route::post('/login', 'UserController@login');
     Route::post('/regis', 'UserController@register');
     Route::post('/logout', 'UserController@logout');
+    Route::post('/reserveSendData','UserController@reserveSendData');
 });
 
 //route for employee
