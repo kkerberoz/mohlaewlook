@@ -234,6 +234,10 @@ export default {
     },
 
     beforeMount() {
+        axios.post("/api/user/reserveSendData").then(response => {
+            console.log(response.data);
+
+        });
         this.loadingPage = true;
         axios.get("/api/backend/getPrice").then(response => {
             this.flights = response.data;
