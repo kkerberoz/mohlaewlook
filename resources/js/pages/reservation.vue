@@ -231,173 +231,83 @@
                             id="card-reservation"
                             v-show="!changePage"
                         >
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="plane">
-                                        <div class="cockpit">
-                                            <h2 style="margin-top:80px">
-                                                Please select a seat
-                                            </h2>
-                                        </div>
-                                        <div
-                                            class="exit exit--front fuselage"
-                                        ></div>
-                                        <ol class="cabin fuselage">
-                                            <li
-                                                class="row row--1"
-                                                style="padding-left:35px"
-                                            >
-                                                <ol class="seats" type="A">
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="1A"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="1A"
-                                                            >1A</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="1B"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="1B"
-                                                            >1B</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="1C"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="1C"
-                                                            >1C</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            disabled
-                                                            id="1D"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="1D"
-                                                            >Occupied</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="1E"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="1E"
-                                                            >1E</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="1F"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="1F"
-                                                            >1F</label
-                                                        >
-                                                    </li>
-                                                </ol>
-                                            </li>
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <div class="container-xl">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="plane">
+                                            <div class="cockpit">
+                                                <h2 style="margin-top:80px">
+                                                    Please select a seat
+                                                    {{ seats }}
+                                                </h2>
+                                            </div>
+                                            <div
+                                                class="exit exit--front fuselage"
+                                            ></div>
 
-                                            <li
-                                                class="row row--2"
-                                                style="padding-left:35px"
-                                            >
-                                                <ol class="seats" type="A">
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="2A"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="2A"
-                                                            >2A</label
+                                            <ol class="cabin fuselage">
+                                                <li
+                                                    class="row row--1"
+                                                    style="padding:25px"
+                                                >
+                                                    <ol
+                                                        class="seats"
+                                                        v-for="(set, i) in sets"
+                                                        :key="i"
+                                                    >
+                                                        <li
+                                                            class="seat"
+                                                            v-for="(n,
+                                                            k) in set"
+                                                            :key="k"
                                                         >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="2B"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="2B"
-                                                            >2B</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="2C"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="2C"
-                                                            >2C</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="2D"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="2D"
-                                                            >2D</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="2E"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="2E"
-                                                            >2E</label
-                                                        >
-                                                    </li>
-                                                    <li class="seat">
-                                                        <input
-                                                            type="checkbox"
-                                                            id="2F"
-                                                        />
-                                                        <label
-                                                            style="padding:5px; color:#fff"
-                                                            for="2F"
-                                                            >2F</label
-                                                        >
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                        </ol>
-                                        <div
-                                            class="exit exit--back fuselage"
-                                        ></div>
+                                                            <input
+                                                                style="padding:5px;"
+                                                                :value="n.id"
+                                                                :id="n.id"
+                                                                type="checkbox"
+                                                                v-model="seats"
+                                                            />
+                                                            <label
+                                                                style="padding:5px; color:#fff; font-size:10px"
+                                                                :for="n.id"
+                                                                >{{
+                                                                    n.seat
+                                                                }}</label
+                                                            >
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                            </ol>
+
+                                            <div
+                                                class="exit exit--back fuselage"
+                                            ></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
+                            <!-- seat -->
                             <hr class="mb-4" />
                             <div class="row">
                                 <div class="col-md-12">
@@ -674,6 +584,25 @@ export default {
     components: { Multiselect, Loading, FunctionalCalendar },
     data() {
         return {
+            sets: [
+                [
+                    { id: 1, seat: "A1" },
+                    { id: 2, seat: "A2" },
+                    { id: 3, seat: "A3" },
+                    { id: 4, seat: "A4" },
+                    { id: 5, seat: "A5" },
+                    { id: 6, seat: "A6" }
+                ],
+                [
+                    { id: 7, seat: "A7" },
+                    { id: 8, seat: "A8" },
+                    { id: 9, seat: "A9" },
+                    { id: 10, seat: "A10" },
+                    { id: 11, seat: "A11" },
+                    { id: 12, seat: "A12" }
+                ]
+            ],
+            seats: [],
             oneway: false,
             back: false,
             loadingPage: false,

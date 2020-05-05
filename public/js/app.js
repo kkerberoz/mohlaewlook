@@ -4088,6 +4088,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -8495,96 +8498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -8597,6 +8510,44 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      sets: [[{
+        id: 1,
+        seat: "A1"
+      }, {
+        id: 2,
+        seat: "A2"
+      }, {
+        id: 3,
+        seat: "A3"
+      }, {
+        id: 4,
+        seat: "A4"
+      }, {
+        id: 5,
+        seat: "A5"
+      }, {
+        id: 6,
+        seat: "A6"
+      }], [{
+        id: 7,
+        seat: "A7"
+      }, {
+        id: 8,
+        seat: "A8"
+      }, {
+        id: 9,
+        seat: "A9"
+      }, {
+        id: 10,
+        seat: "A10"
+      }, {
+        id: 11,
+        seat: "A11"
+      }, {
+        id: 12,
+        seat: "A12"
+      }]],
+      seats: [],
       oneway: false,
       back: false,
       loadingPage: false,
@@ -13378,7 +13329,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
 
 // exports
 
@@ -54300,6 +54251,12 @@ var staticRenderFns = [
           _vm._v(
             "\n                                            First class Price\n                                        "
           )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Action\n                                        "
+          )
         ])
       ])
     ])
@@ -59512,7 +59469,125 @@ var render = function() {
                       attrs: { id: "card-reservation" }
                     },
                     [
-                      _vm._m(4),
+                      _c("div", { staticClass: "container-xl" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "plane" }, [
+                              _c("div", { staticClass: "cockpit" }, [
+                                _c(
+                                  "h2",
+                                  { staticStyle: { "margin-top": "80px" } },
+                                  [
+                                    _vm._v(
+                                      "\n                                                Please select a seat\n                                                " +
+                                        _vm._s(_vm.seats) +
+                                        "\n                                            "
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "exit exit--front fuselage"
+                              }),
+                              _vm._v(" "),
+                              _c("ol", { staticClass: "cabin fuselage" }, [
+                                _c(
+                                  "li",
+                                  {
+                                    staticClass: "row row--1",
+                                    staticStyle: { padding: "25px" }
+                                  },
+                                  _vm._l(_vm.sets, function(set, i) {
+                                    return _c(
+                                      "ol",
+                                      { key: i, staticClass: "seats" },
+                                      _vm._l(set, function(n, k) {
+                                        return _c(
+                                          "li",
+                                          { key: k, staticClass: "seat" },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.seats,
+                                                  expression: "seats"
+                                                }
+                                              ],
+                                              staticStyle: { padding: "5px" },
+                                              attrs: {
+                                                id: n.id,
+                                                type: "checkbox"
+                                              },
+                                              domProps: {
+                                                value: n.id,
+                                                checked: Array.isArray(
+                                                  _vm.seats
+                                                )
+                                                  ? _vm._i(_vm.seats, n.id) > -1
+                                                  : _vm.seats
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$a = _vm.seats,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = n.id,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        (_vm.seats = $$a.concat(
+                                                          [$$v]
+                                                        ))
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        (_vm.seats = $$a
+                                                          .slice(0, $$i)
+                                                          .concat(
+                                                            $$a.slice($$i + 1)
+                                                          ))
+                                                    }
+                                                  } else {
+                                                    _vm.seats = $$c
+                                                  }
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              {
+                                                staticStyle: {
+                                                  padding: "5px",
+                                                  color: "#fff",
+                                                  "font-size": "10px"
+                                                },
+                                                attrs: { for: n.id }
+                                              },
+                                              [_vm._v(_vm._s(n.seat))]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  }),
+                                  0
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "exit exit--back fuselage"
+                              })
+                            ])
+                          ])
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("hr", { staticClass: "mb-4" }),
                       _vm._v(" "),
@@ -60138,210 +60213,6 @@ var staticRenderFns = [
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
       _vm._v("To :\n                                    ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "plane" }, [
-          _c("div", { staticClass: "cockpit" }, [
-            _c("h2", { staticStyle: { "margin-top": "80px" } }, [
-              _vm._v(
-                "\n                                            Please select a seat\n                                        "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "exit exit--front fuselage" }),
-          _vm._v(" "),
-          _c("ol", { staticClass: "cabin fuselage" }, [
-            _c(
-              "li",
-              {
-                staticClass: "row row--1",
-                staticStyle: { "padding-left": "35px" }
-              },
-              [
-                _c("ol", { staticClass: "seats", attrs: { type: "A" } }, [
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1A" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1A" }
-                      },
-                      [_vm._v("1A")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1B" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1B" }
-                      },
-                      [_vm._v("1B")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1C" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1C" }
-                      },
-                      [_vm._v("1C")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", {
-                      attrs: { type: "checkbox", disabled: "", id: "1D" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1D" }
-                      },
-                      [_vm._v("Occupied")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1E" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1E" }
-                      },
-                      [_vm._v("1E")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1F" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1F" }
-                      },
-                      [_vm._v("1F")]
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "row row--2",
-                staticStyle: { "padding-left": "35px" }
-              },
-              [
-                _c("ol", { staticClass: "seats", attrs: { type: "A" } }, [
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2A" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2A" }
-                      },
-                      [_vm._v("2A")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2B" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2B" }
-                      },
-                      [_vm._v("2B")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2C" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2C" }
-                      },
-                      [_vm._v("2C")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2D" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2D" }
-                      },
-                      [_vm._v("2D")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2E" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2E" }
-                      },
-                      [_vm._v("2E")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2F" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2F" }
-                      },
-                      [_vm._v("2F")]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "exit exit--back fuselage" })
-        ])
-      ])
     ])
   }
 ]
