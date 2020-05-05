@@ -12,7 +12,6 @@
 }
 
 .cockpit {
-  padding: 20px;
   height: 250px;
   position: relative;
   overflow: hidden;
@@ -34,7 +33,6 @@
 }
 
 .cockpit h1 {
-  padding: 20px;
   width: 60%;
   margin: 100px auto 35px auto;
 }
@@ -67,13 +65,40 @@
   right: 0;
 }
 
+.toliet {
+  position: relative;
+  height: 50px;
+}
+
+.toliet:before,
+.toliet:after {
+  content: "TOLIET";
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0px 2px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  display: block;
+  position: absolute;
+  background: pink;
+  color: white;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.toliet:before {
+  left: 0;
+}
+
+.toliet:after {
+  right: 0;
+}
+
 .fuselage {
   border-right: 5px solid #d8d8d8;
   border-left: 5px solid #d8d8d8;
 }
 
 ol {
-  padding: 20px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -93,10 +118,6 @@ ol {
   position: relative;
 }
 
-.seat:nth-child(3) {
-  margin-right: 14.2857142857%;
-}
-
 .seat input[type=checkbox] {
   position: absolute;
   opacity: 0;
@@ -114,6 +135,7 @@ ol {
 
 .seat input[type=checkbox]:disabled + label {
   background: #dddddd;
+  width: 30px;
   text-indent: -9999px;
   overflow: hidden;
 }
