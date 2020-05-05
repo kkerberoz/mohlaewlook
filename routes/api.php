@@ -28,6 +28,7 @@ Route::prefix('user')->group(function () {
     Route::post('/logout', 'UserController@logout');
     Route::get('/getLocation', 'UserController@getLocation');
     Route::post('/getFlight', 'UserController@getFlight');
+    Route::post('/reserveSendData','UserController@reserveSendData');
 });
 
 //route for employee
@@ -58,6 +59,8 @@ Route::prefix('backend')->group(function () {
     Route::post('/editPrice','BackendController@editPrice');
     Route::post('/addNewWork','BackendController@addNewWork');
     Route::post('/getflightdetail','BackendController@getflightdetail');
+    Route::post('/getworkday','BackendController@getworkday');
+    Route::post('/updateWorkStatus','BackendController@updateWorkStatus');
     // Analytic
     Route::post('/analytic1_show','BackendController@analytic1_show');
     Route::get('/analytic1_get','BackendController@analytic1_get');

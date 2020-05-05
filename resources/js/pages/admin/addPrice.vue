@@ -34,6 +34,9 @@
                                             <th scope="col">
                                                 First class Price
                                             </th>
+                                            <th scope="col">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody

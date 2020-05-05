@@ -4088,6 +4088,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -5453,9 +5456,247 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-functional-calendar */ "./node_modules/vue-functional-calendar/index.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    FunctionalCalendar: vue_functional_calendar__WEBPACK_IMPORTED_MODULE_0__["FunctionalCalendar"],
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  data: function data() {
+    return {
+      showTotal: false,
+      isLoading: false,
+      loadingPage: false,
+      fullPage: true,
+      works: [],
+      showWork: [],
+      data: [],
+      id: "",
+      user_id: "",
+      flights: [],
+      selected: [],
+      calendar: {},
+      calendarConfigs: {
+        isMultipleDatePicker: true,
+        markedDates: []
+      },
+      error_user_id: "",
+      error_date: ""
+    };
+  },
+  methods: {
+    clickDay: function clickDay() {
+      this.selected = this.calendar.selectedDates;
+    },
+    cancel: function cancel(work_id) {
+      swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, change it!"
+      }).then(function (result) {
+        if (result.value) {
+          var data = {
+            work_id: work_id
+          };
+          axios.post('/api/backend/updateWorkStatus', data).then(function (response) {
+            console.log(response.data);
+          });
+        } else {
+          swal.fire("Cancelled", "Status work date has not changed.", "error");
+        }
+      });
+    },
+    submit: function submit(e) {
+      var _this = this;
+
+      //console.log(this.user_id,this.selected);
+      this.isLoading = true;
+
+      if (this.selected.length || this.user_id) {
+        e.preventDefault();
+        var data = {
+          user_id: this.user_id,
+          array_date: this.selected
+        };
+        axios.post("/api/backend/getworkday", data).then(function (response) {
+          _this.works = response.data;
+          console.log(_this.works);
+          _this.showTotal = true;
+          _this.isLoading = false;
+        })["catch"](function (error) {
+          swal.fire("Some thing went wrong!", "Cilck the button to continue!", "warning");
+          _this.isLoading = false;
+        });
+      } else {
+        this.isLoading = false;
+        swal.fire("Please select date or user id before submit!", "Cilck the button to continue!", "warning");
+      }
+    }
+  } // beforeMount() {
+  //     this.loadingPage = true;
+  //     const today = new Date().toLocaleDateString();
+  //     this.calendarConfigs.disabledDates.push(today);
+  //     axios.get("/api/admin/init").then(response => {
+  //         this.id = response.data.id;
+  //         axios
+  //             .post("/api/backend/getflightdetail", { id: this.id })
+  //             .then(response => {
+  //                 // console.log(response.data);
+  //                 this.user_id = response.data[0];
+  //                 this.works = response.data[1];
+  //             });
+  //         axios
+  //             .get(`/api/backend/schedule/${this.id}`)
+  //             .then(response => {
+  //                 //console.log(response.data);
+  //                 response.data.forEach(each_day => {
+  //                     var Sdate = each_day["work_date"].split("-");
+  //                     var newDate =
+  //                         Number(Sdate[2]) +
+  //                         "/" +
+  //                         Number(Sdate[1]) +
+  //                         "/" +
+  //                         Sdate[0];
+  //                     if (each_day["confirm_status"] == "confirm") {
+  //                         this.calendarConfigs.markedDates.push({
+  //                             date: newDate,
+  //                             class: "green-line"
+  //                         });
+  //                         this.calendarConfigs.disabledDates.push(newDate);
+  //                     } else if (each_day["confirm_status"] == "free") {
+  //                         //console.log(newDate);
+  //                         this.calendarConfigs.markedDates.push({
+  //                             date: newDate,
+  //                             class: "grey-line"
+  //                         });
+  //                         this.calendarConfigs.disabledDates.push(newDate);
+  //                     }
+  //                 });
+  //                 this.loadingPage = false;
+  //             })
+  //             .catch(error => {
+  //                 this.loadingPage = false;
+  //             });
+  //     });
+  // }
+
+});
 
 /***/ }),
 
@@ -8589,6 +8830,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8601,6 +8864,154 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      firsts: [[{
+        id: 1,
+        seat: "1A",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 2,
+        seat: "1B",
+        status: false
+      }, {
+        id: 3,
+        seat: "1C",
+        status: true
+      }, {
+        id: 4,
+        seat: "1D",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 5,
+        seat: "1E",
+        status: false
+      }], [{
+        id: 6,
+        seat: "2A",
+        status: true
+      }, {
+        id: 7,
+        seat: "2B",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 8,
+        seat: "2C",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 9,
+        seat: "2D",
+        status: false
+      }, {
+        id: 10,
+        seat: "2E",
+        status: false
+      }]],
+      buss: [[{
+        id: 11,
+        seat: "3A",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 12,
+        seat: "3B",
+        status: false
+      }, {
+        id: 13,
+        seat: "3C",
+        status: false
+      }, {
+        id: 14,
+        seat: "3D",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 15,
+        seat: "3E",
+        status: true
+      }], [{
+        id: 16,
+        seat: "4A",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 17,
+        seat: "4B",
+        status: false
+      }, {
+        id: 18,
+        seat: "4C",
+        status: true
+      }, {
+        id: 19,
+        seat: "4D",
+        status: false
+      }, {
+        patt: true
+      }, {
+        id: 20,
+        seat: "4E",
+        status: true
+      }]],
+      ecos: [[{
+        id: 21,
+        seat: "5A",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 22,
+        seat: "5B",
+        status: true
+      }, {
+        id: 23,
+        seat: "5C",
+        status: true
+      }, {
+        id: 24,
+        seat: "5D",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 25,
+        seat: "5E",
+        status: true
+      }], [{
+        id: 26,
+        seat: "6A",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 27,
+        seat: "6B",
+        status: true
+      }, {
+        id: 28,
+        seat: "6C",
+        status: true
+      }, {
+        id: 29,
+        seat: "6D",
+        status: true
+      }, {
+        patt: true
+      }, {
+        id: 30,
+        seat: "6E",
+        status: true
+      }]],
+      seats: [],
       oneway: false,
       back: false,
       loadingPage: false,
@@ -13277,6 +13688,25 @@ exports.push([module.i, "* {\n  box-sizing: border-box;\n}\n\n/* Float four colu
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "* {\n  box-sizing: border-box;\n}\n\n/* Float four columns side by side */\n.column {\n  float: left;\n  width: 50%;\n  padding: 0 10px;\n  margin-top: 10px;\n}\n\n/* Remove extra left and right margins, due to padding */\n.row-reservation {\n  margin: 0 -5px;\n}\n\n/* Clear floats after the columns */\n.row-reservation:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n\n/* Responsive columns */\n@media screen and (max-width: 600px) {\n.column {\n    width: 100%;\n    display: block;\n    margin-bottom: 20px;\n}\n}\n/* Style the counter cards */\n.card-reservation {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  padding: 16px;\n  text-align: center;\n  color: #fff;\n  background-color: #f79c65;\n}\n.green-line {\n  width: 30px;\n  line-height: 30px;\n  color: #ffffff;\n  background-color: #45cc0d;\n  border-radius: 100%;\n  margin: 0 auto;\n}\n.grey-line {\n  width: 30px;\n  line-height: 30px;\n  color: #ffffff;\n  background-color: #a9a9a9;\n  border-radius: 100%;\n  margin: 0 auto;\n}\n.green-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #45cc0d;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}\n.orange-point {\n  position: absolute;\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background-color: #ebae05;\n  bottom: 3px;\n  left: calc(50% - 4px);\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loading-overlay/dist/vue-loading.css":
 /*!***********************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loading-overlay/dist/vue-loading.css ***!
@@ -13403,7 +13833,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -44306,6 +44736,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./manageSchedule.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/navbar.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/navbar.vue?vue&type=style&index=0&lang=css& ***!
@@ -51746,20 +52206,6 @@ var render = function() {
             "div",
             { staticClass: "col-md-6" },
             [
-              _c(
-                "div",
-                _vm._l(_vm.selected, function(data, i) {
-                  return _c("span", { key: i }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(data.date) +
-                        "\n                    "
-                    )
-                  ])
-                }),
-                0
-              ),
-              _vm._v(" "),
               _c("functional-calendar", {
                 staticClass: "calendar",
                 attrs: { configs: _vm.calendarConfigs },
@@ -54325,6 +54771,12 @@ var staticRenderFns = [
           _vm._v(
             "\n                                            First class Price\n                                        "
           )
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v(
+            "\n                                            Action\n                                        "
+          )
         ])
       ])
     ])
@@ -55919,9 +56371,243 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    { staticClass: "container-fulid" },
+    [
+      _c("loading", {
+        attrs: {
+          active: _vm.loadingPage,
+          "can-cancel": false,
+          "is-full-page": _vm.fullPage,
+          opacity: 0.9,
+          color: "#f87a2b",
+          loader: "bars",
+          "background-color": "#fff"
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.loadingPage = $event
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-xl" }, [
+        _c("h1", [_vm._v("Work Schedule")]),
+        _vm._v(" "),
+        _c("hr", { staticClass: "mb-4 mt-4" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row flex-center" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-6" },
+            [
+              _c("functional-calendar", {
+                staticClass: "calendar",
+                attrs: { configs: _vm.calendarConfigs },
+                on: { choseDay: _vm.clickDay },
+                model: {
+                  value: _vm.calendar,
+                  callback: function($$v) {
+                    _vm.calendar = $$v
+                  },
+                  expression: "calendar"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", [
+            _c("span", { staticClass: "form-group" }, [
+              _c("div", [
+                _c("label", [_vm._v("User ID")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user_id,
+                      expression: "user_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: {
+                    "is-invalid": _vm.error_user_id
+                  },
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.user_id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.user_id = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\r\n                                " +
+                      _vm._s(_vm.error_user_id) +
+                      "\r\n                            "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                staticStyle: { padding: "20px", "margin-top": "10px" },
+                attrs: { type: "submit", disabled: _vm.isLoading },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.submit($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.isLoading,
+                        expression: "!isLoading"
+                      }
+                    ]
+                  },
+                  [_vm._v("  Find work days  ")]
+                ),
+                _vm._v(" "),
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isLoading,
+                      expression: "isLoading"
+                    }
+                  ],
+                  staticClass: "fas fa-spinner fa-pulse"
+                })
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr", { staticClass: "mb-4 mt-4" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.showTotal,
+                expression: "showTotal"
+              }
+            ],
+            staticClass: "table-responsive"
+          },
+          [
+            _c(
+              "table",
+              { staticClass: "table" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.works, function(work, id) {
+                  return _c("tbody", { key: id }, [
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(Number(id) + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.user_id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.title))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.surname))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.work_date))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.flight_id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.confirm_status))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn",
+                            staticStyle: { color: "Dodgerblue" },
+                            on: {
+                              click: function($event) {
+                                return _vm.cancel(work.work_id)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-window-close fa-2x"
+                            })
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                })
+              ],
+              2
+            )
+          ]
+        )
+      ])
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("User_id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Surname")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Work date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Flight ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action (cancel)")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -59545,7 +60231,369 @@ var render = function() {
                       attrs: { id: "card-reservation" }
                     },
                     [
-                      _vm._m(4),
+                      _c("div", { staticClass: "container-xl" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "plane" }, [
+                              _vm._m(4),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "exit exit--front fuselage"
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "ol",
+                                { staticClass: "cabin fuselage" },
+                                [
+                                  _c("h4", { staticClass: "flex-center" }, [
+                                    _vm._v(
+                                      "\n                                                First Class\n                                            "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.firsts, function(seatt, i) {
+                                    return _c(
+                                      "ol",
+                                      { key: i, staticClass: "seats" },
+                                      _vm._l(seatt, function(f, k) {
+                                        return _c(
+                                          "li",
+                                          { key: k, staticClass: "seat" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: !f.patt == true,
+                                                    expression:
+                                                      "\n                                                            !f.patt == true\n                                                        "
+                                                  }
+                                                ]
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.seats,
+                                                      expression: "seats"
+                                                    }
+                                                  ],
+                                                  staticStyle: {
+                                                    padding: "5px"
+                                                  },
+                                                  attrs: {
+                                                    id: f.id,
+                                                    disabled: f.status == true,
+                                                    type: "checkbox"
+                                                  },
+                                                  domProps: {
+                                                    value: f,
+                                                    checked: Array.isArray(
+                                                      _vm.seats
+                                                    )
+                                                      ? _vm._i(_vm.seats, f) >
+                                                        -1
+                                                      : _vm.seats
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a = _vm.seats,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = f,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.seats = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.seats = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.seats = $$c
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticStyle: {
+                                                      padding: "5px",
+                                                      color: "#fff",
+                                                      "font-size": "10px"
+                                                    },
+                                                    attrs: { for: f.id }
+                                                  },
+                                                  [_vm._v(_vm._s(f.seat))]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "toliet toliet--back fuselage"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("h4", { staticClass: "flex-center" }, [
+                                    _vm._v(
+                                      "\n                                                Business Class\n                                            "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.buss, function(seatt, i) {
+                                    return _c(
+                                      "ol",
+                                      { key: "a" + i, staticClass: "seats" },
+                                      _vm._l(seatt, function(f, k) {
+                                        return _c(
+                                          "li",
+                                          { key: "b" + k, staticClass: "seat" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: !f.patt == true,
+                                                    expression:
+                                                      "\n                                                            !f.patt == true\n                                                        "
+                                                  }
+                                                ]
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.seats,
+                                                      expression: "seats"
+                                                    }
+                                                  ],
+                                                  staticStyle: {
+                                                    padding: "5px"
+                                                  },
+                                                  attrs: {
+                                                    id: f.id,
+                                                    disabled: f.status == true,
+                                                    type: "checkbox"
+                                                  },
+                                                  domProps: {
+                                                    value: f,
+                                                    checked: Array.isArray(
+                                                      _vm.seats
+                                                    )
+                                                      ? _vm._i(_vm.seats, f) >
+                                                        -1
+                                                      : _vm.seats
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a = _vm.seats,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = f,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.seats = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.seats = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.seats = $$c
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticStyle: {
+                                                      padding: "5px",
+                                                      color: "#fff",
+                                                      "font-size": "10px"
+                                                    },
+                                                    attrs: { for: f.id }
+                                                  },
+                                                  [_vm._v(_vm._s(f.seat))]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "toliet toliet--back fuselage"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("h4", { staticClass: "flex-center" }, [
+                                    _vm._v(
+                                      "\n                                                Economy Class\n                                            "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.ecos, function(eco, e) {
+                                    return _c(
+                                      "ol",
+                                      { key: "c" + e, staticClass: "seats" },
+                                      _vm._l(eco, function(index, p) {
+                                        return _c(
+                                          "li",
+                                          { key: "d" + p, staticClass: "seat" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: !index.patt == true,
+                                                    expression:
+                                                      "\n                                                            !index.patt ==\n                                                                true\n                                                        "
+                                                  }
+                                                ]
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.seats,
+                                                      expression: "seats"
+                                                    }
+                                                  ],
+                                                  staticStyle: {
+                                                    padding: "5px"
+                                                  },
+                                                  attrs: {
+                                                    id: index.id,
+                                                    disabled:
+                                                      index.status == true,
+                                                    type: "checkbox"
+                                                  },
+                                                  domProps: {
+                                                    value: index,
+                                                    checked: Array.isArray(
+                                                      _vm.seats
+                                                    )
+                                                      ? _vm._i(
+                                                          _vm.seats,
+                                                          index
+                                                        ) > -1
+                                                      : _vm.seats
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a = _vm.seats,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = index,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            (_vm.seats = $$a.concat(
+                                                              [$$v]
+                                                            ))
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            (_vm.seats = $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                        }
+                                                      } else {
+                                                        _vm.seats = $$c
+                                                      }
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticStyle: {
+                                                      padding: "5px",
+                                                      color: "#fff",
+                                                      "font-size": "10px"
+                                                    },
+                                                    attrs: { for: index.id }
+                                                  },
+                                                  [_vm._v(_vm._s(index.seat))]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "toliet toliet--back"
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "exit exit--back fuselage"
+                              })
+                            ])
+                          ])
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("hr", { staticClass: "mb-4" }),
                       _vm._v(" "),
@@ -60071,60 +61119,68 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-footer flex-center" }, [
-                    _c(
-                      "button",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.changePage,
-                            expression: "changePage"
-                          }
-                        ],
-                        staticClass: "btn btn-block btn-login",
-                        staticStyle: { color: "#fff" },
-                        attrs: { id: "card-reservation", type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.changePage = !_vm.changePage
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Next\n                        "
-                        )
-                      ]
-                    ),
+                  _c("div", { staticClass: "card-footer " }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _vm.changePage
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block btn-login",
+                              staticStyle: { color: "#fff" },
+                              attrs: { id: "card-reservation", type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.changePage = !_vm.changePage
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Next\n                            "
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !_vm.changePage,
-                            expression: "!changePage"
-                          }
-                        ],
-                        staticClass: "btn btn-block btn-success",
-                        staticStyle: { color: "#fff" },
-                        attrs: { id: "card-reservation", type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.changePage = !_vm.changePage
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Back\n                        "
-                        )
-                      ]
-                    )
+                    _c("div", { staticClass: "col-md-12" }, [
+                      !_vm.changePage
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block btn-info",
+                              staticStyle: { color: "#fff" },
+                              attrs: { id: "card-reservation", type: "submit" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Submit\n                            "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.changePage
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block btn-success",
+                              staticStyle: { color: "#fff" },
+                              attrs: { id: "card-reservation", type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.changePage = !_vm.changePage
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Back\n                            "
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
                   ])
                 ]
               )
@@ -60177,203 +61233,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "plane" }, [
-          _c("div", { staticClass: "cockpit" }, [
-            _c("h2", { staticStyle: { "margin-top": "80px" } }, [
-              _vm._v(
-                "\n                                            Please select a seat\n                                        "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "exit exit--front fuselage" }),
-          _vm._v(" "),
-          _c("ol", { staticClass: "cabin fuselage" }, [
-            _c(
-              "li",
-              {
-                staticClass: "row row--1",
-                staticStyle: { "padding-left": "35px" }
-              },
-              [
-                _c("ol", { staticClass: "seats", attrs: { type: "A" } }, [
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1A" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1A" }
-                      },
-                      [_vm._v("1A")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1B" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1B" }
-                      },
-                      [_vm._v("1B")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1C" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1C" }
-                      },
-                      [_vm._v("1C")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", {
-                      attrs: { type: "checkbox", disabled: "", id: "1D" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1D" }
-                      },
-                      [_vm._v("Occupied")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1E" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1E" }
-                      },
-                      [_vm._v("1E")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "1F" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "1F" }
-                      },
-                      [_vm._v("1F")]
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "row row--2",
-                staticStyle: { "padding-left": "35px" }
-              },
-              [
-                _c("ol", { staticClass: "seats", attrs: { type: "A" } }, [
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2A" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2A" }
-                      },
-                      [_vm._v("2A")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2B" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2B" }
-                      },
-                      [_vm._v("2B")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2C" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2C" }
-                      },
-                      [_vm._v("2C")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2D" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2D" }
-                      },
-                      [_vm._v("2D")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2E" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2E" }
-                      },
-                      [_vm._v("2E")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "seat" }, [
-                    _c("input", { attrs: { type: "checkbox", id: "2F" } }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticStyle: { padding: "5px", color: "#fff" },
-                        attrs: { for: "2F" }
-                      },
-                      [_vm._v("2F")]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "exit exit--back fuselage" })
-        ])
+    return _c("div", { staticClass: "cockpit" }, [
+      _c("h2", { staticStyle: { "margin-top": "90px" } }, [
+        _vm._v(
+          "\n                                                Please select a seat\n                                            "
+        )
       ])
     ])
   }
@@ -76550,7 +77414,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./manageSchedule.vue?vue&type=template&id=55d7a676& */ "./resources/js/pages/admin/manageSchedule.vue?vue&type=template&id=55d7a676&");
 /* harmony import */ var _manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./manageSchedule.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _manageSchedule_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./manageSchedule.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -76558,7 +77424,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__["render"],
   _manageSchedule_vue_vue_type_template_id_55d7a676___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -76587,6 +77453,22 @@ component.options.__file = "resources/js/pages/admin/manageSchedule.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./manageSchedule.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss& ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./manageSchedule.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/manageSchedule.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_manageSchedule_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

@@ -153,4 +153,9 @@ class UserController extends Controller
         }
         return response() -> JSON($avaliable_flight);
     }
+    public function reserveSendData(Request $request){
+        $passenger_array = $request->passenger;
+        $seat_array = $request->seat;
+
+    }
 }
