@@ -13078,7 +13078,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\n    font-family: \"Kanit\", sans-serif;\n    font-size: 20px;\n    color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\r\n    font-family: \"Kanit\", sans-serif;\r\n    font-size: 20px;\r\n    color: #fff;\n}\r\n", ""]);
 
 // exports
 
