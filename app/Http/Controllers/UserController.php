@@ -170,7 +170,7 @@ class UserController extends Controller
                 $passenger->passenger_surname = $each_passenger['surname'];
                 $passenger->passenger_DOB = $each_passenger['dob'];
                 $passenger->gender = $each_passenger['gender'];
-                $passenge->passenger_nationality = $each_passenger['national'];
+                $passenger->passenger_nationality = $each_passenger['national'];
                 $passenger->passenger_religion = $each_passenger['religion'];
                 $passenger->passenger_idcard = $each_passenger['idcard'];
                 $passenger->passenger_passport = $each_passenger['passport'];
@@ -201,7 +201,7 @@ class UserController extends Controller
                 $passenger->passenger_surname = $each_passenger['surname'];
                 $passenger->passenger_DOB = $each_passenger['dob'];
                 $passenger->gender = $each_passenger['gender'];
-                $passenge->passenger_nationality = $each_passenger['national'];
+                $passenger->passenger_nationality = $each_passenger['national'];
                 $passenger->passenger_religion = $each_passenger['religion'];
                 $passenger->passenger_idcard = $each_passenger['idcard'];
                 $passenger->passenger_passport = $each_passenger['passport'];
@@ -218,7 +218,7 @@ class UserController extends Controller
         $payment = new Payment;
         $reserve_id = Reservation::select('reservation_id')->where('user_id',$user_id)->where('reservation_datetime',$currrent_date)->first();
         $payment->payment_method = $payment_method;
-        $patment->payment_card = $payment_card;
+        $payment->payment_card = $payment_card;
         $payment ->total_price = $price;
         $payment->reservaton_id = $reserve_id;
         $payment->reservation_status = "confirm";
