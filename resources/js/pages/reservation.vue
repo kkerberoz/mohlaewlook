@@ -236,7 +236,12 @@
                                         v-for="(showFlight, i) in queryFlight"
                                         :key="i"
                                     >
-                                        <div class="card-reser">
+                                        <div
+                                            class="card-reser"
+                                            v-bind:style="{
+                                                backgroundColor: activeColor
+                                            }"
+                                        >
                                             <div class="row ml-4">
                                                 <h4>
                                                     Flight Number:
@@ -319,6 +324,19 @@
                                                     </h3>
                                                 </div>
                                             </div>
+                                            <button
+                                                @click="
+                                                    departSelected(showFlight)
+                                                "
+                                                class="btn btn-block bg-warning"
+                                            >
+                                                <span v-show="!seleted"
+                                                    >Select</span
+                                                >
+                                                <span v-show="seleted"
+                                                    >Selected</span
+                                                >
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -979,6 +997,9 @@ export default {
                     { id: 30, seat: "6E", status: true }
                 ]
             ],
+            alteredState: false,
+            seleted: false,
+            activeColor: "",
             seats: [],
             queryFlight: [],
             oneway: false,
@@ -1068,6 +1089,16 @@ export default {
         });
     },
     methods: {
+        departSelected(showFlight) {
+            this.seleted = !this.seleted;
+            if (this.alteredState) {
+                this.activeColor = "#2197e6 ";
+                this.alteredState = false;
+            } else {
+                this.activeColor = "#f79c65";
+                this.alteredState = true;
+            }
+        },
         showReturn() {
             this.back = true;
             this.oneway = false;
