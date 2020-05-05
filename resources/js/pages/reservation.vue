@@ -136,6 +136,7 @@
                                         </span>
                                         <multiselect
                                             label="name"
+                                            openDirection="bottom"
                                             v-model="input.flightFrom"
                                             :options="airports"
                                             :show-labels="false"
@@ -159,6 +160,7 @@
                                         </span>
                                         <multiselect
                                             label="name"
+                                            openDirection="bottom"
                                             v-model="input.flightTo"
                                             :options="airports"
                                             :show-labels="false"

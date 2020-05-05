@@ -214,11 +214,7 @@ class UserController extends Controller
         $reserve_id = Reservation::select('reservation_id')->where('user_id', $user_id)->where('reservation_datetime', $currrent_date)->first();
         $payment->payment_method = $payment_method;
         $payment->payment_card = $payment_card;
-<<<<<<< refs/remotes/origin/master
-        $payment ->total_price = $price;
-=======
         $payment->total_price = $price;
->>>>>>> fix payment
         $payment->reservaton_id = $reserve_id;
         $payment->reservation_status = "confirm";
         $payment->save();
