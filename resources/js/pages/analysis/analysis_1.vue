@@ -28,7 +28,7 @@
                                 <multiselect
                                     v-model="selected"
                                     label="year"
-                                    @select="queryAnalyssis"
+                                    @input="queryAnalyssis"
                                     :options="years"
                                     :searchable="true"
                                     :multiple="false"
@@ -37,7 +37,7 @@
                                     placeholder="Choose Year"
                                 ></multiselect>
                             </span>
-                            <div class="table-responsive">
+                            <div class="table-responsive" v-show="showTotal">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -62,7 +62,7 @@
                                     </tbody>
 
                                     <tfoot>
-                                        <tr v-show="showTotal">
+                                        <tr>
                                             <td>&nbsp;</td>
                                             <td>Total</td>
                                             <td>{{ sum }}</td>
@@ -97,28 +97,36 @@ export default {
     },
     methods: {
         queryAnalyssis() {
-            this.loadingPage = true;
-            var year = this.selected;
-            this.sum = 0;
-            this.showTotal = true;
-            axios
-                .post("/api/backend/analytic1_show", year)
-                .then(response => {
-                    this.data = response.data.analysis;
-                    this.data.forEach(each_data => {
-                        this.sum += each_data["flight_no_count"];
-                    });
+            if (this.selected == null) {
+                this.loadingPage = true;
+                setTimeout(() => {
                     this.loadingPage = false;
-                    // console.log(this.data);
-                })
-                .catch(error => {
-                    this.showTotal = false;
-                    swal.fire(
-                        "Error.",
-                        "Cilck the button to continue!",
-                        "error"
-                    );
-                });
+                }, 500);
+                this.showTotal = false;
+            } else {
+                this.loadingPage = true;
+                var year = this.selected;
+                this.sum = 0;
+                this.showTotal = true;
+                axios
+                    .post("/api/backend/analytic1_show", year)
+                    .then(response => {
+                        this.data = response.data.analysis;
+                        this.data.forEach(each_data => {
+                            this.sum += each_data["flight_no_count"];
+                        });
+                        this.loadingPage = false;
+                        // console.log(this.data);
+                    })
+                    .catch(error => {
+                        this.showTotal = false;
+                        swal.fire(
+                            "Error.",
+                            "Cilck the button to continue!",
+                            "error"
+                        );
+                    });
+            }
         }
     },
     beforeMount() {
