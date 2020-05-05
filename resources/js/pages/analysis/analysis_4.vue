@@ -54,7 +54,7 @@
                                     ></multiselect>
                                 </span>
                             </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive" v-show="showTotal">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -100,6 +100,7 @@ export default {
     components: { Multiselect, Loading },
     data() {
         return {
+            showTotal: false,
             waitFrom: true,
             loadingPage: false,
             fullPage: true,
@@ -133,9 +134,9 @@ export default {
 
         Analysis4() {
             this.loadingPage = true;
-            console.log("form", this.selectForm);
-            console.log("to", this.selectTo);
-            // simulate
+            // console.log("form", this.selectForm);
+            // console.log("to", this.selectTo);
+
             this.start = this.selectForm;
             this.end = this.selectTo;
 
@@ -148,6 +149,7 @@ export default {
                     // this.males = response.data.Male;
                     // console.log(response.data);
                     this.values = response.data.value;
+                    this.showTotal = true;
                     this.loadingPage = false;
                     // this.females = response.data.Female;
                 });
