@@ -14,11 +14,11 @@
             <hr class="mb-4 mt-4" />
             <div class="row flex-center">
                 <div class="col-md-6">
-                    <div>
+                    <!-- <div>
                         <span v-for="(data, i) in selected" :key="i">
                             {{ data.date }}
                         </span>
-                    </div>
+                    </div> -->
 
                     <functional-calendar
                         v-on:choseDay="clickDay"

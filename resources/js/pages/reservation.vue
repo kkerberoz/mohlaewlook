@@ -135,8 +135,9 @@
                                             <br />From :
                                         </span>
                                         <multiselect
+                                            label="name"
                                             v-model="input.flightFrom"
-                                            :options="allClass"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -157,8 +158,9 @@
                                             <br />To :
                                         </span>
                                         <multiselect
+                                            label="name"
                                             v-model="input.flightTo"
-                                            :options="allClass"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -183,8 +185,9 @@
                                             <br />From :
                                         </span>
                                         <multiselect
-                                            v-model="input.flightFrom"
-                                            :options="allClass"
+                                            disabled
+                                            v-model="input.flightTo.name"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -205,8 +208,9 @@
                                             <br />To :
                                         </span>
                                         <multiselect
-                                            v-model="input.flightTo"
-                                            :options="allClass"
+                                            disabled
+                                            v-model="input.flightFrom.name"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -222,6 +226,103 @@
                                 <div class="col-md-1"></div>
                             </div>
                             <hr class="mb-4" />
+                            <div
+                                class="container-xl"
+                                style="margin-top:2%;margin-bottom:10%"
+                            >
+                                <div class="row-reservation">
+                                    <div
+                                        class="column-reservation"
+                                        v-for="(showFlight, i) in queryFlight"
+                                        :key="i"
+                                    >
+                                        <div class="card-reser">
+                                            <div class="row ml-4">
+                                                <h4>
+                                                    Flight Number:
+                                                    {{ showFlight.flight_no }}
+                                                </h4>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-4">
+                                                    <h4>
+                                                        From:
+                                                        <b>{{
+                                                            showFlight.depart_location
+                                                        }}</b>
+                                                        &nbsp;To:
+                                                        <b>{{
+                                                            showFlight.arrive_location
+                                                        }}</b>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h4>
+                                                        Time :
+                                                        <b
+                                                            >{{
+                                                                showFlight.depart_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}
+                                                            -{{
+                                                                showFlight.arrive_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}</b
+                                                        >
+                                                    </h4>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'Economy'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{
+                                                            showFlight.eco_price
+                                                        }}
+                                                        <i
+                                                            class="fas fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'Business'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{ showFlight.bus_price
+                                                        }}<i
+                                                            class="fas fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'First'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{
+                                                            showFlight.first_price
+                                                        }}<i
+                                                            class="fab fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 -->
@@ -247,9 +348,8 @@
                                     <div class="row">
                                         <div class="plane">
                                             <div class="cockpit">
-                                                <h2 style="margin-top:80px">
+                                                <h2 style="margin-top:90px;">
                                                     Please select a seat
-                                                    {{ seats }}
                                                 </h2>
                                             </div>
                                             <div
@@ -257,38 +357,138 @@
                                             ></div>
 
                                             <ol class="cabin fuselage">
-                                                <li
-                                                    class="row row--1"
-                                                    style="padding:25px"
+                                                <h4 class="flex-center">
+                                                    First Class
+                                                </h4>
+                                                <ol
+                                                    class="seats"
+                                                    v-for="(seatt, i) in firsts"
+                                                    :key="i"
                                                 >
-                                                    <ol
-                                                        class="seats"
-                                                        v-for="(set, i) in sets"
-                                                        :key="i"
+                                                    <li
+                                                        class="seat"
+                                                        v-for="(f, k) in seatt"
+                                                        :key="k"
                                                     >
-                                                        <li
-                                                            class="seat"
-                                                            v-for="(n,
-                                                            k) in set"
-                                                            :key="k"
+                                                        <div
+                                                            v-show="
+                                                                !f.patt == true
+                                                            "
                                                         >
                                                             <input
                                                                 style="padding:5px;"
-                                                                :value="n.id"
-                                                                :id="n.id"
+                                                                :value="f"
+                                                                :id="f.id"
+                                                                :disabled="
+                                                                    f.status ==
+                                                                        true
+                                                                "
                                                                 type="checkbox"
                                                                 v-model="seats"
                                                             />
                                                             <label
                                                                 style="padding:5px; color:#fff; font-size:10px"
-                                                                :for="n.id"
+                                                                :for="f.id"
                                                                 >{{
-                                                                    n.seat
+                                                                    f.seat
                                                                 }}</label
                                                             >
-                                                        </li>
-                                                    </ol>
-                                                </li>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <div
+                                                    class="toliet toliet--back fuselage"
+                                                ></div>
+
+                                                <!-- busss -->
+                                                <h4 class="flex-center">
+                                                    Business Class
+                                                </h4>
+                                                <ol
+                                                    class="seats"
+                                                    v-for="(seatt, i) in buss"
+                                                    :key="'a' + i"
+                                                >
+                                                    <li
+                                                        class="seat"
+                                                        v-for="(f, k) in seatt"
+                                                        :key="'b' + k"
+                                                    >
+                                                        <div
+                                                            v-show="
+                                                                !f.patt == true
+                                                            "
+                                                        >
+                                                            <input
+                                                                style="padding:5px;"
+                                                                :value="f"
+                                                                :id="f.id"
+                                                                :disabled="
+                                                                    f.status ==
+                                                                        true
+                                                                "
+                                                                type="checkbox"
+                                                                v-model="seats"
+                                                            />
+                                                            <label
+                                                                style="padding:5px; color:#fff; font-size:10px"
+                                                                :for="f.id"
+                                                                >{{
+                                                                    f.seat
+                                                                }}</label
+                                                            >
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <div
+                                                    class="toliet toliet--back fuselage"
+                                                ></div>
+
+                                                <!-- ecooooo -->
+                                                <h4 class="flex-center">
+                                                    Economy Class
+                                                </h4>
+                                                <ol
+                                                    class="seats"
+                                                    v-for="(eco, e) in ecos"
+                                                    :key="'c' + e"
+                                                >
+                                                    <li
+                                                        class="seat"
+                                                        v-for="(index,
+                                                        p) in eco"
+                                                        :key="'d' + p"
+                                                    >
+                                                        <div
+                                                            v-show="
+                                                                !index.patt ==
+                                                                    true
+                                                            "
+                                                        >
+                                                            <input
+                                                                style="padding:5px;"
+                                                                :value="index"
+                                                                :id="index.id"
+                                                                :disabled="
+                                                                    index.status ==
+                                                                        true
+                                                                "
+                                                                type="checkbox"
+                                                                v-model="seats"
+                                                            />
+                                                            <label
+                                                                style="padding:5px; color:#fff; font-size:10px"
+                                                                :for="index.id"
+                                                                >{{
+                                                                    index.seat
+                                                                }}</label
+                                                            >
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <div
+                                                    class="toliet toliet--back"
+                                                ></div>
                                             </ol>
 
                                             <div
@@ -613,27 +813,40 @@
                             </div>
                         </div>
 
-                        <div class="card-footer flex-center">
-                            <button
-                                v-show="changePage"
-                                style="color:#fff"
-                                id="card-reservation"
-                                type="button"
-                                @click="changePage = !changePage"
-                                class="btn btn-block btn-login"
-                            >
-                                Next
-                            </button>
-                            <button
-                                v-show="!changePage"
-                                style="color:#fff"
-                                id="card-reservation"
-                                type="button"
-                                @click="changePage = !changePage"
-                                class="btn btn-block btn-success"
-                            >
-                                Back
-                            </button>
+                        <div class="card-footer ">
+                            <div class="col-md-12">
+                                <button
+                                    v-if="changePage"
+                                    style="color:#fff"
+                                    id="card-reservation"
+                                    type="button"
+                                    @click="changePage = !changePage"
+                                    class="btn btn-block btn-login"
+                                >
+                                    Next
+                                </button>
+                            </div>
+                            <div class="col-md-12">
+                                <button
+                                    v-if="!changePage"
+                                    style="color:#fff"
+                                    id="card-reservation"
+                                    type="submit"
+                                    class="btn btn-block btn-info"
+                                >
+                                    Submit
+                                </button>
+                                <button
+                                    v-if="!changePage"
+                                    style="color:#fff"
+                                    id="card-reservation"
+                                    type="button"
+                                    @click="changePage = !changePage"
+                                    class="btn btn-block btn-success"
+                                >
+                                    Back
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -651,31 +864,75 @@ export default {
     components: { Multiselect, Loading, FunctionalCalendar },
     data() {
         return {
-            sets: [
+            firsts: [
                 [
-                    { id: 1, seat: "A1" },
-                    { id: 2, seat: "A2" },
-                    { id: 3, seat: "A3" },
-                    { id: 4, seat: "A4" },
-                    { id: 5, seat: "A5" },
-                    { id: 6, seat: "A6" }
+                    { id: 1, seat: "1A", status: false },
+                    { patt: true },
+                    { id: 2, seat: "1B", status: false },
+                    { id: 3, seat: "1C", status: true },
+                    { id: 4, seat: "1D", status: false },
+                    { patt: true },
+                    { id: 5, seat: "1E", status: false }
                 ],
                 [
-                    { id: 7, seat: "A7" },
-                    { id: 8, seat: "A8" },
-                    { id: 9, seat: "A9" },
-                    { id: 10, seat: "A10" },
-                    { id: 11, seat: "A11" },
-                    { id: 12, seat: "A12" }
+                    { id: 6, seat: "2A", status: true },
+                    { id: 7, seat: "2B", status: false },
+                    { patt: true },
+                    { id: 8, seat: "2C", status: false },
+                    { patt: true },
+                    { id: 9, seat: "2D", status: false },
+                    { id: 10, seat: "2E", status: false }
+                ]
+            ],
+            buss: [
+                [
+                    { id: 11, seat: "3A", status: false },
+                    { patt: true },
+                    { id: 12, seat: "3B", status: false },
+                    { id: 13, seat: "3C", status: false },
+                    { id: 14, seat: "3D", status: false },
+                    { patt: true },
+                    { id: 15, seat: "3E", status: true }
+                ],
+                [
+                    { id: 16, seat: "4A", status: true },
+                    { patt: true },
+                    { id: 17, seat: "4B", status: false },
+                    { id: 18, seat: "4C", status: true },
+                    { id: 19, seat: "4D", status: false },
+                    { patt: true },
+                    { id: 20, seat: "4E", status: true }
+                ]
+            ],
+            ecos: [
+                [
+                    { id: 21, seat: "5A", status: true },
+                    { patt: true },
+                    { id: 22, seat: "5B", status: true },
+                    { id: 23, seat: "5C", status: true },
+                    { id: 24, seat: "5D", status: true },
+                    { patt: true },
+                    { id: 25, seat: "5E", status: true }
+                ],
+                [
+                    { id: 26, seat: "6A", status: true },
+                    { patt: true },
+                    { id: 27, seat: "6B", status: true },
+                    { id: 28, seat: "6C", status: true },
+                    { id: 29, seat: "6D", status: true },
+                    { patt: true },
+                    { id: 30, seat: "6E", status: true }
                 ]
             ],
             seats: [],
+            queryFlight: [],
             oneway: false,
             back: false,
             loadingPage: false,
             fullPage: true,
             changePage: true,
             counter: "",
+            airports: [],
             allClass: ["Economy", "Business", "First"],
             titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
             calendar_from: {},
@@ -688,11 +945,8 @@ export default {
                 class: "",
                 departDate: "",
                 returnDate: "",
-                noPass: "",
                 flightTo: "",
-                flightFrom: "",
-                flightTo2: "",
-                flightFrom2: ""
+                flightFrom: ""
             },
             passengers: [
                 {
@@ -712,7 +966,6 @@ export default {
 
             error_departDate: "",
             error_returnDate: "",
-            error_noPass: "",
             error_flightTo: "",
             error_flightFrom: "",
             error_flightTo2: "",
@@ -730,12 +983,27 @@ export default {
             error_email: ""
         };
     },
-    // beforeMount() {
-    //     this.loadingPage = true;
-    //     setTimeout(() => {
-    //         this.loadingPage = false;
-    //     }, 2000);
-    // },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 1000);
+
+        axios.get("api/user/getLocation").then(response => {
+            response.data.forEach(element => {
+                this.airports.push({
+                    name:
+                        element["airport_id"] +
+                        " - " +
+                        element["airport_name"] +
+                        " [" +
+                        element["airport_region"] +
+                        "]",
+                    value: element
+                });
+            });
+        });
+    },
     methods: {
         showReturn() {
             this.back = true;
@@ -764,6 +1032,27 @@ export default {
         removePass(index) {
             this.passengers.splice(index, 1);
         }
+    },
+    beforeUpdate() {
+        if (
+            (!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) &&
+            !!this.calendar_from.selectedDate &&
+            !!this.input.flightTo &&
+            !!this.input.flightFrom &&
+            !!this.input.class
+        ) {
+            this.input.departDate = this.calendar_from.selectedDate;
+            this.input.returnDate = this.calendar_to.selectedDate;
+            let data = {
+                back: this.back,
+                input: this.input,
+                passengerCount: this.passengers.length
+            };
+            axios.post("/api/user/getFlight", data).then(response => {
+                console.log("query", response.data);
+                this.queryFlight = response.data;
+            });
+        }
     }
 };
 </script>
@@ -782,5 +1071,18 @@ export default {
 #card-reservation {
     border: none;
     border-radius: 0;
+}
+.column-reservation {
+    float: left;
+    width: 100%;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+.card-reser {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    background-color: #2197e6;
 }
 </style>
