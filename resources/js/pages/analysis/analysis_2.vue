@@ -31,6 +31,7 @@
                                         }}</label
                                     >
                                     <functional-calendar
+                                        v-on:choseDay="clickDay"
                                         class="calendar"
                                         v-model="calendar_from"
                                         :configs="calendarConfigs"
@@ -130,32 +131,45 @@ export default {
     },
     methods: {
         clickDay() {
-            this.loadingPage = true;
-            this.sum = 0;
-            let scope = {
-                first: this.calendar_from.selectedDate,
-                second: this.calendar_to.selectedDate
-            };
-            axios
-                .post("/api/backend/analytic2_show", scope)
-                .then(response => {
-                    this.showTotal = true;
-                    this.data = response.data;
-                    console.log(this.data);
-                    this.data.forEach(each_data => {
-                        this.sum += each_data["class_count"];
+            if (!this.calendar_from.selectedDate) {
+                this.loadingPage = false;
+                this.showTotal = false;
+                swal.fire(
+                    "Please Selete start day first",
+                    "Cilck the button to continue!",
+                    "warning"
+                );
+            } else if (
+                this.calendar_from.selectedDate &&
+                this.calendar_to.selectedDate
+            ) {
+                this.loadingPage = true;
+                this.sum = 0;
+                let scope = {
+                    first: this.calendar_from.selectedDate,
+                    second: this.calendar_to.selectedDate
+                };
+                axios
+                    .post("/api/backend/analytic2_show", scope)
+                    .then(response => {
+                        this.showTotal = true;
+                        this.data = response.data;
+                        console.log(this.data);
+                        this.data.forEach(each_data => {
+                            this.sum += each_data["class_count"];
+                        });
+                        this.loadingPage = false;
+                    })
+                    .catch(error => {
+                        this.loadingPage = false;
+                        this.showTotal = false;
+                        swal.fire(
+                            "Error.",
+                            "Cilck the button to continue!",
+                            "error"
+                        );
                     });
-                    this.loadingPage = false;
-                })
-                .catch(error => {
-                    this.loadingPage = false;
-                    this.showTotal = false;
-                    swal.fire(
-                        "Error.",
-                        "Cilck the button to continue!",
-                        "error"
-                    );
-                });
+            }
         }
     }
 };

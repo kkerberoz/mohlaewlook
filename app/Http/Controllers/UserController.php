@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Customer;
 use App\Employee;
+use App\Airport;
+use App\Flight;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -120,5 +122,20 @@ class UserController extends Controller
         Auth::logout();
 
         return response()->json(true, 200);
+    }
+
+    public function getLocation(){
+        $airport = Airport::all();
+        return response() -> JSON($airport);
+    }
+    public function getFlight(Request $request){
+
+        $from = $request->flightFrom;
+        $to = $request->flightTo;
+        $depart_date = $request->departDate;
+        $all_flight = Flight::leftJoin('class_prices', 'flights.flight_no', '=', 'class_prices.flight_no')->
+                              where('depart_location', $from)->where('arrive_location', $to)->
+                              where('depart_datetime', 'LIKE', $depart_date. "%")->get();
+        return response() -> JSON($request);
     }
 }

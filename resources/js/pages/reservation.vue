@@ -522,6 +522,11 @@ export default {
         setTimeout(() => {
             this.loadingPage = false;
         }, 2000);
+
+        axios.get("api/user/getLocation").then(response => {
+            console.log(response.data);
+
+        });
     },
     methods: {
         showReturn() {
@@ -543,6 +548,12 @@ export default {
         removePass(index) {
             this.passengers.splice(index, 1);
         }
+    },
+    beforeUpdate(){
+        axios.post("/api/user/getFlight", {"date": this.back }).then(response => {
+            console.log(response.data);
+
+        });
     }
 };
 </script>

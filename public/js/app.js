@@ -6774,6 +6774,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -6815,27 +6816,33 @@ __webpack_require__.r(__webpack_exports__);
     clickDay: function clickDay() {
       var _this2 = this;
 
-      this.loadingPage = true;
-      this.sum = 0;
-      var scope = {
-        first: this.calendar_from.selectedDate,
-        second: this.calendar_to.selectedDate
-      };
-      axios.post("/api/backend/analytic2_show", scope).then(function (response) {
-        _this2.showTotal = true;
-        _this2.data = response.data;
-        console.log(_this2.data);
+      if (!this.calendar_from.selectedDate) {
+        this.loadingPage = false;
+        this.showTotal = false;
+        swal.fire("Please Selete start day first", "Cilck the button to continue!", "warning");
+      } else if (this.calendar_from.selectedDate && this.calendar_to.selectedDate) {
+        this.loadingPage = true;
+        this.sum = 0;
+        var scope = {
+          first: this.calendar_from.selectedDate,
+          second: this.calendar_to.selectedDate
+        };
+        axios.post("/api/backend/analytic2_show", scope).then(function (response) {
+          _this2.showTotal = true;
+          _this2.data = response.data;
+          console.log(_this2.data);
 
-        _this2.data.forEach(function (each_data) {
-          _this2.sum += each_data["class_count"];
+          _this2.data.forEach(function (each_data) {
+            _this2.sum += each_data["class_count"];
+          });
+
+          _this2.loadingPage = false;
+        })["catch"](function (error) {
+          _this2.loadingPage = false;
+          _this2.showTotal = false;
+          swal.fire("Error.", "Cilck the button to continue!", "error");
         });
-
-        _this2.loadingPage = false;
-      })["catch"](function (error) {
-        _this2.loadingPage = false;
-        _this2.showTotal = false;
-        swal.fire("Error.", "Cilck the button to continue!", "error");
-      });
+      }
     }
   }
 });
@@ -8444,6 +8451,9 @@ __webpack_require__.r(__webpack_exports__);
     setTimeout(function () {
       _this.loadingPage = false;
     }, 2000);
+    axios.get("api/user/getLocation").then(function (response) {
+      console.log(response.data);
+    });
   },
   methods: {
     showReturn: function showReturn() {
@@ -8464,6 +8474,13 @@ __webpack_require__.r(__webpack_exports__);
     removePass: function removePass(index) {
       this.passengers.splice(index, 1);
     }
+  },
+  beforeUpdate: function beforeUpdate() {
+    axios.post("/api/user/getFlight", {
+      "date": this.back
+    }).then(function (response) {
+      console.log(response.data);
+    });
   }
 });
 
@@ -13164,7 +13181,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
 
 // exports
 
@@ -57363,6 +57380,7 @@ var render = function() {
                       _c("functional-calendar", {
                         staticClass: "calendar",
                         attrs: { configs: _vm.calendarConfigs },
+                        on: { choseDay: _vm.clickDay },
                         model: {
                           value: _vm.calendar_from,
                           callback: function($$v) {
