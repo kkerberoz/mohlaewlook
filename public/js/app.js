@@ -6571,17 +6571,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6676,21 +6665,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_3__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6929,23 +6903,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -7022,15 +6979,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -13079,7 +13027,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\r\n    font-family: \"Kanit\", sans-serif;\r\n    font-size: 20px;\r\n    color: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\n  font-family: \"Kanit\", sans-serif;\n  font-size: 20px;\n  color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -57108,10 +57056,10 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "container-xl" }, [
-        _c("div", { staticClass: "row flex-center " }, [
+        _c("div", { staticClass: "row flex-center" }, [
           _c(
             "div",
-            { staticClass: "col-md-12 ", staticStyle: { padding: "10px" } },
+            { staticClass: "col-md-12", staticStyle: { padding: "10px" } },
             [
               _c("div", { staticClass: "card shadow-lg bg-white" }, [
                 _vm._m(0),
@@ -57170,21 +57118,13 @@ var render = function() {
                             return _c("tbody", { key: id }, [
                               _c("tr", [
                                 _c("th", { attrs: { scope: "row" } }, [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(Number(id) + 1) +
-                                      "\n                                        "
-                                  )
+                                  _vm._v(_vm._s(Number(id) + 1))
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [_vm._v(_vm._s(flight.flight_no))]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(flight.flight_no_count) +
-                                      "\n                                        "
-                                  )
+                                  _vm._v(_vm._s(flight.flight_no_count))
                                 ])
                               ])
                             ])
@@ -57224,15 +57164,11 @@ var staticRenderFns = [
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
         _c("div", { staticClass: "card-title" }, [
-          _vm._v(
-            "\n                            Analysis 1\n                        "
-          )
+          _vm._v("Number Of Domestic Flight")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
-          _vm._v(
-            "\n                            สวัสดีครับ\n                        "
-          )
+          _vm._v("จำนวนรอบบินของแต่ละไฟล์ทในแต่ละปี")
         ])
       ]
     )
@@ -57295,8 +57231,8 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "container-xl" }, [
-        _c("div", { staticClass: "row flex-center " }, [
-          _c("div", { staticClass: "col-md-12 " }, [
+        _c("div", { staticClass: "row flex-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card shadow-lg bg-white" }, [
               _vm._m(0),
               _vm._v(" "),
@@ -57308,8 +57244,9 @@ var render = function() {
                     [
                       _c("label", [
                         _vm._v(
-                          "From :\n                                    " +
-                            _vm._s(this.calendar_from.selectedDate)
+                          "\n                  From :\n                  " +
+                            _vm._s(this.calendar_from.selectedDate) +
+                            "\n                "
                         )
                       ]),
                       _vm._v(" "),
@@ -57334,8 +57271,9 @@ var render = function() {
                     [
                       _c("label", [
                         _vm._v(
-                          "To :\n                                    " +
-                            _vm._s(this.calendar_to.selectedDate)
+                          "\n                  To :\n                  " +
+                            _vm._s(this.calendar_to.selectedDate) +
+                            "\n                "
                         )
                       ]),
                       _vm._v(" "),
@@ -57381,22 +57319,12 @@ var render = function() {
                           return _c("tbody", { key: id }, [
                             _c("tr", [
                               _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(Number(id) + 1) +
-                                    "\n                                        "
-                                )
+                                _vm._v(_vm._s(Number(id) + 1))
                               ]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(flight.class_name))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(flight.class_count) +
-                                    "\n                                        "
-                                )
-                              ])
+                              _c("td", [_vm._v(_vm._s(flight.class_count))])
                             ])
                           ])
                         }),
@@ -57433,16 +57361,10 @@ var staticRenderFns = [
       "div",
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "card-title" }, [
-          _vm._v(
-            "\n                            Analysis 2\n                        "
-          )
-        ]),
+        _c("div", { staticClass: "card-title" }, [_vm._v("Seat Level")]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
-          _vm._v(
-            "\n                            สวัสดีครับ\n                        "
-          )
+          _vm._v("จำนวนการเข้าใช้บริการในแต่ละระดับที่นั่ง")
         ])
       ]
     )
@@ -57505,14 +57427,14 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "container-xl" }, [
-        _c("div", { staticClass: "row flex-center " }, [
-          _c("div", { staticClass: "col-md-12 " }, [
+        _c("div", { staticClass: "row flex-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card shadow-lg bg-white" }, [
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-10 mb-2 " }, [
+                  _c("div", { staticClass: "col-md-10 mb-2" }, [
                     _c("label", [_vm._v("Top :" + _vm._s(_vm.input))]),
                     _vm._v(" "),
                     _c("input", {
@@ -57544,15 +57466,11 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("span", { staticClass: "invalid-feedback" }, [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(_vm.error_input) +
-                          "\n                                "
-                      )
+                      _vm._v(_vm._s(_vm.error_input))
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-2 mt-4 " }, [
+                  _c("div", { staticClass: "col-md-2 mt-4" }, [
                     _c(
                       "button",
                       {
@@ -57560,11 +57478,7 @@ var render = function() {
                         attrs: { disabled: _vm.isDisable },
                         on: { click: _vm.queryAnalysis }
                       },
-                      [
-                        _vm._v(
-                          "\n                                    search\n                                "
-                        )
-                      ]
+                      [_vm._v("search")]
                     )
                   ])
                 ]),
@@ -57593,24 +57507,14 @@ var render = function() {
                           return _c("tbody", { key: id }, [
                             _c("tr", [
                               _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(Number(id) + 1) +
-                                    "\n                                        "
-                                )
+                                _vm._v(_vm._s(Number(id) + 1))
                               ]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(flight.user_id))]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(flight.username))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(flight.reserve_count) +
-                                    "\n                                        "
-                                )
-                              ])
+                              _c("td", [_vm._v(_vm._s(flight.reserve_count))])
                             ])
                           ])
                         })
@@ -57638,15 +57542,11 @@ var staticRenderFns = [
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
         _c("div", { staticClass: "card-title" }, [
-          _vm._v(
-            "\n                            Analysis 3\n                        "
-          )
+          _vm._v("Most Reserved Account")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
-          _vm._v(
-            "\n                            สวัสดีครับ\n                        "
-          )
+          _vm._v("account ที่มีจำนวนครั้งในการจองมากที่สุด ... อันดับแรก")
         ])
       ]
     )
@@ -57663,11 +57563,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Username")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v(
-            "\n                                            Reservetion Count\n                                        "
-          )
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Reservetion Count")])
       ])
     ])
   }
@@ -57718,8 +57614,8 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "container-xl" }, [
-        _c("div", { staticClass: "row flex-center " }, [
-          _c("div", { staticClass: "col-md-12 " }, [
+        _c("div", { staticClass: "row flex-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card shadow-lg bg-white" }, [
               _vm._m(0),
               _vm._v(" "),
@@ -57807,11 +57703,7 @@ var render = function() {
                           return _c("tbody", { key: id }, [
                             _c("tr", [
                               _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(value.year) +
-                                    "\n                                        "
-                                )
+                                _vm._v(_vm._s(value.year))
                               ]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(value.male))]),
@@ -57820,11 +57712,11 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v(
-                                  "\n                                            " +
+                                  "\n                      " +
                                     _vm._s(
                                       Number(value.male) + Number(value.female)
                                     ) +
-                                    "\n                                        "
+                                    "\n                    "
                                 )
                               ])
                             ])
@@ -57854,15 +57746,11 @@ var staticRenderFns = [
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
         _c("div", { staticClass: "card-title" }, [
-          _vm._v(
-            "\n                            Analysis 4\n                        "
-          )
+          _vm._v("Number Of Passengers")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
-          _vm._v(
-            "\n                            สวัสดีครับ\n                        "
-          )
+          _vm._v("จํานวนผู้โดยสารที่เข้าใช้บริการตั้งแต่ปี ... ถึง ...")
         ])
       ]
     )
