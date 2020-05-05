@@ -7605,6 +7605,8 @@ __webpack_require__.r(__webpack_exports__);
       _this.user = response.data;
       _this.loadingPage = false;
     })["catch"](function (error) {
+      _this.loadingPage = false;
+
       if (error.response.status === 401) {
         swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
           axios.get("/sanctum/csrf-cookie").then(function (response) {
@@ -8852,6 +8854,225 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9012,6 +9233,7 @@ __webpack_require__.r(__webpack_exports__);
         status: true
       }]],
       seats: [],
+      queryFlight: [],
       oneway: false,
       back: false,
       loadingPage: false,
@@ -9042,8 +9264,17 @@ __webpack_require__.r(__webpack_exports__);
         dob: "",
         national: "",
         idcard: "",
-        passport: ""
+        passport: "",
+        religion: "",
+        phone: "",
+        email: ""
       }],
+      payment: {
+        method: "",
+        cardNumber: "",
+        total: ""
+      },
+      paymentMethod: ["Credit Card", "Cash"],
       error_departDate: "",
       error_returnDate: "",
       error_flightTo: "",
@@ -9065,7 +9296,13 @@ __webpack_require__.r(__webpack_exports__);
       temp_flightTo: null,
       temp_flightFrom: null,
       temp_class: null,
-      temp_passenger: null
+      temp_passenger: null,
+      ///
+      error_religion: "",
+      error_phone: "",
+      error_email: "",
+      error_payMethod: "",
+      error_cardNumber: ""
     };
   },
   beforeMount: function beforeMount() {
@@ -9078,8 +9315,8 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("api/user/getLocation").then(function (response) {
       response.data.forEach(function (element) {
         _this.airports.push({
-          "name": element['airport_id'] + " - " + element['airport_name'] + " [" + element['airport_region'] + "]",
-          "value": element
+          name: element["airport_id"] + " - " + element["airport_name"] + " [" + element["airport_region"] + "]",
+          value: element
         });
       });
     });
@@ -9102,7 +9339,10 @@ __webpack_require__.r(__webpack_exports__);
         dob: "",
         national: "",
         idcard: "",
-        passport: ""
+        passport: "",
+        religion: "",
+        phone: "",
+        email: ""
       });
     },
     removePass: function removePass(index) {
@@ -9110,6 +9350,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeUpdate: function beforeUpdate() {
+    var _this2 = this;
+
     if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"] && (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate || this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo || this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input["class"] || this.passengers.length != this.temp_passenger)) {
       //*---------------------------------------------------------------------------------------------------*//
       this.temp_back = this.back, this.temp_calendar_to = this.calendar_to.selectedDate;
@@ -9123,7 +9365,8 @@ __webpack_require__.r(__webpack_exports__);
         passengerCount: this.passengers.length
       };
       axios.post("/api/user/getFlight", data).then(function (response) {
-        console.log(response.data);
+        console.log("query", response.data);
+        _this2.queryFlight = response.data;
       });
     }
   }
@@ -13845,7 +14088,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n.column-reservation {\n    float: left;\n    width: 100%;\n    padding: 0 10px;\n    margin-top: 10px;\n}\n.card-reser {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    padding: 16px;\n    text-align: center;\n    color: #fff;\n    background-color: #2197e6;\n}\n", ""]);
 
 // exports
 
@@ -60224,7 +60467,135 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("hr", { staticClass: "mb-4" })
+                      _c("hr", { staticClass: "mb-4" }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "container-xl",
+                          staticStyle: {
+                            "margin-top": "2%",
+                            "margin-bottom": "10%"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "row-reservation" },
+                            _vm._l(_vm.queryFlight, function(showFlight, i) {
+                              return _c(
+                                "div",
+                                { key: i, staticClass: "column-reservation" },
+                                [
+                                  _c("div", { staticClass: "card-reser" }, [
+                                    _c("div", { staticClass: "row ml-4" }, [
+                                      _c("h4", [
+                                        _vm._v(
+                                          "\n                                                Flight Number:\n                                                " +
+                                            _vm._s(showFlight.flight_no) +
+                                            "\n                                            "
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("div", { staticClass: "col-md-2" }),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-md-4" }, [
+                                        _c("h4", [
+                                          _vm._v(
+                                            "\n                                                    From:\n                                                    "
+                                          ),
+                                          _c("b", [
+                                            _vm._v(
+                                              _vm._s(showFlight.depart_location)
+                                            )
+                                          ]),
+                                          _vm._v(
+                                            "\n                                                     To:\n                                                    "
+                                          ),
+                                          _c("b", [
+                                            _vm._v(
+                                              _vm._s(showFlight.arrive_location)
+                                            )
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-md-4" }, [
+                                        _c("h4", [
+                                          _vm._v(
+                                            "\n                                                    Time :\n                                                    "
+                                          ),
+                                          _c("b", [
+                                            _vm._v(
+                                              _vm._s(
+                                                showFlight.depart_datetime.split(
+                                                  " "
+                                                )[1]
+                                              ) +
+                                                "\n                                                        -" +
+                                                _vm._s(
+                                                  showFlight.arrive_datetime.split(
+                                                    " "
+                                                  )[1]
+                                                )
+                                            )
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-md-2" })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("div", { staticClass: "col-md-12" }, [
+                                        _vm.input.class == "Economy"
+                                          ? _c("h3", [
+                                              _vm._v(
+                                                "\n                                                    Price :\n                                                    " +
+                                                  _vm._s(showFlight.eco_price) +
+                                                  "\n                                                    "
+                                              ),
+                                              _c("i", {
+                                                staticClass: "fas fa-btc"
+                                              })
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.input.class == "Business"
+                                          ? _c("h3", [
+                                              _vm._v(
+                                                "\n                                                    Price :\n                                                    " +
+                                                  _vm._s(showFlight.bus_price)
+                                              ),
+                                              _c("i", {
+                                                staticClass: "fas fa-btc"
+                                              })
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.input.class == "First"
+                                          ? _c("h3", [
+                                              _vm._v(
+                                                "\n                                                    Price :\n                                                    " +
+                                                  _vm._s(showFlight.first_price)
+                                              ),
+                                              _c("i", {
+                                                staticClass: "fab fa-btc"
+                                              })
+                                            ])
+                                          : _vm._e()
+                                      ])
+                                    ])
+                                  ])
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -60694,7 +61065,11 @@ var render = function() {
                                         class: {
                                           "is-invalid": _vm.error_name
                                         },
-                                        attrs: { type: "text", name: "name" },
+                                        attrs: {
+                                          placeholder: "อาหลีเฮีย",
+                                          type: "text",
+                                          name: "name"
+                                        },
                                         domProps: { value: passenger.name },
                                         on: {
                                           input: function($event) {
@@ -60743,6 +61118,7 @@ var render = function() {
                                           "is-invalid": _vm.error_surname
                                         },
                                         attrs: {
+                                          placeholder: "อาเฮียหลี",
                                           type: "text",
                                           name: "surname"
                                         },
@@ -61018,6 +61394,53 @@ var render = function() {
                                         ]
                                       )
                                     ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-3" }, [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("label", [_vm._v("Religion :")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: passenger.religion,
+                                            expression:
+                                              "\n                                                        passenger.religion\n                                                    "
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.error_religion
+                                        },
+                                        domProps: { value: passenger.religion },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              passenger,
+                                              "religion",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "invalid-feedback" },
+                                        [
+                                          _vm._v(
+                                            "\n                                                    " +
+                                              _vm._s(_vm.error_religion) +
+                                              "\n                                                "
+                                          )
+                                        ]
+                                      )
+                                    ])
                                   ])
                                 ]),
                                 _vm._v(" "),
@@ -61121,7 +61544,238 @@ var render = function() {
                                   ])
                                 ]),
                                 _vm._v(" "),
-                                _c("hr")
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-md-2" }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-3" }, [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("label", [_vm._v("Phone Number :")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: passenger.phone,
+                                            expression:
+                                              "\n                                                        passenger.phone\n                                                    "
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.error_phone
+                                        },
+                                        attrs: {
+                                          placeholder: "098-7654321",
+                                          type: "text"
+                                        },
+                                        domProps: { value: passenger.phone },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              passenger,
+                                              "phone",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "invalid-feedback" },
+                                        [
+                                          _vm._v(
+                                            "\n                                                    " +
+                                              _vm._s(_vm.error_phone) +
+                                              "\n                                                "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-md-3" }, [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("label", [_vm._v("Email :")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: passenger.email,
+                                            expression:
+                                              "\n                                                        passenger.email\n                                                    "
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.error_email
+                                        },
+                                        attrs: {
+                                          placeholder: "example@hotmail.com",
+                                          type: "text"
+                                        },
+                                        domProps: { value: passenger.email },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              passenger,
+                                              "email",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "invalid-feedback" },
+                                        [
+                                          _vm._v(
+                                            "\n                                                    " +
+                                              _vm._s(_vm.error_email) +
+                                              "\n                                                "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("hr"),
+                                _vm._v(" "),
+                                _c(
+                                  "h4",
+                                  { staticStyle: { "margin-left": "15px" } },
+                                  [
+                                    _vm._v(
+                                      "\n                                        Payment :\n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "container-xl" }, [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _vm._v(
+                                        "\n                                                Total:\n                                            "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-md-6" },
+                                      [
+                                        _c("label", [
+                                          _vm._v(
+                                            "Payment Methods\n                                                    :"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("multiselect", {
+                                          class: {
+                                            "is-invalid": _vm.error_payMethod
+                                          },
+                                          attrs: {
+                                            options: _vm.paymentMethod,
+                                            searchable: false,
+                                            "show-labels": false,
+                                            multiple: false,
+                                            "close-on-select": true,
+                                            "clear-on-select": false,
+                                            placeholder:
+                                              "Please select payment method",
+                                            "preselect-first": false
+                                          },
+                                          model: {
+                                            value: _vm.payment.method,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.payment,
+                                                "method",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "payment.method"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value:
+                                            _vm.payment.method == "Credit Card",
+                                          expression:
+                                            "\n                                                payment.method ==\n                                                    'Credit Card'\n                                            "
+                                        }
+                                      ],
+                                      staticClass: "row"
+                                    },
+                                    [
+                                      _c("div", { staticClass: "col-md-6" }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-md-6 mt-2" },
+                                        [
+                                          _c("label", [
+                                            _vm._v("Credit Card :")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.payment.cardNumber,
+                                                expression:
+                                                  "\n                                                        payment.cardNumber\n                                                    "
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            class: {
+                                              "is-invalid": _vm.error_cardNumber
+                                            },
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.payment.cardNumber
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.payment,
+                                                  "cardNumber",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
                               ]
                             )
                           }),

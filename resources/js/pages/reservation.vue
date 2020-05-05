@@ -135,7 +135,7 @@
                                             <br />From :
                                         </span>
                                         <multiselect
-                                            label = "name"
+                                            label="name"
                                             v-model="input.flightFrom"
                                             :options="airports"
                                             :show-labels="false"
@@ -158,7 +158,7 @@
                                             <br />To :
                                         </span>
                                         <multiselect
-                                            label = "name"
+                                            label="name"
                                             v-model="input.flightTo"
                                             :options="airports"
                                             :show-labels="false"
@@ -226,6 +226,103 @@
                                 <div class="col-md-1"></div>
                             </div>
                             <hr class="mb-4" />
+                            <div
+                                class="container-xl"
+                                style="margin-top:2%;margin-bottom:10%"
+                            >
+                                <div class="row-reservation">
+                                    <div
+                                        class="column-reservation"
+                                        v-for="(showFlight, i) in queryFlight"
+                                        :key="i"
+                                    >
+                                        <div class="card-reser">
+                                            <div class="row ml-4">
+                                                <h4>
+                                                    Flight Number:
+                                                    {{ showFlight.flight_no }}
+                                                </h4>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-4">
+                                                    <h4>
+                                                        From:
+                                                        <b>{{
+                                                            showFlight.depart_location
+                                                        }}</b>
+                                                        &nbsp;To:
+                                                        <b>{{
+                                                            showFlight.arrive_location
+                                                        }}</b>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h4>
+                                                        Time :
+                                                        <b
+                                                            >{{
+                                                                showFlight.depart_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}
+                                                            -{{
+                                                                showFlight.arrive_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}</b
+                                                        >
+                                                    </h4>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'Economy'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{
+                                                            showFlight.eco_price
+                                                        }}
+                                                        <i
+                                                            class="fas fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'Business'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{ showFlight.bus_price
+                                                        }}<i
+                                                            class="fas fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                    <h3
+                                                        v-if="
+                                                            input.class ==
+                                                                'First'
+                                                        "
+                                                    >
+                                                        Price :
+                                                        {{
+                                                            showFlight.first_price
+                                                        }}<i
+                                                            class="fab fa-btc"
+                                                        ></i>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 --><!-- page 2 -->
@@ -465,6 +562,7 @@
                                                         v-bind:class="{
                                                             'is-invalid': error_name
                                                         }"
+                                                        placeholder="อาหลีเฮีย"
                                                         type="text"
                                                         class="form-control"
                                                         name="name"
@@ -485,6 +583,7 @@
                                                         v-bind:class="{
                                                             'is-invalid': error_surname
                                                         }"
+                                                        placeholder="อาเฮียหลี"
                                                         type="text"
                                                         class="form-control"
                                                         name="surname"
@@ -597,6 +696,25 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Religion :</label>
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_religion
+                                                        }"
+                                                        class="form-control"
+                                                        v-model="
+                                                            passenger.religion
+                                                        "
+                                                    />
+                                                    <div
+                                                        class="invalid-feedback"
+                                                    >
+                                                        {{ error_religion }}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
@@ -643,7 +761,108 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label
+                                                        >Phone Number :</label
+                                                    >
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_phone
+                                                        }"
+                                                        placeholder="098-7654321"
+                                                        type="text"
+                                                        class="form-control"
+                                                        v-model="
+                                                            passenger.phone
+                                                        "
+                                                    />
+                                                    <div
+                                                        class="invalid-feedback"
+                                                    >
+                                                        {{ error_phone }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Email :</label>
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_email
+                                                        }"
+                                                        placeholder="example@hotmail.com"
+                                                        type="text"
+                                                        class="form-control"
+                                                        v-model="
+                                                            passenger.email
+                                                        "
+                                                    />
+                                                    <div
+                                                        class="invalid-feedback"
+                                                    >
+                                                        {{ error_email }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <hr />
+                                        <h4 style="margin-left:15px">
+                                            Payment :
+                                        </h4>
+                                        <br />
+                                        <div class="container-xl">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    Total:
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label
+                                                        >Payment Methods
+                                                        :</label
+                                                    >
+                                                    <multiselect
+                                                        v-bind:class="{
+                                                            'is-invalid': error_payMethod
+                                                        }"
+                                                        v-model="payment.method"
+                                                        :options="paymentMethod"
+                                                        :searchable="false"
+                                                        :show-labels="false"
+                                                        :multiple="false"
+                                                        :close-on-select="true"
+                                                        :clear-on-select="false"
+                                                        placeholder="Please select payment method"
+                                                        :preselect-first="false"
+                                                    ></multiselect>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="row"
+                                                v-show="
+                                                    payment.method ==
+                                                        'Credit Card'
+                                                "
+                                            >
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label>Credit Card :</label>
+                                                    <input
+                                                        v-bind:class="{
+                                                            'is-invalid': error_cardNumber
+                                                        }"
+                                                        type="text"
+                                                        class="form-control"
+                                                        v-model="
+                                                            payment.cardNumber
+                                                        "
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -761,6 +980,7 @@ export default {
                 ]
             ],
             seats: [],
+            queryFlight: [],
             oneway: false,
             back: false,
             loadingPage: false,
@@ -781,7 +1001,7 @@ export default {
                 departDate: "",
                 returnDate: "",
                 flightTo: "",
-                flightFrom: "",
+                flightFrom: ""
             },
             passengers: [
                 {
@@ -792,9 +1012,19 @@ export default {
                     dob: "",
                     national: "",
                     idcard: "",
-                    passport: ""
+                    passport: "",
+                    religion: "",
+                    phone: "",
+                    email: ""
                 }
             ],
+            payment: {
+                method: "",
+                cardNumber: "",
+                total: ""
+            },
+            paymentMethod: ["Credit Card", "Cash"],
+
             error_departDate: "",
             error_returnDate: "",
             error_flightTo: "",
@@ -816,7 +1046,13 @@ export default {
             temp_flightTo: null,
             temp_flightFrom: null,
             temp_class: null,
-            temp_passenger: null
+            temp_passenger: null,
+            ///
+            error_religion: "",
+            error_phone: "",
+            error_email: "",
+            error_payMethod: "",
+            error_cardNumber: ""
         };
     },
     beforeMount() {
@@ -827,7 +1063,16 @@ export default {
 
         axios.get("api/user/getLocation").then(response => {
             response.data.forEach(element => {
-                this.airports.push({"name": element['airport_id'] + " - " + element['airport_name'] + " [" + element['airport_region'] + "]", "value" : element});
+                this.airports.push({
+                    name:
+                        element["airport_id"] +
+                        " - " +
+                        element["airport_name"] +
+                        " [" +
+                        element["airport_region"] +
+                        "]",
+                    value: element
+                });
             });
         });
     },
@@ -850,7 +1095,10 @@ export default {
                 dob: "",
                 national: "",
                 idcard: "",
-                passport: ""
+                passport: "",
+                religion: "",
+                phone: "",
+                email: ""
             });
         },
         removePass(index) {
@@ -874,10 +1122,10 @@ export default {
                 back: this.back,
                 input: this.input,
                 passengerCount: this.passengers.length
-            }
+            };
             axios.post("/api/user/getFlight", data).then(response => {
-                console.log(response.data);
-
+                console.log("query", response.data);
+                this.queryFlight = response.data;
             });
         }
     }
@@ -898,5 +1146,18 @@ export default {
 #card-reservation {
     border: none;
     border-radius: 0;
+}
+.column-reservation {
+    float: left;
+    width: 100%;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+.card-reser {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    background-color: #2197e6;
 }
 </style>
