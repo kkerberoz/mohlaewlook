@@ -61107,7 +61107,7 @@ var render = function() {
                                                       "\n                                                    "
                                                   ),
                                                   _c("i", {
-                                                    staticClass: "fas fa-btc"
+                                                    staticClass: "fab fa-btc"
                                                   })
                                                 ])
                                               : _vm._e(),
@@ -61121,7 +61121,7 @@ var render = function() {
                                                       )
                                                   ),
                                                   _c("i", {
-                                                    staticClass: "fas fa-btc"
+                                                    staticClass: "fab fa-btc"
                                                   })
                                                 ])
                                               : _vm._e(),

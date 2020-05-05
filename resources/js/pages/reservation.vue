@@ -295,7 +295,7 @@
                                                             showFlight.eco_price
                                                         }}
                                                         <i
-                                                            class="fas fa-btc"
+                                                            class="fab fa-btc"
                                                         ></i>
                                                     </h3>
                                                     <h3
@@ -307,7 +307,7 @@
                                                         Price :
                                                         {{ showFlight.bus_price
                                                         }}<i
-                                                            class="fas fa-btc"
+                                                            class="fab fa-btc"
                                                         ></i>
                                                     </h3>
                                                     <h3
