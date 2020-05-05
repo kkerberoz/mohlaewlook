@@ -14,7 +14,7 @@
                 <div class="col-md-12">
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
-                            <div class="card-title">Most Reserved Account</div>
+                            <div class="card-title">Most reserved account</div>
                             <div class="card-subtitle mb-2">
                                 account ที่มีจำนวนครั้งในการจองมากที่สุด ...
                                 อันดับแรก

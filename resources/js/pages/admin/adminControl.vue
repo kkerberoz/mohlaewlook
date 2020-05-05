@@ -200,7 +200,7 @@
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_1</span>
+                                    <span>Number of domestic flight</span>
                                 </router-link>
                             </li>
                             <li>
@@ -215,7 +215,10 @@
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_2</span>
+                                    <span
+                                        >Number of access in each seat
+                                        class</span
+                                    >
                                 </router-link>
                             </li>
                             <li>
@@ -230,7 +233,7 @@
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_3</span>
+                                    <span>Most reserved account</span>
                                 </router-link>
                             </li>
                             <li>
@@ -244,7 +247,7 @@
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_4</span>
+                                    <span>Number of passengers</span>
                                 </router-link>
                             </li>
                             <li style="margin-top:10px; padding:10px">

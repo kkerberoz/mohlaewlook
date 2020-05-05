@@ -14,7 +14,7 @@
                 <div class="col-md-12">
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
-                            <div class="card-title">Number Of Passengers</div>
+                            <div class="card-title">Number of passengers</div>
                             <div class="card-subtitle mb-2">
                                 จํานวนผู้โดยสารที่เข้าใช้บริการตั้งแต่ปี ... ถึง
                                 ...

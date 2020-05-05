@@ -14,7 +14,9 @@
                 <div class="col-md-12">
                     <div class="card shadow-lg bg-white">
                         <div class="card-header" style="border-radius: 0px;">
-                            <div class="card-title">Seat Level</div>
+                            <div class="card-title">
+                                Number of access in each seat class
+                            </div>
                             <div class="card-subtitle mb-2">
                                 จำนวนการเข้าใช้บริการในแต่ละระดับที่นั่ง
                             </div>

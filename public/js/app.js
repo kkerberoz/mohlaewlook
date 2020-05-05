@@ -4319,6 +4319,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6843,6 +6846,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6937,6 +6951,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_3__);
+//
+//
 //
 //
 //
@@ -14573,7 +14589,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\n  font-family: \"Kanit\", sans-serif;\n  font-size: 20px;\n  color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\n    font-family: \"Kanit\", sans-serif;\n    font-size: 20px;\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -55797,7 +55813,7 @@ var render = function() {
                           [
                             _c("i", { staticClass: "fas fa-chart-line" }),
                             _vm._v(" "),
-                            _c("span", [_vm._v("analysis_1")])
+                            _c("span", [_vm._v("Number of domestic flight")])
                           ]
                         )
                       ],
@@ -55829,7 +55845,11 @@ var render = function() {
                           [
                             _c("i", { staticClass: "fas fa-chart-line" }),
                             _vm._v(" "),
-                            _c("span", [_vm._v("analysis_2")])
+                            _c("span", [
+                              _vm._v(
+                                "Number of access in each seat\n                                    class"
+                              )
+                            ])
                           ]
                         )
                       ],
@@ -55861,7 +55881,7 @@ var render = function() {
                           [
                             _c("i", { staticClass: "fas fa-chart-line" }),
                             _vm._v(" "),
-                            _c("span", [_vm._v("analysis_3")])
+                            _c("span", [_vm._v("Most reserved account")])
                           ]
                         )
                       ],
@@ -55892,7 +55912,7 @@ var render = function() {
                           [
                             _c("i", { staticClass: "fas fa-chart-line" }),
                             _vm._v(" "),
-                            _c("span", [_vm._v("analysis_4")])
+                            _c("span", [_vm._v("Number of passengers")])
                           ]
                         )
                       ],
@@ -58976,13 +58996,21 @@ var render = function() {
                             return _c("tbody", { key: id }, [
                               _c("tr", [
                                 _c("th", { attrs: { scope: "row" } }, [
-                                  _vm._v(_vm._s(Number(id) + 1))
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(Number(id) + 1) +
+                                      "\n                                        "
+                                  )
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [_vm._v(_vm._s(flight.flight_no))]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(_vm._s(flight.flight_no_count))
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(flight.flight_no_count) +
+                                      "\n                                        "
+                                  )
                                 ])
                               ])
                             ])
@@ -59022,11 +59050,15 @@ var staticRenderFns = [
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
         _c("div", { staticClass: "card-title" }, [
-          _vm._v("Number Of Domestic Flight")
+          _vm._v(
+            "\n                            Number of domestic flight\n                        "
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
-          _vm._v("จำนวนรอบบินของแต่ละไฟล์ทในแต่ละปี")
+          _vm._v(
+            "\n                            จำนวนรอบบินของแต่ละไฟล์ทในแต่ละปี\n                        "
+          )
         ])
       ]
     )
@@ -59224,7 +59256,11 @@ var staticRenderFns = [
       "div",
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
-        _c("div", { staticClass: "card-title" }, [_vm._v("Seat Level")]),
+        _c("div", { staticClass: "card-title" }, [
+          _vm._v(
+            "\n                            Number of access in each seat class\n                        "
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
           _vm._v(
@@ -59415,7 +59451,7 @@ var staticRenderFns = [
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
         _c("div", { staticClass: "card-title" }, [
-          _vm._v("Most Reserved Account")
+          _vm._v("Most reserved account")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
@@ -59629,7 +59665,7 @@ var staticRenderFns = [
       { staticClass: "card-header", staticStyle: { "border-radius": "0px" } },
       [
         _c("div", { staticClass: "card-title" }, [
-          _vm._v("Number Of Passengers")
+          _vm._v("Number of passengers")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-subtitle mb-2" }, [
