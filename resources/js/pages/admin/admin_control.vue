@@ -1,5 +1,14 @@
 <template>
     <div class="admin">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
             <div class="btn btn-lg btn-dark btn-admin">
                 <a id="show-sidebar" @click="closeMenu">
@@ -259,9 +268,14 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
+    components: { Loading },
     data() {
         return {
+            loadingPage: false,
+            fullPage: true,
             isLoading: false,
             user: "",
             get role() {
@@ -278,6 +292,7 @@ export default {
             })
             .catch(error => {
                 if (error.response.status === 401) {
+                    this.loadingPage = false;
                     swal.fire(
                         "Please log in.",
                         "Cilck the button to continue!",

@@ -4254,13 +4254,19 @@ __webpack_require__.r(__webpack_exports__);
       user: ""
     };
   },
-  beforeMount: function beforeMount() {
+  mounted: function mounted() {
     var _this = this;
 
     this.loadingPage = true;
-    axios.get("/api/admin/init").then(function (response) {
-      _this.user = response.data;
+    setTimeout(function () {
       _this.loadingPage = false;
+    }, 1000);
+  },
+  beforeMount: function beforeMount() {
+    var _this2 = this;
+
+    axios.get("/api/admin/init").then(function (response) {
+      _this2.user = response.data;
     });
   }
 });
@@ -4493,6 +4499,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -4753,9 +4763,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   data: function data() {
     return {
+      loadingPage: false,
+      fullPage: true,
       isLoading: false,
       user: "",
 
@@ -4772,6 +4798,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.user = response.data;
     })["catch"](function (error) {
       if (error.response.status === 401) {
+        _this.loadingPage = false;
         swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
           _this.$router.push({
             name: "adminLogin"
@@ -12968,7 +12995,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -13006,7 +13033,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\n    font-family: \"Kanit\", sans-serif;\n    font-size: 20px;\n    color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\r\n    font-family: \"Kanit\", sans-serif;\r\n    font-size: 20px;\r\n    color: #fff;\n}\r\n", ""]);
 
 // exports
 
@@ -13044,7 +13071,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -54300,488 +54327,512 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "admin" }, [
-    _c(
-      "div",
-      { staticClass: "page-wrapper default-theme sidebar-bg bg1 toggled" },
-      [
-        _c("div", { staticClass: "btn btn-lg btn-dark btn-admin" }, [
+  return _c(
+    "div",
+    { staticClass: "admin" },
+    [
+      _c("loading", {
+        attrs: {
+          active: _vm.loadingPage,
+          "can-cancel": false,
+          "is-full-page": _vm.fullPage,
+          opacity: 0.9,
+          color: "#f87a2b",
+          loader: "bars",
+          "background-color": "#fff"
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.loadingPage = $event
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "page-wrapper default-theme sidebar-bg bg1 toggled" },
+        [
+          _c("div", { staticClass: "btn btn-lg btn-dark btn-admin" }, [
+            _c(
+              "a",
+              { attrs: { id: "show-sidebar" }, on: { click: _vm.closeMenu } },
+              [_c("i", { staticClass: "fas fa-compress-alt fa-2x" })]
+            )
+          ]),
+          _vm._v(" "),
           _c(
-            "a",
-            { attrs: { id: "show-sidebar" }, on: { click: _vm.closeMenu } },
-            [_c("i", { staticClass: "fas fa-compress-alt fa-2x" })]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "nav",
-          { staticClass: "sidebar-wrapper", attrs: { id: "sidebar" } },
-          [
-            _c("div", { staticClass: "sidebar-content hide-scroll" }, [
-              _c("div", { staticClass: "sidebar-item sidebar-brand" }, [
-                _c("a", [_vm._v("Admin Control")]),
+            "nav",
+            { staticClass: "sidebar-wrapper", attrs: { id: "sidebar" } },
+            [
+              _c("div", { staticClass: "sidebar-content hide-scroll" }, [
+                _c("div", { staticClass: "sidebar-item sidebar-brand" }, [
+                  _c("a", [_vm._v("Admin Control")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      attrs: { id: "close-sidebar" },
+                      on: { click: _vm.closeMenu }
+                    },
+                    [_c("i", { staticClass: "fas fa-times" })]
+                  )
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    attrs: { id: "close-sidebar" },
-                    on: { click: _vm.closeMenu }
-                  },
-                  [_c("i", { staticClass: "fas fa-times" })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "sidebar-item sidebar-header" }, [
-                _c("div", { staticClass: "user-info" }, [
-                  _c("span", { staticClass: "user-name" }, [
-                    _c("strong", [
-                      _vm._v(_vm._s(_vm.user.name + " " + _vm.user.surname))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0)
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "sidebar-item sidebar-menu" }, [
-                _c("ul", [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _c("i", { staticClass: "fas fa-home" }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Homepage")])
+                _c("div", { staticClass: "sidebar-item sidebar-header" }, [
+                  _c("div", { staticClass: "user-info" }, [
+                    _c("span", { staticClass: "user-name" }, [
+                      _c("strong", [
+                        _vm._v(_vm._s(_vm.user.name + " " + _vm.user.surname))
                       ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        { attrs: { to: { name: "adminHome" } } },
-                        [
-                          _c("i", { staticClass: "fas fa-tachometer-alt" }),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "sidebar-item sidebar-menu" }, [
+                  _c("ul", [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c("router-link", { attrs: { to: "/" } }, [
+                          _c("i", { staticClass: "fas fa-home" }),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Dashboard")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "human_resource" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "newEmployee" } }
-                        },
-                        [
-                          _c("i", { staticClass: "far fa-address-card" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Add Employee")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "staff" || _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'staff' || role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "customerCRUD" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-user-edit" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Manage Customer")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "addPrice" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-dollar-sign" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Manage Flight Price")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "addFlight" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-plane-departure" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Add Route")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "addAircraft" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-plane" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Add Aircraft")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "pilot" ||
-                                _vm.role === "admin" ||
-                                _vm.role === "flight_attendant"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'pilot' ||\n                                    role === 'admin' ||\n                                    role === 'flight_attendant'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "Schedule" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-calendar-alt" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Schedule")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "addAirport" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-map-marked-alt" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Add Airport")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "analysis_1" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-chart-line" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("analysis_1")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "analysis_2" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-chart-line" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("analysis_2")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "analysis_3" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-chart-line" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("analysis_3")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                _vm.role === "flight_manager" ||
-                                _vm.role === "admin"
-                                  ? true
-                                  : false,
-                              expression:
-                                "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                            }
-                          ],
-                          attrs: { to: { name: "analysis_4" } }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-chart-line" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("analysis_4")])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticStyle: { "margin-top": "10px", padding: "10px" } },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "btn btn-block",
-                          attrs: { id: "btnLogout" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.logout($event)
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: !_vm.isLoading,
-                                  expression: "!isLoading"
-                                }
-                              ]
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-power-off" }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("Logout")])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("i", {
+                          _c("span", [_vm._v("Homepage")])
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: { name: "adminHome" } } },
+                          [
+                            _c("i", { staticClass: "fas fa-tachometer-alt" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Dashboard")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
                             directives: [
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.isLoading,
-                                expression: "isLoading"
+                                value:
+                                  _vm.role === "human_resource" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
                               }
                             ],
-                            staticClass: "fas fa-spinner fa-pulse"
-                          })
-                        ]
-                      )
-                    ]
-                  )
+                            attrs: { to: { name: "newEmployee" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-address-card" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Add Employee")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "staff" || _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'staff' || role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "customerCRUD" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-user-edit" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Manage Customer")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "addPrice" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-dollar-sign" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Manage Flight Price")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "addFlight" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plane-departure" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Add Route")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "addAircraft" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plane" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Add Aircraft")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "pilot" ||
+                                  _vm.role === "admin" ||
+                                  _vm.role === "flight_attendant"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'pilot' ||\n                                    role === 'admin' ||\n                                    role === 'flight_attendant'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "Schedule" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-calendar-alt" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Schedule")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "addAirport" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-map-marked-alt" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Add Airport")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "analysis_1" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-chart-line" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("analysis_1")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "analysis_2" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-chart-line" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("analysis_2")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "analysis_3" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-chart-line" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("analysis_3")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.role === "flight_manager" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'flight_manager' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "analysis_4" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-chart-line" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("analysis_4")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticStyle: { "margin-top": "10px", padding: "10px" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn btn-block",
+                            attrs: { id: "btnLogout" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.logout($event)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: !_vm.isLoading,
+                                    expression: "!isLoading"
+                                  }
+                                ]
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-power-off" }),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Logout")])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("i", {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.isLoading,
+                                  expression: "isLoading"
+                                }
+                              ],
+                              staticClass: "fas fa-spinner fa-pulse"
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
                 ])
               ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "main",
-          { staticClass: "page-content" },
-          [_c("router-view"), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(2)],
-          1
-        )
-      ]
-    )
-  ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "main",
+            { staticClass: "page-content" },
+            [_c("router-view"), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._m(2)],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -76671,8 +76722,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
