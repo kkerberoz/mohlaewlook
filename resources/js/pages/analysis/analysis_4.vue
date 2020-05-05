@@ -112,7 +112,7 @@ export default {
             const year = new Date().getFullYear();
             return Array.from(
                 { length: year - 2000 },
-                (value, index) => 2001 + index
+                (value, index) => 2000 + index
             );
         }
     },

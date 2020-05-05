@@ -47,12 +47,12 @@
                     <div class="card-reservation">
                         <h4>Flight Number: {{ showWork.flight_no }}</h4>
                         <h5>
-                            Depart: {{ showWork.depart_location }}-{{
+                            Depart: <b>[{{ showWork.depart_location }}]</b> -{{
                                 showWork.depart_datetime
                             }}
                         </h5>
                         <h5>
-                            Arrive: {{ showWork.arrive_location }}-{{
+                            Arrive: <b>[{{ showWork.arrive_location }}]</b> -{{
                                 showWork.arrive_datetime
                             }}
                         </h5>
@@ -84,11 +84,13 @@ export default {
             calendar: {},
             calendarConfigs: {
                 disabledDates: ["beforeToday"],
+
                 isMultipleDatePicker: true,
                 markedDates: []
             }
         };
     },
+
     methods: {
         clickDay() {
             this.selected = this.calendar.selectedDates;
@@ -130,6 +132,8 @@ export default {
     },
     beforeMount() {
         this.loadingPage = true;
+        const today = new Date().toLocaleDateString();
+        this.calendarConfigs.disabledDates.push(today);
         axios.get("/api/admin/init").then(response => {
             this.id = response.data.id;
             axios
@@ -153,19 +157,23 @@ export default {
                             Number(Sdate[1]) +
                             "/" +
                             Sdate[0];
+
                         if (each_day["confirm_status"] == "confirm") {
                             this.calendarConfigs.markedDates.push({
                                 date: newDate,
                                 class: "green-line"
                             });
+                            this.calendarConfigs.disabledDates.push(newDate);
                         } else if (each_day["confirm_status"] == "free") {
                             //console.log(newDate);
                             this.calendarConfigs.markedDates.push({
                                 date: newDate,
                                 class: "grey-line"
                             });
+                            this.calendarConfigs.disabledDates.push(newDate);
                         }
                     });
+
                     this.loadingPage = false;
                 })
                 .catch(error => {

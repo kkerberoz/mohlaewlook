@@ -2206,6 +2206,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     this.loadingPage = true;
+    var today = new Date().toLocaleDateString();
+    this.calendarConfigs.disabledDates.push(today);
     axios.get("/api/admin/init").then(function (response) {
       _this2.id = response.data.id;
       axios.post("/api/backend/getflightdetail", {
@@ -2226,12 +2228,16 @@ __webpack_require__.r(__webpack_exports__);
               date: newDate,
               "class": "green-line"
             });
+
+            _this2.calendarConfigs.disabledDates.push(newDate);
           } else if (each_day["confirm_status"] == "free") {
             //console.log(newDate);
             _this2.calendarConfigs.markedDates.push({
               date: newDate,
               "class": "grey-line"
             });
+
+            _this2.calendarConfigs.disabledDates.push(newDate);
           }
         });
         _this2.loadingPage = false;
@@ -7110,7 +7116,7 @@ __webpack_require__.r(__webpack_exports__);
       return Array.from({
         length: year - 2000
       }, function (value, index) {
-        return 2001 + index;
+        return 2000 + index;
       });
     }
   },
@@ -51509,20 +51515,24 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("h5", [
+                    _vm._v("\n                        Depart: "),
+                    _c("b", [
+                      _vm._v("[" + _vm._s(showWork.depart_location) + "]")
+                    ]),
                     _vm._v(
-                      "\n                        Depart: " +
-                        _vm._s(showWork.depart_location) +
-                        "-" +
+                      " -" +
                         _vm._s(showWork.depart_datetime) +
                         "\n                    "
                     )
                   ]),
                   _vm._v(" "),
                   _c("h5", [
+                    _vm._v("\n                        Arrive: "),
+                    _c("b", [
+                      _vm._v("[" + _vm._s(showWork.arrive_location) + "]")
+                    ]),
                     _vm._v(
-                      "\n                        Arrive: " +
-                        _vm._s(showWork.arrive_location) +
-                        "-" +
+                      " -" +
                         _vm._s(showWork.arrive_datetime) +
                         "\n                    "
                     )
