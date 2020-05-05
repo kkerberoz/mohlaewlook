@@ -8588,6 +8588,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -8606,6 +8607,7 @@ __webpack_require__.r(__webpack_exports__);
       fullPage: true,
       changePage: true,
       counter: "",
+      airports: [],
       allClass: ["Economy", "Business", "First"],
       titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
       calendar_from: {},
@@ -8618,11 +8620,8 @@ __webpack_require__.r(__webpack_exports__);
         "class": "",
         departDate: "",
         returnDate: "",
-        noPass: "",
         flightTo: "",
-        flightFrom: "",
-        flightTo2: "",
-        flightFrom2: ""
+        flightFrom: ""
       },
       passengers: [{
         title: "",
@@ -8636,7 +8635,6 @@ __webpack_require__.r(__webpack_exports__);
       }],
       error_departDate: "",
       error_returnDate: "",
-      error_noPass: "",
       error_flightTo: "",
       error_flightFrom: "",
       error_flightTo2: "",
@@ -8657,9 +8655,14 @@ __webpack_require__.r(__webpack_exports__);
     this.loadingPage = true;
     setTimeout(function () {
       _this.loadingPage = false;
-    }, 2000);
+    }, 1000);
     axios.get("api/user/getLocation").then(function (response) {
-      console.log(response.data);
+      response.data.forEach(function (element) {
+        _this.airports.push({
+          "name": element['airport_id'] + " - " + element['airport_name'] + " [" + element['airport_region'] + "]",
+          "value": element
+        });
+      });
     });
   },
   methods: {
@@ -8688,11 +8691,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeUpdate: function beforeUpdate() {
-    axios.post("/api/user/getFlight", {
-      "date": this.back
-    }).then(function (response) {
-      console.log(response.data);
-    });
+    if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"]) {
+      this.input.departDate = this.calendar_from.selectedDate;
+      this.input.returnDate = this.calendar_to.selectedDate;
+      var data = {
+        back: this.back,
+        input: this.input,
+        passengerCount: this.passengers.length
+      };
+      axios.post("/api/user/getFlight", data).then(function (response) {
+        console.log(response.data);
+      });
+    }
   }
 });
 
@@ -13393,7 +13403,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n", ""]);
 
 // exports
 
@@ -59234,7 +59244,6 @@ var render = function() {
                               _c("functional-calendar", {
                                 staticClass: "calendar",
                                 attrs: { configs: _vm.calendarConfigs },
-                                on: { choseDay: _vm.clickDay },
                                 model: {
                                   value: _vm.calendar_from,
                                   callback: function($$v) {
@@ -59262,7 +59271,6 @@ var render = function() {
                               _c("functional-calendar", {
                                 staticClass: "calendar",
                                 attrs: { configs: _vm.calendarConfigs },
-                                on: { choseDay: _vm.clickDay },
                                 model: {
                                   value: _vm.calendar_to,
                                   callback: function($$v) {
@@ -59306,7 +59314,6 @@ var render = function() {
                               _c("functional-calendar", {
                                 staticClass: "calendar",
                                 attrs: { configs: _vm.calendarConfigs },
-                                on: { choseDay: _vm.clickDay },
                                 model: {
                                   value: _vm.calendar_from,
                                   callback: function($$v) {
@@ -59337,7 +59344,8 @@ var render = function() {
                               _vm._v(" "),
                               _c("multiselect", {
                                 attrs: {
-                                  options: _vm.allClass,
+                                  label: "name",
+                                  options: _vm.airports,
                                   "show-labels": false,
                                   searchable: true,
                                   multiple: false,
@@ -59377,7 +59385,8 @@ var render = function() {
                               _vm._v(" "),
                               _c("multiselect", {
                                 attrs: {
-                                  options: _vm.allClass,
+                                  label: "name",
+                                  options: _vm.airports,
                                   "show-labels": false,
                                   searchable: true,
                                   multiple: false,
@@ -59438,7 +59447,8 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("multiselect", {
                                   attrs: {
-                                    options: _vm.allClass,
+                                    disabled: "",
+                                    options: _vm.airports,
                                     "show-labels": false,
                                     searchable: true,
                                     multiple: false,
@@ -59447,11 +59457,11 @@ var render = function() {
                                     placeholder: "Choose Flight"
                                   },
                                   model: {
-                                    value: _vm.input.flightFrom,
+                                    value: _vm.input.flightTo.name,
                                     callback: function($$v) {
-                                      _vm.$set(_vm.input, "flightFrom", $$v)
+                                      _vm.$set(_vm.input.flightTo, "name", $$v)
                                     },
-                                    expression: "input.flightFrom"
+                                    expression: "input.flightTo.name"
                                   }
                                 }),
                                 _vm._v(" "),
@@ -59478,7 +59488,8 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("multiselect", {
                                   attrs: {
-                                    options: _vm.allClass,
+                                    disabled: "",
+                                    options: _vm.airports,
                                     "show-labels": false,
                                     searchable: true,
                                     multiple: false,
@@ -59487,11 +59498,15 @@ var render = function() {
                                     placeholder: "Choose Class"
                                   },
                                   model: {
-                                    value: _vm.input.flightTo,
+                                    value: _vm.input.flightFrom.name,
                                     callback: function($$v) {
-                                      _vm.$set(_vm.input, "flightTo", $$v)
+                                      _vm.$set(
+                                        _vm.input.flightFrom,
+                                        "name",
+                                        $$v
+                                      )
                                     },
-                                    expression: "input.flightTo"
+                                    expression: "input.flightFrom.name"
                                   }
                                 }),
                                 _vm._v(" "),

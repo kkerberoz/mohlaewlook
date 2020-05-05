@@ -95,7 +95,6 @@
                                         {{ this.calendar_from.selectedDate }}
                                     </label>
                                     <functional-calendar
-                                        v-on:choseDay="clickDay"
                                         class="calendar"
                                         v-model="calendar_from"
                                         :configs="calendarConfigs"
@@ -107,7 +106,6 @@
                                         {{ this.calendar_to.selectedDate }}
                                     </label>
                                     <functional-calendar
-                                        v-on:choseDay="clickDay"
                                         class="calendar"
                                         v-model="calendar_to"
                                         :configs="calendarConfigs"
@@ -121,7 +119,6 @@
                                         {{ this.calendar_from.selectedDate }}
                                     </label>
                                     <functional-calendar
-                                        v-on:choseDay="clickDay"
                                         class="calendar"
                                         v-model="calendar_from"
                                         :configs="calendarConfigs"
@@ -138,8 +135,9 @@
                                             <br />From :
                                         </span>
                                         <multiselect
+                                            label = "name"
                                             v-model="input.flightFrom"
-                                            :options="allClass"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -160,8 +158,9 @@
                                             <br />To :
                                         </span>
                                         <multiselect
+                                            label = "name"
                                             v-model="input.flightTo"
-                                            :options="allClass"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -186,8 +185,9 @@
                                             <br />From :
                                         </span>
                                         <multiselect
-                                            v-model="input.flightFrom"
-                                            :options="allClass"
+                                            disabled
+                                            v-model="input.flightTo.name"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -208,8 +208,9 @@
                                             <br />To :
                                         </span>
                                         <multiselect
-                                            v-model="input.flightTo"
-                                            :options="allClass"
+                                            disabled
+                                            v-model="input.flightFrom.name"
+                                            :options="airports"
                                             :show-labels="false"
                                             :searchable="true"
                                             :multiple="false"
@@ -683,6 +684,7 @@ export default {
             fullPage: true,
             changePage: true,
             counter: "",
+            airports: [],
             allClass: ["Economy", "Business", "First"],
             titles: ["Mr.", "Mrs.", "Ms.", "Miss"],
             calendar_from: {},
@@ -695,11 +697,8 @@ export default {
                 class: "",
                 departDate: "",
                 returnDate: "",
-                noPass: "",
                 flightTo: "",
                 flightFrom: "",
-                flightTo2: "",
-                flightFrom2: ""
             },
             passengers: [
                 {
@@ -716,7 +715,6 @@ export default {
 
             error_departDate: "",
             error_returnDate: "",
-            error_noPass: "",
             error_flightTo: "",
             error_flightFrom: "",
             error_flightTo2: "",
@@ -735,11 +733,12 @@ export default {
         this.loadingPage = true;
         setTimeout(() => {
             this.loadingPage = false;
-        }, 2000);
+        }, 1000);
 
         axios.get("api/user/getLocation").then(response => {
-            console.log(response.data);
-
+            response.data.forEach(element => {
+                this.airports.push({"name": element['airport_id'] + " - " + element['airport_name'] + " [" + element['airport_region'] + "]", "value" : element});
+            });
         });
     },
     methods: {
@@ -769,10 +768,20 @@ export default {
         }
     },
     beforeUpdate(){
-        axios.post("/api/user/getFlight", {"date": this.back }).then(response => {
-            console.log(response.data);
+        if((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate &&
+            !!this.input.flightTo && !!this.input.flightFrom && !!this.input.class){
+            this.input.departDate = this.calendar_from.selectedDate;
+            this.input.returnDate = this.calendar_to.selectedDate;
+            let data = {
+                back: this.back,
+                input: this.input,
+                passengerCount: this.passengers.length
+            }
+            axios.post("/api/user/getFlight", data).then(response => {
+                console.log(response.data);
 
-        });
+            });
+        }
     }
 };
 </script>
