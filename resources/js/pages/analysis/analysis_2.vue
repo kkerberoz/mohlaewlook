@@ -52,7 +52,11 @@
                                 </div>
                             </div>
 
-                            <div class="table-responsive" style="padding:10px">
+                            <div
+                                class="table-responsive"
+                                style="padding:10px"
+                                v-show="showTotal"
+                            >
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -75,7 +79,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <tfoot v-show="showTotal">
+                                    <tfoot>
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td>Total</td>

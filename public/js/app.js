@@ -3530,6 +3530,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4831,6 +4832,9 @@ __webpack_require__.r(__webpack_exports__);
           _this2.$router.push({
             name: "adminLogin"
           });
+        })["catch"](function (error) {
+          _this2.isLoading = false;
+          _this2.loadingPage = false;
         });
       });
     }
@@ -6601,22 +6605,30 @@ __webpack_require__.r(__webpack_exports__);
     queryAnalyssis: function queryAnalyssis() {
       var _this = this;
 
-      this.loadingPage = true;
-      var year = this.selected;
-      this.sum = 0;
-      this.showTotal = true;
-      axios.post("/api/backend/analytic1_show", year).then(function (response) {
-        _this.data = response.data.analysis;
+      if (this.selected == null) {
+        this.loadingPage = true;
+        setTimeout(function () {
+          _this.loadingPage = false;
+        }, 500);
+        this.showTotal = false;
+      } else {
+        this.loadingPage = true;
+        var year = this.selected;
+        this.sum = 0;
+        this.showTotal = true;
+        axios.post("/api/backend/analytic1_show", year).then(function (response) {
+          _this.data = response.data.analysis;
 
-        _this.data.forEach(function (each_data) {
-          _this.sum += each_data["flight_no_count"];
+          _this.data.forEach(function (each_data) {
+            _this.sum += each_data["flight_no_count"];
+          });
+
+          _this.loadingPage = false; // console.log(this.data);
+        })["catch"](function (error) {
+          _this.showTotal = false;
+          swal.fire("Error.", "Cilck the button to continue!", "error");
         });
-
-        _this.loadingPage = false; // console.log(this.data);
-      })["catch"](function (error) {
-        _this.showTotal = false;
-        swal.fire("Error.", "Cilck the button to continue!", "error");
-      });
+      }
     }
   },
   beforeMount: function beforeMount() {
@@ -6664,6 +6676,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_3__);
+//
+//
+//
+//
 //
 //
 //
@@ -6925,6 +6941,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -6935,6 +6956,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      showTotal: false,
       loadingPage: false,
       fullPage: true,
       isDisable: false,
@@ -6973,6 +6995,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/backend/analytic3_show", data).then(function (response) {
         _this2.data = response.data;
         console.log(_this2.data);
+        _this2.showTotal = true;
         _this2.loadingPage = false;
       })["catch"](function (error) {
         _this2.loadingPage = false;
@@ -7091,6 +7114,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -7101,6 +7126,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      waitFrom: true,
       loadingPage: false,
       fullPage: true,
       selectForm: "",
@@ -7114,15 +7140,28 @@ __webpack_require__.r(__webpack_exports__);
     years: function years() {
       var year = new Date().getFullYear();
       return Array.from({
-        length: year - 2000
+        length: year - 1999
       }, function (value, index) {
         return 2000 + index;
+      });
+    },
+    otheryears: function otheryears() {
+      var _this = this;
+
+      var year = new Date().getFullYear();
+      return Array.from({
+        length: year - this.selectForm
+      }, function (value, index) {
+        return _this.selectForm + index + 1;
       });
     }
   },
   methods: {
+    checkTO: function checkTO() {
+      this.waitFrom = false;
+    },
     Analysis4: function Analysis4() {
-      var _this = this;
+      var _this2 = this;
 
       this.loadingPage = true;
       console.log("form", this.selectForm);
@@ -7136,17 +7175,17 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         // this.males = response.data.Male;
         // console.log(response.data);
-        _this.values = response.data.value;
-        _this.loadingPage = false; // this.females = response.data.Female;
+        _this2.values = response.data.value;
+        _this2.loadingPage = false; // this.females = response.data.Female;
       });
     }
   },
   beforeMount: function beforeMount() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.loadingPage = true;
     setTimeout(function () {
-      _this2.loadingPage = false;
+      _this3.loadingPage = false;
     }, 2000); // axios.get("/api/backend/analytic1_get").then(response => {
     //     this.years = response.data;
     // });
@@ -13039,7 +13078,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\r\n    font-family: \"Kanit\", sans-serif;\r\n    font-size: 20px;\r\n    color: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\n    font-family: \"Kanit\", sans-serif;\n    font-size: 20px;\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -53161,6 +53200,7 @@ var render = function() {
                                     "is-invalid": _vm.error_crew
                                   },
                                   attrs: {
+                                    disabled: _vm.waitPilot,
                                     options: _vm.options_attendant,
                                     searchable: true,
                                     multiple: true,
@@ -57092,7 +57132,7 @@ var render = function() {
                           "clear-on-select": false,
                           placeholder: "Choose Year"
                         },
-                        on: { select: _vm.queryAnalyssis },
+                        on: { input: _vm.queryAnalyssis },
                         model: {
                           value: _vm.selected,
                           callback: function($$v) {
@@ -57105,63 +57145,64 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "table-responsive" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table" },
-                      [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _vm._l(_vm.data, function(flight, id) {
-                          return _c("tbody", { key: id }, [
-                            _c("tr", [
-                              _c("th", { attrs: { scope: "row" } }, [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(Number(id) + 1) +
-                                    "\n                                        "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(flight.flight_no))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(flight.flight_no_count) +
-                                    "\n                                        "
-                                )
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.showTotal,
+                          expression: "showTotal"
+                        }
+                      ],
+                      staticClass: "table-responsive"
+                    },
+                    [
+                      _c(
+                        "table",
+                        { staticClass: "table" },
+                        [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _vm._l(_vm.data, function(flight, id) {
+                            return _c("tbody", { key: id }, [
+                              _c("tr", [
+                                _c("th", { attrs: { scope: "row" } }, [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(Number(id) + 1) +
+                                      "\n                                        "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(flight.flight_no))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(flight.flight_no_count) +
+                                      "\n                                        "
+                                  )
+                                ])
                               ])
                             ])
-                          ])
-                        }),
-                        _vm._v(" "),
-                        _c("tfoot", [
-                          _c(
-                            "tr",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.showTotal,
-                                  expression: "showTotal"
-                                }
-                              ]
-                            },
-                            [
+                          }),
+                          _vm._v(" "),
+                          _c("tfoot", [
+                            _c("tr", [
                               _c("td", [_vm._v(" ")]),
                               _vm._v(" "),
                               _c("td", [_vm._v("Total")]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(_vm.sum))])
-                            ]
-                          )
-                        ])
-                      ],
-                      2
-                    )
-                  ])
+                            ])
+                          ])
+                        ],
+                        2
+                      )
+                    ]
+                  )
                 ])
               ])
             ]
@@ -57317,6 +57358,14 @@ var render = function() {
                 _c(
                   "div",
                   {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.showTotal,
+                        expression: "showTotal"
+                      }
+                    ],
                     staticClass: "table-responsive",
                     staticStyle: { padding: "10px" }
                   },
@@ -57351,28 +57400,15 @@ var render = function() {
                           ])
                         }),
                         _vm._v(" "),
-                        _c(
-                          "tfoot",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.showTotal,
-                                expression: "showTotal"
-                              }
-                            ]
-                          },
-                          [
-                            _c("tr", [
-                              _c("td", [_vm._v(" ")]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v("Total")]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(_vm.sum))])
-                            ])
-                          ]
-                        )
+                        _c("tfoot", [
+                          _c("tr", [
+                            _c("td", [_vm._v(" ")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Total")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.sum))])
+                          ])
+                        ])
                       ],
                       2
                     )
@@ -57474,96 +57510,114 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "col-md-3 mb-2 float-right" }, [
-                  _c("label", [_vm._v("Top :" + _vm._s(_vm.input))]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.input,
-                        expression: "input"
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-10 mb-2 " }, [
+                    _c("label", [_vm._v("Top :" + _vm._s(_vm.input))]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input,
+                          expression: "input"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.error_input
+                      },
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.input },
+                      on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.input = $event.target.value
+                          },
+                          _vm.inputNumber
+                        ]
                       }
-                    ],
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.error_input
-                    },
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.input },
-                    on: {
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.input = $event.target.value
-                        },
-                        _vm.inputNumber
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "invalid-feedback" }, [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(_vm.error_input) +
-                        "\n                            "
-                    )
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "invalid-feedback" }, [
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(_vm.error_input) +
+                          "\n                                "
+                      )
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-login mt-1",
-                      attrs: { disabled: _vm.isDisable },
-                      on: { click: _vm.queryAnalysis }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                search\n                            "
-                      )
-                    ]
-                  )
+                  _c("div", { staticClass: "col-md-2 mt-4 " }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-login mt-1",
+                        attrs: { disabled: _vm.isDisable },
+                        on: { click: _vm.queryAnalysis }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    search\n                                "
+                        )
+                      ]
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c(
-                    "table",
-                    { staticClass: "table" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _vm._l(_vm.data, function(flight, id) {
-                        return _c("tbody", { key: id }, [
-                          _c("tr", [
-                            _c("th", { attrs: { scope: "row" } }, [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(Number(id) + 1) +
-                                  "\n                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(flight.user_id))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(flight.username))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(flight.reserve_count) +
-                                  "\n                                        "
-                              )
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.showTotal,
+                        expression: "showTotal"
+                      }
+                    ],
+                    staticClass: "table-responsive"
+                  },
+                  [
+                    _c(
+                      "table",
+                      { staticClass: "table" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._l(_vm.data, function(flight, id) {
+                          return _c("tbody", { key: id }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(Number(id) + 1) +
+                                    "\n                                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(flight.user_id))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(flight.username))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(flight.reserve_count) +
+                                    "\n                                        "
+                                )
+                              ])
                             ])
                           ])
-                        ])
-                      })
-                    ],
-                    2
-                  )
-                ])
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                )
               ])
             ])
           ])
@@ -57685,6 +57739,7 @@ var render = function() {
                           "clear-on-select": false,
                           placeholder: "Choose Year"
                         },
+                        on: { input: _vm.checkTO },
                         model: {
                           value: _vm.selectForm,
                           callback: function($$v) {
@@ -57705,14 +57760,15 @@ var render = function() {
                       _vm._v(" "),
                       _c("multiselect", {
                         attrs: {
-                          options: _vm.years,
+                          disabled: _vm.waitFrom,
+                          options: _vm.otheryears,
                           searchable: true,
                           multiple: false,
                           "close-on-select": true,
                           "clear-on-select": false,
                           placeholder: "Choose Year"
                         },
-                        on: { close: _vm.Analysis4 },
+                        on: { input: _vm.Analysis4 },
                         model: {
                           value: _vm.selectTo,
                           callback: function($$v) {

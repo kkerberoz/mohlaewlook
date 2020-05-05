@@ -22,30 +22,35 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="col-md-3 mb-2 float-right">
-                                <label>Top :{{ input }}</label>
+                            <div class="row">
+                                <div class="col-md-10 mb-2 ">
+                                    <label>Top :{{ input }}</label>
 
-                                <input
-                                    v-bind:class="{
-                                        'is-invalid': error_input
-                                    }"
-                                    type="text"
-                                    @input="inputNumber"
-                                    v-model="input"
-                                    class="form-control"
-                                />
-                                <span class="invalid-feedback">
-                                    {{ error_input }}
-                                </span>
-                                <button
-                                    :disabled="isDisable"
-                                    @click="queryAnalysis"
-                                    class="btn btn-block btn-login mt-1"
-                                >
-                                    search
-                                </button>
+                                    <input
+                                        v-bind:class="{
+                                            'is-invalid': error_input
+                                        }"
+                                        type="text"
+                                        @input="inputNumber"
+                                        v-model="input"
+                                        class="form-control"
+                                    />
+                                    <span class="invalid-feedback">
+                                        {{ error_input }}
+                                    </span>
+                                </div>
+                                <div class="col-md-2 mt-4 ">
+                                    <button
+                                        :disabled="isDisable"
+                                        @click="queryAnalysis"
+                                        class="btn btn-block btn-login mt-1"
+                                    >
+                                        search
+                                    </button>
+                                </div>
                             </div>
-                            <div class="table-responsive">
+
+                            <div class="table-responsive" v-show="showTotal">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -90,6 +95,7 @@ export default {
     components: { Multiselect, Loading },
     data() {
         return {
+            showTotal: false,
             loadingPage: false,
             fullPage: true,
             isDisable: false,
@@ -127,6 +133,7 @@ export default {
                 .then(response => {
                     this.data = response.data;
                     console.log(this.data);
+                    this.showTotal = true;
                     this.loadingPage = false;
                 })
                 .catch(error => {

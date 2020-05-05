@@ -311,12 +311,18 @@ export default {
             e.preventDefault();
             this.isLoading = true;
             axios.get("/sanctum/csrf-cookie").then(response => {
-                axios.post("/api/admin/logout").then(() => {
-                    this.isLoading = false;
-                    localStorage.removeItem("isAdmin");
-                    localStorage.removeItem("isRole");
-                    this.$router.push({ name: "adminLogin" });
-                });
+                axios
+                    .post("/api/admin/logout")
+                    .then(() => {
+                        this.isLoading = false;
+                        localStorage.removeItem("isAdmin");
+                        localStorage.removeItem("isRole");
+                        this.$router.push({ name: "adminLogin" });
+                    })
+                    .catch(error => {
+                        this.isLoading = false;
+                        this.loadingPage = false;
+                    });
             });
         }
     }

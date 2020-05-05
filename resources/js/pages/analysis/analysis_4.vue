@@ -28,6 +28,7 @@
 
                                     <multiselect
                                         v-model="selectForm"
+                                        @input="checkTO"
                                         :options="years"
                                         :searchable="true"
                                         :multiple="false"
@@ -41,9 +42,10 @@
                                     <label>To :{{ selectTo }}</label>
 
                                     <multiselect
+                                        :disabled="waitFrom"
                                         v-model="selectTo"
-                                        @close="Analysis4"
-                                        :options="years"
+                                        @input="Analysis4"
+                                        :options="otheryears"
                                         :searchable="true"
                                         :multiple="false"
                                         :close-on-select="true"
@@ -98,6 +100,7 @@ export default {
     components: { Multiselect, Loading },
     data() {
         return {
+            waitFrom: true,
             loadingPage: false,
             fullPage: true,
             selectForm: "",
@@ -111,12 +114,23 @@ export default {
         years() {
             const year = new Date().getFullYear();
             return Array.from(
-                { length: year - 2000 },
+                { length: year - 1999 },
                 (value, index) => 2000 + index
+            );
+        },
+        otheryears() {
+            const year = new Date().getFullYear();
+            return Array.from(
+                { length: year - this.selectForm },
+                (value, index) => this.selectForm + index + 1
             );
         }
     },
     methods: {
+        checkTO() {
+            this.waitFrom = false;
+        },
+
         Analysis4() {
             this.loadingPage = true;
             console.log("form", this.selectForm);
