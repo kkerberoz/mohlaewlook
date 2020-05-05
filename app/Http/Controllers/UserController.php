@@ -227,24 +227,42 @@ class UserController extends Controller
     {
         $class = $request->input['class'];
         $no_of_passenger = $request->passengerCount;
+        $avaliable_flight_depart = []; $avaliable_flight_return = [];
         // for depart
         $from = $request->input['flightFrom']['value']['airport_id'];
         $to = $request->input['flightTo']['value']['airport_id'];
         list($day, $month, $year) = explode("/", $request->input['departDate']);
         $depart_date = $year . "-" . sprintf("%02d", $month) . "-" . sprintf("%02d", $day);
         $all_flight = Flight::select('*')->where('depart_location', $from)->where('arrive_location', $to)->where('depart_datetime', 'LIKE', $depart_date . "%")->get();
-        $avaliable_flight = [];
         foreach ($all_flight as $flight) {
             $flight_detail = DB::select("SELECT * FROM flights AS d1 INNER JOIN aircrafts AS d2 ON (d1.aircraft_id = d2.aircraft_id) INNER JOIN aircraft_models AS d3 ON (d2.model_id = d3.model_id) INNER JOIN class_prices AS d4 ON (d1.flight_no = d4.flight_no) WHERE d1.flight_id = ?", [$flight['flight_id']]);
             if (isset($flight_detail)) {
                 $ticketCount = Ticket::where('class_name', $class)->where('flight_id', $flight['flight_id'])->count();
                 $class_type = (!strcmp($class, "Economy")) ? "eco_cap" : ((!strcmp($class, "Business")) ? "bus_cap" : "first_cap");
                 if ($flight_detail[0]->$class_type - $ticketCount > $no_of_passenger) {
-                    array_push($avaliable_flight, $flight_detail[0]);
+                    array_push($avaliable_flight_depart, $flight_detail[0]);
                 }
             }
         }
-        return response()->JSON($avaliable_flight);
+        // for return
+        if(!$request->back) goto end;
+        $from = $request->input['flightTo']['value']['airport_id'];
+        $to = $request->input['flightFrom']['value']['airport_id'];
+        list($day, $month, $year) = explode("/", $request->input['returnDate']);
+        $depart_date = $year . "-" . sprintf("%02d", $month) . "-" . sprintf("%02d", $day);
+        $all_flight = Flight::select('*')->where('depart_location', $from)->where('arrive_location', $to)->where('depart_datetime', 'LIKE', $depart_date . "%")->get();
+        foreach ($all_flight as $flight) {
+            $flight_detail = DB::select("SELECT * FROM flights AS d1 INNER JOIN aircrafts AS d2 ON (d1.aircraft_id = d2.aircraft_id) INNER JOIN aircraft_models AS d3 ON (d2.model_id = d3.model_id) INNER JOIN class_prices AS d4 ON (d1.flight_no = d4.flight_no) WHERE d1.flight_id = ?", [$flight['flight_id']]);
+            if (isset($flight_detail)) {
+                $ticketCount = Ticket::where('class_name', $class)->where('flight_id', $flight['flight_id'])->count();
+                $class_type = (!strcmp($class, "Economy")) ? "eco_cap" : ((!strcmp($class, "Business")) ? "bus_cap" : "first_cap");
+                if ($flight_detail[0]->$class_type - $ticketCount > $no_of_passenger) {
+                    array_push($avaliable_flight_return, $flight_detail[0]);
+                }
+            }
+        }
+        end:
+        return response()->JSON(["flight_depart" => $avaliable_flight_depart, "flight_return" => $avaliable_flight_return]);
     }
     public function checkSeat(Request $request){
         $flight_id = $request->flight_id;
@@ -276,7 +294,6 @@ class UserController extends Controller
         // $bussiness class
         $sum =  explode("-", $request->bus_pattern);
         $bus_amount = $bus_total = ($request->bus_cap) / array_sum($sum);
-        $count_id = 1;
         while($bus_amount--){
             $temp = [];
             $pettern = $request->bus_pattern;
@@ -285,7 +302,7 @@ class UserController extends Controller
                 if(is_numeric($pettern[$i])){
                     for($j=0; $j<$pettern[$i]; ++$j){
                         $seat = sprintf("%02d",($bus_total - $bus_amount)). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "bussiness")) ?  true : false)]);
+                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
                     }
                 }
                 else array_push($temp, ["patt" => true]);
@@ -295,7 +312,6 @@ class UserController extends Controller
         // economy class
         $sum =  explode("-", $request->eco_pattern);
         $eco_amount = $eco_total = ($request->eco_cap) / array_sum($sum);
-        $count_id = 1;
         while($eco_amount--){
             $temp = [];
             $pettern = $request->eco_pattern;
