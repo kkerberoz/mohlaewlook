@@ -1453,7 +1453,7 @@
                                 <div class="container-xl">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            Total: {{total}} ฿
+                                            Total:  ฿
                                         </div>
                                         <div class="col-md-6">
                                             <label>Payment Methods :</label>
@@ -1589,8 +1589,8 @@ export default {
             },
             input: {
                 class: null,
-                departDate: 0,
-                returnDate: 0,
+                departDate: null,
+                returnDate: null,
                 flightTo: null,
                 flightFrom: null
             },
@@ -1616,8 +1616,8 @@ export default {
                 total: ""
             },
             paymentMethod: ["Credit Card", "Cash"],
-            depart_price: null,
-            return_price: null,
+            depart_price: 0,
+            return_price: 0,
             check_cal: true,
 
             error_departDate: "",
@@ -1681,27 +1681,34 @@ export default {
     methods: {
         submit() {
 
+
             console.log("depart seat", this.seats); // depart seat
             console.log("return seat", this.seatReturn); // return seat
-            console.log("passengers", this.passengers); // passengers in carbin
-            console.log("payment detail", this.payment); // payment detail
-            console.log("flight depart", this.depart_Selected); // flight depart
-            console.log("flight return", this.return_Selected); // flight return
-            console.log("depart_price", this.depart_price);
-            console.log("return_price", this.return_price);
-            console.log("no_of_passenger", this.no_of_passenger) // number of passenger
-            console.log("class seat",this.input.class); // class seat
-            console.log("user_id",this.user_id);
+            // console.log("passengers", this.passengers); // passengers in carbin
+            // console.log("payment detail", this.payment); // payment detail
+            // console.log("flight depart", this.depart_Selected); // flight depart
+            // console.log("flight return", this.return_Selected); // flight return
+            // console.log("depart_price", this.depart_price);
+            // console.log("return_price", this.return_price);
+            // console.log("no_of_passenger", this.no_of_passenger) // number of passenger
+            // console.log("class seat",this.input.class); // class seat
+            // console.log("user_id",this.user_id);
+            console.log(this.passengers.length);
+
             let data = {
-                reserve_data : [this.input.class],
+                reserve_data : this.input,
                 user_id : this.user_id,
                 passenger : this.passengers,
-                seat : [this.seats,this.seatReturn],
+                seat_depart : this.seats,
+                seat_return : this.seatReturn,
                 payment_method : this.payment.method,
-                price : this.total,
+                price : (this.depart_price * this.no_of_passenger) + (this.return_price * this.no_of_passenger),
                 payment_card : this.payment.cardNumber,
                 flight : [this.depart_Selected,this.return_Selected]
             }
+            axios.post('api/user/reserveSendData',data).then(response => {
+                console.log(response.data);
+            });
 
 
         },

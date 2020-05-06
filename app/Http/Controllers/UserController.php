@@ -117,11 +117,18 @@ class UserController extends Controller
         $reserve_data = $request->reserve_data; // status , class
         $user_id = $request->user_id;
         $passenger_array = $request->passenger;
-        $seat_array = $request->seat;
+        //$seat_array = $request->seat;
         $payment_method = $request->payment_method;
         $price = $request->price;
         $payment_card = $request->payment_card;
         $flight_id_array = $request->flight;
+        $seat_depart = $request->seat_depart;
+        $seat_return = $request->seat_return;
+
+        $passengerObj =[];
+        $ticketObj = [];
+        $reservationObj = [];
+        $paymentObj = [];
 
         //reservation Table
 
@@ -137,22 +144,29 @@ class UserController extends Controller
 
 
 
-
+        $current_passenger_id = [];
         //passenger Table
         foreach ($passenger_array as $each_passenger) {
             $passenger = new Passenger;
-            $passenger_oldID = "";
-            if (isset($each_passenger['idcard']) && !isset($each_passenger['passport'])) {
+            if (isset($each_passenger['idcard'])) {
                 $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard', $each_passenger['idcard']);
-            } else //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
+            } else if(isset($each_passenger['passport'])) //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
             {
                 $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport', $each_passenger['passport']);
             }
 
-            if (isset($passenger_oldID)) {
-                $current_passenger_id = [];
-                array_push($current_passenger_id,$passenger_oldID);
-                $passenger->passenger_id = $passenger_oldID;
+            if (isset($passenger_oldID->passenger_passport) || isset($passenger_oldID->passenger_idcard) ) {
+
+                if( isset($passenger_oldID->passenger_idcard)){
+                    array_push($current_passenger_id,$passenger_oldID->passenger_idcard);
+                    $passenger->passenger_id = $passenger_oldID->passenger_idcard;
+                }
+                else if(isset($passenger_oldID->passenger_passport)){
+                    array_push($current_passenger_id,$passenger_oldID->passenger_passport);
+                    $passenger->passenger_id = $passenger_oldID->passenger_passport;
+                }
+
+
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
                 $passenger->passenger_surname = $each_passenger['surname'];
@@ -180,8 +194,8 @@ class UserController extends Controller
                     $prefix = "K";
                 }
 
-                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->order_By('passenger_id', 'desc')->first();
-                $number = str_replace($prefix, "", $check_id['passenger_id']) + 1;
+                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderBy('passenger_id', 'desc')->first();
+                $number = is_numeric(str_replace($prefix, "", $check_id['passenger_id']) + 1);
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
                 array_push($current_passenger_id,$passenger->passenger_id);
                 $passenger->passenger_title = $each_passenger['title'];
@@ -215,22 +229,51 @@ class UserController extends Controller
 
 
         //ticket create
-        foreach ($seat_array as $seat_each_flight) {
-            $j = 0;
+        // foreach ($seat_array as $seat_each_flight) {
+        //     $j = 0;
+        //     $ticket = new Ticket;
+        //     for ($i = 0; $i < sizeof($passenger_array); $i++) {
+        //         $ticket->seat_no = $seat_each_flight[$i]['seat'];
+        //         $ticket->class_name = $reserve_data['class'];
+        //         $ticket->flight_id = $flight_id_array[$j]['flight_id'];
+        //         $ticket->reservation_id = $reserve_id;
+        //         $ticket->passenger_id = $current_passenger_id[$i];
+        //         array_push($ticketObj,$ticket);
+        //         //---------------------------------------------------------------------------------------------------------------------//
+        //         //$ticket->save();
+        //     }
+        //     $j++;
+        // }
+
+
+        for ($i = 0; $i < sizeof($passenger_array); $i++) {
             $ticket = new Ticket;
-            for ($i = 0; $i < sizeof($passenger_array[$i]); $i++) {
-                $ticket->seat_no = $seat_each_flight[$i]['seat'];
+            $ticket->seat_no = $seat_depart[$i]['seat']; /////////////////////////////////////////
+            $ticket->class_name = $reserve_data['class'];
+            $ticket->flight_id = $flight_id_array[0]['flight_id'];
+            $ticket->reservation_id = $reserve_id;
+            $ticket->passenger_id = $current_passenger_id[$i];
+            array_push($ticketObj,$ticket);
+            //---------------------------------------------------------------------------------------------------------------------//
+            //$ticket->save();
+        }
+        if(sizeof($seat_return)!=0){
+
+            for ($i = 0; $i < sizeof($passenger_array); $i++) {
+                $ticket = new Ticket;
+                $ticket->seat_no = $seat_return[$i]['seat']; /////////////////////////////////////////
                 $ticket->class_name = $reserve_data['class'];
-                $ticket->flight_id = $flight_id_array[$j]['flight_id'];
+                $ticket->flight_id = $flight_id_array[1]['flight_id'];
                 $ticket->reservation_id = $reserve_id;
                 $ticket->passenger_id = $current_passenger_id[$i];
                 array_push($ticketObj,$ticket);
                 //---------------------------------------------------------------------------------------------------------------------//
                 //$ticket->save();
             }
-            $j++;
         }
 
+
+        return response()->JSON([$ticketObj,$passengerObj,$reservationObj,$paymentObj,$current_passenger_id]);
     }
 
     public function getLocation()

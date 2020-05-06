@@ -9775,8 +9775,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       input: {
         "class": null,
-        departDate: 0,
-        returnDate: 0,
+        departDate: null,
+        returnDate: null,
         flightTo: null,
         flightFrom: null
       },
@@ -9800,8 +9800,8 @@ __webpack_require__.r(__webpack_exports__);
         total: ""
       },
       paymentMethod: ["Credit Card", "Cash"],
-      depart_price: null,
-      return_price: null,
+      depart_price: 0,
+      return_price: 0,
       check_cal: true,
       error_departDate: "",
       error_returnDate: "",
@@ -9861,32 +9861,31 @@ __webpack_require__.r(__webpack_exports__);
       console.log("depart seat", this.seats); // depart seat
 
       console.log("return seat", this.seatReturn); // return seat
+      // console.log("passengers", this.passengers); // passengers in carbin
+      // console.log("payment detail", this.payment); // payment detail
+      // console.log("flight depart", this.depart_Selected); // flight depart
+      // console.log("flight return", this.return_Selected); // flight return
+      // console.log("depart_price", this.depart_price);
+      // console.log("return_price", this.return_price);
+      // console.log("no_of_passenger", this.no_of_passenger) // number of passenger
+      // console.log("class seat",this.input.class); // class seat
+      // console.log("user_id",this.user_id);
 
-      console.log("passengers", this.passengers); // passengers in carbin
-
-      console.log("payment detail", this.payment); // payment detail
-
-      console.log("flight depart", this.depart_Selected); // flight depart
-
-      console.log("flight return", this.return_Selected); // flight return
-
-      console.log("depart_price", this.depart_price);
-      console.log("return_price", this.return_price);
-      console.log("no_of_passenger", this.no_of_passenger); // number of passenger
-
-      console.log("class seat", this.input["class"]); // class seat
-
-      console.log("user_id", this.user_id);
+      console.log(this.passengers.length);
       var data = {
-        reserve_data: [this.input["class"]],
+        reserve_data: this.input,
         user_id: this.user_id,
         passenger: this.passengers,
-        seat: [this.seats, this.seatReturn],
+        seat_depart: this.seats,
+        seat_return: this.seatReturn,
         payment_method: this.payment.method,
-        price: this.total,
+        price: this.depart_price * this.no_of_passenger + this.return_price * this.no_of_passenger,
         payment_card: this.payment.cardNumber,
         flight: [this.depart_Selected, this.return_Selected]
       };
+      axios.post('api/user/reserveSendData', data).then(function (response) {
+        console.log(response.data);
+      });
     },
     handleChangePage: function handleChangePage() {
       var _this2 = this;
@@ -57273,9 +57272,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\r\n                                " +
+                    "\n                                " +
                       _vm._s(_vm.error_user_id) +
-                      "\r\n                            "
+                      "\n                            "
                   )
                 ])
               ])
@@ -63746,9 +63745,7 @@ var render = function() {
                             _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-md-6" }, [
                                 _vm._v(
-                                  "\n                                        Total: " +
-                                    _vm._s(_vm.total) +
-                                    " ฿\n                                    "
+                                  "\n                                        Total:  ฿\n                                    "
                                 )
                               ]),
                               _vm._v(" "),
@@ -81142,8 +81139,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Users\Desktop\Minimize\KMUTT Worksheet\CPE 231 Database\Final Project\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
