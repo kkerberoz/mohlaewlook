@@ -9727,6 +9727,7 @@ __webpack_require__.r(__webpack_exports__);
       firsts: [],
       buss: [],
       ecos: [],
+      firsts_temp: [],
       firsts2: [],
       buss2: [],
       ecos2: [],
@@ -9738,6 +9739,9 @@ __webpack_require__.r(__webpack_exports__);
       ///
       seats: [],
       seatReturn: [],
+      check_Dseat: 0,
+      check_Rseat: 0,
+      //
       queryFlight: [],
       queryReturnFlight: [],
       depart_Selected: null,
@@ -9786,7 +9790,8 @@ __webpack_require__.r(__webpack_exports__);
         total: ""
       },
       paymentMethod: ["Credit Card", "Cash"],
-      total: null,
+      depart_price: null,
+      return_price: null,
       check_cal: true,
       error_departDate: "",
       error_returnDate: "",
@@ -9848,8 +9853,8 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log("flight return", this.return_Selected); // flight return
 
-      console.log("Total", this.total); // total
-
+      console.log("depart_price", this.depart_price);
+      console.log("return_price", this.return_price);
       console.log("no_of_passenger", this.no_of_passenger); // number of passenger
     },
     handleChangePage: function handleChangePage() {
@@ -10032,9 +10037,34 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.check_cal == this.changePage) {
       var price_type = this.input["class"] == "Economy" ? "eco_price" : this.input["class"] == "Business" ? "bus_price" : "first_price";
-      if (this.changePage) this.total = parseFloat(this.depart_Selected[price_type]) + (this.back ? parseFloat(this.return_Selected[price_type]) : 0);
+      if (this.changePage) this.depart_price = parseFloat(this.depart_Selected[price_type]);
+      if (this.changePage) this.return_price = this.back ? parseFloat(this.return_Selected[price_type]) : 0;
       this.check_cal == !this.changePage;
+      if (this.changePage) var first_temp = this.firsts;
     }
+
+    if (this.changePage && this.check_Dseat != this.seats.length) {
+      this.check_Dseat = this.seats.length;
+      var seated = [];
+      console.log(first_temp);
+
+      if (this.input["class"] == "First") {
+        if (this.seats.length == this.no_of_passenger) {
+          this.seats.forEach(function (element) {
+            seated.push(element['seat']);
+          });
+          this.firsts.forEach(function (element) {
+            element.forEach(function (seat) {
+              if (seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            });
+          });
+        } else {
+          this.firsts = first_temp;
+        }
+      }
+    }
+
+    if (!this.changePage) this.check_Dseat = null;
   }
 });
 
@@ -14678,7 +14708,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
+exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
 
 // exports
 

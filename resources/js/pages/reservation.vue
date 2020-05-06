@@ -1541,6 +1541,7 @@ export default {
             firsts: [],
             buss: [],
             ecos: [],
+            firsts_temp: [],
             firsts2: [],
             buss2: [],
             ecos2: [],
@@ -1552,6 +1553,9 @@ export default {
             ///
             seats: [],
             seatReturn: [],
+            check_Dseat: 0,
+            check_Rseat: 0,
+            //
             queryFlight: [],
             queryReturnFlight: [],
             depart_Selected: null,
@@ -1602,7 +1606,8 @@ export default {
                 total: ""
             },
             paymentMethod: ["Credit Card", "Cash"],
-            total: null,
+            depart_price: null,
+            return_price: null,
             check_cal: true,
 
             error_departDate: "",
@@ -1665,7 +1670,8 @@ export default {
             console.log("payment detail", this.payment);  // payment detail
             console.log("flight depart", this.depart_Selected); // flight depart
             console.log("flight return", this.return_Selected); // flight return
-            console.log("Total", this.total); // total
+            console.log("depart_price", this.depart_price);
+            console.log("return_price", this.return_price);
             console.log("no_of_passenger", this.no_of_passenger) // number of passenger
         },
         handleChangePage() {
@@ -1902,9 +1908,29 @@ export default {
         }
         if(this.check_cal == this.changePage){
             var price_type = (this.input.class == "Economy") ? "eco_price" : ((this.input.class == "Business") ? "bus_price" : "first_price");
-            if(this.changePage) this.total = parseFloat(this.depart_Selected[price_type]) + ((this.back) ? parseFloat(this.return_Selected[price_type]) : 0);
+            if(this.changePage) this.depart_price = parseFloat(this.depart_Selected[price_type]);
+            if(this.changePage) this.return_price = ((this.back) ? parseFloat(this.return_Selected[price_type]) : 0);
             this.check_cal == !this.changePage;
+            if(this.changePage) var first_temp = this.firsts;
         }
+        if(this.changePage && this.check_Dseat != this.seats.length){
+            this.check_Dseat = this.seats.length;
+            var seated = [];
+            console.log(first_temp);
+
+            if(this.input.class == "First"){
+                if(this.seats.length == this.no_of_passenger){
+                    this.seats.forEach(element => {seated.push(element['seat']);});
+                    this.firsts.forEach(element => { element.forEach(seat => {
+                        if(seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                    })});
+                }
+                else {
+                    this.firsts = first_temp;
+                }
+            }
+        }
+        if(!this.changePage) this.check_Dseat = null;
     }
 };
 </script>
