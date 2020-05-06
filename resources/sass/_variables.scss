@@ -25,8 +25,8 @@ $cyan: #6cb2eb;
 }
 
 .plane {
-    margin: 20px auto;
-    max-width: 300px;
+    margin: 10px auto;
+    max-width: 500px;
 }
 
 .cockpit {
@@ -123,7 +123,7 @@ ol {
 
 .seat {
     display: flex;
-    flex: 0 0 14.28571428571429%;
+    flex: 0 0 4%;
     padding: 5px;
     position: relative;
     // &:nth-child(1) {

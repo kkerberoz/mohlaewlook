@@ -19,7 +19,7 @@
                         <div
                             class="card-body"
                             id="card-reservation"
-                            v-show="changePage"
+                            v-show="!changePage"
                         >
                             <div class="row">
                                 <div class="col-md-1"></div>
@@ -239,11 +239,17 @@
                                         v-for="(showFlight, i) in queryFlight"
                                         :key="i"
                                     >
+                                        {{ isActive === i }}
                                         <div
                                             class="card-reser"
-                                            v-bind:style="{
-                                                backgroundColor: activeColor
-                                            }"
+                                            :style="
+                                                isActive === i
+                                                    ? {
+                                                          'background-color':
+                                                              '#f79c65'
+                                                      }
+                                                    : null
+                                            "
                                         >
                                             <div class="row ml-4">
                                                 <h4>
@@ -266,7 +272,7 @@
                                                     </h4>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <h4>
+                                                    <h5>
                                                         Time :
                                                         <b
                                                             >{{
@@ -280,7 +286,7 @@
                                                                 )[1]
                                                             }}</b
                                                         >
-                                                    </h4>
+                                                    </h5>
                                                 </div>
                                                 <div class="col-md-2"></div>
                                             </div>
@@ -328,16 +334,37 @@
                                                 </div>
                                             </div>
                                             <button
-                                                @click="
-                                                    departSelected(showFlight)
+                                                id="btn-selected"
+                                                :style="
+                                                    isActive === i
+                                                        ? {
+                                                              'background-color':
+                                                                  '#2197e6'
+                                                          }
+                                                        : null
                                                 "
-                                                class="btn btn-block bg-warning"
+                                                :class="[
+                                                    'btn btn-block',
+                                                    {
+                                                        selected:
+                                                            showFlight.selected
+                                                    },
+                                                    {
+                                                        active: isActive === i
+                                                    }
+                                                ]"
+                                                @click="
+                                                    departSelected(
+                                                        showFlight,
+                                                        i
+                                                    )
+                                                "
                                             >
-                                                <span v-show="!seleted"
+                                                <span v-show="isActive !== i"
                                                     >Select</span
                                                 >
-                                                <span v-show="seleted"
-                                                    >Selected</span
+                                                <span v-show="isActive === i"
+                                                    ><b>Selected</b></span
                                                 >
                                             </button>
                                         </div>
@@ -351,7 +378,7 @@
                         <div
                             class="card-body"
                             id="card-reservation"
-                            v-show="!changePage"
+                            v-show="changePage"
                         >
                             <!-- seat -->
                             <!-- seat -->
@@ -366,156 +393,142 @@
                             <!-- seat -->
                             <div class="container-xl" v-show="oneway">
                                 <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="plane">
-                                            <div class="cockpit">
-                                                <h2 style="margin-top:90px;">
-                                                    Please select a seat
-                                                </h2>
-                                            </div>
+                                    <div class="plane">
+                                        <div class="cockpit">
+                                            <h1 style="margin-top:90px;">
+                                                Please select a seat
+                                            </h1>
+                                        </div>
+                                        <div
+                                            class="exit exit--front fuselage"
+                                        ></div>
+
+                                        <ol class="cabin fuselage">
+                                            <h4 class="flex-center">
+                                                First Class
+                                            </h4>
+                                            <ol
+                                                class="seats flex-center"
+                                                v-for="(seatt, i) in firsts"
+                                                :key="i"
+                                            >
+                                                <li
+                                                    class="seat"
+                                                    v-for="(f, k) in seatt"
+                                                    :key="k"
+                                                >
+                                                    <div
+                                                        v-show="!f.patt == true"
+                                                    >
+                                                        <input
+                                                            style="padding:5px;"
+                                                            :value="f"
+                                                            :id="f.id"
+                                                            :disabled="
+                                                                f.status == true
+                                                            "
+                                                            type="checkbox"
+                                                            v-model="seats"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff; font-size:10px"
+                                                            :for="f.id"
+                                                            >{{ f.seat }}</label
+                                                        >
+                                                    </div>
+                                                </li>
+                                            </ol>
                                             <div
-                                                class="exit exit--front fuselage"
+                                                class="toliet toliet--back fuselage"
                                             ></div>
 
-                                            <ol class="cabin fuselage">
-                                                <h4 class="flex-center">
-                                                    First Class
-                                                </h4>
-                                                <ol
-                                                    class="seats"
-                                                    v-for="(seatt, i) in firsts"
-                                                    :key="i"
+                                            <!-- busss -->
+                                            <h4 class="flex-center">
+                                                Business Class
+                                            </h4>
+                                            <ol
+                                                class="seats flex-center"
+                                                v-for="(seatt, i) in buss"
+                                                :key="'a' + i"
+                                            >
+                                                <li
+                                                    class="seat"
+                                                    v-for="(f, k) in seatt"
+                                                    :key="'b' + k"
                                                 >
-                                                    <li
-                                                        class="seat"
-                                                        v-for="(f, k) in seatt"
-                                                        :key="k"
+                                                    <div
+                                                        v-show="!f.patt == true"
                                                     >
-                                                        <div
-                                                            v-show="
-                                                                !f.patt == true
+                                                        <input
+                                                            style="padding:5px;"
+                                                            :value="f"
+                                                            :id="f.id"
+                                                            :disabled="
+                                                                f.status == true
                                                             "
+                                                            type="checkbox"
+                                                            v-model="seats"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff; font-size:10px"
+                                                            :for="f.id"
+                                                            >{{ f.seat }}</label
                                                         >
-                                                            <input
-                                                                style="padding:5px;"
-                                                                :value="f"
-                                                                :id="f.id"
-                                                                :disabled="
-                                                                    f.status ==
-                                                                        true
-                                                                "
-                                                                type="checkbox"
-                                                                v-model="seats"
-                                                            />
-                                                            <label
-                                                                style="padding:5px; color:#fff; font-size:10px"
-                                                                :for="f.id"
-                                                                >{{
-                                                                    f.seat
-                                                                }}</label
-                                                            >
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                                <div
-                                                    class="toliet toliet--back fuselage"
-                                                ></div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                            <div
+                                                class="toliet toliet--back fuselage"
+                                            ></div>
 
-                                                <!-- busss -->
-                                                <h4 class="flex-center">
-                                                    Business Class
-                                                </h4>
-                                                <ol
-                                                    class="seats"
-                                                    v-for="(seatt, i) in buss"
-                                                    :key="'a' + i"
+                                            <!-- ecooooo -->
+                                            <h4 class="flex-center">
+                                                Economy Class
+                                            </h4>
+                                            <ol
+                                                class="seats flex-center"
+                                                v-for="(eco, e) in ecos"
+                                                :key="'c' + e"
+                                            >
+                                                <li
+                                                    class="seat"
+                                                    v-for="(index, p) in eco"
+                                                    :key="'d' + p"
                                                 >
-                                                    <li
-                                                        class="seat"
-                                                        v-for="(f, k) in seatt"
-                                                        :key="'b' + k"
+                                                    <div
+                                                        v-show="
+                                                            !index.patt == true
+                                                        "
                                                     >
-                                                        <div
-                                                            v-show="
-                                                                !f.patt == true
-                                                            "
-                                                        >
-                                                            <input
-                                                                style="padding:5px;"
-                                                                :value="f"
-                                                                :id="f.id"
-                                                                :disabled="
-                                                                    f.status ==
-                                                                        true
-                                                                "
-                                                                type="checkbox"
-                                                                v-model="seats"
-                                                            />
-                                                            <label
-                                                                style="padding:5px; color:#fff; font-size:10px"
-                                                                :for="f.id"
-                                                                >{{
-                                                                    f.seat
-                                                                }}</label
-                                                            >
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                                <div
-                                                    class="toliet toliet--back fuselage"
-                                                ></div>
-
-                                                <!-- ecooooo -->
-                                                <h4 class="flex-center">
-                                                    Economy Class
-                                                </h4>
-                                                <ol
-                                                    class="seats"
-                                                    v-for="(eco, e) in ecos"
-                                                    :key="'c' + e"
-                                                >
-                                                    <li
-                                                        class="seat"
-                                                        v-for="(index,
-                                                        p) in eco"
-                                                        :key="'d' + p"
-                                                    >
-                                                        <div
-                                                            v-show="
-                                                                !index.patt ==
+                                                        <input
+                                                            style="padding:5px;"
+                                                            :value="index"
+                                                            :id="index.id"
+                                                            :disabled="
+                                                                index.status ==
                                                                     true
                                                             "
+                                                            type="checkbox"
+                                                            v-model="seats"
+                                                        />
+                                                        <label
+                                                            style="padding:5px; color:#fff; font-size:10px"
+                                                            :for="index.id"
+                                                            >{{
+                                                                index.seat
+                                                            }}</label
                                                         >
-                                                            <input
-                                                                style="padding:5px;"
-                                                                :value="index"
-                                                                :id="index.id"
-                                                                :disabled="
-                                                                    index.status ==
-                                                                        true
-                                                                "
-                                                                type="checkbox"
-                                                                v-model="seats"
-                                                            />
-                                                            <label
-                                                                style="padding:5px; color:#fff; font-size:10px"
-                                                                :for="index.id"
-                                                                >{{
-                                                                    index.seat
-                                                                }}</label
-                                                            >
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                                <div
-                                                    class="toliet toliet--back"
-                                                ></div>
+                                                    </div>
+                                                </li>
                                             </ol>
-
                                             <div
-                                                class="exit exit--back fuselage"
+                                                class="toliet toliet--back"
                                             ></div>
-                                        </div>
+                                        </ol>
+
+                                        <div
+                                            class="exit exit--back fuselage"
+                                        ></div>
                                     </div>
                                 </div>
                             </div>
@@ -527,12 +540,12 @@
                                         <div class="row">
                                             <div class="plane">
                                                 <div class="cockpit">
-                                                    <h2
+                                                    <h1
                                                         style="margin-top:90px;"
                                                     >
                                                         plaese select depart
                                                         seat
-                                                    </h2>
+                                                    </h1>
                                                 </div>
                                                 <div
                                                     class="exit exit--front fuselage"
@@ -543,7 +556,7 @@
                                                         First Class
                                                     </h4>
                                                     <ol
-                                                        class="seats"
+                                                        class="seats flex-center"
                                                         v-for="(seatt,
                                                         i) in firsts"
                                                         :key="i"
@@ -592,7 +605,7 @@
                                                         Business Class
                                                     </h4>
                                                     <ol
-                                                        class="seats"
+                                                        class="seats flex-center"
                                                         v-for="(seatt,
                                                         i) in buss"
                                                         :key="'a' + i"
@@ -641,7 +654,7 @@
                                                         Economy Class
                                                     </h4>
                                                     <ol
-                                                        class="seats"
+                                                        class="seats flex-center"
                                                         v-for="(eco, e) in ecos"
                                                         :key="'c' + e"
                                                     >
@@ -701,12 +714,12 @@
                                         <div class="row">
                                             <div class="plane">
                                                 <div class="cockpit">
-                                                    <h2
+                                                    <h1
                                                         style="margin-top:90px;"
                                                     >
                                                         plaese select return
                                                         seat
-                                                    </h2>
+                                                    </h1>
                                                 </div>
                                                 <div
                                                     class="exit exit--front fuselage"
@@ -717,7 +730,7 @@
                                                         First Class
                                                     </h4>
                                                     <ol
-                                                        class="seats"
+                                                        class="seats flex-center"
                                                         v-for="(seatt,
                                                         i) in firsts2"
                                                         :key="i"
@@ -766,7 +779,7 @@
                                                         Business Class
                                                     </h4>
                                                     <ol
-                                                        class="seats"
+                                                        class="seats flex-center"
                                                         v-for="(seatt,
                                                         i) in buss2"
                                                         :key="'a' + i"
@@ -811,7 +824,9 @@
                                                     ></div>
 
                                                     <!-- ecooooo -->
-                                                    <h4 class="flex-center">
+                                                    <h4
+                                                        class="flex-center flex-center"
+                                                    >
                                                         Economy Class
                                                     </h4>
                                                     <ol
@@ -1241,11 +1256,11 @@
                         <div class="card-footer ">
                             <div class="col-md-12">
                                 <button
-                                    v-if="changePage"
+                                    v-if="!changePage"
                                     style="color:#fff"
                                     id="card-reservation"
                                     type="button"
-                                    @click="changePage = !changePage"
+                                    @click="handleChangePage"
                                     class="btn btn-block btn-login"
                                 >
                                     Next
@@ -1253,7 +1268,7 @@
                             </div>
                             <div class="col-md-12">
                                 <button
-                                    v-if="!changePage"
+                                    v-if="changePage"
                                     style="color:#fff"
                                     id="card-reservation"
                                     type="submit"
@@ -1262,11 +1277,11 @@
                                     Submit
                                 </button>
                                 <button
-                                    v-if="!changePage"
+                                    v-if="changePage"
                                     style="color:#fff"
                                     id="card-reservation"
                                     type="button"
-                                    @click="changePage = !changePage"
+                                    @click="handleChangePage"
                                     class="btn btn-block btn-success"
                                 >
                                     Back
@@ -1295,8 +1310,8 @@ export default {
             firsts2: [],
             buss2: [],
             ecos2: [],
-            alteredState: false,
-            seleted: false,
+            isSelected: false,
+            isActive: null,
             activeColor: "",
             seats: [],
             seatReturn: [],
@@ -1307,7 +1322,7 @@ export default {
             back: false,
             loadingPage: false,
             fullPage: true,
-            changePage: true,
+            changePage: false,
             counter: "",
             airports: [],
             allClass: ["Economy", "Business", "First"],
@@ -1398,26 +1413,72 @@ export default {
             });
         });
     },
-    methods: {
-        departSelected(showFlight) {
-            this.depart_Selected = showFlight;
-            console.log(this.depart_Selected);
-            this.seleted = !this.seleted;
-            if (this.alteredState) {
-                this.activeColor = "#2197e6 ";
-                this.alteredState = false;
-            } else {
-                this.activeColor = "#f79c65";
-                this.alteredState = true;
-            }
-            this.depart_Selected.class = this.input.class
-            axios.post("/api/user/checkSeat", this.depart_Selected).then(response => {
-                console.log(response.data);
-                this.firsts = response.data.firsts;
-                this.buss = response.data.buss;
-                this.ecos = response.data.ecos;
-            });
 
+    methods: {
+        handleChangePage() {
+            if (this.isSelected) {
+                if (!this.changePage) {
+                    this.loadingPage = true;
+                    setTimeout(() => {
+                        this.changePage = true;
+                        this.loadingPage = false;
+                    }, 1000);
+                } else if (this.changePage) {
+                    this.loadingPage = false;
+                    swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, change it!"
+                    }).then(result => {
+                        if (result.value) {
+                            this.loadingPage = true;
+                            setTimeout(() => {
+                                this.loadingPage = false;
+                                this.changePage = false;
+                                this.isSelected = false;
+                                this.isActive = null;
+                            }, 1000);
+                        } else {
+                            swal.fire(
+                                "Cancelled",
+                                "Status work date has not changed.",
+                                "error"
+                            );
+                        }
+                    });
+                }
+            } else {
+                swal.fire(
+                    "Please select flight!",
+                    "Cilck the button to continue!",
+                    "warning"
+                ).then(() => {
+                    this.changePage = false;
+                });
+            }
+        },
+        departSelected(showFlight, index) {
+            this.isSelected = showFlight.selected = true;
+            this.isActive = index;
+
+            this.depart_Selected = showFlight;
+            console.log("selectedddd", this.depart_Selected);
+
+            this.depart_Selected.class = this.input.class;
+
+            axios
+                .post("/api/user/checkSeat", this.depart_Selected)
+                .then(response => {
+                    console.log(response.data);
+
+                    this.firsts = response.data.firsts;
+                    this.buss = response.data.buss;
+                    this.ecos = response.data.ecos;
+                });
         },
         showReturn() {
             this.back = true;
@@ -1447,17 +1508,31 @@ export default {
             this.passengers.splice(index, 1);
         }
     },
-    beforeUpdate(){
-        if((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate &&
-            !!this.input.flightTo && !!this.input.flightFrom && !!this.input.class &&
-            (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate ||
-            this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo ||
-            this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input.class || this.passengers.length != this.temp_passenger)){
-            //*---------------------------------------------------------------------------------------------------*//
-            this.temp_back = this.back, this.temp_calendar_to = this.calendar_to.selectedDate;
-            this.temp_calendar_from = this.calendar_from.selectedDate, this.temp_flightTo = this.input.flightTo;
-            this.temp_flightFrom = this.input.flightFrom, this.temp_class = this.input.class, this.temp_passenger = this.passengers.length;
 
+    beforeUpdate() {
+        if (
+            (!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) &&
+            !!this.calendar_from.selectedDate &&
+            !!this.input.flightTo &&
+            !!this.input.flightFrom &&
+            !!this.input.class &&
+            (this.temp_back != this.back ||
+                this.temp_calendar_to != this.calendar_to.selectedDate ||
+                this.temp_calendar_from != this.calendar_from.selectedDate ||
+                this.temp_flightTo != this.input.flightTo ||
+                this.temp_flightFrom != this.input.flightFrom ||
+                this.temp_class != this.input.class ||
+                this.passengers.length != this.temp_passenger)
+        ) {
+            //*---------------------------------------------------------------------------------------------------*//
+            (this.temp_back = this.back),
+                (this.temp_calendar_to = this.calendar_to.selectedDate);
+            (this.temp_calendar_from = this.calendar_from.selectedDate),
+                (this.temp_flightTo = this.input.flightTo);
+            (this.temp_flightFrom = this.input.flightFrom),
+                (this.temp_class = this.input.class),
+                (this.temp_passenger = this.passengers.length);
+            this.loadingPage = true;
             this.input.departDate = this.calendar_from.selectedDate;
             this.input.returnDate = this.calendar_to.selectedDate;
             let data = {
@@ -1466,6 +1541,7 @@ export default {
                 passengerCount: this.passengers.length
             };
             axios.post("/api/user/getFlight", data).then(response => {
+                this.loadingPage = false;
                 console.log("query", response.data);
                 this.queryFlight = response.data.flight_depart;
             });
@@ -1475,6 +1551,21 @@ export default {
 </script>
 
 <style>
+#btn-selected {
+    border-radius: 0px;
+    border: none;
+    color: #fff;
+    background: #f1ad2f;
+}
+#btn-selected:hover {
+    border: none;
+    color: #fff;
+    transition: 0.3s;
+    font-size: 20px;
+    background: #f1ad2f;
+    border-radius: 0px;
+}
+
 /* .reservation {
     background-color: #4bb4de;
 } */
@@ -1483,6 +1574,8 @@ export default {
     border-radius: 0;
     background-color: #f79c65;
     display: block;
+    text-align: center;
+    color: #fff;
 }
 /* #f8d49b */
 #card-reservation {
