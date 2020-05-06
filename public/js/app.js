@@ -9712,6 +9712,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9865,6 +9873,8 @@ __webpack_require__.r(__webpack_exports__);
           if (!this.changePage) {
             this.loadingPage = true;
             setTimeout(function () {
+              _this2.seats = [];
+              _this2.seatReturn = [];
               _this2.changePage = true;
               _this2.loadingPage = false;
             }, 1000);
@@ -9911,6 +9921,8 @@ __webpack_require__.r(__webpack_exports__);
         if (!this.changePage) {
           this.loadingPage = true;
           setTimeout(function () {
+            _this2.seats = [];
+            _this2.seatReturn = [];
             _this2.changePage = true;
             _this2.loadingPage = false;
           }, 1000);
@@ -10054,8 +10066,7 @@ __webpack_require__.r(__webpack_exports__);
             seated.push(element['seat']);
           });
           this.firsts.forEach(function (element) {
-            element.forEach(function (seat) {
-              if (seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            element.forEach(function (seat) {//if(seated.indexOf(seat['seat']) == -1) seat['status'] = true;
             });
           });
         } else {
@@ -60813,29 +60824,41 @@ var render = function() {
                               _vm._v(
                                 "\n                                             \n                                        "
                               ),
-                              _c("button", {
-                                staticClass: " btn fas fa-minus-circle",
-                                staticStyle: { color: "#ED4337" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.removePass(_vm.counter)
-                                  }
-                                }
-                              }),
+                              _vm.passengers.length == 1
+                                ? _c("button", {
+                                    staticClass: " btn fas fa-minus-circle",
+                                    staticStyle: { visibility: "hidden" },
+                                    attrs: { disabled: "" }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.passengers.length > 1
+                                ? _c("button", {
+                                    staticClass: " btn fas fa-minus-circle",
+                                    staticStyle: { color: "#ED4337" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.removePass(_vm.counter)
+                                      }
+                                    }
+                                  })
+                                : _vm._e(),
                               _vm._v(
                                 "\n                                        " +
                                   _vm._s(_vm.passengers.length) +
                                   "\n                                        "
                               ),
-                              _c("button", {
-                                staticClass: "btn fas fa-plus-circle",
-                                staticStyle: { color: "#4BB543" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addPass(_vm.counter)
-                                  }
-                                }
-                              })
+                              _vm.passengers.length < 10
+                                ? _c("button", {
+                                    staticClass: "btn fas fa-plus-circle",
+                                    staticStyle: { color: "#4BB543" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addPass(_vm.counter)
+                                      }
+                                    }
+                                  })
+                                : _vm._e()
                             ])
                           ])
                         ]),

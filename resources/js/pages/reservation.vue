@@ -58,12 +58,20 @@
                                         <div>
                                             &nbsp; &nbsp; &nbsp;
                                             <button
+                                                disabled
+                                                v-if="passengers.length == 1"
+                                                class=" btn fas fa-minus-circle"
+                                                style="visibility: hidden;"
+                                            ></button>
+                                            <button
+                                                v-if="passengers.length > 1"
                                                 class=" btn fas fa-minus-circle"
                                                 style="color:#ED4337;"
                                                 @click="removePass(counter)"
                                             ></button>
                                             {{ passengers.length }}
                                             <button
+                                                v-if="passengers.length < 10"
                                                 class="btn fas fa-plus-circle"
                                                 style="color:#4BB543;"
                                                 @click="addPass(counter)"
@@ -187,7 +195,7 @@
                                             <br />From :
                                         </span>
                                         <multiselect
-                                            label = "name"
+                                            label="name"
                                             disabled
                                             v-model="input.flightTo"
                                             :options="airports"
@@ -211,7 +219,7 @@
                                             <br />To :
                                         </span>
                                         <multiselect
-                                            label = "name"
+                                            label="name"
                                             disabled
                                             v-model="input.flightFrom"
                                             :options="airports"
@@ -1663,11 +1671,11 @@ export default {
     },
 
     methods: {
-        submit(){
-            console.log("depart seat", this.seats);  // depart seat
+        submit() {
+            console.log("depart seat", this.seats); // depart seat
             console.log("return seat", this.seatReturn); // return seat
             console.log("passengers", this.passengers); // passengers in carbin
-            console.log("payment detail", this.payment);  // payment detail
+            console.log("payment detail", this.payment); // payment detail
             console.log("flight depart", this.depart_Selected); // flight depart
             console.log("flight return", this.return_Selected); // flight return
             console.log("depart_price", this.depart_price);
@@ -1683,6 +1691,8 @@ export default {
                     if (!this.changePage) {
                         this.loadingPage = true;
                         setTimeout(() => {
+                            this.seats = [];
+                            this.seatReturn = [];
                             this.changePage = true;
                             this.loadingPage = false;
                         }, 1000);
@@ -1751,6 +1761,8 @@ export default {
                 if (!this.changePage) {
                     this.loadingPage = true;
                     setTimeout(() => {
+                        this.seats = [];
+                        this.seatReturn = [];
                         this.changePage = true;
                         this.loadingPage = false;
                     }, 1000);
@@ -1899,7 +1911,11 @@ export default {
                 this.no_of_passenger = this.passengers.length;
             });
         }
-        if(!this.input.class || !this.input.flightTo || !this.input.flightFrom){
+        if (
+            !this.input.class ||
+            !this.input.flightTo ||
+            !this.input.flightFrom
+        ) {
             this.loadingPage = true;
             this.temp_class = this.temp_flightTo = this.temp_flightFrom = null;
             this.queryFlight = [];
@@ -1922,7 +1938,7 @@ export default {
                 if(this.seats.length == this.no_of_passenger){
                     this.seats.forEach(element => {seated.push(element['seat']);});
                     this.firsts.forEach(element => { element.forEach(seat => {
-                        if(seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                        //if(seated.indexOf(seat['seat']) == -1) seat['status'] = true;
                     })});
                 }
                 else {
