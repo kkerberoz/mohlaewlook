@@ -7,8 +7,8 @@
 }
 
 .plane {
-  margin: 20px auto;
-  max-width: 300px;
+  margin: 10px auto;
+  max-width: 500px;
 }
 
 .cockpit {
@@ -113,7 +113,7 @@ ol {
 
 .seat {
   display: flex;
-  flex: 0 0 14.2857142857%;
+  flex: 0 0 4%;
   padding: 5px;
   position: relative;
 }
@@ -135,13 +135,13 @@ ol {
 
 .seat input[type=checkbox]:disabled + label {
   background: #dddddd;
-  width: 20px;
+  width: 30px;
   text-indent: -9999px;
   overflow: hidden;
 }
 
 .seat input[type=checkbox]:disabled + label:after {
-  content: "X";
+  content: "XXX";
   text-indent: 0;
   position: absolute;
   top: 4px;

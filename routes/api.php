@@ -29,6 +29,7 @@ Route::prefix('user')->group(function () {
     Route::get('/getLocation', 'UserController@getLocation');
     Route::post('/getFlight', 'UserController@getFlight');
     Route::post('/reserveSendData','UserController@reserveSendData');
+    Route::post('/checkSeat','UserController@checkSeat');
 });
 
 //route for employee

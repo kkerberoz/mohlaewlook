@@ -35,7 +35,7 @@ let routes = [
     },
     {
         path: "/admin",
-        component: require("./pages/admin/admin_control.vue").default,
+        component: require("./pages/admin/adminControl.vue").default,
         meta: { requiresAdmin: true },
 
         children: [
@@ -65,9 +65,9 @@ let routes = [
                 component: require("./pages/admin/addAirport.vue").default
             },
             {
-                path: "customer",
-                name: "customerCRUD",
-                component: require("./pages/admin/customerCRUD.vue").default
+                path: "manageCustomer",
+                name: "manageCustomer",
+                component: require("./pages/admin/manageCustomer.vue").default
             },
             {
                 path: "addPrice",
@@ -75,9 +75,9 @@ let routes = [
                 component: require("./pages/admin/addPrice.vue").default
             },
             {
-                path: "Schedule",
-                name: "Schedule",
-                component: require("./pages/admin/Schedule.vue").default
+                path: "workSchedule",
+                name: "workSchedule",
+                component: require("./pages/admin/workSchedule.vue").default
             },
             {
                 path: "analysis_1",

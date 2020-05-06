@@ -94,7 +94,7 @@
 
                             <li>
                                 <router-link
-                                    :to="{ name: 'customerCRUD' }"
+                                    :to="{ name: 'manageCustomer' }"
                                     v-show="
                                         role === 'staff' || role === 'admin'
                                             ? true
@@ -149,10 +149,9 @@
                             </li>
                             <li>
                                 <router-link
-                                    :to="{ name: 'Schedule' }"
+                                    :to="{ name: 'workSchedule' }"
                                     v-show="
                                         role === 'pilot' ||
-                                        role === 'admin' ||
                                         role === 'flight_attendant'
                                             ? true
                                             : false
@@ -166,7 +165,7 @@
                                 <router-link
                                     :to="{ name: 'manageSchedule' }"
                                     v-show="
-                                        role === 'flight_manager' ||
+                                        role === 'human_resource' ||
                                         role === 'admin'
                                             ? true
                                             : false
@@ -201,7 +200,7 @@
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_1</span>
+                                    <span>Number of domestic flight</span>
                                 </router-link>
                             </li>
                             <li>
@@ -209,27 +208,32 @@
                                     :to="{ name: 'analysis_2' }"
                                     v-show="
                                         role === 'flight_manager' ||
+                                        role === 'staff' ||
                                         role === 'admin'
                                             ? true
                                             : false
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_2</span>
+                                    <span
+                                        >Number of access in each seat
+                                        class</span
+                                    >
                                 </router-link>
                             </li>
                             <li>
                                 <router-link
                                     :to="{ name: 'analysis_3' }"
                                     v-show="
-                                        role === 'flight_manager' ||
-                                        role === 'admin'
+                                        role === 'staff' ||
+                                        role === 'admin' ||
+                                        role === 'human_resource'
                                             ? true
                                             : false
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_3</span>
+                                    <span>Most reserved account</span>
                                 </router-link>
                             </li>
                             <li>
@@ -243,7 +247,7 @@
                                     "
                                 >
                                     <i class="fas fa-chart-line"></i>
-                                    <span>analysis_4</span>
+                                    <span>Number of passengers</span>
                                 </router-link>
                             </li>
                             <li style="margin-top:10px; padding:10px">

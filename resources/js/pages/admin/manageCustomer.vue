@@ -358,7 +358,7 @@ export default {
                                     "success"
                                 ).then(() => {
                                     this.$router.go({
-                                        name: "customerCRUD"
+                                        name: "manageCustomer"
                                     });
                                 });
                             })
@@ -454,7 +454,7 @@ export default {
                             ).then(() => {
                                 this.isLoading = false;
                                 $("#addNew").modal("hide");
-                                this.$router.go({ name: "customerCRUD" });
+                                this.$router.go({ name: "manageCustomer" });
                             });
                         });
                 });
@@ -572,7 +572,7 @@ export default {
                                 "success"
                             ).then(() => {
                                 $("#addNew").modal("hide");
-                                this.$router.go({ name: "customerCRUD" });
+                                this.$router.go({ name: "manageCustomer" });
                             });
                         }
                     });

@@ -114,7 +114,7 @@ export default {
                             "success"
                         ).then(() => {
                             this.isLoading = false;
-                            this.$router.go({ name: "Schedule" });
+                            this.$router.go({ name: "workSchedule" });
                         });
                     })
                     .catch(error => {
