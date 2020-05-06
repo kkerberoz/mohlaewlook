@@ -1656,7 +1656,6 @@ export default {
         this.loadingPage = true;
         axios.get("/sanctum/csrf-cookie").then(response => {
             axios.get('api/user').then(response => {
-                        console.log(response.data);
                         this.user_id = response.data['user_id'];
                         this.loadingPage = false;
                     });

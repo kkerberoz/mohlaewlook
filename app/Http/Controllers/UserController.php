@@ -293,7 +293,6 @@ class UserController extends Controller
         $alphas = range('A', 'Z');
         // $first class
         $sum =  explode("-", $request->first_pattern);
-<<<<<<< refs/remotes/origin/master
         $first_amount = ($request->first_cap) / array_sum($sum);
         $count_id = 1; $seat_count = 1;
         while($first_amount--){
@@ -305,19 +304,6 @@ class UserController extends Controller
                     for($j=0; $j<$pettern[$i]; ++$j){
                         $seat = sprintf("%02d", $seat_count). $alphas[$count_alphas++];
                         array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
-=======
-        $first_amount = $first_total = ($request->first_cap) / array_sum($sum);
-        $count_id = 1;
-        while ($first_amount--) {
-            $temp = [];
-            $pettern = $request->first_pattern;
-            $count_alphas = 0;
-            for ($i = 0; $i < strlen($pettern); ++$i) {
-                if (is_numeric($pettern[$i])) {
-                    for ($j = 0; $j < $pettern[$i]; ++$j) {
-                        $seat = sprintf("%02d", ($first_total - $first_amount)) . $alphas[$count_alphas++];
-                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
->>>>>>> Auto stash before rebase of "origin/master"
                     }
                 } else array_push($temp, ["patt" => true]);
             }
@@ -326,7 +312,6 @@ class UserController extends Controller
         }
         // $bussiness class
         $sum =  explode("-", $request->bus_pattern);
-<<<<<<< refs/remotes/origin/master
         $bus_amount =($request->bus_cap) / array_sum($sum);
         while($bus_amount--){
             $temp = [];
@@ -337,18 +322,6 @@ class UserController extends Controller
                     for($j=0; $j<$pettern[$i]; ++$j){
                         $seat = sprintf("%02d", $seat_count). $alphas[$count_alphas++];
                         array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
-=======
-        $bus_amount = $bus_total = ($request->bus_cap) / array_sum($sum);
-        while ($bus_amount--) {
-            $temp = [];
-            $pettern = $request->bus_pattern;
-            $count_alphas = 0;
-            for ($i = 0; $i < strlen($pettern); ++$i) {
-                if (is_numeric($pettern[$i])) {
-                    for ($j = 0; $j < $pettern[$i]; ++$j) {
-                        $seat = sprintf("%02d", ($bus_total - $bus_amount)) . $alphas[$count_alphas++];
-                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
->>>>>>> Auto stash before rebase of "origin/master"
                     }
                 } else array_push($temp, ["patt" => true]);
             }
@@ -357,7 +330,6 @@ class UserController extends Controller
         }
         // economy class
         $sum =  explode("-", $request->eco_pattern);
-<<<<<<< refs/remotes/origin/master
         $eco_amount = ($request->eco_cap) / array_sum($sum);
         while($eco_amount--){
             $temp = [];
@@ -368,18 +340,6 @@ class UserController extends Controller
                     for($j=0; $j<$pettern[$i]; ++$j){
                         $seat = sprintf("%02d", $seat_count). $alphas[$count_alphas++];
                         array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
-=======
-        $eco_amount = $eco_total = ($request->eco_cap) / array_sum($sum);
-        while ($eco_amount--) {
-            $temp = [];
-            $pettern = $request->eco_pattern;
-            $count_alphas = 0;
-            for ($i = 0; $i < strlen($pettern); ++$i) {
-                if (is_numeric($pettern[$i])) {
-                    for ($j = 0; $j < $pettern[$i]; ++$j) {
-                        $seat = sprintf("%02d", ($eco_total - $eco_amount)) . $alphas[$count_alphas++];
-                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
->>>>>>> Auto stash before rebase of "origin/master"
                     }
                 } else array_push($temp, ["patt" => true]);
             }
