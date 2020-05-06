@@ -265,6 +265,7 @@ class UserController extends Controller
         return response()->JSON(["flight_depart" => $avaliable_flight_depart, "flight_return" => $avaliable_flight_return]);
     }
     public function checkSeat(Request $request){
+        $seat_prefix = $request->type;
         $flight_id = $request->flight_id;
         $class = strtolower($request->class);
         $firsts = []; $buss = []; $ecos = [];
@@ -284,7 +285,7 @@ class UserController extends Controller
                 if(is_numeric($pettern[$i])){
                     for($j=0; $j<$pettern[$i]; ++$j){
                         $seat = sprintf("%02d",($first_total - $first_amount)). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
+                        array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
                     }
                 }
                 else array_push($temp, ["patt" => true]);
@@ -302,7 +303,7 @@ class UserController extends Controller
                 if(is_numeric($pettern[$i])){
                     for($j=0; $j<$pettern[$i]; ++$j){
                         $seat = sprintf("%02d",($bus_total - $bus_amount)). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
+                        array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
                     }
                 }
                 else array_push($temp, ["patt" => true]);
@@ -320,7 +321,7 @@ class UserController extends Controller
                 if(is_numeric($pettern[$i])){
                     for($j=0; $j<$pettern[$i]; ++$j){
                         $seat = sprintf("%02d",($eco_total - $eco_amount)). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
+                        array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
                     }
                 }
                 else array_push($temp, ["patt" => true]);
