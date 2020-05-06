@@ -170,7 +170,7 @@ class UserController extends Controller
                 $passenger->passenger_name = $each_passenger['name'];
                 $passenger->passenger_surname = $each_passenger['surname'];
                 $passenger->passenger_DOB = $each_passenger['dob'];
-                $passenger->gender = $each_passenger['gender'];
+                $passenger->gender = strtolower($each_passenger['gender']);
                 $passenger->passenger_nationality = $each_passenger['national'];
                 $passenger->passenger_religion = $each_passenger['religion'];
                 $passenger->passenger_idcard = $each_passenger['idcard'];
@@ -181,12 +181,13 @@ class UserController extends Controller
                 $passenger->save();
                 //array_push($passengerObj, $passenger);
             } else {
+
                 $prefix = "";
-                $age = floor(((date_diff(date_create($each_passenger['dob']), date_create(date('Y-m-d'))))->days) / 365);
+                $age = is_numeric(floor(((date_diff(date_create($each_passenger['dob']), date_create(date('Y-m-d'))))->days) / 365));
                 if ($age >= 18) {
-                    if (!strcmp($each_passenger['gender'], "male")) {
+                    if (!strcmp($each_passenger['gender'], "Male")) {
                         $prefix = "M";
-                    } else if (!strcmp($each_passenger['gender'], "female")) {
+                    } else if (!strcmp($each_passenger['gender'], "Female")) {
                         $prefix = "F";
                     }
                 } else {
@@ -194,14 +195,14 @@ class UserController extends Controller
                 }
 
                 $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderBy('passenger_id', 'desc')->first();
-                $number = is_numeric(str_replace($prefix, "", $check_id['passenger_id']) + 1);
+                $number = is_numeric(str_replace($prefix, "", $check_id['passenger_id']))+ 1;
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
                 array_push($current_passenger_id, $passenger->passenger_id);
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
                 $passenger->passenger_surname = $each_passenger['surname'];
                 $passenger->passenger_DOB = $each_passenger['dob'];
-                $passenger->gender = $each_passenger['gender'];
+                $passenger->gender = strtolower($each_passenger['gender']);
                 $passenger->passenger_nationality = $each_passenger['national'];
                 $passenger->passenger_religion = $each_passenger['religion'];
                 $passenger->passenger_idcard = $each_passenger['idcard'];
@@ -221,7 +222,7 @@ class UserController extends Controller
         $payment->payment_method = $payment_method;
         $payment->payment_card = $payment_card;
         $payment->total_price = $price;
-        $payment->reservaton_id = $reserve_id;
+        $payment->reservation_id = $reserve_id['reservation_id'];
         //array_push($paymentObj, $payment);
         //---------------------------------------------------------------------------------------------------------------------//
         $payment->save();
@@ -248,9 +249,9 @@ class UserController extends Controller
         for ($i = 0; $i < sizeof($passenger_array); $i++) {
             $ticket = new Ticket;
             $ticket->seat_no = $seat_depart[$i]['seat']; /////////////////////////////////////////
-            $ticket->class_name = $reserve_data['class'];
+            $ticket->class_name = strtolower($reserve_data['class']);
             $ticket->flight_id = $flight_id_array[0]['flight_id'];
-            $ticket->reservation_id = $reserve_id;
+            $ticket->reservation_id = $reserve_id['reservation_id'];
             $ticket->passenger_id = $current_passenger_id[$i];
             //array_push($ticketObj,$ticket);
             //---------------------------------------------------------------------------------------------------------------------//
@@ -261,9 +262,9 @@ class UserController extends Controller
             for ($i = 0; $i < sizeof($passenger_array); $i++) {
                 $ticket = new Ticket;
                 $ticket->seat_no = $seat_return[$i]['seat']; /////////////////////////////////////////
-                $ticket->class_name = $reserve_data['class'];
+                $ticket->class_name = strtolower($reserve_data['class']);
                 $ticket->flight_id = $flight_id_array[1]['flight_id'];
-                $ticket->reservation_id = $reserve_id;
+                $ticket->reservation_id = $reserve_id['reservation_id'];
                 $ticket->passenger_id = $current_passenger_id[$i];
                 //array_push($ticketObj, $ticket);
                 //---------------------------------------------------------------------------------------------------------------------//

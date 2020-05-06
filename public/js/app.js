@@ -9840,8 +9840,8 @@ __webpack_require__.r(__webpack_exports__);
 
     this.loadingPage = true;
     axios.get("/sanctum/csrf-cookie").then(function (response) {
-      axios.get('api/user').then(function (response) {
-        _this.user_id = response.data['user_id'];
+      axios.get("api/user").then(function (response) {
+        _this.user_id = response.data["user_id"];
         _this.loadingPage = false;
       });
     }); // setTimeout(() => {
@@ -9858,9 +9858,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      console.log("depart seat", this.seats); // depart seat
-
-      console.log("return seat", this.seatReturn); // return seat
+      //console.log("depart seat", this.seats); // depart seat
+      //console.log("return seat", this.seatReturn); // return seat
       // console.log("passengers", this.passengers); // passengers in carbin
       // console.log("payment detail", this.payment); // payment detail
       // console.log("flight depart", this.depart_Selected); // flight depart
@@ -9870,7 +9869,6 @@ __webpack_require__.r(__webpack_exports__);
       // console.log("no_of_passenger", this.no_of_passenger) // number of passenger
       // console.log("class seat",this.input.class); // class seat
       // console.log("user_id",this.user_id);
-
       console.log(this.passengers.length);
       var data = {
         reserve_data: this.input,
@@ -10014,10 +10012,22 @@ __webpack_require__.r(__webpack_exports__);
     showReturn: function showReturn() {
       this.back = true;
       this.oneway = false;
+      this.isSelected = false;
+      this.isReturnSelected = false;
+      this.isActive = null;
+      this.isReturnActive = null;
+      this.seats = [];
+      this.seatReturn = [];
     },
     showOneway: function showOneway() {
       this.back = false;
       this.oneway = true;
+      this.isSelected = false;
+      this.isReturnSelected = false;
+      this.isActive = null;
+      this.isReturnActive = null;
+      this.seats = [];
+      this.seatReturn = [];
     },
     addPass: function addPass(index) {
       this.passengers.push({
@@ -10043,10 +10053,20 @@ __webpack_require__.r(__webpack_exports__);
 
     if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"] && (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate || this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo || this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input["class"] || this.passengers.length != this.temp_passenger)) {
       //*---------------------------------------------------------------------------------------------------*//
-      this.temp_back = this.back, this.temp_calendar_to = this.calendar_to.selectedDate;
-      this.temp_calendar_from = this.calendar_from.selectedDate, this.temp_flightTo = this.input.flightTo;
-      this.temp_flightFrom = this.input.flightFrom, this.temp_class = this.input["class"], this.temp_passenger = this.passengers.length;
+      this.temp_back = this.back;
+      this.temp_calendar_to = this.calendar_to.selectedDate;
+      this.temp_calendar_from = this.calendar_from.selectedDate;
+      this.temp_flightTo = this.input.flightTo;
+      this.temp_flightFrom = this.input.flightFrom;
+      this.temp_class = this.input["class"];
+      this.temp_passenger = this.passengers.length;
       this.loadingPage = true;
+      this.isSelected = false;
+      this.isReturnSelected = false;
+      this.isActive = null;
+      this.isReturnActive = null;
+      this.seats = [];
+      this.seatReturn = [];
       this.input.departDate = this.calendar_from.selectedDate;
       this.input.returnDate = this.calendar_to.selectedDate;
       var data = {
@@ -10082,16 +10102,16 @@ __webpack_require__.r(__webpack_exports__);
       this.check_Dseat = this.seats.length;
       var seated = [];
       this.seats.forEach(function (element) {
-        seated.push(element['seat']);
+        seated.push(element["seat"]);
       });
 
       if (this.input["class"] == "First") {
         this.firsts.forEach(function (element) {
           element.forEach(function (seat) {
             if (_this5.seats.length == _this5.no_of_passenger) {
-              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+              if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10101,9 +10121,9 @@ __webpack_require__.r(__webpack_exports__);
         this.buss.forEach(function (element) {
           element.forEach(function (seat) {
             if (_this5.seats.length == _this5.no_of_passenger) {
-              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+              if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10113,9 +10133,9 @@ __webpack_require__.r(__webpack_exports__);
         this.ecos.forEach(function (element) {
           element.forEach(function (seat) {
             if (_this5.seats.length == _this5.no_of_passenger) {
-              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+              if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10127,16 +10147,16 @@ __webpack_require__.r(__webpack_exports__);
       this.check_Rseat = this.seatReturn.length;
       var seated = [];
       this.seatReturn.forEach(function (element) {
-        seated.push(element['seat']);
+        seated.push(element["seat"]);
       });
 
       if (this.input["class"] == "First") {
         this.firsts2.forEach(function (element) {
           element.forEach(function (seat) {
             if (_this5.seatReturn.length == _this5.no_of_passenger) {
-              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+              if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10146,9 +10166,9 @@ __webpack_require__.r(__webpack_exports__);
         this.buss2.forEach(function (element) {
           element.forEach(function (seat) {
             if (_this5.seatReturn.length == _this5.no_of_passenger) {
-              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+              if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10158,9 +10178,9 @@ __webpack_require__.r(__webpack_exports__);
         this.ecos2.forEach(function (element) {
           element.forEach(function (seat) {
             if (_this5.seatReturn.length == _this5.no_of_passenger) {
-              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+              if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
