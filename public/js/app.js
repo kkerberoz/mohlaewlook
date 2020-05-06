@@ -9709,8 +9709,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -62789,9 +62787,7 @@ var render = function() {
                                       _vm._v(" "),
                                       _c(
                                         "h4",
-                                        {
-                                          staticClass: "flex-center flex-center"
-                                        },
+                                        { staticClass: "flex-center " },
                                         [
                                           _vm._v(
                                             "\n                                                    Economy Class\n                                                "
@@ -62804,7 +62800,7 @@ var render = function() {
                                           "ol",
                                           {
                                             key: "c" + e,
-                                            staticClass: "seats"
+                                            staticClass: "seats flex-center"
                                           },
                                           _vm._l(eco, function(index, p) {
                                             return _c(

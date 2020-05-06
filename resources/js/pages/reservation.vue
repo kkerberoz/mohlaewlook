@@ -1057,13 +1057,11 @@
                                                     ></div>
 
                                                     <!-- ecooooo -->
-                                                    <h4
-                                                        class="flex-center flex-center"
-                                                    >
+                                                    <h4 class="flex-center ">
                                                         Economy Class
                                                     </h4>
                                                     <ol
-                                                        class="seats"
+                                                        class="seats flex-center"
                                                         v-for="(eco,
                                                         e) in ecos2"
                                                         :key="'c' + e"
