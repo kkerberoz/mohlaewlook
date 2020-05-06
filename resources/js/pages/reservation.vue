@@ -1453,7 +1453,7 @@
                                 <div class="container-xl">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            Total:
+                                            Total: {{total}} ฿
                                         </div>
                                         <div class="col-md-6">
                                             <label>Payment Methods :</label>
@@ -1554,6 +1554,8 @@ export default {
             buss2: [],
             ecos2: [],
             ///
+            user_id:"",
+            ///
             isReturnSelected: false,
             isSelected: false,
             isActive: null,
@@ -1587,8 +1589,8 @@ export default {
             },
             input: {
                 class: null,
-                departDate: null,
-                returnDate: null,
+                departDate: 0,
+                returnDate: 0,
                 flightTo: null,
                 flightFrom: null
             },
@@ -1645,15 +1647,21 @@ export default {
             error_phone: "",
             error_email: "",
             error_payMethod: "",
-            error_cardNumber: ""
+            error_cardNumber: "",
+            error_user:""
         };
     },
     beforeMount() {
         this.loadingPage = true;
-        setTimeout(() => {
-            this.loadingPage = false;
-        }, 1000);
-
+        axios.get("/sanctum/csrf-cookie").then(response => {
+            axios.get('api/user').then(response => {
+                        console.log(response.data);
+                        this.user_id = response.data['user_id'];
+                        this.loadingPage = false;
+                    });
+        });
+        // setTimeout(() => {
+        // }, 1000);
         axios.get("api/user/getLocation").then(response => {
             response.data.forEach(element => {
                 this.airports.push({
@@ -1672,6 +1680,7 @@ export default {
 
     methods: {
         submit() {
+
             console.log("depart seat", this.seats); // depart seat
             console.log("return seat", this.seatReturn); // return seat
             console.log("passengers", this.passengers); // passengers in carbin
@@ -1681,6 +1690,20 @@ export default {
             console.log("depart_price", this.depart_price);
             console.log("return_price", this.return_price);
             console.log("no_of_passenger", this.no_of_passenger) // number of passenger
+            console.log("class seat",this.input.class); // class seat
+            console.log("user_id",this.user_id);
+            let data = {
+                reserve_data : [this.input.class],
+                user_id : this.user_id,
+                passenger : this.passengers,
+                seat : [this.seats,this.seatReturn],
+                payment_method : this.payment.method,
+                price : this.total,
+                payment_card : this.payment.cardNumber,
+                flight : [this.depart_Selected,this.return_Selected]
+            }
+
+
         },
         handleChangePage() {
             if (this.back) {

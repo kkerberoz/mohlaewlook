@@ -114,14 +114,14 @@ class UserController extends Controller
     public function reserveSendData(Request $request)
     {
 
-        $reserve_data = $request->reserve_data;
+        $reserve_data = $request->reserve_data; // status , class
         $user_id = $request->user_id;
         $passenger_array = $request->passenger;
         $seat_array = $request->seat;
         $payment_method = $request->payment_method;
         $price = $request->price;
         $payment_card = $request->payment_card;
-        $flight_id_array = $request->flight_id;
+        $flight_id_array = $request->flight;
 
         //reservation Table
 
@@ -129,8 +129,11 @@ class UserController extends Controller
         $currrent_date = date("Y-m-d H:i:s");
         $reservation->user_id = $user_id;
         $reservation->reservation_datetime = $currrent_date;
-        $reservation->reservation_status = $reserve_data['status'];
-        $reservation->save();
+        $reservation->reservation_status = "confirm";
+        //---------------------------------------------------------------------------------------------------------------------//
+        //$reservation->save();
+        array_push($reservationObj,$reservation);
+
 
 
 
@@ -147,6 +150,8 @@ class UserController extends Controller
             }
 
             if (isset($passenger_oldID)) {
+                $current_passenger_id = [];
+                array_push($current_passenger_id,$passenger_oldID);
                 $passenger->passenger_id = $passenger_oldID;
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
@@ -159,7 +164,9 @@ class UserController extends Controller
                 $passenger->passenger_passport = $each_passenger['passport'];
                 $passenger->passenger_phone = $each_passenger['phone'];
                 $passenger->passenger_email = $each_passenger['email'];
-                $passenger->save();
+                //---------------------------------------------------------------------------------------------------------------------//
+                //$passenger->save();
+                array_push($passengerObj,$passenger);
             } else {
                 $prefix = "";
                 $age = floor(((date_diff(date_create($each_passenger['dob']), date_create(date('Y-m-d'))))->days) / 365);
@@ -176,6 +183,7 @@ class UserController extends Controller
                 $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->order_By('passenger_id', 'desc')->first();
                 $number = str_replace($prefix, "", $check_id['passenger_id']) + 1;
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
+                array_push($current_passenger_id,$passenger->passenger_id);
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
                 $passenger->passenger_surname = $each_passenger['surname'];
@@ -187,7 +195,9 @@ class UserController extends Controller
                 $passenger->passenger_passport = $each_passenger['passport'];
                 $passenger->passenger_phone = $each_passenger['phone'];
                 $passenger->passenger_email = $each_passenger['email'];
-                $passenger->save();
+                //---------------------------------------------------------------------------------------------------------------------//
+                //$passenger->save();
+                array_push($passengerObj,$passenger);
             }
         }
 
@@ -199,23 +209,28 @@ class UserController extends Controller
         $payment->payment_card = $payment_card;
         $payment->total_price = $price;
         $payment->reservaton_id = $reserve_id;
-        $payment->reservation_status = "confirm";
-        $payment->save();
+        array_push($paymentObj,$payment);
+        //---------------------------------------------------------------------------------------------------------------------//
+        //$payment->save();
 
 
         //ticket create
         foreach ($seat_array as $seat_each_flight) {
             $j = 0;
             $ticket = new Ticket;
-            for ($i = 0; $i < sizeof($passenger_array[$j]); $i++) {
-                $ticket->seat_no = $seat_each_flight[$i];
+            for ($i = 0; $i < sizeof($passenger_array[$i]); $i++) {
+                $ticket->seat_no = $seat_each_flight[$i]['seat'];
                 $ticket->class_name = $reserve_data['class'];
-                $ticket->flight_id = $flight_id_array[$j];
+                $ticket->flight_id = $flight_id_array[$j]['flight_id'];
                 $ticket->reservation_id = $reserve_id;
-                $ticket->passenger_id = $passenger_array[$j][$i];
+                $ticket->passenger_id = $current_passenger_id[$i];
+                array_push($ticketObj,$ticket);
+                //---------------------------------------------------------------------------------------------------------------------//
+                //$ticket->save();
             }
             $j++;
         }
+
     }
 
     public function getLocation()

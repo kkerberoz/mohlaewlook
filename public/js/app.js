@@ -9740,6 +9740,8 @@ __webpack_require__.r(__webpack_exports__);
       buss2: [],
       ecos2: [],
       ///
+      user_id: "",
+      ///
       isReturnSelected: false,
       isSelected: false,
       isActive: null,
@@ -9773,8 +9775,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       input: {
         "class": null,
-        departDate: null,
-        returnDate: null,
+        departDate: 0,
+        returnDate: 0,
         flightTo: null,
         flightFrom: null
       },
@@ -9828,16 +9830,23 @@ __webpack_require__.r(__webpack_exports__);
       error_phone: "",
       error_email: "",
       error_payMethod: "",
-      error_cardNumber: ""
+      error_cardNumber: "",
+      error_user: ""
     };
   },
   beforeMount: function beforeMount() {
     var _this = this;
 
     this.loadingPage = true;
-    setTimeout(function () {
-      _this.loadingPage = false;
-    }, 1000);
+    axios.get("/sanctum/csrf-cookie").then(function (response) {
+      axios.get('api/user').then(function (response) {
+        console.log(response.data);
+        _this.user_id = response.data['user_id'];
+        _this.loadingPage = false;
+      });
+    }); // setTimeout(() => {
+    // }, 1000);
+
     axios.get("api/user/getLocation").then(function (response) {
       response.data.forEach(function (element) {
         _this.airports.push({
@@ -9864,6 +9873,20 @@ __webpack_require__.r(__webpack_exports__);
       console.log("depart_price", this.depart_price);
       console.log("return_price", this.return_price);
       console.log("no_of_passenger", this.no_of_passenger); // number of passenger
+
+      console.log("class seat", this.input["class"]); // class seat
+
+      console.log("user_id", this.user_id);
+      var data = {
+        reserve_data: [this.input["class"]],
+        user_id: this.user_id,
+        passenger: this.passengers,
+        seat: [this.seats, this.seatReturn],
+        payment_method: this.payment.method,
+        price: this.total,
+        payment_card: this.payment.cardNumber,
+        flight: [this.depart_Selected, this.return_Selected]
+      };
     },
     handleChangePage: function handleChangePage() {
       var _this2 = this;
@@ -63723,7 +63746,9 @@ var render = function() {
                             _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-md-6" }, [
                                 _vm._v(
-                                  "\n                                        Total:\n                                    "
+                                  "\n                                        Total: " +
+                                    _vm._s(_vm.total) +
+                                    " ฿\n                                    "
                                 )
                               ]),
                               _vm._v(" "),
