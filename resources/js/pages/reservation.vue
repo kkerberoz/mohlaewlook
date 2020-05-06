@@ -257,7 +257,7 @@
                                                 isActive === i
                                                     ? {
                                                           'background-color':
-                                                              '#f79c65'
+                                                              '#2197e6'
                                                       }
                                                     : null
                                             "
@@ -388,7 +388,7 @@
                                                     isActive === i
                                                         ? {
                                                               'background-color':
-                                                                  '#2197e6'
+                                                                  '#f1ad2f'
                                                           }
                                                         : null
                                                 "
@@ -441,7 +441,7 @@
                                                 isReturnActive === 'a' + k
                                                     ? {
                                                           'background-color':
-                                                              '#f79c65'
+                                                              '#2197e6'
                                                       }
                                                     : null
                                             "
@@ -572,7 +572,7 @@
                                                     isReturnActive === 'a' + k
                                                         ? {
                                                               'background-color':
-                                                                  '#2197e6'
+                                                                  '#f1ad2f'
                                                           }
                                                         : null
                                                 "
@@ -2040,14 +2040,14 @@ export default {
     border-radius: 0px;
     border: none;
     color: #fff;
-    background: #f1ad2f;
+    background: #f7dd72;
 }
 #btn-selected:hover {
     border: none;
     color: #fff;
     transition: 0.3s;
     font-size: 20px;
-    background: #f1ad2f;
+    background: #f7dd72;
     border-radius: 0px;
 }
 
@@ -2059,7 +2059,6 @@ export default {
     border-radius: 0;
     background-color: #f79c65;
     display: block;
-
     color: #fff;
 }
 /* #f8d49b */
@@ -2078,6 +2077,6 @@ export default {
     padding: 16px;
     text-align: center;
     color: #fff;
-    background-color: #2197e6;
+    background-color: #a5c882;
 }
 </style>
