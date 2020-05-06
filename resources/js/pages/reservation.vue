@@ -14,7 +14,7 @@
                 <div class="col-md-12">
                     <div class="card shadow-lg bg-white" id="card-reservation">
                         <div class="card-header" id="card-reservation">
-                            Reservation {{ this.isReturnSelected }}
+                            Reservation
                         </div>
                         <div
                             class="card-body"
@@ -1933,7 +1933,7 @@ export default {
     border-radius: 0;
     background-color: #f79c65;
     display: block;
-    text-align: center;
+
     color: #fff;
 }
 /* #f8d49b */

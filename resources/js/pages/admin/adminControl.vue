@@ -91,7 +91,20 @@
                                     <span>Add Employee</span>
                                 </router-link>
                             </li>
-
+                            <li>
+                                <router-link
+                                    :to="{ name: 'manageSchedule' }"
+                                    v-show="
+                                        role === 'human_resource' ||
+                                        role === 'admin'
+                                            ? true
+                                            : false
+                                    "
+                                >
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Manage Schedule</span>
+                                </router-link>
+                            </li>
                             <li>
                                 <router-link
                                     :to="{ name: 'manageCustomer' }"
@@ -161,20 +174,7 @@
                                     <span>Schedule</span>
                                 </router-link>
                             </li>
-                            <li>
-                                <router-link
-                                    :to="{ name: 'manageSchedule' }"
-                                    v-show="
-                                        role === 'human_resource' ||
-                                        role === 'admin'
-                                            ? true
-                                            : false
-                                    "
-                                >
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Manage Schedule</span>
-                                </router-link>
-                            </li>
+
                             <li>
                                 <router-link
                                     :to="{ name: 'addAirport' }"
