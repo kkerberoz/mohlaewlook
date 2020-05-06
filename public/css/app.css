@@ -135,13 +135,13 @@ ol {
 
 .seat input[type=checkbox]:disabled + label {
   background: #dddddd;
-  width: 20px;
+  width: 30px;
   text-indent: -9999px;
   overflow: hidden;
 }
 
 .seat input[type=checkbox]:disabled + label:after {
-  content: "X";
+  content: "XXX";
   text-indent: 0;
   position: absolute;
   top: 4px;
