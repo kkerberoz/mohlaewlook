@@ -124,7 +124,7 @@ class UserController extends Controller
         $seat_depart = $request->seat_depart;
         $seat_return = $request->seat_return;
 
-        $passengerObj =[];
+        $passengerObj = [];
         $ticketObj = [];
         $reservationObj = [];
         $paymentObj = [];
@@ -149,22 +149,15 @@ class UserController extends Controller
             $passenger = new Passenger;
             if (isset($each_passenger['idcard'])) {
                 $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard', $each_passenger['idcard']);
-            } else if(isset($each_passenger['passport'])) //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
+            } else if (isset($each_passenger['passport'])) //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
             {
                 $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport', $each_passenger['passport']);
             }
 
-            if (isset($passenger_oldID->passenger_passport) || isset($passenger_oldID->passenger_idcard) ) {
+            if (isset($passenger_oldID->passenger_id)) {
 
-                if( isset($passenger_oldID->passenger_idcard)){
-                    array_push($current_passenger_id,$passenger_oldID->passenger_idcard);
-                    $passenger->passenger_id = $passenger_oldID->passenger_idcard;
-                }
-                else if(isset($passenger_oldID->passenger_passport)){
-                    array_push($current_passenger_id,$passenger_oldID->passenger_passport);
-                    $passenger->passenger_id = $passenger_oldID->passenger_passport;
-                }
-
+                array_push($current_passenger_id, $passenger_oldID->passenger_id);
+                // $passenger->passenger_id = $passenger_oldID->passenger_id;
 
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
@@ -178,7 +171,7 @@ class UserController extends Controller
                 $passenger->passenger_phone = $each_passenger['phone'];
                 $passenger->passenger_email = $each_passenger['email'];
                 //---------------------------------------------------------------------------------------------------------------------//
-                $passenger->save();
+                $passenger->update();
                 //array_push($passengerObj, $passenger);
             } else {
 
@@ -195,7 +188,7 @@ class UserController extends Controller
                 }
 
                 $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderBy('passenger_id', 'desc')->first();
-                $number = is_numeric(str_replace($prefix, "", $check_id['passenger_id']))+ 1;
+                $number = is_numeric(str_replace($prefix, "", $check_id['passenger_id'])) + 1;
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
                 array_push($current_passenger_id, $passenger->passenger_id);
                 $passenger->passenger_title = $each_passenger['title'];
@@ -257,7 +250,7 @@ class UserController extends Controller
             //---------------------------------------------------------------------------------------------------------------------//
             $ticket->save();
         }
-        if(sizeof($seat_return)!=0){
+        if (sizeof($seat_return) != 0) {
 
             for ($i = 0; $i < sizeof($passenger_array); $i++) {
                 $ticket = new Ticket;

@@ -417,19 +417,21 @@ class BackendController extends Controller
         return response()->JSON(['value' => $value]);
     }
 
-    public function schedule(Request $request,$id){
+    public function schedule(Request $request, $id)
+    {
         $employee = Employee::findOrFail($id);
-        $data = Work_schedule::select('*')->where('user_id',$employee->user_id)->get();
+        $data = Work_schedule::select('*')->where('user_id', $employee->user_id)->get();
         return response()->JSON($data);
     }
 
-    public function addNewWork(Request $request){
+    public function addNewWork(Request $request)
+    {
 
         $array_date = $request->array_date;
-        foreach ($array_date as $each_date){
+        foreach ($array_date as $each_date) {
             $schedule = new Work_schedule;
-            list($day,$month,$year) = explode("/", $each_date['date']);
-            $newDate = $year."-".sprintf("%02d",$month)."-".sprintf("%02d",$day);
+            list($day, $month, $year) = explode("/", $each_date['date']);
+            $newDate = $year . "-" . sprintf("%02d", $month) . "-" . sprintf("%02d", $day);
 
             $schedule->user_id = $request->user_id;
             $schedule->work_date = $newDate;
@@ -438,69 +440,66 @@ class BackendController extends Controller
         }
     }
 
-    public function getflightdetail(Request $request){
+    public function getflightdetail(Request $request)
+    {
         $employee = Employee::findOrFail($request->id);
         $data = DB::select('SELECT *
                             FROM flights
                             WHERE flight_id IN (SELECT flight_id FROM work_schedules w WHERE w.user_id = ? AND confirm_status = ?)
-                            ORDER BY depart_datetime DESC',[$employee->user_id,"confirm"]);
-        return response()->JSON([$employee->user_id,$data]);
+                            ORDER BY depart_datetime DESC', [$employee->user_id, "confirm"]);
+        return response()->JSON([$employee->user_id, $data]);
     }
 
-    public function getworkday(Request $request){
+    public function getworkday(Request $request)
+    {
         $data_array = [];
         $user_id = $request->user_id;
         $array_date = $request->array_date;
 
-        if(isset($user_id) && sizeof($array_date)!=0){
+        if (isset($user_id) && sizeof($array_date) != 0) {
 
-            foreach ($array_date as $each_date){
-                list($day,$month,$year) = explode("/", $each_date['date']);
-                $newDate = $year."-".sprintf("%02d",$month)."-".sprintf("%02d",$day);
+            foreach ($array_date as $each_date) {
+                list($day, $month, $year) = explode("/", $each_date['date']);
+                $newDate = $year . "-" . sprintf("%02d", $month) . "-" . sprintf("%02d", $day);
                 $data = DB::select('SELECT w.flight_id,w.work_id,w.user_id,w.work_date,w.confirm_status,e.title,e.name,e.surname
                                 FROM work_schedules w LEFT JOIN
                                 employees e ON w.user_id = e.user_id
                                 WHERE w.user_id = ?
                                 AND w.work_date = ?
-                                AND w.confirm_status IN ("confirm","free")',[$user_id,$newDate]);
-                foreach ($data as $e_data){
-                    array_push($data_array,$e_data);
+                                AND w.confirm_status IN ("confirm","free")', [$user_id, $newDate]);
+                foreach ($data as $e_data) {
+                    array_push($data_array, $e_data);
                 }
-
-
             }
-        }
-        else if (isset($user_id) && sizeof($array_date)==0){
+        } else if (isset($user_id) && sizeof($array_date) == 0) {
 
             $data = DB::select('SELECT w.flight_id,w.work_id,w.user_id,w.work_date,w.confirm_status,e.title,e.name,e.surname
                             FROM work_schedules w LEFT JOIN
                             employees e ON w.user_id = e.user_id
                             WHERE w.user_id = ?
-                            AND w.confirm_status IN ("confirm","free")',[$user_id]);
+                            AND w.confirm_status IN ("confirm","free")', [$user_id]);
             $data_array = $data;
-
-        }
-        else if(!isset($user_id) && sizeof($array_date)!=0){
-            foreach ($array_date as $each_date){
-                list($day,$month,$year) = explode("/", $each_date['date']);
-                $newDate = $year."-".sprintf("%02d",$month)."-".sprintf("%02d",$day);
+        } else if (!isset($user_id) && sizeof($array_date) != 0) {
+            foreach ($array_date as $each_date) {
+                list($day, $month, $year) = explode("/", $each_date['date']);
+                $newDate = $year . "-" . sprintf("%02d", $month) . "-" . sprintf("%02d", $day);
                 $data = DB::select('SELECT w.flight_id,w.work_id,w.user_id,w.work_date,w.confirm_status,e.title,e.name,e.surname
                                 FROM work_schedules w LEFT JOIN
                                 employees e ON w.user_id = e.user_id
                                 WHERE w.work_date = ?
-                                AND w.confirm_status IN ("confirm","free")',[$newDate]);
-                foreach ($data as $e_data){
-                    array_push($data_array,$e_data);
+                                AND w.confirm_status IN ("confirm","free")', [$newDate]);
+                foreach ($data as $e_data) {
+                    array_push($data_array, $e_data);
                 }
             }
         }
         return response()->JSON($data_array);
     }
 
-    public function updateWorkStatus(Request $request){
+    public function updateWorkStatus(Request $request)
+    {
 
-        Work_schedule::where('work_id', $request->work_id)->update(['confirm_status' =>"cancel", 'flight_id' => null]);
+        Work_schedule::where('work_id', $request->work_id)->update(['confirm_status' => "cancel", 'flight_id' => null]);
         return response()->JSON($request->work_id);
     }
-
 }

@@ -1166,7 +1166,8 @@
                                                     <label>Title</label>
                                                     <multiselect
                                                         v-bind:class="{
-                                                            'is-invalid': error_title
+                                                            'is-invalid':
+                                                                passenger.error_title
                                                         }"
                                                         v-model="
                                                             passenger.title
@@ -1183,7 +1184,9 @@
 
                                                     <span
                                                         class="invalid-feedback"
-                                                        >{{ error_title }}</span
+                                                        >{{
+                                                            passenger.error_title
+                                                        }}</span
                                                     >
                                                 </div>
                                             </div>
@@ -1192,7 +1195,8 @@
                                                     <label>Name :</label>
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_name
+                                                            'is-invalid':
+                                                                passenger.error_name
                                                         }"
                                                         placeholder="อาหลีเฮีย"
                                                         type="text"
@@ -1203,7 +1207,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_name }}
+                                                        {{
+                                                            passenger.error_name
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1213,7 +1219,8 @@
                                                     <label>Surname :</label>
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_surname
+                                                            'is-invalid':
+                                                                passenger.error_surname
                                                         }"
                                                         placeholder="อาเฮียหลี"
                                                         type="text"
@@ -1226,7 +1233,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_surname }}
+                                                        {{
+                                                            passenger.error_surname
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1244,6 +1253,10 @@
                                                             for="radios-0"
                                                         >
                                                             <input
+                                                                v-bind:class="{
+                                                                    'is-invalid':
+                                                                        passenger.error_gender
+                                                                }"
                                                                 type="radio"
                                                                 id="radios-0"
                                                                 v-model="
@@ -1253,11 +1266,22 @@
                                                             />
                                                             Male
                                                         </label>
+                                                        <div
+                                                            class="invalid-feedback"
+                                                        >
+                                                            {{
+                                                                passenger.error_gender
+                                                            }}
+                                                        </div>
                                                         <label
                                                             class="radio-inline"
                                                             for="radios-1"
                                                         >
                                                             <input
+                                                                v-bind:class="{
+                                                                    'is-invalid':
+                                                                        passenger.error_gender
+                                                                }"
                                                                 type="radio"
                                                                 id="radios-1"
                                                                 v-model="
@@ -1267,20 +1291,13 @@
                                                             />
                                                             Female
                                                         </label>
-                                                        <label
-                                                            class="radio-inline"
-                                                            for="radios-2"
+                                                        <div
+                                                            class="invalid-feedback"
                                                         >
-                                                            <input
-                                                                type="radio"
-                                                                id="radios-1"
-                                                                v-model="
-                                                                    passenger.gender
-                                                                "
-                                                                value="Other"
-                                                            />
-                                                            Other
-                                                        </label>
+                                                            {{
+                                                                passenger.error_gender
+                                                            }}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1295,7 +1312,8 @@
                                                     >
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_dob
+                                                            'is-invalid':
+                                                                passenger.error_dob
                                                         }"
                                                         type="date"
                                                         class="form-control"
@@ -1304,7 +1322,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_dob }}
+                                                        {{
+                                                            passenger.error_dob
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1314,7 +1334,8 @@
                                                     <label>Nationality :</label>
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_national
+                                                            'is-invalid':
+                                                                passenger.error_national
                                                         }"
                                                         class="form-control"
                                                         v-model="
@@ -1324,7 +1345,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_national }}
+                                                        {{
+                                                            passenger.error_national
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1333,7 +1356,8 @@
                                                     <label>Religion :</label>
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_religion
+                                                            'is-invalid':
+                                                                passenger.error_religion
                                                         }"
                                                         class="form-control"
                                                         v-model="
@@ -1343,7 +1367,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_religion }}
+                                                        {{
+                                                            passenger.error_religion
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1356,7 +1382,8 @@
                                                     <label>ID card :</label>
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_idcard
+                                                            'is-invalid':
+                                                                passenger.error_idcard
                                                         }"
                                                         type="text"
                                                         class="form-control"
@@ -1367,7 +1394,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_idcard }}
+                                                        {{
+                                                            passenger.error_idcard
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1377,7 +1406,8 @@
                                                     <label>Passport :</label>
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_passport
+                                                            'is-invalid':
+                                                                passenger.error_passport
                                                         }"
                                                         type="text"
                                                         class="form-control"
@@ -1388,7 +1418,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_passport }}
+                                                        {{
+                                                            passenger.error_passport
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1402,7 +1434,8 @@
                                                     >
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_phone
+                                                            'is-invalid':
+                                                                passenger.error_phone
                                                         }"
                                                         placeholder="098-7654321"
                                                         type="text"
@@ -1414,7 +1447,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_phone }}
+                                                        {{
+                                                            passenger.error_phone
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1424,7 +1459,8 @@
                                                     <label>Email :</label>
                                                     <input
                                                         v-bind:class="{
-                                                            'is-invalid': error_email
+                                                            'is-invalid':
+                                                                passenger.error_email
                                                         }"
                                                         placeholder="example@hotmail.com"
                                                         type="text"
@@ -1436,7 +1472,9 @@
                                                     <div
                                                         class="invalid-feedback"
                                                     >
-                                                        {{ error_email }}
+                                                        {{
+                                                            passenger.error_email
+                                                        }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1450,10 +1488,92 @@
                                     Payment :
                                 </h4>
                                 <br />
+                                <br />
                                 <div class="container-xl">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            Total: {{}} ฿
+                                        <br />
+                                        <div class="col-md-6 ">
+                                            <div class="row float-right">
+                                                <div class="col-md-12 ">
+                                                    <h4>
+                                                        Depart:
+                                                        {{ this.depart_price }}
+                                                        x
+                                                        {{
+                                                            this.no_of_passenger
+                                                        }}
+                                                        =
+                                                        {{
+                                                            Number(
+                                                                this
+                                                                    .depart_price
+                                                            ) *
+                                                                Number(
+                                                                    this
+                                                                        .no_of_passenger
+                                                                )
+                                                        }}
+                                                        ฿
+                                                    </h4>
+                                                </div>
+                                            </div>
+
+                                            <br />
+                                            <div
+                                                class="row float-right"
+                                                v-show="back"
+                                            >
+                                                <div class="col-md-12 ">
+                                                    <h4>
+                                                        Return:
+                                                        {{ this.return_price }}
+                                                        x
+                                                        {{
+                                                            this.no_of_passenger
+                                                        }}
+                                                        =
+                                                        {{
+                                                            Number(
+                                                                this
+                                                                    .return_price
+                                                            ) *
+                                                                Number(
+                                                                    this
+                                                                        .no_of_passenger
+                                                                )
+                                                        }}
+                                                        ฿
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <br />
+                                            <div class="row float-right">
+                                                <div class="col-md-12 ">
+                                                    <h3>
+                                                        Total:
+                                                        {{
+                                                            Number(
+                                                                this
+                                                                    .depart_price
+                                                            ) *
+                                                                Number(
+                                                                    this
+                                                                        .no_of_passenger
+                                                                ) +
+                                                                Number(
+                                                                    this
+                                                                        .return_price
+                                                                ) *
+                                                                    Number(
+                                                                        this
+                                                                            .no_of_passenger
+                                                                    )
+                                                        }}
+                                                        ฿
+                                                    </h3>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Payment Methods :</label>
@@ -1471,11 +1591,17 @@
                                                 placeholder="Please select payment method"
                                                 :preselect-first="false"
                                             ></multiselect>
+                                            <div class="invalid-feedback">
+                                                {{ error_payMethod }}
+                                            </div>
                                         </div>
                                     </div>
                                     <div
                                         class="row"
-                                        v-show="payment.method == 'Credit Card'"
+                                        v-show="
+                                            payment.method == 'VisaCard' ||
+                                                payment.method == 'MasterCard'
+                                        "
                                     >
                                         <div class="col-md-6"></div>
                                         <div class="col-md-6 mt-2">
@@ -1488,6 +1614,9 @@
                                                 class="form-control"
                                                 v-model="payment.cardNumber"
                                             />
+                                            <div class="invalid-feedback">
+                                                {{ error_cardNumber }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1516,7 +1645,11 @@
                                     class="btn btn-block btn-info"
                                     @click="submit"
                                 >
-                                    Submit
+                                    <span v-show="!isLoading">Submit</span>
+                                    <i
+                                        class="fas fa-spinner fa-pulse"
+                                        v-show="isLoading"
+                                    ></i>
                                 </button>
                                 <button
                                     v-if="changePage"
@@ -1546,6 +1679,7 @@ export default {
     components: { Multiselect, Loading, FunctionalCalendar },
     data() {
         return {
+            isLoading: false,
             D_already_seat: [],
             R_already_seat: [],
             firsts: [],
@@ -1608,7 +1742,18 @@ export default {
                     passport: "",
                     religion: "",
                     phone: "",
-                    email: ""
+                    email: "",
+                    error_title: "",
+                    error_name: "",
+                    error_surname: "",
+                    error_gender: "",
+                    error_dob: "",
+                    error_national: "",
+                    error_idcard: "",
+                    error_passport: "",
+                    error_religion: "",
+                    error_phone: "",
+                    error_email: ""
                 }
             ],
             payment: {
@@ -1616,7 +1761,7 @@ export default {
                 cardNumber: "",
                 total: ""
             },
-            paymentMethod: ["Credit Card", "Cash"],
+            paymentMethod: ["VisaCard", "MasterCard", "Cash"],
             depart_price: 0,
             return_price: 0,
             check_cal: true,
@@ -1627,14 +1772,8 @@ export default {
             error_flightFrom: "",
             error_flightTo2: "",
             error_flightFrom2: "",
-            error_title: "",
-            error_name: "",
-            error_surname: "",
-            error_gender: "",
-            error_dob: "",
-            error_national: "",
-            error_idcard: "",
-            error_passport: "",
+
+            errors: [],
             ///
             temp_back: null,
             temp_calendar_to: null,
@@ -1644,9 +1783,7 @@ export default {
             temp_class: null,
             temp_passenger: null,
             ///
-            error_religion: "",
-            error_phone: "",
-            error_email: "",
+
             error_payMethod: "",
             error_cardNumber: "",
             error_user: ""
@@ -1679,9 +1816,7 @@ export default {
     },
 
     methods: {
-        submit() {
-
-
+        submit(e) {
             //console.log("depart seat", this.seats); // depart seat
             //console.log("return seat", this.seatReturn); // return seat
             // console.log("passengers", this.passengers); // passengers in carbin
@@ -1693,24 +1828,210 @@ export default {
             // console.log("no_of_passenger", this.no_of_passenger) // number of passenger
             // console.log("class seat",this.input.class); // class seat
             // console.log("user_id",this.user_id);
-            console.log(this.passengers.length);
+            // console.log(this.passengers.length);
 
-            let data = {
-                reserve_data : this.input,
-                user_id : this.user_id,
-                passenger : this.passengers,
-                seat_depart : this.seats,
-                seat_return : this.seatReturn,
-                payment_method : this.payment.method,
-                price : (this.depart_price * this.no_of_passenger) + (this.return_price * this.no_of_passenger),
-                payment_card : this.payment.cardNumber,
-                flight : [this.depart_Selected,this.return_Selected]
+            e.preventDefault();
+            this.errors = [];
+            this.error_payMethod = null;
+            this.error_cardNumber = null;
+            for (var k = 0; k < this.no_of_passenger; k++) {
+                this.passengers[k].error_title = null;
+                this.passengers[k].error_name = null;
+                this.passengers[k].error_surname = null;
+                this.passengers[k].error_gender = null;
+                this.passengers[k].error_dob = null;
+                this.passengers[k].error_national = null;
+                this.passengers[k].error_idcard = null;
+                this.passengers[k].error_passport = null;
+                this.passengers[k].error_religion = null;
+                this.passengers[k].error_phone = null;
+                this.passengers[k].error_email = null;
             }
-            axios.post('api/user/reserveSendData',data).then(response => {
-                // console.log(response.data);
-            });
 
+            for (var i = 0; i < this.no_of_passenger; i++) {
+                if (!this.passengers[i].title) {
+                    this.passengers[i].error_title = "Please select title.";
+                    this.errors.push(this.passengers[i].error_title);
+                } else {
+                    this.passengers[i].error_title = null;
+                }
 
+                if (!this.passengers[i].name) {
+                    this.passengers[i].error_name = "Please enter name.";
+                    this.errors.push(this.passengers[i].error_name);
+                } else {
+                    this.passengers[i].error_name = null;
+                }
+
+                if (!this.passengers[i].surname) {
+                    this.passengers[i].error_surname = "Please enter name.";
+                    this.errors.push(this.passengers[i].error_surname);
+                } else {
+                    this.passengers[i].error_surname = null;
+                }
+
+                if (!this.passengers[i].gender) {
+                    this.passengers[i].error_gender = "Please enter gender.";
+                    this.errors.push(this.passengers[i].error_gender);
+                } else {
+                    this.passengers[i].error_gender = null;
+                }
+                if (!this.passengers[i].dob) {
+                    this.passengers[i].error_dob =
+                        "Please enter Date of Birth.";
+                    this.errors.push(this.passengers[i].error_dob);
+                } else {
+                    this.passengers[i].error_dob = null;
+                }
+
+                if (!this.passengers[i].national) {
+                    this.passengers[i].error_national = "Please enter national";
+                    this.errors.push(this.passengers[i].error_national);
+                } else {
+                    this.passengers[i].error_national = null;
+                }
+
+                if (!this.passengers[i].idcard) {
+                    if (!this.passengers[i].passport) {
+                        this.passengers[i].error_idcard =
+                            "Please enter idcard or passport";
+                        this.passengers[i].error_passport =
+                            "Please enter idcard or passport";
+                        this.errors.push(this.passengers[i].error_idcard);
+                        this.errors.push(this.passengers[i].error_passport);
+                    } else if (this.passengers[i].passport.length != 13) {
+                        this.passengers[i].error_passport =
+                            "Password must be 13 characters.";
+                        this.errors.push(this.passengers[i].error_passport);
+                    } else if (isNaN(this.passengers[i].passport)) {
+                        this.passengers[i].error_passport =
+                            "Please fill only number.";
+                        this.errors.push(this.passengers[i].error_passport);
+                    } else {
+                        this.passengers[i].error_passport = null;
+                    }
+                }
+                if (this.passengers[i].passport) {
+                    this.passengers[i].error_idcard = "Please enter only one";
+                    this.passengers[i].error_passport = "Please enter only one";
+                    this.errors.push(this.passengers[i].error_idcard);
+                    this.errors.push(this.passengers[i].error_passport);
+                    this.passengers[i].passport = "";
+                    this.passengers[i].idcard = "";
+                } else if (this.passengers[i].idcard.length != 13) {
+                    this.passengers[i].error_idcard =
+                        "Password must be 13 characters.";
+                    this.errors.push(this.passengers[i].error_idcard);
+                } else if (isNaN(this.passengers[i].idcard)) {
+                    this.passengers[i].error_idcard =
+                        "Please fill only number.";
+                    this.errors.push(this.passengers[i].error_idcard);
+                } else {
+                    this.passengers[i].error_idcard = null;
+                }
+
+                if (!this.passengers[i].religion) {
+                    this.passengers[i].error_religion = "Please enter religion";
+                    this.errors.push(this.passengers[i].error_religion);
+                } else {
+                    this.passengers[i].error_religion = null;
+                }
+
+                if (!this.passengers[i].email) {
+                    this.passengers[i].error_email = "Please enter religion";
+                    this.errors.push(this.passengers[i].error_email);
+                } else {
+                    this.passengers[i].error_email = null;
+                }
+
+                if (!this.passengers[i].phone) {
+                    this.passengers[i].error_phone =
+                        "Please fill your phone number.";
+                    this.errors.push(this.passengers[i].error_phone);
+                } else if (isNaN(this.passengers[i].phone)) {
+                    this.passengers[i].error_phone = "Please fill only number.";
+                    this.errors.push(this.passengers[i].error_phone);
+                } else if (this.passengers[i].phone.length != 10) {
+                    this.passengers[i].error_phone =
+                        "Phone number must be 10 characters.";
+                    this.errors.push(this.passengers[i].error_phone);
+                } else {
+                    this.passengers[i].error_phone = null;
+                }
+            }
+
+            if (!this.payment.method) {
+                this.error_payMethod = "Please fill your payment method.";
+                this.errors.push(this.error_payMethod);
+            } else {
+                if (
+                    this.payment.method == "MasterCard" ||
+                    this.payment.method == "VisaCard"
+                ) {
+                    if (!this.payment.cardNumber) {
+                        this.error_cardNumber = "Please fill your card number.";
+                        this.errors.push(this.error_cardNumber);
+                    } else if (isNaN(this.payment.cardNumber)) {
+                        this.error_cardNumber = "Please fill only number.";
+                        this.errors.push(this.error_cardNumber);
+                    } else if (this.passengers[i].phone.length != 16) {
+                        this.error_cardNumber =
+                            "Phone number must be 16 characters.";
+                        this.errors.push(this.error_cardNumberอ);
+                    }
+                } else {
+                    this.error_cardNumber = null;
+                }
+                this.error_payMethod = null;
+            }
+            if (!this.errors.length) {
+                if (
+                    this.seats.length != this.no_of_passenger ||
+                    (this.seats.length != this.no_of_passenger &&
+                        this.seatReturn.length != this.no_of_passenger)
+                ) {
+                    swal.fire(
+                        "please select seat",
+                        "Cilck the button to continue!",
+                        "warning"
+                    ).then(() => {});
+                } else {
+                    let data = {
+                        reserve_data: this.input,
+                        user_id: this.user_id,
+                        passenger: this.passengers,
+                        seat_depart: this.seats,
+                        seat_return: this.seatReturn,
+                        payment_method: this.payment.method,
+                        price:
+                            this.depart_price * this.no_of_passenger +
+                            this.return_price * this.no_of_passenger,
+                        payment_card: this.payment.cardNumber,
+                        flight: [this.depart_Selected, this.return_Selected]
+                    };
+                    axios
+                        .post("api/user/reserveSendData", data)
+                        .then(response => {
+                            swal.fire(
+                                "Reservation Success!",
+                                "Cilck the button to continue!",
+                                "success"
+                            ).then(() => {
+                                // console.log("reservation", response.data);
+                                this.loadingPage = true;
+                                setTimeout(() => {
+                                    this.loadingPage = false;
+                                    this.changePage = false;
+                                    this.isSelected = false;
+                                    this.isReturnSelected = false;
+                                    this.isActive = null;
+                                    this.isReturnActive = null;
+                                    this.$router.go({ name: "reservation" });
+                                }, 1000);
+                            });
+                        });
+                }
+            }
         },
         handleChangePage() {
             if (this.back) {
@@ -1909,7 +2230,18 @@ export default {
                 passport: "",
                 religion: "",
                 phone: "",
-                email: ""
+                email: "",
+                error_title: "",
+                error_name: "",
+                error_surname: "",
+                error_gender: "",
+                error_dob: "",
+                error_national: "",
+                error_idcard: "",
+                error_passport: "",
+                error_religion: "",
+                error_phone: "",
+                error_email: ""
             });
         },
         removePass(index) {

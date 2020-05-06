@@ -9720,6 +9720,139 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9732,6 +9865,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      isLoading: false,
       D_already_seat: [],
       R_already_seat: [],
       firsts: [],
@@ -9793,14 +9927,25 @@ __webpack_require__.r(__webpack_exports__);
         passport: "",
         religion: "",
         phone: "",
-        email: ""
+        email: "",
+        error_title: "",
+        error_name: "",
+        error_surname: "",
+        error_gender: "",
+        error_dob: "",
+        error_national: "",
+        error_idcard: "",
+        error_passport: "",
+        error_religion: "",
+        error_phone: "",
+        error_email: ""
       }],
       payment: {
         method: "",
         cardNumber: "",
         total: ""
       },
-      paymentMethod: ["Credit Card", "Cash"],
+      paymentMethod: ["VisaCard", "MasterCard", "Cash"],
       depart_price: 0,
       return_price: 0,
       check_cal: true,
@@ -9810,14 +9955,7 @@ __webpack_require__.r(__webpack_exports__);
       error_flightFrom: "",
       error_flightTo2: "",
       error_flightFrom2: "",
-      error_title: "",
-      error_name: "",
-      error_surname: "",
-      error_gender: "",
-      error_dob: "",
-      error_national: "",
-      error_idcard: "",
-      error_passport: "",
+      errors: [],
       ///
       temp_back: null,
       temp_calendar_to: null,
@@ -9827,9 +9965,6 @@ __webpack_require__.r(__webpack_exports__);
       temp_class: null,
       temp_passenger: null,
       ///
-      error_religion: "",
-      error_phone: "",
-      error_email: "",
       error_payMethod: "",
       error_cardNumber: "",
       error_user: ""
@@ -9857,7 +9992,9 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    submit: function submit() {
+    submit: function submit(e) {
+      var _this2 = this;
+
       //console.log("depart seat", this.seats); // depart seat
       //console.log("return seat", this.seatReturn); // return seat
       // console.log("passengers", this.passengers); // passengers in carbin
@@ -9869,33 +10006,201 @@ __webpack_require__.r(__webpack_exports__);
       // console.log("no_of_passenger", this.no_of_passenger) // number of passenger
       // console.log("class seat",this.input.class); // class seat
       // console.log("user_id",this.user_id);
-      console.log(this.passengers.length);
-      var data = {
-        reserve_data: this.input,
-        user_id: this.user_id,
-        passenger: this.passengers,
-        seat_depart: this.seats,
-        seat_return: this.seatReturn,
-        payment_method: this.payment.method,
-        price: this.depart_price * this.no_of_passenger + this.return_price * this.no_of_passenger,
-        payment_card: this.payment.cardNumber,
-        flight: [this.depart_Selected, this.return_Selected]
-      };
-      axios.post('api/user/reserveSendData', data).then(function (response) {// console.log(response.data);
-      });
+      // console.log(this.passengers.length);
+      e.preventDefault();
+      this.errors = [];
+      this.error_payMethod = null;
+      this.error_cardNumber = null;
+
+      for (var k = 0; k < this.no_of_passenger; k++) {
+        this.passengers[k].error_title = null;
+        this.passengers[k].error_name = null;
+        this.passengers[k].error_surname = null;
+        this.passengers[k].error_gender = null;
+        this.passengers[k].error_dob = null;
+        this.passengers[k].error_national = null;
+        this.passengers[k].error_idcard = null;
+        this.passengers[k].error_passport = null;
+        this.passengers[k].error_religion = null;
+        this.passengers[k].error_phone = null;
+        this.passengers[k].error_email = null;
+      }
+
+      for (var i = 0; i < this.no_of_passenger; i++) {
+        if (!this.passengers[i].title) {
+          this.passengers[i].error_title = "Please select title.";
+          this.errors.push(this.passengers[i].error_title);
+        } else {
+          this.passengers[i].error_title = null;
+        }
+
+        if (!this.passengers[i].name) {
+          this.passengers[i].error_name = "Please enter name.";
+          this.errors.push(this.passengers[i].error_name);
+        } else {
+          this.passengers[i].error_name = null;
+        }
+
+        if (!this.passengers[i].surname) {
+          this.passengers[i].error_surname = "Please enter name.";
+          this.errors.push(this.passengers[i].error_surname);
+        } else {
+          this.passengers[i].error_surname = null;
+        }
+
+        if (!this.passengers[i].gender) {
+          this.passengers[i].error_gender = "Please enter gender.";
+          this.errors.push(this.passengers[i].error_gender);
+        } else {
+          this.passengers[i].error_gender = null;
+        }
+
+        if (!this.passengers[i].dob) {
+          this.passengers[i].error_dob = "Please enter Date of Birth.";
+          this.errors.push(this.passengers[i].error_dob);
+        } else {
+          this.passengers[i].error_dob = null;
+        }
+
+        if (!this.passengers[i].national) {
+          this.passengers[i].error_national = "Please enter national";
+          this.errors.push(this.passengers[i].error_national);
+        } else {
+          this.passengers[i].error_national = null;
+        }
+
+        if (!this.passengers[i].idcard) {
+          if (!this.passengers[i].passport) {
+            this.passengers[i].error_idcard = "Please enter idcard or passport";
+            this.passengers[i].error_passport = "Please enter idcard or passport";
+            this.errors.push(this.passengers[i].error_idcard);
+            this.errors.push(this.passengers[i].error_passport);
+          } else if (this.passengers[i].passport.length != 13) {
+            this.passengers[i].error_passport = "Password must be 13 characters.";
+            this.errors.push(this.passengers[i].error_passport);
+          } else if (isNaN(this.passengers[i].passport)) {
+            this.passengers[i].error_passport = "Please fill only number.";
+            this.errors.push(this.passengers[i].error_passport);
+          } else {
+            this.passengers[i].error_passport = null;
+          }
+        }
+
+        if (this.passengers[i].passport) {
+          this.passengers[i].error_idcard = "Please enter only one";
+          this.passengers[i].error_passport = "Please enter only one";
+          this.errors.push(this.passengers[i].error_idcard);
+          this.errors.push(this.passengers[i].error_passport);
+          this.passengers[i].passport = "";
+          this.passengers[i].idcard = "";
+        } else if (this.passengers[i].idcard.length != 13) {
+          this.passengers[i].error_idcard = "Password must be 13 characters.";
+          this.errors.push(this.passengers[i].error_idcard);
+        } else if (isNaN(this.passengers[i].idcard)) {
+          this.passengers[i].error_idcard = "Please fill only number.";
+          this.errors.push(this.passengers[i].error_idcard);
+        } else {
+          this.passengers[i].error_idcard = null;
+        }
+
+        if (!this.passengers[i].religion) {
+          this.passengers[i].error_religion = "Please enter religion";
+          this.errors.push(this.passengers[i].error_religion);
+        } else {
+          this.passengers[i].error_religion = null;
+        }
+
+        if (!this.passengers[i].email) {
+          this.passengers[i].error_email = "Please enter religion";
+          this.errors.push(this.passengers[i].error_email);
+        } else {
+          this.passengers[i].error_email = null;
+        }
+
+        if (!this.passengers[i].phone) {
+          this.passengers[i].error_phone = "Please fill your phone number.";
+          this.errors.push(this.passengers[i].error_phone);
+        } else if (isNaN(this.passengers[i].phone)) {
+          this.passengers[i].error_phone = "Please fill only number.";
+          this.errors.push(this.passengers[i].error_phone);
+        } else if (this.passengers[i].phone.length != 10) {
+          this.passengers[i].error_phone = "Phone number must be 10 characters.";
+          this.errors.push(this.passengers[i].error_phone);
+        } else {
+          this.passengers[i].error_phone = null;
+        }
+      }
+
+      if (!this.payment.method) {
+        this.error_payMethod = "Please fill your payment method.";
+        this.errors.push(this.error_payMethod);
+      } else {
+        if (this.payment.method == "MasterCard" || this.payment.method == "VisaCard") {
+          if (!this.payment.cardNumber) {
+            this.error_cardNumber = "Please fill your card number.";
+            this.errors.push(this.error_cardNumber);
+          } else if (isNaN(this.payment.cardNumber)) {
+            this.error_cardNumber = "Please fill only number.";
+            this.errors.push(this.error_cardNumber);
+          } else if (this.passengers[i].phone.length != 16) {
+            this.error_cardNumber = "Phone number must be 16 characters.";
+            this.errors.push(this.error_cardNumberอ);
+          }
+        } else {
+          this.error_cardNumber = null;
+        }
+
+        this.error_payMethod = null;
+      }
+
+      if (!this.errors.length) {
+        if (this.seats.length != this.no_of_passenger || this.seats.length != this.no_of_passenger && this.seatReturn.length != this.no_of_passenger) {
+          swal.fire("please select seat", "Cilck the button to continue!", "warning").then(function () {});
+        } else {
+          var data = {
+            reserve_data: this.input,
+            user_id: this.user_id,
+            passenger: this.passengers,
+            seat_depart: this.seats,
+            seat_return: this.seatReturn,
+            payment_method: this.payment.method,
+            price: this.depart_price * this.no_of_passenger + this.return_price * this.no_of_passenger,
+            payment_card: this.payment.cardNumber,
+            flight: [this.depart_Selected, this.return_Selected]
+          };
+          axios.post("api/user/reserveSendData", data).then(function (response) {
+            swal.fire("Reservation Success!", "Cilck the button to continue!", "success").then(function () {
+              // console.log("reservation", response.data);
+              _this2.loadingPage = true;
+              setTimeout(function () {
+                _this2.loadingPage = false;
+                _this2.changePage = false;
+                _this2.isSelected = false;
+                _this2.isReturnSelected = false;
+                _this2.isActive = null;
+                _this2.isReturnActive = null;
+
+                _this2.$router.go({
+                  name: "reservation"
+                });
+              }, 1000);
+            });
+          });
+        }
+      }
     },
     handleChangePage: function handleChangePage() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.back) {
         if (this.isReturnSelected === true && this.isSelected === true) {
           if (!this.changePage) {
             this.loadingPage = true;
             setTimeout(function () {
-              _this2.seats = [];
-              _this2.seatReturn = [];
-              _this2.changePage = true;
-              _this2.loadingPage = false;
+              _this3.seats = [];
+              _this3.seatReturn = [];
+              _this3.changePage = true;
+              _this3.loadingPage = false;
             }, 1000);
           } else if (this.changePage === true) {
             this.loadingPage = false;
@@ -9909,14 +10214,14 @@ __webpack_require__.r(__webpack_exports__);
               confirmButtonText: "Yes, change it!"
             }).then(function (result) {
               if (result.value) {
-                _this2.loadingPage = true;
+                _this3.loadingPage = true;
                 setTimeout(function () {
-                  _this2.loadingPage = false;
-                  _this2.changePage = false;
-                  _this2.isSelected = false;
-                  _this2.isReturnSelected = false;
-                  _this2.isActive = null;
-                  _this2.isReturnActive = null;
+                  _this3.loadingPage = false;
+                  _this3.changePage = false;
+                  _this3.isSelected = false;
+                  _this3.isReturnSelected = false;
+                  _this3.isActive = null;
+                  _this3.isReturnActive = null;
                 }, 1000);
               } else {
                 swal.fire("Cancelled", "Status work date has not changed.", "error");
@@ -9925,25 +10230,25 @@ __webpack_require__.r(__webpack_exports__);
           }
         } else if (this.isReturnSelected === true && this.isSelected === false) {
           swal.fire("Please select depart flight!", "Cilck the button to continue!", "warning").then(function () {
-            _this2.changePage = false;
+            _this3.changePage = false;
           });
         } else if (this.isReturnSelected === false && this.isSelected === true) {
           swal.fire("Please select return flight!", "Cilck the button to continue!", "warning").then(function () {
-            _this2.changePage = false;
+            _this3.changePage = false;
           });
         } else {
           swal.fire("Please select depart and return flight", "Cilck the button to continue!", "warning").then(function () {
-            _this2.changePage = false;
+            _this3.changePage = false;
           });
         }
       } else if (this.isSelected === true) {
         if (!this.changePage) {
           this.loadingPage = true;
           setTimeout(function () {
-            _this2.seats = [];
-            _this2.seatReturn = [];
-            _this2.changePage = true;
-            _this2.loadingPage = false;
+            _this3.seats = [];
+            _this3.seatReturn = [];
+            _this3.changePage = true;
+            _this3.loadingPage = false;
           }, 1000);
         } else if (this.changePage === true) {
           this.loadingPage = false;
@@ -9957,12 +10262,12 @@ __webpack_require__.r(__webpack_exports__);
             confirmButtonText: "Yes, change it!"
           }).then(function (result) {
             if (result.value) {
-              _this2.loadingPage = true;
+              _this3.loadingPage = true;
               setTimeout(function () {
-                _this2.loadingPage = false;
-                _this2.changePage = false;
-                _this2.isSelected = false;
-                _this2.isActive = null;
+                _this3.loadingPage = false;
+                _this3.changePage = false;
+                _this3.isSelected = false;
+                _this3.isActive = null;
               }, 1000);
             } else {
               swal.fire("Cancelled", "Status work date has not changed.", "error");
@@ -9970,17 +10275,17 @@ __webpack_require__.r(__webpack_exports__);
           });
         } else {
           swal.fire("Please select flight!", "Cilck the button to continue!", "warning").then(function () {
-            _this2.changePage = false;
+            _this3.changePage = false;
           });
         }
       } else {
         swal.fire("Please success form before click next", "Cilck the button to continue!", "warning").then(function () {
-          _this2.changePage = false;
+          _this3.changePage = false;
         });
       }
     },
     returnSelected: function returnSelected(showReturnFlight, index) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.isReturnSelected = showReturnFlight.selected = true;
       this.isReturnActive = index;
@@ -9988,14 +10293,14 @@ __webpack_require__.r(__webpack_exports__);
       this.return_Selected["class"] = this.input["class"];
       this.depart_Selected.type = "R";
       axios.post("/api/user/checkSeat", this.return_Selected).then(function (response) {
-        _this3.firsts2 = response.data.firsts;
-        _this3.buss2 = response.data.buss;
-        _this3.ecos2 = response.data.ecos;
-        _this3.R_already_seat = response.data.already_seat;
+        _this4.firsts2 = response.data.firsts;
+        _this4.buss2 = response.data.buss;
+        _this4.ecos2 = response.data.ecos;
+        _this4.R_already_seat = response.data.already_seat;
       });
     },
     departSelected: function departSelected(showFlight, index) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.isSelected = showFlight.selected = true;
       this.isActive = index;
@@ -10003,10 +10308,10 @@ __webpack_require__.r(__webpack_exports__);
       this.depart_Selected["class"] = this.input["class"];
       this.depart_Selected.type = "D";
       axios.post("/api/user/checkSeat", this.depart_Selected).then(function (response) {
-        _this4.firsts = response.data.firsts;
-        _this4.buss = response.data.buss;
-        _this4.ecos = response.data.ecos;
-        _this4.D_already_seat = response.data.already_seat;
+        _this5.firsts = response.data.firsts;
+        _this5.buss = response.data.buss;
+        _this5.ecos = response.data.ecos;
+        _this5.D_already_seat = response.data.already_seat;
       });
     },
     showReturn: function showReturn() {
@@ -10041,7 +10346,18 @@ __webpack_require__.r(__webpack_exports__);
         passport: "",
         religion: "",
         phone: "",
-        email: ""
+        email: "",
+        error_title: "",
+        error_name: "",
+        error_surname: "",
+        error_gender: "",
+        error_dob: "",
+        error_national: "",
+        error_idcard: "",
+        error_passport: "",
+        error_religion: "",
+        error_phone: "",
+        error_email: ""
       });
     },
     removePass: function removePass(index) {
@@ -10049,7 +10365,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeUpdate: function beforeUpdate() {
-    var _this5 = this;
+    var _this6 = this;
 
     if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"] && (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate || this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo || this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input["class"] || this.passengers.length != this.temp_passenger)) {
       //*---------------------------------------------------------------------------------------------------*//
@@ -10075,10 +10391,10 @@ __webpack_require__.r(__webpack_exports__);
         passengerCount: this.passengers.length
       };
       axios.post("/api/user/getFlight", data).then(function (response) {
-        _this5.loadingPage = false;
-        _this5.queryFlight = response.data.flight_depart;
-        _this5.queryReturnFlight = response.data.flight_return;
-        _this5.no_of_passenger = _this5.passengers.length;
+        _this6.loadingPage = false;
+        _this6.queryFlight = response.data.flight_depart;
+        _this6.queryReturnFlight = response.data.flight_return;
+        _this6.no_of_passenger = _this6.passengers.length;
       });
     }
 
@@ -10108,10 +10424,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.input["class"] == "First") {
         this.firsts.forEach(function (element) {
           element.forEach(function (seat) {
-            if (_this5.seats.length == _this5.no_of_passenger) {
+            if (_this6.seats.length == _this6.no_of_passenger) {
               if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
+              if (!("patt" in seat) && _this6.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10120,10 +10436,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.input["class"] == "Business") {
         this.buss.forEach(function (element) {
           element.forEach(function (seat) {
-            if (_this5.seats.length == _this5.no_of_passenger) {
+            if (_this6.seats.length == _this6.no_of_passenger) {
               if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
+              if (!("patt" in seat) && _this6.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10132,10 +10448,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.input["class"] == "Economy") {
         this.ecos.forEach(function (element) {
           element.forEach(function (seat) {
-            if (_this5.seats.length == _this5.no_of_passenger) {
+            if (_this6.seats.length == _this6.no_of_passenger) {
               if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
+              if (!("patt" in seat) && _this6.D_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10153,10 +10469,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.input["class"] == "First") {
         this.firsts2.forEach(function (element) {
           element.forEach(function (seat) {
-            if (_this5.seatReturn.length == _this5.no_of_passenger) {
+            if (_this6.seatReturn.length == _this6.no_of_passenger) {
               if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
+              if (!("patt" in seat) && _this6.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10165,10 +10481,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.input["class"] == "Business") {
         this.buss2.forEach(function (element) {
           element.forEach(function (seat) {
-            if (_this5.seatReturn.length == _this5.no_of_passenger) {
+            if (_this6.seatReturn.length == _this6.no_of_passenger) {
               if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
+              if (!("patt" in seat) && _this6.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -10177,10 +10493,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.input["class"] == "Economy") {
         this.ecos2.forEach(function (element) {
           element.forEach(function (seat) {
-            if (_this5.seatReturn.length == _this5.no_of_passenger) {
+            if (_this6.seatReturn.length == _this6.no_of_passenger) {
               if (!("patt" in seat) && seated.indexOf(seat["seat"]) == -1) seat["status"] = true;
             } else {
-              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
+              if (!("patt" in seat) && _this6.R_already_seat.indexOf(seat["seat"]) == -1) seat["status"] = false;
             }
           });
         });
@@ -14814,7 +15130,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -14833,7 +15149,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -14852,7 +15168,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -14871,7 +15187,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\r\n    font-family: \"Kanit\", sans-serif;\r\n    font-size: 20px;\r\n    color: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\n    font-family: \"Kanit\", sans-serif;\n    font-size: 20px;\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -14890,7 +15206,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -63176,7 +63492,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("multiselect", {
                                           class: {
-                                            "is-invalid": _vm.error_title
+                                            "is-invalid": passenger.error_title
                                           },
                                           attrs: {
                                             options: _vm.titles,
@@ -63201,7 +63517,11 @@ var render = function() {
                                         _c(
                                           "span",
                                           { staticClass: "invalid-feedback" },
-                                          [_vm._v(_vm._s(_vm.error_title))]
+                                          [
+                                            _vm._v(
+                                              _vm._s(passenger.error_title)
+                                            )
+                                          ]
                                         )
                                       ],
                                       1
@@ -63223,7 +63543,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_name
+                                          "is-invalid": passenger.error_name
                                         },
                                         attrs: {
                                           placeholder: "อาหลีเฮีย",
@@ -63251,7 +63571,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_name) +
+                                              _vm._s(passenger.error_name) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63275,7 +63595,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_surname
+                                          "is-invalid": passenger.error_surname
                                         },
                                         attrs: {
                                           placeholder: "อาเฮียหลี",
@@ -63303,7 +63623,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_surname) +
+                                              _vm._s(passenger.error_surname) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63340,6 +63660,10 @@ var render = function() {
                                                     "\n                                                                passenger.gender\n                                                            "
                                                 }
                                               ],
+                                              class: {
+                                                "is-invalid":
+                                                  passenger.error_gender
+                                              },
                                               attrs: {
                                                 type: "radio",
                                                 id: "radios-0",
@@ -63368,6 +63692,18 @@ var render = function() {
                                         ),
                                         _vm._v(" "),
                                         _c(
+                                          "div",
+                                          { staticClass: "invalid-feedback" },
+                                          [
+                                            _vm._v(
+                                              "\n                                                        " +
+                                                _vm._s(passenger.error_gender) +
+                                                "\n                                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
                                           "label",
                                           {
                                             staticClass: "radio-inline",
@@ -63384,6 +63720,10 @@ var render = function() {
                                                     "\n                                                                passenger.gender\n                                                            "
                                                 }
                                               ],
+                                              class: {
+                                                "is-invalid":
+                                                  passenger.error_gender
+                                              },
                                               attrs: {
                                                 type: "radio",
                                                 id: "radios-1",
@@ -63412,45 +63752,13 @@ var render = function() {
                                         ),
                                         _vm._v(" "),
                                         _c(
-                                          "label",
-                                          {
-                                            staticClass: "radio-inline",
-                                            attrs: { for: "radios-2" }
-                                          },
+                                          "div",
+                                          { staticClass: "invalid-feedback" },
                                           [
-                                            _c("input", {
-                                              directives: [
-                                                {
-                                                  name: "model",
-                                                  rawName: "v-model",
-                                                  value: passenger.gender,
-                                                  expression:
-                                                    "\n                                                                passenger.gender\n                                                            "
-                                                }
-                                              ],
-                                              attrs: {
-                                                type: "radio",
-                                                id: "radios-1",
-                                                value: "Other"
-                                              },
-                                              domProps: {
-                                                checked: _vm._q(
-                                                  passenger.gender,
-                                                  "Other"
-                                                )
-                                              },
-                                              on: {
-                                                change: function($event) {
-                                                  return _vm.$set(
-                                                    passenger,
-                                                    "gender",
-                                                    "Other"
-                                                  )
-                                                }
-                                              }
-                                            }),
                                             _vm._v(
-                                              "\n                                                        Other\n                                                    "
+                                              "\n                                                        " +
+                                                _vm._s(passenger.error_gender) +
+                                                "\n                                                    "
                                             )
                                           ]
                                         )
@@ -63477,7 +63785,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_dob
+                                          "is-invalid": passenger.error_dob
                                         },
                                         attrs: { type: "date" },
                                         domProps: { value: passenger.dob },
@@ -63501,7 +63809,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_dob) +
+                                              _vm._s(passenger.error_dob) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63525,7 +63833,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_national
+                                          "is-invalid": passenger.error_national
                                         },
                                         domProps: { value: passenger.national },
                                         on: {
@@ -63548,7 +63856,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_national) +
+                                              _vm._s(passenger.error_national) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63572,7 +63880,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_religion
+                                          "is-invalid": passenger.error_religion
                                         },
                                         domProps: { value: passenger.religion },
                                         on: {
@@ -63595,7 +63903,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_religion) +
+                                              _vm._s(passenger.error_religion) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63623,7 +63931,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_idcard
+                                          "is-invalid": passenger.error_idcard
                                         },
                                         attrs: { type: "text" },
                                         domProps: { value: passenger.idcard },
@@ -63647,7 +63955,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_idcard) +
+                                              _vm._s(passenger.error_idcard) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63671,7 +63979,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_passport
+                                          "is-invalid": passenger.error_passport
                                         },
                                         attrs: { type: "text" },
                                         domProps: { value: passenger.passport },
@@ -63695,7 +64003,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_passport) +
+                                              _vm._s(passenger.error_passport) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63723,7 +64031,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_phone
+                                          "is-invalid": passenger.error_phone
                                         },
                                         attrs: {
                                           placeholder: "098-7654321",
@@ -63750,7 +64058,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_phone) +
+                                              _vm._s(passenger.error_phone) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63774,7 +64082,7 @@ var render = function() {
                                         ],
                                         staticClass: "form-control",
                                         class: {
-                                          "is-invalid": _vm.error_email
+                                          "is-invalid": passenger.error_email
                                         },
                                         attrs: {
                                           placeholder: "example@hotmail.com",
@@ -63801,7 +64109,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                                    " +
-                                              _vm._s(_vm.error_email) +
+                                              _vm._s(passenger.error_email) +
                                               "\n                                                "
                                           )
                                         ]
@@ -63833,12 +64141,87 @@ var render = function() {
                           _vm._v(" "),
                           _c("br"),
                           _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
                           _c("div", { staticClass: "container-xl" }, [
                             _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-md-6" }, [
-                                _vm._v(
-                                  "\n                                        Total: {{}} ฿\n                                    "
-                                )
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-6 " }, [
+                                _c("div", { staticClass: "row float-right" }, [
+                                  _c("div", { staticClass: "col-md-12 " }, [
+                                    _c("h4", [
+                                      _vm._v(
+                                        "\n                                                    Depart:\n                                                    " +
+                                          _vm._s(this.depart_price) +
+                                          "\n                                                    x\n                                                    " +
+                                          _vm._s(this.no_of_passenger) +
+                                          "\n                                                    =\n                                                    " +
+                                          _vm._s(
+                                            Number(this.depart_price) *
+                                              Number(this.no_of_passenger)
+                                          ) +
+                                          "\n                                                    ฿\n                                                "
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.back,
+                                        expression: "back"
+                                      }
+                                    ],
+                                    staticClass: "row float-right"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "col-md-12 " }, [
+                                      _c("h4", [
+                                        _vm._v(
+                                          "\n                                                    Return:\n                                                    " +
+                                            _vm._s(this.return_price) +
+                                            "\n                                                    x\n                                                    " +
+                                            _vm._s(this.no_of_passenger) +
+                                            "\n                                                    =\n                                                    " +
+                                            _vm._s(
+                                              Number(this.return_price) *
+                                                Number(this.no_of_passenger)
+                                            ) +
+                                            "\n                                                    ฿\n                                                "
+                                        )
+                                      ])
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row float-right" }, [
+                                  _c("div", { staticClass: "col-md-12 " }, [
+                                    _c("h3", [
+                                      _vm._v(
+                                        "\n                                                    Total:\n                                                    " +
+                                          _vm._s(
+                                            Number(this.depart_price) *
+                                              Number(this.no_of_passenger) +
+                                              Number(this.return_price) *
+                                                Number(this.no_of_passenger)
+                                          ) +
+                                          "\n                                                    ฿\n                                                "
+                                      )
+                                    ])
+                                  ])
+                                ])
                               ]),
                               _vm._v(" "),
                               _c(
@@ -63869,7 +64252,19 @@ var render = function() {
                                       },
                                       expression: "payment.method"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(_vm.error_payMethod) +
+                                          "\n                                        "
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -63882,9 +64277,11 @@ var render = function() {
                                   {
                                     name: "show",
                                     rawName: "v-show",
-                                    value: _vm.payment.method == "Credit Card",
+                                    value:
+                                      _vm.payment.method == "VisaCard" ||
+                                      _vm.payment.method == "MasterCard",
                                     expression:
-                                      "payment.method == 'Credit Card'"
+                                      "\n                                        payment.method == 'VisaCard' ||\n                                            payment.method == 'MasterCard'\n                                    "
                                   }
                                 ],
                                 staticClass: "row"
@@ -63922,7 +64319,19 @@ var render = function() {
                                         )
                                       }
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(_vm.error_cardNumber) +
+                                          "\n                                        "
+                                      )
+                                    ]
+                                  )
                                 ])
                               ]
                             )
@@ -63963,9 +64372,32 @@ var render = function() {
                               on: { click: _vm.submit }
                             },
                             [
-                              _vm._v(
-                                "\n                                Submit\n                            "
-                              )
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: !_vm.isLoading,
+                                      expression: "!isLoading"
+                                    }
+                                  ]
+                                },
+                                [_vm._v("Submit")]
+                              ),
+                              _vm._v(" "),
+                              _c("i", {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.isLoading,
+                                    expression: "isLoading"
+                                  }
+                                ],
+                                staticClass: "fas fa-spinner fa-pulse"
+                              })
                             ]
                           )
                         : _vm._e(),
@@ -81231,8 +81663,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\DBproject\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\DBproject\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
