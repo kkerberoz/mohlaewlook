@@ -14641,7 +14641,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -55674,6 +55674,37 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value:
+                                  _vm.role === "human_resource" ||
+                                  _vm.role === "admin"
+                                    ? true
+                                    : false,
+                                expression:
+                                  "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
+                              }
+                            ],
+                            attrs: { to: { name: "manageSchedule" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-chart-line" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Manage Schedule")])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
                                   _vm.role === "staff" || _vm.role === "admin"
                                     ? true
                                     : false,
@@ -55811,37 +55842,6 @@ var render = function() {
                             _c("i", { staticClass: "fas fa-calendar-alt" }),
                             _vm._v(" "),
                             _c("span", [_vm._v("Schedule")])
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value:
-                                  _vm.role === "human_resource" ||
-                                  _vm.role === "admin"
-                                    ? true
-                                    : false,
-                                expression:
-                                  "\n                                    role === 'human_resource' ||\n                                    role === 'admin'\n                                        ? true\n                                        : false\n                                "
-                              }
-                            ],
-                            attrs: { to: { name: "manageSchedule" } }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-chart-line" }),
-                            _vm._v(" "),
-                            _c("span", [_vm._v("Manage Schedule")])
                           ]
                         )
                       ],
