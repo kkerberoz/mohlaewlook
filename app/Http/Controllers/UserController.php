@@ -132,7 +132,7 @@ class UserController extends Controller
         $reservation->reservation_status = "confirm";
         //---------------------------------------------------------------------------------------------------------------------//
         //$reservation->save();
-        array_push($reservationObj,$reservation);
+        array_push($reservationObj, $reservation);
 
 
 
@@ -151,7 +151,7 @@ class UserController extends Controller
 
             if (isset($passenger_oldID)) {
                 $current_passenger_id = [];
-                array_push($current_passenger_id,$passenger_oldID);
+                array_push($current_passenger_id, $passenger_oldID);
                 $passenger->passenger_id = $passenger_oldID;
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
@@ -166,7 +166,7 @@ class UserController extends Controller
                 $passenger->passenger_email = $each_passenger['email'];
                 //---------------------------------------------------------------------------------------------------------------------//
                 //$passenger->save();
-                array_push($passengerObj,$passenger);
+                array_push($passengerObj, $passenger);
             } else {
                 $prefix = "";
                 $age = floor(((date_diff(date_create($each_passenger['dob']), date_create(date('Y-m-d'))))->days) / 365);
@@ -183,7 +183,7 @@ class UserController extends Controller
                 $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->order_By('passenger_id', 'desc')->first();
                 $number = str_replace($prefix, "", $check_id['passenger_id']) + 1;
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
-                array_push($current_passenger_id,$passenger->passenger_id);
+                array_push($current_passenger_id, $passenger->passenger_id);
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
                 $passenger->passenger_surname = $each_passenger['surname'];
@@ -197,7 +197,7 @@ class UserController extends Controller
                 $passenger->passenger_email = $each_passenger['email'];
                 //---------------------------------------------------------------------------------------------------------------------//
                 //$passenger->save();
-                array_push($passengerObj,$passenger);
+                array_push($passengerObj, $passenger);
             }
         }
 
@@ -209,7 +209,7 @@ class UserController extends Controller
         $payment->payment_card = $payment_card;
         $payment->total_price = $price;
         $payment->reservaton_id = $reserve_id;
-        array_push($paymentObj,$payment);
+        array_push($paymentObj, $payment);
         //---------------------------------------------------------------------------------------------------------------------//
         //$payment->save();
 
@@ -224,13 +224,12 @@ class UserController extends Controller
                 $ticket->flight_id = $flight_id_array[$j]['flight_id'];
                 $ticket->reservation_id = $reserve_id;
                 $ticket->passenger_id = $current_passenger_id[$i];
-                array_push($ticketObj,$ticket);
+                array_push($ticketObj, $ticket);
                 //---------------------------------------------------------------------------------------------------------------------//
                 //$ticket->save();
             }
             $j++;
         }
-
     }
 
     public function getLocation()
@@ -294,16 +293,17 @@ class UserController extends Controller
         // $first class
         $sum =  explode("-", $request->first_pattern);
         $first_amount = ($request->first_cap) / array_sum($sum);
-        $count_id = 1; $seat_count = 1;
-        while($first_amount--){
+        $count_id = 1;
+        $seat_count = 1;
+        while ($first_amount--) {
             $temp = [];
             $pettern = $request->first_pattern;
             $count_alphas = 0;
-            for($i=0 ;$i<strlen($pettern); ++$i){
-                if(is_numeric($pettern[$i])){
-                    for($j=0; $j<$pettern[$i]; ++$j){
-                        $seat = sprintf("%02d", $seat_count). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
+            for ($i = 0; $i < strlen($pettern); ++$i) {
+                if (is_numeric($pettern[$i])) {
+                    for ($j = 0; $j < $pettern[$i]; ++$j) {
+                        $seat = sprintf("%02d", $seat_count) . $alphas[$count_alphas++];
+                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
                     }
                 } else array_push($temp, ["patt" => true]);
             }
@@ -312,16 +312,16 @@ class UserController extends Controller
         }
         // $bussiness class
         $sum =  explode("-", $request->bus_pattern);
-        $bus_amount =($request->bus_cap) / array_sum($sum);
-        while($bus_amount--){
+        $bus_amount = ($request->bus_cap) / array_sum($sum);
+        while ($bus_amount--) {
             $temp = [];
             $pettern = $request->bus_pattern;
             $count_alphas = 0;
-            for($i=0 ;$i<strlen($pettern); ++$i){
-                if(is_numeric($pettern[$i])){
-                    for($j=0; $j<$pettern[$i]; ++$j){
-                        $seat = sprintf("%02d", $seat_count). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
+            for ($i = 0; $i < strlen($pettern); ++$i) {
+                if (is_numeric($pettern[$i])) {
+                    for ($j = 0; $j < $pettern[$i]; ++$j) {
+                        $seat = sprintf("%02d", $seat_count) . $alphas[$count_alphas++];
+                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
                     }
                 } else array_push($temp, ["patt" => true]);
             }
@@ -331,15 +331,15 @@ class UserController extends Controller
         // economy class
         $sum =  explode("-", $request->eco_pattern);
         $eco_amount = ($request->eco_cap) / array_sum($sum);
-        while($eco_amount--){
+        while ($eco_amount--) {
             $temp = [];
             $pettern = $request->eco_pattern;
             $count_alphas = 0;
-            for($i=0 ;$i<strlen($pettern); ++$i){
-                if(is_numeric($pettern[$i])){
-                    for($j=0; $j<$pettern[$i]; ++$j){
-                        $seat = sprintf("%02d", $seat_count). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => $seat_prefix.$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
+            for ($i = 0; $i < strlen($pettern); ++$i) {
+                if (is_numeric($pettern[$i])) {
+                    for ($j = 0; $j < $pettern[$i]; ++$j) {
+                        $seat = sprintf("%02d", $seat_count) . $alphas[$count_alphas++];
+                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
                     }
                 } else array_push($temp, ["patt" => true]);
             }
