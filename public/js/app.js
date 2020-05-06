@@ -8891,133 +8891,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -14012,7 +13885,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\n.column-reservation {\r\n    float: left;\r\n    width: 100%;\r\n    padding: 0 10px;\r\n    margin-top: 10px;\n}\n.card-reser {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    padding: 16px;\r\n    text-align: center;\r\n    color: #fff;\r\n    background-color: #2197e6;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n  border: none;\n  border-radius: 0;\n  background-color: #f79c65;\n  display: block;\n}\n/* #f8d49b */\n#card-reservation {\n  border: none;\n  border-radius: 0;\n}\n.column-reservation {\n  float: left;\n  width: 100%;\n  padding: 0 10px;\n  margin-top: 10px;\n}\n.card-reser {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  padding: 16px;\n  text-align: center;\n  color: #fff;\n  background-color: #2197e6;\n}\n", ""]);
 
 // exports
 
@@ -59894,7 +59767,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "container-fluid ",
+      staticClass: "container-fluid",
       staticStyle: { "padding-top": "5%", "padding-bottom": "10%" }
     },
     [
@@ -59937,11 +59810,7 @@ var render = function() {
                       staticClass: "card-header",
                       attrs: { id: "card-reservation" }
                     },
-                    [
-                      _vm._v(
-                        "\n                        Reservation\n                    "
-                      )
-                    ]
+                    [_vm._v("Reservation")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -59975,7 +59844,7 @@ var render = function() {
                           [
                             _c("label", { staticClass: "container-ratio" }, [
                               _vm._v(
-                                "\n                                    One Way\n                                    "
+                                "\n                  One Way\n                  "
                               ),
                               _c("input", {
                                 attrs: { type: "radio", name: "radio" },
@@ -60000,7 +59869,7 @@ var render = function() {
                           [
                             _c("label", { staticClass: "container-ratio" }, [
                               _vm._v(
-                                "\n                                    Return\n                                    "
+                                "\n                  Return\n                  "
                               ),
                               _c("input", {
                                 attrs: { type: "radio", name: "radio" },
@@ -60018,10 +59887,10 @@ var render = function() {
                             _vm._v(" "),
                             _c("div", [
                               _vm._v(
-                                "\n                                             \n                                        "
+                                "\n                         \n                    "
                               ),
                               _c("button", {
-                                staticClass: " btn fas fa-minus-circle",
+                                staticClass: "btn fas fa-minus-circle",
                                 staticStyle: { color: "#ED4337" },
                                 on: {
                                   click: function($event) {
@@ -60030,9 +59899,9 @@ var render = function() {
                                 }
                               }),
                               _vm._v(
-                                "\n                                        " +
+                                "\n                    " +
                                   _vm._s(_vm.passengers.length) +
-                                  "\n                                        "
+                                  "\n                    "
                               ),
                               _c("button", {
                                 staticClass: "btn fas fa-plus-circle",
@@ -60100,9 +59969,9 @@ var render = function() {
                             [
                               _c("label", [
                                 _vm._v(
-                                  "\n                                    From :\n                                    " +
+                                  "\n                  From :\n                  " +
                                     _vm._s(this.calendar_from.selectedDate) +
-                                    "\n                                "
+                                    "\n                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -60127,9 +59996,9 @@ var render = function() {
                             [
                               _c("label", [
                                 _vm._v(
-                                  "\n                                    To :\n                                    " +
+                                  "\n                  To :\n                  " +
                                     _vm._s(this.calendar_to.selectedDate) +
-                                    "\n                                "
+                                    "\n                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -60170,9 +60039,9 @@ var render = function() {
                             [
                               _c("label", [
                                 _vm._v(
-                                  "\n                                    Date :\n                                    " +
+                                  "\n                  Date :\n                  " +
                                     _vm._s(this.calendar_from.selectedDate) +
-                                    "\n                                "
+                                    "\n                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -60203,7 +60072,7 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v(" Depart Flight No :")]),
+                              _c("label", [_vm._v("Depart Flight No :")]),
                               _vm._v(" "),
                               _vm._m(0),
                               _vm._v(" "),
@@ -60228,11 +60097,7 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(_vm.error_flightFrom) +
-                                    "\n                                    "
-                                )
+                                _vm._v(_vm._s(_vm.error_flightFrom))
                               ])
                             ],
                             1
@@ -60269,11 +60134,7 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(_vm.error_flightTo) +
-                                    "\n                                    "
-                                )
+                                _vm._v(_vm._s(_vm.error_flightTo))
                               ])
                             ],
                             1
@@ -60306,7 +60167,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _c("label", [_vm._v(" Return Flight No :")]),
+                                _c("label", [_vm._v("Return Flight No :")]),
                                 _vm._v(" "),
                                 _vm._m(2),
                                 _vm._v(" "),
@@ -60331,11 +60192,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "invalid-feedback" }, [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(_vm.error_flightFrom) +
-                                      "\n                                    "
-                                  )
+                                  _vm._v(_vm._s(_vm.error_flightFrom))
                                 ])
                               ],
                               1
@@ -60376,11 +60233,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "invalid-feedback" }, [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(_vm.error_flightTo) +
-                                      "\n                                    "
-                                  )
+                                  _vm._v(_vm._s(_vm.error_flightTo))
                                 ])
                               ],
                               1
@@ -60415,9 +60268,9 @@ var render = function() {
                                     _c("div", { staticClass: "row ml-4" }, [
                                       _c("h4", [
                                         _vm._v(
-                                          "\n                                                Flight Number:\n                                                " +
+                                          "\n                        Flight Number:\n                        " +
                                             _vm._s(showFlight.flight_no) +
-                                            "\n                                            "
+                                            "\n                      "
                                         )
                                       ])
                                     ]),
@@ -60428,19 +60281,27 @@ var render = function() {
                                       _c("div", { staticClass: "col-md-4" }, [
                                         _c("h4", [
                                           _vm._v(
-                                            "\n                                                    From:\n                                                    "
+                                            "\n                          From:\n                          "
                                           ),
                                           _c("b", [
                                             _vm._v(
-                                              _vm._s(showFlight.depart_location)
+                                              "\n                            " +
+                                                _vm._s(
+                                                  showFlight.depart_location
+                                                ) +
+                                                "\n                          "
                                             )
                                           ]),
                                           _vm._v(
-                                            "\n                                                     To:\n                                                    "
+                                            "\n                           To:\n                          "
                                           ),
                                           _c("b", [
                                             _vm._v(
-                                              _vm._s(showFlight.arrive_location)
+                                              "\n                            " +
+                                                _vm._s(
+                                                  showFlight.arrive_location
+                                                ) +
+                                                "\n                          "
                                             )
                                           ])
                                         ])
@@ -60449,21 +60310,23 @@ var render = function() {
                                       _c("div", { staticClass: "col-md-4" }, [
                                         _c("h4", [
                                           _vm._v(
-                                            "\n                                                    Time :\n                                                    "
+                                            "\n                          Time :\n                          "
                                           ),
                                           _c("b", [
                                             _vm._v(
-                                              _vm._s(
-                                                showFlight.depart_datetime.split(
-                                                  " "
-                                                )[1]
-                                              ) +
-                                                "\n                                                        -" +
+                                              "\n                            " +
+                                                _vm._s(
+                                                  showFlight.depart_datetime.split(
+                                                    " "
+                                                  )[1]
+                                                ) +
+                                                "\n                            -" +
                                                 _vm._s(
                                                   showFlight.arrive_datetime.split(
                                                     " "
                                                   )[1]
-                                                )
+                                                ) +
+                                                "\n                          "
                                             )
                                           ])
                                         ])
@@ -60477,9 +60340,9 @@ var render = function() {
                                         _vm.input.class == "Economy"
                                           ? _c("h3", [
                                               _vm._v(
-                                                "\n                                                    Price :\n                                                    " +
+                                                "\n                          Price :\n                          " +
                                                   _vm._s(showFlight.eco_price) +
-                                                  "\n                                                    "
+                                                  "\n                          "
                                               ),
                                               _c("i", {
                                                 staticClass: "fas fa-btc"
@@ -60490,8 +60353,9 @@ var render = function() {
                                         _vm.input.class == "Business"
                                           ? _c("h3", [
                                               _vm._v(
-                                                "\n                                                    Price :\n                                                    " +
-                                                  _vm._s(showFlight.bus_price)
+                                                "\n                          Price :\n                          " +
+                                                  _vm._s(showFlight.bus_price) +
+                                                  "\n                          "
                                               ),
                                               _c("i", {
                                                 staticClass: "fas fa-btc"
@@ -60502,8 +60366,11 @@ var render = function() {
                                         _vm.input.class == "First"
                                           ? _c("h3", [
                                               _vm._v(
-                                                "\n                                                    Price :\n                                                    " +
-                                                  _vm._s(showFlight.first_price)
+                                                "\n                          Price :\n                          " +
+                                                  _vm._s(
+                                                    showFlight.first_price
+                                                  ) +
+                                                  "\n                          "
                                               ),
                                               _c("i", {
                                                 staticClass: "fab fa-btc"
@@ -60553,9 +60420,7 @@ var render = function() {
                                 { staticClass: "cabin fuselage" },
                                 [
                                   _c("h4", { staticClass: "flex-center" }, [
-                                    _vm._v(
-                                      "\n                                                First Class\n                                            "
-                                    )
+                                    _vm._v("First Class")
                                   ]),
                                   _vm._v(" "),
                                   _vm._l(_vm.firsts, function(seatt, i) {
@@ -60576,7 +60441,7 @@ var render = function() {
                                                     rawName: "v-show",
                                                     value: !f.patt == true,
                                                     expression:
-                                                      "\n                                                            !f.patt == true\n                                                        "
+                                                      "\n                                                              !f.patt == true\n                                                          "
                                                   }
                                                 ]
                                               },
@@ -60649,7 +60514,13 @@ var render = function() {
                                                     },
                                                     attrs: { for: f.id }
                                                   },
-                                                  [_vm._v(_vm._s(f.seat))]
+                                                  [
+                                                    _vm._v(
+                                                      "\n                              " +
+                                                        _vm._s(f.seat) +
+                                                        "\n                            "
+                                                    )
+                                                  ]
                                                 )
                                               ]
                                             )
@@ -60665,9 +60536,7 @@ var render = function() {
                                   }),
                                   _vm._v(" "),
                                   _c("h4", { staticClass: "flex-center" }, [
-                                    _vm._v(
-                                      "\n                                                Business Class\n                                            "
-                                    )
+                                    _vm._v("Business Class")
                                   ]),
                                   _vm._v(" "),
                                   _vm._l(_vm.buss, function(seatt, i) {
@@ -60688,7 +60557,7 @@ var render = function() {
                                                     rawName: "v-show",
                                                     value: !f.patt == true,
                                                     expression:
-                                                      "\n                                                            !f.patt == true\n                                                        "
+                                                      "\n                                                              !f.patt == true\n                                                          "
                                                   }
                                                 ]
                                               },
@@ -60761,7 +60630,13 @@ var render = function() {
                                                     },
                                                     attrs: { for: f.id }
                                                   },
-                                                  [_vm._v(_vm._s(f.seat))]
+                                                  [
+                                                    _vm._v(
+                                                      "\n                              " +
+                                                        _vm._s(f.seat) +
+                                                        "\n                            "
+                                                    )
+                                                  ]
                                                 )
                                               ]
                                             )
@@ -60777,9 +60652,7 @@ var render = function() {
                                   }),
                                   _vm._v(" "),
                                   _c("h4", { staticClass: "flex-center" }, [
-                                    _vm._v(
-                                      "\n                                                Economy Class\n                                            "
-                                    )
+                                    _vm._v("Economy Class")
                                   ]),
                                   _vm._v(" "),
                                   _vm._l(_vm.ecos, function(eco, e) {
@@ -60800,7 +60673,7 @@ var render = function() {
                                                     rawName: "v-show",
                                                     value: !index.patt == true,
                                                     expression:
-                                                      "\n                                                            !index.patt ==\n                                                                true\n                                                        "
+                                                      "\n                                                              !index.patt ==\n                                                                  true\n                                                          "
                                                   }
                                                 ]
                                               },
@@ -60876,7 +60749,13 @@ var render = function() {
                                                     },
                                                     attrs: { for: index.id }
                                                   },
-                                                  [_vm._v(_vm._s(index.seat))]
+                                                  [
+                                                    _vm._v(
+                                                      "\n                              " +
+                                                        _vm._s(index.seat) +
+                                                        "\n                            "
+                                                    )
+                                                  ]
                                                 )
                                               ]
                                             )
@@ -60920,9 +60799,9 @@ var render = function() {
                                     _c("h5", [
                                       _c("br"),
                                       _vm._v(
-                                        "Passenger\n                                                " +
+                                        "\n                        Passenger\n                        " +
                                           _vm._s(Number(counter) + 1) +
-                                          " :\n                                            "
+                                          " :\n                      "
                                       )
                                     ])
                                   ])
@@ -60958,7 +60837,7 @@ var render = function() {
                                               _vm.$set(passenger, "title", $$v)
                                             },
                                             expression:
-                                              "\n                                                        passenger.title\n                                                    "
+                                              "\n                                                          passenger.title\n                                                      "
                                           }
                                         }),
                                         _vm._v(" "),
@@ -61012,13 +60891,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_name) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_name))]
                                       )
                                     ])
                                   ]),
@@ -61034,7 +60907,7 @@ var render = function() {
                                             rawName: "v-model",
                                             value: passenger.surname,
                                             expression:
-                                              "\n                                                        passenger.surname\n                                                    "
+                                              "\n                                                          passenger.surname\n                                                      "
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -61064,13 +60937,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_surname) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_surname))]
                                       )
                                     ])
                                   ]),
@@ -61101,7 +60968,7 @@ var render = function() {
                                                   rawName: "v-model",
                                                   value: passenger.gender,
                                                   expression:
-                                                    "\n                                                                passenger.gender\n                                                            "
+                                                    "\n                                                                  passenger.gender\n                                                              "
                                                 }
                                               ],
                                               attrs: {
@@ -61126,7 +60993,7 @@ var render = function() {
                                               }
                                             }),
                                             _vm._v(
-                                              "\n                                                        Male\n                                                    "
+                                              "\n                            Male\n                          "
                                             )
                                           ]
                                         ),
@@ -61145,7 +61012,7 @@ var render = function() {
                                                   rawName: "v-model",
                                                   value: passenger.gender,
                                                   expression:
-                                                    "\n                                                                passenger.gender\n                                                            "
+                                                    "\n                                                                  passenger.gender\n                                                              "
                                                 }
                                               ],
                                               attrs: {
@@ -61170,7 +61037,7 @@ var render = function() {
                                               }
                                             }),
                                             _vm._v(
-                                              "\n                                                        Female\n                                                    "
+                                              "\n                            Female\n                          "
                                             )
                                           ]
                                         ),
@@ -61189,7 +61056,7 @@ var render = function() {
                                                   rawName: "v-model",
                                                   value: passenger.gender,
                                                   expression:
-                                                    "\n                                                                passenger.gender\n                                                            "
+                                                    "\n                                                                  passenger.gender\n                                                              "
                                                 }
                                               ],
                                               attrs: {
@@ -61214,7 +61081,7 @@ var render = function() {
                                               }
                                             }),
                                             _vm._v(
-                                              "\n                                                        Other\n                                                    "
+                                              "\n                            Other\n                          "
                                             )
                                           ]
                                         )
@@ -61262,13 +61129,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_dob) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_dob))]
                                       )
                                     ])
                                   ]),
@@ -61283,8 +61144,7 @@ var render = function() {
                                             name: "model",
                                             rawName: "v-model",
                                             value: passenger.national,
-                                            expression:
-                                              "\n                                                        passenger.national\n                                                    "
+                                            expression: "passenger.national"
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -61309,13 +61169,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_national) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_national))]
                                       )
                                     ])
                                   ]),
@@ -61331,7 +61185,7 @@ var render = function() {
                                             rawName: "v-model",
                                             value: passenger.religion,
                                             expression:
-                                              "\n                                                        passenger.religion\n                                                    "
+                                              "\n                                                          passenger.religion\n                                                      "
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -61356,13 +61210,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_religion) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_religion))]
                                       )
                                     ])
                                   ])
@@ -61382,7 +61230,7 @@ var render = function() {
                                             rawName: "v-model",
                                             value: passenger.idcard,
                                             expression:
-                                              "\n                                                        passenger.idcard\n                                                    "
+                                              "\n                                                          passenger.idcard\n                                                      "
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -61408,13 +61256,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_idcard) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_idcard))]
                                       )
                                     ])
                                   ]),
@@ -61430,7 +61272,7 @@ var render = function() {
                                             rawName: "v-model",
                                             value: passenger.passport,
                                             expression:
-                                              "\n                                                        passenger.passport\n                                                    "
+                                              "\n                                                          passenger.passport\n                                                      "
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -61456,13 +61298,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_passport) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_passport))]
                                       )
                                     ])
                                   ])
@@ -61482,7 +61318,7 @@ var render = function() {
                                             rawName: "v-model",
                                             value: passenger.phone,
                                             expression:
-                                              "\n                                                        passenger.phone\n                                                    "
+                                              "\n                                                          passenger.phone\n                                                      "
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -61511,13 +61347,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_phone) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_phone))]
                                       )
                                     ])
                                   ]),
@@ -61533,7 +61363,7 @@ var render = function() {
                                             rawName: "v-model",
                                             value: passenger.email,
                                             expression:
-                                              "\n                                                        passenger.email\n                                                    "
+                                              "\n                                                          passenger.email\n                                                      "
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -61562,13 +61392,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         { staticClass: "invalid-feedback" },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    " +
-                                              _vm._s(_vm.error_email) +
-                                              "\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v(_vm._s(_vm.error_email))]
                                       )
                                     ])
                                   ])
@@ -61584,7 +61408,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-footer " }, [
+                  _c("div", { staticClass: "card-footer" }, [
                     _c("div", { staticClass: "col-md-12" }, [
                       _vm.changePage
                         ? _c(
@@ -61599,11 +61423,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [
-                              _vm._v(
-                                "\n                                Next\n                            "
-                              )
-                            ]
+                            [_vm._v("Next")]
                           )
                         : _vm._e()
                     ]),
@@ -61617,11 +61437,7 @@ var render = function() {
                               staticStyle: { color: "#fff" },
                               attrs: { id: "card-reservation", type: "submit" }
                             },
-                            [
-                              _vm._v(
-                                "\n                                Submit\n                            "
-                              )
-                            ]
+                            [_vm._v("Submit")]
                           )
                         : _vm._e(),
                       _vm._v(" "),
@@ -61638,11 +61454,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [
-                              _vm._v(
-                                "\n                                Back\n                            "
-                              )
-                            ]
+                            [_vm._v("Back")]
                           )
                         : _vm._e()
                     ])
@@ -61664,7 +61476,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                    ")
+      _vm._v("From :\n                  ")
     ])
   },
   function() {
@@ -61673,7 +61485,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To :\n                                    ")
+      _vm._v("To :\n                  ")
     ])
   },
   function() {
@@ -61682,7 +61494,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("From :\n                                    ")
+      _vm._v("From :\n                  ")
     ])
   },
   function() {
@@ -61691,7 +61503,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
-      _vm._v("To :\n                                    ")
+      _vm._v("To :\n                  ")
     ])
   },
   function() {
@@ -61700,9 +61512,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "cockpit" }, [
       _c("h2", { staticStyle: { "margin-top": "90px" } }, [
-        _vm._v(
-          "\n                                                Please select a seat\n                                            "
-        )
+        _vm._v("Please select a seat")
       ])
     ])
   }
