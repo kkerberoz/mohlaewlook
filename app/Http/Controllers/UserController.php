@@ -148,30 +148,41 @@ class UserController extends Controller
         foreach ($passenger_array as $each_passenger) {
             $passenger = new Passenger;
             if (isset($each_passenger['idcard'])) {
-                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard', $each_passenger['idcard']);
+                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard', $each_passenger['idcard'])->first();
             } else if (isset($each_passenger['passport'])) //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
             {
-                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport', $each_passenger['passport']);
+                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport', $each_passenger['passport'])->first();
             }
 
             if (isset($passenger_oldID->passenger_id)) {
 
                 array_push($current_passenger_id, $passenger_oldID->passenger_id);
-                // $passenger->passenger_id = $passenger_oldID->passenger_id;
+                $passenger->passenger_id = $passenger_oldID->passenger_id;
 
-                $passenger->passenger_title = $each_passenger['title'];
-                $passenger->passenger_name = $each_passenger['name'];
-                $passenger->passenger_surname = $each_passenger['surname'];
-                $passenger->passenger_DOB = $each_passenger['dob'];
-                $passenger->gender = strtolower($each_passenger['gender']);
-                $passenger->passenger_nationality = $each_passenger['national'];
-                $passenger->passenger_religion = $each_passenger['religion'];
-                $passenger->passenger_idcard = $each_passenger['idcard'];
-                $passenger->passenger_passport = $each_passenger['passport'];
-                $passenger->passenger_phone = $each_passenger['phone'];
-                $passenger->passenger_email = $each_passenger['email'];
+                Passenger::where('passenger_id',$passenger_oldID->passenger_id)->update(['passenger_title' => $each_passenger['title'],
+                                                                                        'passenger_name' => $each_passenger['name'],
+                                                                                        'passenger_surname'=>$each_passenger['surname'],
+                                                                                        'passenger_DOB' => $each_passenger['dob'],
+                                                                                        'gender' => strtolower($each_passenger['gender']),
+                                                                                        'passenger_nationality'=> $each_passenger['national'],
+                                                                                        'passenger_religion' => $each_passenger['religion'],
+                                                                                        'passenger_idcard' => $each_passenger['idcard'],
+                                                                                        'passenger_passport' => $each_passenger['passport'],
+                                                                                        'passenger_phone' => $each_passenger['phone'],
+                                                                                         'passenger_email'=> $each_passenger['email'] ]);
+                // $passenger->passenger_title = $each_passenger['title'];
+                // $passenger->passenger_name = $each_passenger['name'];
+                // $passenger->passenger_surname = $each_passenger['surname'];
+                // $passenger->passenger_DOB = $each_passenger['dob'];
+                // $passenger->gender = strtolower($each_passenger['gender']);
+                // $passenger->passenger_nationality = $each_passenger['national'];
+                // $passenger->passenger_religion = $each_passenger['religion'];
+                // $passenger->passenger_idcard = $each_passenger['idcard'];
+                // $passenger->passenger_passport = $each_passenger['passport'];
+                // $passenger->passenger_phone = $each_passenger['phone'];
+                // $passenger->passenger_email = $each_passenger['email'];
                 //---------------------------------------------------------------------------------------------------------------------//
-                $passenger->update();
+                // $passenger->update();
                 //array_push($passengerObj, $passenger);
             } else {
 
@@ -187,8 +198,9 @@ class UserController extends Controller
                     $prefix = "K";
                 }
 
-                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderBy('passenger_id', 'desc')->first();
+                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderByDesc('passenger_id')->first();
                 $number = is_numeric(str_replace($prefix, "", $check_id['passenger_id'])) + 1;
+                //return response()->JSON([str_replace($prefix, "", $check_id['passenger_id']),$check_id['passenger_id'] ,$number,$prefix . sprintf("%08d", $number)]);
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
                 array_push($current_passenger_id, $passenger->passenger_id);
                 $passenger->passenger_title = $each_passenger['title'];

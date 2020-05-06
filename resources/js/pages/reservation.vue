@@ -1911,7 +1911,7 @@ export default {
                         this.passengers[i].error_passport = null;
                     }
                 }
-                if (this.passengers[i].passport) {
+                if (this.passengers[i].passport && this.passengers[i].idcard) {
                     this.passengers[i].error_idcard = "Please enter only one";
                     this.passengers[i].error_passport = "Please enter only one";
                     this.errors.push(this.passengers[i].error_idcard);
@@ -1974,10 +1974,10 @@ export default {
                     } else if (isNaN(this.payment.cardNumber)) {
                         this.error_cardNumber = "Please fill only number.";
                         this.errors.push(this.error_cardNumber);
-                    } else if (this.passengers[i].phone.length != 16) {
+                    } else if (this.payment.cardNumber.length != 16) {
                         this.error_cardNumber =
-                            "Phone number must be 16 characters.";
-                        this.errors.push(this.error_cardNumberอ);
+                            "Card number must be 16 characters.";
+                        this.errors.push(this.error_cardNumber);
                     }
                 } else {
                     this.error_cardNumber = null;
@@ -2012,6 +2012,8 @@ export default {
                     axios
                         .post("api/user/reserveSendData", data)
                         .then(response => {
+                            console.log(response.data);
+
                             swal.fire(
                                 "Reservation Success!",
                                 "Cilck the button to continue!",
