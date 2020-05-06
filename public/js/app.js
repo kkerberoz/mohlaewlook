@@ -9478,6 +9478,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60862,115 +60900,158 @@ var render = function() {
                                           : null
                                     },
                                     [
-                                      _c("div", { staticClass: "row ml-4" }, [
-                                        _c("h4", [
-                                          _vm._v(
-                                            "\n                                                Flight Number:\n                                                " +
-                                              _vm._s(showFlight.flight_no) +
-                                              "\n                                            "
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "row" }, [
-                                        _c("div", { staticClass: "col-md-2" }),
-                                        _vm._v(" "),
+                                      _c("div", { staticClass: "row ml-2" }, [
                                         _c("div", { staticClass: "col-md-4" }, [
-                                          _c("h4", [
-                                            _vm._v(
-                                              "\n                                                    From:\n                                                    "
-                                            ),
-                                            _c("b", [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h5", [
                                               _vm._v(
-                                                _vm._s(
-                                                  showFlight.depart_location
-                                                )
+                                                "\n                                                        Flight No:\n                                                    "
                                               )
                                             ]),
                                             _vm._v(
-                                              "\n                                                     To:\n                                                    "
+                                              "\n                                                     \n                                                    "
                                             ),
-                                            _c("b", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  showFlight.arrive_location
+                                            _c("h4", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(showFlight.flight_no)
                                                 )
-                                              )
+                                              ])
+                                            ])
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row ml-4" }, [
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showFlight.depart_location
+                                                  )
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm._m(4, true),
+                                            _vm._v(" "),
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showFlight.arrive_location
+                                                  )
+                                                )
+                                              ])
                                             ])
                                           ])
                                         ]),
                                         _vm._v(" "),
                                         _c("div", { staticClass: "col-md-4" }, [
-                                          _c("h5", [
-                                            _vm._v(
-                                              "\n                                                    Time :\n                                                    "
-                                            ),
-                                            _c("b", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  showFlight.depart_datetime.split(
-                                                    " "
-                                                  )[1]
-                                                ) +
-                                                  "\n                                                        -" +
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showFlight.depart_datetime.split(
+                                                      " "
+                                                    )[1]
+                                                  )
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm._m(5, true),
+                                            _vm._v(" "),
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
                                                   _vm._s(
                                                     showFlight.arrive_datetime.split(
                                                       " "
                                                     )[1]
                                                   )
-                                              )
+                                                )
+                                              ])
                                             ])
                                           ])
                                         ]),
                                         _vm._v(" "),
-                                        _c("div", { staticClass: "col-md-2" })
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "row" }, [
                                         _c(
                                           "div",
-                                          { staticClass: "col-md-12" },
+                                          { staticClass: "col-md-3 " },
                                           [
                                             _vm.input.class == "Economy"
-                                              ? _c("h3", [
-                                                  _vm._v(
-                                                    "\n                                                    Price :\n                                                    " +
-                                                      _vm._s(
-                                                        showFlight.eco_price
-                                                      ) +
-                                                      "\n                                                    "
-                                                  ),
-                                                  _c("i", {
-                                                    staticClass: "fab fa-btc"
-                                                  })
+                                              ? _c("div", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "row float-right mb-4"
+                                                    },
+                                                    [
+                                                      _c("h1", [
+                                                        _c("b", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              showFlight.eco_price
+                                                            ) +
+                                                              "฿\n                                                            "
+                                                          )
+                                                        ])
+                                                      ])
+                                                    ]
+                                                  )
                                                 ])
                                               : _vm._e(),
                                             _vm._v(" "),
                                             _vm.input.class == "Business"
-                                              ? _c("h3", [
-                                                  _vm._v(
-                                                    "\n                                                    Price :\n                                                    " +
-                                                      _vm._s(
-                                                        showFlight.bus_price
-                                                      )
-                                                  ),
-                                                  _c("i", {
-                                                    staticClass: "fab fa-btc"
-                                                  })
+                                              ? _c("div", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "row float-right mb-4"
+                                                    },
+                                                    [
+                                                      _c("h1", [
+                                                        _c("b", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              showFlight.bus_price
+                                                            ) +
+                                                              "฿\n                                                            "
+                                                          )
+                                                        ])
+                                                      ])
+                                                    ]
+                                                  )
                                                 ])
                                               : _vm._e(),
                                             _vm._v(" "),
                                             _vm.input.class == "First"
-                                              ? _c("h3", [
-                                                  _vm._v(
-                                                    "\n                                                    Price :\n                                                    " +
-                                                      _vm._s(
-                                                        showFlight.first_price
-                                                      )
-                                                  ),
-                                                  _c("i", {
-                                                    staticClass: "fab fa-btc"
-                                                  })
+                                              ? _c("div", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "row float-right mb-4"
+                                                    },
+                                                    [
+                                                      _c("h1", [
+                                                        _c("b", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              showFlight.first_price
+                                                            ) +
+                                                              "฿\n                                                            "
+                                                          )
+                                                        ])
+                                                      ])
+                                                    ]
+                                                  )
                                                 ])
                                               : _vm._e()
                                           ]
@@ -61080,7 +61161,7 @@ var render = function() {
                         [
                           _c("div", { staticClass: "col-md-12" }, [
                             _c("div", { staticClass: "plane" }, [
-                              _vm._m(4),
+                              _vm._m(6),
                               _vm._v(" "),
                               _c("div", {
                                 staticClass: "exit exit--front fuselage"
@@ -61467,7 +61548,7 @@ var render = function() {
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("div", { staticClass: "row" }, [
                                 _c("div", { staticClass: "plane" }, [
-                                  _vm._m(5),
+                                  _vm._m(7),
                                   _vm._v(" "),
                                   _c("div", {
                                     staticClass: "exit exit--front fuselage"
@@ -61884,7 +61965,7 @@ var render = function() {
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("div", { staticClass: "row" }, [
                                 _c("div", { staticClass: "plane" }, [
-                                  _vm._m(6),
+                                  _vm._m(8),
                                   _vm._v(" "),
                                   _c("div", {
                                     staticClass: "exit exit--front fuselage"
@@ -63204,6 +63285,26 @@ var staticRenderFns = [
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
       _vm._v("To :\n                                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("b", [
+      _vm._v(" \n                                                        "),
+      _c("i", { staticClass: "fas fa-plane" }),
+      _vm._v("\n                                                         ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("b", [
+      _vm._v(" \n                                                        "),
+      _c("i", { staticClass: "far fa-window-minimize" }),
+      _vm._v(" ")
     ])
   },
   function() {

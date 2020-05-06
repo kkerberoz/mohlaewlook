@@ -251,88 +251,126 @@
                                                     : null
                                             "
                                         >
-                                            <div class="row ml-4">
-                                                <h4>
-                                                    Flight Number:
-                                                    {{ showFlight.flight_no }}
-                                                </h4>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-2"></div>
+                                            <div class="row ml-2">
                                                 <div class="col-md-4">
-                                                    <h4>
-                                                        From:
-                                                        <b>{{
-                                                            showFlight.depart_location
-                                                        }}</b>
-                                                        &nbsp;To:
-                                                        <b>{{
-                                                            showFlight.arrive_location
-                                                        }}</b>
-                                                    </h4>
+                                                    <div class="row">
+                                                        <h5>
+                                                            Flight No:
+                                                        </h5>
+                                                        &nbsp;
+                                                        <h4>
+                                                            <b>{{
+                                                                showFlight.flight_no
+                                                            }}</b>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row ml-4">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <h3>
+                                                            <b>{{
+                                                                showFlight.depart_location
+                                                            }}</b>
+                                                        </h3>
+                                                        <b
+                                                            >&nbsp;
+                                                            <i
+                                                                class="fas fa-plane"
+                                                            ></i>
+                                                            &nbsp;</b
+                                                        >
+                                                        <h3>
+                                                            <b>{{
+                                                                showFlight.arrive_location
+                                                            }}</b>
+                                                        </h3>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <h5>
-                                                        Time :
-                                                        <b
-                                                            >{{
+                                                    <div class="row">
+                                                        <h3>
+                                                            <b>{{
                                                                 showFlight.depart_datetime.split(
                                                                     " "
                                                                 )[1]
-                                                            }}
-                                                            -{{
+                                                            }}</b>
+                                                        </h3>
+                                                        <b
+                                                            >&nbsp;
+                                                            <i
+                                                                class="far fa-window-minimize"
+                                                            ></i
+                                                            >&nbsp;</b
+                                                        >
+                                                        <h3>
+                                                            <b>{{
                                                                 showFlight.arrive_datetime.split(
                                                                     " "
                                                                 )[1]
-                                                            }}</b
-                                                        >
-                                                    </h5>
+                                                            }}</b>
+                                                        </h3>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h3
+                                                <div class="col-md-3 ">
+                                                    <div
                                                         v-if="
                                                             input.class ==
                                                                 'Economy'
                                                         "
                                                     >
-                                                        Price :
-                                                        {{
-                                                            showFlight.eco_price
-                                                        }}
-                                                        <i
-                                                            class="fab fa-btc"
-                                                        ></i>
-                                                    </h3>
-                                                    <h3
+                                                        <div
+                                                            class="row float-right mb-4"
+                                                        >
+                                                            <h1>
+                                                                <b
+                                                                    >{{
+                                                                        showFlight.eco_price
+                                                                    }}฿
+                                                                </b>
+                                                            </h1>
+                                                        </div>
+                                                    </div>
+                                                    <div
                                                         v-if="
                                                             input.class ==
                                                                 'Business'
                                                         "
                                                     >
-                                                        Price :
-                                                        {{ showFlight.bus_price
-                                                        }}<i
-                                                            class="fab fa-btc"
-                                                        ></i>
-                                                    </h3>
-                                                    <h3
+                                                        <div
+                                                            class="row float-right mb-4"
+                                                        >
+                                                            <h1>
+                                                                <b
+                                                                    >{{
+                                                                        showFlight.bus_price
+                                                                    }}฿
+                                                                </b>
+                                                            </h1>
+                                                        </div>
+                                                    </div>
+                                                    <div
                                                         v-if="
                                                             input.class ==
                                                                 'First'
                                                         "
                                                     >
-                                                        Price :
-                                                        {{
-                                                            showFlight.first_price
-                                                        }}<i
-                                                            class="fab fa-btc"
-                                                        ></i>
-                                                    </h3>
+                                                        <div
+                                                            class="row float-right mb-4"
+                                                        >
+                                                            <h1>
+                                                                <b
+                                                                    >{{
+                                                                        showFlight.first_price
+                                                                    }}฿
+                                                                </b>
+                                                            </h1>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                             <button
                                                 id="btn-selected"
                                                 :style="
