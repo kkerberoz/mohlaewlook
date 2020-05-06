@@ -9739,6 +9739,8 @@ __webpack_require__.r(__webpack_exports__);
       buss2: [],
       ecos2: [],
       ///
+      user_id: "",
+      ///
       isReturnSelected: false,
       isSelected: false,
       isActive: null,
@@ -9823,16 +9825,23 @@ __webpack_require__.r(__webpack_exports__);
       error_phone: "",
       error_email: "",
       error_payMethod: "",
-      error_cardNumber: ""
+      error_cardNumber: "",
+      error_user: ""
     };
   },
   beforeMount: function beforeMount() {
     var _this = this;
 
     this.loadingPage = true;
-    setTimeout(function () {
-      _this.loadingPage = false;
-    }, 1000);
+    axios.get("/sanctum/csrf-cookie").then(function (response) {
+      axios.get('api/user').then(function (response) {
+        console.log(response.data);
+        _this.user_id = response.data['user_id'];
+        _this.loadingPage = false;
+      });
+    }); // setTimeout(() => {
+    // }, 1000);
+
     axios.get("api/user/getLocation").then(function (response) {
       response.data.forEach(function (element) {
         _this.airports.push({
@@ -9859,6 +9868,20 @@ __webpack_require__.r(__webpack_exports__);
       console.log("Total", this.total); // total
 
       console.log("no_of_passenger", this.no_of_passenger); // number of passenger
+
+      console.log("class seat", this.input["class"]); // class seat
+
+      console.log("user_id", this.user_id);
+      var data = {
+        reserve_data: [this.input["class"]],
+        user_id: this.user_id,
+        passenger: this.passengers,
+        seat: [this.seats, this.seatReturn],
+        payment_method: this.payment.method,
+        price: this.total,
+        payment_card: this.payment.cardNumber,
+        flight: [this.depart_Selected, this.return_Selected]
+      };
     },
     handleChangePage: function handleChangePage() {
       var _this2 = this;
@@ -14766,7 +14789,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#btn-selected {\r\n    border-radius: 0px;\r\n    border: none;\r\n    color: #fff;\r\n    background: #f1ad2f;\n}\n#btn-selected:hover {\r\n    border: none;\r\n    color: #fff;\r\n    transition: 0.3s;\r\n    font-size: 20px;\r\n    background: #f1ad2f;\r\n    border-radius: 0px;\n}\r\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\r\n\r\n    color: #fff;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\n.column-reservation {\r\n    float: left;\r\n    width: 100%;\r\n    padding: 0 10px;\r\n    margin-top: 10px;\n}\n.card-reser {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    padding: 16px;\r\n    text-align: center;\r\n    color: #fff;\r\n    background-color: #2197e6;\n}\r\n", ""]);
+exports.push([module.i, "\n#btn-selected {\n    border-radius: 0px;\n    border: none;\n    color: #fff;\n    background: #f1ad2f;\n}\n#btn-selected:hover {\n    border: none;\n    color: #fff;\n    transition: 0.3s;\n    font-size: 20px;\n    background: #f1ad2f;\n    border-radius: 0px;\n}\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n\n    color: #fff;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n.column-reservation {\n    float: left;\n    width: 100%;\n    padding: 0 10px;\n    margin-top: 10px;\n}\n.card-reser {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    padding: 16px;\n    text-align: center;\n    color: #fff;\n    background-color: #2197e6;\n}\n", ""]);
 
 // exports
 
@@ -63694,7 +63717,9 @@ var render = function() {
                             _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-md-6" }, [
                                 _vm._v(
-                                  "\n                                        Total:\n                                    "
+                                  "\n                                        Total: " +
+                                    _vm._s(_vm.total) +
+                                    " ฿\n                                    "
                                 )
                               ]),
                               _vm._v(" "),
