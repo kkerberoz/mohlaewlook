@@ -14,7 +14,7 @@
                 <div class="col-md-12">
                     <div class="card shadow-lg bg-white" id="card-reservation">
                         <div class="card-header" id="card-reservation">
-                            Reservation
+                            Reservation {{ this.isReturnSelected }}
                         </div>
                         <div
                             class="card-body"
@@ -227,19 +227,20 @@
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
-                            <hr class="mb-4" />
+
                             <div
                                 v-show="queryFlight.length"
                                 class="container-xl"
                                 style="margin-top:2%;margin-bottom:10%"
                             >
+                                <h1>Depart</h1>
+                                <hr class="mb-4" />
                                 <div class="row-reservation">
                                     <div
                                         class="column-reservation"
                                         v-for="(showFlight, i) in queryFlight"
                                         :key="i"
                                     >
-                                        {{ isActive === i }}
                                         <div
                                             class="card-reser"
                                             :style="
@@ -402,6 +403,200 @@
                                                     >Select</span
                                                 >
                                                 <span v-show="isActive === i"
+                                                    ><b>Selected</b></span
+                                                >
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                v-show="back && queryReturnFlight.length"
+                                class="container-xl"
+                                style="margin-top:2%;margin-bottom:10%"
+                            >
+                                <h1>Return</h1>
+                                <hr class="mb-4" />
+                                <div class="row-reservation">
+                                    <div
+                                        class="column-reservation"
+                                        v-for="(showReturnFlight,
+                                        k) in queryReturnFlight"
+                                        :key="'a' + k"
+                                    >
+                                        <div
+                                            class="card-reser"
+                                            :style="
+                                                isReturnActive === 'a' + k
+                                                    ? {
+                                                          'background-color':
+                                                              '#f79c65'
+                                                      }
+                                                    : null
+                                            "
+                                        >
+                                            <div class="row ml-2">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <h5>
+                                                            Flight No:
+                                                        </h5>
+                                                        &nbsp;
+                                                        <h4>
+                                                            <b>{{
+                                                                showReturnFlight.flight_no
+                                                            }}</b>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row ml-4">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <h3>
+                                                            <b>{{
+                                                                showReturnFlight.depart_location
+                                                            }}</b>
+                                                        </h3>
+                                                        <b
+                                                            >&nbsp;
+                                                            <i
+                                                                class="fas fa-plane"
+                                                            ></i>
+                                                            &nbsp;</b
+                                                        >
+                                                        <h3>
+                                                            <b>{{
+                                                                showReturnFlight.arrive_location
+                                                            }}</b>
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <h3>
+                                                            <b>{{
+                                                                showReturnFlight.depart_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}</b>
+                                                        </h3>
+                                                        <b
+                                                            >&nbsp;
+                                                            <i
+                                                                class="far fa-window-minimize"
+                                                            ></i
+                                                            >&nbsp;</b
+                                                        >
+                                                        <h3>
+                                                            <b>{{
+                                                                showReturnFlight.arrive_datetime.split(
+                                                                    " "
+                                                                )[1]
+                                                            }}</b>
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <div
+                                                        v-if="
+                                                            input.class ==
+                                                                'Economy'
+                                                        "
+                                                    >
+                                                        <div
+                                                            class="row float-right mb-4"
+                                                        >
+                                                            <h1>
+                                                                <b
+                                                                    >{{
+                                                                        showReturnFlight.eco_price
+                                                                    }}฿
+                                                                </b>
+                                                            </h1>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        v-if="
+                                                            input.class ==
+                                                                'Business'
+                                                        "
+                                                    >
+                                                        <div
+                                                            class="row float-right mb-4"
+                                                        >
+                                                            <h1>
+                                                                <b
+                                                                    >{{
+                                                                        showReturnFlight.bus_price
+                                                                    }}฿
+                                                                </b>
+                                                            </h1>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        v-if="
+                                                            input.class ==
+                                                                'First'
+                                                        "
+                                                    >
+                                                        <div
+                                                            class="row float-right mb-4"
+                                                        >
+                                                            <h1>
+                                                                <b
+                                                                    >{{
+                                                                        showReturnFlight.first_price
+                                                                    }}฿
+                                                                </b>
+                                                            </h1>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                id="btn-selected"
+                                                :style="
+                                                    isReturnActive === 'a' + k
+                                                        ? {
+                                                              'background-color':
+                                                                  '#2197e6'
+                                                          }
+                                                        : null
+                                                "
+                                                :class="[
+                                                    'btn btn-block',
+                                                    {
+                                                        selected:
+                                                            showReturnFlight.selected
+                                                    },
+                                                    {
+                                                        active:
+                                                            isReturnActive ===
+                                                            'a' + k
+                                                    }
+                                                ]"
+                                                @click="
+                                                    returnSelected(
+                                                        showReturnFlight,
+                                                        'a' + k
+                                                    )
+                                                "
+                                            >
+                                                <span
+                                                    v-show="
+                                                        isReturnActive !==
+                                                            'a' + k
+                                                    "
+                                                    >Select</span
+                                                >
+                                                <span
+                                                    v-show="
+                                                        isReturnActive ===
+                                                            'a' + k
+                                                    "
                                                     ><b>Selected</b></span
                                                 >
                                             </button>
@@ -1348,14 +1543,16 @@ export default {
             firsts2: [],
             buss2: [],
             ecos2: [],
+            isReturnSelected: false,
             isSelected: false,
             isActive: null,
-            activeColor: "",
+            isReturnActive: null,
             seats: [],
             seatReturn: [],
             queryFlight: [],
-            depart_Selected: null,
-            return_Selected: null,
+            queryReturnFlight: [],
+            depart_Selected: [],
+            return_Selected: [],
             oneway: false,
             back: false,
             loadingPage: false,
@@ -1378,6 +1575,7 @@ export default {
                 flightTo: "",
                 flightFrom: ""
             },
+            returnClass: "",
             passengers: [
                 {
                     title: "",
@@ -1454,14 +1652,86 @@ export default {
 
     methods: {
         handleChangePage() {
-            if (this.isSelected) {
+            if (this.back) {
+                if (
+                    this.isReturnSelected === true &&
+                    this.isSelected === true
+                ) {
+                    if (!this.changePage) {
+                        this.loadingPage = true;
+                        setTimeout(() => {
+                            this.changePage = true;
+                            this.loadingPage = false;
+                        }, 1000);
+                    } else if (this.changePage === true) {
+                        this.loadingPage = false;
+                        swal.fire({
+                            title: "Are you sure?",
+                            text: "You won't be able to revert this!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, change it!"
+                        }).then(result => {
+                            if (result.value) {
+                                this.loadingPage = true;
+                                setTimeout(() => {
+                                    this.loadingPage = false;
+                                    this.changePage = false;
+                                    this.isSelected = false;
+                                    this.isReturnSelected = false;
+                                    this.isActive = null;
+                                    this.isReturnActive = null;
+                                }, 1000);
+                            } else {
+                                swal.fire(
+                                    "Cancelled",
+                                    "Status work date has not changed.",
+                                    "error"
+                                );
+                            }
+                        });
+                    }
+                } else if (
+                    this.isReturnSelected === true &&
+                    this.isSelected === false
+                ) {
+                    swal.fire(
+                        "Please select depart flight!",
+                        "Cilck the button to continue!",
+                        "warning"
+                    ).then(() => {
+                        this.changePage = false;
+                    });
+                } else if (
+                    this.isReturnSelected === false &&
+                    this.isSelected === true
+                ) {
+                    swal.fire(
+                        "Please select return flight!",
+                        "Cilck the button to continue!",
+                        "warning"
+                    ).then(() => {
+                        this.changePage = false;
+                    });
+                } else {
+                    swal.fire(
+                        "Please select depart and return flight",
+                        "Cilck the button to continue!",
+                        "warning"
+                    ).then(() => {
+                        this.changePage = false;
+                    });
+                }
+            } else if (this.isSelected === true) {
                 if (!this.changePage) {
                     this.loadingPage = true;
                     setTimeout(() => {
                         this.changePage = true;
                         this.loadingPage = false;
                     }, 1000);
-                } else if (this.changePage) {
+                } else if (this.changePage === true) {
                     this.loadingPage = false;
                     swal.fire({
                         title: "Are you sure?",
@@ -1488,10 +1758,18 @@ export default {
                             );
                         }
                     });
+                } else {
+                    swal.fire(
+                        "Please select flight!",
+                        "Cilck the button to continue!",
+                        "warning"
+                    ).then(() => {
+                        this.changePage = false;
+                    });
                 }
             } else {
                 swal.fire(
-                    "Please select flight!",
+                    "Please success form before click next",
                     "Cilck the button to continue!",
                     "warning"
                 ).then(() => {
@@ -1499,19 +1777,38 @@ export default {
                 });
             }
         },
+        returnSelected(showReturnFlight, index) {
+            this.isReturnSelected = showReturnFlight.selected = true;
+            this.isReturnActive = index;
+            this.return_Selected = showReturnFlight;
+
+            // this.returnClass = this.input.class;
+            this.return_Selected.class = this.input.class;
+            console.log("Return", this.return_Selected);
+
+            axios
+                .post("/api/user/checkSeat", this.return_Selected)
+                .then(response => {
+                    console.log("return seat", response.data);
+
+                    this.firsts2 = response.data.firsts;
+                    this.buss2 = response.data.buss;
+                    this.ecos2 = response.data.ecos;
+                });
+        },
         departSelected(showFlight, index) {
             this.isSelected = showFlight.selected = true;
             this.isActive = index;
 
             this.depart_Selected = showFlight;
-            console.log("selectedddd", this.depart_Selected);
+            console.log("depart", this.depart_Selected);
 
             this.depart_Selected.class = this.input.class;
 
             axios
                 .post("/api/user/checkSeat", this.depart_Selected)
                 .then(response => {
-                    console.log(response.data);
+                    console.log("depart seat", response.data);
 
                     this.firsts = response.data.firsts;
                     this.buss = response.data.buss;
@@ -1582,6 +1879,7 @@ export default {
                 this.loadingPage = false;
                 console.log("query", response.data);
                 this.queryFlight = response.data.flight_depart;
+                this.queryReturnFlight = response.data.flight_return;
             });
         }
     }

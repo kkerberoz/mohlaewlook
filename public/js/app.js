@@ -9516,6 +9516,201 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9534,14 +9729,16 @@ __webpack_require__.r(__webpack_exports__);
       firsts2: [],
       buss2: [],
       ecos2: [],
+      isReturnSelected: false,
       isSelected: false,
       isActive: null,
-      activeColor: "",
+      isReturnActive: null,
       seats: [],
       seatReturn: [],
       queryFlight: [],
-      depart_Selected: null,
-      return_Selected: null,
+      queryReturnFlight: [],
+      depart_Selected: [],
+      return_Selected: [],
       oneway: false,
       back: false,
       loadingPage: false,
@@ -9564,6 +9761,7 @@ __webpack_require__.r(__webpack_exports__);
         flightTo: "",
         flightFrom: ""
       },
+      returnClass: "",
       passengers: [{
         title: "",
         name: "",
@@ -9633,14 +9831,61 @@ __webpack_require__.r(__webpack_exports__);
     handleChangePage: function handleChangePage() {
       var _this2 = this;
 
-      if (this.isSelected) {
+      if (this.back) {
+        if (this.isReturnSelected === true && this.isSelected === true) {
+          if (!this.changePage) {
+            this.loadingPage = true;
+            setTimeout(function () {
+              _this2.changePage = true;
+              _this2.loadingPage = false;
+            }, 1000);
+          } else if (this.changePage === true) {
+            this.loadingPage = false;
+            swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, change it!"
+            }).then(function (result) {
+              if (result.value) {
+                _this2.loadingPage = true;
+                setTimeout(function () {
+                  _this2.loadingPage = false;
+                  _this2.changePage = false;
+                  _this2.isSelected = false;
+                  _this2.isReturnSelected = false;
+                  _this2.isActive = null;
+                  _this2.isReturnActive = null;
+                }, 1000);
+              } else {
+                swal.fire("Cancelled", "Status work date has not changed.", "error");
+              }
+            });
+          }
+        } else if (this.isReturnSelected === true && this.isSelected === false) {
+          swal.fire("Please select depart flight!", "Cilck the button to continue!", "warning").then(function () {
+            _this2.changePage = false;
+          });
+        } else if (this.isReturnSelected === false && this.isSelected === true) {
+          swal.fire("Please select return flight!", "Cilck the button to continue!", "warning").then(function () {
+            _this2.changePage = false;
+          });
+        } else {
+          swal.fire("Please select depart and return flight", "Cilck the button to continue!", "warning").then(function () {
+            _this2.changePage = false;
+          });
+        }
+      } else if (this.isSelected === true) {
         if (!this.changePage) {
           this.loadingPage = true;
           setTimeout(function () {
             _this2.changePage = true;
             _this2.loadingPage = false;
           }, 1000);
-        } else if (this.changePage) {
+        } else if (this.changePage === true) {
           this.loadingPage = false;
           swal.fire({
             title: "Are you sure?",
@@ -9663,26 +9908,46 @@ __webpack_require__.r(__webpack_exports__);
               swal.fire("Cancelled", "Status work date has not changed.", "error");
             }
           });
+        } else {
+          swal.fire("Please select flight!", "Cilck the button to continue!", "warning").then(function () {
+            _this2.changePage = false;
+          });
         }
       } else {
-        swal.fire("Please select flight!", "Cilck the button to continue!", "warning").then(function () {
+        swal.fire("Please success form before click next", "Cilck the button to continue!", "warning").then(function () {
           _this2.changePage = false;
         });
       }
     },
-    departSelected: function departSelected(showFlight, index) {
+    returnSelected: function returnSelected(showReturnFlight, index) {
       var _this3 = this;
+
+      this.isReturnSelected = showReturnFlight.selected = true;
+      this.isReturnActive = index;
+      this.return_Selected = showReturnFlight; // this.returnClass = this.input.class;
+
+      this.return_Selected["class"] = this.input["class"];
+      console.log("Return", this.return_Selected);
+      axios.post("/api/user/checkSeat", this.return_Selected).then(function (response) {
+        console.log("return seat", response.data);
+        _this3.firsts2 = response.data.firsts;
+        _this3.buss2 = response.data.buss;
+        _this3.ecos2 = response.data.ecos;
+      });
+    },
+    departSelected: function departSelected(showFlight, index) {
+      var _this4 = this;
 
       this.isSelected = showFlight.selected = true;
       this.isActive = index;
       this.depart_Selected = showFlight;
-      console.log("selectedddd", this.depart_Selected);
+      console.log("depart", this.depart_Selected);
       this.depart_Selected["class"] = this.input["class"];
       axios.post("/api/user/checkSeat", this.depart_Selected).then(function (response) {
-        console.log(response.data);
-        _this3.firsts = response.data.firsts;
-        _this3.buss = response.data.buss;
-        _this3.ecos = response.data.ecos;
+        console.log("depart seat", response.data);
+        _this4.firsts = response.data.firsts;
+        _this4.buss = response.data.buss;
+        _this4.ecos = response.data.ecos;
       });
     },
     showReturn: function showReturn() {
@@ -9713,7 +9978,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeUpdate: function beforeUpdate() {
-    var _this4 = this;
+    var _this5 = this;
 
     if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"] && (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate || this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo || this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input["class"] || this.passengers.length != this.temp_passenger)) {
       //*---------------------------------------------------------------------------------------------------*//
@@ -9729,9 +9994,10 @@ __webpack_require__.r(__webpack_exports__);
         passengerCount: this.passengers.length
       };
       axios.post("/api/user/getFlight", data).then(function (response) {
-        _this4.loadingPage = false;
+        _this5.loadingPage = false;
         console.log("query", response.data);
-        _this4.queryFlight = response.data.flight_depart;
+        _this5.queryFlight = response.data.flight_depart;
+        _this5.queryReturnFlight = response.data.flight_return;
       });
     }
   }
@@ -60401,7 +60667,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Reservation\n                    "
+                        "\n                        Reservation " +
+                          _vm._s(this.isReturnSelected) +
+                          "\n                    "
                       )
                     ]
                   ),
@@ -60855,8 +61123,6 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("hr", { staticClass: "mb-4" }),
-                      _vm._v(" "),
                       _c(
                         "div",
                         {
@@ -60875,6 +61141,10 @@ var render = function() {
                           }
                         },
                         [
+                          _c("h1", [_vm._v("Depart")]),
+                          _vm._v(" "),
+                          _c("hr", { staticClass: "mb-4" }),
+                          _vm._v(" "),
                           _c(
                             "div",
                             { staticClass: "row-reservation" },
@@ -60883,11 +61153,6 @@ var render = function() {
                                 "div",
                                 { key: i, staticClass: "column-reservation" },
                                 [
-                                  _vm._v(
-                                    "\n                                    " +
-                                      _vm._s(_vm.isActive === i) +
-                                      "\n                                    "
-                                  ),
                                   _c(
                                     "div",
                                     {
@@ -61126,6 +61391,292 @@ var render = function() {
                             0
                           )
                         ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.back && _vm.queryReturnFlight.length,
+                              expression: "back && queryReturnFlight.length"
+                            }
+                          ],
+                          staticClass: "container-xl",
+                          staticStyle: {
+                            "margin-top": "2%",
+                            "margin-bottom": "10%"
+                          }
+                        },
+                        [
+                          _c("h1", [_vm._v("Return")]),
+                          _vm._v(" "),
+                          _c("hr", { staticClass: "mb-4" }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row-reservation" },
+                            _vm._l(_vm.queryReturnFlight, function(
+                              showReturnFlight,
+                              k
+                            ) {
+                              return _c(
+                                "div",
+                                {
+                                  key: "a" + k,
+                                  staticClass: "column-reservation"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "card-reser",
+                                      style:
+                                        _vm.isReturnActive === "a" + k
+                                          ? {
+                                              "background-color": "#f79c65"
+                                            }
+                                          : null
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row ml-2" }, [
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h5", [
+                                              _vm._v(
+                                                "\n                                                        Flight No:\n                                                    "
+                                              )
+                                            ]),
+                                            _vm._v(
+                                              "\n                                                     \n                                                    "
+                                            ),
+                                            _c("h4", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showReturnFlight.flight_no
+                                                  )
+                                                )
+                                              ])
+                                            ])
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row ml-4" }, [
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showReturnFlight.depart_location
+                                                  )
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm._m(6, true),
+                                            _vm._v(" "),
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showReturnFlight.arrive_location
+                                                  )
+                                                )
+                                              ])
+                                            ])
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showReturnFlight.depart_datetime.split(
+                                                      " "
+                                                    )[1]
+                                                  )
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm._m(7, true),
+                                            _vm._v(" "),
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    showReturnFlight.arrive_datetime.split(
+                                                      " "
+                                                    )[1]
+                                                  )
+                                                )
+                                              ])
+                                            ])
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "col-md-3 " },
+                                          [
+                                            _vm.input.class == "Economy"
+                                              ? _c("div", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "row float-right mb-4"
+                                                    },
+                                                    [
+                                                      _c("h1", [
+                                                        _c("b", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              showReturnFlight.eco_price
+                                                            ) +
+                                                              "฿\n                                                            "
+                                                          )
+                                                        ])
+                                                      ])
+                                                    ]
+                                                  )
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.input.class == "Business"
+                                              ? _c("div", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "row float-right mb-4"
+                                                    },
+                                                    [
+                                                      _c("h1", [
+                                                        _c("b", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              showReturnFlight.bus_price
+                                                            ) +
+                                                              "฿\n                                                            "
+                                                          )
+                                                        ])
+                                                      ])
+                                                    ]
+                                                  )
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.input.class == "First"
+                                              ? _c("div", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "row float-right mb-4"
+                                                    },
+                                                    [
+                                                      _c("h1", [
+                                                        _c("b", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              showReturnFlight.first_price
+                                                            ) +
+                                                              "฿\n                                                            "
+                                                          )
+                                                        ])
+                                                      ])
+                                                    ]
+                                                  )
+                                                ])
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          class: [
+                                            "btn btn-block",
+                                            {
+                                              selected:
+                                                showReturnFlight.selected
+                                            },
+                                            {
+                                              active:
+                                                _vm.isReturnActive === "a" + k
+                                            }
+                                          ],
+                                          style:
+                                            _vm.isReturnActive === "a" + k
+                                              ? {
+                                                  "background-color": "#2197e6"
+                                                }
+                                              : null,
+                                          attrs: { id: "btn-selected" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.returnSelected(
+                                                showReturnFlight,
+                                                "a" + k
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value:
+                                                    _vm.isReturnActive !==
+                                                    "a" + k,
+                                                  expression:
+                                                    "\n                                                    isReturnActive !==\n                                                        'a' + k\n                                                "
+                                                }
+                                              ]
+                                            },
+                                            [_vm._v("Select")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value:
+                                                    _vm.isReturnActive ===
+                                                    "a" + k,
+                                                  expression:
+                                                    "\n                                                    isReturnActive ===\n                                                        'a' + k\n                                                "
+                                                }
+                                              ]
+                                            },
+                                            [_c("b", [_vm._v("Selected")])]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ]
                       )
                     ]
                   ),
@@ -61161,7 +61712,7 @@ var render = function() {
                         [
                           _c("div", { staticClass: "col-md-12" }, [
                             _c("div", { staticClass: "plane" }, [
-                              _vm._m(6),
+                              _vm._m(8),
                               _vm._v(" "),
                               _c("div", {
                                 staticClass: "exit exit--front fuselage"
@@ -61548,7 +62099,7 @@ var render = function() {
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("div", { staticClass: "row" }, [
                                 _c("div", { staticClass: "plane" }, [
-                                  _vm._m(7),
+                                  _vm._m(9),
                                   _vm._v(" "),
                                   _c("div", {
                                     staticClass: "exit exit--front fuselage"
@@ -61965,7 +62516,7 @@ var render = function() {
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("div", { staticClass: "row" }, [
                                 _c("div", { staticClass: "plane" }, [
-                                  _vm._m(8),
+                                  _vm._m(10),
                                   _vm._v(" "),
                                   _c("div", {
                                     staticClass: "exit exit--front fuselage"
@@ -63285,6 +63836,26 @@ var staticRenderFns = [
     return _c("span", { staticClass: "input-text" }, [
       _c("br"),
       _vm._v("To :\n                                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("b", [
+      _vm._v(" \n                                                        "),
+      _c("i", { staticClass: "fas fa-plane" }),
+      _vm._v("\n                                                         ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("b", [
+      _vm._v(" \n                                                        "),
+      _c("i", { staticClass: "far fa-window-minimize" }),
+      _vm._v(" ")
     ])
   },
   function() {
