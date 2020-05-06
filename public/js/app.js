@@ -9732,10 +9732,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      D_already_seat: [],
+      R_already_seat: [],
       firsts: [],
       buss: [],
       ecos: [],
-      firsts_temp: [],
       firsts2: [],
       buss2: [],
       ecos2: [],
@@ -9749,8 +9750,8 @@ __webpack_require__.r(__webpack_exports__);
       ///
       seats: [],
       seatReturn: [],
-      check_Dseat: 0,
-      check_Rseat: 0,
+      check_Dseat: -1,
+      check_Rseat: -1,
       //
       queryFlight: [],
       queryReturnFlight: [],
@@ -9775,8 +9776,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       input: {
         "class": null,
-        departDate: 0,
-        returnDate: 0,
+        departDate: null,
+        returnDate: null,
         flightTo: null,
         flightFrom: null
       },
@@ -9800,8 +9801,8 @@ __webpack_require__.r(__webpack_exports__);
         total: ""
       },
       paymentMethod: ["Credit Card", "Cash"],
-      depart_price: null,
-      return_price: null,
+      depart_price: 0,
+      return_price: 0,
       check_cal: true,
       error_departDate: "",
       error_returnDate: "",
@@ -9883,7 +9884,6 @@ __webpack_require__.r(__webpack_exports__);
         passenger: this.passengers,
         seat: [this.seats, this.seatReturn],
         payment_method: this.payment.method,
-        price: this.total,
         payment_card: this.payment.cardNumber,
         flight: [this.depart_Selected, this.return_Selected]
       };
@@ -9995,6 +9995,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.firsts2 = response.data.firsts;
         _this3.buss2 = response.data.buss;
         _this3.ecos2 = response.data.ecos;
+        _this3.R_already_seat = response.data.already_seat;
       });
     },
     departSelected: function departSelected(showFlight, index) {
@@ -10009,6 +10010,7 @@ __webpack_require__.r(__webpack_exports__);
         _this4.firsts = response.data.firsts;
         _this4.buss = response.data.buss;
         _this4.ecos = response.data.ecos;
+        _this4.D_already_seat = response.data.already_seat;
       });
     },
     showReturn: function showReturn() {
@@ -10070,35 +10072,106 @@ __webpack_require__.r(__webpack_exports__);
       this.loadingPage = false;
     }
 
-    if (this.check_cal == this.changePage) {
+    if (this.check_cal === this.changePage) {
       var price_type = this.input["class"] == "Economy" ? "eco_price" : this.input["class"] == "Business" ? "bus_price" : "first_price";
       if (this.changePage) this.depart_price = parseFloat(this.depart_Selected[price_type]);
       if (this.changePage) this.return_price = this.back ? parseFloat(this.return_Selected[price_type]) : 0;
-      this.check_cal == !this.changePage;
-      if (this.changePage) var first_temp = this.firsts;
-    }
+      this.check_cal = !this.changePage;
+    } // for depart
+
 
     if (this.changePage && this.check_Dseat != this.seats.length) {
       this.check_Dseat = this.seats.length;
       var seated = [];
-      console.log(first_temp);
+      this.seats.forEach(function (element) {
+        seated.push(element['seat']);
+      });
 
       if (this.input["class"] == "First") {
-        if (this.seats.length == this.no_of_passenger) {
-          this.seats.forEach(function (element) {
-            seated.push(element['seat']);
+        this.firsts.forEach(function (element) {
+          element.forEach(function (seat) {
+            if (_this5.seats.length == _this5.no_of_passenger) {
+              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            } else {
+              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+            }
           });
-          this.firsts.forEach(function (element) {
-            element.forEach(function (seat) {//if(seated.indexOf(seat['seat']) == -1) seat['status'] = true;
-            });
+        });
+      }
+
+      if (this.input["class"] == "Business") {
+        this.buss.forEach(function (element) {
+          element.forEach(function (seat) {
+            if (_this5.seats.length == _this5.no_of_passenger) {
+              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            } else {
+              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+            }
           });
-        } else {
-          this.firsts = first_temp;
-        }
+        });
+      }
+
+      if (this.input["class"] == "Economy") {
+        this.ecos.forEach(function (element) {
+          element.forEach(function (seat) {
+            if (_this5.seats.length == _this5.no_of_passenger) {
+              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            } else {
+              if (!("patt" in seat) && _this5.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+            }
+          });
+        });
+      }
+    } // for return
+
+
+    if (this.changePage && this.check_Rseat != this.seatReturn.length) {
+      this.check_Rseat = this.seatReturn.length;
+      var seated = [];
+      this.seatReturn.forEach(function (element) {
+        seated.push(element['seat']);
+      });
+
+      if (this.input["class"] == "First") {
+        this.firsts2.forEach(function (element) {
+          element.forEach(function (seat) {
+            if (_this5.seatReturn.length == _this5.no_of_passenger) {
+              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            } else {
+              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+            }
+          });
+        });
+      }
+
+      if (this.input["class"] == "Business") {
+        this.buss2.forEach(function (element) {
+          element.forEach(function (seat) {
+            if (_this5.seatReturn.length == _this5.no_of_passenger) {
+              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            } else {
+              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+            }
+          });
+        });
+      }
+
+      if (this.input["class"] == "Economy") {
+        this.ecos2.forEach(function (element) {
+          element.forEach(function (seat) {
+            if (_this5.seatReturn.length == _this5.no_of_passenger) {
+              if (!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+            } else {
+              if (!("patt" in seat) && _this5.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+            }
+          });
+        });
       }
     }
 
-    if (!this.changePage) this.check_Dseat = null;
+    if (!this.changePage) {
+      this.check_Dseat = this.check_Rseat = -1;
+    }
   }
 });
 
@@ -63746,9 +63819,7 @@ var render = function() {
                             _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-md-6" }, [
                                 _vm._v(
-                                  "\n                                        Total: " +
-                                    _vm._s(_vm.total) +
-                                    " ฿\n                                    "
+                                  "\n                                        Total: {{}} ฿\n                                    "
                                 )
                               ]),
                               _vm._v(" "),

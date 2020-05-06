@@ -1453,7 +1453,7 @@
                                 <div class="container-xl">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            Total: {{total}} ฿
+                                            Total: {{}} ฿
                                         </div>
                                         <div class="col-md-6">
                                             <label>Payment Methods :</label>
@@ -1546,10 +1546,11 @@ export default {
     components: { Multiselect, Loading, FunctionalCalendar },
     data() {
         return {
+            D_already_seat: [],
+            R_already_seat: [],
             firsts: [],
             buss: [],
             ecos: [],
-            firsts_temp: [],
             firsts2: [],
             buss2: [],
             ecos2: [],
@@ -1563,8 +1564,8 @@ export default {
             ///
             seats: [],
             seatReturn: [],
-            check_Dseat: 0,
-            check_Rseat: 0,
+            check_Dseat: -1,
+            check_Rseat: -1,
             //
             queryFlight: [],
             queryReturnFlight: [],
@@ -1589,8 +1590,8 @@ export default {
             },
             input: {
                 class: null,
-                departDate: 0,
-                returnDate: 0,
+                departDate: null,
+                returnDate: null,
                 flightTo: null,
                 flightFrom: null
             },
@@ -1616,8 +1617,8 @@ export default {
                 total: ""
             },
             paymentMethod: ["Credit Card", "Cash"],
-            depart_price: null,
-            return_price: null,
+            depart_price: 0,
+            return_price: 0,
             check_cal: true,
 
             error_departDate: "",
@@ -1698,7 +1699,6 @@ export default {
                 passenger : this.passengers,
                 seat : [this.seats,this.seatReturn],
                 payment_method : this.payment.method,
-                price : this.total,
                 payment_card : this.payment.cardNumber,
                 flight : [this.depart_Selected,this.return_Selected]
             }
@@ -1849,6 +1849,7 @@ export default {
                     this.firsts2 = response.data.firsts;
                     this.buss2 = response.data.buss;
                     this.ecos2 = response.data.ecos;
+                    this.R_already_seat = response.data.already_seat;
                 });
         },
         departSelected(showFlight, index) {
@@ -1865,6 +1866,7 @@ export default {
                     this.firsts = response.data.firsts;
                     this.buss = response.data.buss;
                     this.ecos = response.data.ecos;
+                    this.D_already_seat = response.data.already_seat;
                 });
         },
         showReturn() {
@@ -1945,31 +1947,90 @@ export default {
             this.queryReturnFlight = [];
             this.loadingPage = false;
         }
-        if(this.check_cal == this.changePage){
+
+        if(this.check_cal === this.changePage){
             var price_type = (this.input.class == "Economy") ? "eco_price" : ((this.input.class == "Business") ? "bus_price" : "first_price");
             if(this.changePage) this.depart_price = parseFloat(this.depart_Selected[price_type]);
             if(this.changePage) this.return_price = ((this.back) ? parseFloat(this.return_Selected[price_type]) : 0);
-            this.check_cal == !this.changePage;
-            if(this.changePage) var first_temp = this.firsts;
+            this.check_cal = !this.changePage;
         }
+        // for depart
         if(this.changePage && this.check_Dseat != this.seats.length){
             this.check_Dseat = this.seats.length;
             var seated = [];
-            console.log(first_temp);
-
+            this.seats.forEach(element => {seated.push(element['seat']);});
             if(this.input.class == "First"){
-                if(this.seats.length == this.no_of_passenger){
-                    this.seats.forEach(element => {seated.push(element['seat']);});
-                    this.firsts.forEach(element => { element.forEach(seat => {
-                        //if(seated.indexOf(seat['seat']) == -1) seat['status'] = true;
-                    })});
-                }
-                else {
-                    this.firsts = first_temp;
-                }
+                this.firsts.forEach(element => { element.forEach(seat => {
+                    if(this.seats.length == this.no_of_passenger){
+                        if(!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                    }
+                    else {
+                        if(!("patt" in seat) && this.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+                    }
+                })});
             }
+            if(this.input.class == "Business"){
+                this.buss.forEach(element => { element.forEach(seat => {
+                    if(this.seats.length == this.no_of_passenger){
+                        if(!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                    }
+                    else {
+                        if(!("patt" in seat) && this.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+                    }
+                })});
+            }
+            if(this.input.class == "Economy"){
+                this.ecos.forEach(element => { element.forEach(seat => {
+                    if(this.seats.length == this.no_of_passenger){
+                        if(!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                    }
+                    else {
+                        if(!("patt" in seat) && this.D_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+                    }
+                })});
+            }
+
         }
-        if(!this.changePage) this.check_Dseat = null;
+        // for return
+        if(this.changePage && this.check_Rseat != this.seatReturn.length){
+            this.check_Rseat = this.seatReturn.length;
+            var seated = [];
+            this.seatReturn.forEach(element => {seated.push(element['seat']);});
+            if(this.input.class == "First"){
+                this.firsts2.forEach(element => { element.forEach(seat => {
+                    if(this.seatReturn.length == this.no_of_passenger){
+                        if(!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                    }
+                    else {
+                        if(!("patt" in seat) && this.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+                    }
+                })});
+            }
+            if(this.input.class == "Business"){
+                this.buss2.forEach(element => { element.forEach(seat => {
+                    if(this.seatReturn.length == this.no_of_passenger){
+                        if(!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                    }
+                    else {
+                        if(!("patt" in seat) && this.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+                    }
+                })});
+            }
+            if(this.input.class == "Economy"){
+                this.ecos2.forEach(element => { element.forEach(seat => {
+                    if(this.seatReturn.length == this.no_of_passenger){
+                        if(!("patt" in seat) && seated.indexOf(seat['seat']) == -1) seat['status'] = true;
+                    }
+                    else {
+                        if(!("patt" in seat) && this.R_already_seat.indexOf(seat['seat']) == -1) seat['status'] = false;
+                    }
+                })});
+            }
+
+        }
+        if(!this.changePage) {
+            this.check_Dseat = this.check_Rseat = -1;
+        }
     }
 };
 </script>

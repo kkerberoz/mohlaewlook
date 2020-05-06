@@ -346,6 +346,6 @@ class UserController extends Controller
             array_push($ecos, $temp);
             ++$seat_count;
         }
-        return response()->JSON(["firsts" => $firsts, "buss" => $buss, "ecos" => $ecos]);
+        return response()->JSON(["firsts" => $firsts, "buss" => $buss, "ecos" => $ecos, "already_seat" => $already_seat]);
     }
 }
