@@ -9475,306 +9475,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      firsts: [[{
-        id: 1,
-        seat: "1A",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 2,
-        seat: "1B",
-        status: false
-      }, {
-        id: 3,
-        seat: "1C",
-        status: true
-      }, {
-        id: 4,
-        seat: "1D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 5,
-        seat: "1E",
-        status: false
-      }], [{
-        id: 6,
-        seat: "2A",
-        status: true
-      }, {
-        id: 7,
-        seat: "2B",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 8,
-        seat: "2C",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 9,
-        seat: "2D",
-        status: false
-      }, {
-        id: 10,
-        seat: "2E",
-        status: false
-      }]],
-      buss: [[{
-        id: 11,
-        seat: "3A",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 12,
-        seat: "3B",
-        status: false
-      }, {
-        id: 13,
-        seat: "3C",
-        status: false
-      }, {
-        id: 14,
-        seat: "3D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 15,
-        seat: "3E",
-        status: true
-      }], [{
-        id: 16,
-        seat: "4A",
-        status: true
-      }, {
-        patt: true
-      }, {
-        id: 17,
-        seat: "4B",
-        status: false
-      }, {
-        id: 18,
-        seat: "4C",
-        status: true
-      }, {
-        id: 19,
-        seat: "4D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 20,
-        seat: "4E",
-        status: true
-      }]],
-      ecos: [[{
-        id: 21,
-        seat: "5A",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 22,
-        seat: "5B",
-        status: false
-      }, {
-        id: 23,
-        seat: "5C",
-        status: false
-      }, {
-        id: 24,
-        seat: "5D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 25,
-        seat: "5E",
-        status: true
-      }], [{
-        id: 26,
-        seat: "6A",
-        status: true
-      }, {
-        patt: true
-      }, {
-        id: 27,
-        seat: "6B",
-        status: true
-      }, {
-        id: 28,
-        seat: "6C",
-        status: true
-      }, {
-        id: 29,
-        seat: "6D",
-        status: true
-      }, {
-        patt: true
-      }, {
-        id: 30,
-        seat: "6E",
-        status: true
-      }]],
-      firsts2: [[{
-        id: 1,
-        seat: "1A",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 2,
-        seat: "1B",
-        status: false
-      }, {
-        id: 3,
-        seat: "1C",
-        status: true
-      }, {
-        id: 4,
-        seat: "1D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 5,
-        seat: "1E",
-        status: false
-      }], [{
-        id: 6,
-        seat: "2A",
-        status: true
-      }, {
-        id: 7,
-        seat: "2B",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 8,
-        seat: "2C",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 9,
-        seat: "2D",
-        status: false
-      }, {
-        id: 10,
-        seat: "2E",
-        status: false
-      }]],
-      buss2: [[{
-        id: 11,
-        seat: "3A",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 12,
-        seat: "3B",
-        status: false
-      }, {
-        id: 13,
-        seat: "3C",
-        status: false
-      }, {
-        id: 14,
-        seat: "3D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 15,
-        seat: "3E",
-        status: true
-      }], [{
-        id: 16,
-        seat: "4A",
-        status: true
-      }, {
-        patt: true
-      }, {
-        id: 17,
-        seat: "4B",
-        status: false
-      }, {
-        id: 18,
-        seat: "4C",
-        status: true
-      }, {
-        id: 19,
-        seat: "4D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 20,
-        seat: "4E",
-        status: true
-      }]],
-      ecos2: [[{
-        id: 41,
-        seat: "5A",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 42,
-        seat: "5B",
-        status: false
-      }, {
-        id: 43,
-        seat: "5C",
-        status: false
-      }, {
-        id: 44,
-        seat: "5D",
-        status: false
-      }, {
-        patt: true
-      }, {
-        id: 45,
-        seat: "5E",
-        status: true
-      }], [{
-        id: 46,
-        seat: "6A",
-        status: true
-      }, {
-        patt: true
-      }, {
-        id: 47,
-        seat: "6B",
-        status: true
-      }, {
-        id: 48,
-        seat: "6C",
-        status: true
-      }, {
-        id: 49,
-        seat: "6D",
-        status: true
-      }, {
-        patt: true
-      }, {
-        id: 40,
-        seat: "6E",
-        status: true
-      }]],
+      firsts: [],
+      buss: [],
+      ecos: [],
+      firsts2: [],
+      buss2: [],
+      ecos2: [],
       alteredState: false,
       seleted: false,
       activeColor: "",
       seats: [],
       seatReturn: [],
       queryFlight: [],
+      depart_Selected: null,
+      return_Selected: null,
       oneway: false,
       back: false,
       loadingPage: false,
@@ -9830,6 +9544,15 @@ __webpack_require__.r(__webpack_exports__);
       error_national: "",
       error_idcard: "",
       error_passport: "",
+      ///
+      temp_back: null,
+      temp_calendar_to: null,
+      temp_calendar_from: null,
+      temp_flightTo: null,
+      temp_flightFrom: null,
+      temp_class: null,
+      temp_passenger: null,
+      ///
       error_religion: "",
       error_phone: "",
       error_email: "",
@@ -9855,6 +9578,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     departSelected: function departSelected(showFlight) {
+      var _this2 = this;
+
+      this.depart_Selected = showFlight;
+      console.log(this.depart_Selected);
       this.seleted = !this.seleted;
 
       if (this.alteredState) {
@@ -9864,6 +9591,14 @@ __webpack_require__.r(__webpack_exports__);
         this.activeColor = "#f79c65";
         this.alteredState = true;
       }
+
+      this.depart_Selected["class"] = this.input["class"];
+      axios.post("/api/user/checkSeat", this.depart_Selected).then(function (response) {
+        console.log(response.data);
+        _this2.firsts = response.data.firsts;
+        _this2.buss = response.data.buss;
+        _this2.ecos = response.data.ecos;
+      });
     },
     showReturn: function showReturn() {
       this.back = true;
@@ -9893,9 +9628,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeUpdate: function beforeUpdate() {
-    var _this2 = this;
+    var _this3 = this;
 
-    if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"]) {
+    if ((!this.back || !(this.back ^ !!this.calendar_to.selectedDate)) && !!this.calendar_from.selectedDate && !!this.input.flightTo && !!this.input.flightFrom && !!this.input["class"] && (this.temp_back != this.back || this.temp_calendar_to != this.calendar_to.selectedDate || this.temp_calendar_from != this.calendar_from.selectedDate || this.temp_flightTo != this.input.flightTo || this.temp_flightFrom != this.input.flightFrom || this.temp_class != this.input["class"] || this.passengers.length != this.temp_passenger)) {
+      //*---------------------------------------------------------------------------------------------------*//
+      this.temp_back = this.back, this.temp_calendar_to = this.calendar_to.selectedDate;
+      this.temp_calendar_from = this.calendar_from.selectedDate, this.temp_flightTo = this.input.flightTo;
+      this.temp_flightFrom = this.input.flightFrom, this.temp_class = this.input["class"], this.temp_passenger = this.passengers.length;
       this.input.departDate = this.calendar_from.selectedDate;
       this.input.returnDate = this.calendar_to.selectedDate;
       var data = {
@@ -9905,7 +9644,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/api/user/getFlight", data).then(function (response) {
         console.log("query", response.data);
-        _this2.queryFlight = response.data;
+        _this3.queryFlight = response.data;
       });
     }
   }
@@ -14627,7 +14366,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\n.column-reservation {\r\n    float: left;\r\n    width: 100%;\r\n    padding: 0 10px;\r\n    margin-top: 10px;\n}\n.card-reser {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    padding: 16px;\r\n    text-align: center;\r\n    color: #fff;\r\n    background-color: #2197e6;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n.column-reservation {\n    float: left;\n    width: 100%;\n    padding: 0 10px;\n    margin-top: 10px;\n}\n.card-reser {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    padding: 16px;\n    text-align: center;\n    color: #fff;\n    background-color: #2197e6;\n}\n", ""]);
 
 // exports
 

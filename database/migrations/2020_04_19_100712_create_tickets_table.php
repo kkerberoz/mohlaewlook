@@ -16,7 +16,7 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id('ticket_id')->unique();
             $table->string('seat_no');
-            $table->enum('class_name',['economy','bussiness','first']);
+            $table->enum('class_name',['economy','business','first']);
             $table->foreignId('flight_id')->references('flight_id')->on('flights')->onUpdate('cascade');
             $table->foreignId('reservation_id')->references('reservation_id')->on('reservations')->onUpdate('cascade');
             $table->string('passenger_id');
