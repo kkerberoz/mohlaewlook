@@ -114,14 +114,20 @@ class UserController extends Controller
     public function reserveSendData(Request $request)
     {
 
-        $reserve_data = $request->reserve_data;
+        $reserve_data = $request->reserve_data; //  class
         $user_id = $request->user_id;
         $passenger_array = $request->passenger;
-        $seat_array = $request->seat;
         $payment_method = $request->payment_method;
         $price = $request->price;
         $payment_card = $request->payment_card;
-        $flight_id_array = $request->flight_id;
+        $flight_id_array = $request->flight;
+        $seat_depart = $request->seat_depart;
+        $seat_return = $request->seat_return;
+
+        $passengerObj = [];
+        $ticketObj = [];
+        $reservationObj = [];
+        $paymentObj = [];
 
         //reservation Table
 
@@ -129,65 +135,90 @@ class UserController extends Controller
         $currrent_date = date("Y-m-d H:i:s");
         $reservation->user_id = $user_id;
         $reservation->reservation_datetime = $currrent_date;
-        $reservation->reservation_status = $reserve_data['status'];
+        $reservation->reservation_status = "confirm";
+        //---------------------------------------------------------------------------------------------------------------------//
         $reservation->save();
+        //array_push($reservationObj, $reservation);
 
 
 
 
+        $current_passenger_id = [];
         //passenger Table
         foreach ($passenger_array as $each_passenger) {
             $passenger = new Passenger;
-            $passenger_oldID = "";
-            if (isset($each_passenger['idcard']) && !isset($each_passenger['passport'])) {
-                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard', $each_passenger['idcard']);
-            } else //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
+            if (isset($each_passenger['idcard'])) {
+                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_idcard', $each_passenger['idcard'])->first();
+            } else if (isset($each_passenger['passport'])) //if(!isset($each_passenger['idcard']) && isset($each_passenger['passport'])){
             {
-                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport', $each_passenger['passport']);
+                $passenger_oldID = Passenger::select('passenger_id')->where('passenger_passport', $each_passenger['passport'])->first();
             }
 
-            if (isset($passenger_oldID)) {
-                $passenger->passenger_id = $passenger_oldID;
-                $passenger->passenger_title = $each_passenger['title'];
-                $passenger->passenger_name = $each_passenger['name'];
-                $passenger->passenger_surname = $each_passenger['surname'];
-                $passenger->passenger_DOB = $each_passenger['dob'];
-                $passenger->gender = $each_passenger['gender'];
-                $passenger->passenger_nationality = $each_passenger['national'];
-                $passenger->passenger_religion = $each_passenger['religion'];
-                $passenger->passenger_idcard = $each_passenger['idcard'];
-                $passenger->passenger_passport = $each_passenger['passport'];
-                $passenger->passenger_phone = $each_passenger['phone'];
-                $passenger->passenger_email = $each_passenger['email'];
-                $passenger->save();
+            if (isset($passenger_oldID->passenger_id)) {
+
+                array_push($current_passenger_id, $passenger_oldID->passenger_id);
+                $passenger->passenger_id = $passenger_oldID->passenger_id;
+
+                Passenger::where('passenger_id', $passenger_oldID->passenger_id)->update([
+                    'passenger_title' => $each_passenger['title'],
+                    'passenger_name' => $each_passenger['name'],
+                    'passenger_surname' => $each_passenger['surname'],
+                    'passenger_DOB' => $each_passenger['dob'],
+                    'gender' => strtolower($each_passenger['gender']),
+                    'passenger_nationality' => $each_passenger['national'],
+                    'passenger_religion' => $each_passenger['religion'],
+                    'passenger_idcard' => $each_passenger['idcard'],
+                    'passenger_passport' => $each_passenger['passport'],
+                    'passenger_phone' => $each_passenger['phone'],
+                    'passenger_email' => $each_passenger['email']
+                ]);
+                // $passenger->passenger_title = $each_passenger['title'];
+                // $passenger->passenger_name = $each_passenger['name'];
+                // $passenger->passenger_surname = $each_passenger['surname'];
+                // $passenger->passenger_DOB = $each_passenger['dob'];
+                // $passenger->gender = strtolower($each_passenger['gender']);
+                // $passenger->passenger_nationality = $each_passenger['national'];
+                // $passenger->passenger_religion = $each_passenger['religion'];
+                // $passenger->passenger_idcard = $each_passenger['idcard'];
+                // $passenger->passenger_passport = $each_passenger['passport'];
+                // $passenger->passenger_phone = $each_passenger['phone'];
+                // $passenger->passenger_email = $each_passenger['email'];
+                //---------------------------------------------------------------------------------------------------------------------//
+                // $passenger->update();
+                //array_push($passengerObj, $passenger);
             } else {
+
                 $prefix = "";
-                $age = floor(((date_diff(date_create($each_passenger['dob']), date_create(date('Y-m-d'))))->days) / 365);
+                $age = is_numeric(floor(((date_diff(date_create($each_passenger['dob']), date_create(date('Y-m-d'))))->days) / 365));
                 if ($age >= 18) {
-                    if (!strcmp($each_passenger['gender'], "male")) {
+                    if (!strcmp($each_passenger['gender'], "Male")) {
                         $prefix = "M";
-                    } else if (!strcmp($each_passenger['gender'], "female")) {
+                    } else if (!strcmp($each_passenger['gender'], "Female")) {
                         $prefix = "F";
                     }
                 } else {
                     $prefix = "K";
                 }
 
-                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->order_By('passenger_id', 'desc')->first();
-                $number = str_replace($prefix, "", $check_id['passenger_id']) + 1;
+                $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderByDesc('passenger_id')->first();
+                $number = (int) str_replace($prefix, "", $check_id['passenger_id']) + 1;
+                //return response()->JSON([str_replace($prefix, "", $check_id['passenger_id']),$check_id['passenger_id'] ,$number,$prefix . sprintf("%08d", $number)]);
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
+                array_push($current_passenger_id, $passenger->passenger_id);
                 $passenger->passenger_title = $each_passenger['title'];
                 $passenger->passenger_name = $each_passenger['name'];
                 $passenger->passenger_surname = $each_passenger['surname'];
                 $passenger->passenger_DOB = $each_passenger['dob'];
-                $passenger->gender = $each_passenger['gender'];
+                $passenger->gender = strtolower($each_passenger['gender']);
                 $passenger->passenger_nationality = $each_passenger['national'];
                 $passenger->passenger_religion = $each_passenger['religion'];
                 $passenger->passenger_idcard = $each_passenger['idcard'];
                 $passenger->passenger_passport = $each_passenger['passport'];
                 $passenger->passenger_phone = $each_passenger['phone'];
                 $passenger->passenger_email = $each_passenger['email'];
+                //---------------------------------------------------------------------------------------------------------------------//
                 $passenger->save();
+                //array_push($passengerObj, $passenger);
             }
         }
 
@@ -198,24 +229,58 @@ class UserController extends Controller
         $payment->payment_method = $payment_method;
         $payment->payment_card = $payment_card;
         $payment->total_price = $price;
-        $payment->reservaton_id = $reserve_id;
-        $payment->reservation_status = "confirm";
+        $payment->reservation_id = $reserve_id['reservation_id'];
+        //array_push($paymentObj, $payment);
+        //---------------------------------------------------------------------------------------------------------------------//
         $payment->save();
 
 
         //ticket create
-        foreach ($seat_array as $seat_each_flight) {
-            $j = 0;
+        // foreach ($seat_array as $seat_each_flight) {
+        //     $j = 0;
+        //     $ticket = new Ticket;
+        //     for ($i = 0; $i < sizeof($passenger_array); $i++) {
+        //         $ticket->seat_no = $seat_each_flight[$i]['seat'];
+        //         $ticket->class_name = $reserve_data['class'];
+        //         $ticket->flight_id = $flight_id_array[$j]['flight_id'];
+        //         $ticket->reservation_id = $reserve_id;
+        //         $ticket->passenger_id = $current_passenger_id[$i];
+        //         array_push($ticketObj,$ticket);
+        //         //---------------------------------------------------------------------------------------------------------------------//
+        //         //$ticket->save();
+        //     }
+        //     $j++;
+        // }
+
+
+        for ($i = 0; $i < sizeof($passenger_array); $i++) {
             $ticket = new Ticket;
-            for ($i = 0; $i < sizeof($passenger_array[$j]); $i++) {
-                $ticket->seat_no = $seat_each_flight[$i];
-                $ticket->class_name = $reserve_data['class'];
-                $ticket->flight_id = $flight_id_array[$j];
-                $ticket->reservation_id = $reserve_id;
-                $ticket->passenger_id = $passenger_array[$j][$i];
-            }
-            $j++;
+            $ticket->seat_no = $seat_depart[$i]['seat']; /////////////////////////////////////////
+            $ticket->class_name = strtolower($reserve_data['class']);
+            $ticket->flight_id = $flight_id_array[0]['flight_id'];
+            $ticket->reservation_id = $reserve_id['reservation_id'];
+            $ticket->passenger_id = $current_passenger_id[$i];
+            //array_push($ticketObj,$ticket);
+            //---------------------------------------------------------------------------------------------------------------------//
+            $ticket->save();
         }
+        if (sizeof($seat_return) != 0) {
+
+            for ($i = 0; $i < sizeof($passenger_array); $i++) {
+                $ticket = new Ticket;
+                $ticket->seat_no = $seat_return[$i]['seat']; /////////////////////////////////////////
+                $ticket->class_name = strtolower($reserve_data['class']);
+                $ticket->flight_id = $flight_id_array[1]['flight_id'];
+                $ticket->reservation_id = $reserve_id['reservation_id'];
+                $ticket->passenger_id = $current_passenger_id[$i];
+                //array_push($ticketObj, $ticket);
+                //---------------------------------------------------------------------------------------------------------------------//
+                $ticket->save();
+            }
+        }
+
+
+        //return response()->JSON([$ticketObj,$passengerObj,$reservationObj,$paymentObj,$current_passenger_id]);
     }
 
     public function getLocation()
@@ -227,7 +292,8 @@ class UserController extends Controller
     {
         $class = $request->input['class'];
         $no_of_passenger = $request->passengerCount;
-        $avaliable_flight_depart = []; $avaliable_flight_return = [];
+        $avaliable_flight_depart = [];
+        $avaliable_flight_return = [];
         // for depart
         $from = $request->input['flightFrom']['value']['airport_id'];
         $to = $request->input['flightTo']['value']['airport_id'];
@@ -245,7 +311,7 @@ class UserController extends Controller
             }
         }
         // for return
-        if(!$request->back) goto end;
+        if (!$request->back) goto end;
         $from = $request->input['flightTo']['value']['airport_id'];
         $to = $request->input['flightFrom']['value']['airport_id'];
         list($day, $month, $year) = explode("/", $request->input['returnDate']);
@@ -261,72 +327,76 @@ class UserController extends Controller
                 }
             }
         }
-        end:
-        return response()->JSON(["flight_depart" => $avaliable_flight_depart, "flight_return" => $avaliable_flight_return]);
+        end: return response()->JSON(["flight_depart" => $avaliable_flight_depart, "flight_return" => $avaliable_flight_return]);
     }
-    public function checkSeat(Request $request){
+    public function checkSeat(Request $request)
+    {
+        $seat_prefix = $request->type;
         $flight_id = $request->flight_id;
         $class = strtolower($request->class);
-        $firsts = []; $buss = []; $ecos = [];
+        $firsts = [];
+        $buss = [];
+        $ecos = [];
         $all_seat = Ticket::select('seat_no')->where('flight_id', $flight_id)->where('class_name', $class)->get();
         $already_seat = [];
-        foreach($all_seat as $seat) array_push($already_seat, $seat['seat_no']);
+        foreach ($all_seat as $seat) array_push($already_seat, $seat['seat_no']);
         $alphas = range('A', 'Z');
         // $first class
         $sum =  explode("-", $request->first_pattern);
-        $first_amount = $first_total = ($request->first_cap) / array_sum($sum);
+        $first_amount = ($request->first_cap) / array_sum($sum);
         $count_id = 1;
-        while($first_amount--){
+        $seat_count = 1;
+        while ($first_amount--) {
             $temp = [];
             $pettern = $request->first_pattern;
             $count_alphas = 0;
-            for($i=0 ;$i<strlen($pettern); ++$i){
-                if(is_numeric($pettern[$i])){
-                    for($j=0; $j<$pettern[$i]; ++$j){
-                        $seat = sprintf("%02d",($first_total - $first_amount)). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
+            for ($i = 0; $i < strlen($pettern); ++$i) {
+                if (is_numeric($pettern[$i])) {
+                    for ($j = 0; $j < $pettern[$i]; ++$j) {
+                        $seat = sprintf("%02d", $seat_count) . $alphas[$count_alphas++];
+                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "first")) ?  true : false)]);
                     }
-                }
-                else array_push($temp, ["patt" => true]);
+                } else array_push($temp, ["patt" => true]);
             }
             array_push($firsts, $temp);
+            ++$seat_count;
         }
         // $bussiness class
         $sum =  explode("-", $request->bus_pattern);
-        $bus_amount = $bus_total = ($request->bus_cap) / array_sum($sum);
-        while($bus_amount--){
+        $bus_amount = ($request->bus_cap) / array_sum($sum);
+        while ($bus_amount--) {
             $temp = [];
             $pettern = $request->bus_pattern;
             $count_alphas = 0;
-            for($i=0 ;$i<strlen($pettern); ++$i){
-                if(is_numeric($pettern[$i])){
-                    for($j=0; $j<$pettern[$i]; ++$j){
-                        $seat = sprintf("%02d",($bus_total - $bus_amount)). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
+            for ($i = 0; $i < strlen($pettern); ++$i) {
+                if (is_numeric($pettern[$i])) {
+                    for ($j = 0; $j < $pettern[$i]; ++$j) {
+                        $seat = sprintf("%02d", $seat_count) . $alphas[$count_alphas++];
+                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "business")) ?  true : false)]);
                     }
-                }
-                else array_push($temp, ["patt" => true]);
+                } else array_push($temp, ["patt" => true]);
             }
             array_push($buss, $temp);
+            ++$seat_count;
         }
         // economy class
         $sum =  explode("-", $request->eco_pattern);
-        $eco_amount = $eco_total = ($request->eco_cap) / array_sum($sum);
-        while($eco_amount--){
+        $eco_amount = ($request->eco_cap) / array_sum($sum);
+        while ($eco_amount--) {
             $temp = [];
             $pettern = $request->eco_pattern;
             $count_alphas = 0;
-            for($i=0 ;$i<strlen($pettern); ++$i){
-                if(is_numeric($pettern[$i])){
-                    for($j=0; $j<$pettern[$i]; ++$j){
-                        $seat = sprintf("%02d",($eco_total - $eco_amount)). $alphas[$count_alphas++];
-                        array_push($temp, ["id" => "D".$count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
+            for ($i = 0; $i < strlen($pettern); ++$i) {
+                if (is_numeric($pettern[$i])) {
+                    for ($j = 0; $j < $pettern[$i]; ++$j) {
+                        $seat = sprintf("%02d", $seat_count) . $alphas[$count_alphas++];
+                        array_push($temp, ["id" => $seat_prefix . $count_id++, "seat" => $seat, "status" => ((is_numeric(array_search($seat, $already_seat, true)) || strcmp($class, "economy")) ?  true : false)]);
                     }
-                }
-                else array_push($temp, ["patt" => true]);
+                } else array_push($temp, ["patt" => true]);
             }
             array_push($ecos, $temp);
+            ++$seat_count;
         }
-        return response()->JSON(["firsts" => $firsts, "buss" => $buss, "ecos" => $ecos]);
+        return response()->JSON(["firsts" => $firsts, "buss" => $buss, "ecos" => $ecos, "already_seat" => $already_seat]);
     }
 }

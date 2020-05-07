@@ -15,7 +15,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id('payment_id')->unique();
-            $table->enum('payment_mothod',['MasterCard','VisaCard','Cash']);
+            $table->enum('payment_method',['MasterCard','VisaCard','Cash']);
             $table->string('payment_card',16)->nullable();
             $table->timestamp('payment_time');
             $table->double('total_price');
