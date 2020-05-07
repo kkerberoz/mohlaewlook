@@ -60515,25 +60515,49 @@ var staticRenderFns = [
         _c("div", { staticClass: "row flex-center" }, [
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")])
+              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s\n                    "
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")])
+              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s\n                    "
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")])
+              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s\n                    "
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")])
+              _c("div", { staticClass: "card-body" }, [_vm._v("Hello,World")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s\n                    "
+                )
+              ])
             ])
           ])
         ]),
