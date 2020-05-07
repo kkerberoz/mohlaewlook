@@ -1291,14 +1291,14 @@
                                                             />
                                                             Female
                                                         </label>
-                                                        <div
-                                                            class="invalid-feedback"
-                                                        >
-                                                            {{
-                                                                passenger.error_gender
-                                                            }}
-                                                        </div>
                                                     </div>
+                                                    <span
+                                                        class="invalid-feedback"
+                                                    >
+                                                        {{
+                                                            passenger.error_gender
+                                                        }}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1834,6 +1834,7 @@ export default {
             this.errors = [];
             this.error_payMethod = null;
             this.error_cardNumber = null;
+
             for (var k = 0; k < this.no_of_passenger; k++) {
                 this.passengers[k].error_title = null;
                 this.passengers[k].error_name = null;
@@ -1885,7 +1886,8 @@ export default {
                 }
 
                 if (!this.passengers[i].national) {
-                    this.passengers[i].error_national = "Please enter national";
+                    this.passengers[i].error_national =
+                        "Please enter nationality";
                     this.errors.push(this.passengers[i].error_national);
                 } else {
                     this.passengers[i].error_national = null;
@@ -1910,8 +1912,10 @@ export default {
                     } else {
                         this.passengers[i].error_passport = null;
                     }
-                }
-                if (this.passengers[i].passport && this.passengers[i].idcard) {
+                } else if (
+                    this.passengers[i].passport &&
+                    this.passengers[i].idcard
+                ) {
                     this.passengers[i].error_idcard = "Please enter only one";
                     this.passengers[i].error_passport = "Please enter only one";
                     this.errors.push(this.passengers[i].error_idcard);
@@ -1938,7 +1942,7 @@ export default {
                 }
 
                 if (!this.passengers[i].email) {
-                    this.passengers[i].error_email = "Please enter religion";
+                    this.passengers[i].error_email = "Please enter email";
                     this.errors.push(this.passengers[i].error_email);
                 } else {
                     this.passengers[i].error_email = null;
@@ -2031,6 +2035,13 @@ export default {
                                     this.$router.go({ name: "reservation" });
                                 }, 1000);
                             });
+                        })
+                        .catch(error => {
+                            swal.fire(
+                                "error!",
+                                "Cilck the button to continue!",
+                                "error"
+                            ).then(() => {});
                         });
                 }
             }

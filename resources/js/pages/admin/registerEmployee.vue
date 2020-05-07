@@ -211,26 +211,10 @@
                                         >Female</label
                                     >
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input
-                                        v-bind:class="{
-                                            'is-invalid': error_gender
-                                        }"
-                                        class="form-check-input"
-                                        type="radio"
-                                        value="other"
-                                        v-model="input.gender"
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        for="inlineRadio3"
-                                        >other</label
-                                    >
-                                </div>
-                                <span class="invalid-feedback">{{
-                                    error_gender
-                                }}</span>
                             </span>
+                            <span class="invalid-feedback">{{
+                                error_gender
+                            }}</span>
                         </div>
 
                         <div class="row">
