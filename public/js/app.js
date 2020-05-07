@@ -4428,6 +4428,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7538,114 +7589,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/info.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/info.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
-/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
-/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
-  },
-  data: function data() {
-    return {
-      loadingPage: false,
-      fullPage: true,
-      user: ""
-    };
-  },
-  beforeMount: function beforeMount() {
-    var _this = this;
-
-    this.loadingPage = true;
-    axios.get("/api/user").then(function (response) {
-      _this.user = response.data;
-      _this.loadingPage = false;
-    })["catch"](function (error) {
-      _this.loadingPage = false;
-
-      if (error.response.status === 401) {
-        swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
-          axios.get("/sanctum/csrf-cookie").then(function (response) {
-            axios.post("/api/user/logout").then(function () {
-              localStorage.removeItem("isLoggedIn");
-
-              _this.$router.go({
-                name: "userLogin"
-              });
-            });
-          });
-        });
-      }
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/login.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/login.vue?vue&type=script&lang=js& ***!
@@ -8911,8 +8854,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -9495,30 +9436,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
 
 
 
@@ -9543,6 +9460,7 @@ __webpack_require__.r(__webpack_exports__);
       seats: [],
       seatReturn: [],
       queryFlight: [],
+      queryReturnFlight: [],
       depart_Selected: null,
       return_Selected: null,
       oneway: false,
@@ -9735,6 +9653,7 @@ __webpack_require__.r(__webpack_exports__);
         _this4.loadingPage = false;
         console.log("query", response.data);
         _this4.queryFlight = response.data.flight_depart;
+        _this4.queryReturnFlight = response.data.flight_return;
       });
     }
   }
@@ -14361,7 +14280,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
+exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
 
 // exports
 
@@ -14387,6 +14306,25 @@ exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.order-card {\n    color: #fff;\n}\n.bg-c-blue {\n    background: linear-gradient(45deg, #4099ff, #59e0c5);\n}\n.bg-c-green {\n    background: linear-gradient(45deg, #2ed8b6, #ffcb80);\n}\n.bg-c-yellow {\n    background: linear-gradient(45deg, #ffb64d, #ff869a);\n}\n.bg-c-pink {\n    background: linear-gradient(45deg, #ff5370, pink);\n}\n.card {\n    border-radius: 5px;\n    box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);\n    border: none;\n    margin-bottom: 30px;\n    transition: all 0.3s ease-in-out;\n}\n.card .card-block {\n    padding: 25px;\n}\n.order-card i {\n    font-size: 26px;\n}\n.f-left {\n    float: left;\n}\n.f-right {\n    float: right;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/adminLogin.vue?vue&type=style&index=0&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/adminLogin.vue?vue&type=style&index=0&lang=css& ***!
@@ -14399,7 +14337,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -14437,7 +14375,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
+exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
 
 // exports
 
@@ -14456,11 +14394,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-<<<<<<< HEAD
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n  border: none;\n  border-radius: 0;\n  background-color: #f79c65;\n  display: block;\n}\n/* #f8d49b */\n#card-reservation {\n  border: none;\n  border-radius: 0;\n}\n.column-reservation {\n  float: left;\n  width: 100%;\n  padding: 0 10px;\n  margin-top: 10px;\n}\n.card-reser {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  padding: 16px;\n  text-align: center;\n  color: #fff;\n  background-color: #2197e6;\n}\n", ""]);
-=======
-exports.push([module.i, "\n#btn-selected {\n    border-radius: 0px;\n    border: none;\n    color: #fff;\n    background: #f1ad2f;\n}\n#btn-selected:hover {\n    border: none;\n    color: #fff;\n    transition: 0.3s;\n    font-size: 20px;\n    background: #f1ad2f;\n    border-radius: 0px;\n}\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n    text-align: center;\n    color: #fff;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n.column-reservation {\n    float: left;\n    width: 100%;\n    padding: 0 10px;\n    margin-top: 10px;\n}\n.card-reser {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    padding: 16px;\n    text-align: center;\n    color: #fff;\n    background-color: #2197e6;\n}\n", ""]);
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
+exports.push([module.i, "\n#btn-selected {\n  border-radius: 0px;\n  border: none;\n  color: #fff;\n  background: #f1ad2f;\n}\n#btn-selected:hover {\n  border: none;\n  color: #fff;\n  transition: 0.3s;\n  font-size: 20px;\n  background: #f1ad2f;\n  border-radius: 0px;\n}\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n  border: none;\n  border-radius: 0;\n  background-color: #f79c65;\n  display: block;\n  text-align: center;\n  color: #fff;\n}\n/* #f8d49b */\n#card-reservation {\n  border: none;\n  border-radius: 0;\n}\n.column-reservation {\n  float: left;\n  width: 100%;\n  padding: 0 10px;\n  margin-top: 10px;\n}\n.card-reser {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  padding: 16px;\n  text-align: center;\n  color: #fff;\n  background-color: #2197e6;\n}\n", ""]);
 
 // exports
 
@@ -45453,6 +45387,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./adminHome.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/adminLogin.vue?vue&type=style&index=0&lang=css&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/admin/adminLogin.vue?vue&type=style&index=0&lang=css& ***!
@@ -55874,7 +55838,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container-fluid " },
+    { staticClass: "container-fluid" },
     [
       _c("loading", {
         attrs: {
@@ -55893,43 +55857,105 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "container-xl" }, [
-        _c("div", { staticClass: "row full-height " }, [
-          _c(
-            "div",
-            {
-              staticClass: "col-md-12 centerWithText",
-              staticStyle: { color: "#ff7e5f" }
-            },
-            [
-              _c("div", { staticClass: "card " }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticStyle: { "font-size": "5vw" } }, [
-                    _vm._v(
-                      "\n                            Welcome : " +
-                        _vm._s(_vm.user.username) +
-                        "\n                        "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticStyle: { "font-size": "5vw" } }, [
-                    _vm._v(
-                      "\n                            Role :" +
-                        _vm._s(_vm.user.employee_role) +
-                        "\n                        "
-                    )
-                  ])
-                ])
-              ])
-            ]
-          )
-        ])
-      ])
+      _vm._m(0)
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-xl" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+          _c("div", { staticClass: "card bg-c-blue order-card" }, [
+            _c("div", { staticClass: "card-block" }, [
+              _c("h6", { staticClass: "m-b-20" }, [_vm._v("Customer")]),
+              _vm._v(" "),
+              _c("h2", { staticClass: "text-right" }, [
+                _c("i", { staticClass: "fa fa-users f-left" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("849,865")])
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "m-b-0" }, [
+                _vm._v(
+                  "\n                            Available\n                            "
+                ),
+                _c("span", { staticClass: "f-right" }, [_vm._v("351")])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+          _c("div", { staticClass: "card bg-c-green order-card" }, [
+            _c("div", { staticClass: "card-block" }, [
+              _c("h6", { staticClass: "m-b-20" }, [_vm._v("Employee")]),
+              _vm._v(" "),
+              _c("h2", { staticClass: "text-right" }, [
+                _c("i", { staticClass: "fa fa-user-tie f-left" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("4,082")])
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "m-b-0" }, [
+                _vm._v(
+                  "\n                            Available\n                            "
+                ),
+                _c("span", { staticClass: "f-right" }, [_vm._v("4,050")])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+          _c("div", { staticClass: "card bg-c-yellow order-card" }, [
+            _c("div", { staticClass: "card-block" }, [
+              _c("h6", { staticClass: "m-b-20" }, [_vm._v("Airplane")]),
+              _vm._v(" "),
+              _c("h2", { staticClass: "text-right" }, [
+                _c("i", { staticClass: "fa fa-plane f-left" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("29")])
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "m-b-0" }, [
+                _vm._v(
+                  "\n                            Available\n                            "
+                ),
+                _c("span", { staticClass: "f-right" }, [_vm._v("27")])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+          _c("div", { staticClass: "card bg-c-pink order-card" }, [
+            _c("div", { staticClass: "card-block" }, [
+              _c("h6", { staticClass: "m-b-20" }, [_vm._v("Pilot")]),
+              _vm._v(" "),
+              _c("h2", { staticClass: "text-right" }, [
+                _c("i", { staticClass: "fa fa-blind f-left" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("29")])
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "m-b-0" }, [
+                _vm._v(
+                  "\n                            Available\n                            "
+                ),
+                _c("span", { staticClass: "f-right" }, [_vm._v("28")])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -59629,147 +59655,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/info.vue?vue&type=template&id=6c4eb6d2&":
-/*!**************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/info.vue?vue&type=template&id=6c4eb6d2& ***!
-  \**************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container-xl", staticStyle: { padding: "3%" } },
-    [
-      _c("loading", {
-        attrs: {
-          active: _vm.loadingPage,
-          "can-cancel": false,
-          "is-full-page": _vm.fullPage,
-          opacity: 0.9,
-          color: "#f87a2b",
-          loader: "bars",
-          "background-color": "#fff"
-        },
-        on: {
-          "update:active": function($event) {
-            _vm.loadingPage = $event
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "title flex-center full-height" }, [
-            _vm._v(
-              "\n                Logged in as: " +
-                _vm._s(_vm.user.username) +
-                "\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex-center title m-b-md" }, [
-            _vm._v("info")
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4)
-      ])
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "title flex-center full-height" }, [
-        _vm._v("Created by")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content m-b-md" }, [
-        _vm._v("mohlaewlook group")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "title flex-center full-height" }, [
-        _vm._v("\n                Example Component\n            ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content m-b-md" }, [
-        _vm._v("I'm an example component.")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "title flex-center full-height" }, [
-        _vm._v("info")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex-center title m-b-md" }, [_vm._v("info")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "title flex-center full-height" }, [
-        _vm._v("\n                Example Component\n            ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content m-b-md" }, [
-        _vm._v("I'm an example component.")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "title flex-center full-height" }, [
-        _vm._v("\n                Example Component\n            ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content m-b-md" }, [
-        _vm._v("I'm an example component.")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/login.vue?vue&type=template&id=780e8960&":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/login.vue?vue&type=template&id=780e8960& ***!
@@ -60870,76 +60755,10 @@ var render = function() {
                                 "div",
                                 { key: i, staticClass: "column-reservation" },
                                 [
-<<<<<<< HEAD
-                                  _c("div", { staticClass: "card-reser" }, [
-                                    _c("div", { staticClass: "row ml-4" }, [
-                                      _c("h4", [
-                                        _vm._v(
-                                          "\n                        Flight Number:\n                        " +
-                                            _vm._s(showFlight.flight_no) +
-                                            "\n                      "
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("div", { staticClass: "col-md-2" }),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "col-md-4" }, [
-                                        _c("h4", [
-                                          _vm._v(
-                                            "\n                          From:\n                          "
-                                          ),
-                                          _c("b", [
-                                            _vm._v(
-                                              "\n                            " +
-                                                _vm._s(
-                                                  showFlight.depart_location
-                                                ) +
-                                                "\n                          "
-                                            )
-                                          ]),
-                                          _vm._v(
-                                            "\n                           To:\n                          "
-                                          ),
-                                          _c("b", [
-                                            _vm._v(
-                                              "\n                            " +
-                                                _vm._s(
-                                                  showFlight.arrive_location
-                                                ) +
-                                                "\n                          "
-                                            )
-                                          ])
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "col-md-4" }, [
-                                        _c("h4", [
-                                          _vm._v(
-                                            "\n                          Time :\n                          "
-                                          ),
-                                          _c("b", [
-                                            _vm._v(
-                                              "\n                            " +
-                                                _vm._s(
-                                                  showFlight.depart_datetime.split(
-                                                    " "
-                                                  )[1]
-                                                ) +
-                                                "\n                            -" +
-                                                _vm._s(
-                                                  showFlight.arrive_datetime.split(
-                                                    " "
-                                                  )[1]
-                                                ) +
-                                                "\n                          "
-                                            )
-=======
                                   _vm._v(
-                                    "\n                                    " +
+                                    "\n                  " +
                                       _vm._s(_vm.isActive === i) +
-                                      "\n                                    "
+                                      "\n                  "
                                   ),
                                   _c(
                                     "div",
@@ -60956,52 +60775,36 @@ var render = function() {
                                       _c("div", { staticClass: "row ml-2" }, [
                                         _c("div", { staticClass: "col-md-4" }, [
                                           _c("div", { staticClass: "row" }, [
-                                            _c("h5", [
-                                              _vm._v(
-                                                "\n                                                        Flight No:\n                                                    "
-                                              )
-                                            ]),
+                                            _c("h5", [_vm._v("Flight No:")]),
                                             _vm._v(
-                                              "\n                                                     \n                                                    "
+                                              " \n                          "
                                             ),
                                             _c("h4", [
                                               _c("b", [
                                                 _vm._v(
-                                                  _vm._s(showFlight.flight_no)
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.flight_no
+                                                    ) +
+                                                    "\n                            "
                                                 )
                                               ])
                                             ])
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                           ])
                                         ])
                                       ]),
                                       _vm._v(" "),
-<<<<<<< HEAD
-                                      _c("div", { staticClass: "col-md-2" })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("div", { staticClass: "col-md-12" }, [
-                                        _vm.input.class == "Economy"
-                                          ? _c("h3", [
-                                              _vm._v(
-                                                "\n                          Price :\n                          " +
-                                                  _vm._s(showFlight.eco_price) +
-                                                  "\n                          "
-                                              ),
-                                              _c("i", {
-                                                staticClass: "fas fa-btc"
-                                              })
-=======
                                       _c("div", { staticClass: "row ml-4" }, [
                                         _c("div", { staticClass: "col-md-4" }, [
                                           _c("div", { staticClass: "row" }, [
                                             _c("h3", [
                                               _c("b", [
                                                 _vm._v(
-                                                  _vm._s(
-                                                    showFlight.depart_location
-                                                  )
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.depart_location
+                                                    ) +
+                                                    "\n                            "
                                                 )
                                               ])
                                             ]),
@@ -61011,38 +60814,29 @@ var render = function() {
                                             _c("h3", [
                                               _c("b", [
                                                 _vm._v(
-                                                  _vm._s(
-                                                    showFlight.arrive_location
-                                                  )
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.arrive_location
+                                                    ) +
+                                                    "\n                            "
                                                 )
                                               ])
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                             ])
                                           ])
                                         ]),
                                         _vm._v(" "),
-<<<<<<< HEAD
-                                        _vm.input.class == "Business"
-                                          ? _c("h3", [
-                                              _vm._v(
-                                                "\n                          Price :\n                          " +
-                                                  _vm._s(showFlight.bus_price) +
-                                                  "\n                          "
-                                              ),
-                                              _c("i", {
-                                                staticClass: "fas fa-btc"
-                                              })
-=======
                                         _c("div", { staticClass: "col-md-4" }, [
                                           _c("div", { staticClass: "row" }, [
                                             _c("h3", [
                                               _c("b", [
                                                 _vm._v(
-                                                  _vm._s(
-                                                    showFlight.depart_datetime.split(
-                                                      " "
-                                                    )[1]
-                                                  )
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.depart_datetime.split(
+                                                        " "
+                                                      )[1]
+                                                    ) +
+                                                    "\n                            "
                                                 )
                                               ])
                                             ]),
@@ -61052,114 +60846,95 @@ var render = function() {
                                             _c("h3", [
                                               _c("b", [
                                                 _vm._v(
-                                                  _vm._s(
-                                                    showFlight.arrive_datetime.split(
-                                                      " "
-                                                    )[1]
-                                                  )
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.arrive_datetime.split(
+                                                        " "
+                                                      )[1]
+                                                    ) +
+                                                    "\n                            "
                                                 )
                                               ])
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                             ])
                                           ])
                                         ]),
                                         _vm._v(" "),
-<<<<<<< HEAD
-                                        _vm.input.class == "First"
-                                          ? _c("h3", [
-                                              _vm._v(
-                                                "\n                          Price :\n                          " +
-                                                  _vm._s(
-                                                    showFlight.first_price
-                                                  ) +
-                                                  "\n                          "
-                                              ),
-                                              _c("i", {
-                                                staticClass: "fab fa-btc"
-                                              })
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    ])
-                                  ])
-=======
-                                        _c(
-                                          "div",
-                                          { staticClass: "col-md-3 " },
-                                          [
-                                            _vm.input.class == "Economy"
-                                              ? _c("div", [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "row float-right mb-4"
-                                                    },
-                                                    [
-                                                      _c("h1", [
-                                                        _c("b", [
-                                                          _vm._v(
+                                        _c("div", { staticClass: "col-md-3" }, [
+                                          _vm.input.class == "Economy"
+                                            ? _c("div", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "row float-right mb-4"
+                                                  },
+                                                  [
+                                                    _c("h1", [
+                                                      _c("b", [
+                                                        _vm._v(
+                                                          "\n                                " +
                                                             _vm._s(
                                                               showFlight.eco_price
                                                             ) +
-                                                              "฿\n                                                            "
-                                                          )
-                                                        ])
+                                                            "฿\n                              "
+                                                        )
                                                       ])
-                                                    ]
-                                                  )
-                                                ])
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            _vm.input.class == "Business"
-                                              ? _c("div", [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "row float-right mb-4"
-                                                    },
-                                                    [
-                                                      _c("h1", [
-                                                        _c("b", [
-                                                          _vm._v(
+                                                    ])
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.input.class == "Business"
+                                            ? _c("div", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "row float-right mb-4"
+                                                  },
+                                                  [
+                                                    _c("h1", [
+                                                      _c("b", [
+                                                        _vm._v(
+                                                          "\n                                " +
                                                             _vm._s(
                                                               showFlight.bus_price
                                                             ) +
-                                                              "฿\n                                                            "
-                                                          )
-                                                        ])
+                                                            "฿\n                              "
+                                                        )
                                                       ])
-                                                    ]
-                                                  )
-                                                ])
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            _vm.input.class == "First"
-                                              ? _c("div", [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "row float-right mb-4"
-                                                    },
-                                                    [
-                                                      _c("h1", [
-                                                        _c("b", [
-                                                          _vm._v(
+                                                    ])
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.input.class == "First"
+                                            ? _c("div", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "row float-right mb-4"
+                                                  },
+                                                  [
+                                                    _c("h1", [
+                                                      _c("b", [
+                                                        _vm._v(
+                                                          "\n                                " +
                                                             _vm._s(
                                                               showFlight.first_price
                                                             ) +
-                                                              "฿\n                                                            "
-                                                          )
-                                                        ])
+                                                            "฿\n                              "
+                                                        )
                                                       ])
-                                                    ]
-                                                  )
-                                                ])
-                                              : _vm._e()
-                                          ]
-                                        )
+                                                    ])
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e()
+                                        ])
                                       ]),
                                       _vm._v(" "),
                                       _c(
@@ -61224,7 +60999,292 @@ var render = function() {
                                       )
                                     ]
                                   )
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("hr", { staticClass: "mb-4" }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.queryReturnFlight.length && _vm.back,
+                              expression: "queryReturnFlight.length && back"
+                            }
+                          ],
+                          staticClass: "container-xl",
+                          staticStyle: {
+                            "margin-top": "2%",
+                            "margin-bottom": "10%"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "row-reservation" },
+                            _vm._l(_vm.queryReturnFlight, function(
+                              showFlight,
+                              i
+                            ) {
+                              return _c(
+                                "div",
+                                {
+                                  key: "a" + i,
+                                  staticClass: "column-reservation"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                  " +
+                                      _vm._s(_vm.isActive === i) +
+                                      "\n                  "
+                                  ),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "card-reser",
+                                      style:
+                                        _vm.isActive === i
+                                          ? {
+                                              "background-color": "#f79c65"
+                                            }
+                                          : null
+                                    },
+                                    [
+                                      _c("div", { staticClass: "row ml-2" }, [
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h5", [_vm._v("Flight No:")]),
+                                            _vm._v(
+                                              " \n                          "
+                                            ),
+                                            _c("h4", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.flight_no
+                                                    ) +
+                                                    "\n                            "
+                                                )
+                                              ])
+                                            ])
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "row ml-4" }, [
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.depart_location
+                                                    ) +
+                                                    "\n                            "
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm._m(6, true),
+                                            _vm._v(" "),
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.arrive_location
+                                                    ) +
+                                                    "\n                            "
+                                                )
+                                              ])
+                                            ])
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-4" }, [
+                                          _c("div", { staticClass: "row" }, [
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.depart_datetime.split(
+                                                        " "
+                                                      )[1]
+                                                    ) +
+                                                    "\n                            "
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm._m(7, true),
+                                            _vm._v(" "),
+                                            _c("h3", [
+                                              _c("b", [
+                                                _vm._v(
+                                                  "\n                              " +
+                                                    _vm._s(
+                                                      showFlight.arrive_datetime.split(
+                                                        " "
+                                                      )[1]
+                                                    ) +
+                                                    "\n                            "
+                                                )
+                                              ])
+                                            ])
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "col-md-3" }, [
+                                          _vm.input.class == "Economy"
+                                            ? _c("div", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "row float-right mb-4"
+                                                  },
+                                                  [
+                                                    _c("h1", [
+                                                      _c("b", [
+                                                        _vm._v(
+                                                          "\n                                " +
+                                                            _vm._s(
+                                                              showFlight.eco_price
+                                                            ) +
+                                                            "฿\n                              "
+                                                        )
+                                                      ])
+                                                    ])
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.input.class == "Business"
+                                            ? _c("div", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "row float-right mb-4"
+                                                  },
+                                                  [
+                                                    _c("h1", [
+                                                      _c("b", [
+                                                        _vm._v(
+                                                          "\n                                " +
+                                                            _vm._s(
+                                                              showFlight.bus_price
+                                                            ) +
+                                                            "฿\n                              "
+                                                        )
+                                                      ])
+                                                    ])
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.input.class == "First"
+                                            ? _c("div", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "row float-right mb-4"
+                                                  },
+                                                  [
+                                                    _c("h1", [
+                                                      _c("b", [
+                                                        _vm._v(
+                                                          "\n                                " +
+                                                            _vm._s(
+                                                              showFlight.first_price
+                                                            ) +
+                                                            "฿\n                              "
+                                                        )
+                                                      ])
+                                                    ])
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e()
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          class: [
+                                            "btn btn-block",
+                                            {
+                                              selected: showFlight.selected
+                                            },
+                                            {
+                                              active: _vm.isActive === i
+                                            }
+                                          ],
+                                          style:
+                                            _vm.isActive === i
+                                              ? {
+                                                  "background-color": "#2197e6"
+                                                }
+                                              : null,
+                                          attrs: { id: "btn-selected" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.departSelected(
+                                                showFlight,
+                                                i
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value: _vm.isActive !== i,
+                                                  expression: "isActive !== i"
+                                                }
+                                              ]
+                                            },
+                                            [_vm._v("Select")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "show",
+                                                  rawName: "v-show",
+                                                  value: _vm.isActive === i,
+                                                  expression: "isActive === i"
+                                                }
+                                              ]
+                                            },
+                                            [_c("b", [_vm._v("Selected")])]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
                                 ]
                               )
                             }),
@@ -61266,7 +61326,7 @@ var render = function() {
                         [
                           _c("div", { staticClass: "col-md-12" }, [
                             _c("div", { staticClass: "plane" }, [
-                              _vm._m(6),
+                              _vm._m(8),
                               _vm._v(" "),
                               _c("div", {
                                 staticClass: "exit exit--front fuselage"
@@ -61277,13 +61337,7 @@ var render = function() {
                                 { staticClass: "cabin fuselage" },
                                 [
                                   _c("h4", { staticClass: "flex-center" }, [
-<<<<<<< HEAD
                                     _vm._v("First Class")
-=======
-                                    _vm._v(
-                                      "\n                                            First Class\n                                        "
-                                    )
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                   ]),
                                   _vm._v(" "),
                                   _vm._l(_vm.firsts, function(seatt, i) {
@@ -61307,11 +61361,7 @@ var render = function() {
                                                     rawName: "v-show",
                                                     value: !f.patt == true,
                                                     expression:
-<<<<<<< HEAD
-                                                      "\n                                                              !f.patt == true\n                                                          "
-=======
                                                       "!f.patt == true"
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                                   }
                                                 ]
                                               },
@@ -61384,13 +61434,7 @@ var render = function() {
                                                     },
                                                     attrs: { for: f.id }
                                                   },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                              " +
-                                                        _vm._s(f.seat) +
-                                                        "\n                            "
-                                                    )
-                                                  ]
+                                                  [_vm._v(_vm._s(f.seat))]
                                                 )
                                               ]
                                             )
@@ -61406,13 +61450,7 @@ var render = function() {
                                   }),
                                   _vm._v(" "),
                                   _c("h4", { staticClass: "flex-center" }, [
-<<<<<<< HEAD
                                     _vm._v("Business Class")
-=======
-                                    _vm._v(
-                                      "\n                                            Business Class\n                                        "
-                                    )
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                   ]),
                                   _vm._v(" "),
                                   _vm._l(_vm.buss, function(seatt, i) {
@@ -61436,11 +61474,7 @@ var render = function() {
                                                     rawName: "v-show",
                                                     value: !f.patt == true,
                                                     expression:
-<<<<<<< HEAD
-                                                      "\n                                                              !f.patt == true\n                                                          "
-=======
                                                       "!f.patt == true"
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                                   }
                                                 ]
                                               },
@@ -61513,13 +61547,7 @@ var render = function() {
                                                     },
                                                     attrs: { for: f.id }
                                                   },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                              " +
-                                                        _vm._s(f.seat) +
-                                                        "\n                            "
-                                                    )
-                                                  ]
+                                                  [_vm._v(_vm._s(f.seat))]
                                                 )
                                               ]
                                             )
@@ -61535,13 +61563,7 @@ var render = function() {
                                   }),
                                   _vm._v(" "),
                                   _c("h4", { staticClass: "flex-center" }, [
-<<<<<<< HEAD
                                     _vm._v("Economy Class")
-=======
-                                    _vm._v(
-                                      "\n                                            Economy Class\n                                        "
-                                    )
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
                                   ]),
                                   _vm._v(" "),
                                   _vm._l(_vm.ecos, function(eco, e) {
@@ -61565,11 +61587,7 @@ var render = function() {
                                                     rawName: "v-show",
                                                     value: !index.patt == true,
                                                     expression:
-<<<<<<< HEAD
-                                                      "\n                                                              !index.patt ==\n                                                                  true\n                                                          "
-=======
-                                                      "\n                                                        !index.patt == true\n                                                    "
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
+                                                      "\n                                                          !index.patt == true\n                                                      "
                                                   }
                                                 ]
                                               },
@@ -61647,9 +61665,9 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                              " +
+                                                      "\n                            " +
                                                         _vm._s(index.seat) +
-                                                        "\n                            "
+                                                        "\n                          "
                                                     )
                                                   ]
                                                 )
@@ -61695,7 +61713,7 @@ var render = function() {
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("div", { staticClass: "row" }, [
                                 _c("div", { staticClass: "plane" }, [
-                                  _vm._m(7),
+                                  _vm._m(9),
                                   _vm._v(" "),
                                   _c("div", {
                                     staticClass: "exit exit--front fuselage"
@@ -61706,9 +61724,7 @@ var render = function() {
                                     { staticClass: "cabin fuselage" },
                                     [
                                       _c("h4", { staticClass: "flex-center" }, [
-                                        _vm._v(
-                                          "\n                                                    First Class\n                                                "
-                                        )
+                                        _vm._v("First Class")
                                       ]),
                                       _vm._v(" "),
                                       _vm._l(_vm.firsts, function(seatt, i) {
@@ -61732,7 +61748,7 @@ var render = function() {
                                                         rawName: "v-show",
                                                         value: !f.patt == true,
                                                         expression:
-                                                          "\n                                                                !f.patt ==\n                                                                    true\n                                                            "
+                                                          "\n                                                                  !f.patt ==\n                                                                      true\n                                                              "
                                                       }
                                                     ]
                                                   },
@@ -61744,7 +61760,7 @@ var render = function() {
                                                           rawName: "v-model",
                                                           value: _vm.seats,
                                                           expression:
-                                                            "\n                                                                    seats\n                                                                "
+                                                            "\n                                                                      seats\n                                                                  "
                                                         }
                                                       ],
                                                       staticStyle: {
@@ -61817,7 +61833,13 @@ var render = function() {
                                                         },
                                                         attrs: { for: f.id }
                                                       },
-                                                      [_vm._v(_vm._s(f.seat))]
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                " +
+                                                            _vm._s(f.seat) +
+                                                            "\n                              "
+                                                        )
+                                                      ]
                                                     )
                                                   ]
                                                 )
@@ -61834,9 +61856,7 @@ var render = function() {
                                       }),
                                       _vm._v(" "),
                                       _c("h4", { staticClass: "flex-center" }, [
-                                        _vm._v(
-                                          "\n                                                    Business Class\n                                                "
-                                        )
+                                        _vm._v("Business Class")
                                       ]),
                                       _vm._v(" "),
                                       _vm._l(_vm.buss, function(seatt, i) {
@@ -61863,7 +61883,7 @@ var render = function() {
                                                         rawName: "v-show",
                                                         value: !f.patt == true,
                                                         expression:
-                                                          "\n                                                                !f.patt ==\n                                                                    true\n                                                            "
+                                                          "\n                                                                  !f.patt ==\n                                                                      true\n                                                              "
                                                       }
                                                     ]
                                                   },
@@ -61875,7 +61895,7 @@ var render = function() {
                                                           rawName: "v-model",
                                                           value: _vm.seats,
                                                           expression:
-                                                            "\n                                                                    seats\n                                                                "
+                                                            "\n                                                                      seats\n                                                                  "
                                                         }
                                                       ],
                                                       staticStyle: {
@@ -61948,7 +61968,13 @@ var render = function() {
                                                         },
                                                         attrs: { for: f.id }
                                                       },
-                                                      [_vm._v(_vm._s(f.seat))]
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                " +
+                                                            _vm._s(f.seat) +
+                                                            "\n                              "
+                                                        )
+                                                      ]
                                                     )
                                                   ]
                                                 )
@@ -61965,9 +61991,7 @@ var render = function() {
                                       }),
                                       _vm._v(" "),
                                       _c("h4", { staticClass: "flex-center" }, [
-                                        _vm._v(
-                                          "\n                                                    Economy Class\n                                                "
-                                        )
+                                        _vm._v("Economy Class")
                                       ]),
                                       _vm._v(" "),
                                       _vm._l(_vm.ecos, function(eco, e) {
@@ -61995,7 +62019,7 @@ var render = function() {
                                                         value:
                                                           !index.patt == true,
                                                         expression:
-                                                          "\n                                                                !index.patt ==\n                                                                    true\n                                                            "
+                                                          "\n                                                                  !index.patt ==\n                                                                      true\n                                                              "
                                                       }
                                                     ]
                                                   },
@@ -62007,7 +62031,7 @@ var render = function() {
                                                           rawName: "v-model",
                                                           value: _vm.seats,
                                                           expression:
-                                                            "\n                                                                    seats\n                                                                "
+                                                            "\n                                                                      seats\n                                                                  "
                                                         }
                                                       ],
                                                       staticStyle: {
@@ -62082,7 +62106,9 @@ var render = function() {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          _vm._s(index.seat)
+                                                          "\n                                " +
+                                                            _vm._s(index.seat) +
+                                                            "\n                              "
                                                         )
                                                       ]
                                                     )
@@ -62112,7 +62138,7 @@ var render = function() {
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("div", { staticClass: "row" }, [
                                 _c("div", { staticClass: "plane" }, [
-                                  _vm._m(8),
+                                  _vm._m(10),
                                   _vm._v(" "),
                                   _c("div", {
                                     staticClass: "exit exit--front fuselage"
@@ -62123,9 +62149,7 @@ var render = function() {
                                     { staticClass: "cabin fuselage" },
                                     [
                                       _c("h4", { staticClass: "flex-center" }, [
-                                        _vm._v(
-                                          "\n                                                    First Class\n                                                "
-                                        )
+                                        _vm._v("First Class")
                                       ]),
                                       _vm._v(" "),
                                       _vm._l(_vm.firsts2, function(seatt, i) {
@@ -62149,7 +62173,7 @@ var render = function() {
                                                         rawName: "v-show",
                                                         value: !f.patt == true,
                                                         expression:
-                                                          "\n                                                                !f.patt ==\n                                                                    true\n                                                            "
+                                                          "\n                                                                  !f.patt ==\n                                                                      true\n                                                              "
                                                       }
                                                     ]
                                                   },
@@ -62161,7 +62185,7 @@ var render = function() {
                                                           rawName: "v-model",
                                                           value: _vm.seatReturn,
                                                           expression:
-                                                            "\n                                                                    seatReturn\n                                                                "
+                                                            "\n                                                                      seatReturn\n                                                                  "
                                                         }
                                                       ],
                                                       staticStyle: {
@@ -62235,7 +62259,13 @@ var render = function() {
                                                         },
                                                         attrs: { for: f.id }
                                                       },
-                                                      [_vm._v(_vm._s(f.seat))]
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                " +
+                                                            _vm._s(f.seat) +
+                                                            "\n                              "
+                                                        )
+                                                      ]
                                                     )
                                                   ]
                                                 )
@@ -62252,9 +62282,7 @@ var render = function() {
                                       }),
                                       _vm._v(" "),
                                       _c("h4", { staticClass: "flex-center" }, [
-                                        _vm._v(
-                                          "\n                                                    Business Class\n                                                "
-                                        )
+                                        _vm._v("Business Class")
                                       ]),
                                       _vm._v(" "),
                                       _vm._l(_vm.buss2, function(seatt, i) {
@@ -62281,7 +62309,7 @@ var render = function() {
                                                         rawName: "v-show",
                                                         value: !f.patt == true,
                                                         expression:
-                                                          "\n                                                                !f.patt ==\n                                                                    true\n                                                            "
+                                                          "\n                                                                  !f.patt ==\n                                                                      true\n                                                              "
                                                       }
                                                     ]
                                                   },
@@ -62293,7 +62321,7 @@ var render = function() {
                                                           rawName: "v-model",
                                                           value: _vm.seatReturn,
                                                           expression:
-                                                            "\n                                                                    seatReturn\n                                                                "
+                                                            "\n                                                                      seatReturn\n                                                                  "
                                                         }
                                                       ],
                                                       staticStyle: {
@@ -62367,7 +62395,13 @@ var render = function() {
                                                         },
                                                         attrs: { for: f.id }
                                                       },
-                                                      [_vm._v(_vm._s(f.seat))]
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                " +
+                                                            _vm._s(f.seat) +
+                                                            "\n                              "
+                                                        )
+                                                      ]
                                                     )
                                                   ]
                                                 )
@@ -62388,11 +62422,7 @@ var render = function() {
                                         {
                                           staticClass: "flex-center flex-center"
                                         },
-                                        [
-                                          _vm._v(
-                                            "\n                                                    Economy Class\n                                                "
-                                          )
-                                        ]
+                                        [_vm._v("Economy Class")]
                                       ),
                                       _vm._v(" "),
                                       _vm._l(_vm.ecos2, function(eco, e) {
@@ -62420,7 +62450,7 @@ var render = function() {
                                                         value:
                                                           !index.patt == true,
                                                         expression:
-                                                          "\n                                                                !index.patt ==\n                                                                    true\n                                                            "
+                                                          "\n                                                                  !index.patt ==\n                                                                      true\n                                                              "
                                                       }
                                                     ]
                                                   },
@@ -62432,7 +62462,7 @@ var render = function() {
                                                           rawName: "v-model",
                                                           value: _vm.seatReturn,
                                                           expression:
-                                                            "\n                                                                    seatReturn\n                                                                "
+                                                            "\n                                                                      seatReturn\n                                                                  "
                                                         }
                                                       ],
                                                       staticStyle: {
@@ -62508,7 +62538,9 @@ var render = function() {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          _vm._s(index.seat)
+                                                          "\n                                " +
+                                                            _vm._s(index.seat) +
+                                                            "\n                              "
                                                         )
                                                       ]
                                                     )
@@ -62901,7 +62933,8 @@ var render = function() {
                                             name: "model",
                                             rawName: "v-model",
                                             value: passenger.national,
-                                            expression: "passenger.national"
+                                            expression:
+                                              "\n                                                          passenger.national\n                                                      "
                                           }
                                         ],
                                         staticClass: "form-control",
@@ -63171,9 +63204,7 @@ var render = function() {
                         },
                         [
                           _c("h4", { staticStyle: { "margin-left": "15px" } }, [
-                            _vm._v(
-                              "\n                                Payment :\n                            "
-                            )
+                            _vm._v("Payment :")
                           ]),
                           _vm._v(" "),
                           _c("br"),
@@ -63181,9 +63212,7 @@ var render = function() {
                           _c("div", { staticClass: "container-xl" }, [
                             _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-md-6" }, [
-                                _vm._v(
-                                  "\n                                        Total:\n                                    "
-                                )
+                                _vm._v("Total:")
                               ]),
                               _vm._v(" "),
                               _c(
@@ -63372,9 +63401,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("b", [
-      _vm._v(" \n                                                        "),
+      _vm._v("\n                             \n                            "),
       _c("i", { staticClass: "fas fa-plane" }),
-      _vm._v("\n                                                         ")
+      _vm._v("\n                             \n                          ")
     ])
   },
   function() {
@@ -63382,9 +63411,29 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("b", [
-      _vm._v(" \n                                                        "),
+      _vm._v("\n                             \n                            "),
       _c("i", { staticClass: "far fa-window-minimize" }),
-      _vm._v(" ")
+      _vm._v(" \n                          ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("b", [
+      _vm._v("\n                             \n                            "),
+      _c("i", { staticClass: "fas fa-plane" }),
+      _vm._v("\n                             \n                          ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("b", [
+      _vm._v("\n                             \n                            "),
+      _c("i", { staticClass: "far fa-window-minimize" }),
+      _vm._v(" \n                          ")
     ])
   },
   function() {
@@ -63393,38 +63442,31 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "cockpit" }, [
       _c("h1", { staticStyle: { "margin-top": "90px" } }, [
-        _vm._v(
-          "\n                                            Please select a seat\n                                        "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cockpit" }, [
-      _c("h1", { staticStyle: { "margin-top": "90px" } }, [
-        _vm._v(
-          "\n                                                    plaese select depart\n                                                    seat\n                                                "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cockpit" }, [
-<<<<<<< HEAD
-      _c("h2", { staticStyle: { "margin-top": "90px" } }, [
         _vm._v("Please select a seat")
-=======
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cockpit" }, [
       _c("h1", { staticStyle: { "margin-top": "90px" } }, [
         _vm._v(
-          "\n                                                    plaese select return\n                                                    seat\n                                                "
+          "\n                          plaese select depart\n                          seat\n                        "
         )
->>>>>>> afbac6125af7286f9eb2d3ede058da7017fce1b2
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cockpit" }, [
+      _c("h1", { staticStyle: { "margin-top": "90px" } }, [
+        _vm._v(
+          "\n                          plaese select return\n                          seat\n                        "
+        )
       ])
     ])
   }
@@ -79289,7 +79331,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _adminHome_vue_vue_type_template_id_b996ce96___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./adminHome.vue?vue&type=template&id=b996ce96& */ "./resources/js/pages/admin/adminHome.vue?vue&type=template&id=b996ce96&");
 /* harmony import */ var _adminHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./adminHome.vue?vue&type=script&lang=js& */ "./resources/js/pages/admin/adminHome.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _adminHome_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./adminHome.vue?vue&type=style&index=0&lang=css& */ "./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -79297,7 +79341,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _adminHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _adminHome_vue_vue_type_template_id_b996ce96___WEBPACK_IMPORTED_MODULE_0__["render"],
   _adminHome_vue_vue_type_template_id_b996ce96___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -79326,6 +79370,22 @@ component.options.__file = "resources/js/pages/admin/adminHome.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./adminHome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/adminHome.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./adminHome.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/admin/adminHome.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_adminHome_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -80136,20 +80196,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _info_vue_vue_type_template_id_6c4eb6d2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./info.vue?vue&type=template&id=6c4eb6d2& */ "./resources/js/pages/info.vue?vue&type=template&id=6c4eb6d2&");
-/* harmony import */ var _info_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info.vue?vue&type=script&lang=js& */ "./resources/js/pages/info.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _info_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _info_vue_vue_type_template_id_6c4eb6d2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _info_vue_vue_type_template_id_6c4eb6d2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
   false,
   null,
   null,
@@ -80157,42 +80214,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
-/* hot reload */
-if (false) { var api; }
 component.options.__file = "resources/js/pages/info.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/info.vue?vue&type=script&lang=js&":
-/*!**************************************************************!*\
-  !*** ./resources/js/pages/info.vue?vue&type=script&lang=js& ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_info_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./info.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/info.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_info_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/pages/info.vue?vue&type=template&id=6c4eb6d2&":
-/*!********************************************************************!*\
-  !*** ./resources/js/pages/info.vue?vue&type=template&id=6c4eb6d2& ***!
-  \********************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_info_vue_vue_type_template_id_6c4eb6d2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./info.vue?vue&type=template&id=6c4eb6d2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/info.vue?vue&type=template&id=6c4eb6d2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_info_vue_vue_type_template_id_6c4eb6d2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_info_vue_vue_type_template_id_6c4eb6d2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 
@@ -80548,8 +80571,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

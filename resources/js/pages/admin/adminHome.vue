@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid ">
+    <div class="container-fluid">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -10,16 +10,67 @@
             background-color="#fff"
         ></loading>
         <div class="container-xl">
-            <div class="row full-height ">
-                <div class="col-md-12 centerWithText" style="color:#ff7e5f ">
-                    <div class="card ">
-                        <div class="card-body">
-                            <div style="font-size:5vw;">
-                                Welcome : {{ user.username }}
-                            </div>
-                            <div style="font-size:5vw;">
-                                Role :{{ user.employee_role }}
-                            </div>
+            <div class="row">
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Customer</h6>
+                            <h2 class="text-right">
+                                <i class="fa fa-users f-left"></i>
+                                <span>849,865</span>
+                            </h2>
+                            <p class="m-b-0">
+                                Available
+                                <span class="f-right">351</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Employee</h6>
+                            <h2 class="text-right">
+                                <i class="fa fa-user-tie f-left"></i>
+                                <span>4,082</span>
+                            </h2>
+                            <p class="m-b-0">
+                                Available
+                                <span class="f-right">4,050</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Airplane</h6>
+                            <h2 class="text-right">
+                                <i class="fa fa-plane f-left"></i>
+                                <span>29</span>
+                            </h2>
+                            <p class="m-b-0">
+                                Available
+                                <span class="f-right">27</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-pink order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Pilot</h6>
+                            <h2 class="text-right">
+                                <i class="fa fa-blind f-left"></i>
+                                <span>29</span>
+                            </h2>
+                            <p class="m-b-0">
+                                Available
+                                <span class="f-right">28</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -59,4 +110,50 @@ export default {
     }
 };
 </script>
-<style></style>
+<style>
+.order-card {
+    color: #fff;
+}
+
+.bg-c-blue {
+    background: linear-gradient(45deg, #4099ff, #59e0c5);
+}
+
+.bg-c-green {
+    background: linear-gradient(45deg, #2ed8b6, #ffcb80);
+}
+
+.bg-c-yellow {
+    background: linear-gradient(45deg, #ffb64d, #ff869a);
+}
+
+.bg-c-pink {
+    background: linear-gradient(45deg, #ff5370, pink);
+}
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.card .card-block {
+    padding: 25px;
+}
+
+.order-card i {
+    font-size: 26px;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+</style>
