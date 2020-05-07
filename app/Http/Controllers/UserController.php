@@ -199,7 +199,7 @@ class UserController extends Controller
                 }
 
                 $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderByDesc('passenger_id')->first();
-                $number = is_numeric(str_replace($prefix, "", $check_id['passenger_id'])) + 1;
+                $number = (int)str_replace($prefix, "", $check_id['passenger_id'])+ 1;
                 //return response()->JSON([str_replace($prefix, "", $check_id['passenger_id']),$check_id['passenger_id'] ,$number,$prefix . sprintf("%08d", $number)]);
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
                 array_push($current_passenger_id, $passenger->passenger_id);
