@@ -159,17 +159,19 @@ class UserController extends Controller
                 array_push($current_passenger_id, $passenger_oldID->passenger_id);
                 $passenger->passenger_id = $passenger_oldID->passenger_id;
 
-                Passenger::where('passenger_id',$passenger_oldID->passenger_id)->update(['passenger_title' => $each_passenger['title'],
-                                                                                        'passenger_name' => $each_passenger['name'],
-                                                                                        'passenger_surname'=>$each_passenger['surname'],
-                                                                                        'passenger_DOB' => $each_passenger['dob'],
-                                                                                        'gender' => strtolower($each_passenger['gender']),
-                                                                                        'passenger_nationality'=> $each_passenger['national'],
-                                                                                        'passenger_religion' => $each_passenger['religion'],
-                                                                                        'passenger_idcard' => $each_passenger['idcard'],
-                                                                                        'passenger_passport' => $each_passenger['passport'],
-                                                                                        'passenger_phone' => $each_passenger['phone'],
-                                                                                         'passenger_email'=> $each_passenger['email'] ]);
+                Passenger::where('passenger_id', $passenger_oldID->passenger_id)->update([
+                    'passenger_title' => $each_passenger['title'],
+                    'passenger_name' => $each_passenger['name'],
+                    'passenger_surname' => $each_passenger['surname'],
+                    'passenger_DOB' => $each_passenger['dob'],
+                    'gender' => strtolower($each_passenger['gender']),
+                    'passenger_nationality' => $each_passenger['national'],
+                    'passenger_religion' => $each_passenger['religion'],
+                    'passenger_idcard' => $each_passenger['idcard'],
+                    'passenger_passport' => $each_passenger['passport'],
+                    'passenger_phone' => $each_passenger['phone'],
+                    'passenger_email' => $each_passenger['email']
+                ]);
                 // $passenger->passenger_title = $each_passenger['title'];
                 // $passenger->passenger_name = $each_passenger['name'];
                 // $passenger->passenger_surname = $each_passenger['surname'];
@@ -199,7 +201,7 @@ class UserController extends Controller
                 }
 
                 $check_id = Passenger::select('passenger_id')->where('passenger_id', 'LIKE', $prefix . "%")->orderByDesc('passenger_id')->first();
-                $number = (int)str_replace($prefix, "", $check_id['passenger_id'])+ 1;
+                $number = (int) str_replace($prefix, "", $check_id['passenger_id']) + 1;
                 //return response()->JSON([str_replace($prefix, "", $check_id['passenger_id']),$check_id['passenger_id'] ,$number,$prefix . sprintf("%08d", $number)]);
                 $passenger->passenger_id = $prefix . sprintf("%08d", $number);
                 array_push($current_passenger_id, $passenger->passenger_id);

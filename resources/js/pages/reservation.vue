@@ -1877,6 +1877,7 @@ export default {
                 } else {
                     this.passengers[i].error_gender = null;
                 }
+
                 if (!this.passengers[i].dob) {
                     this.passengers[i].error_dob =
                         "Please enter Date of Birth.";
