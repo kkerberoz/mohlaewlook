@@ -9,20 +9,24 @@
             loader="bars"
             background-color="#fff"
         ></loading>
-        <div class="container-xl" style="margin-top:10%">
+        <div class="container-xl" style="margin-top:10%;margin-bottom:10%">
+            <h1 class="mb-3" style="display:block ">
+                Dashboard
+            </h1>
+            <hr class="mb-4" />
             <div class="row flex-center">
                 <div class="col-md-4 col-xl-3">
                     <div class="card bg-c-blue order-card">
                         <div class="card-block">
                             <h6 class="m-b-20">Customer</h6>
-                            <h2 class="text-right">
+                            <h2 class="text-right mt-4">
                                 <i class="fa fa-users f-left"></i>
-                                <span>849,865</span>
+                                <span>{{ count.user }}</span>
                             </h2>
-                            <p class="m-b-0">
+                            <!-- <p class="m-b-0">
                                 Available
                                 <span class="f-right">351</span>
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                 </div>
@@ -31,14 +35,14 @@
                     <div class="card bg-c-green order-card">
                         <div class="card-block">
                             <h6 class="m-b-20">Employee</h6>
-                            <h2 class="text-right">
+                            <h2 class="text-right mt-4">
                                 <i class="fa fa-user-tie f-left"></i>
-                                <span>4,082</span>
+                                <span>{{ count.employee }}</span>
                             </h2>
-                            <p class="m-b-0">
+                            <!-- <p class="m-b-0">
                                 Available
                                 <span class="f-right">4,050</span>
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                 </div>
@@ -47,14 +51,14 @@
                     <div class="card bg-c-yellow order-card">
                         <div class="card-block">
                             <h6 class="m-b-20">Airplane</h6>
-                            <h2 class="text-right">
+                            <h2 class="text-right mt-4">
                                 <i class="fa fa-plane f-left"></i>
-                                <span>29</span>
+                                <span>{{ count.aircraft }}</span>
                             </h2>
-                            <p class="m-b-0">
+                            <!-- <p class="m-b-0">
                                 Available
                                 <span class="f-right">27</span>
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                 </div>
@@ -64,14 +68,60 @@
                     <div class="card bg-c-pink order-card">
                         <div class="card-block">
                             <h6 class="m-b-20">Pilot</h6>
-                            <h2 class="text-right">
+                            <h2 class="text-right mt-4">
                                 <i class="fa fa-blind f-left"></i>
-                                <span>29</span>
+                                <span>{{ count.pilot }}</span>
                             </h2>
-                            <p class="m-b-0">
+                            <!-- <p class="m-b-0">
                                 Available
                                 <span class="f-right">28</span>
-                            </p>
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-pink order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Flight Attendant</h6>
+                            <h2 class="text-right mt-4">
+                                <i class="fa fa-blind f-left"></i>
+                                <span>{{ count.air }}</span>
+                            </h2>
+                            <!-- <p class="m-b-0">
+                                Available
+                                <span class="f-right">28</span>
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-pink order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Staff</h6>
+                            <h2 class="text-right mt-4">
+                                <i class="fas fa-users-cog f-left"></i>
+                                <span>{{ count.staff }}</span>
+                            </h2>
+                            <!-- <p class="m-b-0">
+                                Available
+                                <span class="f-right">28</span>
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Airport</h6>
+                            <h2 class="text-right mt-4">
+                                <i class="fas fa-map-marked-alt f-left"></i>
+
+                                <span>{{ count.airport }}</span>
+                            </h2>
+                            <!-- <p class="m-b-0">
+                                Available
+                                <span class="f-right">28</span>
+                            </p> -->
                         </div>
                     </div>
                 </div>
@@ -88,7 +138,7 @@ export default {
         return {
             loadingPage: false,
             fullPage: true,
-            user: ""
+            count: []
         };
     },
     // mounted() {
@@ -97,12 +147,14 @@ export default {
     //         this.loadingPage = false;
     //     }, 1000);
     // },
+
     beforeMount() {
         this.loadingPage = true;
         axios
-            .get("/api/admin/init")
+            .get("/api/backend/getCount")
             .then(response => {
-                this.user = response.data;
+                this.count = response.data;
+                console.log(this.count);
                 this.loadingPage = false;
             })
             .catch(error => {

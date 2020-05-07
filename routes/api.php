@@ -28,8 +28,8 @@ Route::prefix('user')->group(function () {
     Route::post('/logout', 'UserController@logout');
     Route::get('/getLocation', 'UserController@getLocation');
     Route::post('/getFlight', 'UserController@getFlight');
-    Route::post('/reserveSendData','UserController@reserveSendData');
-    Route::post('/checkSeat','UserController@checkSeat');
+    Route::post('/reserveSendData', 'UserController@reserveSendData');
+    Route::post('/checkSeat', 'UserController@checkSeat');
 });
 
 //route for employee
@@ -55,20 +55,19 @@ Route::prefix('backend')->group(function () {
     Route::post('/addFlight', 'BackendController@addFlight');
     Route::post('/addAirport', 'BackendController@addAirport');
     Route::get('/getModelBrand', 'BackendController@getModelBrand');
-    Route::post('/addPrice','BackendController@addPrice');
-    Route::get('/getPrice','BackendController@getPrice');
-    Route::post('/editPrice','BackendController@editPrice');
-    Route::post('/addNewWork','BackendController@addNewWork');
-    Route::post('/getflightdetail','BackendController@getflightdetail');
-    Route::post('/getworkday','BackendController@getworkday');
-    Route::post('/updateWorkStatus','BackendController@updateWorkStatus');
+    Route::post('/addPrice', 'BackendController@addPrice');
+    Route::get('/getPrice', 'BackendController@getPrice');
+    Route::post('/editPrice', 'BackendController@editPrice');
+    Route::post('/addNewWork', 'BackendController@addNewWork');
+    Route::post('/getflightdetail', 'BackendController@getflightdetail');
+    Route::post('/getworkday', 'BackendController@getworkday');
+    Route::post('/updateWorkStatus', 'BackendController@updateWorkStatus');
     // Analytic
-    Route::post('/analytic1_show','BackendController@analytic1_show');
-    Route::get('/analytic1_get','BackendController@analytic1_get');
-    Route::post('/analytic2_show','BackendController@analytic2_show');
-    Route::post('/analytic3_show','BackendController@analytic3_show');
-    Route::post('/analytic4','BackendController@analytic4');
-    Route::get('/schedule/{id}','Backendcontroller@schedule');
-
-
+    Route::post('/analytic1_show', 'BackendController@analytic1_show');
+    Route::get('/analytic1_get', 'BackendController@analytic1_get');
+    Route::post('/analytic2_show', 'BackendController@analytic2_show');
+    Route::post('/analytic3_show', 'BackendController@analytic3_show');
+    Route::post('/analytic4', 'BackendController@analytic4');
+    Route::get('/schedule/{id}', 'Backendcontroller@schedule');
+    Route::get('/getCount', 'Backendcontroller@getCount');
 });

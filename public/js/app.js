@@ -4480,6 +4480,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4490,7 +4540,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loadingPage: false,
       fullPage: true,
-      user: ""
+      count: []
     };
   },
   // mounted() {
@@ -4503,8 +4553,9 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.loadingPage = true;
-    axios.get("/api/admin/init").then(function (response) {
-      _this.user = response.data;
+    axios.get("/api/backend/getCount").then(function (response) {
+      _this.count = response.data;
+      console.log(_this.count);
       _this.loadingPage = false;
     })["catch"](function (error) {
       _this.loadingPage = false;
@@ -56650,111 +56701,129 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        {
+          staticClass: "container-xl",
+          staticStyle: { "margin-top": "10%", "margin-bottom": "10%" }
+        },
+        [
+          _c("h1", { staticClass: "mb-3", staticStyle: { display: "block" } }, [
+            _vm._v("\n            Dashboard\n        ")
+          ]),
+          _vm._v(" "),
+          _c("hr", { staticClass: "mb-4" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "row flex-center" }, [
+            _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+              _c("div", { staticClass: "card bg-c-blue order-card" }, [
+                _c("div", { staticClass: "card-block" }, [
+                  _c("h6", { staticClass: "m-b-20" }, [_vm._v("Customer")]),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-right mt-4" }, [
+                    _c("i", { staticClass: "fa fa-users f-left" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.count.user))])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+              _c("div", { staticClass: "card bg-c-green order-card" }, [
+                _c("div", { staticClass: "card-block" }, [
+                  _c("h6", { staticClass: "m-b-20" }, [_vm._v("Employee")]),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-right mt-4" }, [
+                    _c("i", { staticClass: "fa fa-user-tie f-left" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.count.employee))])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+              _c("div", { staticClass: "card bg-c-yellow order-card" }, [
+                _c("div", { staticClass: "card-block" }, [
+                  _c("h6", { staticClass: "m-b-20" }, [_vm._v("Airplane")]),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-right mt-4" }, [
+                    _c("i", { staticClass: "fa fa-plane f-left" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.count.aircraft))])
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row flex-center" }, [
+            _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+              _c("div", { staticClass: "card bg-c-pink order-card" }, [
+                _c("div", { staticClass: "card-block" }, [
+                  _c("h6", { staticClass: "m-b-20" }, [_vm._v("Pilot")]),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-right mt-4" }, [
+                    _c("i", { staticClass: "fa fa-blind f-left" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.count.pilot))])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+              _c("div", { staticClass: "card bg-c-pink order-card" }, [
+                _c("div", { staticClass: "card-block" }, [
+                  _c("h6", { staticClass: "m-b-20" }, [
+                    _vm._v("Flight Attendant")
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-right mt-4" }, [
+                    _c("i", { staticClass: "fa fa-blind f-left" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.count.air))])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+              _c("div", { staticClass: "card bg-c-pink order-card" }, [
+                _c("div", { staticClass: "card-block" }, [
+                  _c("h6", { staticClass: "m-b-20" }, [_vm._v("Staff")]),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-right mt-4" }, [
+                    _c("i", { staticClass: "fas fa-users-cog f-left" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.count.staff))])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 col-xl-3" }, [
+              _c("div", { staticClass: "card bg-c-yellow order-card" }, [
+                _c("div", { staticClass: "card-block" }, [
+                  _c("h6", { staticClass: "m-b-20" }, [_vm._v("Airport")]),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-right mt-4" }, [
+                    _c("i", { staticClass: "fas fa-map-marked-alt f-left" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.count.airport))])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "container-xl", staticStyle: { "margin-top": "10%" } },
-      [
-        _c("div", { staticClass: "row flex-center" }, [
-          _c("div", { staticClass: "col-md-4 col-xl-3" }, [
-            _c("div", { staticClass: "card bg-c-blue order-card" }, [
-              _c("div", { staticClass: "card-block" }, [
-                _c("h6", { staticClass: "m-b-20" }, [_vm._v("Customer")]),
-                _vm._v(" "),
-                _c("h2", { staticClass: "text-right" }, [
-                  _c("i", { staticClass: "fa fa-users f-left" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("849,865")])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "m-b-0" }, [
-                  _vm._v(
-                    "\n                            Available\n                            "
-                  ),
-                  _c("span", { staticClass: "f-right" }, [_vm._v("351")])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xl-3" }, [
-            _c("div", { staticClass: "card bg-c-green order-card" }, [
-              _c("div", { staticClass: "card-block" }, [
-                _c("h6", { staticClass: "m-b-20" }, [_vm._v("Employee")]),
-                _vm._v(" "),
-                _c("h2", { staticClass: "text-right" }, [
-                  _c("i", { staticClass: "fa fa-user-tie f-left" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("4,082")])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "m-b-0" }, [
-                  _vm._v(
-                    "\n                            Available\n                            "
-                  ),
-                  _c("span", { staticClass: "f-right" }, [_vm._v("4,050")])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-xl-3" }, [
-            _c("div", { staticClass: "card bg-c-yellow order-card" }, [
-              _c("div", { staticClass: "card-block" }, [
-                _c("h6", { staticClass: "m-b-20" }, [_vm._v("Airplane")]),
-                _vm._v(" "),
-                _c("h2", { staticClass: "text-right" }, [
-                  _c("i", { staticClass: "fa fa-plane f-left" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("29")])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "m-b-0" }, [
-                  _vm._v(
-                    "\n                            Available\n                            "
-                  ),
-                  _c("span", { staticClass: "f-right" }, [_vm._v("27")])
-                ])
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row flex-center" }, [
-          _c("div", { staticClass: "col-md-4 col-xl-3" }, [
-            _c("div", { staticClass: "card bg-c-pink order-card" }, [
-              _c("div", { staticClass: "card-block" }, [
-                _c("h6", { staticClass: "m-b-20" }, [_vm._v("Pilot")]),
-                _vm._v(" "),
-                _c("h2", { staticClass: "text-right" }, [
-                  _c("i", { staticClass: "fa fa-blind f-left" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("29")])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "m-b-0" }, [
-                  _vm._v(
-                    "\n                            Available\n                            "
-                  ),
-                  _c("span", { staticClass: "f-right" }, [_vm._v("28")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
