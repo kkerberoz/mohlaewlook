@@ -9995,6 +9995,7 @@ __webpack_require__.r(__webpack_exports__);
       this.errors = [];
       this.error_payMethod = null;
       this.error_cardNumber = null;
+      this.isLoading = true;
 
       for (var k = 0; k < this.no_of_passenger; k++) {
         this.passengers[k].error_title = null;
@@ -10011,21 +10012,21 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.no_of_passenger; i++) {
-        if (!this.passengers[i].title) {
+        if (!this.passengers[i].title.trim()) {
           this.passengers[i].error_title = "Please select title.";
           this.errors.push(this.passengers[i].error_title);
         } else {
           this.passengers[i].error_title = null;
         }
 
-        if (!this.passengers[i].name) {
+        if (!this.passengers[i].name.trim()) {
           this.passengers[i].error_name = "Please enter name.";
           this.errors.push(this.passengers[i].error_name);
         } else {
           this.passengers[i].error_name = null;
         }
 
-        if (!this.passengers[i].surname) {
+        if (!this.passengers[i].surname.trim()) {
           this.passengers[i].error_surname = "Please enter name.";
           this.errors.push(this.passengers[i].error_surname);
         } else {
@@ -10046,66 +10047,66 @@ __webpack_require__.r(__webpack_exports__);
           this.passengers[i].error_dob = null;
         }
 
-        if (!this.passengers[i].national) {
+        if (!this.passengers[i].national.trim()) {
           this.passengers[i].error_national = "Please enter nationality";
           this.errors.push(this.passengers[i].error_national);
         } else {
           this.passengers[i].error_national = null;
         }
 
-        if (!this.passengers[i].idcard) {
+        if (!this.passengers[i].idcard.trim()) {
           if (!this.passengers[i].passport) {
-            this.passengers[i].error_idcard = "Please enter idcard or passport";
-            this.passengers[i].error_passport = "Please enter idcard or passport";
+            this.passengers[i].error_idcard = "Please enter ID card or Passport";
+            this.passengers[i].error_passport = "Please enter ID card or Passport";
             this.errors.push(this.passengers[i].error_idcard);
             this.errors.push(this.passengers[i].error_passport);
-          } else if (this.passengers[i].passport.length != 13) {
-            this.passengers[i].error_passport = "Password must be 13 characters.";
+          } else if (this.passengers[i].passport.trim().length != 13) {
+            this.passengers[i].error_passport = "Passport must be 13 characters.";
             this.errors.push(this.passengers[i].error_passport);
-          } else if (isNaN(this.passengers[i].passport)) {
+          } else if (isNaN(this.passengers[i].passport.trim())) {
             this.passengers[i].error_passport = "Please fill only number.";
             this.errors.push(this.passengers[i].error_passport);
           } else {
             this.passengers[i].error_passport = null;
           }
-        } else if (this.passengers[i].passport && this.passengers[i].idcard) {
+        } else if (this.passengers[i].passport.trim() && this.passengers[i].idcard.trim()) {
           this.passengers[i].error_idcard = "Please enter only one";
           this.passengers[i].error_passport = "Please enter only one";
           this.errors.push(this.passengers[i].error_idcard);
           this.errors.push(this.passengers[i].error_passport);
           this.passengers[i].passport = "";
           this.passengers[i].idcard = "";
-        } else if (this.passengers[i].idcard.length != 13) {
-          this.passengers[i].error_idcard = "Password must be 13 characters.";
+        } else if (this.passengers[i].idcard.trim().length != 13) {
+          this.passengers[i].error_idcard = "ID card must be 13 characters.";
           this.errors.push(this.passengers[i].error_idcard);
-        } else if (isNaN(this.passengers[i].idcard)) {
+        } else if (isNaN(this.passengers[i].idcard.trim())) {
           this.passengers[i].error_idcard = "Please fill only number.";
           this.errors.push(this.passengers[i].error_idcard);
         } else {
           this.passengers[i].error_idcard = null;
         }
 
-        if (!this.passengers[i].religion) {
+        if (!this.passengers[i].religion.trim()) {
           this.passengers[i].error_religion = "Please enter religion";
           this.errors.push(this.passengers[i].error_religion);
         } else {
           this.passengers[i].error_religion = null;
         }
 
-        if (!this.passengers[i].email) {
+        if (!this.passengers[i].email.trim()) {
           this.passengers[i].error_email = "Please enter email";
           this.errors.push(this.passengers[i].error_email);
         } else {
           this.passengers[i].error_email = null;
         }
 
-        if (!this.passengers[i].phone) {
+        if (!this.passengers[i].phone.trim()) {
           this.passengers[i].error_phone = "Please fill your phone number.";
           this.errors.push(this.passengers[i].error_phone);
-        } else if (isNaN(this.passengers[i].phone)) {
+        } else if (isNaN(this.passengers[i].phone.trim())) {
           this.passengers[i].error_phone = "Please fill only number.";
           this.errors.push(this.passengers[i].error_phone);
-        } else if (this.passengers[i].phone.length != 10) {
+        } else if (this.passengers[i].phone.trim().length != 10) {
           this.passengers[i].error_phone = "Phone number must be 10 characters.";
           this.errors.push(this.passengers[i].error_phone);
         } else {
@@ -10118,13 +10119,13 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.push(this.error_payMethod);
       } else {
         if (this.payment.method == "MasterCard" || this.payment.method == "VisaCard") {
-          if (!this.payment.cardNumber) {
+          if (!this.payment.cardNumber.trim()) {
             this.error_cardNumber = "Please fill your card number.";
             this.errors.push(this.error_cardNumber);
-          } else if (isNaN(this.payment.cardNumber)) {
+          } else if (isNaN(this.payment.cardNumber.trim())) {
             this.error_cardNumber = "Please fill only number.";
             this.errors.push(this.error_cardNumber);
-          } else if (this.payment.cardNumber.length != 16) {
+          } else if (this.payment.cardNumber.trim().length != 16) {
             this.error_cardNumber = "Card number must be 16 characters.";
             this.errors.push(this.error_cardNumber);
           }
@@ -10137,6 +10138,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.errors.length) {
         if (this.seats.length != this.no_of_passenger || this.seats.length != this.no_of_passenger && this.seatReturn.length != this.no_of_passenger) {
+          window.scrollTo(0, 0);
           swal.fire("please select seat", "Cilck the button to continue!", "warning").then(function () {});
         } else {
           var data = {
@@ -10156,19 +10158,22 @@ __webpack_require__.r(__webpack_exports__);
               // console.log("reservation", response.data);
               _this2.loadingPage = true;
               setTimeout(function () {
+                _this2.isLoading = false;
                 _this2.loadingPage = false;
                 _this2.changePage = false;
                 _this2.isSelected = false;
                 _this2.isReturnSelected = false;
                 _this2.isActive = null;
                 _this2.isReturnActive = null;
+              }, 2000);
+              window.scrollTo(0, 0);
 
-                _this2.$router.go({
-                  name: "reservation"
-                });
-              }, 1000);
+              _this2.$router.go({
+                name: "reservation"
+              });
             });
           })["catch"](function (error) {
+            _this2.isLoading = false;
             swal.fire("error!", "Cilck the button to continue!", "error").then(function () {});
           });
         }
@@ -10182,6 +10187,7 @@ __webpack_require__.r(__webpack_exports__);
           if (!this.changePage) {
             this.loadingPage = true;
             setTimeout(function () {
+              window.scrollTo(0, 0);
               _this3.seats = [];
               _this3.seatReturn = [];
               _this3.changePage = true;
@@ -10201,6 +10207,7 @@ __webpack_require__.r(__webpack_exports__);
               if (result.value) {
                 _this3.loadingPage = true;
                 setTimeout(function () {
+                  window.scrollTo(0, 0);
                   _this3.loadingPage = false;
                   _this3.changePage = false;
                   _this3.isSelected = false;
@@ -10230,6 +10237,7 @@ __webpack_require__.r(__webpack_exports__);
         if (!this.changePage) {
           this.loadingPage = true;
           setTimeout(function () {
+            window.scrollTo(0, 0);
             _this3.seats = [];
             _this3.seatReturn = [];
             _this3.changePage = true;
@@ -10249,6 +10257,7 @@ __webpack_require__.r(__webpack_exports__);
             if (result.value) {
               _this3.loadingPage = true;
               setTimeout(function () {
+                window.scrollTo(0, 0);
                 _this3.loadingPage = false;
                 _this3.changePage = false;
                 _this3.isSelected = false;
