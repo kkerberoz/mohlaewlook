@@ -1834,7 +1834,7 @@ export default {
             this.errors = [];
             this.error_payMethod = null;
             this.error_cardNumber = null;
-
+            this.isLoading = true;
             for (var k = 0; k < this.no_of_passenger; k++) {
                 this.passengers[k].error_title = null;
                 this.passengers[k].error_name = null;
@@ -1850,21 +1850,21 @@ export default {
             }
 
             for (var i = 0; i < this.no_of_passenger; i++) {
-                if (!this.passengers[i].title) {
+                if (!this.passengers[i].title.trim()) {
                     this.passengers[i].error_title = "Please select title.";
                     this.errors.push(this.passengers[i].error_title);
                 } else {
                     this.passengers[i].error_title = null;
                 }
 
-                if (!this.passengers[i].name) {
+                if (!this.passengers[i].name.trim()) {
                     this.passengers[i].error_name = "Please enter name.";
                     this.errors.push(this.passengers[i].error_name);
                 } else {
                     this.passengers[i].error_name = null;
                 }
 
-                if (!this.passengers[i].surname) {
+                if (!this.passengers[i].surname.trim()) {
                     this.passengers[i].error_surname = "Please enter name.";
                     this.errors.push(this.passengers[i].error_surname);
                 } else {
@@ -1885,7 +1885,7 @@ export default {
                     this.passengers[i].error_dob = null;
                 }
 
-                if (!this.passengers[i].national) {
+                if (!this.passengers[i].national.trim()) {
                     this.passengers[i].error_national =
                         "Please enter nationality";
                     this.errors.push(this.passengers[i].error_national);
@@ -1893,19 +1893,21 @@ export default {
                     this.passengers[i].error_national = null;
                 }
 
-                if (!this.passengers[i].idcard) {
+                if (!this.passengers[i].idcard.trim()) {
                     if (!this.passengers[i].passport) {
                         this.passengers[i].error_idcard =
-                            "Please enter idcard or passport";
+                            "Please enter ID card or Passport";
                         this.passengers[i].error_passport =
-                            "Please enter idcard or passport";
+                            "Please enter ID card or Passport";
                         this.errors.push(this.passengers[i].error_idcard);
                         this.errors.push(this.passengers[i].error_passport);
-                    } else if (this.passengers[i].passport.length != 13) {
+                    } else if (
+                        this.passengers[i].passport.trim().length != 13
+                    ) {
                         this.passengers[i].error_passport =
-                            "Password must be 13 characters.";
+                            "Passport must be 13 characters.";
                         this.errors.push(this.passengers[i].error_passport);
-                    } else if (isNaN(this.passengers[i].passport)) {
+                    } else if (isNaN(this.passengers[i].passport.trim())) {
                         this.passengers[i].error_passport =
                             "Please fill only number.";
                         this.errors.push(this.passengers[i].error_passport);
@@ -1913,8 +1915,8 @@ export default {
                         this.passengers[i].error_passport = null;
                     }
                 } else if (
-                    this.passengers[i].passport &&
-                    this.passengers[i].idcard
+                    this.passengers[i].passport.trim() &&
+                    this.passengers[i].idcard.trim()
                 ) {
                     this.passengers[i].error_idcard = "Please enter only one";
                     this.passengers[i].error_passport = "Please enter only one";
@@ -1922,11 +1924,11 @@ export default {
                     this.errors.push(this.passengers[i].error_passport);
                     this.passengers[i].passport = "";
                     this.passengers[i].idcard = "";
-                } else if (this.passengers[i].idcard.length != 13) {
+                } else if (this.passengers[i].idcard.trim().length != 13) {
                     this.passengers[i].error_idcard =
-                        "Password must be 13 characters.";
+                        "ID card must be 13 characters.";
                     this.errors.push(this.passengers[i].error_idcard);
-                } else if (isNaN(this.passengers[i].idcard)) {
+                } else if (isNaN(this.passengers[i].idcard.trim())) {
                     this.passengers[i].error_idcard =
                         "Please fill only number.";
                     this.errors.push(this.passengers[i].error_idcard);
@@ -1934,28 +1936,28 @@ export default {
                     this.passengers[i].error_idcard = null;
                 }
 
-                if (!this.passengers[i].religion) {
+                if (!this.passengers[i].religion.trim()) {
                     this.passengers[i].error_religion = "Please enter religion";
                     this.errors.push(this.passengers[i].error_religion);
                 } else {
                     this.passengers[i].error_religion = null;
                 }
 
-                if (!this.passengers[i].email) {
+                if (!this.passengers[i].email.trim()) {
                     this.passengers[i].error_email = "Please enter email";
                     this.errors.push(this.passengers[i].error_email);
                 } else {
                     this.passengers[i].error_email = null;
                 }
 
-                if (!this.passengers[i].phone) {
+                if (!this.passengers[i].phone.trim()) {
                     this.passengers[i].error_phone =
                         "Please fill your phone number.";
                     this.errors.push(this.passengers[i].error_phone);
-                } else if (isNaN(this.passengers[i].phone)) {
+                } else if (isNaN(this.passengers[i].phone.trim())) {
                     this.passengers[i].error_phone = "Please fill only number.";
                     this.errors.push(this.passengers[i].error_phone);
-                } else if (this.passengers[i].phone.length != 10) {
+                } else if (this.passengers[i].phone.trim().length != 10) {
                     this.passengers[i].error_phone =
                         "Phone number must be 10 characters.";
                     this.errors.push(this.passengers[i].error_phone);
@@ -1972,13 +1974,13 @@ export default {
                     this.payment.method == "MasterCard" ||
                     this.payment.method == "VisaCard"
                 ) {
-                    if (!this.payment.cardNumber) {
+                    if (!this.payment.cardNumber.trim()) {
                         this.error_cardNumber = "Please fill your card number.";
                         this.errors.push(this.error_cardNumber);
-                    } else if (isNaN(this.payment.cardNumber)) {
+                    } else if (isNaN(this.payment.cardNumber.trim())) {
                         this.error_cardNumber = "Please fill only number.";
                         this.errors.push(this.error_cardNumber);
-                    } else if (this.payment.cardNumber.length != 16) {
+                    } else if (this.payment.cardNumber.trim().length != 16) {
                         this.error_cardNumber =
                             "Card number must be 16 characters.";
                         this.errors.push(this.error_cardNumber);
@@ -1994,6 +1996,7 @@ export default {
                     (this.seats.length != this.no_of_passenger &&
                         this.seatReturn.length != this.no_of_passenger)
                 ) {
+                    window.scrollTo(0, 0);
                     swal.fire(
                         "please select seat",
                         "Cilck the button to continue!",
@@ -2026,17 +2029,20 @@ export default {
                                 // console.log("reservation", response.data);
                                 this.loadingPage = true;
                                 setTimeout(() => {
+                                    this.isLoading = false;
                                     this.loadingPage = false;
                                     this.changePage = false;
                                     this.isSelected = false;
                                     this.isReturnSelected = false;
                                     this.isActive = null;
                                     this.isReturnActive = null;
-                                    this.$router.go({ name: "reservation" });
-                                }, 1000);
+                                }, 2000);
+                                window.scrollTo(0, 0);
+                                this.$router.go({ name: "reservation" });
                             });
                         })
                         .catch(error => {
+                            this.isLoading = false;
                             swal.fire(
                                 "error!",
                                 "Cilck the button to continue!",
@@ -2055,6 +2061,7 @@ export default {
                     if (!this.changePage) {
                         this.loadingPage = true;
                         setTimeout(() => {
+                            window.scrollTo(0, 0);
                             this.seats = [];
                             this.seatReturn = [];
                             this.changePage = true;
@@ -2074,6 +2081,7 @@ export default {
                             if (result.value) {
                                 this.loadingPage = true;
                                 setTimeout(() => {
+                                    window.scrollTo(0, 0);
                                     this.loadingPage = false;
                                     this.changePage = false;
                                     this.isSelected = false;
@@ -2125,6 +2133,7 @@ export default {
                 if (!this.changePage) {
                     this.loadingPage = true;
                     setTimeout(() => {
+                        window.scrollTo(0, 0);
                         this.seats = [];
                         this.seatReturn = [];
                         this.changePage = true;
@@ -2144,6 +2153,7 @@ export default {
                         if (result.value) {
                             this.loadingPage = true;
                             setTimeout(() => {
+                                window.scrollTo(0, 0);
                                 this.loadingPage = false;
                                 this.changePage = false;
                                 this.isSelected = false;
