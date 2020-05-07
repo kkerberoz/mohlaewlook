@@ -138,7 +138,7 @@ export default {
                                 "success"
                             ).then(() => {
                                 localStorage.setItem("isLoggedIn", "true");
-                                this.$router.go({ name: "info" });
+                                this.$router.go({ name: "reservation" });
                             });
                         })
                         .catch(error => {

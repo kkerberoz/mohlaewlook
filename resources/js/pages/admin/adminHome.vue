@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid full-height">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -9,8 +9,8 @@
             loader="bars"
             background-color="#fff"
         ></loading>
-        <div class="container-xl">
-            <div class="row">
+        <div class="container-xl" style="margin-top:10%">
+            <div class="row flex-center">
                 <div class="col-md-4 col-xl-3">
                     <div class="card bg-c-blue order-card">
                         <div class="card-block">
@@ -58,7 +58,8 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="row flex-center">
                 <div class="col-md-4 col-xl-3">
                     <div class="card bg-c-pink order-card">
                         <div class="card-block">

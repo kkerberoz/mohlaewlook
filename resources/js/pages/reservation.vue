@@ -1626,6 +1626,7 @@
                         <div class="card-footer ">
                             <div class="col-md-12">
                                 <button
+                                    :disabled="isLoading"
                                     v-if="!changePage"
                                     style="color:#fff"
                                     id="card-reservation"
@@ -1638,6 +1639,7 @@
                             </div>
                             <div class="col-md-12">
                                 <button
+                                    :disabled="isLoading"
                                     v-if="changePage"
                                     style="color:#fff"
                                     id="card-reservation"
@@ -1652,6 +1654,7 @@
                                     ></i>
                                 </button>
                                 <button
+                                    :disabled="isLoading"
                                     v-if="changePage"
                                     style="color:#fff"
                                     id="card-reservation"
@@ -1834,7 +1837,7 @@ export default {
             this.errors = [];
             this.error_payMethod = null;
             this.error_cardNumber = null;
-            this.isLoading = true;
+
             for (var k = 0; k < this.no_of_passenger; k++) {
                 this.passengers[k].error_title = null;
                 this.passengers[k].error_name = null;
@@ -1991,17 +1994,19 @@ export default {
                 this.error_payMethod = null;
             }
             if (!this.errors.length) {
+                this.isLoading = true;
                 if (
                     this.seats.length != this.no_of_passenger ||
                     (this.seats.length != this.no_of_passenger &&
                         this.seatReturn.length != this.no_of_passenger)
                 ) {
-                    window.scrollTo(0, 0);
                     swal.fire(
                         "please select seat",
                         "Cilck the button to continue!",
                         "warning"
-                    ).then(() => {});
+                    ).then(() => {
+                        this.isLoading = false;
+                    });
                 } else {
                     let data = {
                         reserve_data: this.input,
