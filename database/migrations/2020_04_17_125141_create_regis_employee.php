@@ -21,7 +21,7 @@ class CreateRegisEmployee extends Migration
             $table->string('title', 10);
             $table->string('name', 64);
             $table->string('surname', 64);
-            $table->enum('gender', ['male', 'female','other']);
+            $table->enum('gender', ['male', 'female']);
             $table->string('id_card', 13);
             $table->date('DOB');
             $table->double('height');
@@ -31,10 +31,10 @@ class CreateRegisEmployee extends Migration
             $table->string('address', 128);
             $table->date('start_date');
             $table->double('salary');
-            $table->enum('employee_role', ['admin','flight_manager', 'human_resource', 'staff', 'pilot', 'flight_attendant']);
+            $table->enum('employee_role', ['admin', 'flight_manager', 'human_resource', 'staff', 'pilot', 'flight_attendant']);
             $table->string('airport_id', 3)->nullable();
             $table->foreign('airport_id')->references('airport_id')->on('airports')->onUpdate('cascade'); //FK
-            $table->enum('is_work',[1,0]);
+            $table->enum('is_work', [1, 0]);
 
             // $table->primary('user_id');
         });
