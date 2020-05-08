@@ -15122,7 +15122,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\r\n    background-color: #3b84c4;\n}\r\n/* 4699c2 */\r\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -15141,7 +15141,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.btn-admin {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    display: inline-flex;\n}\n.btn-admin:hover {\r\n    color: #fff;\r\n    border: none;\r\n    border-radius: 0px;\r\n    font-size: 30px;\r\n    transition: 0.3s;\r\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\r\n    overflow-y: hidden; /* Hide vertical scrollbar */\r\n    overflow-x: hidden;\r\n    display: none;\n}\n#btnLogout {\r\n    border: none;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\r\n    background: #eb3349;\r\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\r\n", ""]);
+exports.push([module.i, "\n.btn-admin {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    display: inline-flex;\n}\n.btn-admin:hover {\n    color: #fff;\n    border: none;\n    border-radius: 0px;\n    font-size: 30px;\n    transition: 0.3s;\n    display: inline-flex;\n}\n.hide-scroll::-webkit-scrollbar {\n    overflow-y: hidden; /* Hide vertical scrollbar */\n    overflow-x: hidden;\n    display: none;\n}\n#btnLogout {\n    border: none;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to right, #f45c43, #eb3349);\n}\n#btnLogout:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n    background: #eb3349;\n    background: linear-gradient(to left, #f45c43, #eb3349);\n}\n", ""]);
 
 // exports
 
@@ -15160,7 +15160,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.order-card {\n  color: #fff;\n}\n.bg-c-blue {\n  background: linear-gradient(45deg, #4099ff, #59e0c5);\n}\n.bg-c-supergreen {\n  background: linear-gradient(45deg, #59e0c5, #2ed8b6);\n}\n.bg-c-green {\n  background: linear-gradient(45deg, #2ed8b6, #ffcb80);\n}\n.bg-c-yellow {\n  background: linear-gradient(45deg, #ffb64d, #ff869a);\n}\n.bg-c-pink {\n  background: linear-gradient(45deg, #ff5370, pink);\n}\n.card {\n  border-radius: 5px;\n  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);\n  border: none;\n  margin-bottom: 30px;\n  transition: all 0.3s ease-in-out;\n}\n.card .card-block {\n  padding: 25px;\n}\n.order-card i {\n  font-size: 26px;\n}\n.f-left {\n  float: left;\n}\n.f-right {\n  float: right;\n}\n", ""]);
+exports.push([module.i, "\n.order-card {\r\n  color: #fff;\n}\n.bg-c-blue {\r\n  background: linear-gradient(45deg, #4099ff, #59e0c5);\n}\n.bg-c-supergreen {\r\n  background: linear-gradient(45deg, #59e0c5, #2ed8b6);\n}\n.bg-c-green {\r\n  background: linear-gradient(45deg, #2ed8b6, #ffcb80);\n}\n.bg-c-yellow {\r\n  background: linear-gradient(45deg, #ffb64d, #ff869a);\n}\n.bg-c-pink {\r\n  background: linear-gradient(45deg, #ff5370, pink);\n}\n.card {\r\n  border-radius: 5px;\r\n  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);\r\n  border: none;\r\n  margin-bottom: 30px;\r\n  transition: all 0.3s ease-in-out;\n}\n.card .card-block {\r\n  padding: 25px;\n}\n.order-card i {\r\n  font-size: 26px;\n}\n.f-left {\r\n  float: left;\n}\n.f-right {\r\n  float: right;\n}\r\n", ""]);
 
 // exports
 
@@ -15179,7 +15179,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.adminLogin {\r\n    width: 100%;\r\n    background: #1d976c;\r\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin {\r\n    border: none;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to right, #a8e063, #56ab2f);\r\n\r\n    border-radius: 0px;\n}\n#btnLogin:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    background: #56ab2f;\r\n    background: linear-gradient(to left, #a8e063, #56ab2f);\r\n    border-radius: 0px;\n}\n#btnLogin2 {\r\n    border: none;\r\n    border-radius: 0px;\n}\n#btnLogin2:hover {\r\n    border: none;\r\n    transition: 0.7s;\r\n    border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.adminLogin {\n    width: 100%;\n    background: #1d976c;\n    background: linear-gradient(to right, #93f9b9, #1d976c);\n}\n#cardLogin {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin {\n    border: none;\n    background: #56ab2f;\n    background: linear-gradient(to right, #a8e063, #56ab2f);\n\n    border-radius: 0px;\n}\n#btnLogin:hover {\n    border: none;\n    transition: 0.7s;\n    background: #56ab2f;\n    background: linear-gradient(to left, #a8e063, #56ab2f);\n    border-radius: 0px;\n}\n#btnLogin2 {\n    border: none;\n    border-radius: 0px;\n}\n#btnLogin2:hover {\n    border: none;\n    transition: 0.7s;\n    border-radius: 0px;\n}\n", ""]);
 
 // exports
 
@@ -15198,7 +15198,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card-subtitle {\r\n    font-family: \"Kanit\", sans-serif;\r\n    font-size: 20px;\r\n    color: #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-subtitle {\n    font-family: \"Kanit\", sans-serif;\n    font-size: 20px;\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -15217,7 +15217,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\r\n    /* background-color: #4bb4de; */\r\n    background: #ff7e5f;\r\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\r\n\r\n    /* background: #ff512f;\r\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\r\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\r\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -15236,7 +15236,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#btn-selected {\r\n    border-radius: 0px;\r\n    border: none;\r\n    color: #fff;\r\n    background: #f7dd72;\n}\n#btn-selected:hover {\r\n    border: none;\r\n    color: #fff;\r\n    transition: 0.3s;\r\n    font-size: 20px;\r\n    background: #f7dd72;\r\n    border-radius: 0px;\n}\r\n\r\n/* .reservation {\r\n    background-color: #4bb4de;\r\n} */\n.card-header {\r\n    border: none;\r\n    border-radius: 0;\r\n    background-color: #f79c65;\r\n    display: block;\r\n    color: #fff;\n}\r\n/* #f8d49b */\n#card-reservation {\r\n    border: none;\r\n    border-radius: 0;\n}\n.column-reservation {\r\n    float: left;\r\n    width: 100%;\r\n    padding: 0 10px;\r\n    margin-top: 10px;\n}\n.card-reser {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    padding: 16px;\r\n    text-align: center;\r\n    color: #fff;\r\n    background-color: #a5c882;\n}\r\n", ""]);
+exports.push([module.i, "\n#btn-selected {\n    border-radius: 0px;\n    border: none;\n    color: #fff;\n    background: #f7dd72;\n}\n#btn-selected:hover {\n    border: none;\n    color: #fff;\n    transition: 0.3s;\n    font-size: 20px;\n    background: #f7dd72;\n    border-radius: 0px;\n}\n\n/* .reservation {\n    background-color: #4bb4de;\n} */\n.card-header {\n    border: none;\n    border-radius: 0;\n    background-color: #f79c65;\n    display: block;\n    color: #fff;\n}\n/* #f8d49b */\n#card-reservation {\n    border: none;\n    border-radius: 0;\n}\n.column-reservation {\n    float: left;\n    width: 100%;\n    padding: 0 10px;\n    margin-top: 10px;\n}\n.card-reser {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    padding: 16px;\n    text-align: center;\n    color: #fff;\n    background-color: #a5c882;\n}\n", ""]);
 
 // exports
 
@@ -60513,18 +60513,20 @@ var staticRenderFns = [
         _c("div", { staticClass: "row flex-center" }, [
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [_vm._v("Phoo Khao")]),
+              _c("div", { staticClass: "card-body" }, [_vm._v("Mheey")]),
               _vm._v(" "),
               _c("div", { staticClass: "card-footer" }, [
                 _c("img", {
                   staticStyle: { width: "100%", height: "auto" },
                   attrs: { src: "/assets/Mheee.jpg", alt: "test" }
                 }),
-                _vm._v("\n            Krittaphon Raksakul\n            "),
+                _vm._v(
+                  "\n                        Krittaphon Raksakul\n                        "
+                ),
                 _c("br"),
-                _vm._v("61070501003\n            "),
+                _vm._v("61070501003 "),
                 _c("br"),
-                _vm._v("SECTION A\n          ")
+                _vm._v("SECTION A\n                    ")
               ])
             ])
           ]),
@@ -60538,11 +60540,13 @@ var staticRenderFns = [
                   staticStyle: { width: "100%", height: "auto" },
                   attrs: { src: "/assets/Boss.jpg", alt: "test" }
                 }),
-                _vm._v("\n            Narawit Wongnom\n            "),
+                _vm._v(
+                  "\n                        Narawit Wongnom\n                        "
+                ),
                 _c("br"),
-                _vm._v("61070501029\n            "),
+                _vm._v("61070501029 "),
                 _c("br"),
-                _vm._v("SECTION A\n          ")
+                _vm._v("SECTION A\n                    ")
               ])
             ])
           ]),
@@ -60556,11 +60560,13 @@ var staticRenderFns = [
                   staticStyle: { width: "100%", height: "215px" },
                   attrs: { src: "/assets/Ratty.jpg", alt: "test" }
                 }),
-                _vm._v("\n            Wasurat Chaiyapumsakul\n            "),
+                _vm._v(
+                  "\n                        Wasurat Chaiyapumsakul\n                        "
+                ),
                 _c("br"),
-                _vm._v("61070501049\n            "),
+                _vm._v("61070501049 "),
                 _c("br"),
-                _vm._v("SECTION B\n          ")
+                _vm._v("SECTION B\n                    ")
               ])
             ])
           ]),
@@ -60574,11 +60580,13 @@ var staticRenderFns = [
                   staticStyle: { width: "100%", height: "auto" },
                   attrs: { src: "/assets/Divee.jpg", alt: "test" }
                 }),
-                _vm._v("\n            Kasidit Sang-Utai\n            "),
+                _vm._v(
+                  "\n                        Kasidit Sang-Utai\n                        "
+                ),
                 _c("br"),
-                _vm._v("61070501057\n            "),
+                _vm._v("61070501057 "),
                 _c("br"),
-                _vm._v("SECTION B\n          ")
+                _vm._v("SECTION B\n                    ")
               ])
             ])
           ])
@@ -81737,8 +81745,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Project Database\mohlaewlook\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Project Database\mohlaewlook\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
