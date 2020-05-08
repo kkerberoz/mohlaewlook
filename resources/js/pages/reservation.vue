@@ -1795,27 +1795,44 @@ export default {
     beforeMount() {
         this.loadingPage = true;
         axios.get("/sanctum/csrf-cookie").then(response => {
-            axios.get("api/user").then(response => {
-                this.user_id = response.data["user_id"];
-                this.loadingPage = false;
-            });
+            axios
+                .get("api/user")
+                .then(response => {
+                    this.user_id = response.data["user_id"];
+                    this.loadingPage = false;
+                })
+                .catch(error => {
+                    if (error.response.status === 401) {
+                        this.loadingPage = false;
+                        swal.fire(
+                            "Please log in.",
+                            "Cilck the button to continue!",
+                            "error"
+                        ).then(() => {
+                            this.$router.push({ name: "login" });
+                        });
+                    }
+                });
         });
         // setTimeout(() => {
         // }, 1000);
-        axios.get("api/user/getLocation").then(response => {
-            response.data.forEach(element => {
-                this.airports.push({
-                    name:
-                        element["airport_id"] +
-                        " - " +
-                        element["airport_name"] +
-                        " [" +
-                        element["airport_region"] +
-                        "]",
-                    value: element
+        axios
+            .get("api/user/getLocation")
+            .then(response => {
+                response.data.forEach(element => {
+                    this.airports.push({
+                        name:
+                            element["airport_id"] +
+                            " - " +
+                            element["airport_name"] +
+                            " [" +
+                            element["airport_region"] +
+                            "]",
+                        value: element
+                    });
                 });
-            });
-        });
+            })
+            .catch(error => {});
     },
 
     methods: {

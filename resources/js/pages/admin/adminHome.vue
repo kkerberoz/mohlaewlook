@@ -156,6 +156,13 @@ export default {
                 this.loadingPage = false;
             })
             .catch(error => {
+                this.count.user = 0;
+                this.count.employee = 0;
+                this.count.pilot = 0;
+                this.count.air = 0;
+                this.count.airport = 0;
+                this.count.staff = 0;
+                this.count.aircraft = 0;
                 this.loadingPage = false;
             });
     }
