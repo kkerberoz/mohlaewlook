@@ -2024,7 +2024,7 @@ export default {
                     axios
                         .post("api/user/reserveSendData", data)
                         .then(response => {
-                            console.log(response.data);
+                            // console.log(response.data);
 
                             swal.fire(
                                 "Reservation Success!",
@@ -2206,7 +2206,8 @@ export default {
                     this.buss2 = response.data.buss;
                     this.ecos2 = response.data.ecos;
                     this.R_already_seat = response.data.already_seat;
-                });
+                })
+                .catch(error => {});
         },
         departSelected(showFlight, index) {
             this.isSelected = showFlight.selected = true;
@@ -2223,7 +2224,8 @@ export default {
                     this.buss = response.data.buss;
                     this.ecos = response.data.ecos;
                     this.D_already_seat = response.data.already_seat;
-                });
+                })
+                .catch(error => {});
         },
         showReturn() {
             this.back = true;
@@ -2314,12 +2316,17 @@ export default {
                 input: this.input,
                 passengerCount: this.passengers.length
             };
-            axios.post("/api/user/getFlight", data).then(response => {
-                this.loadingPage = false;
-                this.queryFlight = response.data.flight_depart;
-                this.queryReturnFlight = response.data.flight_return;
-                this.no_of_passenger = this.passengers.length;
-            });
+            axios
+                .post("/api/user/getFlight", data)
+                .then(response => {
+                    this.loadingPage = false;
+                    this.queryFlight = response.data.flight_depart;
+                    this.queryReturnFlight = response.data.flight_return;
+                    this.no_of_passenger = this.passengers.length;
+                })
+                .catch(error => {
+                    this.loadingPage = false;
+                });
         }
         if (
             !this.input.class ||

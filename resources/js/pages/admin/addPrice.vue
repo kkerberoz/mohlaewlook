@@ -234,15 +234,18 @@ export default {
     },
 
     beforeMount() {
-        axios.post("/api/user/reserveSendData").then(response => {
-            console.log(response.data);
-        });
+        // axios.post("/api/user/reserveSendData").then(response => {
+        //     // console.log(response.data);
+        // });
         this.loadingPage = true;
-        axios.get("/api/backend/getPrice").then(response => {
-            this.flights = response.data;
-            console.log("flight", this.flights);
-            this.loadingPage = false;
-        });
+        axios
+            .get("/api/backend/getPrice")
+            .then(response => {
+                this.flights = response.data;
+                // console.log("flight", this.flights);
+                this.loadingPage = false;
+            })
+            .catch(error => {});
     },
     methods: {
         editPrice(flight) {
@@ -310,17 +313,29 @@ export default {
             if (!this.errors.length) {
                 this.isLoading = true;
                 let data = { input: this.input };
-                axios.post("/api/backend/editPrice", data).then(response => {
-                    swal.fire(
-                        "Update Success!",
-                        "Cilck the button to continue!",
-                        "success"
-                    ).then(() => {
-                        this.isLoading = false;
-                        $("#addNew").modal("hide");
-                        this.$router.go({ name: "addPrice" });
+                axios
+                    .post("/api/backend/editPrice", data)
+                    .then(response => {
+                        swal.fire(
+                            "Update Success!",
+                            "Cilck the button to continue!",
+                            "success"
+                        ).then(() => {
+                            this.isLoading = false;
+                            $("#addNew").modal("hide");
+                            this.$router.go({ name: "addPrice" });
+                        });
+                    })
+                    .catch(error => {
+                        swal.fire(
+                            "Update Fail!",
+                            "Cilck the button to continue!",
+                            "error"
+                        ).then(() => {
+                            this.isLoading = false;
+                            $("#addNew").modal("hide");
+                        });
                     });
-                });
             }
         }
     }

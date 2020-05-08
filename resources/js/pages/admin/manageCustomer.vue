@@ -303,11 +303,14 @@ export default {
     },
     beforeMount() {
         this.loadingPage = true;
-        axios.get("/api/backend/getCustomer").then(response => {
-            this.users = response.data;
-            console.log(this.users);
-            this.loadingPage = false;
-        });
+        axios
+            .get("/api/backend/getCustomer")
+            .then(response => {
+                this.users = response.data;
+                // console.log(this.users);
+                this.loadingPage = false;
+            })
+            .catch(error => {});
     },
     methods: {
         newModal() {
@@ -430,7 +433,7 @@ export default {
             } else {
                 this.error_email = null;
             }
-            console.log(this.errors.length);
+            // console.log(this.errors.length);
 
             if (!this.errors.length) {
                 this.isLoading = true;
@@ -456,7 +459,8 @@ export default {
                                 $("#addNew").modal("hide");
                                 this.$router.go({ name: "manageCustomer" });
                             });
-                        });
+                        })
+                        .catch(error => {});
                 });
             } else {
                 this.isLoading = false;
@@ -533,7 +537,7 @@ export default {
             } else {
                 this.error_email = null;
             }
-            console.log(this.errors.length);
+            // console.log(this.errors.length);
 
             if (!this.errors.length) {
                 this.isLoading = true;
@@ -547,35 +551,39 @@ export default {
                     email: this.input.email
                 };
                 axios.get("/sanctum/csrf-cookie").then(response => {
-                    axios.post("/api/user/regis", data).then(response => {
-                        if (response.data.errorU == 1) {
-                            this.isLoading = false;
-                            this.input.username = "";
-                            this.input.error_username =
-                                "This Username is already exist";
-                            this.errors.push(this.error_username);
-                            this.errors = [];
-                        } else if (response.data.errorE == 1) {
-                            this.isLoading = false;
-                            this.input.email = "";
-                            this.error_email = "This E-mail is already exist";
-                            this.errors.push(this.error_email);
-                            this.errors = [];
-                        } else if (
-                            response.data.errorU == 0 &&
-                            response.data.errorE == 0
-                        ) {
-                            currentObj.output = response.data;
-                            swal.fire(
-                                "Register Success!",
-                                "Cilck the button to continue!",
-                                "success"
-                            ).then(() => {
-                                $("#addNew").modal("hide");
-                                this.$router.go({ name: "manageCustomer" });
-                            });
-                        }
-                    });
+                    axios
+                        .post("/api/user/regis", data)
+                        .then(response => {
+                            if (response.data.errorU == 1) {
+                                this.isLoading = false;
+                                this.input.username = "";
+                                this.input.error_username =
+                                    "This Username is already exist";
+                                this.errors.push(this.error_username);
+                                this.errors = [];
+                            } else if (response.data.errorE == 1) {
+                                this.isLoading = false;
+                                this.input.email = "";
+                                this.error_email =
+                                    "This E-mail is already exist";
+                                this.errors.push(this.error_email);
+                                this.errors = [];
+                            } else if (
+                                response.data.errorU == 0 &&
+                                response.data.errorE == 0
+                            ) {
+                                currentObj.output = response.data;
+                                swal.fire(
+                                    "Register Success!",
+                                    "Cilck the button to continue!",
+                                    "success"
+                                ).then(() => {
+                                    $("#addNew").modal("hide");
+                                    this.$router.go({ name: "manageCustomer" });
+                                });
+                            }
+                        })
+                        .catch(error => {});
                 });
             } else {
                 this.isLoading = false;

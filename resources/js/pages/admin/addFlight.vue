@@ -683,7 +683,7 @@ export default {
                 axios
                     .post("/api/backend/addFlight", this.input)
                     .then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         swal.fire(
                             "Register Success!",
                             "Cilck the button to continue!",
@@ -691,7 +691,8 @@ export default {
                         ).then(() => {
                             this.$router.go({ name: "addFlight" });
                         });
-                    });
+                    })
+                    .catch(error => {});
             } else {
                 swal.fire(
                     "Please success your form!",
@@ -703,19 +704,27 @@ export default {
     },
     beforeMount() {
         this.loadingPage = true;
-        axios.get("/api/backend/getAirports").then(response => {
-            response.data.forEach(airport => {
-                this.locations.push({
-                    value: airport["airport_id"],
-                    name:
-                        airport["airport_id"] + " - " + airport["airport_name"]
+        axios
+            .get("/api/backend/getAirports")
+            .then(response => {
+                response.data.forEach(airport => {
+                    this.locations.push({
+                        value: airport["airport_id"],
+                        name:
+                            airport["airport_id"] +
+                            " - " +
+                            airport["airport_name"]
+                    });
                 });
-            });
-            this.loadingPage = false;
-        });
-        axios.get("/api/backend/getFlightNo").then(response => {
-            this.flights = response.data;
-        });
+                this.loadingPage = false;
+            })
+            .catch(error => {});
+        axios
+            .get("/api/backend/getFlightNo")
+            .then(response => {
+                this.flights = response.data;
+            })
+            .catch(error => {});
     },
     beforeUpdate() {
         // for check depart location, depart date and depart time are selected.
@@ -752,7 +761,7 @@ export default {
                     time: this.input.departTime
                 })
                 .then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
 
                     // show aircraft
                     var aircraft = response.data.Aircraft;
@@ -857,7 +866,8 @@ export default {
                             type: attendant[i]["type"]
                         });
                     }
-                });
+                })
+                .catch(error => {});
         }
         // show information of each aircraft
         if (this.input.aircraftID != null)
@@ -868,7 +878,7 @@ export default {
         // show information of each pilot
         if (this.input.captain != this.caption_check) {
             this.caption_check = this.input.captain;
-            console.log(this.input.captain);
+            // console.log(this.input.captain);
 
             if (this.input.captain) {
                 document.getElementById("pilot_info").innerHTML =

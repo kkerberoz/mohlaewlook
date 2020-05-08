@@ -449,16 +449,19 @@ export default {
 
             if (!this.errors.length) {
                 this.isLoading = true;
-                axios.post("/api/backend/addAircraft", data).then(response => {
-                    // console.log(response.data);
-                    swal.fire(
-                        "Register Success!",
-                        "Cilck the button to continue!",
-                        "success"
-                    ).then(() => {
-                        this.$router.push({ name: "addAircraft" });
-                    });
-                });
+                axios
+                    .post("/api/backend/addAircraft", data)
+                    .then(response => {
+                        // console.log(response.data);
+                        swal.fire(
+                            "Register Success!",
+                            "Cilck the button to continue!",
+                            "success"
+                        ).then(() => {
+                            this.$router.push({ name: "addAircraft" });
+                        });
+                    })
+                    .catch(error => {});
             } else {
                 this.isLoading = false;
                 swal.fire(

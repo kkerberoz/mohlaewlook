@@ -129,7 +129,7 @@ export default {
                 .post("/api/backend/analytic3_show", data)
                 .then(response => {
                     this.data = response.data;
-                    console.log(this.data);
+                    // console.log(this.data);
                     this.showTotal = true;
                     this.loadingPage = false;
                 })

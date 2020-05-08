@@ -148,7 +148,7 @@ export default {
                     .then(response => {
                         this.showTotal = true;
                         this.data = response.data;
-                        console.log(this.data);
+                        // console.log(this.data);
                         this.data.forEach(each_data => {
                             this.sum += each_data["class_count"];
                         });

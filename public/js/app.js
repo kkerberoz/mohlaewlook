@@ -2538,7 +2538,7 @@ __webpack_require__.r(__webpack_exports__);
               name: "addAircraft"
             });
           });
-        });
+        })["catch"](function (error) {});
       } else {
         this.isLoading = false;
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
@@ -3512,13 +3512,13 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.errors_input) {
         axios.post("/api/backend/addFlight", this.input).then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
             _this2.$router.go({
               name: "addFlight"
             });
           });
-        });
+        })["catch"](function (error) {});
       } else {
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
@@ -3536,10 +3536,10 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
       _this3.loadingPage = false;
-    });
+    })["catch"](function (error) {});
     axios.get("/api/backend/getFlightNo").then(function (response) {
       _this3.flights = response.data;
-    });
+    })["catch"](function (error) {});
   },
   beforeUpdate: function beforeUpdate() {
     var _this4 = this;
@@ -3563,8 +3563,8 @@ __webpack_require__.r(__webpack_exports__);
         date: this.input.departDate,
         time: this.input.departTime
       }).then(function (response) {
-        console.log(response.data); // show aircraft
-
+        // console.log(response.data);
+        // show aircraft
         var aircraft = response.data.Aircraft;
         var aircraft_brand = response.data.Aircraft_Brand;
         var aircraft_model = response.data.Aircraft_Model;
@@ -3635,15 +3635,14 @@ __webpack_require__.r(__webpack_exports__);
             type: attendant[i]["type"]
           });
         }
-      });
+      })["catch"](function (error) {});
     } // show information of each aircraft
 
 
     if (this.input.aircraftID != null) document.getElementById("aircraft_info").innerHTML = this.aircraft_array_info[this.input.aircraftID.value];else document.getElementById("aircraft_info").innerHTML = null; // show information of each pilot
 
     if (this.input.captain != this.caption_check) {
-      this.caption_check = this.input.captain;
-      console.log(this.input.captain);
+      this.caption_check = this.input.captain; // console.log(this.input.captain);
 
       if (this.input.captain) {
         document.getElementById("pilot_info").innerHTML = "<b>Name</b>: " + this.crew_array_info[this.input.captain.value]["name"] + " " + this.crew_array_info[this.input.captain.value]["surname"] + "<br>" + "<b>Flying experience:</b> " + this.crew_array_info[this.input.captain.value]["count"] + " Times";
@@ -3934,15 +3933,15 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var _this = this;
 
-    axios.post("/api/user/reserveSendData").then(function (response) {
-      console.log(response.data);
-    });
+    // axios.post("/api/user/reserveSendData").then(response => {
+    //     // console.log(response.data);
+    // });
     this.loadingPage = true;
     axios.get("/api/backend/getPrice").then(function (response) {
-      _this.flights = response.data;
-      console.log("flight", _this.flights);
+      _this.flights = response.data; // console.log("flight", this.flights);
+
       _this.loadingPage = false;
-    });
+    })["catch"](function (error) {});
   },
   methods: {
     editPrice: function editPrice(flight) {
@@ -4013,6 +4012,11 @@ __webpack_require__.r(__webpack_exports__);
             _this2.$router.go({
               name: "addPrice"
             });
+          });
+        })["catch"](function (error) {
+          swal.fire("Update Fail!", "Cilck the button to continue!", "error").then(function () {
+            _this2.isLoading = false;
+            $("#addNew").modal("hide");
           });
         });
       }
@@ -4552,8 +4556,8 @@ __webpack_require__.r(__webpack_exports__);
 
     this.loadingPage = true;
     axios.get("/api/backend/getCount").then(function (response) {
-      _this.count = response.data;
-      console.log(_this.count);
+      _this.count = response.data; // console.log(this.count);
+
       _this.loadingPage = false;
     })["catch"](function (error) {
       _this.loadingPage = false;
@@ -5100,10 +5104,10 @@ __webpack_require__.r(__webpack_exports__);
 
     this.loadingPage = true;
     axios.get("/api/backend/getCustomer").then(function (response) {
-      _this.users = response.data;
-      console.log(_this.users);
+      _this.users = response.data; // console.log(this.users);
+
       _this.loadingPage = false;
-    });
+    })["catch"](function (error) {});
   },
   methods: {
     newModal: function newModal() {
@@ -5214,9 +5218,8 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.push(this.error_email);
       } else {
         this.error_email = null;
-      }
+      } // console.log(this.errors.length);
 
-      console.log(this.errors.length);
 
       if (!this.errors.length) {
         this.isLoading = true;
@@ -5239,7 +5242,7 @@ __webpack_require__.r(__webpack_exports__);
                 name: "manageCustomer"
               });
             });
-          });
+          })["catch"](function (error) {});
         });
       } else {
         this.isLoading = false;
@@ -5312,9 +5315,8 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.push(this.error_email);
       } else {
         this.error_email = null;
-      }
+      } // console.log(this.errors.length);
 
-      console.log(this.errors.length);
 
       if (!this.errors.length) {
         this.isLoading = true;
@@ -5355,7 +5357,7 @@ __webpack_require__.r(__webpack_exports__);
                 });
               });
             }
-          });
+          })["catch"](function (error) {});
         });
       } else {
         this.isLoading = false;
@@ -5381,6 +5383,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
 //
 //
 //
@@ -5534,8 +5539,9 @@ __webpack_require__.r(__webpack_exports__);
           var data = {
             work_id: work_id
           };
-          axios.post('/api/backend/updateWorkStatus', data).then(function (response) {
-            console.log(response.data);
+          axios.post("/api/backend/updateWorkStatus", data).then(function (response) {
+            // console.log(response.data);
+            swal.fire("Status work has been cancelled", "Cilck the button to continue!", "success");
           });
         } else {
           swal.fire("Cancelled", "Status work date has not changed.", "error");
@@ -5555,8 +5561,8 @@ __webpack_require__.r(__webpack_exports__);
           array_date: this.selected
         };
         axios.post("/api/backend/getworkday", data).then(function (response) {
-          _this.works = response.data;
-          console.log(_this.works);
+          _this.works = response.data; // console.log(this.works);
+
           _this.showTotal = true;
           _this.isLoading = false;
         })["catch"](function (error) {
@@ -7001,9 +7007,9 @@ __webpack_require__.r(__webpack_exports__);
       _this2.data = response.data.analysis;
       _this2.selected = [{
         year: response.data.year
-      }];
-      console.log(_this2.selected);
-      console.log(response.data);
+      }]; // console.log(this.selected);
+      // console.log(response.data);
+
       _this2.showTotal = true;
 
       _this2.data.forEach(function (each_data) {
@@ -7181,8 +7187,7 @@ __webpack_require__.r(__webpack_exports__);
         };
         axios.post("/api/backend/analytic2_show", scope).then(function (response) {
           _this.showTotal = true;
-          _this.data = response.data;
-          console.log(_this.data);
+          _this.data = response.data; // console.log(this.data);
 
           _this.data.forEach(function (each_data) {
             _this.sum += each_data["class_count"];
@@ -7347,8 +7352,8 @@ __webpack_require__.r(__webpack_exports__);
         top: Number(this.input)
       };
       axios.post("/api/backend/analytic3_show", data).then(function (response) {
-        _this.data = response.data;
-        console.log(_this.data);
+        _this.data = response.data; // console.log(this.data);
+
         _this.showTotal = true;
         _this.loadingPage = false;
       })["catch"](function (error) {
@@ -10151,7 +10156,7 @@ __webpack_require__.r(__webpack_exports__);
             flight: [this.depart_Selected, this.return_Selected]
           };
           axios.post("api/user/reserveSendData", data).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             swal.fire("Reservation Success!", "Cilck the button to continue!", "success").then(function () {
               // console.log("reservation", response.data);
               _this2.loadingPage = true;
@@ -10289,7 +10294,7 @@ __webpack_require__.r(__webpack_exports__);
         _this4.buss2 = response.data.buss;
         _this4.ecos2 = response.data.ecos;
         _this4.R_already_seat = response.data.already_seat;
-      });
+      })["catch"](function (error) {});
     },
     departSelected: function departSelected(showFlight, index) {
       var _this5 = this;
@@ -10304,7 +10309,7 @@ __webpack_require__.r(__webpack_exports__);
         _this5.buss = response.data.buss;
         _this5.ecos = response.data.ecos;
         _this5.D_already_seat = response.data.already_seat;
-      });
+      })["catch"](function (error) {});
     },
     showReturn: function showReturn() {
       this.back = true;
@@ -10387,6 +10392,8 @@ __webpack_require__.r(__webpack_exports__);
         _this6.queryFlight = response.data.flight_depart;
         _this6.queryReturnFlight = response.data.flight_return;
         _this6.no_of_passenger = _this6.passengers.length;
+      })["catch"](function (error) {
+        _this6.loadingPage = false;
       });
     }
 
@@ -15160,7 +15167,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.order-card {\r\n  color: #fff;\n}\n.bg-c-blue {\r\n  background: linear-gradient(45deg, #4099ff, #59e0c5);\n}\n.bg-c-supergreen {\r\n  background: linear-gradient(45deg, #59e0c5, #2ed8b6);\n}\n.bg-c-green {\r\n  background: linear-gradient(45deg, #2ed8b6, #ffcb80);\n}\n.bg-c-yellow {\r\n  background: linear-gradient(45deg, #ffb64d, #ff869a);\n}\n.bg-c-pink {\r\n  background: linear-gradient(45deg, #ff5370, pink);\n}\n.card {\r\n  border-radius: 5px;\r\n  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);\r\n  border: none;\r\n  margin-bottom: 30px;\r\n  transition: all 0.3s ease-in-out;\n}\n.card .card-block {\r\n  padding: 25px;\n}\n.order-card i {\r\n  font-size: 26px;\n}\n.f-left {\r\n  float: left;\n}\n.f-right {\r\n  float: right;\n}\r\n", ""]);
+exports.push([module.i, "\n.order-card {\n    color: #fff;\n}\n.bg-c-blue {\n    background: linear-gradient(45deg, #4099ff, #59e0c5);\n}\n.bg-c-supergreen {\n    background: linear-gradient(45deg, #59e0c5, #2ed8b6);\n}\n.bg-c-green {\n    background: linear-gradient(45deg, #2ed8b6, #ffcb80);\n}\n.bg-c-yellow {\n    background: linear-gradient(45deg, #ffb64d, #ff869a);\n}\n.bg-c-pink {\n    background: linear-gradient(45deg, #ff5370, pink);\n}\n.card {\n    border-radius: 5px;\n    box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);\n    border: none;\n    margin-bottom: 30px;\n    transition: all 0.3s ease-in-out;\n}\n.card .card-block {\n    padding: 25px;\n}\n.order-card i {\n    font-size: 26px;\n}\n.f-left {\n    float: left;\n}\n.f-right {\n    float: right;\n}\n", ""]);
 
 // exports
 
@@ -57807,9 +57814,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
-                    "\r\n                                " +
+                    "\n                            " +
                       _vm._s(_vm.error_user_id) +
-                      "\r\n                            "
+                      "\n                        "
                   )
                 ])
               ])

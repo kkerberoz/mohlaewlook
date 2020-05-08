@@ -1,5 +1,5 @@
 <template>
-<div class="container-fulid">
+    <div class="container-fulid">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -51,11 +51,15 @@
                         @click.prevent="submit"
                         class="btn btn-success"
                     >
-                        <span v-show="!isLoading">&nbsp; Find work days &nbsp;</span>
-                        <i class="fas fa-spinner fa-pulse" v-show="isLoading"></i>
+                        <span v-show="!isLoading"
+                            >&nbsp; Find work days &nbsp;</span
+                        >
+                        <i
+                            class="fas fa-spinner fa-pulse"
+                            v-show="isLoading"
+                        ></i>
                     </button>
                 </div>
-
             </div>
             <hr class="mb-4 mt-4" />
         </div>
@@ -63,43 +67,42 @@
             <div class="table-responsive" v-show="showTotal">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">User_id</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Surname</th>
-                        <th scope="col">Work date</th>
-                        <th scope="col">Flight ID</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action (cancel)</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">User_id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Work date</th>
+                            <th scope="col">Flight ID</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action (cancel)</th>
+                        </tr>
                     </thead>
                     <tbody v-for="(work, id) in works" :key="id">
-                    <tr>
-                        <th scope="row">{{ Number(id) + 1 }}</th>
-                        <td>{{ work.user_id }}</td>
-                        <td>{{ work.title }}</td>
-                        <td>{{ work.name }}</td>
-                        <td>{{ work.surname }}</td>
-                        <td>{{ work.work_date }}</td>
-                        <td>{{ work.flight_id }}</td>
-                        <td>{{ work.confirm_status }}</td>
-                        <td>
-                            <button
-                                class="btn"
-                                @click="cancel(work.work_id)"
-                                style="color: Dodgerblue;"
-                            >
-                                <i class="fas fa-window-close fa-2x"></i>
-                            </button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th scope="row">{{ Number(id) + 1 }}</th>
+                            <td>{{ work.user_id }}</td>
+                            <td>{{ work.title }}</td>
+                            <td>{{ work.name }}</td>
+                            <td>{{ work.surname }}</td>
+                            <td>{{ work.work_date }}</td>
+                            <td>{{ work.flight_id }}</td>
+                            <td>{{ work.confirm_status }}</td>
+                            <td>
+                                <button
+                                    class="btn"
+                                    @click="cancel(work.work_id)"
+                                    style="color: Dodgerblue;"
+                                >
+                                    <i class="fas fa-window-close fa-2x"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -127,8 +130,8 @@ export default {
                 isMultipleDatePicker: true,
                 markedDates: []
             },
-            error_user_id:"",
-            error_date:""
+            error_user_id: "",
+            error_date: ""
         };
     },
 
@@ -136,8 +139,7 @@ export default {
         clickDay() {
             this.selected = this.calendar.selectedDates;
         },
-        cancel(work_id){
-
+        cancel(work_id) {
             swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -148,11 +150,17 @@ export default {
                 confirmButtonText: "Yes, change it!"
             }).then(result => {
                 if (result.value) {
-                    let data = { work_id:work_id};
-                    axios.post('/api/backend/updateWorkStatus',data)
-                    .then(response =>{
-                        console.log(response.data);
-                    });
+                    let data = { work_id: work_id };
+                    axios
+                        .post("/api/backend/updateWorkStatus", data)
+                        .then(response => {
+                            // console.log(response.data);
+                            swal.fire(
+                                "Status work has been cancelled",
+                                "Cilck the button to continue!",
+                                "success"
+                            );
+                        });
                 } else {
                     swal.fire(
                         "Cancelled",
@@ -161,9 +169,6 @@ export default {
                     );
                 }
             });
-
-
-
         },
         submit(e) {
             //console.log(this.user_id,this.selected);
@@ -178,9 +183,8 @@ export default {
                 axios
                     .post("/api/backend/getworkday", data)
                     .then(response => {
-
                         this.works = response.data;
-                        console.log(this.works);
+                        // console.log(this.works);
                         this.showTotal = true;
                         this.isLoading = false;
                     })
@@ -201,7 +205,7 @@ export default {
                 );
             }
         }
-    },
+    }
     // beforeMount() {
     //     this.loadingPage = true;
     //     const today = new Date().toLocaleDateString();
@@ -335,4 +339,3 @@ export default {
     left: calc(50% - 4px);
 }
 </style>
-

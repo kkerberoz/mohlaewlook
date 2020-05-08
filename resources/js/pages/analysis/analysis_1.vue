@@ -136,8 +136,8 @@ export default {
         axios.post("/api/backend/analytic1_show", year).then(response => {
             this.data = response.data.analysis;
             this.selected = [{ year: response.data.year }];
-            console.log(this.selected);
-            console.log(response.data);
+            // console.log(this.selected);
+            // console.log(response.data);
             this.showTotal = true;
             this.data.forEach(each_data => {
                 this.sum += each_data["flight_no_count"];
