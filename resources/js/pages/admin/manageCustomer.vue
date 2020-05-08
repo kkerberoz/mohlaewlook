@@ -460,7 +460,9 @@ export default {
                                 this.$router.go({ name: "manageCustomer" });
                             });
                         })
-                        .catch(error => {});
+                        .catch(error => {
+                            this.isLoading = false;
+                        });
                 });
             } else {
                 this.isLoading = false;

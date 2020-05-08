@@ -266,7 +266,7 @@ export default {
                             "success"
                         ).then(() => {
                             this.isLoading = false;
-                            this.$router.push({ name: "addAirport" });
+                            this.$router.go({ name: "addAirport" });
                         });
                     })
                     .catch(error => {

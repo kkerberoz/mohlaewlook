@@ -458,10 +458,13 @@ export default {
                             "Cilck the button to continue!",
                             "success"
                         ).then(() => {
-                            this.$router.push({ name: "addAircraft" });
+                            this.isLoading = false;
+                            this.$router.go({ name: "addAircraft" });
                         });
                     })
-                    .catch(error => {});
+                    .catch(error => {
+                        this.isLoading = false;
+                    });
             } else {
                 this.isLoading = false;
                 swal.fire(

@@ -316,7 +316,7 @@ export default {
                         "Cilck the button to continue!",
                         "error"
                     ).then(() => {
-                        this.$router.push({ name: "adminLogin" });
+                        this.$router.go({ name: "adminLogin" });
                     });
                 }
             });

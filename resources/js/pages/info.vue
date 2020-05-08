@@ -1,5 +1,14 @@
 <template>
     <div class="container-fulid full-height">
+        <loading
+            :active.sync="loadingPage"
+            :can-cancel="false"
+            :is-full-page="fullPage"
+            :opacity="0.9"
+            color="#f87a2b"
+            loader="bars"
+            background-color="#fff"
+        ></loading>
         <div class="container-xl center">
             <h1>about us</h1>
             <hr class="mb-4 mt-4" />
@@ -65,3 +74,22 @@
         </div>
     </div>
 </template>
+<script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+export default {
+    components: { Loading },
+    data() {
+        return {
+            loadingPage: false,
+            fullPage: true
+        };
+    },
+    beforeMount() {
+        this.loadingPage = true;
+        setTimeout(() => {
+            this.loadingPage = false;
+        }, 1000);
+    }
+};
+</script>
