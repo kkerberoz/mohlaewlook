@@ -1,51 +1,57 @@
 <template>
-    <div class="container-fulid full-height">
-        <div class="container-xl center">
-            <h1>about us</h1>
-            <hr class="mb-4 mt-4" />
-            <div class="row flex-center">
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">Hello,World</div>
-                        <div class="card-footer">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">Hello,World</div>
-                        <div class="card-footer">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">Hello,World</div>
-                        <div class="card-footer">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">Hello,World</div>
-                        <div class="card-footer">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s
-                        </div>
-                    </div>
-                </div>
+  <div class="container-fulid full-height">
+    <div class="container-xl center">
+      <h1>about us</h1>
+      <hr class="mb-4 mt-4" />
+      <div class="row flex-center">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">Phoo Khao</div>
+            <div class="card-footer">
+              <img src="/assets/Mheee.jpg" alt="test" style="width:100%;height: auto;" />
+              Krittaphon Raksakul
+              <br />61070501003
+              <br />SECTION A
             </div>
-            <hr class="mb-4 mt-4" />
+          </div>
         </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">Bossy</div>
+            <div class="card-footer">
+              <img src="/assets/Boss.jpg" alt="test" style="width:100%;height: auto;" />
+              Narawit Wongnom
+              <br />61070501029
+              <br />SECTION A
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">Ratty</div>
+            <div class="card-footer">
+              <img src="/assets/Ratty.jpg" alt="test" style="width:100%;height: 215px;" />
+              Wasurat Chaiyapumsakul
+              <br />61070501049
+              <br />SECTION B
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">Divefy</div>
+            <div class="card-footer">
+              <img src="/assets/Divee.jpg" alt="test" style="width:100%;height: auto;" />
+              Kasidit Sang-Utai
+              <br />61070501057
+              <br />SECTION B
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="mb-4 mt-4" />
     </div>
+  </div>
 </template>
+
+
