@@ -265,6 +265,7 @@ export default {
                             "Cilck the button to continue!",
                             "success"
                         ).then(() => {
+                            this.isLoading = false;
                             this.$router.push({ name: "addAirport" });
                         });
                     })

@@ -2877,6 +2877,8 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.errors.length) {
         axios.post("/api/backend/addAirport", data).then(function (response) {
           swal.fire("Add Data Success!", "Cilck the button to continue!", "success").then(function () {
+            _this.isLoading = false;
+
             _this.$router.push({
               name: "addAirport"
             });
@@ -4560,6 +4562,13 @@ __webpack_require__.r(__webpack_exports__);
 
       _this.loadingPage = false;
     })["catch"](function (error) {
+      _this.count.user = 0;
+      _this.count.employee = 0;
+      _this.count.pilot = 0;
+      _this.count.air = 0;
+      _this.count.airport = 0;
+      _this.count.staff = 0;
+      _this.count.aircraft = 0;
       _this.loadingPage = false;
     });
   }
@@ -9963,6 +9972,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("api/user").then(function (response) {
         _this.user_id = response.data["user_id"];
         _this.loadingPage = false;
+      })["catch"](function (error) {
+        if (error.response.status === 401) {
+          _this.loadingPage = false;
+          swal.fire("Please log in.", "Cilck the button to continue!", "error").then(function () {
+            _this.$router.push({
+              name: "login"
+            });
+          });
+        }
       });
     }); // setTimeout(() => {
     // }, 1000);
@@ -9974,7 +9992,7 @@ __webpack_require__.r(__webpack_exports__);
           value: element
         });
       });
-    });
+    })["catch"](function (error) {});
   },
   methods: {
     submit: function submit(e) {
