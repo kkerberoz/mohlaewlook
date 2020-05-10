@@ -6759,49 +6759,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6812,7 +6769,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showTotal: false,
       isLoading: false,
       loadingPage: false,
       fullPage: true,
@@ -6825,114 +6781,89 @@ __webpack_require__.r(__webpack_exports__);
       selected: [],
       calendar: {},
       calendarConfigs: {
+        disabledDates: ["beforeToday"],
         isMultipleDatePicker: true,
         markedDates: []
-      },
-      error_user_id: "",
-      error_date: ""
+      }
     };
   },
   methods: {
     clickDay: function clickDay() {
-      this.selected = this.calendar.selectedDates;
-    },
-    cancel: function cancel(work_id) {
-      swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, change it!"
-      }).then(function (result) {
-        if (result.value) {
-          var data = {
-            work_id: work_id
-          };
-          axios.post("/api/backend/updateWorkStatus", data).then(function (response) {
-            // console.log(response.data);
-            swal.fire("Status work has been cancelled", "Cilck the button to continue!", "success");
-          });
-        } else {
-          swal.fire("Cancelled", "Status work date has not changed.", "error");
-        }
-      });
+      this.selected = this.calendar.selectedDates; // console.log(this.selected);
+      // console.log(this.calendar.selectedDates);
     },
     submit: function submit(e) {
       var _this = this;
 
-      //console.log(this.user_id,this.selected);
       this.isLoading = true;
 
-      if (this.selected.length || this.user_id) {
+      if (this.selected.length) {
         e.preventDefault();
         var data = {
           user_id: this.user_id,
           array_date: this.selected
         };
-        axios.post("/api/backend/getworkday", data).then(function (response) {
-          _this.works = response.data; // console.log(this.works);
+        axios.post("/api/backend/addNewWork", data).then(function (response) {
+          swal.fire("Add Success!", "Cilck the button to continue!", "success").then(function () {
+            _this.isLoading = false;
 
-          _this.showTotal = true;
-          _this.isLoading = false;
+            _this.$router.go({
+              name: "workSchedule"
+            });
+          });
         })["catch"](function (error) {
-          swal.fire("Some thing went wrong!", "Cilck the button to continue!", "warning");
           _this.isLoading = false;
         });
       } else {
         this.isLoading = false;
-        swal.fire("Please select date or user id before submit!", "Cilck the button to continue!", "warning");
+        swal.fire("Please select date before submit!", "Cilck the button to continue!", "warning");
       }
     }
-  } // beforeMount() {
-  //     this.loadingPage = true;
-  //     const today = new Date().toLocaleDateString();
-  //     this.calendarConfigs.disabledDates.push(today);
-  //     axios.get("/api/admin/init").then(response => {
-  //         this.id = response.data.id;
-  //         axios
-  //             .post("/api/backend/getflightdetail", { id: this.id })
-  //             .then(response => {
-  //                 // console.log(response.data);
-  //                 this.user_id = response.data[0];
-  //                 this.works = response.data[1];
-  //             });
-  //         axios
-  //             .get(`/api/backend/schedule/${this.id}`)
-  //             .then(response => {
-  //                 //console.log(response.data);
-  //                 response.data.forEach(each_day => {
-  //                     var Sdate = each_day["work_date"].split("-");
-  //                     var newDate =
-  //                         Number(Sdate[2]) +
-  //                         "/" +
-  //                         Number(Sdate[1]) +
-  //                         "/" +
-  //                         Sdate[0];
-  //                     if (each_day["confirm_status"] == "confirm") {
-  //                         this.calendarConfigs.markedDates.push({
-  //                             date: newDate,
-  //                             class: "green-line"
-  //                         });
-  //                         this.calendarConfigs.disabledDates.push(newDate);
-  //                     } else if (each_day["confirm_status"] == "free") {
-  //                         //console.log(newDate);
-  //                         this.calendarConfigs.markedDates.push({
-  //                             date: newDate,
-  //                             class: "grey-line"
-  //                         });
-  //                         this.calendarConfigs.disabledDates.push(newDate);
-  //                     }
-  //                 });
-  //                 this.loadingPage = false;
-  //             })
-  //             .catch(error => {
-  //                 this.loadingPage = false;
-  //             });
-  //     });
-  // }
+  },
+  beforeMount: function beforeMount() {
+    var _this2 = this;
 
+    this.loadingPage = true;
+    var today = new Date().toLocaleDateString();
+    this.calendarConfigs.disabledDates.push(today);
+    axios.get("/api/admin/init").then(function (response) {
+      _this2.id = response.data.id;
+      axios.post("/api/backend/getflightdetail", {
+        id: _this2.id
+      }).then(function (response) {
+        // console.log(response.data);
+        _this2.user_id = response.data[0];
+        _this2.works = response.data[1];
+      });
+      axios.get("/api/backend/schedule/".concat(_this2.id)).then(function (response) {
+        //console.log(response.data);
+        response.data.forEach(function (each_day) {
+          var Sdate = each_day["work_date"].split("-");
+          var newDate = Number(Sdate[2]) + "/" + Number(Sdate[1]) + "/" + Sdate[0];
+
+          if (each_day["confirm_status"] == "confirm") {
+            _this2.calendarConfigs.markedDates.push({
+              date: newDate,
+              "class": "green-line"
+            });
+
+            _this2.calendarConfigs.disabledDates.push(newDate);
+          } else if (each_day["confirm_status"] == "free") {
+            //console.log(newDate);
+            _this2.calendarConfigs.markedDates.push({
+              date: newDate,
+              "class": "grey-line"
+            });
+
+            _this2.calendarConfigs.disabledDates.push(newDate);
+          }
+        });
+        _this2.loadingPage = false;
+      })["catch"](function (error) {
+        _this2.loadingPage = false;
+      });
+    });
+  }
 });
 
 /***/ }),
@@ -59693,196 +59624,105 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("span", { staticClass: "form-group" }, [
-              _c("div", [
-                _c("label", [_vm._v("User ID")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.user_id,
-                      expression: "user_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.error_user_id
-                  },
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.user_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.user_id = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(_vm.error_user_id) +
-                      "\n                        "
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                staticStyle: { padding: "20px", "margin-top": "10px" },
-                attrs: { type: "submit", disabled: _vm.isLoading },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.submit($event)
-                  }
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              staticStyle: { padding: "20px", "margin-top": "10px" },
+              attrs: { type: "submit", disabled: _vm.isLoading },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit($event)
                 }
-              },
-              [
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.isLoading,
-                        expression: "!isLoading"
-                      }
-                    ]
-                  },
-                  [_vm._v("  Find work days  ")]
-                ),
-                _vm._v(" "),
-                _c("i", {
+              }
+            },
+            [
+              _c(
+                "span",
+                {
                   directives: [
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.isLoading,
-                      expression: "isLoading"
+                      value: !_vm.isLoading,
+                      expression: "!isLoading"
                     }
-                  ],
-                  staticClass: "fas fa-spinner fa-pulse"
-                })
-              ]
-            )
-          ])
+                  ]
+                },
+                [_vm._v("Submit free day")]
+              ),
+              _vm._v(" "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isLoading,
+                    expression: "isLoading"
+                  }
+                ],
+                staticClass: "fas fa-spinner fa-pulse"
+              })
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("hr", { staticClass: "mb-4 mt-4" })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.showTotal,
-                expression: "showTotal"
-              }
-            ],
-            staticClass: "table-responsive"
-          },
-          [
-            _c(
-              "table",
-              { staticClass: "table" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.works, function(work, id) {
-                  return _c("tbody", { key: id }, [
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(Number(id) + 1))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(work.user_id))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(work.title))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(work.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(work.surname))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(work.work_date))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(work.flight_id))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(work.confirm_status))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn",
-                            staticStyle: { color: "Dodgerblue" },
-                            on: {
-                              click: function($event) {
-                                return _vm.cancel(work.work_id)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-window-close fa-2x"
-                            })
-                          ]
-                        )
-                      ])
-                    ])
+      _c(
+        "div",
+        {
+          staticClass: "container-xl",
+          staticStyle: { "margin-top": "2%", "margin-bottom": "10%" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "row-reservation" },
+            _vm._l(_vm.works, function(showWork, i) {
+              return _c("div", { key: i, staticClass: "column" }, [
+                _c("div", { staticClass: "card-reservation" }, [
+                  _c("h4", [
+                    _vm._v("Flight Number: " + _vm._s(showWork.flight_no))
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", [
+                    _vm._v("\n                        Depart: "),
+                    _c("b", [
+                      _vm._v("[" + _vm._s(showWork.depart_location) + "]")
+                    ]),
+                    _vm._v(
+                      " -" +
+                        _vm._s(showWork.depart_datetime) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", [
+                    _vm._v("\n                        Arrive: "),
+                    _c("b", [
+                      _vm._v("[" + _vm._s(showWork.arrive_location) + "]")
+                    ]),
+                    _vm._v(
+                      " -" +
+                        _vm._s(showWork.arrive_datetime) +
+                        "\n                    "
+                    )
                   ])
-                })
-              ],
-              2
-            )
-          ]
-        )
-      ])
+                ])
+              ])
+            }),
+            0
+          )
+        ]
+      )
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("User_id")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Title")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Surname")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Work date")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Flight ID")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action (cancel)")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
