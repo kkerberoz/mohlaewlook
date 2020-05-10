@@ -27,37 +27,80 @@
                         :configs="calendarConfigs"
                     ></functional-calendar>
                 </div>
-                <button
-                    style="padding:20px;margin-top:10px"
-                    type="submit"
-                    :disabled="isLoading"
-                    @click.prevent="submit"
-                    class="btn btn-success"
-                >
-                    <span v-show="!isLoading">Submit free day</span>
-                    <i class="fas fa-spinner fa-pulse" v-show="isLoading"></i>
-                </button>
+                <div class="col-md-6">
+                    <span class="form-group">
+                        <div>
+                            <label>User ID</label>
+                            <input
+                                v-bind:class="{
+                                    'is-invalid': error_user_id
+                                }"
+                                type="text"
+                                class="form-control"
+                                v-model="user_id"
+                            />
+                            <div class="invalid-feedback">
+                                {{ error_user_id }}
+                            </div>
+                        </div>
+                    </span>
+                    <button
+                        style="padding:20px;margin-top:10px"
+                        type="submit"
+                        :disabled="isLoading"
+                        @click.prevent="submit"
+                        class="btn btn-success"
+                    >
+                        <span v-show="!isLoading"
+                            >&nbsp; Find work days &nbsp;</span
+                        >
+                        <i
+                            class="fas fa-spinner fa-pulse"
+                            v-show="isLoading"
+                        ></i>
+                    </button>
+                </div>
             </div>
             <hr class="mb-4 mt-4" />
         </div>
-
-        <div class="container-xl" style="margin-top:2%;margin-bottom:10%">
-            <div class="row-reservation">
-                <div class="column" v-for="(showWork, i) in works" :key="i">
-                    <div class="card-reservation">
-                        <h4>Flight Number: {{ showWork.flight_no }}</h4>
-                        <h5>
-                            Depart: <b>[{{ showWork.depart_location }}]</b> -{{
-                                showWork.depart_datetime
-                            }}
-                        </h5>
-                        <h5>
-                            Arrive: <b>[{{ showWork.arrive_location }}]</b> -{{
-                                showWork.arrive_datetime
-                            }}
-                        </h5>
-                    </div>
-                </div>
+        <div class="card-body">
+            <div class="table-responsive" v-show="showTotal">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">User_id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Work date</th>
+                            <th scope="col">Flight ID</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action (cancel)</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="(work, id) in works" :key="id">
+                        <tr>
+                            <th scope="row">{{ Number(id) + 1 }}</th>
+                            <td>{{ work.user_id }}</td>
+                            <td>{{ work.title }}</td>
+                            <td>{{ work.name }}</td>
+                            <td>{{ work.surname }}</td>
+                            <td>{{ work.work_date }}</td>
+                            <td>{{ work.flight_id }}</td>
+                            <td>{{ work.confirm_status }}</td>
+                            <td>
+                                <button
+                                    class="btn"
+                                    @click="cancel(work.work_id)"
+                                    style="color: Dodgerblue;"
+                                >
+                                    <i class="fas fa-window-close fa-2x"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -71,6 +114,7 @@ export default {
     components: { FunctionalCalendar, Loading },
     data() {
         return {
+            showTotal: false,
             isLoading: false,
             loadingPage: false,
             fullPage: true,
@@ -83,104 +127,130 @@ export default {
             selected: [],
             calendar: {},
             calendarConfigs: {
-                disabledDates: ["beforeToday"],
-
                 isMultipleDatePicker: true,
                 markedDates: []
-            }
+            },
+            error_user_id: "",
+            error_date: ""
         };
     },
-
     methods: {
         clickDay() {
             this.selected = this.calendar.selectedDates;
-            // console.log(this.selected);
-            // console.log(this.calendar.selectedDates);
+        },
+        cancel(work_id) {
+            swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, change it!"
+            }).then(result => {
+                if (result.value) {
+                    let data = { work_id: work_id };
+                    axios
+                        .post("/api/backend/updateWorkStatus", data)
+                        .then(response => {
+                            // console.log(response.data);
+                            swal.fire(
+                                "Status work has been cancelled",
+                                "Cilck the button to continue!",
+                                "success"
+                            );
+                        });
+                } else {
+                    swal.fire(
+                        "Cancelled",
+                        "Status work date has not changed.",
+                        "error"
+                    );
+                }
+            });
         },
         submit(e) {
+            //console.log(this.user_id,this.selected);
             this.isLoading = true;
-            if (this.selected.length) {
+            if (this.selected.length || this.user_id) {
                 e.preventDefault();
                 let data = {
                     user_id: this.user_id,
                     array_date: this.selected
                 };
                 axios
-                    .post("/api/backend/addNewWork", data)
+                    .post("/api/backend/getworkday", data)
                     .then(response => {
-                        swal.fire(
-                            "Add Success!",
-                            "Cilck the button to continue!",
-                            "success"
-                        ).then(() => {
-                            this.isLoading = false;
-                            this.$router.go({ name: "workSchedule" });
-                        });
+                        this.works = response.data;
+                        // console.log(this.works);
+                        this.showTotal = true;
+                        this.isLoading = false;
                     })
                     .catch(error => {
+                        swal.fire(
+                            "Some thing went wrong!",
+                            "Cilck the button to continue!",
+                            "warning"
+                        );
                         this.isLoading = false;
                     });
             } else {
                 this.isLoading = false;
                 swal.fire(
-                    "Please select date before submit!",
+                    "Please select date or user id before submit!",
                     "Cilck the button to continue!",
                     "warning"
                 );
             }
         }
-    },
-    beforeMount() {
-        this.loadingPage = true;
-        const today = new Date().toLocaleDateString();
-        this.calendarConfigs.disabledDates.push(today);
-        axios.get("/api/admin/init").then(response => {
-            this.id = response.data.id;
-            axios
-                .post("/api/backend/getflightdetail", { id: this.id })
-                .then(response => {
-                    // console.log(response.data);
-                    this.user_id = response.data[0];
-                    this.works = response.data[1];
-                });
-
-            axios
-                .get(`/api/backend/schedule/${this.id}`)
-                .then(response => {
-                    //console.log(response.data);
-
-                    response.data.forEach(each_day => {
-                        var Sdate = each_day["work_date"].split("-");
-                        var newDate =
-                            Number(Sdate[2]) +
-                            "/" +
-                            Number(Sdate[1]) +
-                            "/" +
-                            Sdate[0];
-
-                        if (each_day["confirm_status"] == "confirm") {
-                            this.calendarConfigs.markedDates.push({
-                                date: newDate,
-                                class: "green-line"
-                            });
-                            this.calendarConfigs.disabledDates.push(newDate);
-                        } else if (each_day["confirm_status"] == "free") {
-                            //console.log(newDate);
-                            this.calendarConfigs.markedDates.push({
-                                date: newDate,
-                                class: "grey-line"
-                            });
-                            this.calendarConfigs.disabledDates.push(newDate);
-                        }
-                    });
-
-                    this.loadingPage = false;
-                })
-                .catch(error => {
-                    this.loadingPage = false;
-                });
-        });
     }
+    // beforeMount() {
+    //     this.loadingPage = true;
+    //     const today = new Date().toLocaleDateString();
+    //     this.calendarConfigs.disabledDates.push(today);
+    //     axios.get("/api/admin/init").then(response => {
+    //         this.id = response.data.id;
+    //         axios
+    //             .post("/api/backend/getflightdetail", { id: this.id })
+    //             .then(response => {
+    //                 // console.log(response.data);
+    //                 this.user_id = response.data[0];
+    //                 this.works = response.data[1];
+    //             });
+    //         axios
+    //             .get(`/api/backend/schedule/${this.id}`)
+    //             .then(response => {
+    //                 //console.log(response.data);
+    //                 response.data.forEach(each_day => {
+    //                     var Sdate = each_day["work_date"].split("-");
+    //                     var newDate =
+    //                         Number(Sdate[2]) +
+    //                         "/" +
+    //                         Number(Sdate[1]) +
+    //                         "/" +
+    //                         Sdate[0];
+    //                     if (each_day["confirm_status"] == "confirm") {
+    //                         this.calendarConfigs.markedDates.push({
+    //                             date: newDate,
+    //                             class: "green-line"
+    //                         });
+    //                         this.calendarConfigs.disabledDates.push(newDate);
+    //                     } else if (each_day["confirm_status"] == "free") {
+    //                         //console.log(newDate);
+    //                         this.calendarConfigs.markedDates.push({
+    //                             date: newDate,
+    //                             class: "grey-line"
+    //                         });
+    //                         this.calendarConfigs.disabledDates.push(newDate);
+    //                     }
+    //                 });
+    //                 this.loadingPage = false;
+    //             })
+    //             .catch(error => {
+    //                 this.loadingPage = false;
+    //             });
+    //     });
+    // }
 };
 </script>
 
@@ -195,19 +265,16 @@ export default {
     padding: 0 10px;
     margin-top: 10px;
 }
-
 /* Remove extra left and right margins, due to padding */
 .row-reservation {
     margin: 0 -5px;
 }
-
 /* Clear floats after the columns */
 .row-reservation:after {
     content: "";
     display: table;
     clear: both;
 }
-
 /* Responsive columns */
 @media screen and (max-width: 600px) {
     .column {
@@ -216,7 +283,6 @@ export default {
         margin-bottom: 20px;
     }
 }
-
 /* Style the counter cards */
 .card-reservation {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -233,7 +299,6 @@ export default {
     border-radius: 100%;
     margin: 0 auto;
 }
-
 .grey-line {
     width: 30px;
     line-height: 30px;
@@ -242,7 +307,6 @@ export default {
     border-radius: 100%;
     margin: 0 auto;
 }
-
 .green-point {
     position: absolute;
     width: 4px;
@@ -252,7 +316,6 @@ export default {
     bottom: 3px;
     left: calc(50% - 4px);
 }
-
 .orange-point {
     position: absolute;
     width: 4px;

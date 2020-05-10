@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fulid full-height">
+    <div class="container-fulid" style="padding-top:7%;padding-bottom:10%;">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -9,7 +9,8 @@
             loader="bars"
             background-color="#fff"
         ></loading>
-        <div class="container-xl center">
+        <div class="container-xl" style="margin-top:5%;margin-bottom:5%;">
+            <br />
             <h1>about us</h1>
             <hr class="mb-4 mt-4" />
             <div class="row flex-center">

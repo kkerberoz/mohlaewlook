@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid " style="padding-top:5%;padding-bottom:10%;">
+    <div class="container-fluid " style="padding-top:7%;padding-bottom:10%;">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -9,7 +9,8 @@
             loader="bars"
             background-color="#fff"
         ></loading>
-        <div class="container-xl" style="margin-top:5%;padding-bottom:5%;">
+        <br />
+        <div class="container-xl" style="margin-top:5%;margin-bottom:5%;">
             <div class="row flex-center">
                 <div class="col-md-12">
                     <div class="card shadow-lg bg-white" id="card-reservation">
@@ -2200,7 +2201,7 @@ export default {
                 }
             } else {
                 swal.fire(
-                    "Please success form before click next",
+                    "Please complete the form before click next",
                     "Cilck the button to continue!",
                     "warning"
                 ).then(() => {

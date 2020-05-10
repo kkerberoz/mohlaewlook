@@ -506,21 +506,15 @@ class BackendController extends Controller
 
     public function getCount()
     {
-        $userCount = Customer::count();
-        $employeeCount = Employee::count();
-        $pilotCount = Employee::where('employee_role', 'pilot')->count();
-        $airCount = Employee::where('employee_role', 'flight_attendant')->count();
-        $staffCount = Employee::where('employee_role', 'staff')->count();
-        $airportCount = Airport::count();
-        $aircraftCount = Aircraft::count();
+
+        $userCount = DB::table('customers')->count();
+        $employeeCount = DB::table('employees')->count();
+        $pilotCount = DB::table('employees')->where('employee_role', 'pilot')->count();
+        $airCount = DB::table('employees')->where('employee_role', 'flight_attendant')->count();
+        $staffCount = DB::table('employees')->where('employee_role', 'staff')->count();
+        $airportCount = DB::table('airports')->count();
+        $aircraftCount = DB::table('aircrafts')->count();
 
         return response()->JSON(['user' => $userCount, 'employee' => $employeeCount, 'pilot' => $pilotCount, 'staff' => $staffCount,  'air' => $airCount, 'airport' => $airportCount, 'aircraft' => $aircraftCount]);
     }
 }
-
-// use App\Aircraft;
-// use App\Aircraft_brand;
-// use App\Aircraft_model;
-// use App\Airport;
-// use App\Employee;
-// use App\Customer;
