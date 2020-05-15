@@ -30,7 +30,7 @@ class BackendController extends Controller
     {
 
         // Get Aircraft
-        $initial_location = "BKK";
+        $initial_location = "MHK";
         $location = $request->location;
         $date = $request->date;
         $datetime = $request->date . " " . $request->time;

@@ -310,7 +310,10 @@ export default {
             error_firstCap: "",
             error_ecoPat: "",
             error_busPat: "",
-            error_firstPat: ""
+            error_firstPat: "",
+            flag_brand : false,
+            flag_model : false
+
         };
     },
     mounted() {
@@ -477,10 +480,12 @@ export default {
         checkModel() {
             // console.log(this.model_query);
             // console.log(this.brand_query);
+            this.flag_model = false;
             this.model_query.forEach(each_model => {
                 if (this.input.model === each_model["model_name"]) {
                     this.seenModel = false;
-                    // console.log("find");
+                    this.flag_model = true;
+                    //console.log(each_model["model_name"]);
                     this.input.Dup_fuelCap = each_model["fuel_capacity"];
                     this.input.Dup_numberEng = each_model["number_of_engine"];
                     this.input.Dup_typeEng = each_model["engine_type"];
@@ -494,17 +499,31 @@ export default {
                     this.seenModel = true;
                 }
             });
+            if(this.flag_model == true){
+                this.seenModel = false;
+            }
+            else{
+                this.seenModel = true;
+            }
         },
         checkBrand() {
+            this.flag_brand = false;
             this.brand_query.forEach(each_brand => {
                 if (this.input.brand === each_brand["brand_name"]) {
-                    this.seenBrand = false;
-                    // console.log("find");
+                    // this.seenBrand = false;
+                    this.flag_brand = true;
+                    console.log(each_brand["brand_name"]);
                     this.input.Dup_country = each_brand["country"];
-                } else {
+                }else{
                     this.seenBrand = true;
                 }
             });
+            if(this.flag_brand == true){
+                this.seenBrand = false;
+            }
+            else{
+                this.seenBrand = true;
+            }
         },
         matchModel() {
             this.input.fuelCap = this.input.Dup_fuelCap;
