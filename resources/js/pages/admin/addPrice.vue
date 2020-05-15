@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid" style="padding:3%">
+    <div class="container-fluid" style="padding:5%">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"

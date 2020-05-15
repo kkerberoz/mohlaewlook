@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fulid">
+    <div class="container-fulid" style="padding:5%">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"

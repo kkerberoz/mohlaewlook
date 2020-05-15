@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fulid">
+    <div class="container-fulid" style="padding:5%">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -150,6 +150,7 @@ export default {
                 confirmButtonText: "Yes, change it!"
             }).then(result => {
                 if (result.value) {
+                    this.isLoading = true;
                     let data = { work_id: work_id };
                     axios
                         .post("/api/backend/updateWorkStatus", data)
@@ -159,14 +160,20 @@ export default {
                                 "Status work has been cancelled",
                                 "Cilck the button to continue!",
                                 "success"
-                            );
+                            ).then(() => {
+                                this.isLoading = false;
+                                this.$router.go({ name: "manageSchedule" });
+                            });
                         });
                 } else {
+                    this.isLoading = true;
                     swal.fire(
                         "Cancelled",
                         "Status work date has not changed.",
                         "error"
-                    );
+                    ).then(() => {
+                        this.isLoading = false;
+                    });
                 }
             });
         },

@@ -271,6 +271,7 @@
                     <!-- sidebar-menu  -->
                 </div>
             </nav>
+            <br />
             <!-- sidebar-content  -->
             <main class="page-content">
                 <router-view></router-view>
