@@ -311,9 +311,8 @@ export default {
             error_ecoPat: "",
             error_busPat: "",
             error_firstPat: "",
-            flag_brand : false,
-            flag_model : false
-
+            flag_brand: false,
+            flag_model: false
         };
     },
     mounted() {
@@ -499,10 +498,9 @@ export default {
                     this.seenModel = true;
                 }
             });
-            if(this.flag_model == true){
+            if (this.flag_model == true) {
                 this.seenModel = false;
-            }
-            else{
+            } else {
                 this.seenModel = true;
             }
         },
@@ -512,16 +510,15 @@ export default {
                 if (this.input.brand === each_brand["brand_name"]) {
                     // this.seenBrand = false;
                     this.flag_brand = true;
-                    console.log(each_brand["brand_name"]);
+                    // console.log(each_brand["brand_name"]);
                     this.input.Dup_country = each_brand["country"];
-                }else{
+                } else {
                     this.seenBrand = true;
                 }
             });
-            if(this.flag_brand == true){
+            if (this.flag_brand == true) {
                 this.seenBrand = false;
-            }
-            else{
+            } else {
                 this.seenBrand = true;
             }
         },
