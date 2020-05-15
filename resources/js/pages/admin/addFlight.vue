@@ -591,7 +591,7 @@ export default {
             }
         },
         formSubmit(e) {
-            this.loadingPage = true;
+            this.isLoading = true;
             e.preventDefault();
             this.errors_input = true;
             // condition for input
@@ -695,15 +695,15 @@ export default {
                             "Cilck the button to continue!",
                             "success"
                         ).then(() => {
-                            this.loadingPage = false;
+                            this.isLoading = false;
                             this.$router.go({ name: "addFlight" });
                         });
                     })
                     .catch(error => {
-                        this.loadingPage = false;
+                        this.isLoading = false;
                     });
             } else {
-                this.loadingPage = false;
+                this.isLoading = false;
                 swal.fire(
                     "Please success your form!",
                     "Cilck the button to continue!",
@@ -733,8 +733,11 @@ export default {
             .get("/api/backend/getFlightNo")
             .then(response => {
                 this.flights = response.data;
+                this.loadingPage = false;
             })
-            .catch(error => {});
+            .catch(error => {
+                this.loadingPage = false;
+            });
     },
     beforeUpdate() {
         // for check depart location, depart date and depart time are selected.

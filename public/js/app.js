@@ -3500,7 +3500,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this2 = this;
 
-      this.loadingPage = true;
+      this.isLoading = true;
       e.preventDefault();
       this.errors_input = true; // condition for input
 
@@ -3539,17 +3539,17 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/backend/addFlight", this.input).then(function (response) {
           // console.log(response.data);
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
-            _this2.loadingPage = false;
+            _this2.isLoading = false;
 
             _this2.$router.go({
               name: "addFlight"
             });
           });
         })["catch"](function (error) {
-          _this2.loadingPage = false;
+          _this2.isLoading = false;
         });
       } else {
-        this.loadingPage = false;
+        this.isLoading = false;
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }
@@ -3569,7 +3569,10 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (error) {});
     axios.get("/api/backend/getFlightNo").then(function (response) {
       _this3.flights = response.data;
-    })["catch"](function (error) {});
+      _this3.loadingPage = false;
+    })["catch"](function (error) {
+      _this3.loadingPage = false;
+    });
   },
   beforeUpdate: function beforeUpdate() {
     var _this4 = this;
@@ -64807,7 +64810,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "cockpit" }, [
       _c("h1", { staticStyle: { "margin-top": "90px" } }, [
         _vm._v(
-          "\n                                                    plaese select depart\n                                                    seat\n                                                "
+          "\n                                                    please select depart\n                                                    seat\n                                                "
         )
       ])
     ])
@@ -64819,7 +64822,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "cockpit" }, [
       _c("h1", { staticStyle: { "margin-top": "90px" } }, [
         _vm._v(
-          "\n                                                    plaese select return\n                                                    seat\n                                                "
+          "\n                                                    please select return\n                                                    seat\n                                                "
         )
       ])
     ])

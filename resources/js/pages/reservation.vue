@@ -787,7 +787,7 @@
                                                     <h1
                                                         style="margin-top:90px;"
                                                     >
-                                                        plaese select depart
+                                                        please select depart
                                                         seat
                                                     </h1>
                                                 </div>
@@ -961,7 +961,7 @@
                                                     <h1
                                                         style="margin-top:90px;"
                                                     >
-                                                        plaese select return
+                                                        please select return
                                                         seat
                                                     </h1>
                                                 </div>
