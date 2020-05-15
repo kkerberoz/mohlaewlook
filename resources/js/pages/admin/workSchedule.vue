@@ -44,7 +44,7 @@
         <div class="container-xl" style="margin-top:2%;margin-bottom:10%">
             <div class="row-reservation">
                 <div class="column" v-for="(showWork, i) in works" :key="i">
-                    <div class="card-reservation">
+                    <div class="card-reservation" v-show="showByDate(showWork)">
                         <h4>Flight Number: {{ showWork.flight_no }}</h4>
                         <h5>
                             Depart: <b>[{{ showWork.depart_location }}]</b> -{{
@@ -90,8 +90,29 @@ export default {
             }
         };
     },
-
+    computed: {},
     methods: {
+        showByDate(datetime) {
+            // console.log(e);
+            // console.log("trueee");
+            // return true;
+            const today = new Date().toLocaleDateString();
+            var Sdate = datetime["depart_datetime"].split(" ");
+            var onlyDate = Sdate[0].split("-");
+            var newDate =
+                Number(onlyDate[1]) +
+                "/" +
+                Number(onlyDate[2]) +
+                "/" +
+                onlyDate[0];
+            // console.log("newdate", newDate);
+            // console.log("today", today);
+            if (today <= newDate) {
+                return true;
+            } else {
+                return false;
+            }
+        },
         clickDay() {
             this.selected = this.calendar.selectedDates;
             // console.log(this.selected);

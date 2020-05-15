@@ -6841,7 +6841,24 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  computed: {},
   methods: {
+    showByDate: function showByDate(datetime) {
+      // console.log(e);
+      // console.log("trueee");
+      // return true;
+      var today = new Date().toLocaleDateString();
+      var Sdate = datetime["depart_datetime"].split(" ");
+      var onlyDate = Sdate[0].split("-");
+      var newDate = Number(onlyDate[1]) + "/" + Number(onlyDate[2]) + "/" + onlyDate[0]; // console.log("newdate", newDate);
+      // console.log("today", today);
+
+      if (today <= newDate) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     clickDay: function clickDay() {
       this.selected = this.calendar.selectedDates; // console.log(this.selected);
       // console.log(this.calendar.selectedDates);
@@ -59665,35 +59682,49 @@ var render = function() {
             { staticClass: "row-reservation" },
             _vm._l(_vm.works, function(showWork, i) {
               return _c("div", { key: i, staticClass: "column" }, [
-                _c("div", { staticClass: "card-reservation" }, [
-                  _c("h4", [
-                    _vm._v("Flight Number: " + _vm._s(showWork.flight_no))
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v("\n                        Depart: "),
-                    _c("b", [
-                      _vm._v("[" + _vm._s(showWork.depart_location) + "]")
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.showByDate(showWork),
+                        expression: "showByDate(showWork)"
+                      }
+                    ],
+                    staticClass: "card-reservation"
+                  },
+                  [
+                    _c("h4", [
+                      _vm._v("Flight Number: " + _vm._s(showWork.flight_no))
                     ]),
-                    _vm._v(
-                      " -" +
-                        _vm._s(showWork.depart_datetime) +
-                        "\n                    "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v("\n                        Arrive: "),
-                    _c("b", [
-                      _vm._v("[" + _vm._s(showWork.arrive_location) + "]")
+                    _vm._v(" "),
+                    _c("h5", [
+                      _vm._v("\n                        Depart: "),
+                      _c("b", [
+                        _vm._v("[" + _vm._s(showWork.depart_location) + "]")
+                      ]),
+                      _vm._v(
+                        " -" +
+                          _vm._s(showWork.depart_datetime) +
+                          "\n                    "
+                      )
                     ]),
-                    _vm._v(
-                      " -" +
-                        _vm._s(showWork.arrive_datetime) +
-                        "\n                    "
-                    )
-                  ])
-                ])
+                    _vm._v(" "),
+                    _c("h5", [
+                      _vm._v("\n                        Arrive: "),
+                      _c("b", [
+                        _vm._v("[" + _vm._s(showWork.arrive_location) + "]")
+                      ]),
+                      _vm._v(
+                        " -" +
+                          _vm._s(showWork.arrive_datetime) +
+                          "\n                    "
+                      )
+                    ])
+                  ]
+                )
               ])
             }),
             0
