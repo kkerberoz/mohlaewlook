@@ -3382,6 +3382,7 @@ __webpack_require__.r(__webpack_exports__);
         businessPrice: null,
         firstPrice: null
       },
+      newFlight: "",
       input: {
         aircraftID: null,
         flightNo: null,
@@ -3436,7 +3437,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.modalOpen) {
         $("#addNew").modal("show");
       } else {
-        this.input.flightNo = null;
+        this.newFlight = null;
         this.modalInput.ecoPrice = null;
         this.modalInput.businessPrice = null;
         this.modalInput.firstPrice = null;
@@ -3449,7 +3450,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     handleCloseModal: function handleCloseModal() {
       this.modalOpen = false;
-      this.input.flightNo = null;
+      this.newFlight = null;
       this.modalInput.ecoPrice = null;
       this.modalInput.businessPrice = null;
       this.modalInput.firstPrice = null;
@@ -3463,11 +3464,11 @@ __webpack_require__.r(__webpack_exports__);
       this.modalOpen = true;
       this.isLoading = true;
       var data = {
-        flight_no: this.input.flightNo,
+        flight_no: this.newFlight,
         input: this.modalInput
       };
       this.errors_newFlight = true;
-      this.error_newFlightNo = !this.input.flightNo ? "Please fill flight number" : null;
+      this.error_newFlightNo = !this.newFlight ? "Please fill flight number" : null;
       this.error_ecoPrice = !this.modalInput.ecoPrice ? "Please fill economy class price" : null;
       this.error_businessPrice = !this.modalInput.businessPrice ? "Please fill business class price" : null;
       this.error_firstPrice = !this.modalInput.firstPrice ? "Please fill first class price" : null; //**/
@@ -3485,7 +3486,10 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/backend/addPrice", data).then(function (response) {
           swal.fire("Create Success!", "Cilck the button to continue!", "success").then(function () {
             _this.isLoading = false;
-            $("#addNew").modal("hide"); // this.$router.go({ name: "addFlight" });
+            $("#addNew").modal("hide");
+            axios.get("/api/backend/getFlightNo").then(function (response) {
+              _this.flights = response.data;
+            })["catch"](function (error) {});
           });
         });
       } else {
@@ -55522,8 +55526,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.input.flightNo,
-                        expression: "input.flightNo"
+                        value: _vm.newFlight,
+                        expression: "newFlight"
                       }
                     ],
                     staticClass: "form-control",
@@ -55531,13 +55535,13 @@ var render = function() {
                       "is-invalid": _vm.error_newFlightNo
                     },
                     attrs: { type: "text" },
-                    domProps: { value: _vm.input.flightNo },
+                    domProps: { value: _vm.newFlight },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.input, "flightNo", $event.target.value)
+                        _vm.newFlight = $event.target.value
                       }
                     }
                   }),

@@ -332,7 +332,7 @@
                             }"
                             type="text"
                             class="form-control"
-                            v-model="input.flightNo"
+                            v-model="newFlight"
                         />
                         <div class="invalid-feedback">
                             {{ error_newFlightNo }}
@@ -434,6 +434,7 @@ export default {
                 businessPrice: null,
                 firstPrice: null
             },
+            newFlight: "",
             input: {
                 aircraftID: null,
                 flightNo: null,
@@ -488,7 +489,7 @@ export default {
             if (this.modalOpen) {
                 $("#addNew").modal("show");
             } else {
-                this.input.flightNo = null;
+                this.newFlight = null;
                 this.modalInput.ecoPrice = null;
                 this.modalInput.businessPrice = null;
                 this.modalInput.firstPrice = null;
@@ -500,7 +501,7 @@ export default {
         },
         handleCloseModal() {
             this.modalOpen = false;
-            this.input.flightNo = null;
+            this.newFlight = null;
             this.modalInput.ecoPrice = null;
             this.modalInput.businessPrice = null;
             this.modalInput.firstPrice = null;
@@ -512,11 +513,11 @@ export default {
             this.modalOpen = true;
             this.isLoading = true;
             let data = {
-                flight_no: this.input.flightNo,
+                flight_no: this.newFlight,
                 input: this.modalInput
             };
             this.errors_newFlight = true;
-            this.error_newFlightNo = !this.input.flightNo
+            this.error_newFlightNo = !this.newFlight
                 ? "Please fill flight number"
                 : null;
             this.error_ecoPrice = !this.modalInput.ecoPrice
@@ -572,7 +573,12 @@ export default {
                     ).then(() => {
                         this.isLoading = false;
                         $("#addNew").modal("hide");
-                        // this.$router.go({ name: "addFlight" });
+                        axios
+                            .get("/api/backend/getFlightNo")
+                            .then(response => {
+                                this.flights = response.data;
+                            })
+                            .catch(error => {});
                     });
                 });
             } else {
