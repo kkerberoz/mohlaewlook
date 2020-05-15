@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid full-height">
+    <div class="container-fluid" style="padding:5%">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -9,7 +9,7 @@
             loader="bars"
             background-color="#fff"
         ></loading>
-        <div class="container-xl" style="margin-top:10%;margin-bottom:10%">
+        <div class="container-xl">
             <h1 class="mb-3" style="display:block ">Dashboard</h1>
             <hr class="mb-4" />
             <div class="row flex-center">

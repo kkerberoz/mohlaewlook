@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl" style="padding:3%">
+    <div class="container-xl" style="padding:5%">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -9,7 +9,7 @@
             loader="bars"
             background-color="#fff"
         ></loading>
-        <div class="row flex-center" style="margin-bottom:3%">
+        <div class="row flex-center">
             <div
                 class="col-md-10 order-md-1 justify-content-between align-items-center"
             >
@@ -254,7 +254,6 @@
                                                     'is-invalid': error_crew
                                                 }"
                                                 v-model="input.crew"
-                                                :disabled="waitPilot"
                                                 :options="options_attendant"
                                                 :searchable="true"
                                                 :multiple="true"

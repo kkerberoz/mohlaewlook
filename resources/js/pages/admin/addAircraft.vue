@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl" style="padding:3%; margin-bottom:5%">
+    <div class="container-xl" style="padding:5%;">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -372,7 +372,7 @@ export default {
                 this.error_country = null;
             }
 
-            if (!this.input.fuelCap.trim()) {
+            if (!this.input.fuelCap) {
                 this.error_fuelCap = "Please fill the fuel capacity.";
                 this.errors.push(this.error_fuelCap);
             } else if (isNaN(this.input.fuelCap)) {
@@ -382,7 +382,7 @@ export default {
                 this.error_fuelCap = null;
             }
 
-            if (!this.input.numberEng.trim()) {
+            if (!this.input.numberEng) {
                 this.error_numberEng = "Please fill the number of engine.";
                 this.errors.push(this.error_numberEng);
             } else if (isNaN(this.input.numberEng)) {
@@ -399,7 +399,7 @@ export default {
                 this.error_typeEng = null;
             }
 
-            if (!this.input.ecoCap.trim()) {
+            if (!this.input.ecoCap) {
                 this.error_ecoCap = "Please fill the economic class capacity.";
                 this.errors.push(this.error_ecoCap);
             } else if (isNaN(this.input.ecoCap)) {
@@ -409,7 +409,7 @@ export default {
                 this.error_ecoCap = null;
             }
 
-            if (!this.input.busCap.trim()) {
+            if (!this.input.busCap) {
                 this.error_busCap = "Please fill the bussiness class capacity.";
                 this.errors.push(this.error_busCap);
             } else if (isNaN(this.input.busCap)) {
@@ -419,7 +419,7 @@ export default {
                 this.error_busCap = null;
             }
 
-            if (!this.input.firstCap.trim()) {
+            if (!this.input.firstCap) {
                 this.error_firstCap = "Please fill the first class capacity.";
                 this.errors.push(this.error_firstCap);
             } else if (isNaN(this.input.firstCap)) {

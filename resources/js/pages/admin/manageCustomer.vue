@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid" style="padding:3%">
+    <div class="container-fluid" style="padding:5%">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -10,7 +10,7 @@
             background-color="#fff"
         ></loading>
         <br />
-        <div class="col-md-12 full-height">
+        <div class="col-md-12 ">
             <div class="card shadow-lg bg-white">
                 <div class="card-header" style="border-radius: 0px;">
                     <div class="card-title">Manage Customer</div>

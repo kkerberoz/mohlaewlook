@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="container-xl"
-        style="margin-bottom:15%;margin-top:5%;padding:3%"
-    >
+    <div class="container-xl" style="padding:5%">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
