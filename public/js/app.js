@@ -6323,6 +6323,15 @@ __webpack_require__.r(__webpack_exports__);
         name: "Pilot"
       }, {
         name: "Flight Attendant"
+      } // { name: "Human Resource" },
+      // { name: "Flight Manager" }
+      ],
+      rolesAdmin: [{
+        name: "Staff"
+      }, {
+        name: "Pilot"
+      }, {
+        name: "Flight Attendant"
       }, {
         name: "Human Resource"
       }, {
@@ -6373,7 +6382,12 @@ __webpack_require__.r(__webpack_exports__);
       error_note: "",
       error_edus: "",
       errors: [],
-      seen: true
+      seen: true,
+
+      get isRole() {
+        return localStorage.getItem("isRole");
+      }
+
     };
   },
   beforeMount: function beforeMount() {
@@ -6386,6 +6400,15 @@ __webpack_require__.r(__webpack_exports__);
       _this.airports = response.data;
       _this.loadingPage = false; // console.log(this.airports);
     });
+  },
+  computed: {
+    optionRoles: function optionRoles() {
+      if (this.isRole === "human_resource") {
+        return this.roles;
+      } else if (this.isRole === "admin") {
+        return this.rolesAdmin;
+      }
+    }
   },
   methods: {
     airportName: function airportName(_ref) {
@@ -58279,7 +58302,7 @@ var render = function() {
                           },
                           attrs: {
                             label: "name",
-                            options: _vm.roles,
+                            options: _vm.optionRoles,
                             searchable: true,
                             multiple: false,
                             "close-on-select": true,
@@ -81898,8 +81921,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

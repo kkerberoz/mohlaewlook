@@ -64,7 +64,7 @@
                                         'is-invalid': error_role
                                     }"
                                     v-model="input.role"
-                                    :options="roles"
+                                    :options="optionRoles"
                                     :searchable="true"
                                     :multiple="false"
                                     :close-on-select="true"
@@ -638,6 +638,13 @@ export default {
             roles: [
                 { name: "Staff" },
                 { name: "Pilot" },
+                { name: "Flight Attendant" }
+                // { name: "Human Resource" },
+                // { name: "Flight Manager" }
+            ],
+            rolesAdmin: [
+                { name: "Staff" },
+                { name: "Pilot" },
                 { name: "Flight Attendant" },
                 { name: "Human Resource" },
                 { name: "Flight Manager" }
@@ -687,7 +694,10 @@ export default {
             error_edus: "",
 
             errors: [],
-            seen: true
+            seen: true,
+            get isRole() {
+                return localStorage.getItem("isRole");
+            }
         };
     },
     beforeMount() {
@@ -700,7 +710,15 @@ export default {
             // console.log(this.airports);
         });
     },
-
+    computed: {
+        optionRoles() {
+            if (this.isRole === "human_resource") {
+                return this.roles;
+            } else if (this.isRole === "admin") {
+                return this.rolesAdmin;
+            }
+        }
+    },
     methods: {
         airportName({ airport_id, airport_name }) {
             return `[${airport_id}] - ${airport_name}`;
