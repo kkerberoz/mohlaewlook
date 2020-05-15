@@ -3500,6 +3500,7 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit(e) {
       var _this2 = this;
 
+      this.loadingPage = true;
       e.preventDefault();
       this.errors_input = true; // condition for input
 
@@ -3538,12 +3539,17 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/api/backend/addFlight", this.input).then(function (response) {
           // console.log(response.data);
           swal.fire("Register Success!", "Cilck the button to continue!", "success").then(function () {
+            _this2.loadingPage = false;
+
             _this2.$router.go({
               name: "addFlight"
             });
           });
-        })["catch"](function (error) {});
+        })["catch"](function (error) {
+          _this2.loadingPage = false;
+        });
       } else {
+        this.loadingPage = false;
         swal.fire("Please success your form!", "Cilck the button to continue!", "error");
       }
     }

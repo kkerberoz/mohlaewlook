@@ -591,6 +591,7 @@ export default {
             }
         },
         formSubmit(e) {
+            this.loadingPage = true;
             e.preventDefault();
             this.errors_input = true;
             // condition for input
@@ -694,11 +695,15 @@ export default {
                             "Cilck the button to continue!",
                             "success"
                         ).then(() => {
+                            this.loadingPage = false;
                             this.$router.go({ name: "addFlight" });
                         });
                     })
-                    .catch(error => {});
+                    .catch(error => {
+                        this.loadingPage = false;
+                    });
             } else {
+                this.loadingPage = false;
                 swal.fire(
                     "Please success your form!",
                     "Cilck the button to continue!",
