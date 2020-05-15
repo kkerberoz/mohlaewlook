@@ -254,7 +254,6 @@
                                                     'is-invalid': error_crew
                                                 }"
                                                 v-model="input.crew"
-                                                :disabled="waitPilot"
                                                 :options="options_attendant"
                                                 :searchable="true"
                                                 :multiple="true"

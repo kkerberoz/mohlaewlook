@@ -3343,7 +3343,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -55339,7 +55338,6 @@ var render = function() {
                                   "is-invalid": _vm.error_crew
                                 },
                                 attrs: {
-                                  disabled: _vm.waitPilot,
                                   options: _vm.options_attendant,
                                   searchable: true,
                                   multiple: true,
