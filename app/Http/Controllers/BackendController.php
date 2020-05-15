@@ -192,7 +192,8 @@ class BackendController extends Controller
     public function getWorkSchedule(Request $request)
     {
         $start_date = $request->date;
-        $Work_Schedule = Work_schedule::select('*')->where('work_date', $start_date)->get();
+        // $Work_Schedule = Work_schedule::select('*')->where('work_date', $start_date)->get();
+        $Work_Schedule = DB::select("SELECT * FROM work_schedules WHERE work_data =?", [$start_date]);
         $Pilot = [];
         $Attendant = [];
         foreach ($Work_Schedule as $work) {
@@ -417,10 +418,11 @@ class BackendController extends Controller
         return response()->JSON(['value' => $value]);
     }
 
-    public function schedule(Request $request, $id)
+    public function schedule($id)
     {
         $employee = Employee::findOrFail($id);
-        $data = Work_schedule::select('*')->where('user_id', $employee->user_id)->get();
+        $data = DB::select("SELECT * FROM work_schedules WHERE user_id =?", [$employee->user_id]);
+        // $data = Work_schedule::select('*')->where('user_id', $employee->user_id)->get();
         return response()->JSON($data);
     }
 
@@ -440,9 +442,9 @@ class BackendController extends Controller
         }
     }
 
-    public function getflightdetail(Request $request)
+    public function getflightdetail($id)
     {
-        $employee = Employee::findOrFail($request->id);
+        $employee = Employee::findOrFail($id);
         $data = DB::select('SELECT *
                             FROM flights
                             WHERE flight_id IN (SELECT flight_id FROM work_schedules w WHERE w.user_id = ? AND confirm_status = ?)

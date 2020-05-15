@@ -137,7 +137,7 @@ export default {
         axios.get("/api/admin/init").then(response => {
             this.id = response.data.id;
             axios
-                .post("/api/backend/getflightdetail", { id: this.id })
+                .post(`/api/backend/getflightdetail/${this.id}`)
                 .then(response => {
                     // console.log(response.data);
                     this.user_id = response.data[0];

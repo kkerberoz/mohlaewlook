@@ -6855,9 +6855,7 @@ __webpack_require__.r(__webpack_exports__);
     this.calendarConfigs.disabledDates.push(today);
     axios.get("/api/admin/init").then(function (response) {
       _this2.id = response.data.id;
-      axios.post("/api/backend/getflightdetail", {
-        id: _this2.id
-      }).then(function (response) {
+      axios.post("/api/backend/getflightdetail/".concat(_this2.id)).then(function (response) {
         // console.log(response.data);
         _this2.user_id = response.data[0];
         _this2.works = response.data[1];
