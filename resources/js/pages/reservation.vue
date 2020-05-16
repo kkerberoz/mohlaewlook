@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid " style="padding-top:7%;padding-bottom:10%;">
+    <div class="container-fluid " style="padding-bottom:10%;">
         <loading
             :active.sync="loadingPage"
             :can-cancel="false"
@@ -139,7 +139,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label> Depart Flight No :</label>
+                                        <label> Depart :</label>
                                         <span class="input-text">
                                             <br />From :
                                         </span>
@@ -191,7 +191,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label> Return Flight No :</label>
+                                        <label> Return :</label>
                                         <span class="input-text">
                                             <br />From :
                                         </span>

@@ -60653,7 +60653,7 @@ var render = function() {
     "div",
     {
       staticClass: "container-fulid",
-      staticStyle: { "padding-top": "7%", "padding-bottom": "10%" }
+      staticStyle: { "padding-bottom": "10%" }
     },
     [
       _c("loading", {
@@ -60995,7 +60995,7 @@ var render = function() {
     "div",
     {
       staticClass: "container-fluid",
-      staticStyle: { "margin-top": "8%", "margin-bottom": "10%" }
+      staticStyle: { "margin-top": "3%", "margin-bottom": "10%" }
     },
     [
       _c("loading", {
@@ -61383,7 +61383,7 @@ var render = function() {
     "div",
     {
       staticClass: "container-fluid ",
-      staticStyle: { "padding-top": "7%", "padding-bottom": "10%" }
+      staticStyle: { "padding-bottom": "10%" }
     },
     [
       _c("loading", {
@@ -61705,7 +61705,7 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v(" Depart Flight No :")]),
+                              _c("label", [_vm._v(" Depart :")]),
                               _vm._v(" "),
                               _vm._m(0),
                               _vm._v(" "),
@@ -61810,7 +61810,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _c("label", [_vm._v(" Return Flight No :")]),
+                                _c("label", [_vm._v(" Return :")]),
                                 _vm._v(" "),
                                 _vm._m(2),
                                 _vm._v(" "),
