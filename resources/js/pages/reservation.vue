@@ -1199,7 +1199,6 @@
                                                             'is-invalid':
                                                                 passenger.error_name
                                                         }"
-                                                        placeholder="อาหลีเฮีย"
                                                         type="text"
                                                         class="form-control"
                                                         name="name"
@@ -1223,7 +1222,6 @@
                                                             'is-invalid':
                                                                 passenger.error_surname
                                                         }"
-                                                        placeholder="อาเฮียหลี"
                                                         type="text"
                                                         class="form-control"
                                                         name="surname"
@@ -1438,7 +1436,6 @@
                                                             'is-invalid':
                                                                 passenger.error_phone
                                                         }"
-                                                        placeholder="098-7654321"
                                                         type="text"
                                                         class="form-control"
                                                         v-model="
@@ -1463,7 +1460,6 @@
                                                             'is-invalid':
                                                                 passenger.error_email
                                                         }"
-                                                        placeholder="example@hotmail.com"
                                                         type="text"
                                                         class="form-control"
                                                         v-model="

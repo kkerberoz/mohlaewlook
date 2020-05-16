@@ -10043,10 +10043,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -63805,11 +63801,7 @@ var render = function() {
                                         class: {
                                           "is-invalid": passenger.error_name
                                         },
-                                        attrs: {
-                                          placeholder: "อาหลีเฮีย",
-                                          type: "text",
-                                          name: "name"
-                                        },
+                                        attrs: { type: "text", name: "name" },
                                         domProps: { value: passenger.name },
                                         on: {
                                           input: function($event) {
@@ -63858,7 +63850,6 @@ var render = function() {
                                           "is-invalid": passenger.error_surname
                                         },
                                         attrs: {
-                                          placeholder: "อาเฮียหลี",
                                           type: "text",
                                           name: "surname"
                                         },
@@ -64293,10 +64284,7 @@ var render = function() {
                                         class: {
                                           "is-invalid": passenger.error_phone
                                         },
-                                        attrs: {
-                                          placeholder: "098-7654321",
-                                          type: "text"
-                                        },
+                                        attrs: { type: "text" },
                                         domProps: { value: passenger.phone },
                                         on: {
                                           input: function($event) {
@@ -64344,10 +64332,7 @@ var render = function() {
                                         class: {
                                           "is-invalid": passenger.error_email
                                         },
-                                        attrs: {
-                                          placeholder: "example@hotmail.com",
-                                          type: "text"
-                                        },
+                                        attrs: { type: "text" },
                                         domProps: { value: passenger.email },
                                         on: {
                                           input: function($event) {
