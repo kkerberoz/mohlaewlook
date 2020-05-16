@@ -94,7 +94,7 @@ export default {
 </script>
 <style>
 .navbar {
-    background-color: #3b84c4;
+    background-color: #7b241c;
 }
 /* 4699c2 */
 </style>

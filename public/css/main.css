@@ -101,7 +101,9 @@ body {
 }
 
 #footers {
-    background-color: #3b84c4;
+    /* background-color: #3b84c4; */
+    background-color: #7b241c;
+
     align-items: center;
     display: flex;
     justify-content: center;

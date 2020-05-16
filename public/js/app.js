@@ -7699,6 +7699,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -15346,7 +15347,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar {\n    background-color: #3b84c4;\n}\n/* 4699c2 */\n", ""]);
+exports.push([module.i, "\n.navbar {\n    background-color: #7b241c;\n}\n/* 4699c2 */\n", ""]);
 
 // exports
 
@@ -15441,7 +15442,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    background: #ff7e5f;\n    background: linear-gradient(to left, #feb47b, #ff7e5f);\n\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
+exports.push([module.i, "\n.reservation {\n    /* background-color: #4bb4de; */\n    /* background: #ff7e5f;\n    background: -webkit-linear-gradient(to left, #feb47b, #ff7e5f);\n    background: linear-gradient(to left, #feb47b, #ff7e5f); */\n    background-image: url(\"/assets/airplane.jpg\");\n    background-repeat: no-repeat, repeat;\n    background-position: center;\n    /* background: #ff512f;\n    background: -webkit-linear-gradient(to right, #f09819, #ff512f);\n    background: linear-gradient(to right, #f09819, #ff512f); */\n}\n", ""]);
 
 // exports
 
@@ -60604,19 +60605,6 @@ var staticRenderFns = [
       { staticClass: "container-xl", staticStyle: { padding: "20px" } },
       [
         _c("div", { staticClass: "row flex-center full-height" }, [
-          _c("img", {
-            staticClass: "center",
-            staticStyle: {
-              width: "100%",
-              height: "auto",
-              "max-width": "900px"
-            },
-            attrs: {
-              src: "/assets/undraw_air_support_wy1q.svg",
-              alt: "Monkey face"
-            }
-          }),
-          _vm._v(" "),
           _c("div", { staticClass: "col-md-12 center" }, [
             _c(
               "h1",
@@ -81965,8 +81953,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kkerberoz/Desktop/dev/mohlaewlook/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Tree\Desktop\playground\mohlaewlookFlight\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

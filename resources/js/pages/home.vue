@@ -11,18 +11,19 @@
         ></loading>
         <div class="container-xl" style="padding:20px">
             <div class="row flex-center full-height">
-                <img
+                <!-- <img
                     src="/assets/undraw_air_support_wy1q.svg"
                     alt="Monkey face"
                     style="width: 100%; height: auto;  max-width:900px"
                     class="center"
-                />
+                /> -->
+
                 <!-- <img
-                    src="/assets/undraw_aircraft_fbvl.svg"
+                    src="/assets/plane.jpg"
                     alt="Monkey face"
-                    style="width:100%; height: auto; max-width:500px"
-                    class="float-left"
-        />-->
+                    style="width: 100%; height: auto;  max-width:1500px"
+                    class="center"
+                /> -->
 
                 <div class="col-md-12 center">
                     <h1
@@ -58,10 +59,12 @@ export default {
 <style>
 .reservation {
     /* background-color: #4bb4de; */
-    background: #ff7e5f;
+    /* background: #ff7e5f;
     background: -webkit-linear-gradient(to left, #feb47b, #ff7e5f);
-    background: linear-gradient(to left, #feb47b, #ff7e5f);
-
+    background: linear-gradient(to left, #feb47b, #ff7e5f); */
+    background-image: url("/assets/airplane.jpg");
+    background-repeat: no-repeat, repeat;
+    background-position: center;
     /* background: #ff512f;
     background: -webkit-linear-gradient(to right, #f09819, #ff512f);
     background: linear-gradient(to right, #f09819, #ff512f); */
